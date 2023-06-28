@@ -5,3 +5,5 @@ municipality of Aarhus.
 
 This API is build using [Symfony](https://symfony.com/) with their Symfony Messenger and 
 [API platform](https://api-platform.com/) utilizing basic CORS pattern. 
+
+For more detailed and technical documentation see the docs folder in this repository.
