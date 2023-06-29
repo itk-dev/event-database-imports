@@ -45,6 +45,9 @@ class Event
     #[ORM\Column]
     private bool $public = true;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Organization $organization = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +133,18 @@ class Event
     public function setPublic(bool $public): static
     {
         $this->public = $public;
+
+        return $this;
+    }
+
+    public function getOrganization(): ?Organization
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?Organization $organization): static
+    {
+        $this->organization = $organization;
 
         return $this;
     }
