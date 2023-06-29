@@ -4,7 +4,7 @@ This is the technical documentation for the project.
 
 # Abstracted data flow
 
-![plot](./images/data_flow.png)
+![System input data flow](./images/data_flow.png)
 
 ### Notes
 
@@ -17,10 +17,14 @@ This is the technical documentation for the project.
 
 # User handling
 
-![plot](./images/user_handling.png)
+![User handling concept](./images/user_handling.png)
 
 ### Notes
 
 * User expire
 * User enable/disable (soft delete)
 * Is context handler in play
+
+# API access
+
+![Api user creation flow](./images/api_user.png)

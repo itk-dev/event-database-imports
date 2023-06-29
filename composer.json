@@ -69,6 +69,22 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "coding-standards-apply": [
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix"
+        ],
+        "coding-standards-check": [
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run"
+        ],
+        "psalm": [
+            "./vendor/bin/psalm --no-cache"
+        ],
+        "queues": [
+            "bin/console messenger:consume async_priority_high --failure-limit=1 -vvv"
+        ],
+        "update-api-spec": [
+            "bin/console api:openapi:export --output=public/api-spec-v1.yaml --yaml --no-interaction",
+            "bin/console api:openapi:export --output=public/api-spec-v1.json --no-interaction"
         ]
     },
     "conflict": {
@@ -82,6 +98,10 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.49"
+        "friendsofphp/php-cs-fixer": "^3.20",
+        "psalm/plugin-symfony": "^5.0",
+        "symfony/maker-bundle": "^1.49",
+        "vimeo/psalm": "^5.13",
+        "weirdan/doctrine-psalm-plugin": "^2.8"
     }
 }
