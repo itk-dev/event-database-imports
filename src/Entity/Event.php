@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\EventRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
@@ -52,6 +54,18 @@ class Event
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $feedItemId = null;
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, orphanRemoval: true)]
+    private Collection $occurrences;
+
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
+    private Collection $dailyOccurrences;
+
+    public function __construct()
+    {
+        $this->occurrences = new ArrayCollection();
+        $this->dailyOccurrences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,6 +188,66 @@ class Event
     public function setFeedItemId(?string $feedItemId): static
     {
         $this->feedItemId = $feedItemId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Occurrence>
+     */
+    public function getOccurrences(): Collection
+    {
+        return $this->occurrences;
+    }
+
+    public function addOccurrence(Occurrence $occurrence): static
+    {
+        if (!$this->occurrences->contains($occurrence)) {
+            $this->occurrences->add($occurrence);
+            $occurrence->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOccurrence(Occurrence $occurrence): static
+    {
+        if ($this->occurrences->removeElement($occurrence)) {
+            // set the owning side to null (unless already changed)
+            if ($occurrence->getEvent() === $this) {
+                $occurrence->setEvent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DailyOccurrence>
+     */
+    public function getDailyOccurrences(): Collection
+    {
+        return $this->dailyOccurrences;
+    }
+
+    public function addDailyOccurrence(DailyOccurrence $dailyOccurrence): static
+    {
+        if (!$this->dailyOccurrences->contains($dailyOccurrence)) {
+            $this->dailyOccurrences->add($dailyOccurrence);
+            $dailyOccurrence->setEvent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDailyOccurrence(DailyOccurrence $dailyOccurrence): static
+    {
+        if ($this->dailyOccurrences->removeElement($dailyOccurrence)) {
+            // set the owning side to null (unless already changed)
+            if ($dailyOccurrence->getEvent() === $this) {
+                $dailyOccurrence->setEvent(null);
+            }
+        }
 
         return $this;
     }
