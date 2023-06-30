@@ -28,3 +28,7 @@ This is the technical documentation for the project.
 ## API access
 
 ![Api user creation flow](./images/api_user.png)
+
+## Entity model
+
+![Database entity model](./images/db.png)
