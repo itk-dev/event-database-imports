@@ -100,12 +100,12 @@ class Event
         return $this;
     }
 
-    public function getLangcode(): ?string
+    public function getLanguageCode(): string
     {
         return $this->langcode;
     }
 
-    public function setLangcode(?string $langcode): static
+    public function setLanguageCode(string $langcode): static
     {
         $this->langcode = $langcode;
 
