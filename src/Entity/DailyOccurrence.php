@@ -5,11 +5,16 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DailyOccurrenceRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: DailyOccurrenceRepository::class)]
 #[ApiResource]
 class DailyOccurrence
 {
+    use TimestampableEntity;
+    use SoftDeleteableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,6 +39,10 @@ class DailyOccurrence
     #[ORM\ManyToOne(inversedBy: 'dailyOccurrences')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Occurrence $occurrence = null;
+
+    #[ORM\ManyToOne(inversedBy: 'dailyOccurrences')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Location $location = null;
 
     public function getId(): ?int
     {
@@ -108,6 +117,18 @@ class DailyOccurrence
     public function setOccurrence(?Occurrence $occurrence): static
     {
         $this->occurrence = $occurrence;
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): static
+    {
+        $this->location = $location;
 
         return $this;
     }

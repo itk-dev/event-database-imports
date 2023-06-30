@@ -3,72 +3,63 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use App\Repository\EventRepository;
+use App\Repository\LocationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
-#[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\Entity(repositoryClass: LocationRepository::class)]
 #[ApiResource]
-class Event
+class Location
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
-    use BlameableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $excerpt = null;
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 32, nullable: true)]
-    private string $langcode = 'und';
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $telephone = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $ticket_url = null;
+    private ?string $logo = null;
 
     #[ORM\Column]
-    private bool $public = true;
-
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?Organization $organization = null;
-
-    #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?Feed $feed = null;
+    private ?bool $disabilityAccess = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $feedItemId = null;
+    private ?string $mail = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, orphanRemoval: true)]
+    #[ORM\ManyToOne(inversedBy: 'locations')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Address $address = null;
+
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Occurrence::class)]
     private Collection $occurrences;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: DailyOccurrence::class)]
     private Collection $dailyOccurrences;
-
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'events')]
-    private Collection $tags;
 
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
         $this->dailyOccurrences = new ArrayCollection();
-        $this->tags = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,14 +67,14 @@ class Event
         return $this->id;
     }
 
-    public function getExcerpt(): ?string
+    public function getName(): ?string
     {
-        return $this->excerpt;
+        return $this->name;
     }
 
-    public function setExcerpt(?string $excerpt): static
+    public function setName(string $name): static
     {
-        $this->excerpt = $excerpt;
+        $this->name = $name;
 
         return $this;
     }
@@ -117,81 +108,69 @@ class Event
         return $this->url;
     }
 
-    public function setUrl(string $url): static
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
 
         return $this;
     }
 
-    public function getLanguageCode(): string
+    public function getTelephone(): ?string
     {
-        return $this->langcode;
+        return $this->telephone;
     }
 
-    public function setLanguageCode(string $langcode): static
+    public function setTelephone(?string $telephone): static
     {
-        $this->langcode = $langcode;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
-    public function getTicketUrl(): ?string
+    public function getLogo(): ?string
     {
-        return $this->ticket_url;
+        return $this->logo;
     }
 
-    public function setTicketUrl(?string $ticket_url): static
+    public function setLogo(?string $logo): static
     {
-        $this->ticket_url = $ticket_url;
+        $this->logo = $logo;
 
         return $this;
     }
 
-    public function isPublic(): ?bool
+    public function isDisabilityAccess(): ?bool
     {
-        return $this->public;
+        return $this->disabilityAccess;
     }
 
-    public function setPublic(bool $public): static
+    public function setDisabilityAccess(bool $disabilityAccess): static
     {
-        $this->public = $public;
+        $this->disabilityAccess = $disabilityAccess;
 
         return $this;
     }
 
-    public function getOrganization(): ?Organization
+    public function getMail(): ?string
     {
-        return $this->organization;
+        return $this->mail;
     }
 
-    public function setOrganization(?Organization $organization): static
+    public function setMail(?string $mail): static
     {
-        $this->organization = $organization;
+        $this->mail = $mail;
 
         return $this;
     }
 
-    public function getFeed(): ?Feed
+    public function getAddress(): ?Address
     {
-        return $this->feed;
+        return $this->address;
     }
 
-    public function setFeed(?Feed $feed): static
+    public function setAddress(?Address $address): static
     {
-        $this->feed = $feed;
-
-        return $this;
-    }
-
-    public function getFeedItemId(): ?string
-    {
-        return $this->feedItemId;
-    }
-
-    public function setFeedItemId(?string $feedItemId): static
-    {
-        $this->feedItemId = $feedItemId;
+        $this->address = $address;
 
         return $this;
     }
@@ -208,7 +187,7 @@ class Event
     {
         if (!$this->occurrences->contains($occurrence)) {
             $this->occurrences->add($occurrence);
-            $occurrence->setEvent($this);
+            $occurrence->setLocation($this);
         }
 
         return $this;
@@ -218,8 +197,8 @@ class Event
     {
         if ($this->occurrences->removeElement($occurrence)) {
             // set the owning side to null (unless already changed)
-            if ($occurrence->getEvent() === $this) {
-                $occurrence->setEvent(null);
+            if ($occurrence->getLocation() === $this) {
+                $occurrence->setLocation(null);
             }
         }
 
@@ -238,7 +217,7 @@ class Event
     {
         if (!$this->dailyOccurrences->contains($dailyOccurrence)) {
             $this->dailyOccurrences->add($dailyOccurrence);
-            $dailyOccurrence->setEvent($this);
+            $dailyOccurrence->setLocation($this);
         }
 
         return $this;
@@ -248,34 +227,10 @@ class Event
     {
         if ($this->dailyOccurrences->removeElement($dailyOccurrence)) {
             // set the owning side to null (unless already changed)
-            if ($dailyOccurrence->getEvent() === $this) {
-                $dailyOccurrence->setEvent(null);
+            if ($dailyOccurrence->getLocation() === $this) {
+                $dailyOccurrence->setLocation(null);
             }
         }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Tag>
-     */
-    public function getTags(): Collection
-    {
-        return $this->tags;
-    }
-
-    public function addTag(Tag $tag): static
-    {
-        if (!$this->tags->contains($tag)) {
-            $this->tags->add($tag);
-        }
-
-        return $this;
-    }
-
-    public function removeTag(Tag $tag): static
-    {
-        $this->tags->removeElement($tag);
 
         return $this;
     }
