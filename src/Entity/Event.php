@@ -47,6 +47,12 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Organization $organization = null;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Feed $feed = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $feedItemId = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -144,6 +150,30 @@ class Event
     public function setOrganization(?Organization $organization): static
     {
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    public function getFeed(): ?Feed
+    {
+        return $this->feed;
+    }
+
+    public function setFeed(?Feed $feed): static
+    {
+        $this->feed = $feed;
+
+        return $this;
+    }
+
+    public function getFeedItemId(): ?string
+    {
+        return $this->feedItemId;
+    }
+
+    public function setFeedItemId(?string $feedItemId): static
+    {
+        $this->feedItemId = $feedItemId;
 
         return $this;
     }

@@ -39,9 +39,13 @@ class User
     #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'Users')]
     private Collection $organizations;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
+    private Collection $feeds;
+
     public function __construct()
     {
         $this->organizations = new ArrayCollection();
+        $this->feeds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,6 +123,36 @@ class User
     {
         if ($this->organizations->removeElement($organization)) {
             $organization->removeUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feed>
+     */
+    public function getFeeds(): Collection
+    {
+        return $this->feeds;
+    }
+
+    public function addFeed(Feed $feed): static
+    {
+        if (!$this->feeds->contains($feed)) {
+            $this->feeds->add($feed);
+            $feed->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeed(Feed $feed): static
+    {
+        if ($this->feeds->removeElement($feed)) {
+            // set the owning side to null (unless already changed)
+            if ($feed->getUser() === $this) {
+                $feed->setUser(null);
+            }
         }
 
         return $this;
