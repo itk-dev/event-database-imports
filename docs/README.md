@@ -2,7 +2,7 @@
 
 This is the technical documentation for the project.
 
-# Abstracted data flow
+## Abstracted data flow
 
 ![System input data flow](./images/data_flow.png)
 
@@ -15,7 +15,7 @@ This is the technical documentation for the project.
 * Geo encoding filter
 * Postel code filter (or filter)
 
-# User handling
+## User handling
 
 ![User handling concept](./images/user_handling.png)
 
@@ -25,6 +25,6 @@ This is the technical documentation for the project.
 * User enable/disable (soft delete)
 * Is context handler in play
 
-# API access
+## API access
 
 ![Api user creation flow](./images/api_user.png)
