@@ -8,6 +8,254 @@ servers:
     url: /
     description: ''
 paths:
+  /api/addresses:
+    get:
+      operationId: api_addresses_get_collection
+      tags:
+        - Address
+      responses:
+        200:
+          description: 'Address collection'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Address.jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:previous': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } }, example: { '@id': string, type: string, 'hydra:first': string, 'hydra:last': string, 'hydra:previous': string, 'hydra:next': string } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Address'
+      summary: 'Retrieves the collection of Address resources.'
+      description: 'Retrieves the collection of Address resources.'
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'The collection page number'
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_addresses_post
+      tags:
+        - Address
+      responses:
+        201:
+          description: 'Address resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+      summary: 'Creates a Address resource.'
+      description: 'Creates a Address resource.'
+      parameters: []
+      requestBody:
+        description: 'The new Address resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Address.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      deprecated: false
+    parameters: []
+  '/api/addresses/{id}':
+    get:
+      operationId: api_addresses_id_get
+      tags:
+        - Address
+      responses:
+        200:
+          description: 'Address resource'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address'
+        404:
+          description: 'Resource not found'
+      summary: 'Retrieves a Address resource.'
+      description: 'Retrieves a Address resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    put:
+      operationId: api_addresses_id_put
+      tags:
+        - Address
+      responses:
+        200:
+          description: 'Address resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Replaces the Address resource.'
+      description: 'Replaces the Address resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Address resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Address.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Address'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      deprecated: false
+    delete:
+      operationId: api_addresses_id_delete
+      tags:
+        - Address
+      responses:
+        204:
+          description: 'Address resource deleted'
+        404:
+          description: 'Resource not found'
+      summary: 'Removes the Address resource.'
+      description: 'Removes the Address resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    patch:
+      operationId: api_addresses_id_patch
+      tags:
+        - Address
+      responses:
+        200:
+          description: 'Address resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Address.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Address'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Address'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Updates the Address resource.'
+      description: 'Updates the Address resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Address identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Address resource'
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Address'
+        required: true
+      deprecated: false
+    parameters: []
   /api/daily_occurrences:
     get:
       operationId: api_daily_occurrences_get_collection
@@ -749,6 +997,254 @@ paths:
           application/merge-patch+json:
             schema:
               $ref: '#/components/schemas/Feed'
+        required: true
+      deprecated: false
+    parameters: []
+  /api/locations:
+    get:
+      operationId: api_locations_get_collection
+      tags:
+        - Location
+      responses:
+        200:
+          description: 'Location collection'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Location.jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:previous': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } }, example: { '@id': string, type: string, 'hydra:first': string, 'hydra:last': string, 'hydra:previous': string, 'hydra:next': string } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+      summary: 'Retrieves the collection of Location resources.'
+      description: 'Retrieves the collection of Location resources.'
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'The collection page number'
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_locations_post
+      tags:
+        - Location
+      responses:
+        201:
+          description: 'Location resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Location.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Location'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+      summary: 'Creates a Location resource.'
+      description: 'Creates a Location resource.'
+      parameters: []
+      requestBody:
+        description: 'The new Location resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Location.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      deprecated: false
+    parameters: []
+  '/api/locations/{id}':
+    get:
+      operationId: api_locations_id_get
+      tags:
+        - Location
+      responses:
+        200:
+          description: 'Location resource'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Location.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Location'
+        404:
+          description: 'Resource not found'
+      summary: 'Retrieves a Location resource.'
+      description: 'Retrieves a Location resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Location identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    put:
+      operationId: api_locations_id_put
+      tags:
+        - Location
+      responses:
+        200:
+          description: 'Location resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Location.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Location'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Replaces the Location resource.'
+      description: 'Replaces the Location resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Location identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Location resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Location.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Location'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Location'
+        required: true
+      deprecated: false
+    delete:
+      operationId: api_locations_id_delete
+      tags:
+        - Location
+      responses:
+        204:
+          description: 'Location resource deleted'
+        404:
+          description: 'Resource not found'
+      summary: 'Removes the Location resource.'
+      description: 'Removes the Location resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Location identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    patch:
+      operationId: api_locations_id_patch
+      tags:
+        - Location
+      responses:
+        200:
+          description: 'Location resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Location.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Location'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Updates the Location resource.'
+      description: 'Updates the Location resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Location identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Location resource'
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Location'
         required: true
       deprecated: false
     parameters: []
@@ -1496,8 +1992,375 @@ paths:
         required: true
       deprecated: false
     parameters: []
+  /api/vocabularies:
+    get:
+      operationId: api_vocabularies_get_collection
+      tags:
+        - Vocabulary
+      responses:
+        200:
+          description: 'Vocabulary collection'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Vocabulary.jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:previous': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } }, example: { '@id': string, type: string, 'hydra:first': string, 'hydra:last': string, 'hydra:previous': string, 'hydra:next': string } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vocabulary'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vocabulary'
+      summary: 'Retrieves the collection of Vocabulary resources.'
+      description: 'Retrieves the collection of Vocabulary resources.'
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'The collection page number'
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_vocabularies_post
+      tags:
+        - Vocabulary
+      responses:
+        201:
+          description: 'Vocabulary resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+      summary: 'Creates a Vocabulary resource.'
+      description: 'Creates a Vocabulary resource.'
+      parameters: []
+      requestBody:
+        description: 'The new Vocabulary resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+        required: true
+      deprecated: false
+    parameters: []
+  '/api/vocabularies/{id}':
+    get:
+      operationId: api_vocabularies_id_get
+      tags:
+        - Vocabulary
+      responses:
+        200:
+          description: 'Vocabulary resource'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+        404:
+          description: 'Resource not found'
+      summary: 'Retrieves a Vocabulary resource.'
+      description: 'Retrieves a Vocabulary resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Vocabulary identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    put:
+      operationId: api_vocabularies_id_put
+      tags:
+        - Vocabulary
+      responses:
+        200:
+          description: 'Vocabulary resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Replaces the Vocabulary resource.'
+      description: 'Replaces the Vocabulary resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Vocabulary identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Vocabulary resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+        required: true
+      deprecated: false
+    delete:
+      operationId: api_vocabularies_id_delete
+      tags:
+        - Vocabulary
+      responses:
+        204:
+          description: 'Vocabulary resource deleted'
+        404:
+          description: 'Resource not found'
+      summary: 'Removes the Vocabulary resource.'
+      description: 'Removes the Vocabulary resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Vocabulary identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    patch:
+      operationId: api_vocabularies_id_patch
+      tags:
+        - Vocabulary
+      responses:
+        200:
+          description: 'Vocabulary resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Vocabulary'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Updates the Vocabulary resource.'
+      description: 'Updates the Vocabulary resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Vocabulary identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Vocabulary resource'
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Vocabulary'
+        required: true
+      deprecated: false
+    parameters: []
 components:
   schemas:
+    Address:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        street:
+          type: string
+        suite:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        city:
+          type: string
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+        latitude:
+          type: number
+          nullable: true
+        longitude:
+          type: number
+          nullable: true
+        locations:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
+    Address.jsonld:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            -
+              type: string
+            -
+              type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        street:
+          type: string
+        suite:
+          type: string
+          nullable: true
+        region:
+          type: string
+          nullable: true
+        city:
+          type: string
+        country:
+          type: string
+          nullable: true
+        postalCode:
+          type: string
+        latitude:
+          type: number
+          nullable: true
+        longitude:
+          type: number
+          nullable: true
+        locations:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
     DailyOccurrence:
       type: object
       description: ''
@@ -1811,6 +2674,141 @@ components:
           readOnly: true
           description: 'Check if the entity has been soft deleted.'
           type: boolean
+    Location:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        telephone:
+          type: string
+          nullable: true
+        logo:
+          type: string
+          nullable: true
+        disabilityAccess:
+          type: boolean
+        mail:
+          type: string
+          nullable: true
+        address:
+          type: string
+          format: iri-reference
+        occurrences:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        dailyOccurrences:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
+    Location.jsonld:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            -
+              type: string
+            -
+              type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        image:
+          type: string
+          nullable: true
+        url:
+          type: string
+          nullable: true
+        telephone:
+          type: string
+          nullable: true
+        logo:
+          type: string
+          nullable: true
+        disabilityAccess:
+          type: boolean
+        mail:
+          type: string
+          nullable: true
+        address:
+          type: string
+          format: iri-reference
+        occurrences:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        dailyOccurrences:
+          type: array
+          items:
+            type: string
+            format: iri-reference
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
     Occurrence:
       type: object
       description: ''
@@ -1997,6 +2995,93 @@ components:
           readOnly: true
           description: 'Check if the entity has been soft deleted.'
           type: boolean
+    Tag:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        vocabularies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vocabulary'
+        name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
+    Tag.jsonld:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            -
+              type: string
+            -
+              type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        vocabularies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vocabulary.jsonld'
+        name:
+          type: string
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/Event.jsonld'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
     User:
       type: object
       description: ''
@@ -2097,6 +3182,91 @@ components:
           nullable: true
         updatedBy:
           type: string
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
+    Vocabulary:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        description:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        deleted:
+          readOnly: true
+          description: 'Check if the entity has been soft deleted.'
+          type: boolean
+    Vocabulary.jsonld:
+      type: object
+      description: ''
+      deprecated: false
+      properties:
+        '@context':
+          readOnly: true
+          oneOf:
+            -
+              type: string
+            -
+              type: object
+              properties:
+                '@vocab':
+                  type: string
+                hydra:
+                  type: string
+                  enum: ['http://www.w3.org/ns/hydra/core#']
+              required:
+                - '@vocab'
+                - hydra
+              additionalProperties: true
+        '@id':
+          readOnly: true
+          type: string
+        '@type':
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: integer
+        name:
+          type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag.jsonld'
+        description:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        deletedAt:
+          type: string
+          format: date-time
           nullable: true
         deleted:
           readOnly: true
