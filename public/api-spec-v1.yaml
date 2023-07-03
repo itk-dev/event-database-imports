@@ -1744,6 +1744,254 @@ paths:
         required: true
       deprecated: false
     parameters: []
+  /api/tags:
+    get:
+      operationId: api_tags_get_collection
+      tags:
+        - Tag
+      responses:
+        200:
+          description: 'Tag collection'
+          content:
+            application/ld+json:
+              schema:
+                type: object
+                properties:
+                  'hydra:member': { type: array, items: { $ref: '#/components/schemas/Tag.jsonld' } }
+                  'hydra:totalItems': { type: integer, minimum: 0 }
+                  'hydra:view': { type: object, properties: { '@id': { type: string, format: iri-reference }, '@type': { type: string }, 'hydra:first': { type: string, format: iri-reference }, 'hydra:last': { type: string, format: iri-reference }, 'hydra:previous': { type: string, format: iri-reference }, 'hydra:next': { type: string, format: iri-reference } }, example: { '@id': string, type: string, 'hydra:first': string, 'hydra:last': string, 'hydra:previous': string, 'hydra:next': string } }
+                  'hydra:search': { type: object, properties: { '@type': { type: string }, 'hydra:template': { type: string }, 'hydra:variableRepresentation': { type: string }, 'hydra:mapping': { type: array, items: { type: object, properties: { '@type': { type: string }, variable: { type: string }, property: { type: string, nullable: true }, required: { type: boolean } } } } } }
+                required:
+                  - 'hydra:member'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tag'
+      summary: 'Retrieves the collection of Tag resources.'
+      description: 'Retrieves the collection of Tag resources.'
+      parameters:
+        -
+          name: page
+          in: query
+          description: 'The collection page number'
+          required: false
+          deprecated: false
+          allowEmptyValue: true
+          schema:
+            type: integer
+            default: 1
+          style: form
+          explode: false
+          allowReserved: false
+      deprecated: false
+    post:
+      operationId: api_tags_post
+      tags:
+        - Tag
+      responses:
+        201:
+          description: 'Tag resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tag.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+      summary: 'Creates a Tag resource.'
+      description: 'Creates a Tag resource.'
+      parameters: []
+      requestBody:
+        description: 'The new Tag resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Tag.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      deprecated: false
+    parameters: []
+  '/api/tags/{id}':
+    get:
+      operationId: api_tags_id_get
+      tags:
+        - Tag
+      responses:
+        200:
+          description: 'Tag resource'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tag.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tag'
+        404:
+          description: 'Resource not found'
+      summary: 'Retrieves a Tag resource.'
+      description: 'Retrieves a Tag resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Tag identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    put:
+      operationId: api_tags_id_put
+      tags:
+        - Tag
+      responses:
+        200:
+          description: 'Tag resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tag.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Replaces the Tag resource.'
+      description: 'Replaces the Tag resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Tag identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Tag resource'
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Tag.jsonld'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      deprecated: false
+    delete:
+      operationId: api_tags_id_delete
+      tags:
+        - Tag
+      responses:
+        204:
+          description: 'Tag resource deleted'
+        404:
+          description: 'Resource not found'
+      summary: 'Removes the Tag resource.'
+      description: 'Removes the Tag resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Tag identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      deprecated: false
+    patch:
+      operationId: api_tags_id_patch
+      tags:
+        - Tag
+      responses:
+        200:
+          description: 'Tag resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Tag.jsonld'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          links: {  }
+        400:
+          description: 'Invalid input'
+        422:
+          description: 'Unprocessable entity'
+        404:
+          description: 'Resource not found'
+      summary: 'Updates the Tag resource.'
+      description: 'Updates the Tag resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Tag identifier'
+          required: true
+          deprecated: false
+          allowEmptyValue: false
+          schema:
+            type: string
+          style: simple
+          explode: false
+          allowReserved: false
+      requestBody:
+        description: 'The updated Tag resource'
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: '#/components/schemas/Tag'
+        required: true
+      deprecated: false
+    parameters: []
   /api/users:
     get:
       operationId: api_users_get_collection
@@ -3006,13 +3254,15 @@ components:
         vocabularies:
           type: array
           items:
-            $ref: '#/components/schemas/Vocabulary'
+            type: string
+            format: iri-reference
         name:
           type: string
         events:
           type: array
           items:
-            $ref: '#/components/schemas/Event'
+            type: string
+            format: iri-reference
         createdAt:
           type: string
           format: date-time
@@ -3061,13 +3311,15 @@ components:
         vocabularies:
           type: array
           items:
-            $ref: '#/components/schemas/Vocabulary.jsonld'
+            type: string
+            format: iri-reference
         name:
           type: string
         events:
           type: array
           items:
-            $ref: '#/components/schemas/Event.jsonld'
+            type: string
+            format: iri-reference
         createdAt:
           type: string
           format: date-time
@@ -3200,7 +3452,8 @@ components:
         tags:
           type: array
           items:
-            $ref: '#/components/schemas/Tag'
+            type: string
+            format: iri-reference
         description:
           type: string
           nullable: true
@@ -3254,7 +3507,8 @@ components:
         tags:
           type: array
           items:
-            $ref: '#/components/schemas/Tag.jsonld'
+            type: string
+            format: iri-reference
         description:
           type: string
           nullable: true
