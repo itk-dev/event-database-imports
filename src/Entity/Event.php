@@ -67,6 +67,9 @@ class Event
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Location $location = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $hash = null;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
@@ -291,6 +294,18 @@ class Event
     public function setLocation(?Location $location): static
     {
         $this->location = $location;
+
+        return $this;
+    }
+
+    public function getHash(): ?string
+    {
+        return $this->hash;
+    }
+
+    public function setHash(string $hash): static
+    {
+        $this->hash = $hash;
 
         return $this;
     }

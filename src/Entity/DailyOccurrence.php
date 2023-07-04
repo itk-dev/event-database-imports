@@ -40,6 +40,9 @@ class DailyOccurrence
     #[ORM\JoinColumn(nullable: false)]
     private ?Occurrence $occurrence = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,6 +116,18 @@ class DailyOccurrence
     public function setOccurrence(?Occurrence $occurrence): static
     {
         $this->occurrence = $occurrence;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

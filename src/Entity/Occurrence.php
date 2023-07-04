@@ -41,6 +41,9 @@ class Occurrence
     #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
     private Collection $dailyOccurrences;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->dailyOccurrences = new ArrayCollection();
@@ -137,6 +140,18 @@ class Occurrence
                 $dailyOccurrence->setOccurrence(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }
