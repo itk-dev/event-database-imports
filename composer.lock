@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a7f6f646363625d39c88952b090be8d4",
+    "content-hash": "c890b7f5cfa794d7711ea035191a2fc4",
     "packages": [
         {
             "name": "api-platform/core",
@@ -2306,6 +2306,71 @@
                 "source": "https://github.com/php-fig/log/tree/3.0.0"
             },
             "time": "2021-07-14T16:46:02+00:00"
+        },
+        {
+            "name": "softcreatr/jsonpath",
+            "version": "0.7.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SoftCreatR/JSONPath.git",
+                "reference": "008569bf80aa3584834f7890781576bc7b65afa7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SoftCreatR/JSONPath/zipball/008569bf80aa3584834f7890781576bc7b65afa7",
+                "reference": "008569bf80aa3584834f7890781576bc7b65afa7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": ">=7.1"
+            },
+            "replace": {
+                "flow/jsonpath": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=7.0",
+                "roave/security-advisories": "dev-master",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Flow\\JSONPath\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stephen Frank",
+                    "email": "stephen@flowsa.com",
+                    "homepage": "https://prismaticbytes.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Sascha Greuel",
+                    "email": "hello@1-2.dev",
+                    "homepage": "http://1-2.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JSONPath implementation for parsing, searching and flattening arrays",
+            "support": {
+                "email": "hello@1-2.dev",
+                "forum": "https://github.com/SoftCreatR/JSONPath/discussions",
+                "issues": "https://github.com/SoftCreatR/JSONPath/issues",
+                "source": "https://github.com/SoftCreatR/JSONPath"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/softcreatr",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-06-02T22:15:26+00:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -6347,6 +6412,84 @@
                 "source": "https://github.com/willdurand/Negotiation/tree/3.1.0"
             },
             "time": "2022-01-30T20:08:53+00:00"
+        },
+        {
+            "name": "wizaplace/php-etl",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wizacode/php-etl.git",
+                "reference": "9ea73da38a1287b9857a2ee568c52d3192004ae9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wizacode/php-etl/zipball/9ea73da38a1287b9857a2ee568c52d3192004ae9",
+                "reference": "9ea73da38a1287b9857a2ee568c52d3192004ae9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "~8.1",
+                "softcreatr/jsonpath": "^0.7.2"
+            },
+            "require-dev": {
+                "ext-json": "*",
+                "ext-pdo": "*",
+                "ext-pdo_sqlite": "*",
+                "ext-xmlreader": "*",
+                "friendsofphp/php-cs-fixer": "^3.4",
+                "infection/infection": ">=0.15",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^0.12.100",
+                "phpstan/phpstan-deprecation-rules": "^0.12.6",
+                "phpstan/phpstan-strict-rules": "^0.12.11",
+                "phpunit/phpunit": ">=8",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "suggest": {
+                "ext-PDO": "Required for various extractors and loaders. Most users will want this.",
+                "ext-json": "Required for JSON extractor and JSON Encode/Decode transformers.",
+                "ext-pdo_mysql": "Required to work with MySQL databases.",
+                "ext-pdo_pgsql": "Required to work with PostgreSQL databases.",
+                "ext-pdo_sqlite": "Required to work with SQLite databases.",
+                "ext-pdo_sqlsrv": "Required to work with MS SQL Server databases.",
+                "ext-xmlreader": "Required for XML extractor."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wizaplace\\Etl\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Wizaplace DevTeam",
+                    "email": "dev@wizacha.com"
+                },
+                {
+                    "name": "Leonardo Marquine",
+                    "email": "leonardomarquine@gmail.com"
+                }
+            ],
+            "description": "Extract, Transform and Load data using this PHP written migration library.",
+            "keywords": [
+                "data",
+                "etl",
+                "extract",
+                "extraction",
+                "load",
+                "symfony",
+                "transform",
+                "transformation"
+            ],
+            "support": {
+                "issues": "https://github.com/wizacode/php-etl/issues",
+                "source": "https://github.com/wizacode/php-etl/tree/2.3.0"
+            },
+            "time": "2023-05-14T14:59:49+00:00"
         }
     ],
     "packages-dev": [
