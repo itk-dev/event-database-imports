@@ -49,13 +49,22 @@ Things that requires more ivestigated:
 
 ## User handling
 
+The user model as two types of users. Symfony created user (super admin, which should only be one or two off) and
+[MitID](https://www.mitid.dk/) verified users. The idea is that each organization/institution have an appointed admin
+that is allowed to send user invitation out for his/her organization. Each user can be part of more than on organization
+it just requires that they get an invitation and thereby get there account linked to a given organization.
+
 ![User handling concept](./images/user_handling.png)
+
+When users are returned from the user verification process the uuid from MitID is stored on the user account and MitID
+is then used to log in users. Also, users that have not been logged ind for at given timeframe (e.g. 3 months) should
+be disabled automatically. The organization admin can also enable/disabled access for a given user and if a user is not
+member of any organization should automatically be disabled.
 
 ### Notes
 
-* User expire
-* User enable/disable (soft delete)
-* Is context handler in play
+* Which roles should exist in the system. Should editors be limited to some actions (feeds only editor, only view etc.).
+* Is the users only municipality base (context handler) or should MitID be implemented using nemLogin.
 
 ## API access
 
