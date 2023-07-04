@@ -50,16 +50,12 @@ class Location
     #[ORM\JoinColumn(nullable: false)]
     private ?Address $address = null;
 
-    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Occurrence::class)]
-    private Collection $occurrences;
-
-    #[ORM\OneToMany(mappedBy: 'location', targetEntity: DailyOccurrence::class)]
-    private Collection $dailyOccurrences;
+    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]
+    private Collection $events;
 
     public function __construct()
     {
-        $this->occurrences = new ArrayCollection();
-        $this->dailyOccurrences = new ArrayCollection();
+        $this->events = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,59 +172,29 @@ class Location
     }
 
     /**
-     * @return Collection<int, Occurrence>
+     * @return Collection<int, Event>
      */
-    public function getOccurrences(): Collection
+    public function getEvents(): Collection
     {
-        return $this->occurrences;
+        return $this->events;
     }
 
-    public function addOccurrence(Occurrence $occurrence): static
+    public function addEvent(Event $event): static
     {
-        if (!$this->occurrences->contains($occurrence)) {
-            $this->occurrences->add($occurrence);
-            $occurrence->setLocation($this);
+        if (!$this->events->contains($event)) {
+            $this->events->add($event);
+            $event->setLocation($this);
         }
 
         return $this;
     }
 
-    public function removeOccurrence(Occurrence $occurrence): static
+    public function removeEvent(Event $event): static
     {
-        if ($this->occurrences->removeElement($occurrence)) {
+        if ($this->events->removeElement($event)) {
             // set the owning side to null (unless already changed)
-            if ($occurrence->getLocation() === $this) {
-                $occurrence->setLocation(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, DailyOccurrence>
-     */
-    public function getDailyOccurrences(): Collection
-    {
-        return $this->dailyOccurrences;
-    }
-
-    public function addDailyOccurrence(DailyOccurrence $dailyOccurrence): static
-    {
-        if (!$this->dailyOccurrences->contains($dailyOccurrence)) {
-            $this->dailyOccurrences->add($dailyOccurrence);
-            $dailyOccurrence->setLocation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDailyOccurrence(DailyOccurrence $dailyOccurrence): static
-    {
-        if ($this->dailyOccurrences->removeElement($dailyOccurrence)) {
-            // set the owning side to null (unless already changed)
-            if ($dailyOccurrence->getLocation() === $this) {
-                $dailyOccurrence->setLocation(null);
+            if ($event->getLocation() === $this) {
+                $event->setLocation(null);
             }
         }
 

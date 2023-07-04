@@ -64,6 +64,9 @@ class Event
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'events')]
     private Collection $tags;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Location $location = null;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
@@ -276,6 +279,18 @@ class Event
     public function removeTag(Tag $tag): static
     {
         $this->tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getLocation(): ?Location
+    {
+        return $this->location;
+    }
+
+    public function setLocation(?Location $location): static
+    {
+        $this->location = $location;
 
         return $this;
     }

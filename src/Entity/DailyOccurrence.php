@@ -40,10 +40,6 @@ class DailyOccurrence
     #[ORM\JoinColumn(nullable: false)]
     private ?Occurrence $occurrence = null;
 
-    #[ORM\ManyToOne(inversedBy: 'dailyOccurrences')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Location $location = null;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -117,18 +113,6 @@ class DailyOccurrence
     public function setOccurrence(?Occurrence $occurrence): static
     {
         $this->occurrence = $occurrence;
-
-        return $this;
-    }
-
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?Location $location): static
-    {
-        $this->location = $location;
 
         return $this;
     }

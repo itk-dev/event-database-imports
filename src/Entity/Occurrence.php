@@ -41,10 +41,6 @@ class Occurrence
     #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
     private Collection $dailyOccurrences;
 
-    #[ORM\ManyToOne(inversedBy: 'occurrences')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Location $location = null;
-
     public function __construct()
     {
         $this->dailyOccurrences = new ArrayCollection();
@@ -141,18 +137,6 @@ class Occurrence
                 $dailyOccurrence->setOccurrence(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getLocation(): ?Location
-    {
-        return $this->location;
-    }
-
-    public function setLocation(?Location $location): static
-    {
-        $this->location = $location;
 
         return $this;
     }
