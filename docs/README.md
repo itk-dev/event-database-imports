@@ -66,10 +66,19 @@ member of any organization should automatically be disabled.
 * Which roles should exist in the system. Should editors be limited to some actions (feeds only editor, only view etc.).
 * Is the users only municipality base (context handler) or should MitID be implemented using nemLogin.
 
-## API access
+## API access (read-only)
+
+To use the public API, sites have to registry with a username and e-mail-address to get an API-key. The reason for this
+is that it is the only way that the system admin can see where request are coming from in the case of mis-usage and have
+contact information to communicate with the mis-user.
+
+This will also prevent must automatic mis-usage from the internet of the service that just probing the system or trying
+to automatically hack it.
 
 ![Api user creation flow](./images/api_user.png)
 
 ## Entity model
+
+The database entity model.
 
 ![Database entity model](./images/db.png)
