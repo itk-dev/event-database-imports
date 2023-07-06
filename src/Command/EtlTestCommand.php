@@ -61,7 +61,7 @@ class EtlTestCommand extends Command
         $row = $this->memoryLoader->get(10061);
         $data = $row->toArray();
         dump($data);
-        
+
         return Command::SUCCESS;
     }
 }
