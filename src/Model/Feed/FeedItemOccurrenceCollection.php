@@ -2,12 +2,10 @@
 
 namespace App\Model\Feed;
 
-use Traversable;
-
 final class FeedItemOccurrenceCollection implements \IteratorAggregate
 {
     /**
-     * @var array<FeedItemOccurrence> $occurrences
+     * @var array<FeedItemOccurrence>
      */
     private readonly array $occurrences;
 
@@ -16,10 +14,7 @@ final class FeedItemOccurrenceCollection implements \IteratorAggregate
         $this->occurrences = $occurrences;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function getIterator(): Traversable
+    public function getIterator(): \Traversable
     {
         return new \ArrayIterator($this->occurrences);
     }

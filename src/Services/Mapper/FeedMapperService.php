@@ -28,7 +28,7 @@ class FeedMapperService implements FeedMapperInterface
                             'DateTo' => 'end',
                             'Url' => 'url',
                             'Image' => 'image',
-                            'BuyTicketsLink' => 'ticketUrl'
+                            'BuyTicketsLink' => 'ticketUrl',
                         ])
                 );
         } catch (MappingError $error) {

@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\Services\Feeds\FeedParserInterface;
-use phpDocumentor\Reflection\Utils;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -36,6 +35,7 @@ class FeedDebugCommand extends Command
         $url = $input->getArgument('url');
         if (!filter_var($url, FILTER_VALIDATE_URL)) {
             $io->error('Url given is not a valid URL');
+
             return Command::FAILURE;
         }
 
