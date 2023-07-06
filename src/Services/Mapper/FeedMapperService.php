@@ -9,7 +9,7 @@ use CuyZ\Valinor\MapperBuilder;
 
 class FeedMapperService implements FeedMapperInterface
 {
-    public function getFeedItemFromArray(array $data): FeedItem
+    public function getFeedItemFromArray(array $data, array $mapping): FeedItem
     {
         try {
             return (new MapperBuilder())
@@ -18,18 +18,7 @@ class FeedMapperService implements FeedMapperInterface
                 ->mapper()
                 ->map(
                     FeedItem::class,
-                    Source::array($data)
-                        ->map([
-                            'Id' => 'id',
-                            'Title' => 'title',
-                            'Teaser' => 'excerpt',
-                            'Description' => 'description',
-                            'DateFrom' => 'start',
-                            'DateTo' => 'end',
-                            'Url' => 'url',
-                            'Image' => 'image',
-                            'BuyTicketsLink' => 'ticketUrl',
-                        ])
+                    Source::array($data)->map($mapping)
                 );
         } catch (MappingError $error) {
             // @todo: Log mapping error for later debugging.

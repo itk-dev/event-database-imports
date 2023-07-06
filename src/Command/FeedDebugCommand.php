@@ -2,12 +2,14 @@
 
 namespace App\Command;
 
+use App\Repository\FeedRepository;
 use App\Services\Feeds\FeedParserInterface;
 use App\Services\Mapper\FeedMapperInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -22,26 +24,26 @@ class FeedDebugCommand extends Command
         private readonly FeedParserInterface $feedParser,
         private readonly FeedMapperInterface $feedMapper,
         private readonly HttpClientInterface $httpClient,
+        private readonly FeedRepository $feedRepository,
     ) {
         parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->addArgument('url', InputArgument::OPTIONAL, 'Feed data url');
+        $this->addArgument('feedId', InputArgument::REQUIRED, 'Database feed id');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $url = $input->getArgument('url');
-        if (!filter_var($url, FILTER_VALIDATE_URL)) {
-            $io->error('Url given is not a valid URL');
+        $feedId = $input->getArgument('feedId');
 
-            return Command::FAILURE;
-        }
+        // @todo: Convert config array to value object.
+        $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
+        $config = $feed->getConfiguration();
 
-        $req = $this->httpClient->request('GET', $url);
+        $req = $this->httpClient->request('GET', $config['url']);
         $data = $req->getContent();
 
         foreach ($this->feedParser->parse($data) as $item) {
@@ -49,11 +51,11 @@ class FeedDebugCommand extends Command
             // here for debugging we by-pass message system and try mapping the item.
 
             // @todo: Add feed configuration for dynamic mapping.
-            $event = $this->feedMapper->getFeedItemFromArray($item);
+            $event = $this->feedMapper->getFeedItemFromArray($item, $config['mapping']);
             $io->writeln($event);
         }
 
-        $io->success('You have a new command! Now make it your own! Pass --help to see your options.');
+        $io->success('Feed debugging completed.');
 
         return Command::SUCCESS;
     }

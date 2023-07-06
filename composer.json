@@ -97,6 +97,7 @@
         }
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "friendsofphp/php-cs-fixer": "^3.20",
         "psalm/plugin-symfony": "^5.0",
         "symfony/maker-bundle": "^1.49",
