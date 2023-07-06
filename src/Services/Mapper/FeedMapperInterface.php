@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Mapper;
 
-use App\Model\FeedItem;
+use App\Model\Feed\FeedItem;
 
 interface FeedMapperInterface
 {

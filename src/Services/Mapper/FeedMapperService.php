@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Mapper;
 
-use App\Model\FeedItem;
+use App\Model\Feed\FeedItem;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\MapperBuilder;
@@ -20,10 +20,15 @@ class FeedMapperService implements FeedMapperInterface
                     FeedItem::class,
                     Source::array($data)
                         ->map([
+                            'Id' => 'id',
                             'Title' => 'title',
                             'Teaser' => 'excerpt',
+                            'Description' => 'description',
                             'DateFrom' => 'start',
                             'DateTo' => 'end',
+                            'Url' => 'url',
+                            'Image' => 'image',
+                            'BuyTicketsLink' => 'ticketUrl'
                         ])
                 );
         } catch (MappingError $error) {

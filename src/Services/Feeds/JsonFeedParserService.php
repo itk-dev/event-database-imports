@@ -2,7 +2,7 @@
 
 namespace App\Services\Feeds;
 
-use App\Services\FeedMapperInterface;
+use App\Services\Mapper\FeedMapperInterface;
 use Cerbero\JsonParser\JsonParser;
 
 class JsonFeedParserService implements FeedParserInterface
@@ -23,6 +23,7 @@ class JsonFeedParserService implements FeedParserInterface
             }
         } catch (\Exception $exception) {
             // @todo: Log parsing error for later processing or debugging.
+            throw $exception;
         }
     }
 }
