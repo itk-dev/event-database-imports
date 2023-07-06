@@ -14,6 +14,7 @@ final class FeedItem
     public readonly \DateTimeImmutable $start;
     public readonly \DateTimeImmutable $end;
 
+    // Properties that is not required in the FeedMapperService.
     public string $feedId = '';
     public ?FeedItemOccurrenceCollection $occurrences = null;
 
