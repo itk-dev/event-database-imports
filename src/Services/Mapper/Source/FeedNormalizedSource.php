@@ -10,10 +10,21 @@ final class FeedNormalizedSource implements \IteratorAggregate
 
     public function __construct(iterable $source, array $mappings)
     {
-        $this->source = $this->doSomething($source, $mappings);
+        $this->source = $this->normalize($source, $mappings);
     }
 
-    private function doSomething(iterable $source, array $mappings): iterable
+    /**
+     * Normalize array data into mappings format.
+     *
+     * @param iterable $source
+     *   The input source as iterable array.
+     * @param array $mappings
+     *   Mappings defined.
+     *
+     * @return iterable
+     *   Normalized array.
+     */
+    private function normalize(iterable $source, array $mappings): iterable
     {
         $output = [];
 
@@ -25,12 +36,26 @@ final class FeedNormalizedSource implements \IteratorAggregate
         return $output;
     }
 
+    /**
+     * @inheritDoc
+     */
     public function getIterator(): \Traversable
     {
         yield from $this->source;
     }
 
-    private function getValue(array $data, string $src)
+    /**
+     * Get value from data based on dot separated array indexes.
+     *
+     * @param array $data
+     *   Input data.
+     * @param string $src
+     *   Index into input data as string.
+     *
+     * @return mixed
+     *   The content of the index found or null if not found.
+     */
+    private function getValue(array $data, string $src): mixed
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
             ->disableExceptionOnInvalidPropertyPath()

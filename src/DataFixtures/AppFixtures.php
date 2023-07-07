@@ -12,6 +12,7 @@ class AppFixtures extends Fixture
     {
         $feed = new Feed();
         $config = [
+            'type' => 'json',
             'url' => 'https://www.aros.dk/umbraco/api/events/feed/?culture=da',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -57,6 +58,7 @@ class AppFixtures extends Fixture
 
         $feed = new Feed();
         $config = [
+            'type' => 'json',
             'url' => 'https://www.aakb.dk/feeds/eventdb',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -73,22 +75,7 @@ class AppFixtures extends Fixture
                 'tickets.url' => 'ticketUrl',
             ],
             'defaults' => [
-                // @todo: defaults dont make sens yet, but are here for idea presentation.
-                'name' => 'Aros',
-                'url' => 'http://www.aros.dk/',
-                'telephone' => '87306600',
-                'logo' => 'http://www.aros.dk/images/logo.png',
-                'address' => [
-                    'country' => 'Danmark',
-                    'city' => 'Aarhus C',
-                    'postalCode' => 8000,
-                    'street' => 'Aros Allé 2',
-                    'region' => 'Jylland',
-                    'suite' => '',
-                    'latitude' => 56.153922,
-                    'longitude' => 10.197522,
-                ],
-                'mail' => 'info@aros.dk',
+
             ],
         ];
 

@@ -11,6 +11,9 @@ use CuyZ\Valinor\MapperBuilder;
 
 class FeedMapperService implements FeedMapperInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function getFeedItemFromArray(array $data, array $mapping, string $dateFormat = 'Y-m-d\TH:i:s'): FeedItem
     {
         try {

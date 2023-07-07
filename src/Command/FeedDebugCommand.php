@@ -13,6 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
+/**
+ * THIS COMMAND IS ONLY HERE DURING DEVELOPMENT FOR FASTER FEED PARSING TEST/DEVELOPMENT.
+ */
 #[AsCommand(
     name: 'app:feed:debug',
     description: 'Try parsing feed and output raw data',
@@ -22,7 +25,6 @@ class FeedDebugCommand extends Command
     public function __construct(
         private readonly FeedParserInterface $feedParser,
         private readonly FeedMapperInterface $feedMapper,
-        private readonly HttpClientInterface $httpClient,
         private readonly FeedRepository $feedRepository,
     ) {
         parent::__construct();
@@ -42,11 +44,8 @@ class FeedDebugCommand extends Command
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
         $config = $feed->getConfiguration();
 
-        $req = $this->httpClient->request('GET', $config['url']);
-        $data = $req->getContent();
-
         $rootPointer = $config['rootPointer'] ?? '/-';
-        foreach ($this->feedParser->parse($data, $rootPointer) as $item) {
+        foreach ($this->feedParser->parse($config['url'], $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
 

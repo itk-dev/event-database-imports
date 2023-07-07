@@ -6,6 +6,9 @@ use Cerbero\JsonParser\JsonParser;
 
 class JsonFeedParserService implements FeedParserInterface
 {
+    /**
+     * @inheritDoc
+     */
     public function parse(string $data, string $pointerPath = '/-'): \Generator
     {
         $parser = new JsonParser($data);
