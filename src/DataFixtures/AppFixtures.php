@@ -11,10 +11,11 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $feed = new Feed();
-
         $config = [
             'url' => 'https://www.aros.dk/umbraco/api/events/feed/?culture=da',
-            'timeZone' => 'Europe/Copenhagen',
+            'timezone' => 'Europe/Copenhagen',
+            'rootPointer' => '/-',
+            'dateFormat' => 'Y-m-d\TH:i:s',
             'mapping' => [
                 'Id' => 'id',
                 'Title' => 'title',
@@ -42,11 +43,56 @@ class AppFixtures extends Fixture
                     'latitude' => 56.153922,
                     'longitude' => 10.197522,
                 ],
-                'mail' => 'info@aros.dk'
-            ]
+                'mail' => 'info@aros.dk',
+            ],
         ];
 
         $feed->setName('Test feed - Aros')
+            ->setEnabled(true)
+            ->setLastRead(new \DateTimeImmutable())
+            ->setConfiguration($config);
+
+        $manager->persist($feed);
+        $manager->flush();
+
+        $feed = new Feed();
+        $config = [
+            'url' => 'https://www.aakb.dk/feeds/eventdb',
+            'timezone' => 'Europe/Copenhagen',
+            'rootPointer' => '/-',
+            'dateFormat' => 'Y-m-d\TH:i:sP',
+            'mapping' => [
+                'nid' => 'id',
+                'title' => 'title',
+                'lead' => 'excerpt',
+                'body' => 'description',
+                'date.start' => 'start',
+                'date.stop' => 'end',
+                'url' => 'url',
+                'images.list' => 'image',
+                'tickets.url' => 'ticketUrl',
+            ],
+            'defaults' => [
+                // @todo: defaults dont make sens yet, but are here for idea presentation.
+                'name' => 'Aros',
+                'url' => 'http://www.aros.dk/',
+                'telephone' => '87306600',
+                'logo' => 'http://www.aros.dk/images/logo.png',
+                'address' => [
+                    'country' => 'Danmark',
+                    'city' => 'Aarhus C',
+                    'postalCode' => 8000,
+                    'street' => 'Aros Allé 2',
+                    'region' => 'Jylland',
+                    'suite' => '',
+                    'latitude' => 56.153922,
+                    'longitude' => 10.197522,
+                ],
+                'mail' => 'info@aros.dk',
+            ],
+        ];
+
+        $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setLastRead(new \DateTimeImmutable())
             ->setConfiguration($config);

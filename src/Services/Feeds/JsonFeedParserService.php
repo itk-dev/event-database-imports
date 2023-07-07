@@ -2,7 +2,6 @@
 
 namespace App\Services\Feeds;
 
-use App\Services\Mapper\FeedMapperInterface;
 use Cerbero\JsonParser\JsonParser;
 
 class JsonFeedParserService implements FeedParserInterface

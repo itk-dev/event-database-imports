@@ -9,7 +9,6 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -46,12 +45,14 @@ class FeedDebugCommand extends Command
         $req = $this->httpClient->request('GET', $config['url']);
         $data = $req->getContent();
 
-        foreach ($this->feedParser->parse($data) as $item) {
+        $rootPointer = $config['rootPointer'] ?? '/-';
+        foreach ($this->feedParser->parse($data, $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
 
             // @todo: Add feed configuration for dynamic mapping.
-            $event = $this->feedMapper->getFeedItemFromArray($item, $config['mapping']);
+            $event = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
+            $event->feedId = $feedId;
             $io->writeln($event);
         }
 
