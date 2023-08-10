@@ -202,7 +202,7 @@ jobs:
           node-version: '18'
       - run: yarn install
       - name: markdownlint
-        run: yarn markdownlint README.md docs/README.md
+        run: yarn run coding-standards-check
 
   apispec:
     runs-on: ubuntu-latest
