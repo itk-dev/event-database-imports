@@ -4,10 +4,14 @@ namespace App\DataFixtures;
 
 use App\Entity\Feed;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class AppFixtures extends Fixture
+class FeedFixtures extends Fixture implements DependentFixtureInterface
 {
+    /**
+     * @{@inheritdoc }
+     */
     public function load(ObjectManager $manager): void
     {
         $feed = new Feed();
@@ -51,7 +55,8 @@ class AppFixtures extends Fixture
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
             ->setLastRead(new \DateTimeImmutable())
-            ->setConfiguration($config);
+            ->setConfiguration($config)
+            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 
         $manager->persist($feed);
         $manager->flush();
@@ -82,9 +87,20 @@ class AppFixtures extends Fixture
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setLastRead(new \DateTimeImmutable())
-            ->setConfiguration($config);
+            ->setConfiguration($config)
+            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 
         $manager->persist($feed);
         $manager->flush();
+    }
+
+    /**
+     * @{@inheritdoc }
+     */
+    public function getDependencies(): array
+    {
+        return [
+          UserFixtures::class,
+        ];
     }
 }
