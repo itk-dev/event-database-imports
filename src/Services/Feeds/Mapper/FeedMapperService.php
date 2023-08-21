@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Mapper;
+namespace App\Services\Feeds\Mapper;
 
 use App\Model\Feed\FeedItem;
-use App\Services\Mapper\Source\FeedNormalizedSource;
+use App\Services\Feeds\Mapper\Source\FeedNormalizedSource;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;

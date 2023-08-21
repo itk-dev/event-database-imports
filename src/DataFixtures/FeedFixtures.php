@@ -78,6 +78,13 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'url' => 'url',
                 'images.list' => 'image',
                 'tickets.url' => 'ticketUrl',
+                'location.postal_code' => 'location.postalCode',
+                'location.locality' => 'location.city',
+                'location.thoroughfare' => 'location.street',
+                'location.name' => 'location.name',
+                'location.coordinates.lat' => 'location.coordinates.lat',
+                'location.coordinates.lon' => 'location.coordinates.long',
+                'location.mail' => 'location.mail',
             ],
             'defaults' => [
 

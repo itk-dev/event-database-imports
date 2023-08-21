@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Feeds;
+namespace App\Services\Feeds\Parser;
 
 use Cerbero\JsonParser\JsonParser;
 

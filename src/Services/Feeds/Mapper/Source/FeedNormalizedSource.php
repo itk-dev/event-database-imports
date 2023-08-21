@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Mapper\Source;
+namespace App\Services\Feeds\Mapper\Source;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -29,8 +29,8 @@ final class FeedNormalizedSource implements \IteratorAggregate
         $output = [];
 
         foreach ($mappings as $src => $dest) {
-            $data = $this->getValue([...$source], $src);
-            $output[$dest] = $data ?? '';
+            $value = $this->getValue([...$source], $src);
+            $this->setValue($output, $dest, $value ?? '');
         }
 
         return $output;
@@ -64,5 +64,28 @@ final class FeedNormalizedSource implements \IteratorAggregate
         $key = '['.implode('][', $key).']';
 
         return $propertyAccessor->getValue($data, $key);
+    }
+
+    /**
+     * Set value in output based on dot separated array indexes.
+     *
+     * @param array $output
+     *   The array to insert data into.
+     * @param string $dest
+     *   The array location to insert data into (levels operated by a '.' dot).
+     * @param $value
+     *   The value to insert into the array location.
+     *
+     * @return void
+     */
+    private function setValue(array &$output, string $dest, $value): void
+    {
+        $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->disableExceptionOnInvalidPropertyPath()
+            ->getPropertyAccessor();
+        $key = explode('.', $dest);
+        $key = '['.implode('][', $key).']';
+
+        $propertyAccessor->setValue($output, $key, $value);
     }
 }

@@ -3,15 +3,14 @@
 namespace App\Command;
 
 use App\Repository\FeedRepository;
-use App\Services\Feeds\FeedParserInterface;
-use App\Services\Mapper\FeedMapperInterface;
+use App\Services\Feeds\Mapper\FeedMapperInterface;
+use App\Services\Feeds\Parser\FeedParserInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * THIS COMMAND IS ONLY HERE DURING DEVELOPMENT FOR FASTER FEED PARSING TEST/DEVELOPMENT.
@@ -48,8 +47,6 @@ class FeedDebugCommand extends Command
         foreach ($this->feedParser->parse($config['url'], $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
-
-            // @todo: Add feed configuration for dynamic mapping.
             $event = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
             $event->feedId = $feedId;
             $io->writeln($event);

@@ -4,10 +4,10 @@ namespace App\Model\Feed;
 
 final class FeedConfiguration
 {
-    public readonly string $url;
-    public readonly string $timezone;
-    public readonly array $mapping;
     public readonly array $defaults;
+    public readonly array $mapping;
+    public readonly string $timezone;
+    public readonly string $url;
 
     public function __toString(): string
     {

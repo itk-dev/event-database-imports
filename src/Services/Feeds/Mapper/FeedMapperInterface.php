@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Mapper;
+namespace App\Services\Feeds\Mapper;
 
 use App\Model\Feed\FeedItem;
 

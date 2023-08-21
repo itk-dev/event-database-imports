@@ -5,18 +5,19 @@ namespace App\Model\Feed;
 final class FeedItem
 {
     public readonly int $id;
-    public string $title = '';
-    public string $excerpt = '';
     public string $description = '';
+    public string $excerpt = '';
     public string $image = '';
     public string $ticketUrl = '';
+    public string $title = '';
     public string $url = '';
-    public ?\DateTimeImmutable $start = null;
     public ?\DateTimeImmutable $end = null;
+    public ?\DateTimeImmutable $start = null;
 
     // Properties that is not required in the FeedMapperService.
-    public string $feedId = '';
     public ?FeedItemOccurrenceCollection $occurrences = null;
+    public ?FeedLocation $location = null;
+    public string $feedId = '';
 
     public function __toString(): string
     {
@@ -27,6 +28,7 @@ final class FeedItem
         $output[] = 'Id: '.$this->id;
         $output[] = 'Title: '.$this->title;
         $output[] = wordwrap('Excerpt: '.$this->excerpt, 60, "\n         ");
+        $output[] = 'Ticker: '.$this->ticketUrl;
         $output[] = 'Start: '.$this->start?->format('c');
         $output[] = 'End: '.$this->end?->format('c');
         $output[] = 'URL: '.$this->url;
