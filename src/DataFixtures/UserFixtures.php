@@ -12,7 +12,7 @@ class UserFixtures extends Fixture
     public const USER_REFERENCE = 'user';
 
     /**
-     * @{@inheritdoc }
+     * @{@inheritdoc}
      */
     public function load(ObjectManager $manager): void
     {

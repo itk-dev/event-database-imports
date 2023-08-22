@@ -41,15 +41,20 @@ class FeedDebugCommand extends Command
 
         // @todo: Convert config array to value object.
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
-        $config = $feed->getConfiguration();
+        if (is_null($feed)) {
+            $io->error('Feed not found with the provided id');
 
+            return Command::FAILURE;
+        }
+
+        $config = $feed->getConfiguration();
         $rootPointer = $config['rootPointer'] ?? '/-';
         foreach ($this->feedParser->parse($config['url'], $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
-            $event = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
-            $event->feedId = $feedId;
-            $io->writeln($event);
+            $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
+            $feedItem->feedId = $feedId;
+            $io->writeln((string) $feedItem);
         }
 
         $io->success('Feed debugging completed.');

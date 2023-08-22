@@ -12,7 +12,19 @@ use CuyZ\Valinor\MapperBuilder;
 class FeedMapperService implements FeedMapperInterface
 {
     /**
-     * @inheritDoc
+     * Transform raw feed item array into typed FeedItem object.
+     *
+     * @param array $data
+     *   The raw feed item data
+     * @param array $mapping
+     *   The mapping configuration
+     * @param string $dateFormat
+     *   The default date format used in the raw data
+     *
+     * @return feedItem
+     *   The data mapped to FeedItem object
+     *
+     * @throws MappingError
      */
     public function getFeedItemFromArray(array $data, array $mapping, string $dateFormat = 'Y-m-d\TH:i:s'): FeedItem
     {
@@ -37,7 +49,5 @@ class FeedMapperService implements FeedMapperInterface
             }
             throw $error;
         }
-
-        // Apply default values.
     }
 }

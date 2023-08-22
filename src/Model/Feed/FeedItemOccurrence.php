@@ -13,8 +13,8 @@ final class FeedItemOccurrence
         $output = [];
 
         $output[] = str_repeat('-', 41);
-        $output[] = 'Start: '.$this->start->format('d-m-y H:i:s');
-        $output[] = 'End: '.$this->end->format('d-m-y H:i:s');
+        $output[] = 'Start: '.$this->start?->format('d-m-y H:i:s');
+        $output[] = 'End: '.$this->end?->format('d-m-y H:i:s');
         $output[] = 'Price: '.$this->price;
         $output[] = str_repeat('-', 41);
 

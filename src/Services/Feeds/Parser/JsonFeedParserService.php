@@ -7,7 +7,7 @@ use Cerbero\JsonParser\JsonParser;
 class JsonFeedParserService implements FeedParserInterface
 {
     /**
-     * @inheritDoc
+     * @{@inheritdoc}
      */
     public function parse(string $data, string $pointerPath = '/-'): \Generator
     {

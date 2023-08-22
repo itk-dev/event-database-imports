@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class FeedFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @{@inheritdoc }
+     * @{@inheritdoc}
      */
     public function load(ObjectManager $manager): void
     {
@@ -87,7 +87,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'location.mail' => 'location.mail',
             ],
             'defaults' => [
-
             ],
         ];
 
@@ -118,7 +117,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'occurrences.*.endDate' => 'occurrences.*.end',
             ],
             'defaults' => [
-
             ],
         ];
 
@@ -133,7 +131,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @{@inheritdoc }
+     * @{@inheritdoc}
      */
     public function getDependencies(): array
     {

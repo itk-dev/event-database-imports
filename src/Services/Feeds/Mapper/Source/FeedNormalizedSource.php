@@ -19,25 +19,22 @@ final class FeedNormalizedSource implements \IteratorAggregate
      * Normalize array data into mappings format.
      *
      * @param iterable $source
-     *   The input source as iterable array.
+     *   The input source as iterable array
      * @param array $mappings
-     *   Mappings defined.
+     *   Mappings defined
      *
      * @return iterable
-     *   Normalized array.
+     *   Normalized array
      */
     private function normalize(iterable $source, array $mappings): iterable
     {
         $output = [];
 
         foreach ($mappings as $src => $dest) {
-
-            if(str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
+            if (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $values = $this->getValues([...$source], $src);
                 $this->setValues($output, $dest, $values);
-
-            }
-            else {
+            } else {
                 $value = $this->getValue([...$source], $src);
                 $this->setValue($output, $dest, $value ?? '');
             }
@@ -47,7 +44,7 @@ final class FeedNormalizedSource implements \IteratorAggregate
     }
 
     /**
-     * @inheritDoc
+     * @{@inheritdoc}
      */
     public function getIterator(): \Traversable
     {
@@ -58,12 +55,12 @@ final class FeedNormalizedSource implements \IteratorAggregate
      * Get value from data based on dot separated array indexes.
      *
      * @param array $data
-     *   Input data.
+     *   Input data
      * @param string $src
-     *   Index into input data as string.
+     *   Index into input data as string
      *
      * @return mixed
-     *   The content of the index found or null if not found.
+     *   The content of the index found or null if not found
      */
     private function getValue(array $data, string $src): mixed
     {
@@ -79,13 +76,11 @@ final class FeedNormalizedSource implements \IteratorAggregate
      * Set value in output based on dot separated array indexes.
      *
      * @param array $output
-     *   The array to insert data into.
+     *   The array to insert data into
      * @param string $dest
      *   The array location to insert data into (levels operated by a '.' dot).
      * @param $value
-     *   The value to insert into the array location.
-     *
-     * @return void
+     *   The value to insert into the array location
      */
     private function setValue(array &$output, string $dest, $value): void
     {
@@ -101,9 +96,9 @@ final class FeedNormalizedSource implements \IteratorAggregate
      * Get values from array indexed by wildcard src key string.
      *
      * @param array $data
+     *   The raw input data
      * @param string $src
-     *
-     * @return array
+     *   The keys to look up the values under
      */
     private function getValues(array $data, string $src): array
     {
@@ -127,10 +122,14 @@ final class FeedNormalizedSource implements \IteratorAggregate
     }
 
     /**
+     * Set values from array to array in output.
+     *
      * @param array $output
+     *   The result
      * @param string $dest
+     *   The destination key(s)
      * @param array $values
-     * @return void
+     *   The values to insert based on the key
      */
     private function setValues(array &$output, string $dest, array $values): void
     {
@@ -149,9 +148,10 @@ final class FeedNormalizedSource implements \IteratorAggregate
      * Transform dot separated key into property accessor pattern.
      *
      * @param string $key
-     *   The dot separated key.
+     *   The dot separated key
+     *
      * @return string
-     *   Key as property accessor pattern.
+     *   Key as property accessor pattern
      */
     private function transformKey(string $key): string
     {

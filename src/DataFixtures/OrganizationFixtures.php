@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class OrganizationFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @{@inheritdoc }
+     * @{@inheritdoc}
      */
     public function load(ObjectManager $manager): void
     {
@@ -24,7 +24,7 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @{@inheritdoc }
+     * @{@inheritdoc}
      */
     public function getDependencies(): array
     {
