@@ -4,6 +4,12 @@ namespace App\Services\Feeds\Mapper\Source;
 
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
+/**
+ * Normalizer that is executed before mapping feed data to object.
+ *
+ * It handles the "." dot notation in mappings to enabled mapping of dimensional data (array indexes) to object values.
+ * It handles the ".*." wildcard notation to map arrays into arrays with different keys.
+ */
 final class FeedNormalizedSource implements \IteratorAggregate
 {
     private const SRC_WILDCARD = '*';
