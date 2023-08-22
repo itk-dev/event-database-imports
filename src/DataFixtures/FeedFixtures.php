@@ -99,6 +99,37 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($feed);
         $manager->flush();
+
+        $feed = new Feed();
+        $config = [
+            'type' => 'json',
+            'url' => 'https://bora-bora.dk/wp-json/feed/v1/events',
+            'timezone' => 'Europe/Copenhagen',
+            'rootPointer' => '/-',
+            'dateFormat' => 'Y-m-d\TH:i:sP',
+            'mapping' => [
+                'id' => 'id',
+                'title' => 'title',
+                'description' => 'description',
+                'url' => 'url',
+                'image_url' => 'image',
+                'price' => 'price',
+                'occurrences.*.startDate' => 'occurrences.*.start',
+                'occurrences.*.endDate' => 'occurrences.*.end',
+            ],
+            'defaults' => [
+
+            ],
+        ];
+
+        $feed->setName('Test feed - Bora-bora')
+            ->setEnabled(true)
+            ->setLastRead(new \DateTimeImmutable())
+            ->setConfiguration($config)
+            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+
+        $manager->persist($feed);
+        $manager->flush();
     }
 
     /**

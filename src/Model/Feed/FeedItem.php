@@ -13,11 +13,11 @@ final class FeedItem
     public string $url = '';
     public ?\DateTimeImmutable $end = null;
     public ?\DateTimeImmutable $start = null;
-
-    // Properties that is not required in the FeedMapperService.
-    public ?FeedItemOccurrenceCollection $occurrences = null;
+    /** @var list<FeedItemOccurrence> */
+    public array $occurrences = [];
     public ?FeedLocation $location = null;
     public string $feedId = '';
+    public string $price = '';
 
     public function __toString(): string
     {
@@ -32,6 +32,11 @@ final class FeedItem
         $output[] = 'Start: '.$this->start?->format('c');
         $output[] = 'End: '.$this->end?->format('c');
         $output[] = 'URL: '.$this->url;
+        $output[] = 'Price: '.$this->price;
+        $output[] = 'Occurrence:';
+        foreach ($this->occurrences as $occurrence) {
+            $output[] = $occurrence;
+        }
         $output[] = str_repeat('-', 70);
 
         return implode("\n", $output);
