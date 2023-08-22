@@ -10,7 +10,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * It handles the "." dot notation in mappings to enabled mapping of dimensional data (array indexes) to object values.
  * It handles the ".*." wildcard notation to map arrays into arrays with different keys.
  */
-final class FeedNormalizedSource implements \IteratorAggregate
+final class FeedItemSource implements \IteratorAggregate
 {
     private const SRC_WILDCARD = '*';
     private const SRC_SEPARATOR = '.';
@@ -37,7 +37,15 @@ final class FeedNormalizedSource implements \IteratorAggregate
         $output = [];
 
         foreach ($mappings as $src => $dest) {
-            if (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
+            // Match dest that ends with ".[OPERATOR]". to map to array
+            if (preg_match('/(.*)\.\[(.*)]/', $dest, $matches)) {
+                $separator = $matches[2];
+                $value = $this->getValue([...$source], $src);
+                $values = empty($separator) ? [$value] : explode($separator, $value);
+                $this->setValue($output, $matches[1], $values);
+            }
+            // Match src with ".*." multi value array mapping.
+            elseif (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $values = $this->getValues([...$source], $src);
                 $this->setValues($output, $dest, $values);
             } else {

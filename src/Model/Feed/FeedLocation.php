@@ -2,7 +2,7 @@
 
 namespace App\Model\Feed;
 
-class FeedLocation
+final class FeedLocation
 {
     public string $city = '';
     public string $country = '';

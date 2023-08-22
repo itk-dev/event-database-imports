@@ -2,7 +2,7 @@
 
 namespace App\Model\Feed;
 
-class FeedCoordinates
+final class FeedCoordinates
 {
     public string $lat = '';
     public string $long = '';

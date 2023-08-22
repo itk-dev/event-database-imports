@@ -9,6 +9,7 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -31,13 +32,15 @@ class FeedDebugCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('feedId', InputArgument::REQUIRED, 'Database feed id');
+        $this->addArgument('feedId', InputArgument::REQUIRED, 'Database feed id')
+            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items outputted', -1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
         $feedId = $input->getArgument('feedId');
+        $limit = $input->getOption('limit');
 
         // @todo: Convert config array to value object.
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
@@ -49,12 +52,18 @@ class FeedDebugCommand extends Command
 
         $config = $feed->getConfiguration();
         $rootPointer = $config['rootPointer'] ?? '/-';
+        $index = 1;
         foreach ($this->feedParser->parse($config['url'], $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
             $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
             $feedItem->feedId = $feedId;
             $io->writeln((string) $feedItem);
+
+            if ($limit > 0 && $limit == $index) {
+                break;
+            }
+            ++$index;
         }
 
         $io->success('Feed debugging completed.');

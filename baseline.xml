@@ -5,6 +5,7 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER_REFERENCE)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER_REFERENCE)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER_REFERENCE)]]></code>
+      <code><![CDATA[$this->getReference(UserFixtures::USER_REFERENCE)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">
@@ -17,8 +18,9 @@
       <code>$dateFormat</code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="src/Services/Feeds/Mapper/Source/FeedNormalizedSource.php">
+  <file src="src/Services/Feeds/Mapper/Source/FeedItemSource.php">
     <InvalidOperand>
+      <code>$source</code>
       <code>$source</code>
       <code>$source</code>
     </InvalidOperand>

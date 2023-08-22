@@ -13,11 +13,13 @@ final class FeedItem
     public string $url = '';
     public ?\DateTimeImmutable $end = null;
     public ?\DateTimeImmutable $start = null;
-    /** @var list<FeedItemOccurrence> */
+    /** @var array<FeedItemOccurrence> */
     public array $occurrences = [];
     public ?FeedLocation $location = null;
     public string $feedId = '';
     public string $price = '';
+    /** @var array<string> */
+    public mixed $tags = [];
 
     public function __toString(): string
     {
@@ -33,6 +35,7 @@ final class FeedItem
         $output[] = 'End: '.$this->end?->format('c');
         $output[] = 'URL: '.$this->url;
         $output[] = 'Price: '.$this->price;
+        $output[] = 'Tags: '.implode(', ', $this->tags);
         $output[] = 'Occurrence:';
         foreach ($this->occurrences as $occurrence) {
             $output[] = $occurrence;

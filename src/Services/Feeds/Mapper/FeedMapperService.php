@@ -3,7 +3,7 @@
 namespace App\Services\Feeds\Mapper;
 
 use App\Model\Feed\FeedItem;
-use App\Services\Feeds\Mapper\Source\FeedNormalizedSource;
+use App\Services\Feeds\Mapper\Source\FeedItemSource;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;
@@ -36,7 +36,7 @@ class FeedMapperService implements FeedMapperInterface
                 ->mapper()
                 ->map(
                     FeedItem::class,
-                    Source::iterable(new FeedNormalizedSource($data, $mapping))
+                    Source::iterable(new FeedItemSource($data, $mapping))
                 );
         } catch (MappingError $error) {
             // @todo: Log mapping error for later debugging.

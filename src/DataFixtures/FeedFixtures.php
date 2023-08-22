@@ -128,6 +128,38 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($feed);
         $manager->flush();
+
+        $feed = new Feed();
+        $config = [
+            'type' => 'json',
+            'url' => 'https://www.train.dk/calenderjsonrewrite.php',
+            'timezone' => 'Europe/Copenhagen',
+            'rootPointer' => '/events/-',
+            'dateFormat' => 'Y-m-d\TH:i:sP',
+            'mapping' => [
+                'id' => 'id',
+                'name' => 'title',
+                'description' => 'description',
+                'url' => 'url',
+                'image' => 'image',
+                'ticketPriceRange' => 'price',
+                'purchaseUrl' => 'ticketUrl',
+                'tags' => 'tags.[]',
+                'starttime' => 'start',
+                'endtime' => 'end',
+            ],
+            'defaults' => [
+            ],
+        ];
+
+        $feed->setName('Test feed - Train')
+            ->setEnabled(true)
+            ->setLastRead(new \DateTimeImmutable())
+            ->setConfiguration($config)
+            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+
+        $manager->persist($feed);
+        $manager->flush();
     }
 
     /**
