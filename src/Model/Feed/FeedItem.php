@@ -19,7 +19,7 @@ final class FeedItem
     public string $feedId = '';
     public string $price = '';
     /** @var array<string> */
-    public mixed $tags = [];
+    public array $tags = [];
 
     public function __toString(): string
     {
