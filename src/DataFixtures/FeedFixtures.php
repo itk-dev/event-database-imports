@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 class FeedFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
-     * @{@inheritdoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager): void
     {
@@ -31,24 +31,30 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'Url' => 'url',
                 'Image' => 'image',
                 'BuyTicketsLink' => 'ticketUrl',
+                'Tags' => 'tags.[,]',
             ],
             'defaults' => [
-                // @todo: defaults dont make sens yet, but are here for idea presentation.
-                'name' => 'Aros',
-                'url' => 'http://www.aros.dk/',
-                'telephone' => '87306600',
-                'logo' => 'http://www.aros.dk/images/logo.png',
-                'address' => [
+                'title' => 'missing',
+                'tags' => [
+                    'Aros',
+                    'Aarhus',
+                ],
+                'location' => [
                     'country' => 'Danmark',
                     'city' => 'Aarhus C',
                     'postalCode' => 8000,
                     'street' => 'Aros Allé 2',
                     'region' => 'Jylland',
                     'suite' => '',
-                    'latitude' => 56.153922,
-                    'longitude' => 10.197522,
+                    'coordinates' => [
+                        'lat' => '56.153922',
+                        'long' => '10.197522',
+                    ],
+                    'url' => 'http://www.aros.dk/',
+                    'telephone' => '87306600',
+                    'mail' => 'info@aros.dk',
+                    'logo' => 'http://www.aros.dk/images/logo.png',
                 ],
-                'mail' => 'info@aros.dk',
             ],
         ];
 
@@ -163,7 +169,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @{@inheritdoc}
+     * {@inheritdoc}
      */
     public function getDependencies(): array
     {

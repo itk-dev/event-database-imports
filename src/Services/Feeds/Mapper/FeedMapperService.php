@@ -15,13 +15,9 @@ class FeedMapperService implements FeedMapperInterface
 {
     public function __construct(
         private readonly FeedDefaultsMapperService $defaultsMapperService
-    )
-    {
+    ) {
     }
 
-    /**
-     * @{inheritdoc}
-     */
     public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItem
     {
         try {

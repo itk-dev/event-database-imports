@@ -13,10 +13,10 @@ class FeedConfigurationMapperService
      * Get feed configuration object from array.
      *
      * @param array $configuration
-     *   Raw configuration array.
+     *   Raw configuration array
      *
-     * @return FeedConfiguration
-     *   Parsed configuration object.
+     * @return feedConfiguration
+     *   Parsed configuration object
      *
      * @throws MappingError
      */

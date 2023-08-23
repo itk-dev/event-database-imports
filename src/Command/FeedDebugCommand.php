@@ -56,12 +56,9 @@ class FeedDebugCommand extends Command
             return Command::FAILURE;
         }
 
-
-
-        $rootPointer = $config['rootPointer'] ?? '/-';
-        $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
         $index = 1;
-        foreach ($this->feedParser->parse($config->url, $rootPointer) as $item) {
+        $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
+        foreach ($this->feedParser->parse($config->url, $config->rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
             $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);

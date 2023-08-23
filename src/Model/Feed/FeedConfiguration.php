@@ -8,6 +8,7 @@ final class FeedConfiguration
     public readonly string $url;
     public readonly string $timezone;
     public readonly string $rootPointer;
+    /** @var non-empty-string */
     public readonly string $dateFormat;
     /** @var array list<string> */
     public readonly array $mapping;

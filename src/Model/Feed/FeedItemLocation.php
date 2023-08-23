@@ -2,7 +2,7 @@
 
 namespace App\Model\Feed;
 
-final class FeedLocation
+final class FeedItemLocation
 {
     public string $city = '';
     public string $country = '';
@@ -16,7 +16,7 @@ final class FeedLocation
     public string $image = '';
     public string $logo = '';
     public string $region = '';
-    public ?FeedCoordinates $coordinates = null;
+    public ?FeedItemCoordinates $coordinates = null;
 
     public function __toString(): string
     {

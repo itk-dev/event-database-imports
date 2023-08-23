@@ -24,13 +24,12 @@ final class FeedItemSource implements \IteratorAggregate
         iterable $source,
         private readonly FeedConfiguration $configuration,
         private readonly FeedDefaultsMapperService $defaultsMapperService
-    )
-    {
+    ) {
         $this->source = $this->normalize($source);
     }
 
     /**
-     * @{@inheritdoc}
+     * {@inheritdoc}
      */
     public function getIterator(): \Traversable
     {
@@ -56,6 +55,7 @@ final class FeedItemSource implements \IteratorAggregate
                 $separator = $matches[2];
                 $value = $this->getValue([...$source], $src);
                 $values = empty($separator) ? [$value] : explode($separator, $value);
+                $values = array_map('trim', array_filter($values));
                 $this->setValue($output, $matches[1], $values);
             }
             // Match src with ".*." multi value array mapping.
@@ -69,9 +69,7 @@ final class FeedItemSource implements \IteratorAggregate
         }
 
         // Apply default values.
-        $this->defaultsMapperService->apply($output, $this->configuration->mapping, $this->configuration->defaults);
-
-        return $output;
+        return $this->defaultsMapperService->apply($output, $this->configuration);
     }
 
     /**
