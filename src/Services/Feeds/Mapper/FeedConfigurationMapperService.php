@@ -3,36 +3,34 @@
 namespace App\Services\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Model\Feed\FeedItem;
-use App\Services\Feeds\FeedDefaultsMapperService;
-use App\Services\Feeds\Mapper\Source\FeedItemSource;
 use CuyZ\Valinor\Mapper\MappingError;
-use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 
-class FeedMapperService implements FeedMapperInterface
+class FeedConfigurationMapperService
 {
-    public function __construct(
-        private readonly FeedDefaultsMapperService $defaultsMapperService
-    )
-    {
-    }
-
     /**
-     * @{inheritdoc}
+     * Get feed configuration object from array.
+     *
+     * @param array $configuration
+     *   Raw configuration array.
+     *
+     * @return FeedConfiguration
+     *   Parsed configuration object.
+     *
+     * @throws MappingError
      */
-    public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItem
+    public function getConfigurationFromArray(array $configuration): FeedConfiguration
     {
         try {
             return (new MapperBuilder())
+                ->allowPermissiveTypes()
                 ->allowSuperfluousKeys()
                 ->enableFlexibleCasting()
-                ->supportDateFormats($configuration->dateFormat)
                 ->mapper()
                 ->map(
-                    FeedItem::class,
-                    Source::iterable(new FeedItemSource($data, $configuration, $this->defaultsMapperService))
+                    FeedConfiguration::class,
+                    $configuration
                 );
         } catch (MappingError $error) {
             // @todo: Log mapping error for later debugging.

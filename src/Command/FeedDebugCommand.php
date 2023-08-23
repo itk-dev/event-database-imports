@@ -3,8 +3,10 @@
 namespace App\Command;
 
 use App\Repository\FeedRepository;
+use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
 use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
+use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -25,6 +27,7 @@ class FeedDebugCommand extends Command
     public function __construct(
         private readonly FeedParserInterface $feedParser,
         private readonly FeedMapperInterface $feedMapper,
+        private readonly FeedConfigurationMapperService $configurationMapperService,
         private readonly FeedRepository $feedRepository,
     ) {
         parent::__construct();
@@ -36,6 +39,9 @@ class FeedDebugCommand extends Command
             ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items outputted', -1);
     }
 
+    /**
+     * @throws MappingError
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
@@ -50,13 +56,15 @@ class FeedDebugCommand extends Command
             return Command::FAILURE;
         }
 
-        $config = $feed->getConfiguration();
+
+
         $rootPointer = $config['rootPointer'] ?? '/-';
+        $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
         $index = 1;
-        foreach ($this->feedParser->parse($config['url'], $rootPointer) as $item) {
+        foreach ($this->feedParser->parse($config->url, $rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
-            $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config['mapping'], $config['dateFormat']);
+            $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);
             $feedItem->feedId = $feedId;
             $io->writeln((string) $feedItem);
 

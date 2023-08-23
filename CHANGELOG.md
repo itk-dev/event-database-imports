@@ -19,3 +19,5 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Entity model created
 - Basic feed parser structure
 - Fixtures
+- Typed feed configuration objects
+- Feeds default mapper service
