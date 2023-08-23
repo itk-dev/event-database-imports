@@ -17,3 +17,5 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Messenger
 - Lint tools
 - Entity model created
+- Basic feed parser structure
+- Fixtures

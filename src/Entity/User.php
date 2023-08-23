@@ -29,7 +29,7 @@ class User
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $enabled = null;
+    private ?bool $enabled = null;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
@@ -75,12 +75,12 @@ class User
         return $this;
     }
 
-    public function getEnabled(): ?string
+    public function isEnabled(): ?bool
     {
         return $this->enabled;
     }
 
-    public function setEnabled(string $enabled): static
+    public function setEnabled(bool $enabled): static
     {
         $this->enabled = $enabled;
 

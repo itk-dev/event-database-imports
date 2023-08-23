@@ -20,7 +20,7 @@ The input data is very different from the output data in this setup and the fron
 import/parsing of new data. The logic step will therefore be to separate the input and output model, which can be
 archived be using the "Command Query Responsibility Segregation" patter, here after called [CQRS](https://martinfowler.com/bliki/CQRS.html).
 
-For more implementation details see https://github.com/itk-dev/event-database-imports/tree/develop/docs
+For more implementation details see [https://github.com/itk-dev/event-database-imports/tree/develop/docs](https://github.com/itk-dev/event-database-imports/tree/develop/docs)
 
 ## Consequences
 
