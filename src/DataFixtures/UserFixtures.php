@@ -11,9 +11,6 @@ class UserFixtures extends Fixture
     public const ADMIN_USER_REFERENCE = 'admin-user';
     public const USER_REFERENCE = 'user';
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $userAdmin = new User();

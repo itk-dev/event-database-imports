@@ -28,9 +28,6 @@ final class FeedItemSource implements \IteratorAggregate
         $this->source = $this->normalize($source);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIterator(): \Traversable
     {
         yield from $this->source;

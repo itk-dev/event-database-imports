@@ -9,9 +9,6 @@ use Doctrine\Persistence\ObjectManager;
 
 class FeedFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(ObjectManager $manager): void
     {
         $feed = new Feed();
@@ -168,9 +165,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getDependencies(): array
     {
         return [
