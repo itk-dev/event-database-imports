@@ -7,62 +7,14 @@ namespace App\Tests;
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapperService;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
+use App\Tests\Utils\FeedItemInput;
+use App\Tests\Utils\PhpUnitUtils;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(FeedItemSource::class)]
 final class FeedItemSourceTest extends KernelTestCase
 {
-    // This test data is not live data, but combined data from different input sources.
-    private const FEED_ITEM_EXAMPLE_DATA = [
-        'nid' => '30506',
-        'url' => 'https://www.aakb.dk/arrangementer/teknologi/aabent-lab-60',
-        'title' => 'Åbent Lab',
-        'category' => 'Teknologi',
-        'tags' => [
-            'laserskæring',
-            'lasercut',
-            '3D print',
-        ],
-        'tags_string' => 'laserskæring,lasercut , 3D print',
-        'lead' => 'Vi holder åbent i labbet - kig forbi, hvis du er nysgerrig, har en ide eller en fil du gerne vil have skåret/printet.',
-        'body' => "<p><strong>Vi holder åbent i labbet - kig forbi, hvis du er nysgerrig, har en ide eller en fil du gerne vil have skåret/printet.</strong></p> <p>På Dokk1 har vi et Maker Lab, hvor der er laserskærer og 3D printer. Vi har også forskellig hobby elektronik, som Micro:bit, Arduino og Little Bits.</p>\n<p>Åbent Lab er ikke en workshop eller undervisning; det er dig, din ide og motivation, der sætter rammen!</p>\n<p>Vi har åbent de fleste onsdage og enkelte lørdage, se mere på vores <a href='http://www.aakb.dk/makerlab'> temaside</a>.</p>\n<p>Alle er velkomne fra 12 år.</p>\n<h3> </h3>\n<h3><strong>Covid-19</strong></h3>\n<p>Deltagelse kræver gyldigt coronapas</p>\n<p><br />Vi forbeholder os ret til at foretage ændringer i de enkelte arrangementer, hvis corona-situationen skulle ændre sig.</p>\n<p>Aarhus Bibliotekerne følger sundhedsmyndighedernes anvisninger, så det er trygt at deltage i bibliotekernes arrangementer både for brugere og for ansatte.</p>",
-        'date' => [
-            'start' => '2021-06-09T13:30:00+00:00',
-            'stop' => '2021-06-09T15:30:00+00:00',
-        ],
-        'images' => [
-            'list' => 'https://www.aakb.dk/sites/www.aakb.dk/files/list_image/event/lampeprototyper.jpg',
-            'title' => 'https://www.aakb.dk/sites/www.aakb.dk/files/title_image/event/makerlab_1.jpg',
-        ],
-        'location' => [
-            'hint' => '',
-            'thoroughfare' => 'Hack Kampmanns Plads 2',
-            'postal_code' => '8000',
-            'locality' => 'Aarhus',
-            'mail' => 'dokk1-hovedbiblioteket@aarhus.dk',
-            'phone' => '89 40 92 00 Borgerservice og Bibliotekers hovednummer',
-            'name' => 'Hovedbiblioteket',
-            'coordinates' => [
-                'lat' => '56.1535',
-                'lon' => '10.2142',
-            ],
-        ],
-        'price' => '0',
-        'tickets' => [
-            'url' => 'https://tickets.online.dk/id=235123451',
-        ],
-        'occurrences' => [
-            [
-                'startDate' => '2023-08-30T19:30:00+02:00',
-                'endDate' => '2023-08-30T20:45:00+02:00',
-            ], [
-                'startDate' => '2023-08-31T20:30:00+02:00',
-                'endDate' => '2023-08-31T21:45:00+02:00',
-            ],
-        ],
-    ];
-
     /**
      * Test that dot operated keys are transformed into property accessor keys.
      *
@@ -102,7 +54,7 @@ final class FeedItemSourceTest extends KernelTestCase
                 dateFormat: 'Y-m-d\TH:i:sP'
             )),
             'getValue',
-            [self::FEED_ITEM_EXAMPLE_DATA, 'images.list']
+            [FeedItemInput::EXAMPLE_DATA, 'images.list']
         );
         $this->assertEquals('https://www.aakb.dk/sites/www.aakb.dk/files/list_image/event/lampeprototyper.jpg', $value);
     }
@@ -129,7 +81,7 @@ final class FeedItemSourceTest extends KernelTestCase
         $value = PhpUnitUtils::callPrivateMethod(
             $this->getFeedItemSource($config),
             'getValue',
-            [self::FEED_ITEM_EXAMPLE_DATA, $key]
+            [FeedItemInput::EXAMPLE_DATA, $key]
         );
 
         PhpUnitUtils::callPrivateMethod(
@@ -159,7 +111,7 @@ final class FeedItemSourceTest extends KernelTestCase
             )),
             'getValues',
             [
-                self::FEED_ITEM_EXAMPLE_DATA,
+                FeedItemInput::EXAMPLE_DATA,
                 'occurrences.*.startDate',
             ]
         );
@@ -190,7 +142,7 @@ final class FeedItemSourceTest extends KernelTestCase
             $this->getFeedItemSource($config),
             'getValues',
             [
-                self::FEED_ITEM_EXAMPLE_DATA,
+                FeedItemInput::EXAMPLE_DATA,
                 'occurrences.*.startDate',
             ]
         );
@@ -241,36 +193,36 @@ final class FeedItemSourceTest extends KernelTestCase
 
         $feedItemSource = $this->getFeedItemSource($feedConfig);
 
-        $source = $feedItemSource->normalize(self::FEED_ITEM_EXAMPLE_DATA);
+        $source = $feedItemSource->normalize(FeedItemInput::EXAMPLE_DATA);
 
         $this->assertCount(12, $source);
         $this->assertEquals([
-            'id' => self::FEED_ITEM_EXAMPLE_DATA['nid'],
-            'title' => self::FEED_ITEM_EXAMPLE_DATA['title'],
-            'excerpt' => self::FEED_ITEM_EXAMPLE_DATA['lead'],
-            'description' => self::FEED_ITEM_EXAMPLE_DATA['body'],
-            'start' => self::FEED_ITEM_EXAMPLE_DATA['date']['start'],
-            'end' => self::FEED_ITEM_EXAMPLE_DATA['date']['stop'],
-            'url' => self::FEED_ITEM_EXAMPLE_DATA['url'],
-            'image' => self::FEED_ITEM_EXAMPLE_DATA['images']['list'],
-            'ticketUrl' => self::FEED_ITEM_EXAMPLE_DATA['tickets']['url'],
+            'id' => FeedItemInput::EXAMPLE_DATA['nid'],
+            'title' => FeedItemInput::EXAMPLE_DATA['title'],
+            'excerpt' => FeedItemInput::EXAMPLE_DATA['lead'],
+            'description' => FeedItemInput::EXAMPLE_DATA['body'],
+            'start' => FeedItemInput::EXAMPLE_DATA['date']['start'],
+            'end' => FeedItemInput::EXAMPLE_DATA['date']['stop'],
+            'url' => FeedItemInput::EXAMPLE_DATA['url'],
+            'image' => FeedItemInput::EXAMPLE_DATA['images']['list'],
+            'ticketUrl' => FeedItemInput::EXAMPLE_DATA['tickets']['url'],
             'location' => [
-                'name' => self::FEED_ITEM_EXAMPLE_DATA['location']['name'],
-                'mail' => self::FEED_ITEM_EXAMPLE_DATA['location']['mail'],
+                'name' => FeedItemInput::EXAMPLE_DATA['location']['name'],
+                'mail' => FeedItemInput::EXAMPLE_DATA['location']['mail'],
                 'coordinates' => [
-                    'lat' => self::FEED_ITEM_EXAMPLE_DATA['location']['coordinates']['lat'],
-                    'long' => self::FEED_ITEM_EXAMPLE_DATA['location']['coordinates']['lon'],
+                    'lat' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lat'],
+                    'long' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lon'],
                 ],
             ],
-            'tags' => [self::FEED_ITEM_EXAMPLE_DATA['tags_string']],
+            'tags' => [FeedItemInput::EXAMPLE_DATA['tags_string']],
             'occurrences' => [
                 [
-                    'start' => self::FEED_ITEM_EXAMPLE_DATA['occurrences'][0]['startDate'],
-                    'end' => self::FEED_ITEM_EXAMPLE_DATA['occurrences'][0]['endDate'],
+                    'start' => FeedItemInput::EXAMPLE_DATA['occurrences'][0]['startDate'],
+                    'end' => FeedItemInput::EXAMPLE_DATA['occurrences'][0]['endDate'],
                 ],
                 [
-                    'start' => self::FEED_ITEM_EXAMPLE_DATA['occurrences'][1]['startDate'],
-                    'end' => self::FEED_ITEM_EXAMPLE_DATA['occurrences'][1]['endDate'],
+                    'start' => FeedItemInput::EXAMPLE_DATA['occurrences'][1]['startDate'],
+                    'end' => FeedItemInput::EXAMPLE_DATA['occurrences'][1]['endDate'],
                 ],
             ],
         ], $source);
