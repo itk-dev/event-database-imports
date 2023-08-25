@@ -2,6 +2,8 @@
 
 namespace App\Services\Feeds\Mapper\Source;
 
+use App\Model\Feed\FeedConfiguration;
+use App\Services\Feeds\FeedDefaultsMapperService;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -18,9 +20,17 @@ final class FeedItemSource implements \IteratorAggregate
     private const SRC_SEPARATOR = '.';
     private iterable $source;
 
-    public function __construct(iterable $source, array $mappings)
+    public function __construct(
+        iterable $source,
+        private readonly FeedConfiguration $configuration,
+        private readonly FeedDefaultsMapperService $defaultsMapperService
+    ) {
+        $this->source = $this->normalize($source);
+    }
+
+    public function getIterator(): \Traversable
     {
-        $this->source = $this->normalize($source, $mappings);
+        yield from $this->source;
     }
 
     /**
@@ -28,22 +38,21 @@ final class FeedItemSource implements \IteratorAggregate
      *
      * @param iterable $source
      *   The input source as iterable array
-     * @param array $mappings
-     *   Mappings defined
      *
      * @return iterable
      *   Normalized array
      */
-    private function normalize(iterable $source, array $mappings): iterable
+    private function normalize(iterable $source): iterable
     {
         $output = [];
 
-        foreach ($mappings as $src => $dest) {
+        foreach ($this->configuration->mapping as $src => $dest) {
             // Match dest that ends with ".[OPERATOR]". to map to array
             if (preg_match('/(.*)\.\[(.*)]/', $dest, $matches)) {
                 $separator = $matches[2];
                 $value = $this->getValue([...$source], $src);
                 $values = empty($separator) ? [$value] : explode($separator, $value);
+                $values = array_map('trim', array_filter($values));
                 $this->setValue($output, $matches[1], $values);
             }
             // Match src with ".*." multi value array mapping.
@@ -56,15 +65,8 @@ final class FeedItemSource implements \IteratorAggregate
             }
         }
 
-        return $output;
-    }
-
-    /**
-     * @{@inheritdoc}
-     */
-    public function getIterator(): \Traversable
-    {
-        yield from $this->source;
+        // Apply default values.
+        return $this->defaultsMapperService->apply($output, $this->configuration);
     }
 
     /**

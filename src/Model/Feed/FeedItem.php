@@ -15,7 +15,7 @@ final class FeedItem
     public ?\DateTimeImmutable $start = null;
     /** @var array<FeedItemOccurrence> */
     public array $occurrences = [];
-    public ?FeedLocation $location = null;
+    public ?FeedItemLocation $location = null;
     public string $feedId = '';
     public string $price = '';
     /** @var array<string> */
