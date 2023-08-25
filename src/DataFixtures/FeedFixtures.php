@@ -88,6 +88,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'location.coordinates.lat' => 'location.coordinates.lat',
                 'location.coordinates.lon' => 'location.coordinates.long',
                 'location.mail' => 'location.mail',
+                'tags' => 'tags',
             ],
             'defaults' => [
             ],

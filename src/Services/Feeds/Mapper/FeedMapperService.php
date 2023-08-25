@@ -28,7 +28,7 @@ class FeedMapperService implements FeedMapperInterface
                 ->mapper()
                 ->map(
                     FeedItem::class,
-                    Source::iterable(new FeedItemSource($data, $configuration, $this->defaultsMapperService))
+                    Source::iterable((new FeedItemSource($configuration, $this->defaultsMapperService))->normalize($data))
                 );
         } catch (MappingError $error) {
             // @todo: Log mapping error for later debugging.

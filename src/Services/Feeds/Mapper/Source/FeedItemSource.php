@@ -14,23 +14,15 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @see https://valinor.cuyz.io/1.5/how-to/transform-input/#custom-source
  */
-final class FeedItemSource implements \IteratorAggregate
+final class FeedItemSource
 {
     private const SRC_WILDCARD = '*';
     private const SRC_SEPARATOR = '.';
-    private iterable $source;
 
     public function __construct(
-        iterable $source,
         private readonly FeedConfiguration $configuration,
         private readonly FeedDefaultsMapperService $defaultsMapperService
     ) {
-        $this->source = $this->normalize($source);
-    }
-
-    public function getIterator(): \Traversable
-    {
-        yield from $this->source;
     }
 
     /**
@@ -42,7 +34,7 @@ final class FeedItemSource implements \IteratorAggregate
      * @return iterable
      *   Normalized array
      */
-    private function normalize(iterable $source): iterable
+    public function normalize(iterable $source): iterable
     {
         $output = [];
 
@@ -52,7 +44,6 @@ final class FeedItemSource implements \IteratorAggregate
                 $separator = $matches[2];
                 $value = $this->getValue([...$source], $src);
                 $values = empty($separator) ? [$value] : explode($separator, $value);
-                $values = array_map('trim', array_filter($values));
                 $this->setValue($output, $matches[1], $values);
             }
             // Match src with ".*." multi value array mapping.
