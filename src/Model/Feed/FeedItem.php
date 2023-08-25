@@ -21,8 +21,7 @@ final class FeedItem
         public string $price = '',
         /** @var array<string> */
         public array $tags = [],
-    )
-    {
+    ) {
     }
 
     public function __toString(): string

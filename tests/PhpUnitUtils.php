@@ -7,7 +7,8 @@ class PhpUnitUtils
     /**
      * @throws \ReflectionException
      */
-    public static function callPrivateMethod(object $obj, string $name, array $args) {
+    public static function callPrivateMethod(object $obj, string $name, array $args)
+    {
         $class = new \ReflectionClass($obj);
         $method = $class->getMethod($name);
 

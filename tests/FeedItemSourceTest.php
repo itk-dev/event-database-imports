@@ -5,7 +5,6 @@ namespace App\Tests;
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapperService;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
-use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class FeedItemSourceTest extends KernelTestCase
@@ -19,7 +18,7 @@ final class FeedItemSourceTest extends KernelTestCase
         'tags' => [
             'laserskæring',
             'lasercut',
-            '3D print'
+            '3D print',
         ],
         'tags_string' => 'laserskæring,lasercut , 3D print',
         'lead' => 'Vi holder åbent i labbet - kig forbi, hvis du er nysgerrig, har en ide eller en fil du gerne vil have skåret/printet.',
@@ -30,7 +29,7 @@ final class FeedItemSourceTest extends KernelTestCase
         ],
         'images' => [
             'list' => 'https://www.aakb.dk/sites/www.aakb.dk/files/list_image/event/lampeprototyper.jpg',
-            'title' => 'https://www.aakb.dk/sites/www.aakb.dk/files/title_image/event/makerlab_1.jpg'
+            'title' => 'https://www.aakb.dk/sites/www.aakb.dk/files/title_image/event/makerlab_1.jpg',
         ],
         'location' => [
             'hint' => '',
@@ -99,7 +98,7 @@ final class FeedItemSourceTest extends KernelTestCase
                 dateFormat: 'Y-m-d\TH:i:sP'
             )),
             'getValue',
-            [self::FEED_ITEM_EXAMPLE_DATA,'images.list']
+            [self::FEED_ITEM_EXAMPLE_DATA, 'images.list']
         );
         $this->assertEquals('https://www.aakb.dk/sites/www.aakb.dk/files/list_image/event/lampeprototyper.jpg', $value);
     }
@@ -208,7 +207,8 @@ final class FeedItemSourceTest extends KernelTestCase
      *
      * @throws \Exception
      */
-    public function testNormalize() {
+    public function testNormalize()
+    {
         $feedConfig = new FeedConfiguration(
             type: 'json',
             url: 'https://aakb.dk/feeds',
@@ -275,8 +275,8 @@ final class FeedItemSourceTest extends KernelTestCase
     /**
      * Helper function to bootstrap the service tested.
      *
-     * @param FeedConfiguration $configuration
-     *   Default feed configuration.
+     * @param feedConfiguration $configuration
+     *   Default feed configuration
      *
      * @return FeedItemSource
      *   The service

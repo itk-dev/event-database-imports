@@ -18,8 +18,7 @@ final class FeedItemLocation
         public string $logo = '',
         public string $region = '',
         public ?FeedItemCoordinates $coordinates = null,
-    )
-    {
+    ) {
     }
 
     public function __toString(): string

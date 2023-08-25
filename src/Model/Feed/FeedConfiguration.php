@@ -15,8 +15,7 @@ final class FeedConfiguration
         public readonly array $mapping = [],
         /** @var array list<string> */
         public readonly array $defaults = [],
-    )
-    {
+    ) {
     }
 
     public function __toString(): string

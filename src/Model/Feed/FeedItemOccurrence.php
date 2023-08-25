@@ -8,8 +8,7 @@ final class FeedItemOccurrence
         public ?\DateTimeImmutable $start = null,
         public ?\DateTimeImmutable $end = null,
         public string $price = '',
-    )
-    {
+    ) {
     }
 
     public function __toString(): string
