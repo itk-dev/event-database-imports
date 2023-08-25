@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapperService;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+#[CoversClass(FeedItemSource::class)]
 final class FeedItemSourceTest extends KernelTestCase
 {
     // This test data is not live data, but combined data from different input sources.
