@@ -13,12 +13,11 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 #[CoversClass(FeedItemSource::class)]
 final class TagsNormalizationTest extends KernelTestCase
 {
-
     /**
      * @throws \Exception
      */
-    public function testTrimLength()  {
-
+    public function testTrimLength()
+    {
         $tagsNames = PhpUnitUtils::callPrivateMethod(
             $this->getTagsNormalizerService(),
             'trimLength',
@@ -52,5 +51,4 @@ final class TagsNormalizationTest extends KernelTestCase
 
         return $container->get(TagsNormalizerService::class);
     }
-
 }
