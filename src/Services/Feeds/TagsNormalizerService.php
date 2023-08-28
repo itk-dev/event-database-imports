@@ -4,12 +4,12 @@ namespace App\Services\Feeds;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;
-use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 
-class TagsNormalizerService implements TagsNormalizerInterface
+final class TagsNormalizerService implements TagsNormalizerInterface
 {
     public function __construct(
-        private readonly EntityManager $em,
+        private readonly EntityManagerInterface $em,
         private readonly TagRepository $tagRepository,
     ) {
     }

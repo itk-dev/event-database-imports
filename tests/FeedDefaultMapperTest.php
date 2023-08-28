@@ -15,6 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 final class FeedDefaultMapperTest extends KernelTestCase
 {
     /**
+     * Test mapping of default values.
+     *
      * @throws \Exception
      */
     public function testApply(): void
