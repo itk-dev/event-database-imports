@@ -26,7 +26,7 @@ class FeedDefaultsMapperService
             if (array_key_exists($key, $defaults)) {
                 if (is_array($data)) {
                     // Append values into array.
-                    $output[$key] = array_merge($data, $defaults[$key]);
+                    $output[$key] = array_merge($defaults[$key], $data);
                 } elseif (empty($data)) {
                     // Set default value.
                     $output[$key] = $defaults[$key];
