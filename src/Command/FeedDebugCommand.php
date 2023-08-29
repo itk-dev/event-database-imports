@@ -6,6 +6,7 @@ use App\Repository\FeedRepository;
 use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
 use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
+use App\Services\Feeds\TagsNormalizerService;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -29,6 +30,7 @@ class FeedDebugCommand extends Command
         private readonly FeedMapperInterface $feedMapper,
         private readonly FeedConfigurationMapperService $configurationMapperService,
         private readonly FeedRepository $feedRepository,
+        private readonly TagsNormalizerService $tagsNormalizerService
     ) {
         parent::__construct();
     }
@@ -63,6 +65,7 @@ class FeedDebugCommand extends Command
             // here for debugging we by-pass message system and try mapping the item.
             $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);
             $feedItem->feedId = $feedId;
+            $feedItem->tags = $this->tagsNormalizerService->normalize($feedItem->tags);
             $io->writeln((string) $feedItem);
 
             if ($limit > 0 && $limit == $index) {

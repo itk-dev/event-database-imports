@@ -13,9 +13,12 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER_REFERENCE)]]></code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="src/Services/Feeds/Mapper/FeedMapperService.php">
+  <file src="src/DataFixtures/TagsFixtures.php">
     <ArgumentTypeCoercion>
-      <code>$dateFormat</code>
+      <code><![CDATA[$this->getReference(VocabularyFixtures::VOCAB_MANAGED)]]></code>
+      <code><![CDATA[$this->getReference(VocabularyFixtures::VOCAB_MANAGED)]]></code>
+      <code><![CDATA[$this->getReference(VocabularyFixtures::VOCAB_MANAGED)]]></code>
+      <code><![CDATA[$this->getReference(VocabularyFixtures::VOCAB_MANAGED)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/Services/Feeds/Mapper/Source/FeedItemSource.php">
