@@ -6,12 +6,6 @@ framework:
         transports:
             async:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
-                retry_strategy:
-                    # 1, 3, 9, 27
-                    max_retries: 4
-                    delay: 60000 # 1 minutes
-                    multiplier: 3
-                    max_delay: 3600000 # 1 hour
                 options:
                     exchange:
                         name: async
@@ -23,8 +17,8 @@ framework:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN_FAILED)%'
 
         routing:
-            # Route your messages to the transports
-            # 'App\Message\YourMessage': async
+            'App\Message\FeedItemDataMessage': async
+            'App\Message\FeedNormalizationMessage': async
 
 when@test:
     framework:
