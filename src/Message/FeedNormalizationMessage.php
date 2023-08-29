@@ -10,8 +10,7 @@ class FeedNormalizationMessage
     public function __construct(
         private readonly FeedConfiguration $configuration,
         private readonly FeedItem $item,
-    )
-    {
+    ) {
     }
 
     public function getConfiguration(): FeedConfiguration

@@ -16,8 +16,7 @@ class FeedItemDataHandler
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly FeedMapperInterface $feedMapper,
-    )
-    {
+    ) {
     }
 
     public function __invoke(FeedItemDataMessage $message): void
@@ -25,7 +24,6 @@ class FeedItemDataHandler
         try {
             $feedItem = $this->feedMapper->getFeedItemFromArray($message->getData(), $message->getConfiguration());
             $feedItem->feedId = $message->getFeedId();
-
         } catch (MappingError $e) {
             throw new UnrecoverableMessageHandlingException($e->getMessage(), $e->getCode(), $e);
         }

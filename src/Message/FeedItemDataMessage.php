@@ -10,8 +10,7 @@ class FeedItemDataMessage
         private readonly int $feedId,
         private readonly FeedConfiguration $configuration,
         private readonly array $data,
-    )
-    {
+    ) {
     }
 
     public function getFeedId(): int

@@ -47,7 +47,7 @@ class FeedDebugCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $feedId = $input->getArgument('feedId');
+        $feedId = (int) $input->getArgument('feedId');
         $limit = $input->getOption('limit');
 
         // @todo: Convert config array to value object.

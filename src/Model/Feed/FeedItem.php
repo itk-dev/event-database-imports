@@ -17,7 +17,7 @@ final class FeedItem
         /** @var array<FeedItemOccurrence> */
         public array $occurrences = [],
         public ?FeedItemLocation $location = null,
-        public string $feedId = '',
+        public int $feedId = 0,
         public string $price = '',
         /** @var array<string> */
         public array $tags = [],

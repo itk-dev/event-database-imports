@@ -5,7 +5,6 @@ namespace App\Command;
 use App\Message\FeedItemDataMessage;
 use App\Repository\FeedRepository;
 use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
-use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -16,7 +15,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\MessageBusInterface;
-
 
 #[AsCommand(
     name: 'app:feed:import',
@@ -45,7 +43,7 @@ class FeedImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $feedId = $input->getArgument('feedId');
+        $feedId = (int) $input->getArgument('feedId');
         $limit = $input->getOption('limit');
 
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
