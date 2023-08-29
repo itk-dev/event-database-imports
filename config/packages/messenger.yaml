@@ -19,6 +19,7 @@ framework:
         routing:
             'App\Message\FeedItemDataMessage': async
             'App\Message\FeedNormalizationMessage': async
+            'App\Message\EventMessage': async
 
 when@test:
     framework:
