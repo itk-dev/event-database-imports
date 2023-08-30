@@ -11,7 +11,7 @@ use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 
-class FeedMapperService implements FeedMapperInterface
+final class FeedMapperService implements FeedMapperInterface
 {
     public function __construct(
         private readonly FeedDefaultsMapperService $defaultsMapperService

@@ -7,7 +7,7 @@ use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 
-class FeedConfigurationMapperService
+final class FeedConfigurationMapperService
 {
     /**
      * Get feed configuration object from array.

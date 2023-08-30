@@ -6,12 +6,11 @@ namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapperService;
-use App\Services\Feeds\Mapper\Source\FeedItemSource;
 use App\Tests\Utils\FeedItemInput;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-#[CoversClass(FeedItemSource::class)]
+#[CoversClass(FeedDefaultsMapperService::class)]
 final class FeedDefaultMapperTest extends KernelTestCase
 {
     /**
@@ -24,6 +23,7 @@ final class FeedDefaultMapperTest extends KernelTestCase
         $config = new FeedConfiguration(
             type: 'json',
             url: 'https://aakb.dk/feeds',
+            base: 'https://aakb.dk/',
             timezone: 'Europe/Copenhagen',
             rootPointer: '/-',
             dateFormat: 'Y-m-d\TH:i:sP',

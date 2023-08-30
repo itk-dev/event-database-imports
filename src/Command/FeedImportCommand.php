@@ -2,11 +2,10 @@
 
 namespace App\Command;
 
+use App\Message\FeedItemDataMessage;
 use App\Repository\FeedRepository;
 use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
-use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
-use App\Services\TagsNormalizerService;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -15,22 +14,19 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Messenger\MessageBusInterface;
 
-/**
- * THIS COMMAND IS ONLY HERE DURING DEVELOPMENT FOR FASTER FEED PARSING TEST/DEVELOPMENT.
- */
 #[AsCommand(
-    name: 'app:feed:debug',
-    description: 'Try parsing feed and output raw data',
+    name: 'app:feed:import',
+    description: 'Parse feed and import events from it',
 )]
-class FeedDebugCommand extends Command
+class FeedImportCommand extends Command
 {
     public function __construct(
+        private readonly MessageBusInterface $messageBus,
         private readonly FeedParserInterface $feedParser,
-        private readonly FeedMapperInterface $feedMapper,
         private readonly FeedConfigurationMapperService $configurationMapperService,
         private readonly FeedRepository $feedRepository,
-        private readonly TagsNormalizerService $tagsNormalizerService
     ) {
         parent::__construct();
     }
@@ -50,7 +46,6 @@ class FeedDebugCommand extends Command
         $feedId = (int) $input->getArgument('feedId');
         $limit = $input->getOption('limit');
 
-        // @todo: Convert config array to value object.
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
         if (is_null($feed)) {
             $io->error('Feed not found with the provided id');
@@ -61,12 +56,10 @@ class FeedDebugCommand extends Command
         $index = 1;
         $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
         foreach ($this->feedParser->parse($config->url, $config->rootPointer) as $item) {
-            // What should happen. Send item into queue system and in the next step map and validate data. But right
-            // here for debugging we by-pass message system and try mapping the item.
-            $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);
-            $feedItem->feedId = $feedId;
-            $feedItem->tags = $this->tagsNormalizerService->normalize($feedItem->tags);
-            $io->writeln((string) $feedItem);
+            $this->messageBus->dispatch(new FeedItemDataMessage($feedId, $config, $item));
+
+            // @todo: Create better feedback.
+            $io->write('.');
 
             if ($limit > 0 && $limit == $index) {
                 break;
@@ -74,7 +67,7 @@ class FeedDebugCommand extends Command
             ++$index;
         }
 
-        $io->success('Feed debugging completed.');
+        $io->success('Feed import completed.');
 
         return Command::SUCCESS;
     }

@@ -4,7 +4,7 @@ namespace App\Services\Feeds\Parser;
 
 use Cerbero\JsonParser\JsonParser;
 
-class JsonFeedParserService implements FeedParserInterface
+final class JsonFeedParserService implements FeedParserInterface
 {
     public function parse(string $data, string $pointerPath = '/-'): \Generator
     {
