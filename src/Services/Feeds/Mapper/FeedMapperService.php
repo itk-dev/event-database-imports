@@ -10,11 +10,13 @@ use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
+use Psr\Log\LoggerInterface;
 
 final class FeedMapperService implements FeedMapperInterface
 {
     public function __construct(
-        private readonly FeedDefaultsMapperService $defaultsMapperService
+        private readonly FeedDefaultsMapperService $defaultsMapperService,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -31,13 +33,10 @@ final class FeedMapperService implements FeedMapperInterface
                     Source::iterable((new FeedItemSource($configuration, $this->defaultsMapperService))->normalize($data))
                 );
         } catch (MappingError $error) {
-            // @todo: Log mapping error for later debugging.
             // Get flatten list of all messages through the whole nodes tree
-            $messages = Messages::flattenFromNode(
-                $error->node()
-            );
+            $messages = Messages::flattenFromNode($error->node());
             foreach ($messages as $message) {
-                echo $message,"\n";
+                $this->logger->error($message);
             }
             throw $error;
         }
