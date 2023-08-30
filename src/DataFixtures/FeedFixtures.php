@@ -15,6 +15,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $config = [
             'type' => 'json',
             'url' => 'https://www.aros.dk/umbraco/api/events/feed/?culture=da',
+            'base' => 'https://www.aros.dk',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
             'dateFormat' => 'Y-m-d\TH:i:s',
@@ -68,6 +69,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $config = [
             'type' => 'json',
             'url' => 'https://www.aakb.dk/feeds/eventdb',
+            'base' => 'https://www.aakb.dk/events',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
             'dateFormat' => 'Y-m-d\TH:i:sP',
@@ -107,6 +109,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $config = [
             'type' => 'json',
             'url' => 'https://bora-bora.dk/wp-json/feed/v1/events',
+            'base' => 'https://www.bora-bora.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
             'dateFormat' => 'Y-m-d\TH:i:sP',
@@ -137,6 +140,7 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $config = [
             'type' => 'json',
             'url' => 'https://www.train.dk/calenderjsonrewrite.php',
+            'base' => 'https://www.bora-bora.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/events/-',
             'dateFormat' => 'Y-m-d\TH:i:sP',

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Feeds;
+namespace App\Services;
 
 use App\Entity\Tag;
 use App\Repository\TagRepository;

@@ -6,7 +6,7 @@ use App\Repository\FeedRepository;
 use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
 use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
-use App\Services\Feeds\TagsNormalizerService;
+use App\Services\TagsNormalizerService;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

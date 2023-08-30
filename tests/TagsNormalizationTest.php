@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Services\Feeds\Mapper\Source\FeedItemSource;
-use App\Services\Feeds\TagsNormalizerService;
+use App\Services\TagsNormalizerService;
 use App\Tests\Utils\PhpUnitUtils;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-#[CoversClass(FeedItemSource::class)]
+#[CoversClass(TagsNormalizerService::class)]
 final class TagsNormalizationTest extends KernelTestCase
 {
     /**

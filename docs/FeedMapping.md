@@ -9,6 +9,7 @@ mapping and defaults objects in this document.
 {
   "type": "json",
   "url": "",
+  "base": "https://aakb.dk/",
   "timezone": "Europe/Copenhagen",
   "rootPointer": "/-",
   "dateFormat": "Y-m-d\TH:i:sP",

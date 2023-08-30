@@ -27,6 +27,7 @@ final class FeedItemSourceTest extends KernelTestCase
             $this->getFeedItemSource(new FeedConfiguration(
                 type: 'json',
                 url: 'https://aakb.dk/feeds',
+                base: 'https://aakb.dk/',
                 timezone: 'Europe/Copenhagen',
                 rootPointer: '/-',
                 dateFormat: 'Y-m-d\TH:i:sP'
@@ -49,6 +50,7 @@ final class FeedItemSourceTest extends KernelTestCase
             $this->getFeedItemSource(new FeedConfiguration(
                 type: 'json',
                 url: 'https://aakb.dk/feeds',
+                base: 'https://aakb.dk/',
                 timezone: 'Europe/Copenhagen',
                 rootPointer: '/-',
                 dateFormat: 'Y-m-d\TH:i:sP'
@@ -72,6 +74,7 @@ final class FeedItemSourceTest extends KernelTestCase
         $config = new FeedConfiguration(
             type: 'json',
             url: 'https://aakb.dk/feeds',
+            base: 'https://aakb.dk/',
             timezone: 'Europe/Copenhagen',
             rootPointer: '/-',
             dateFormat: 'Y-m-d\TH:i:sP'
@@ -105,6 +108,7 @@ final class FeedItemSourceTest extends KernelTestCase
             $this->getFeedItemSource(new FeedConfiguration(
                 type: 'json',
                 url: 'https://aakb.dk/feeds',
+                base: 'https://aakb.dk/',
                 timezone: 'Europe/Copenhagen',
                 rootPointer: '/-',
                 dateFormat: 'Y-m-d\TH:i:sP'
@@ -133,6 +137,7 @@ final class FeedItemSourceTest extends KernelTestCase
         $config = new FeedConfiguration(
             type: 'json',
             url: 'https://aakb.dk/feeds',
+            base: 'https://aakb.dk/',
             timezone: 'Europe/Copenhagen',
             rootPointer: '/-',
             dateFormat: 'Y-m-d\TH:i:sP'
@@ -168,6 +173,7 @@ final class FeedItemSourceTest extends KernelTestCase
         $feedConfig = new FeedConfiguration(
             type: 'json',
             url: 'https://aakb.dk/feeds',
+            base: 'https://aakb.dk/',
             timezone: 'Europe/Copenhagen',
             rootPointer: '/-',
             dateFormat: 'Y-m-d\TH:i:sP',

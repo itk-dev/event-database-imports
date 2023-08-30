@@ -4,7 +4,8 @@ namespace App\MessageHandler;
 
 use App\Message\EventMessage;
 use App\Message\FeedNormalizationMessage;
-use App\Services\Feeds\TagsNormalizerService;
+use App\Services\ContentNormalizer;
+use App\Services\TagsNormalizerService;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -12,6 +13,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 class FeedNormalizationHandler
 {
     public function __construct(
+        private readonly ContentNormalizer $contentNormalizer,
         private readonly MessageBusInterface $messageBus,
         private readonly TagsNormalizerService $tagsNormalizerService,
     ) {
@@ -25,9 +27,12 @@ class FeedNormalizationHandler
         $item->tags = $this->tagsNormalizerService->normalize($item->tags);
 
         // Url normalization (relative path to full path)
+        // @todo should we detect relative paths?
 
         // Content normalizations check up. HTML fixer etc.
-        // Strip tags config
+        // @todo Make field normalization configurable.
+        $item->description = $this->contentNormalizer->normalize($item->description);
+        $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
 
         $this->messageBus->dispatch(new EventMessage($item));
     }
