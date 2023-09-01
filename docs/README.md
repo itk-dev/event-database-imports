@@ -54,7 +54,7 @@ The user model as two types of users. Symfony created user (super admin, which s
 that is allowed to send user invitation out for his/her organization. Each user can be part of more than on organization
 it just requires that they get an invitation and thereby get there account linked to a given organization.
 
-![User handling concept](./images/user_handling.png)
+![User handling concept](./images/user_handling_v2.png)
 
 When users are returned from the user verification process the uuid from MitID is stored on the user account and MitID
 is then used to log in users. Also, users that have not been logged ind for at given timeframe (e.g. 3 months) should
