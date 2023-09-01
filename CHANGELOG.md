@@ -24,3 +24,4 @@ See [keep a changelog](https://keepachangelog.com/en/1.0.0/) for information abo
 - Added phpunit tests
 - Tags normalization
 - Added rabbit MQ to the mix
+- Added monolog package
