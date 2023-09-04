@@ -14,7 +14,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Messenger\Exception\TransportException;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
 
 #[AsCommand(
     name: 'app:feed:import',
@@ -56,7 +58,13 @@ class FeedImportCommand extends Command
         $index = 1;
         $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
         foreach ($this->feedParser->parse($config->url, $config->rootPointer) as $item) {
-            $this->messageBus->dispatch(new FeedItemDataMessage($feedId, $config, $item));
+            $message = new FeedItemDataMessage($feedId, $config, $item);
+            try {
+                $this->messageBus->dispatch($message);
+            } catch (TransportException|\LogicException) {
+                // Ensure that message get into failed queue if connection to AMQP fails.
+                $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
+            }
 
             // @todo: Create better feedback.
             $io->write('.');
