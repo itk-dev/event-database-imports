@@ -25,7 +25,7 @@ final class JsonFeedParserService implements FeedParserInterface
                 yield $item;
             }
         } catch (\Exception $exception) {
-            $this->logger->error($exception->getMessage());
+            $this->logger->error('Error parsing JSON feed: {message}', ['message' => $exception->getMessage()]);
             throw $exception;
         }
     }
