@@ -27,12 +27,9 @@ final class FeedDefaultsMapperService
                 if (is_array($data)) {
                     // Append values into array.
                     $output[$key] = array_merge($defaults[$key], $data);
-                } elseif (empty($data)) {
-                    // Set default value.
-                    $output[$key] = $defaults[$key];
-                } else {
-                    // Don't override.
-                    $output[$key] = $data;
+                } else{
+                    // Use default value if data is empty. Otherwise, copy the data.
+                    $output[$key] = empty($data) ? $defaults[$key] : $data;
                 }
 
                 // Removed processed default for later merge of left-overs.
