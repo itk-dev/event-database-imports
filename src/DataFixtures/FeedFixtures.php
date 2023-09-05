@@ -58,7 +58,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
-            ->setLastRead(new \DateTimeImmutable())
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 
@@ -98,7 +97,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
-            ->setLastRead(new \DateTimeImmutable())
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 
@@ -129,7 +127,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $feed->setName('Test feed - Bora-bora')
             ->setEnabled(true)
-            ->setLastRead(new \DateTimeImmutable())
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 
@@ -162,7 +159,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
 
         $feed->setName('Test feed - Train')
             ->setEnabled(true)
-            ->setLastRead(new \DateTimeImmutable())
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
 

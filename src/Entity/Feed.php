@@ -28,7 +28,7 @@ class Feed
     #[ORM\Column]
     private array $configuration = [];
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $lastRead = null;
 
     #[ORM\Column]
