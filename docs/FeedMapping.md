@@ -94,7 +94,6 @@ This example will map a comma separated string into the tags array. Spilt by the
 
 ## Destination fields
 
-<!-- markdownlint-disable line-length-->
 | Field       | Data type       | Required (do not reflect recommended) | Comment                                                                            |
 |-------------|-----------------|---------------------------------------|------------------------------------------------------------------------------------|
 | feedId      | int             | no                                    | Should not be set will be overridden doing import                                  |
@@ -109,7 +108,6 @@ This example will map a comma separated string into the tags array. Spilt by the
 | end         | date            | no                                    | Date of event end (optional as this may be located in occurrences)                 |
 | price       | string          | no                                    | Price as string as this may be a price range                                       |
 | tags        | array\|string   | no                                    | Tags from the event. See string to array mapping for more information              |
-<!-- markdownlint-disable line-length -->
 
 ### Location mapping
 
