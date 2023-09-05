@@ -17,6 +17,7 @@ class UserFixtures extends Fixture
         $user->setName('admin')
             ->setMail('admin@itkdev.dk')
             // Password: admin
+            // @todo: Use PasswordAuthenticatedUserInterface when users are correctly implemented.
             ->setPassword('$2y$13$QFJIcHB.G8kPqvDfDwbozOPjGMtHtHXN7gcVZCO43EwD3RaZHQRtW')
             ->setUpdatedBy('admin')
             ->setEnabled(true);
@@ -27,6 +28,7 @@ class UserFixtures extends Fixture
         $user->setName('Test Testersen')
             ->setMail('tester@itkdev.dk')
             // Password: 1233456789
+            // @todo: Use PasswordAuthenticatedUserInterface when users are correctly implemented.
             ->setPassword('$2y$13$ptcIsrnZSXwjNcEj6RZUIOkotUy/j2amaKAIYViUABaJdNl6Y4WIa')
             ->setUpdatedBy('admin')
             ->setEnabled(true);
