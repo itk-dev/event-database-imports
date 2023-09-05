@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use App\Entity\Feed;
+use App\Model\Feed\FeedItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,5 +39,34 @@ final class EventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function updateOrCreate(string $hash, Feed $feed, FeedItem $item): Event
+    {
+        $entity = $this->findOneBy(['feed' => $feed, 'feedItemId' => $item->id]);
+        if (is_null($entity)) {
+            $entity = new Event();
+            $entity->setDescription($item->description)
+                ->setExcerpt($item->excerpt)
+                ->setFeedItemId($item->id)
+                ->setFeed($feed)
+                ->setHash($hash)
+                ->setTicketUrl($item->ticketUrl)
+                ->setUrl($item->url);
+            $this->getEntityManager()->persist($entity);
+            $this->getEntityManager()->flush();
+            // Public config
+            // Org
+            // Image
+            // langcode
+            // Created_by (should we have feed user)
+        } else {
+            // Check if hash has changed.
+            if ($entity->getHash() !== $hash) {
+                // Update.
+            }
+        }
+
+        return $entity;
     }
 }

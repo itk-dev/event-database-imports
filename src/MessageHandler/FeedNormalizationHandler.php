@@ -33,6 +33,7 @@ final class FeedNormalizationHandler
         // @todo Make field normalization configurable.
         $item->description = $this->contentNormalizer->normalize($item->description);
         $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
+        $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, 255);
 
         $this->messageBus->dispatch(new EventMessage($item));
     }
