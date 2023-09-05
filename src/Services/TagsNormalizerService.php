@@ -46,12 +46,13 @@ final class TagsNormalizerService implements TagsNormalizerInterface
     private function trimLength(array $names): array
     {
         $metadata = $this->em->getClassMetadata(Tag::class);
-        $maxNameLength = isset($metadata->fieldMappings, $metadata->fieldMappings['name'], $metadata->fieldMappings['name']['length']) ? (int) $metadata->fieldMappings['name']['length'] : 50;
+        $maxNameLength = (int) ($metadata->fieldMappings['name']['length'] ?? 50);
 
         // Ensure we don't exceed field length in db
-        return array_map(function ($name) use ($maxNameLength) {
-            return mb_substr(trim($name), 0, $maxNameLength);
-        }, $names);
+        return array_map(
+            static fn (string $name) => mb_substr(trim($name), 0, $maxNameLength),
+            $names
+        );
     }
 
     /**
@@ -70,11 +71,7 @@ final class TagsNormalizerService implements TagsNormalizerInterface
         $normalizedNames = [];
         foreach ($names as $name) {
             $tag = $this->tagRepository->findOneBy(['name' => $name]);
-            if ($tag) {
-                $normalizedNames[] = $tag->getName();
-            } else {
-                $normalizedNames[] = $name;
-            }
+            $normalizedNames[] = $tag ? $tag->getName() : $name;
         }
 
         return $normalizedNames;
