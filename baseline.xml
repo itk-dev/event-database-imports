@@ -27,8 +27,5 @@
       <code>$source</code>
       <code>$source</code>
     </InvalidOperand>
-    <MissingTemplateParam>
-      <code>\IteratorAggregate</code>
-    </MissingTemplateParam>
   </file>
 </files>

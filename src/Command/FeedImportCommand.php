@@ -77,7 +77,7 @@ class FeedImportCommand extends Command
             }
             ++$index;
         }
-        
+
         $feed->setLastRead(new \DateTimeImmutable());
         $this->feedRepository->save($feed, true);
 
