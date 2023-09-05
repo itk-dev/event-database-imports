@@ -26,6 +26,7 @@ final class TagsNormalizerService implements TagsNormalizerInterface
     public function normalize(array $names): array
     {
         if (!empty($names)) {
+            $names = array_filter($names);
             $names = $this->trimLength($names);
             $names = $this->normalizeToDbName($names);
         }

@@ -18,13 +18,4 @@ final class FeedConfiguration
         public readonly array $defaults = [],
     ) {
     }
-
-    public function __toString(): string
-    {
-        $output = [];
-        $output[] = 'Type: '.$this->type;
-        $output[] = 'Url: '.$this->url;
-
-        return implode("\n", $output);
-    }
 }

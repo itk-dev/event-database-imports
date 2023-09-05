@@ -23,28 +23,4 @@ final class FeedItem
         public array $tags = [],
     ) {
     }
-
-    public function __toString(): string
-    {
-        $output = [];
-
-        $output[] = str_repeat('-', 70);
-        $output[] = 'Feed ID: '.$this->feedId;
-        $output[] = 'Id: '.$this->id;
-        $output[] = 'Title: '.$this->title;
-        $output[] = wordwrap('Excerpt: '.$this->excerpt, 60, "\n         ");
-        $output[] = 'Ticker: '.$this->ticketUrl;
-        $output[] = 'Start: '.$this->start?->format('c');
-        $output[] = 'End: '.$this->end?->format('c');
-        $output[] = 'URL: '.$this->url;
-        $output[] = 'Price: '.$this->price;
-        $output[] = 'Tags: '.implode(', ', $this->tags);
-        $output[] = 'Occurrence:';
-        foreach ($this->occurrences as $occurrence) {
-            $output[] = $occurrence;
-        }
-        $output[] = str_repeat('-', 70);
-
-        return implode("\n", $output);
-    }
 }
