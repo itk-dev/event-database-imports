@@ -68,10 +68,10 @@ class FeedDebugCommand extends Command
             $feedItem->tags = $this->tagsNormalizerService->normalize($feedItem->tags);
             $io->writeln((string) $feedItem);
 
-            if ($limit > 0 && $limit == $index) {
+            ++$index;
+            if ($limit > 0 && $index >= $limit) {
                 break;
             }
-            ++$index;
         }
 
         $io->success('Feed debugging completed.');
