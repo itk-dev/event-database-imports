@@ -15,7 +15,7 @@ class OrganizationFixtures extends Fixture implements DependentFixtureInterface
         $org->setName('ITKDev')
             ->setMail('info@itkdev.dk')
             ->setUrl('https://github.com/itk-dev')
-            ->addUser($this->getReference(UserFixtures::USER_REFERENCE));
+            ->addUser($this->getReference(UserFixtures::USER));
         $manager->persist($org);
         $manager->flush();
     }

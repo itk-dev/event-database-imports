@@ -8,23 +8,24 @@ use Doctrine\Persistence\ObjectManager;
 
 class VocabularyFixtures extends Fixture
 {
-    public const VOCAB_MANAGED = 'vocab_managed';
-    public const VOCAB_FREE = 'vocab_free';
+    public const MANAGED = 'managed';
+    public const FREE = 'free';
 
     public function load(ObjectManager $manager): void
     {
-        $vocab = new Vocabulary();
-        $vocab->setName('managed')
+        $vocabulary = new Vocabulary();
+        $vocabulary->setName('managed')
             ->setDescription('Managed tags vocabulary');
-        $manager->persist($vocab);
-        $manager->flush();
-        $this->addReference(self::VOCAB_MANAGED, $vocab);
+        $manager->persist($vocabulary);
+        $this->addReference(self::MANAGED, $vocabulary);
 
-        $vocab_free = new Vocabulary();
-        $vocab_free->setName('feeds')
+        $vocabulary = new Vocabulary();
+        $vocabulary->setName('feeds')
             ->setDescription('Free tags from feeds');
-        $manager->persist($vocab_free);
+        $manager->persist($vocabulary);
+        $this->addReference(self::FREE, $vocabulary);
+
+        // Make it stick.
         $manager->flush();
-        $this->addReference(self::VOCAB_FREE, $vocab_free);
     }
 }

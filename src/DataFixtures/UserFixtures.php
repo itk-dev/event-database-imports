@@ -8,21 +8,20 @@ use Doctrine\Persistence\ObjectManager;
 
 class UserFixtures extends Fixture
 {
-    public const ADMIN_USER_REFERENCE = 'admin-user';
-    public const USER_REFERENCE = 'user';
+    public const ADMIN_USER = 'admin';
+    public const USER = 'user';
 
     public function load(ObjectManager $manager): void
     {
-        $userAdmin = new User();
-        $userAdmin->setName('admin')
+        $user = new User();
+        $user->setName('admin')
             ->setMail('admin@itkdev.dk')
             // Password: admin
             ->setPassword('$2y$13$QFJIcHB.G8kPqvDfDwbozOPjGMtHtHXN7gcVZCO43EwD3RaZHQRtW')
             ->setUpdatedBy('admin')
             ->setEnabled(true);
-        $manager->persist($userAdmin);
-        $manager->flush();
-        $this->addReference(self::ADMIN_USER_REFERENCE, $userAdmin);
+        $manager->persist($user);
+        $this->addReference(self::ADMIN_USER, $user);
 
         $user = new User();
         $user->setName('Test Testersen')
@@ -33,6 +32,9 @@ class UserFixtures extends Fixture
             ->setEnabled(true);
         $manager->persist($user);
         $manager->flush();
-        $this->addReference(self::USER_REFERENCE, $user);
+        $this->addReference(self::USER, $user);
+
+        // Make it stick.
+        $manager->flush();
     }
 }

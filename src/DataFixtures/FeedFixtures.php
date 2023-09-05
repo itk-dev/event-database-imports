@@ -59,10 +59,9 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+            ->setUser($this->getReference(UserFixtures::USER));
 
         $manager->persist($feed);
-        $manager->flush();
 
         $feed = new Feed();
         $config = [
@@ -98,10 +97,9 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+            ->setUser($this->getReference(UserFixtures::USER));
 
         $manager->persist($feed);
-        $manager->flush();
 
         $feed = new Feed();
         $config = [
@@ -128,10 +126,9 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Bora-bora')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+            ->setUser($this->getReference(UserFixtures::USER));
 
         $manager->persist($feed);
-        $manager->flush();
 
         $feed = new Feed();
         $config = [
@@ -160,9 +157,11 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Train')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER_REFERENCE));
+            ->setUser($this->getReference(UserFixtures::USER));
 
         $manager->persist($feed);
+
+        // Make it stick.
         $manager->flush();
     }
 

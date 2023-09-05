@@ -11,28 +11,27 @@ class TagsFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $tag1 = new Tag();
-        $tag1->setName('aros')
-            ->addVocabulary($this->getReference(VocabularyFixtures::VOCAB_MANAGED));
-        $manager->persist($tag1);
-        $manager->flush();
+        $tag = new Tag();
+        $tag->setName('aros')
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
+        $manager->persist($tag);
 
-        $tag2 = new Tag();
-        $tag2->setName('theoceanraceaarhus')
-            ->addVocabulary($this->getReference(VocabularyFixtures::VOCAB_MANAGED));
-        $manager->persist($tag2);
-        $manager->flush();
+        $tag = new Tag();
+        $tag->setName('theoceanraceaarhus')
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
+        $manager->persist($tag);
 
-        $tag3 = new Tag();
-        $tag3->setName('For børn')
-            ->addVocabulary($this->getReference(VocabularyFixtures::VOCAB_MANAGED));
-        $manager->persist($tag3);
-        $manager->flush();
+        $tag = new Tag();
+        $tag->setName('For børn')
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
+        $manager->persist($tag);
 
-        $tag4 = new Tag();
-        $tag4->setName('Koncert')
-            ->addVocabulary($this->getReference(VocabularyFixtures::VOCAB_MANAGED));
-        $manager->persist($tag4);
+        $tag = new Tag();
+        $tag->setName('Koncert')
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
+        $manager->persist($tag);
+
+        // Make it stick.
         $manager->flush();
     }
 
