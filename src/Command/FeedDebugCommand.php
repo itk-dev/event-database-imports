@@ -10,7 +10,6 @@ use App\Services\TagsNormalizerService;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -67,11 +66,10 @@ class FeedDebugCommand extends Command
             $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);
             $feedItem->feedId = $feedId;
             $feedItem->tags = $this->tagsNormalizerService->normalize($feedItem->tags);
-            //$io->writeln((string) $feedItem);
             $io->definitionList(
                 ['Id' => $feedItem->id],
                 ['Title' => $feedItem->title],
-                ['Excerpt' =>  wordwrap($feedItem->excerpt, 80, "\n")],
+                ['Excerpt' => wordwrap($feedItem->excerpt, 80)],
                 ['Url' => $feedItem->url],
                 ['Price' => $feedItem->price],
                 ['Start' => $feedItem->start?->format('c')],

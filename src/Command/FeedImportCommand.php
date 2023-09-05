@@ -9,6 +9,7 @@ use App\Services\Feeds\Parser\FeedParserInterface;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -50,10 +51,13 @@ class FeedImportCommand extends Command
 
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
         if (is_null($feed)) {
-            $io->error('Feed not found with the provided id');
+            $io->error(sprintf('Invalid feed id: %d', $feedId));
 
-            return Command::FAILURE;
+            return Command::INVALID;
         }
+
+        $progressBar = new ProgressBar($output);
+        $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
 
         $index = 1;
         $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
@@ -66,8 +70,7 @@ class FeedImportCommand extends Command
                 $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
             }
 
-            // @todo: Create better feedback.
-            $io->write('.');
+            $progressBar->advance();
 
             if ($limit > 0 && $limit == $index) {
                 break;
@@ -75,6 +78,7 @@ class FeedImportCommand extends Command
             ++$index;
         }
 
+        $progressBar->finish();
         $io->success('Feed import completed.');
 
         return Command::SUCCESS;
