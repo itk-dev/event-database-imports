@@ -55,6 +55,11 @@ class FeedImportCommand extends Command
 
             return Command::INVALID;
         }
+        if (!$feed->isEnabled()) {
+            $io->error(sprintf('The feed "%s" is disabled', $feed->getName()));
+
+            return Command::FAILURE;
+        }
 
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');

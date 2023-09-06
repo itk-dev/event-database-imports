@@ -57,6 +57,11 @@ class FeedDebugCommand extends Command
 
             return Command::FAILURE;
         }
+        if (!$feed->isEnabled()) {
+            $io->error(sprintf('The feed "%s" is disabled', $feed->getName()));
+
+            return Command::FAILURE;
+        }
 
         $index = 0;
         $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());

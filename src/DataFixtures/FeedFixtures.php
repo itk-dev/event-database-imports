@@ -60,7 +60,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
             ->setEnabled(true)
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER));
-
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -98,7 +97,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
             ->setEnabled(true)
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER));
-
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -127,7 +125,6 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
             ->setEnabled(true)
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER));
-
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -158,7 +155,30 @@ class FeedFixtures extends Fixture implements DependentFixtureInterface
             ->setEnabled(true)
             ->setConfiguration($config)
             ->setUser($this->getReference(UserFixtures::USER));
+        $manager->persist($feed);
 
+        $feed = new Feed();
+        $config = [
+            'type' => 'json',
+            'url' => 'https://www.hq.dk/events/kultur/',
+            'base' => 'https://www.hq.dk/',
+            'timezone' => 'Europe/Copenhagen',
+            'rootPointer' => '/-',
+            'dateFormat' => 'd.m.Y H:i',
+            'mapping' => [
+                'id' => 'id',
+                'title' => 'title',
+                'description' => 'description',
+                'url' => 'url',
+            ],
+            'defaults' => [
+            ],
+        ];
+
+        $feed->setName('Test feed - HeadQuarters')
+            ->setEnabled(false)
+            ->setConfiguration($config)
+            ->setUser($this->getReference(UserFixtures::USER));
         $manager->persist($feed);
 
         // Make it stick.
