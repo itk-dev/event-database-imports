@@ -12,6 +12,7 @@ final class FeedItem
         public string $ticketUrl = '',
         public string $title = '',
         public string $url = '',
+        public bool $public = true,
         public ?\DateTimeImmutable $end = null,
         public ?\DateTimeImmutable $start = null,
         /** @var array<FeedItemOccurrence> */

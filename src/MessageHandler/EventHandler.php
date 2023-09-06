@@ -2,10 +2,8 @@
 
 namespace App\MessageHandler;
 
+use App\Factory\Event as EventFactory;
 use App\Message\EventMessage;
-use App\Model\Feed\FeedItem;
-use App\Repository\EventRepository;
-use App\Repository\FeedRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -15,27 +13,26 @@ final class EventHandler
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,
-        private readonly EventRepository $eventRepository,
-        private readonly FeedRepository $feedRepository,
+        private readonly EventFactory $eventFactory,
     ) {
     }
 
     public function __invoke(EventMessage $message): void
     {
         $item = $message->getItem();
-        $hash = $this->calculateHash($item);
 
         // Check for create or update.
-        $feed = $this->feedRepository->find(['id' => $item->feedId]);
-        $entity = $this->eventRepository->updateOrCreate($hash, $feed, $item);
+        $entity = null;
+        try {
+            $entity = $this->eventFactory->create($item);
+        } catch (\Exception $e) {
+            // @todo: better message.
+            throw new UnrecoverableMessageHandlingException($e->getMessage());
+        }
 
-        // Save data to the database.
-
+        // @todo: create next message
         throw new UnrecoverableMessageHandlingException('Not implemented yet');
     }
 
-    private function calculateHash(FeedItem $item): string
-    {
-        return hash('sha256', serialize($item));
-    }
+
 }

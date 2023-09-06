@@ -32,6 +32,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             ],
             'defaults' => [
                 'title' => 'missing',
+                'public' => true,
                 'tags' => [
                     'Aros',
                     'Aarhus',
@@ -89,6 +90,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'tags' => 'tags',
             ],
             'defaults' => [
+                'public' => true,
             ],
         ];
 
@@ -117,6 +119,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'occurrences.*.endDate' => 'occurrences.*.end',
             ],
             'defaults' => [
+                'public' => false,
             ],
         ];
 
@@ -147,6 +150,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'endtime' => 'end',
             ],
             'defaults' => [
+                'public' => false,
             ],
         ];
 
