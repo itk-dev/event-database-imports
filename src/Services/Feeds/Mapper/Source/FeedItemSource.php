@@ -40,11 +40,11 @@ final class FeedItemSource
 
         foreach ($this->configuration->mapping as $src => $dest) {
             // Match dest that ends with ".[OPERATOR]". to map to array
-            if (preg_match('/(.*)\.\[(.*)]/', $dest, $matches)) {
-                $separator = $matches[2];
+            if (preg_match('/(?P<dest>.*)\.\[(?P<separator>.*)]/', $dest, $matches)) {
+                $separator = $matches['separator'];
                 $value = $this->getValue([...$source], $src);
                 $values = empty($separator) ? [$value] : explode($separator, $value);
-                $this->setValue($output, $matches[1], $values);
+                $this->setValue($output, $matches['dest'], $values);
             }
             // Match src with ".*." multi value array mapping.
             elseif (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {

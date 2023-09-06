@@ -191,7 +191,7 @@ final class FeedItemSourceTest extends KernelTestCase
                 'location.coordinates.lat' => 'location.coordinates.latitude',
                 'location.coordinates.lon' => 'location.coordinates.longitude',
                 'location.mail' => 'location.mail',
-                'tags_string' => 'tags.[]',
+                'tags_string' => 'tags.[,]',
                 'occurrences.*.startDate' => 'occurrences.*.start',
                 'occurrences.*.endDate' => 'occurrences.*.end',
             ]
@@ -220,7 +220,7 @@ final class FeedItemSourceTest extends KernelTestCase
                     'longitude' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lon'],
                 ],
             ],
-            'tags' => [FeedItemInput::EXAMPLE_DATA['tags_string']],
+            'tags' => explode(',', FeedItemInput::EXAMPLE_DATA['tags_string']),
             'occurrences' => [
                 [
                     'start' => FeedItemInput::EXAMPLE_DATA['occurrences'][0]['startDate'],
