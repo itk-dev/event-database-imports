@@ -4,7 +4,7 @@
 
 All notable changes to this project will be documented in this file.
 
-See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for information about writing changes to this log.
+See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
@@ -22,3 +22,6 @@ See [keep a changelog](https://keepachangelog.com/en/1.1.0/) for information abo
 - Tags normalization
 - Added rabbit MQ to the mix
 - Added monolog package
+
+[keep a changelog]: https://keepachangelog.com/en/1.1.0/
+[unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
