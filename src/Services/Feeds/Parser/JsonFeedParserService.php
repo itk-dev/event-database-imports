@@ -2,6 +2,7 @@
 
 namespace App\Services\Feeds\Parser;
 
+use App\Entity\Feed;
 use Cerbero\JsonParser\JsonParser;
 use Psr\Log\LoggerInterface;
 
@@ -15,7 +16,7 @@ final class JsonFeedParserService implements FeedParserInterface
     /**
      * @throws \Exception
      */
-    public function parse(string $data, string $pointerPath = '/-'): \Generator
+    public function parse(Feed $feed, string $data, string $pointerPath = '/-'): \Generator
     {
         $parser = new JsonParser($data);
         $parser->pointer($pointerPath);
@@ -25,7 +26,7 @@ final class JsonFeedParserService implements FeedParserInterface
                 yield $item;
             }
         } catch (\Exception $exception) {
-            $this->logger->error('Error parsing JSON feed: {message}', ['message' => $exception->getMessage()]);
+            $this->logger->error('Error parsing JSON feed ({id}): {message}', ['id' => $feed->getId(), 'message' => $exception->getMessage()]);
             throw $exception;
         }
     }

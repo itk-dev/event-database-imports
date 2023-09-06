@@ -59,9 +59,9 @@ class FeedImportCommand extends Command
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
 
-        $index = 1;
+        $index = 0;
         $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
-        foreach ($this->feedParser->parse($config->url, $config->rootPointer) as $item) {
+        foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
             $message = new FeedItemDataMessage($feedId, $config, $item);
             try {
                 $this->messageBus->dispatch($message);
@@ -72,10 +72,10 @@ class FeedImportCommand extends Command
 
             $progressBar->advance();
 
-            if ($limit > 0 && $limit == $index) {
+            ++$index;
+            if ($limit > 0 && $index >= $limit) {
                 break;
             }
-            ++$index;
         }
 
         $feed->setLastRead(new \DateTimeImmutable());
