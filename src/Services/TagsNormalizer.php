@@ -6,7 +6,7 @@ use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class TagsNormalizerService implements TagsNormalizerInterface
+final class TagsNormalizer implements TagsNormalizerInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $em,

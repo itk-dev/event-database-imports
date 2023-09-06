@@ -6,6 +6,7 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
+      <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">

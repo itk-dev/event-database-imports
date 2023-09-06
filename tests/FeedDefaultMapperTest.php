@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapperService;
+use App\Services\Feeds\FeedDefaultsMapper;
 use App\Tests\Utils\FeedItemInput;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-#[CoversClass(FeedDefaultsMapperService::class)]
+#[CoversClass(FeedDefaultsMapper::class)]
 final class FeedDefaultMapperTest extends KernelTestCase
 {
     /**
@@ -100,16 +100,16 @@ final class FeedDefaultMapperTest extends KernelTestCase
     /**
      * Helper function to bootstrap the service tested.
      *
-     * @return FeedDefaultsMapperService
+     * @return FeedDefaultsMapper
      *   The service
      *
      * @throws \Exception
      */
-    private function getFeedDefaultMapper(): FeedDefaultsMapperService
+    private function getFeedDefaultMapper(): FeedDefaultsMapper
     {
         self::bootKernel();
         $container = FeedDefaultMapperTest::getContainer();
 
-        return $container->get(FeedDefaultsMapperService::class);
+        return $container->get(FeedDefaultsMapper::class);
     }
 }

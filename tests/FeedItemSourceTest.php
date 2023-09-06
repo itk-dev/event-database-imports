@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapperService;
+use App\Services\Feeds\FeedDefaultsMapper;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
 use App\Tests\Utils\FeedItemInput;
 use App\Tests\Utils\PhpUnitUtils;
@@ -249,7 +249,7 @@ final class FeedItemSourceTest extends KernelTestCase
     {
         self::bootKernel();
         $container = FeedItemSourceTest::getContainer();
-        $mapperService = $container->get(FeedDefaultsMapperService::class);
+        $mapperService = $container->get(FeedDefaultsMapper::class);
 
         return new FeedItemSource($configuration, $mapperService);
     }

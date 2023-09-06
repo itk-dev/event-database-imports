@@ -4,7 +4,7 @@ namespace App\Services\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Model\Feed\FeedItem;
-use App\Services\Feeds\FeedDefaultsMapperService;
+use App\Services\Feeds\FeedDefaultsMapper;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
@@ -12,10 +12,10 @@ use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 use Psr\Log\LoggerInterface;
 
-final class FeedMapperService implements FeedMapperInterface
+final class FeedMapper implements FeedMapperInterface
 {
     public function __construct(
-        private readonly FeedDefaultsMapperService $defaultsMapperService,
+        private readonly FeedDefaultsMapper $defaultsMapperService,
         private readonly LoggerInterface $logger,
     ) {
     }

@@ -4,7 +4,7 @@ namespace App\Services\Feeds;
 
 use App\Model\Feed\FeedConfiguration;
 
-final class FeedDefaultsMapperService
+final class FeedDefaultsMapper
 {
     /**
      * Apply default values to input data based on feed configuration.

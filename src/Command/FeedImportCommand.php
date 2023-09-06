@@ -4,7 +4,7 @@ namespace App\Command;
 
 use App\Message\FeedItemDataMessage;
 use App\Repository\FeedRepository;
-use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
+use App\Services\Feeds\Mapper\FeedConfigurationMapper;
 use App\Services\Feeds\Parser\FeedParserInterface;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -28,7 +28,7 @@ final class FeedImportCommand extends Command
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly FeedParserInterface $feedParser,
-        private readonly FeedConfigurationMapperService $configurationMapperService,
+        private readonly FeedConfigurationMapper $configurationMapper,
         private readonly FeedRepository $feedRepository,
     ) {
         parent::__construct();
@@ -56,7 +56,7 @@ final class FeedImportCommand extends Command
             return Command::INVALID;
         }
         if (!$feed->isEnabled()) {
-            $io->error(sprintf('The feed "%s" is disabled', $feed->getName()));
+            $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
 
             return Command::FAILURE;
         }
@@ -65,7 +65,7 @@ final class FeedImportCommand extends Command
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
 
         $index = 0;
-        $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
+        $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
         foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
             $message = new FeedItemDataMessage($feedId, $config, $item);
             try {

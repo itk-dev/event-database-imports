@@ -3,7 +3,7 @@
 namespace App\Services\Feeds\Mapper\Source;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapperService;
+use App\Services\Feeds\FeedDefaultsMapper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -21,7 +21,7 @@ final class FeedItemSource
 
     public function __construct(
         private readonly FeedConfiguration $configuration,
-        private readonly FeedDefaultsMapperService $defaultsMapperService
+        private readonly FeedDefaultsMapper $defaultsMapperService
     ) {
     }
 

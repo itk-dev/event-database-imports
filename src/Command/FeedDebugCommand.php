@@ -3,10 +3,10 @@
 namespace App\Command;
 
 use App\Repository\FeedRepository;
-use App\Services\Feeds\Mapper\FeedConfigurationMapperService;
+use App\Services\Feeds\Mapper\FeedConfigurationMapper;
 use App\Services\Feeds\Mapper\FeedMapperInterface;
 use App\Services\Feeds\Parser\FeedParserInterface;
-use App\Services\TagsNormalizerService;
+use App\Services\TagsNormalizer;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -28,9 +28,9 @@ final class FeedDebugCommand extends Command
     public function __construct(
         private readonly FeedParserInterface $feedParser,
         private readonly FeedMapperInterface $feedMapper,
-        private readonly FeedConfigurationMapperService $configurationMapperService,
+        private readonly FeedConfigurationMapper $configurationMapper,
         private readonly FeedRepository $feedRepository,
-        private readonly TagsNormalizerService $tagsNormalizerService
+        private readonly TagsNormalizer $tagsNormalizer
     ) {
         parent::__construct();
     }
@@ -58,19 +58,19 @@ final class FeedDebugCommand extends Command
             return Command::FAILURE;
         }
         if (!$feed->isEnabled()) {
-            $io->error(sprintf('The feed "%s" is disabled', $feed->getName()));
+            $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
 
             return Command::FAILURE;
         }
 
         $index = 0;
-        $config = $this->configurationMapperService->getConfigurationFromArray($feed->getConfiguration());
+        $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
         foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
             // What should happen. Send item into queue system and in the next step map and validate data. But right
             // here for debugging we by-pass message system and try mapping the item.
             $feedItem = $this->feedMapper->getFeedItemFromArray($item, $config);
             $feedItem->feedId = $feedId;
-            $feedItem->tags = $this->tagsNormalizerService->normalize($feedItem->tags);
+            $feedItem->tags = $this->tagsNormalizer->normalize($feedItem->tags);
             $io->definitionList(
                 ['Id' => $feedItem->id],
                 ['Title' => $feedItem->title],

@@ -6,7 +6,7 @@ use App\Entity\Feed;
 use Cerbero\JsonParser\JsonParser;
 use Psr\Log\LoggerInterface;
 
-final class JsonFeedParserService implements FeedParserInterface
+final class JsonFeedParser implements FeedParserInterface
 {
     public function __construct(
         private readonly LoggerInterface $logger,
