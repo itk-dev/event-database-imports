@@ -10,7 +10,7 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-class EventHandler
+final class EventHandler
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,

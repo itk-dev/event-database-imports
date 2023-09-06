@@ -23,7 +23,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:feed:debug',
     description: 'Try parsing feed and output raw data',
 )]
-class FeedDebugCommand extends Command
+final class FeedDebugCommand extends Command
 {
     public function __construct(
         private readonly FeedParserInterface $feedParser,

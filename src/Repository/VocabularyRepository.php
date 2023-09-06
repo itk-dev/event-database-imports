@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Vocabulary[]    findAll()
  * @method Vocabulary[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class VocabularyRepository extends ServiceEntityRepository
+final class VocabularyRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

@@ -11,7 +11,7 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-class FeedItemDataHandler
+final class FeedItemDataHandler
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,

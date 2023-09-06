@@ -4,7 +4,7 @@ namespace App\Message;
 
 use App\Model\Feed\FeedConfiguration;
 
-class FeedItemDataMessage
+final class FeedItemDataMessage
 {
     public function __construct(
         private readonly int $feedId,

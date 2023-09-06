@@ -10,7 +10,7 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-class FeedNormalizationHandler
+final class FeedNormalizationHandler
 {
     public function __construct(
         private readonly ContentNormalizer $contentNormalizer,

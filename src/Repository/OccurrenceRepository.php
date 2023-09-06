@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Occurrence[]    findAll()
  * @method Occurrence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class OccurrenceRepository extends ServiceEntityRepository
+final class OccurrenceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

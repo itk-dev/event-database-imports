@@ -5,7 +5,7 @@ namespace App\Message;
 use App\Model\Feed\FeedConfiguration;
 use App\Model\Feed\FeedItem;
 
-class FeedNormalizationMessage
+final class FeedNormalizationMessage
 {
     public function __construct(
         private readonly FeedConfiguration $configuration,

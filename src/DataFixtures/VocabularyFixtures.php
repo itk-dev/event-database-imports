@@ -6,7 +6,7 @@ use App\Entity\Vocabulary;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class VocabularyFixtures extends Fixture
+final class VocabularyFixtures extends Fixture
 {
     public const MANAGED = 'managed';
     public const FREE = 'free';

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 
-class ContentNormalizer implements ContentNormalizerInterface
+final class ContentNormalizer implements ContentNormalizerInterface
 {
     public function __construct(
         private readonly HtmlSanitizerInterface $feedHtmlSanitizer,

@@ -11,7 +11,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+final class User
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

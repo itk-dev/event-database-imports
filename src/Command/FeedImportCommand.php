@@ -23,7 +23,7 @@ use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
     name: 'app:feed:import',
     description: 'Parse feed and import events from it',
 )]
-class FeedImportCommand extends Command
+final class FeedImportCommand extends Command
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,

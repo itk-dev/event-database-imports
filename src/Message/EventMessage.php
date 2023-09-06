@@ -4,7 +4,7 @@ namespace App\Message;
 
 use App\Model\Feed\FeedItem;
 
-class EventMessage
+final class EventMessage
 {
     public function __construct(
         private readonly FeedItem $item
