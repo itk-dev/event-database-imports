@@ -22,8 +22,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             'mapping' => [
                 'Id' => 'id',
                 'Title' => 'title',
-                'Teaser' => 'excerpt',
-                'Description' => 'description',
+                'Teaser' => 'description',
                 'DateFrom' => 'start',
                 'DateTo' => 'end',
                 'Url' => 'url',

@@ -17,10 +17,6 @@ interface ContentNormalizerInterface
 
     /**
      * Trim content length.
-     *
-     * @param string $content
-     * @param int $maxLength
-     * @return string
      */
     public function trimLength(string $content, int $maxLength, bool $onWords = true): string;
 }

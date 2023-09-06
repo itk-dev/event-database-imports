@@ -6,7 +6,6 @@ use App\Message\EventMessage;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
