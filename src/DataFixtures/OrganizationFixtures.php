@@ -9,6 +9,9 @@ use Doctrine\Persistence\ObjectManager;
 
 final class OrganizationFixtures extends Fixture implements DependentFixtureInterface
 {
+    public const ITK = 'itk';
+    public const AAKB = 'aakb';
+
     public function load(ObjectManager $manager): void
     {
         $org = new Organization();
@@ -17,6 +20,17 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
             ->setUrl('https://github.com/itk-dev')
             ->addUser($this->getReference(UserFixtures::USER));
         $manager->persist($org);
+        $this->addReference(self::ITK, $org);
+
+        $org = new Organization();
+        $org->setName('Aakb')
+            ->setMail('info@aakb.dk.dk')
+            ->setUrl('https://aakb.dk/')
+            ->addUser($this->getReference(UserFixtures::USER));
+        $manager->persist($org);
+        $this->addReference(self::AAKB, $org);
+
+        // Make it stick.
         $manager->flush();
     }
 

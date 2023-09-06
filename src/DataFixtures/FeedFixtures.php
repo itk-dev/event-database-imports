@@ -59,7 +59,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -97,7 +98,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::AAKB));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -126,7 +128,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Bora-bora')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -181,7 +184,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - HeadQuarters')
             ->setEnabled(false)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         // Make it stick.
@@ -192,6 +196,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            OrganizationFixtures::class,
         ];
     }
 }
