@@ -48,7 +48,8 @@ final class FeedListCommand extends Command
             $io->definitionList(
                 ['Id' => $feed->getId()],
                 ['Name' => $feed->getName()],
-                ['Url' => $config->url]
+                ['Url' => $config->url],
+                ['Enabled' => $feed->isEnabled()]
             );
         }
 
