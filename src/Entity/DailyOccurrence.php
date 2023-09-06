@@ -8,7 +8,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: DailyOccurrenceRepository::class)]
-final class DailyOccurrence
+class DailyOccurrence
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

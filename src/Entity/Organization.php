@@ -10,7 +10,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
-final class Organization
+class Organization
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

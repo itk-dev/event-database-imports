@@ -11,7 +11,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
-final class Feed
+class Feed
 {
     use TimestampableEntity;
     use BlameableEntity;

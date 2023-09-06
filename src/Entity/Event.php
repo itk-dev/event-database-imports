@@ -12,7 +12,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-final class Event
+class Event
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
