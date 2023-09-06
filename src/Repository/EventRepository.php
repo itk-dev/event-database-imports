@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Event;
-use App\Entity\Feed;
-use App\Model\Feed\FeedItem;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

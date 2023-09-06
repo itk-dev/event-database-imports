@@ -24,7 +24,7 @@ final class EventHandler
         // Check for create or update.
         $entity = null;
         try {
-            $entity = $this->eventFactory->create($item);
+            $entity = $this->eventFactory->createOrUpdate($item);
         } catch (\Exception $e) {
             // @todo: better message.
             throw new UnrecoverableMessageHandlingException($e->getMessage());
@@ -33,6 +33,4 @@ final class EventHandler
         // @todo: create next message
         throw new UnrecoverableMessageHandlingException('Not implemented yet');
     }
-
-
 }

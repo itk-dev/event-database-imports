@@ -6,13 +6,14 @@ final class FeedItem
 {
     public function __construct(
         public readonly int $id,
-        public string $description = '',
-        public string $excerpt = '',
-        public string $image = '',
-        public string $ticketUrl = '',
-        public string $title = '',
-        public string $url = '',
+        public ?string $description = null,
+        public ?string $excerpt = null,
+        public ?string $image = null,
+        public ?string $ticketUrl = null,
+        public ?string $title = null,
+        public ?string $url = null,
         public bool $public = true,
+        public string $landcode = 'da',
         public ?\DateTimeImmutable $end = null,
         public ?\DateTimeImmutable $start = null,
         /** @var array<FeedItemOccurrence> */

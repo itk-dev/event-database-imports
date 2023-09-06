@@ -36,7 +36,7 @@ class Event
     private ?string $url = null;
 
     #[ORM\Column(length: 32, nullable: true)]
-    private string $langcode = 'und';
+    private string $langcode = 'da';
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ticket_url = null;

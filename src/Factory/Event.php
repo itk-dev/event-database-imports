@@ -2,55 +2,41 @@
 
 namespace App\Factory;
 
+use App\Entity\Event as EventEntity;
+use App\Entity\Feed;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 use App\Repository\OrganizationRepository;
-use App\Entity\Event as EventEntity;
 
 class Event
 {
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly FeedRepository $feedRepository,
-        private readonly OrganizationRepository $organizationRepository,
-    )
-    {
+    ) {
     }
 
-    public function create(FeedItem $item): EventEntity
+    public function createOrUpdate(FeedItem $item): EventEntity
     {
         $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
         $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
         $hash = $this->calculateHash($item);
         if (is_null($entity)) {
             $entity = new \App\Entity\Event();
-            $entity->setDescription($item->description)
-                ->setExcerpt($item->excerpt)
-                ->setFeedItemId($item->id)
-                ->setFeed($feed)
-                ->setHash($hash)
-                ->setTicketUrl($item->ticketUrl)
-                ->setUrl($item->url)
-                ->setPublic($item->public);
+            $entity->setHash($hash);
+            $this->mapValues($entity, $item, $feed);
+
+            // Make it stick.
             $this->eventRepository->save($entity, true);
-
-            // Public config
-
-            // Org
-
-            // Image
-
-            // langcode
-
-            // Location -> address
-
-            // Created_by (should we have feed user)
         } else {
-            // Check if hash has changed.
+            // Check if hash has changed, before trying to update it.
             if ($entity->getHash() !== $hash) {
-                // Update.
-                $t=1;
+                $this->mapValues($entity, $item, $feed);
+                $entity->setHash($hash);
+
+                // Make it stick.
+                $this->eventRepository->save($entity, true);
             }
         }
 
@@ -62,8 +48,37 @@ class Event
         return $this->eventRepository->findOneBy($criteria);
     }
 
+    /**
+     * Calculate hash string base on typed value event object.
+     *
+     * This hash should be used to see if event have changed it's content.
+     *
+     * @param feedItem $item
+     *   The feed item object to calculate hash value for
+     *
+     * @return string
+     *   The calculated hash string
+     */
     private function calculateHash(FeedItem $item): string
     {
         return hash('sha256', serialize($item));
+    }
+
+    private function mapValues(EventEntity $entity, FeedItem $item, Feed $feed): void
+    {
+        $entity->setDescription($item->description)
+            ->setExcerpt($item->excerpt)
+            ->setLanguageCode($item->landcode)
+            ->setImage($item->image)
+            ->setFeedItemId($item->id)
+            ->setTicketUrl($item->ticketUrl)
+            ->setUrl($item->url)
+            ->setPublic($item->public)
+            ->setOrganization($feed->getOrganization())
+            ->setFeed($feed);
+
+        // Location -> address
+
+        // Created_by (should we have feed user)
     }
 }
