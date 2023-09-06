@@ -39,11 +39,9 @@ final class FeedListCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $showDisabled = $input->getOption('show-disabled');
 
-        if ($showDisabled) {
-            $feeds = $this->feedRepository->findAll();
-        } else {
-            $feeds = $this->feedRepository->findBy(['enabled' => !$showDisabled]);
-        }
+        $feeds = $showDisabled
+          ? $this->feedRepository->findAll()
+          : $this->feedRepository->findBy(['enabled' => true]);
 
         foreach ($feeds as $feed) {
             $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
