@@ -41,7 +41,14 @@ final class FeedListCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $status = $input->getOption('status');
         if (!in_array($status, self::SELECTIONS)) {
-            $io->error(sprintf('Status given not valid. Allowed values are (%s)', implode(', ', self::SELECTIONS)));
+            $io->error(sprintf('Invalid status: %s', $status));
+
+            // Show how to run this command.
+            // https://symfony.com/doc/current/console/calling_commands.html
+            $this->getApplication()->doRun(new ArrayInput([
+                'command' => $this->getName(),
+                '--help'  => true,
+            ]), $output);
 
             return Command::INVALID;
         }
