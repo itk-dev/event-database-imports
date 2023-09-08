@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface TagsNormalizerInterface
 {
-    public function normalize(array $names);
+    public function normalize(array $names): array;
 }

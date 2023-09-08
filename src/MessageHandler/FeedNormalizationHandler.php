@@ -30,10 +30,11 @@ final class FeedNormalizationHandler
         // @todo should we detect relative paths?
 
         // Content normalizations check up. HTML fixer etc.
-        // @todo Make field normalization configurable.
-        $item->description = $this->contentNormalizer->normalize($item->description);
-        $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
-        $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, 255);
+        $item->description = $this->contentNormalizer->normalize($item->description ?? '');
+        if (!is_null($item->excerpt)) {
+            $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
+            $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, 255);
+        }
 
         $this->messageBus->dispatch(new EventMessage($item));
     }

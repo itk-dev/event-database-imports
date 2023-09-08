@@ -7,7 +7,6 @@ use App\Entity\Feed;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
-use App\Repository\OrganizationRepository;
 
 class Event
 {
@@ -77,8 +76,10 @@ class Event
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
 
-        // Location -> address
+        // @todo: Tags
 
-        // Created_by (should we have feed user)
+        // @todo: Location -> address
+
+        // @todo: Created_by (should we have feed user)
     }
 }
