@@ -7,6 +7,7 @@ use App\Services\Feeds\Mapper\FeedConfigurationMapper;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -35,6 +36,7 @@ final class FeedListCommand extends Command
 
     /**
      * @throws MappingError
+     * @throws \Throwable
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -45,9 +47,9 @@ final class FeedListCommand extends Command
 
             // Show how to run this command.
             // https://symfony.com/doc/current/console/calling_commands.html
-            $this->getApplication()->doRun(new ArrayInput([
+            $this->getApplication()?->doRun(new ArrayInput([
                 'command' => $this->getName(),
-                '--help'  => true,
+                '--help' => true,
             ]), $output);
 
             return Command::INVALID;
