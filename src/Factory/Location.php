@@ -30,14 +30,24 @@ class Location
         if (is_null($address)) {
             // Create new address
             $address = new Address();
-
+            $address->setCity($input->city)
+                ->setCountry($input->country)
+                ->setRegion($input->region)
+                ->setPostalCode($input->postalCode)
+                ->setStreet($input->street)
+                ->setSuite($input->suite);
             $this->addressRepository->save($address, true);
         }
 
         if (is_null($location)) {
             // Create new location.
             $location = new LocationEntity();
-            $location->setAddress($address);
+            $location->setAddress($address)
+                ->setImage($input->image)
+                ->setUrl($input->url)
+                ->setName($input->name)
+                ->setMail($input->mail)
+                ->setTelephone($input->telephone);
 
             $this->locationRepository->save($location, true);
         }
