@@ -13,6 +13,7 @@ class Event
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly FeedRepository $feedRepository,
+        private readonly Location $locationFactory,
     ) {
     }
 
@@ -79,6 +80,7 @@ class Event
         // @todo: Tags
 
         // @todo: Location -> address
+        $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
 
         // @todo: Created_by (should we have feed user)
     }

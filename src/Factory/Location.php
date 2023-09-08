@@ -16,47 +16,50 @@ class Location
     ) {
     }
 
-    public function get(FeedItemLocation $input, bool $update = true): LocationEntity
+    /**
+     * Create or update location entity.
+     *
+     * @param feedItemLocation $input
+     *   Location information from feed item
+     *
+     * @return locationEntity
+     *   Location entity base on feed data
+     */
+    public function createOrUpdate(FeedItemLocation $input): LocationEntity
     {
         $address = $this->getAddress($input);
         $location = $this->getLocation($input);
 
-        if (!is_null($location) && $address?->getLocations()->contains($location)) {
-            // Location have been seen before, so reuse it (the fast track).
-            // @todo: update.
-            return $location;
-        }
+        $address = $address ?? new Address();
+        $input->city ?? $address->setCity($input->city);
+        $input->country ?? $address->setCountry($input->country);
+        $input->region ?? $address->setRegion($input->region);
+        $input->postalCode ?? $address->setPostalCode($input->postalCode);
+        $input->street ?? $address->setStreet($input->street);
+        $input->suite ?? $address->setSuite($input->suite);
+        $this->addressRepository->save($address, true);
 
-        if (is_null($address)) {
-            // Create new address
-            $address = new Address();
-            $address->setCity($input->city)
-                ->setCountry($input->country)
-                ->setRegion($input->region)
-                ->setPostalCode($input->postalCode)
-                ->setStreet($input->street)
-                ->setSuite($input->suite);
-            $this->addressRepository->save($address, true);
-        }
-
-        if (is_null($location)) {
-            // Create new location.
-            $location = new LocationEntity();
-            $location->setAddress($address)
-                ->setImage($input->image)
-                ->setUrl($input->url)
-                ->setName($input->name)
-                ->setMail($input->mail)
-                ->setTelephone($input->telephone);
-
-            $this->locationRepository->save($location, true);
-        }
-
-        // @todo: update.
+        $location = $location ?? new LocationEntity();
+        $location->setAddress($address);
+        $input->image ?? $location->setImage($input->image);
+        $input->url ?? $location->setUrl($input->url);
+        $input->name ?? $location->setName($input->name);
+        $input->mail ?? $location->setMail($input->mail);
+        $input->telephone ?? $location->setTelephone($input->telephone);
+        $this->locationRepository->save($location, true);
 
         return $location;
     }
 
+    /**
+     * Try to get address for at location base on feed data.
+     *
+     * @param feedItemLocation $location
+     *   Location information from feed
+     *
+     * @return Address|null
+     *   Address entity if found else null
+     */
     private function getAddress(FeedItemLocation $location): ?Address
     {
         $values = [];
@@ -83,6 +86,15 @@ class Location
         return $this->addressRepository->findOneBy($values);
     }
 
+    /**
+     * Try to get location from database.
+     *
+     * @param FeedItemLocation $location
+     *   Location information from feed
+     *
+     * @return LocationEntity|null
+     *   Fund location entity or null
+     */
     private function getLocation(FeedItemLocation $location): ?LocationEntity
     {
         $values = array_filter([
