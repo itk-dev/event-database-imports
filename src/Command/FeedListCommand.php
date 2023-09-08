@@ -18,6 +18,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class FeedListCommand extends Command
 {
+    private const SELECTIONS = ['enabled', 'disabled', 'all'];
+
     public function __construct(
         private readonly FeedConfigurationMapper $configurationMapper,
         private readonly FeedRepository $feedRepository,
@@ -28,7 +30,7 @@ final class FeedListCommand extends Command
     protected function configure(): void
     {
         // @todo: Add option to limit based on organization (data available in other PR currently).
-        $this->addOption('show-disabled', '', InputOption::VALUE_NONE, 'Also list disabled feeds');
+        $this->addOption('status', '', InputOption::VALUE_REQUIRED, sprintf('Show the current feed status (Values: %s)', implode(', ', self::SELECTIONS)), 'enabled');
     }
 
     /**
@@ -37,11 +39,18 @@ final class FeedListCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $showDisabled = $input->getOption('show-disabled');
+        $status = $input->getOption('status');
+        if (!in_array($status, self::SELECTIONS)) {
+            $io->error(sprintf('Status given not valid. Allowed values are (%s)', implode(', ', self::SELECTIONS)));
 
-        $feeds = $showDisabled
-          ? $this->feedRepository->findAll()
-          : $this->feedRepository->findBy(['enabled' => true]);
+            return Command::INVALID;
+        }
+
+        $feeds = match ($status) {
+            'all' => $this->feedRepository->findAll(),
+            'enabled' => $this->feedRepository->findBy(['enabled' => true]),
+            'disabled' => $this->feedRepository->findBy(['enabled' => false])
+        };
 
         foreach ($feeds as $feed) {
             $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
@@ -49,7 +58,7 @@ final class FeedListCommand extends Command
                 ['Id' => $feed->getId()],
                 ['Name' => $feed->getName()],
                 ['Url' => $config->url],
-                ['Enabled' => $feed->isEnabled()]
+                ['Enabled' => $feed->isEnabled() ? 'true' : 'false']
             );
         }
 
