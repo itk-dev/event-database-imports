@@ -15,6 +15,7 @@ class Event
         private readonly EventRepository $eventRepository,
         private readonly FeedRepository $feedRepository,
         private readonly Location $locationFactory,
+        private readonly Tags $tagsFactory,
     ) {
     }
 
@@ -71,6 +72,16 @@ class Event
         return hash('sha256', serialize($item));
     }
 
+    /**
+     * Helper function to map feed items into event entities.
+     *
+     * @param eventEntity $entity
+     *   Entity to map values to
+     * @param feedItem $item
+     *   The normalized feed item
+     * @param feed $feed
+     *   The feed that the item came from
+     */
     private function mapValues(EventEntity $entity, FeedItem $item, Feed $feed): void
     {
         $entity->setDescription($item->description)
@@ -84,9 +95,12 @@ class Event
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
 
-        // @todo: Tags
+        if (!is_null($item->tags)) {
+            foreach ($this->tagsFactory->createOrLookup($item->tags) as $tag) {
+                $entity->addTag($tag);
+            }
+        }
 
-        // @todo: Location -> address
         if (!is_null($item->location)) {
             $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
         }
