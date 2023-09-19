@@ -106,12 +106,7 @@ class Event
             $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
         }
 
-        // The feed items may come with occurrences (if not use stats/end to create an occurrences). The daly
-        // occurrences will be handled later on.
-        if (!is_null($item->start) && !is_null($item->end)) {
-            $t = 1;
-        }
-
+        // The feed items may come with occurrences The daly occurrences will be handled later on.
         foreach ($this->occurrencesFactory->createOrLookup($item->occurrences, $entity->getId()) as $occurrenceEntity) {
             $entity->addOccurrence($occurrenceEntity);
         }

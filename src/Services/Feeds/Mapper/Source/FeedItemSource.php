@@ -50,6 +50,12 @@ final class FeedItemSource
             elseif (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $values = $this->getValues([...$source], $src);
                 $this->setValues($output, $dest, $values);
+            }
+            // Match dest with ".*." single value into array mapping.
+            elseif (str_contains($dest, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
+                $value = $this->getValue([...$source], $src);
+                $this->setValues($output, $dest, [$value]);
+                $t = 1;
             } else {
                 $value = $this->getValue([...$source], $src);
                 $this->setValue($output, $dest, $value ?? '');

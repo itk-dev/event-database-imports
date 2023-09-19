@@ -28,7 +28,7 @@ class Tags
             if (is_null($tag)) {
                 $tag = new Tag();
                 $tag->setName($tagName);
-                $this->tagRepository->save($tag, true);
+                $this->tagRepository->save($tag);
             }
 
             yield $tag;

@@ -76,9 +76,6 @@ final class FeedDebugCommand extends Command
                 ['Title' => $feedItem->title],
                 ['Excerpt' => wordwrap($feedItem->excerpt ?? '', 80)],
                 ['Url' => $feedItem->url],
-                ['Price' => $feedItem->price],
-                ['Start' => $feedItem->start?->format('c')],
-                ['End' => $feedItem->end?->format('c')],
                 ['Tags' => implode(', ', $feedItem->tags)],
             );
 

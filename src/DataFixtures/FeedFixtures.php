@@ -23,12 +23,12 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'Id' => 'id',
                 'Title' => 'title',
                 'Teaser' => 'description',
-                'DateFrom' => 'start',
-                'DateTo' => 'end',
                 'Url' => 'url',
                 'Image' => 'image',
                 'BuyTicketsLink' => 'ticketUrl',
                 'Tags' => 'tags.[,]',
+                'DateFrom' => 'occurrences.*.start',
+                'DateTo' => 'occurrences.*.end',
             ],
             'defaults' => [
                 'title' => 'missing',
@@ -76,8 +76,6 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'title',
                 'lead' => 'excerpt',
                 'body' => 'description',
-                'date.start' => 'start',
-                'date.stop' => 'end',
                 'url' => 'url',
                 'images.list' => 'image',
                 'tickets.url' => 'ticketUrl',
@@ -89,6 +87,9 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'location.coordinates.lon' => 'location.coordinates.longitude',
                 'location.mail' => 'location.mail',
                 'tags' => 'tags',
+                'date.start' => 'occurrences.*.start',
+                'date.stop' => 'occurrences.*.end',
+                'price' => 'occurrences.*.price',
             ],
             'defaults' => [
                 'location' => [
@@ -119,9 +120,9 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'description' => 'description',
                 'url' => 'url',
                 'image_url' => 'image',
-                'price' => 'price',
                 'occurrences.*.startDate' => 'occurrences.*.start',
                 'occurrences.*.endDate' => 'occurrences.*.end',
+                'price' => 'occurrences.*.price',
             ],
             'defaults' => [
                 'public' => false,
@@ -168,8 +169,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'ticketPriceRange' => 'price',
                 'purchaseUrl' => 'ticketUrl',
                 'tags' => 'tags.[]',
-                'starttime' => 'start',
-                'endtime' => 'end',
+                'starttime' => 'occurrences.*.start',
+                'endtime' => 'occurrences.*.end',
             ],
             'defaults' => [
                 'location' => [

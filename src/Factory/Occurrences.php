@@ -32,7 +32,7 @@ class Occurrences
             if (!is_null($occurrencesEntity)) {
                 if ($occurrencesEntity->getEvent()?->getId() == $eventId) {
                     $this->mapValues($item, $occurrencesEntity);
-                    $this->occurrenceRepository->save($occurrencesEntity, true);
+                    $this->occurrenceRepository->save($occurrencesEntity);
 
                     yield $occurrencesEntity;
                     continue;
@@ -41,7 +41,7 @@ class Occurrences
 
             $occurrencesEntity = new Occurrence();
             $this->mapValues($item, $occurrencesEntity);
-            $this->occurrenceRepository->save($occurrencesEntity, true);
+            $this->occurrenceRepository->save($occurrencesEntity);
 
             yield $occurrencesEntity;
         }

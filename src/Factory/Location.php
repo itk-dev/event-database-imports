@@ -54,7 +54,7 @@ class Location
             $address->setLatitude(floatval($coordinates->latitude));
             $address->setLongitude(floatval($coordinates->longitude));
         }
-        $this->addressRepository->save($address, true);
+        $this->addressRepository->save($address);
 
         $location = $location ?? new LocationEntity();
         $location->setAddress($address);
@@ -74,7 +74,7 @@ class Location
             $location->setTelephone($input->telephone);
         }
         $location->setDisabilityAccess($input->disabilityAccess);
-        $this->locationRepository->save($location, true);
+        $this->locationRepository->save($location);
 
         return $location;
     }
