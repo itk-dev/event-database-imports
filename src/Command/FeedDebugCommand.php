@@ -74,7 +74,7 @@ final class FeedDebugCommand extends Command
             $io->definitionList(
                 ['Id' => $feedItem->id],
                 ['Title' => $feedItem->title],
-                ['Excerpt' => wordwrap($feedItem->excerpt, 80)],
+                ['Excerpt' => wordwrap($feedItem->excerpt ?? '', 80)],
                 ['Url' => $feedItem->url],
                 ['Price' => $feedItem->price],
                 ['Start' => $feedItem->start?->format('c')],

@@ -38,6 +38,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                     'Aarhus',
                 ],
                 'location' => [
+                    'name' => 'Aros',
                     'country' => 'Danmark',
                     'city' => 'Aarhus C',
                     'postalCode' => 8000,
@@ -51,7 +52,6 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                     'url' => 'http://www.aros.dk/',
                     'telephone' => '87306600',
                     'mail' => 'info@aros.dk',
-                    'logo' => 'http://www.aros.dk/images/logo.png',
                 ],
             ],
         ];
@@ -91,6 +91,9 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'tags' => 'tags',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'Aarhus Kommunea biblioteker',
+                ],
                 'public' => true,
             ],
         ];
@@ -122,6 +125,22 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             ],
             'defaults' => [
                 'public' => false,
+                'location' => [
+                    'name' => 'Aros',
+                    'country' => 'Danmark',
+                    'city' => 'Aarhus C',
+                    'postalCode' => 8000,
+                    'street' => 'Valdemarsgade 1',
+                    'region' => 'Jylland',
+                    'suite' => '',
+                    'coordinates' => [
+                        'latitude' => '56.15221473835729',
+                        'longitude' => '10.19933009834337',
+                    ],
+                    'url' => 'https://www.bora-bora.dk/',
+                    'telephone' => '86190079',
+                    'mail' => 'info@bora-bora.dk',
+                ],
             ],
         ];
 
@@ -153,6 +172,14 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'endtime' => 'end',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'Train Music',
+                    'country' => 'Danmark',
+                    'city' => 'Aarhus C',
+                    'postalCode' => 8000,
+                    'street' => 'Toldbodgade 6',
+                    'region' => 'Jylland',
+                ],
                 'public' => false,
             ],
         ];
@@ -178,6 +205,9 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'url' => 'url',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'HeadQuarters',
+                ],
             ],
         ];
 

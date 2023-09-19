@@ -4,6 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Event as EventEntity;
 use App\Entity\Feed;
+use App\Exception\FactoryException;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
@@ -17,9 +18,15 @@ class Event
     ) {
     }
 
+    /**
+     * @throws FactoryException
+     */
     public function createOrUpdate(FeedItem $item): EventEntity
     {
         $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
+        if (is_null($feed)) {
+            throw new FactoryException('Missing feed in event factory');
+        }
         $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
         $hash = $this->calculateHash($item);
         if (is_null($entity)) {
@@ -80,7 +87,9 @@ class Event
         // @todo: Tags
 
         // @todo: Location -> address
-        $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
+        if (!is_null($item->location)) {
+            $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
+        }
 
         // @todo: Created_by (should we have feed user)
     }

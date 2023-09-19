@@ -16,6 +16,7 @@ final class FeedItemLocation
         public ?string $url = null,
         public ?string $image = null,
         public ?string $region = null,
+        public bool $disabilityAccess = false,
         public ?FeedItemCoordinates $coordinates = null,
     ) {
     }

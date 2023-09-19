@@ -31,21 +31,49 @@ class Location
         $location = $this->getLocation($input);
 
         $address = $address ?? new Address();
-        $input->city ?? $address->setCity($input->city);
-        $input->country ?? $address->setCountry($input->country);
-        $input->region ?? $address->setRegion($input->region);
-        $input->postalCode ?? $address->setPostalCode($input->postalCode);
-        $input->street ?? $address->setStreet($input->street);
-        $input->suite ?? $address->setSuite($input->suite);
+        if (!is_null($input->city)) {
+            $address->setCity($input->city);
+        }
+        if (!is_null($input->country)) {
+            $address->setCountry($input->country);
+        }
+        if (!is_null($input->region)) {
+            $address->setRegion($input->region);
+        }
+        if ($input->postalCode) {
+            $address->setPostalCode($input->postalCode);
+        }
+        if (!is_null($input->street)) {
+            $address->setStreet($input->street);
+        }
+        if (!is_null($input->suite)) {
+            $address->setSuite($input->suite);
+        }
+        $coordinates = $input->coordinates;
+        if (!is_null($coordinates) && !is_null($coordinates->latitude) && !is_null($coordinates->longitude)) {
+            $address->setLatitude(floatval($coordinates->latitude));
+            $address->setLongitude(floatval($coordinates->longitude));
+        }
         $this->addressRepository->save($address, true);
 
         $location = $location ?? new LocationEntity();
         $location->setAddress($address);
-        $input->image ?? $location->setImage($input->image);
-        $input->url ?? $location->setUrl($input->url);
-        $input->name ?? $location->setName($input->name);
-        $input->mail ?? $location->setMail($input->mail);
-        $input->telephone ?? $location->setTelephone($input->telephone);
+        if (!is_null($input->image)) {
+            $location->setImage($input->image);
+        }
+        if (!is_null($input->url)) {
+            $location->setUrl($input->url);
+        }
+        if (!is_null($input->name)) {
+            $location->setName($input->name);
+        }
+        if (!is_null($input->mail)) {
+            $location->setMail($input->mail);
+        }
+        if (!is_null($input->telephone)) {
+            $location->setTelephone($input->telephone);
+        }
+        $location->setDisabilityAccess($input->disabilityAccess);
         $this->locationRepository->save($location, true);
 
         return $location;
@@ -69,8 +97,8 @@ class Location
         $longitude = $location->coordinates?->longitude;
         if (!is_null($longitude) && !is_null($latitude)) {
             $values = [
-                'latitude' => $latitude,
-                'longitude' => $longitude,
+                'latitude' => floatval($latitude),
+                'longitude' => floatval($longitude),
             ];
         }
 
