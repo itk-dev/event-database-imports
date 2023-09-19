@@ -131,7 +131,10 @@ This example will map a comma separated string into the tags array. Spilt by the
 
 ### Occurrences mapping
 
-| Field               | Data type | Required (do not reflect recommended) | Comment                       |
-|---------------------|-----------|---------------------------------------|-------------------------------|
-| occurrences.*.start | date      | no                                    | Start date of the occurrences |
-| occurrences.*.end   | date      | no                                    | End date of the occurrences   |
+| Field                | Data type | Required (do not reflect recommended) | Comment                       |
+|----------------------|-----------|---------------------------------------|-------------------------------|
+| occurrences.*.start  | date      | no                                    | Start date of the occurrences |
+| occurrences.*.end    | date      | no                                    | End date of the occurrences   |
+| occurrences.*.price  | string    | no                                    | Price or price range          |
+| occurrences.*.room   | string    | no                                    | If it happens in a room       |
+| occurrences.*.status | string    | no                                    | E.g sold-out                  |

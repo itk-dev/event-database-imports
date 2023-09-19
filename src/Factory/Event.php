@@ -16,6 +16,7 @@ class Event
         private readonly FeedRepository $feedRepository,
         private readonly Location $locationFactory,
         private readonly Tags $tagsFactory,
+        private readonly Occurrences $occurrencesFactory,
     ) {
     }
 
@@ -103,6 +104,16 @@ class Event
 
         if (!is_null($item->location)) {
             $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
+        }
+
+        // The feed items may come with occurrences (if not use stats/end to create an occurrences). The daly
+        // occurrences will be handled later on.
+        if (!is_null($item->start) && !is_null($item->end)) {
+            $t = 1;
+        }
+
+        foreach ($this->occurrencesFactory->createOrLookup($item->occurrences, $entity->getId()) as $occurrenceEntity) {
+            $entity->addOccurrence($occurrenceEntity);
         }
 
         // @todo: Created_by (should we have feed user)
