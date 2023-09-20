@@ -10,8 +10,8 @@ class Image implements ImageInterface
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly string $publicPath,
-    )
-    {}
+    ) {
+    }
 
     public function fetch(string $url): string
     {
@@ -31,7 +31,6 @@ class Image implements ImageInterface
             fwrite($fileHandler, $chunk->getContent());
         }
         fclose($fileHandler);
-
     }
 
     public function remove(\App\Entity\Image $image): bool
@@ -48,21 +47,21 @@ class Image implements ImageInterface
      * Generate safe path to storage file in based on URL.
      *
      * @param string $url
-     *   The files URL.
+     *   The files URL
      * @param int $depth
-     *   The depth of the generated path.
+     *   The depth of the generated path
      * @param int $size
-     *   The size of each element in the generated path.
+     *   The size of each element in the generated path
      *
      * @return string
-     *   The generated path ending with slash.
+     *   The generated path ending with slash
      */
     private function generatePath(string $url, bool $absolute = false, int $depth = 2, int $size = 8): string
     {
         $hash = $this->hash($url);
-        $subPath = implode("/", str_split(strtolower(substr($hash, 0, $size*$depth)), $size)) . "/";
+        $subPath = implode('/', str_split(strtolower(substr($hash, 0, $size * $depth)), $size)).'/';
 
-        return ($absolute ? $this->publicPath : '') . $subPath;
+        return ($absolute ? $this->publicPath : '').$subPath;
     }
 
     /**
