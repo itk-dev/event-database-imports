@@ -26,7 +26,7 @@ class Occurrence
     #[ORM\Column]
     private ?\DateTimeImmutable $end = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ticketPriceRange = null;
 
     #[ORM\Column(length: 255, nullable: true)]

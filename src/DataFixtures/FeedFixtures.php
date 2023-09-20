@@ -127,7 +127,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             'defaults' => [
                 'public' => false,
                 'location' => [
-                    'name' => 'Aros',
+                    'name' => 'Bora Bora',
                     'country' => 'Danmark',
                     'city' => 'Aarhus C',
                     'postalCode' => 8000,
@@ -156,7 +156,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $config = [
             'type' => 'json',
             'url' => 'https://www.train.dk/calenderjsonrewrite.php',
-            'base' => 'https://www.bora-bora.dk/',
+            'base' => 'https://www.train.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/events/-',
             'dateFormat' => 'Y-m-d\TH:i:sP',

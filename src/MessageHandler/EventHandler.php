@@ -21,8 +21,6 @@ final class EventHandler
     {
         $item = $message->getItem();
 
-        // Check for create or update.
-        $entity = null;
         try {
             $entity = $this->eventFactory->createOrUpdate($item);
         } catch (\Exception $e) {
