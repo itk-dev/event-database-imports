@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapper;
-use App\Services\Feeds\Mapper\Source\FeedItemSource;
+use App\Service\Feeds\FeedDefaultsMapper;
+use App\Service\Feeds\Mapper\Source\FeedItemSource;
 use App\Tests\Utils\PhpUnitUtils;
 use App\Tests\Utils\TestData;
 use PHPUnit\Framework\Attributes\CoversClass;

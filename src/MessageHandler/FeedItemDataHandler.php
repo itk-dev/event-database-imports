@@ -4,7 +4,7 @@ namespace App\MessageHandler;
 
 use App\Message\FeedItemDataMessage;
 use App\Message\FeedNormalizationMessage;
-use App\Services\Feeds\Mapper\FeedMapperInterface;
+use App\Service\Feeds\Mapper\FeedMapperInterface;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;

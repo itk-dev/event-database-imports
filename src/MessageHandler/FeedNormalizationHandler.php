@@ -4,8 +4,8 @@ namespace App\MessageHandler;
 
 use App\Message\EventMessage;
 use App\Message\FeedNormalizationMessage;
-use App\Services\ContentNormalizer;
-use App\Services\TagsNormalizer;
+use App\Service\ContentNormalizer;
+use App\Service\TagsNormalizer;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
