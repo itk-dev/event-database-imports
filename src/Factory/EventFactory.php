@@ -17,6 +17,7 @@ final class EventFactory
         private readonly LocationFactory $locationFactory,
         private readonly TagsFactory $tagsFactory,
         private readonly OccurrencesFactory $occurrencesFactory,
+        private readonly Image $imageFactory,
     ) {
     }
 
@@ -94,6 +95,10 @@ final class EventFactory
             ->setPublic($item->public)
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
+
+        if (!is_null($item->image)) {
+            $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+        }
 
         if (!is_null($item->tags)) {
             foreach ($this->tagsFactory->createOrLookup($item->tags) as $tag) {
