@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapper;
+use App\Service\Feeds\FeedDefaultsMapper;
 use App\Tests\Utils\TestData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

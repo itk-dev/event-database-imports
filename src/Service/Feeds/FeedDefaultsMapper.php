@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Feeds;
+namespace App\Service\Feeds;
 
 use App\Model\Feed\FeedConfiguration;
 

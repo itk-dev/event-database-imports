@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Feeds\Mapper;
+namespace App\Service\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
 use CuyZ\Valinor\Mapper\MappingError;

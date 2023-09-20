@@ -9,7 +9,7 @@ class Image
 {
     public function __construct(
         private readonly ImageRepository $imageRepository,
-        private readonly \App\Services\Image $image
+        private readonly \App\Service\Image $image
     ) {
     }
 

@@ -3,10 +3,10 @@
 namespace App\Command;
 
 use App\Repository\FeedRepository;
-use App\Services\Feeds\Mapper\FeedConfigurationMapper;
-use App\Services\Feeds\Mapper\FeedMapperInterface;
-use App\Services\Feeds\Parser\FeedParserInterface;
-use App\Services\TagsNormalizer;
+use App\Service\Feeds\Mapper\FeedConfigurationMapper;
+use App\Service\Feeds\Mapper\FeedMapperInterface;
+use App\Service\Feeds\Parser\FeedParserInterface;
+use App\Service\TagsNormalizer;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
