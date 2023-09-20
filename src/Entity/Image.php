@@ -67,12 +67,12 @@ class Image
     public function setEvent(?Event $event): static
     {
         // unset the owning side of the relation if necessary
-        if ($event === null && $this->event !== null) {
+        if (null === $event && null !== $this->event) {
             $this->event->setImage(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($event !== null && $event->getImage() !== $this) {
+        if (null !== $event && $event->getImage() !== $this) {
             $event->setImage($this);
         }
 
