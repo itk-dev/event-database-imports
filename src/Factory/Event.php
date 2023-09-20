@@ -17,6 +17,7 @@ class Event
         private readonly Location $locationFactory,
         private readonly Tags $tagsFactory,
         private readonly Occurrences $occurrencesFactory,
+        private readonly Image $imageFactory,
     ) {
     }
 
@@ -88,13 +89,16 @@ class Event
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)
             ->setLanguageCode($item->landcode)
-            ->setImage($item->image)
             ->setFeedItemId($item->id)
             ->setTicketUrl($item->ticketUrl)
             ->setUrl($item->url)
             ->setPublic($item->public)
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
+
+        if (!is_null($item->image)) {
+            $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+        }
 
         if (!is_null($item->tags)) {
             foreach ($this->tagsFactory->createOrLookup($item->tags) as $tag) {
