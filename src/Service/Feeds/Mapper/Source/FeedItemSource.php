@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\Feeds\Mapper\Source;
+namespace App\Service\Feeds\Mapper\Source;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Services\Feeds\FeedDefaultsMapper;
+use App\Service\Feeds\FeedDefaultsMapper;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**

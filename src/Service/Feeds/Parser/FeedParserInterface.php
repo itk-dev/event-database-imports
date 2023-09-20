@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Feeds\Parser;
+namespace App\Service\Feeds\Parser;
 
 use App\Entity\Feed;
 
