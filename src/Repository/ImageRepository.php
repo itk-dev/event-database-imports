@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Event;
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -22,7 +21,7 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    public function save(Event $entity, bool $flush = false): void
+    public function save(Image $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -31,7 +30,7 @@ class ImageRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Event $entity, bool $flush = false): void
+    public function remove(Image $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 

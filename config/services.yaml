@@ -24,4 +24,4 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\Image:
         arguments:
-            $publicPath: '%kernel.project_dir%/public/'
+            $publicPath: '%kernel.project_dir%/public/images/'

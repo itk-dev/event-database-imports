@@ -5,11 +5,10 @@ namespace App\Factory;
 use App\Entity\Image as ImageEntity;
 use App\Repository\ImageRepository;
 
-class Image
+final class Image
 {
     public function __construct(
         private readonly ImageRepository $imageRepository,
-        private readonly \App\Service\Image $image
     ) {
     }
 
@@ -22,8 +21,11 @@ class Image
             $image = new ImageEntity();
             $image->setSource($url);
         } else {
-            // Check if image have been updated.
+            // @todo: should we soft delete and create new image.
+            $image->setSource($url);
+            $image->setUpdated(true);
         }
+        $this->imageRepository->save($image);
 
         return $image;
     }
