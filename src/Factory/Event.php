@@ -97,7 +97,8 @@ class Event
             ->setFeed($feed);
 
         if (!is_null($item->image)) {
-            $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+            $image = $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+            $entity->setImage($image);
         }
 
         if (!is_null($item->tags)) {

@@ -2,10 +2,15 @@
 
 namespace App\Service;
 
+use App\Exception\FilesystemException;
+use App\Exception\ImageFetchException;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class Image implements ImageInterface
+final class Image implements ImageInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
@@ -13,24 +18,38 @@ class Image implements ImageInterface
     ) {
     }
 
+    /**
+     * @throws FilesystemException
+     * @throws TransportExceptionInterface
+     * @throws ImageFetchException
+     */
     public function fetch(string $url): string
     {
         $filesystem = new Filesystem();
 
-        $response = $this->client->request('GET', $url);
-
-        // Responses are lazy: this code is executed as soon as headers are received
-        if (200 !== $response->getStatusCode()) {
-            throw new \Exception('...');
+        try {
+            $path = $this->generatePath(url: $url, absolute: true);
+            $filesystem->mkdir(
+                Path::normalize($path),
+                0775
+            );
+        } catch (IOExceptionInterface $exception) {
+            throw new FilesystemException('Unable to create upload folder', $exception->getCode(), $exception);
         }
 
-        // get the response content in chunks and save them in a file
-        // response chunks implement Symfony\Contracts\HttpClient\ChunkInterface
-        $fileHandler = fopen('/ubuntu.iso', 'w');
+        $response = $this->client->request('GET', $url);
+        if (200 !== $response->getStatusCode()) {
+            throw new ImageFetchException(sprintf('Failed to fetch %s with code %s', $url, $response->getStatusCode()), $response->getStatusCode());
+        }
+
+        $dest = $path.basename($url);
+        $fileHandler = fopen($dest, 'w');
         foreach ($this->client->stream($response) as $chunk) {
             fwrite($fileHandler, $chunk->getContent());
         }
         fclose($fileHandler);
+
+        return $dest;
     }
 
     public function remove(\App\Entity\Image $image): bool
@@ -56,7 +75,7 @@ class Image implements ImageInterface
      * @return string
      *   The generated path ending with slash
      */
-    private function generatePath(string $url, bool $absolute = false, int $depth = 2, int $size = 8): string
+    private function generatePath(string $url, bool $absolute = false, int $depth = 1, int $size = 8): string
     {
         $hash = $this->hash($url);
         $subPath = implode('/', str_split(strtolower(substr($hash, 0, $size * $depth)), $size)).'/';
@@ -75,6 +94,8 @@ class Image implements ImageInterface
      */
     private function hash(string $url): string
     {
-        return hash('sha256', $url);
+        $parts = parse_url($url);
+
+        return hash('sha256', $parts['host']);
     }
 }
