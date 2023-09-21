@@ -7,7 +7,7 @@ use App\Entity\Tag;
 use App\Model\Feed\FeedItemOccurrence;
 use App\Repository\OccurrenceRepository;
 
-class Occurrences
+final class Occurrences
 {
     public function __construct(
         private readonly OccurrenceRepository $occurrenceRepository

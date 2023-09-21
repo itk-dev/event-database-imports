@@ -9,7 +9,7 @@ use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 
-class Event
+final class Event
 {
     public function __construct(
         private readonly EventRepository $eventRepository,

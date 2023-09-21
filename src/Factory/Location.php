@@ -8,7 +8,7 @@ use App\Model\Feed\FeedItemLocation;
 use App\Repository\AddressRepository;
 use App\Repository\LocationRepository;
 
-class Location
+final class Location
 {
     public function __construct(
         private readonly LocationRepository $locationRepository,
