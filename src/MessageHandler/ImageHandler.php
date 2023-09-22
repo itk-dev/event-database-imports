@@ -36,11 +36,11 @@ final class ImageHandler
             $local = $this->imageService->fetch($image->getSource());
             $image->setLocal($local);
             $this->imageRepository->save($image, true);
+
+            $this->imageService->transform($image);
         }
 
-        // @todo: send message to image cache warmup.
-
-        // @todo: send message to geo-encoder.
+        // @todo: send message to geo-encoder
 
         // @todo: create next message
         throw new UnrecoverableMessageHandlingException('Not implemented yet');

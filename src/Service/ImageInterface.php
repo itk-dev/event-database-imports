@@ -8,5 +8,5 @@ interface ImageInterface
 
     public function remove(\App\Entity\Image $image): bool;
 
-    public function transform(\App\Entity\Image $image): bool;
+    public function transform(\App\Entity\Image $image): void;
 }
