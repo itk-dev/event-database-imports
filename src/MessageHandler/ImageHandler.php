@@ -33,11 +33,13 @@ final class ImageHandler
 
         if (!is_null($imageId)) {
             $image = $this->imageRepository->findOneBy(['id' => $imageId]);
-            $local = $this->imageService->fetch($image->getSource());
-            $image->setLocal($local);
-            $this->imageRepository->save($image, true);
+            if (!is_null($image)) {
+                $local = $this->imageService->fetch($image->getSource());
+                $image->setLocal($local);
+                $this->imageRepository->save($image, true);
 
-            $this->imageService->transform($image);
+                $this->imageService->transform($image);
+            }
         }
 
         // @todo: send message to geo-encoder

@@ -58,12 +58,15 @@ final class Image implements ImageInterface
     public function remove(\App\Entity\Image $image): bool
     {
         // TODO: Implement remove() method.
+        return false;
     }
 
     public function transform(\App\Entity\Image $image): void
     {
         $path = $image->getLocal();
-        $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
+        if (!is_null($path)) {
+            $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
+        }
     }
 
     /**
@@ -85,9 +88,9 @@ final class Image implements ImageInterface
      *
      * @param string $url
      *   The files URL
-     * @param int $depth
+     * @param int<1, max> $depth
      *   The depth of the generated path
-     * @param int $size
+     * @param int<1, max> $size
      *   The size of each element in the generated path
      *
      * @return string
@@ -114,6 +117,6 @@ final class Image implements ImageInterface
     {
         $parts = parse_url($url);
 
-        return hash('sha256', $parts['host']);
+        return hash('sha256', $parts['host'] ?? 'unknown');
     }
 }

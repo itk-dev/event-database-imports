@@ -6,7 +6,7 @@ final class ImageMessage
 {
     public function __construct(
         private readonly int $eventId,
-        private readonly int $imageId,
+        private readonly ?int $imageId,
     ) {
     }
 
