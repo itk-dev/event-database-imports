@@ -4,9 +4,11 @@ namespace App\Service;
 
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
+use Liip\ImagineBundle\Message\WarmupCache;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -15,6 +17,7 @@ final class Image implements ImageInterface
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly string $publicPath,
+        private readonly MessageBusInterface $messageBus,
     ) {
     }
 
@@ -49,7 +52,7 @@ final class Image implements ImageInterface
         }
         fclose($fileHandler);
 
-        return $dest;
+        return $this->getRelativePath($dest);
     }
 
     public function remove(\App\Entity\Image $image): bool
@@ -57,9 +60,24 @@ final class Image implements ImageInterface
         // TODO: Implement remove() method.
     }
 
-    public function transform(\App\Entity\Image $image): bool
+    public function transform(\App\Entity\Image $image): void
     {
-        // TODO: Implement transform() method.
+        $path = $image->getLocal();
+        $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
+    }
+
+    /**
+     * Get relative path from absolute path.
+     *
+     * @param string $path
+     *   The absolute path
+     *
+     * @return string
+     *   Path stripped the image web-root
+     */
+    private function getRelativePath(string $path): string
+    {
+        return preg_replace('/^'.preg_quote($this->publicPath, '/').'/', '', $path);
     }
 
     /**
