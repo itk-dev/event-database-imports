@@ -27,7 +27,17 @@
       <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="src/Services/Feeds/Mapper/Source/FeedItemSource.php">
+  <file src="src/MessageHandler/EventHandler.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$entity->getId()]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/MessageHandler/ImageHandler.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$image->getSource()]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Service/Feeds/Mapper/Source/FeedItemSource.php">
     <InvalidOperand>
       <code>$source</code>
       <code>$source</code>
