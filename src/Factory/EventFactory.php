@@ -74,7 +74,7 @@ final class EventFactory
     }
 
     /**
-     * Helper function to map feed items into event entities.
+     * Helper function to set feed items into event entities.
      *
      * @param Event $entity
      *   Entity to map values to

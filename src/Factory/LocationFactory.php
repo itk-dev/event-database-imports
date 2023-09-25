@@ -30,7 +30,7 @@ final class LocationFactory
         $address = $this->getAddress($input);
         $location = $this->getLocation($input);
 
-        $address = $address ?? new Address();
+        $address ??= new Address();
         if (!is_null($input->city)) {
             $address->setCity($input->city);
         }
@@ -50,13 +50,13 @@ final class LocationFactory
             $address->setSuite($input->suite);
         }
         $coordinates = $input->coordinates;
-        if (!is_null($coordinates) && !is_null($coordinates->latitude) && !is_null($coordinates->longitude)) {
+        if (isset($coordinates->latitude, $coordinates->longitude)) {
             $address->setLatitude(floatval($coordinates->latitude));
             $address->setLongitude(floatval($coordinates->longitude));
         }
         $this->addressRepository->save($address);
 
-        $location = $location ?? new Location();
+        $location ??= new Location();
         $location->setAddress($address);
         if (!is_null($input->image)) {
             $location->setImage($input->image);
