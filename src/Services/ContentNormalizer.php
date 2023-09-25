@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
+use Symfony\Component\String\UnicodeString;
 
 final class ContentNormalizer implements ContentNormalizerInterface
 {
@@ -18,15 +19,14 @@ final class ContentNormalizer implements ContentNormalizerInterface
 
     public function trimLength(string $content, int $maxLength, bool $onWords = true): string
     {
-        return $onWords ? $this->wordSplitter($content, $maxLength) : trim(mb_substr($content, 0, $maxLength));
+        $str = new UnicodeString($content);
+        return $onWords ? $this->wordSplitter($str, $maxLength) : $str->truncate($maxLength)->trim();
     }
 
     /**
      * Trim content length on whole words.
      *
-     * @see https://stackoverflow.com/questions/79960/how-to-truncate-a-string-in-php-to-the-word-closest-to-a-certain-number-of-chara
-     *
-     * @param string $content
+     * @param UnicodeString $str
      *   The content to trim in length
      * @param int $maxLength
      *   The max length of content to return
@@ -34,21 +34,16 @@ final class ContentNormalizer implements ContentNormalizerInterface
      * @return string
      *   The trimmed content wit max length
      */
-    private function wordSplitter(string $content, int $maxLength): string
+    private function wordSplitter(UnicodeString $str, int $maxLength): string
     {
-        $parts = preg_split('/([\s\n\r]+)/u', $content, -1, PREG_SPLIT_DELIM_CAPTURE);
-        $parts_count = count($parts);
+        $str = $str->truncate($maxLength, '', false)->trim();
 
-        $length = 0;
-        $last_part = 0;
-        for (; $last_part < $parts_count; ++$last_part) {
-            $currentPartLength = mb_strlen($parts[$last_part]);
-            if ($length + $currentPartLength > $maxLength) {
-                break;
-            }
-            $length += $currentPartLength;
+        if ($str->length() > $maxLength) {
+            // As the truncate function above, have returned a string longer then max length. Remove the last word from
+            // the string to ensure that it is below max length.
+            return preg_replace('/\W\w+\s*(\W*)$/', '$1', $str->toString());
         }
 
-        return trim(implode(array_slice($parts, 0, $last_part)));
+        return $str->toString();
     }
 }
