@@ -3,9 +3,11 @@
 namespace App\MessageHandler;
 
 use App\Message\GeocoderMessage;
+use App\Repository\AddressRepository;
 use App\Repository\EventRepository;
 use App\Service\Geocoder;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
@@ -14,16 +16,27 @@ final class GeocoderHandler
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly Geocoder $geocoderService,
+        private readonly AddressRepository $addressRepository,
         private readonly MessageBusInterface $messageBus,
     ) {
     }
 
     public function __invoke(GeocoderMessage $message): void
     {
-        $event = $this->eventRepository->findOneBy(['id' => $message->getEventId()]);
+        if (!is_null($message->getEventId())) {
+            $event = $this->eventRepository->findOneBy(['id' => $message->getEventId()]);
+        } else {
+            throw new UnrecoverableMessageHandlingException('Missing event id in geo-coder handler');
+        }
 
-        $address = $event->getLocation()->getAddress();
+        $address = $event?->getLocation()?->getAddress();
+        if (!is_null($address)) {
+            $coordinates = $this->geocoderService->encode($address);
+            $address->setLatitude($coordinates[0]);
+            $address->setLongitude($coordinates[0]);
+            $this->addressRepository->save($address, true);
+        }
 
-        $t = 1;
+        // @TODO: send index massage and daily occurrences splitter message.
     }
 }

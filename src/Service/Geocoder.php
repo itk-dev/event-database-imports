@@ -21,10 +21,10 @@ final class Geocoder implements GeocoderInterface
     public function encode(Address $address): array
     {
         $query = $this->buildQuery($address);
-        $link = $this->runQuery($query);
+        $url = $this->runQuery($query);
         $response = $this->client->request(
             'GET',
-            $link
+            $url
         );
         if (200 !== $response->getStatusCode()) {
             throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
@@ -62,6 +62,14 @@ final class Geocoder implements GeocoderInterface
     }
 
     /**
+     * Call DAWA "datavask" to get link to address with coordinates.
+     *
+     * The "datavask" may return many address references, but as there are no indication in the data to which on is the
+     * best match we simply assumes that the result are sorted and takes the first one returned.
+     *
+     * @return string
+     *   URL to the detailed record for the address if found
+     *
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
      * @throws GeocoderException
