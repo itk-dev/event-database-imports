@@ -4,6 +4,7 @@ namespace App\MessageHandler;
 
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
+use App\Message\GeocoderMessage;
 use App\Message\ImageMessage;
 use App\Repository\ImageRepository;
 use App\Service\Image;
@@ -42,9 +43,10 @@ final class ImageHandler
             }
         }
 
-        // @todo: send message to geo-encoder
-
-        // @todo: create next message
-        throw new UnrecoverableMessageHandlingException('Not implemented yet');
+        if (!is_null($message->getEventId())) {
+            $this->messageBus->dispatch(new GeocoderMessage($message->getEventId()));
+        } else {
+            throw new UnrecoverableMessageHandlingException('Missing event id in image handler');
+        }
     }
 }
