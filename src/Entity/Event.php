@@ -35,9 +35,6 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
-    #[ORM\Column(length: 32, nullable: true)]
-    private string $langcode = 'da';
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $ticket_url = null;
 
@@ -124,18 +121,6 @@ class Event
     public function setUrl(string $url): static
     {
         $this->url = $url;
-
-        return $this;
-    }
-
-    public function getLanguageCode(): string
-    {
-        return $this->langcode;
-    }
-
-    public function setLanguageCode(string $langcode): static
-    {
-        $this->langcode = $langcode;
 
         return $this;
     }

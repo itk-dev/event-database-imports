@@ -87,7 +87,6 @@ final class Event
     {
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)
-            ->setLanguageCode($item->landcode)
             ->setImage($item->image)
             ->setFeedItemId($item->id)
             ->setTicketUrl($item->ticketUrl)

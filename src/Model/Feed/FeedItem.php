@@ -13,7 +13,6 @@ final class FeedItem
         public ?string $title = null,
         public string $url = '',
         public bool $public = true,
-        public string $landcode = 'da',
         /** @var array<FeedItemOccurrence> */
         public array $occurrences = [],
         public ?FeedItemLocation $location = null,

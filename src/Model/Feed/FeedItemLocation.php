@@ -6,8 +6,8 @@ final class FeedItemLocation
 {
     public function __construct(
         public ?string $city = null,
-        public ?string $country = 'Denmark',
-        public int $postalCode = 0,
+        public ?string $country = null,
+        public ?string $postalCode = null,
         public ?string $street = null,
         public ?string $suite = null,
         public ?string $name = null,
