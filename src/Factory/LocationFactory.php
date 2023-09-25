@@ -3,12 +3,12 @@
 namespace App\Factory;
 
 use App\Entity\Address;
-use App\Entity\Location as LocationEntity;
+use App\Entity\Location;
 use App\Model\Feed\FeedItemLocation;
 use App\Repository\AddressRepository;
 use App\Repository\LocationRepository;
 
-final class Location
+final class LocationFactory
 {
     public function __construct(
         private readonly LocationRepository $locationRepository,
@@ -22,10 +22,10 @@ final class Location
      * @param feedItemLocation $input
      *   Location information from feed item
      *
-     * @return locationEntity
+     * @return Location
      *   Location entity base on feed data
      */
-    public function createOrUpdate(FeedItemLocation $input): LocationEntity
+    public function createOrUpdate(FeedItemLocation $input): Location
     {
         $address = $this->getAddress($input);
         $location = $this->getLocation($input);
@@ -56,7 +56,7 @@ final class Location
         }
         $this->addressRepository->save($address);
 
-        $location = $location ?? new LocationEntity();
+        $location = $location ?? new Location();
         $location->setAddress($address);
         if (!is_null($input->image)) {
             $location->setImage($input->image);
@@ -120,10 +120,10 @@ final class Location
      * @param FeedItemLocation $location
      *   Location information from feed
      *
-     * @return LocationEntity|null
+     * @return Location|null
      *   Fund location entity or null
      */
-    private function getLocation(FeedItemLocation $location): ?LocationEntity
+    private function getLocation(FeedItemLocation $location): ?Location
     {
         $values = array_filter([
             'name' => $location->name,

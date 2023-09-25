@@ -508,10 +508,10 @@ paths:
     get:
       operationId: api_events_get_collection
       tags:
-        - Event
+        - EventFactory
       responses:
         200:
-          description: 'Event collection'
+          description: 'EventFactory collection'
           content:
             application/ld+json:
               schema:
@@ -533,8 +533,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Event'
-      summary: 'Retrieves the collection of Event resources.'
-      description: 'Retrieves the collection of Event resources.'
+      summary: 'Retrieves the collection of EventFactory resources.'
+      description: 'Retrieves the collection of EventFactory resources.'
       parameters:
         -
           name: page
@@ -553,10 +553,10 @@ paths:
     post:
       operationId: api_events_post
       tags:
-        - Event
+        - EventFactory
       responses:
         201:
-          description: 'Event resource created'
+          description: 'EventFactory resource created'
           content:
             application/ld+json:
               schema:
@@ -572,11 +572,11 @@ paths:
           description: 'Invalid input'
         422:
           description: 'Unprocessable entity'
-      summary: 'Creates a Event resource.'
-      description: 'Creates a Event resource.'
+      summary: 'Creates a EventFactory resource.'
+      description: 'Creates a EventFactory resource.'
       parameters: []
       requestBody:
-        description: 'The new Event resource'
+        description: 'The new EventFactory resource'
         content:
           application/ld+json:
             schema:
@@ -594,10 +594,10 @@ paths:
     get:
       operationId: api_events_id_get
       tags:
-        - Event
+        - EventFactory
       responses:
         200:
-          description: 'Event resource'
+          description: 'EventFactory resource'
           content:
             application/ld+json:
               schema:
@@ -610,13 +610,13 @@ paths:
                 $ref: '#/components/schemas/Event'
         404:
           description: 'Resource not found'
-      summary: 'Retrieves a Event resource.'
-      description: 'Retrieves a Event resource.'
+      summary: 'Retrieves a EventFactory resource.'
+      description: 'Retrieves a EventFactory resource.'
       parameters:
         -
           name: id
           in: path
-          description: 'Event identifier'
+          description: 'EventFactory identifier'
           required: true
           deprecated: false
           allowEmptyValue: false
@@ -629,10 +629,10 @@ paths:
     put:
       operationId: api_events_id_put
       tags:
-        - Event
+        - EventFactory
       responses:
         200:
-          description: 'Event resource updated'
+          description: 'EventFactory resource updated'
           content:
             application/ld+json:
               schema:
@@ -650,13 +650,13 @@ paths:
           description: 'Unprocessable entity'
         404:
           description: 'Resource not found'
-      summary: 'Replaces the Event resource.'
-      description: 'Replaces the Event resource.'
+      summary: 'Replaces the EventFactory resource.'
+      description: 'Replaces the EventFactory resource.'
       parameters:
         -
           name: id
           in: path
-          description: 'Event identifier'
+          description: 'EventFactory identifier'
           required: true
           deprecated: false
           allowEmptyValue: false
@@ -666,7 +666,7 @@ paths:
           explode: false
           allowReserved: false
       requestBody:
-        description: 'The updated Event resource'
+        description: 'The updated EventFactory resource'
         content:
           application/ld+json:
             schema:
@@ -682,19 +682,19 @@ paths:
     delete:
       operationId: api_events_id_delete
       tags:
-        - Event
+        - EventFactory
       responses:
         204:
-          description: 'Event resource deleted'
+          description: 'EventFactory resource deleted'
         404:
           description: 'Resource not found'
-      summary: 'Removes the Event resource.'
-      description: 'Removes the Event resource.'
+      summary: 'Removes the EventFactory resource.'
+      description: 'Removes the EventFactory resource.'
       parameters:
         -
           name: id
           in: path
-          description: 'Event identifier'
+          description: 'EventFactory identifier'
           required: true
           deprecated: false
           allowEmptyValue: false
@@ -707,10 +707,10 @@ paths:
     patch:
       operationId: api_events_id_patch
       tags:
-        - Event
+        - EventFactory
       responses:
         200:
-          description: 'Event resource updated'
+          description: 'EventFactory resource updated'
           content:
             application/ld+json:
               schema:
@@ -728,13 +728,13 @@ paths:
           description: 'Unprocessable entity'
         404:
           description: 'Resource not found'
-      summary: 'Updates the Event resource.'
-      description: 'Updates the Event resource.'
+      summary: 'Updates the EventFactory resource.'
+      description: 'Updates the EventFactory resource.'
       parameters:
         -
           name: id
           in: path
-          description: 'Event identifier'
+          description: 'EventFactory identifier'
           required: true
           deprecated: false
           allowEmptyValue: false
@@ -744,7 +744,7 @@ paths:
           explode: false
           allowReserved: false
       requestBody:
-        description: 'The updated Event resource'
+        description: 'The updated EventFactory resource'
         content:
           application/merge-patch+json:
             schema:

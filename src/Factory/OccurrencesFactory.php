@@ -3,11 +3,10 @@
 namespace App\Factory;
 
 use App\Entity\Occurrence;
-use App\Entity\Tag;
 use App\Model\Feed\FeedItemOccurrence;
 use App\Repository\OccurrenceRepository;
 
-final class Occurrences
+final class OccurrencesFactory
 {
     public function __construct(
         private readonly OccurrenceRepository $occurrenceRepository

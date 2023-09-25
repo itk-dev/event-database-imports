@@ -2,28 +2,28 @@
 
 namespace App\Factory;
 
-use App\Entity\Event as EventEntity;
+use App\Entity\Event;
 use App\Entity\Feed;
 use App\Exception\FactoryException;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 
-final class Event
+final class EventFactory
 {
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly FeedRepository $feedRepository,
-        private readonly Location $locationFactory,
-        private readonly Tags $tagsFactory,
-        private readonly Occurrences $occurrencesFactory,
+        private readonly LocationFactory $locationFactory,
+        private readonly TagsFactory $tagsFactory,
+        private readonly OccurrencesFactory $occurrencesFactory,
     ) {
     }
 
     /**
      * @throws FactoryException
      */
-    public function createOrUpdate(FeedItem $item): EventEntity
+    public function createOrUpdate(FeedItem $item): Event
     {
         $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
         if (is_null($feed)) {
@@ -32,7 +32,7 @@ final class Event
         $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
         $hash = $this->calculateHash($item);
         if (is_null($entity)) {
-            $entity = new \App\Entity\Event();
+            $entity = new Event();
             $entity->setHash($hash);
             $this->mapValues($entity, $item, $feed);
 
@@ -52,7 +52,7 @@ final class Event
         return $entity;
     }
 
-    public function get(array $criteria): ?EventEntity
+    public function get(array $criteria): ?Event
     {
         return $this->eventRepository->findOneBy($criteria);
     }
@@ -76,14 +76,14 @@ final class Event
     /**
      * Helper function to map feed items into event entities.
      *
-     * @param eventEntity $entity
+     * @param Event $entity
      *   Entity to map values to
      * @param feedItem $item
      *   The normalized feed item
      * @param feed $feed
      *   The feed that the item came from
      */
-    private function mapValues(EventEntity $entity, FeedItem $item, Feed $feed): void
+    private function mapValues(Event $entity, FeedItem $item, Feed $feed): void
     {
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)

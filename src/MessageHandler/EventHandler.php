@@ -2,7 +2,7 @@
 
 namespace App\MessageHandler;
 
-use App\Factory\Event as EventFactory;
+use App\Factory\EventFactory;
 use App\Message\EventMessage;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;

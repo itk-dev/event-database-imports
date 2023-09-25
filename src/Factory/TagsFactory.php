@@ -5,7 +5,7 @@ namespace App\Factory;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
 
-final class Tags
+final class TagsFactory
 {
     public function __construct(
         private readonly TagRepository $tagRepository
