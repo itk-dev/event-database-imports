@@ -34,14 +34,14 @@ final class EventFactory
         if (is_null($entity)) {
             $entity = new Event();
             $entity->setHash($hash);
-            $this->mapValues($entity, $item, $feed);
+            $this->setValues($entity, $item, $feed);
 
             // Make it stick.
             $this->eventRepository->save($entity, true);
         } else {
             // Check if hash has changed, before trying to update it.
             if ($entity->getHash() !== $hash) {
-                $this->mapValues($entity, $item, $feed);
+                $this->setValues($entity, $item, $feed);
                 $entity->setHash($hash);
 
                 // Make it stick.
@@ -83,7 +83,7 @@ final class EventFactory
      * @param feed $feed
      *   The feed that the item came from
      */
-    private function mapValues(Event $entity, FeedItem $item, Feed $feed): void
+    private function setValues(Event $entity, FeedItem $item, Feed $feed): void
     {
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)

@@ -20,6 +20,7 @@ final class ContentNormalizer implements ContentNormalizerInterface
     public function trimLength(string $content, int $maxLength, bool $onWords = true): string
     {
         $str = new UnicodeString($content);
+
         return $onWords ? $this->wordSplitter($str, $maxLength) : $str->truncate($maxLength)->trim();
     }
 

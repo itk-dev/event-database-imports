@@ -30,7 +30,7 @@ final class OccurrencesFactory
             $occurrencesEntity = $this->occurrenceRepository->findOneBy(['start' => $item->start, 'end' => $item->end]);
             if (!is_null($occurrencesEntity)) {
                 if ($occurrencesEntity->getEvent()?->getId() == $eventId) {
-                    $this->mapValues($item, $occurrencesEntity);
+                    $this->setValues($item, $occurrencesEntity);
                     $this->occurrenceRepository->save($occurrencesEntity);
 
                     yield $occurrencesEntity;
@@ -39,7 +39,7 @@ final class OccurrencesFactory
             }
 
             $occurrencesEntity = new Occurrence();
-            $this->mapValues($item, $occurrencesEntity);
+            $this->setValues($item, $occurrencesEntity);
             $this->occurrenceRepository->save($occurrencesEntity);
 
             yield $occurrencesEntity;
@@ -54,7 +54,7 @@ final class OccurrencesFactory
      * @param Occurrence $occurrence
      *   Database occurrences entity
      */
-    private function mapValues(FeedItemOccurrence $feedItemOccurrence, Occurrence $occurrence): void
+    private function setValues(FeedItemOccurrence $feedItemOccurrence, Occurrence $occurrence): void
     {
         if (!is_null($feedItemOccurrence->start)) {
             $occurrence->setStart($feedItemOccurrence->start);

@@ -15,15 +15,15 @@ final class TagsFactory
     /**
      * Create tag or find matching in the database.
      *
-     * @param array<string> $tagsName
+     * @param array<string> $tagNames
      *   The tag names to create/lockup in the database as strings
      *
      * @return iterable<Tag>
      *   Yield tag entities from the database
      */
-    public function createOrLookup(array $tagsName): iterable
+    public function createOrLookup(array $tagNames): iterable
     {
-        foreach ($tagsName as $tagName) {
+        foreach ($tagNames as $tagName) {
             $tag = $this->tagRepository->findOneBy(['name' => $tagName]);
             if (is_null($tag)) {
                 $tag = new Tag();

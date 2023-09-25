@@ -6,7 +6,6 @@ use App\Message\EventMessage;
 use App\Message\FeedNormalizationMessage;
 use App\Services\ContentNormalizer;
 use App\Services\TagsNormalizer;
-use phpDocumentor\Reflection\Types\Self_;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
