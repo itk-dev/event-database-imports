@@ -40,6 +40,9 @@ class Feed
     #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Event::class)]
     private Collection $events;
 
+    #[ORM\ManyToOne(inversedBy: 'feeds')]
+    private ?Organization $organization = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -136,6 +139,18 @@ class Feed
                 $event->setFeed(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getOrganization(): ?Organization
+    {
+        return $this->organization;
+    }
+
+    public function setOrganization(?Organization $organization): static
+    {
+        $this->organization = $organization;
 
         return $this;
     }

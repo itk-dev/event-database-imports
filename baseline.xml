@@ -2,6 +2,10 @@
 <files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/DataFixtures/FeedFixtures.php">
     <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::AAKB)]]></code>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
@@ -11,6 +15,7 @@
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">
     <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
     </ArgumentTypeCoercion>
   </file>
@@ -24,6 +29,7 @@
   </file>
   <file src="src/Services/Feeds/Mapper/Source/FeedItemSource.php">
     <InvalidOperand>
+      <code>$source</code>
       <code>$source</code>
       <code>$source</code>
       <code>$source</code>

@@ -2,9 +2,8 @@
 
 namespace App\MessageHandler;
 
+use App\Factory\EventFactory;
 use App\Message\EventMessage;
-use App\Repository\EventRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -14,19 +13,22 @@ final class EventHandler
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,
-        private readonly EventRepository $eventRepository,
-        private readonly EntityManagerInterface $entityManager,
+        private readonly EventFactory $eventFactory,
     ) {
     }
 
     public function __invoke(EventMessage $message): void
     {
-        // Calculate hash used later for 2x.
+        $item = $message->getItem();
 
-        // Check for create or update.
+        try {
+            $entity = $this->eventFactory->createOrUpdate($item);
+        } catch (\Exception $e) {
+            // @todo: better message.
+            throw new UnrecoverableMessageHandlingException($e->getMessage());
+        }
 
-        // Save data to the database.
-
+        // @todo: create next message
         throw new UnrecoverableMessageHandlingException('Not implemented yet');
     }
 }

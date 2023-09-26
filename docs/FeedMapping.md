@@ -103,7 +103,7 @@ This example will map a comma separated string into the tags array. Spilt by the
 | excerpt     | string          | no                                    | Short description.                                                                 |
 | image       | string          | no                                    | Url to image location for the event                                                |
 | ticketUrl   | string          | no                                    | Url to buy ticket                                                                  |
-| url         | string          | no                                    | Url of the event                                                                   |
+| url         | string          | yes                                   | Url of the event                                                                   |
 | start       | date            | no                                    | Date of event start (optional as this may be located in occurrences)               |
 | end         | date            | no                                    | Date of event end (optional as this may be located in occurrences)                 |
 | price       | string          | no                                    | Price as string as this may be a price range                                       |
@@ -111,26 +111,30 @@ This example will map a comma separated string into the tags array. Spilt by the
 
 ### Location mapping
 
-| Field                     | Data type | Required (do not reflect recommended) | Comment |
-|---------------------------|-----------|---------------------------------------|---------|
-| location.city             | string    | no                                    |         |
-| location.country          | string    | no                                    |         |
-| location.postalCode       | string    | no                                    |         |
-| location.street           | string    | no                                    |         |
-| location.suite            | string    | no                                    |         |
-| location.name             | string    | no                                    |         |
-| location.mail             | string    | no                                    |         |
-| location.telephone        | string    | no                                    |         |
-| location.url              | string    | no                                    |         |
-| location.image            | string    | no                                    |         |
-| location.logo             | string    | no                                    |         |
-| location.region           | string    | no                                    |         |
-| location.coordinates.lat  | string    | no                                    |         |
-| location.coordinates.long | string    | no                                    |         |
+| Field                     | Data type | Required (do not reflect recommended) | Comment              |
+|---------------------------|-----------|---------------------------------------|----------------------|
+| location.city             | string    | no                                    |                      |
+| location.country          | string    | no                                    |                      |
+| location.postalCode       | string    | no                                    |                      |
+| location.street           | string    | no                                    |                      |
+| location.suite            | string    | no                                    |                      |
+| location.name             | string    | yes                                   |                      |
+| location.mail             | string    | no                                    |                      |
+| location.telephone        | string    | no                                    |                      |
+| location.url              | string    | no                                    |                      |
+| location.image            | string    | no                                    |                      |
+| location.logo             | string    | no                                    |                      |
+| location.region           | string    | no                                    |                      |
+| location.disabilityAccess | boolean   | no                                    | default value: false |
+| location.coordinates.lat  | string    | no                                    |                      |
+| location.coordinates.long | string    | no                                    |                      |
 
 ### Occurrences mapping
 
-| Field               | Data type | Required (do not reflect recommended) | Comment                       |
-|---------------------|-----------|---------------------------------------|-------------------------------|
-| occurrences.*.start | date      | no                                    | Start date of the occurrences |
-| occurrences.*.end   | date      | no                                    | End date of the occurrences   |
+| Field                | Data type | Required (do not reflect recommended) | Comment                       |
+|----------------------|-----------|---------------------------------------|-------------------------------|
+| occurrences.*.start  | date      | no                                    | Start date of the occurrences |
+| occurrences.*.end    | date      | no                                    | End date of the occurrences   |
+| occurrences.*.price  | string    | no                                    | Price or price range          |
+| occurrences.*.room   | string    | no                                    | If it happens in a room       |
+| occurrences.*.status | string    | no                                    | E.g sold-out                  |

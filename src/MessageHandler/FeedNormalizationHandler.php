@@ -12,6 +12,11 @@ use Symfony\Component\Messenger\MessageBusInterface;
 #[AsMessageHandler]
 final class FeedNormalizationHandler
 {
+    /**
+     * Max length here is taken from the max database varchar length.
+     */
+    private const EXCERPT_MAX_LENGTH = 255;
+
     public function __construct(
         private readonly ContentNormalizer $contentNormalizer,
         private readonly MessageBusInterface $messageBus,
@@ -30,9 +35,11 @@ final class FeedNormalizationHandler
         // @todo should we detect relative paths?
 
         // Content normalizations check up. HTML fixer etc.
-        // @todo Make field normalization configurable.
-        $item->description = $this->contentNormalizer->normalize($item->description);
-        $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
+        $item->description = $this->contentNormalizer->normalize($item->description ?? '');
+        if (!is_null($item->excerpt)) {
+            $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
+            $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, self::EXCERPT_MAX_LENGTH);
+        }
 
         $this->messageBus->dispatch(new EventMessage($item));
     }
