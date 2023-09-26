@@ -43,8 +43,8 @@ final class OccurrencesFactory
                 }
             }
 
-            // Not found in input, so remove it.
-            $event->getOccurrences()->removeElement($occurrence);
+            // Occurence found in input, so remove it from event.
+            $eventOccurrences->removeElement($occurrence);
         }
 
         // Loop over remaining input elements.
