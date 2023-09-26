@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-class FactoryException extends \Exception
+class FactoryException extends AppException
 {
 }
