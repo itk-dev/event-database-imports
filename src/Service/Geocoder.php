@@ -81,7 +81,10 @@ final class Geocoder implements GeocoderInterface
     {
         $response = $this->client->request(
             'GET',
-            'https://api.dataforsyningen.dk/datavask/adgangsadresser?betegnelse='.$query
+            'https://api.dataforsyningen.dk/datavask/adgangsadresser',
+            [
+              'query' => ['betegnelse' => $query],
+            ]
         );
         if (200 !== $response->getStatusCode()) {
             throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
