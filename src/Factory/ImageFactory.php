@@ -5,7 +5,7 @@ namespace App\Factory;
 use App\Entity\Image as ImageEntity;
 use App\Repository\ImageRepository;
 
-final class Image
+final class ImageFactory
 {
     public function __construct(
         private readonly ImageRepository $imageRepository,

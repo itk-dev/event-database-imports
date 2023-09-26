@@ -17,7 +17,7 @@ final class EventFactory
         private readonly LocationFactory $locationFactory,
         private readonly TagsFactory $tagsFactory,
         private readonly OccurrencesFactory $occurrencesFactory,
-        private readonly Image $imageFactory,
+        private readonly ImageFactory $imageFactory,
     ) {
     }
 
@@ -88,7 +88,6 @@ final class EventFactory
     {
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)
-            ->setImage($item->image)
             ->setFeedItemId($item->id)
             ->setTicketUrl($item->ticketUrl)
             ->setUrl($item->url)
