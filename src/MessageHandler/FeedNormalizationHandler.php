@@ -15,7 +15,7 @@ final class FeedNormalizationHandler
     /**
      * Max length here is taken from the max database varchar length.
      */
-    private const MAX_LENGTH = 255;
+    private const EXCERPT_MAX_LENGTH = 255;
 
     public function __construct(
         private readonly ContentNormalizer $contentNormalizer,
