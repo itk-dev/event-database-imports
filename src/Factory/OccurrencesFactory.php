@@ -102,14 +102,8 @@ final class OccurrencesFactory
         if (!is_null($feedItemOccurrence->end)) {
             $occurrence->setEnd($feedItemOccurrence->end);
         }
-        if (!is_null($feedItemOccurrence->price)) {
-            $occurrence->setTicketPriceRange($feedItemOccurrence->price);
-        }
-        if (!is_null($feedItemOccurrence->room)) {
-            $occurrence->setRoom($feedItemOccurrence->room);
-        }
-        if (!is_null($feedItemOccurrence->status)) {
-            $occurrence->setStatus($feedItemOccurrence->status);
-        }
+        $occurrence->setTicketPriceRange($feedItemOccurrence->price);
+        $occurrence->setRoom($feedItemOccurrence->room);
+        $occurrence->setStatus($feedItemOccurrence->status);
     }
 }
