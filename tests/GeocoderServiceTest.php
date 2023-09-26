@@ -20,7 +20,7 @@ final class GeocoderServiceTest extends KernelTestCase
     {
         $address = new Address();
         $address->setStreet('Hack Kampmanns Plads 2')
-            ->setPostalCode(8000)
+            ->setPostalCode('8000')
             ->setCity('Aarhus C');
 
         $query = PhpUnitUtils::callPrivateMethod(

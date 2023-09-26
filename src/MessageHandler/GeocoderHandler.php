@@ -2,6 +2,7 @@
 
 namespace App\MessageHandler;
 
+use App\Exception\GeocoderException;
 use App\Message\GeocoderMessage;
 use App\Repository\AddressRepository;
 use App\Repository\EventRepository;
@@ -9,6 +10,11 @@ use App\Service\Geocoder;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 
 #[AsMessageHandler]
 final class GeocoderHandler
@@ -21,6 +27,14 @@ final class GeocoderHandler
     ) {
     }
 
+    /**
+     * @throws GeocoderException
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     public function __invoke(GeocoderMessage $message): void
     {
         if (!is_null($message->getEventId())) {
