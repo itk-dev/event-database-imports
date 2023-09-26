@@ -74,8 +74,8 @@ final class OccurrencesFactory
     private function isEqualDates(FeedItemOccurrence $item, Occurrence $occurrence, Event $event): bool
     {
         $occurrenceStartDate = $occurrence->getStart();
-        $occurrenceEndData = $occurrence->getEnd();
-        if (!isset($occurrenceStartDate, $occurrenceEndData, $item->start, $item->end)) {
+        $occurrenceEndDate = $occurrence->getEnd();
+        if (!isset($occurrenceStartDate, $occurrenceEndDate, $item->start, $item->end)) {
             // This should not happen.
             $this->logger->critical(sprintf('Event (id: %d) has occurrences dates that are null', $event->getId() ?? '-1'));
 
