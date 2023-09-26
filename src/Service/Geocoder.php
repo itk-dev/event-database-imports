@@ -86,7 +86,7 @@ final class Geocoder implements GeocoderInterface
               'query' => ['betegnelse' => $query],
             ]
         );
-        if (200 !== $response->getStatusCode()) {
+        if (Response::HTTP_OK !== $response->getStatusCode()) {
             throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
         }
         $content = $response->toArray();
