@@ -14,7 +14,9 @@ first plan about the administrative interface was to utilize the API and make it
 ## Decision
 
 It has been decided to switch the administrative interface to [Easy admin](https://github.com/EasyCorp/EasyAdminBundle)
-bundle, which utilize the database and the entities to generate an administrative user interface.
+bundle, which utilize the database and the entities to generate an administrative user interface. This is also within
+the lines of the first part of this project, which is to upgrade the existing Even database where we also use Easy
+Admin. Right now there is no reason why Easy admin should not be a sufficient solution to editors in the future.
 
 When using Easy admin one should stay within the limitation that this bundle may enforce on the user interface. We
 should not make extensive changes to interface.
