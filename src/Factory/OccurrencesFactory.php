@@ -83,7 +83,8 @@ final class OccurrencesFactory
             return false;
         }
 
-        return 0 === $occurrenceStartDate->diff($item->start)->s && 0 === $occurrenceEndData->diff($item->end)->s;
+        return $occurrenceStartDate->getTimestamp() === $item->start->getTimestamp()
+          && $occurrenceEndDate->getTimestamp() === $item->end->getTimestamp();
     }
 
     /**
