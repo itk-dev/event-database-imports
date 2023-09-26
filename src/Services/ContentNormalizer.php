@@ -21,7 +21,7 @@ final class ContentNormalizer implements ContentNormalizerInterface
     {
         $str = new UnicodeString($content);
 
-        return $onWords ? $this->wordSplitter($str, $maxLength) : $str->truncate($maxLength)->trim();
+        return $onWords ? $this->wordSplitter($str, $maxLength) : $str->truncate($maxLength)->trim()->toString();
     }
 
     /**

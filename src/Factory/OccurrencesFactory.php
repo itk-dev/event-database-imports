@@ -6,11 +6,13 @@ use App\Entity\Event;
 use App\Entity\Occurrence;
 use App\Model\Feed\FeedItemOccurrence;
 use App\Repository\OccurrenceRepository;
+use Psr\Log\LoggerInterface;
 
 final class OccurrencesFactory
 {
     public function __construct(
-        private readonly OccurrenceRepository $occurrenceRepository
+        private readonly OccurrenceRepository $occurrenceRepository,
+        private readonly LoggerInterface $logger
     ) {
     }
 
@@ -28,7 +30,7 @@ final class OccurrencesFactory
         foreach ($eventOccurrences as $occurrence) {
             foreach ($input as $id => $item) {
                 // Check if item exist in the old occurrences base on timestamps.
-                if (0 === $occurrence->getStart()->diff($item->start)->s && 0 === $occurrence->getEnd()->diff($item->end)->s) {
+                if ($this->isEqualDates($item, $occurrence, $event)) {
                     // Update with new values.
                     $this->setValues($item, $occurrence);
                     $this->occurrenceRepository->save($occurrence);
@@ -54,6 +56,34 @@ final class OccurrencesFactory
             // Add the new occurrence to the event.
             $event->addOccurrence($occurrence);
         }
+    }
+
+    /**
+     * Compare dates for an occurrence.
+     *
+     * @param FeedItemOccurrence $item
+     *   The new input occurrence
+     * @param occurrence $occurrence
+     *   An occurrences from an exiting database backed event
+     * @param Event $event
+     *   The event in question
+     *
+     * @return bool
+     *   True if dates are equal else false
+     */
+    private function isEqualDates(FeedItemOccurrence $item, Occurrence $occurrence, Event $event): bool
+    {
+        $occurrenceStartDate = $occurrence->getStart();
+        $occurrenceEndData = $occurrence->getEnd();
+        if (!isset($occurrenceStartDate, $occurrenceEndData, $item->start, $item->end)) {
+            // This should not happen.
+            $this->logger->critical(sprintf('Event (id: %d) has occurrences dates that are null', $event->getId() ?? '-1'));
+
+            // We return null to remove the event.
+            return false;
+        }
+
+        return 0 === $occurrenceStartDate->diff($item->start)->s && 0 === $occurrenceEndData->diff($item->end)->s;
     }
 
     /**
