@@ -2,6 +2,7 @@
 
 namespace App\Factory;
 
+use App\Entity\Event;
 use App\Entity\Occurrence;
 use App\Model\Feed\FeedItemOccurrence;
 use App\Repository\OccurrenceRepository;
@@ -16,33 +17,42 @@ final class OccurrencesFactory
     /**
      * Create occurrences or find matching in the database.
      *
-     * @param array<FeedItemOccurrence> $occurrences
+     * @param array<FeedItemOccurrence> $input
      *   The tag names to create/lockup in the database as strings
-     * @param ?int $eventId
-     *   The id of the event related to the occurrences
-     *
-     * @return iterable<Occurrence>
-     *   Yield tag entities from the database
+     * @param Event $event
+     *   The event related to the occurrences
      */
-    public function createOrLookup(array $occurrences, ?int $eventId): iterable
+    public function createOrLookup(array $input, Event $event): void
     {
-        foreach ($occurrences as $item) {
-            $occurrence = $this->occurrenceRepository->findOneBy(['start' => $item->start, 'end' => $item->end]);
-            if (!is_null($occurrence)) {
-                if ($occurrence->getEvent()?->getId() == $eventId) {
+        $eventOccurrences = $event->getOccurrences();
+        foreach ($eventOccurrences as $occurrence) {
+            foreach ($input as $id => $item) {
+                // Check if item exist in the old occurrences base on timestamps.
+                if (0 === $occurrence->getStart()->diff($item->start)->s && 0 === $occurrence->getEnd()->diff($item->end)->s) {
+                    // Update with new values.
                     $this->setValues($item, $occurrence);
                     $this->occurrenceRepository->save($occurrence);
 
-                    yield $occurrence;
-                    continue;
+                    // Removed processed occurrence from input.
+                    unset($input[$id]);
+
+                    // Jump to outer foreach.
+                    continue 2;
                 }
             }
 
+            // Not found in input, so remove it.
+            $event->getOccurrences()->removeElement($occurrence);
+        }
+
+        // Loop over remaining input elements.
+        foreach ($input as $item) {
             $occurrence = new Occurrence();
             $this->setValues($item, $occurrence);
             $this->occurrenceRepository->save($occurrence);
 
-            yield $occurrence;
+            // Add the new occurrence to the event.
+            $event->addOccurrence($occurrence);
         }
     }
 

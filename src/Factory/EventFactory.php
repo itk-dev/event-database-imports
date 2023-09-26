@@ -106,9 +106,7 @@ final class EventFactory
         }
 
         // The feed items may come with occurrences The daly occurrences will be handled later on.
-        foreach ($this->occurrencesFactory->createOrLookup($item->occurrences, $entity->getId()) as $occurrenceEntity) {
-            $entity->addOccurrence($occurrenceEntity);
-        }
+        $this->occurrencesFactory->createOrLookup($item->occurrences, $entity);
 
         // @todo: Created_by (should we have feed user)
     }
