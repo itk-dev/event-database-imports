@@ -15,7 +15,7 @@ final class FeedNormalizationHandler
     /**
      * Max length here is taken from the max database varchar length.
      */
-    private const MAX_LENGTH = 255;
+    private const EXCERPT_MAX_LENGTH = 255;
 
     public function __construct(
         private readonly ContentNormalizer $contentNormalizer,
@@ -38,7 +38,7 @@ final class FeedNormalizationHandler
         $item->description = $this->contentNormalizer->normalize($item->description ?? '');
         if (!is_null($item->excerpt)) {
             $item->excerpt = $this->contentNormalizer->normalize($item->excerpt);
-            $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, self::MAX_LENGTH);
+            $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, self::EXCERPT_MAX_LENGTH);
         }
 
         $this->messageBus->dispatch(new EventMessage($item));

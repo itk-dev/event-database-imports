@@ -43,8 +43,8 @@ final class OccurrencesFactory
                 }
             }
 
-            // Not found in input, so remove it.
-            $event->getOccurrences()->removeElement($occurrence);
+            // Occurence found in input, so remove it from event.
+            $eventOccurrences->removeElement($occurrence);
         }
 
         // Loop over remaining input elements.
@@ -74,8 +74,8 @@ final class OccurrencesFactory
     private function isEqualDates(FeedItemOccurrence $item, Occurrence $occurrence, Event $event): bool
     {
         $occurrenceStartDate = $occurrence->getStart();
-        $occurrenceEndData = $occurrence->getEnd();
-        if (!isset($occurrenceStartDate, $occurrenceEndData, $item->start, $item->end)) {
+        $occurrenceEndDate = $occurrence->getEnd();
+        if (!isset($occurrenceStartDate, $occurrenceEndDate, $item->start, $item->end)) {
             // This should not happen.
             $this->logger->critical(sprintf('Event (id: %d) has occurrences dates that are null', $event->getId() ?? '-1'));
 
@@ -83,7 +83,8 @@ final class OccurrencesFactory
             return false;
         }
 
-        return 0 === $occurrenceStartDate->diff($item->start)->s && 0 === $occurrenceEndData->diff($item->end)->s;
+        return $occurrenceStartDate->getTimestamp() === $item->start->getTimestamp()
+          && $occurrenceEndDate->getTimestamp() === $item->end->getTimestamp();
     }
 
     /**

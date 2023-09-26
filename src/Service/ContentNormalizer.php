@@ -40,9 +40,14 @@ final class ContentNormalizer implements ContentNormalizerInterface
         $str = $str->truncate($maxLength, '', false)->trim();
 
         if ($str->length() > $maxLength) {
-            // As the truncate function above, have returned a string longer then max length. Remove the last word from
-            // the string to ensure that it is below max length.
-            return preg_replace('/\W\w+\s*(\W*)$/', '$1', $str->toString());
+            // The truncate function above has returned a string longer then max length. Remove the last space character
+            // and any non-space characters from end of string.
+            $str = new UnicodeString(preg_replace('/\s+\S+$/u', '', $str->toString()));
+            // Truncate the string hard if the string is still longer than the max length, e.g. if it's a single very
+            // long word.
+            if ($str->length() > $maxLength) {
+                $str = $str->truncate($maxLength);
+            }
         }
 
         return $str->toString();
