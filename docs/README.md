@@ -25,7 +25,7 @@ in a production setup.
 * API
 * UI (administrative and manual event creation)
 
-![System input data flow](./images/data_flow.png)
+![System input data flow](./images/data_flow_v2.png)
 
 ### Implementation notes
 
