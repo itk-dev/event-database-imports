@@ -33,7 +33,7 @@ final class EventHandler
         if (!is_null($id)) {
             $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
         } else {
-            throw new UnrecoverableMessageHandlingException('Event without it detected');
+            throw new UnrecoverableMessageHandlingException('Event without id detected');
         }
     }
 }
