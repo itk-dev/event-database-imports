@@ -186,13 +186,11 @@ final class ImageHandler implements ImageHandlerInterface
      */
     private function detectMimetypes(array $headers): string
     {
-        $type = false;
         if (isset($headers['content-type'])) {
             $type = reset($headers['content-type']);
-        }
-
-        if ($type) {
-            return $type;
+            if ($type) {
+                return $type;
+            }
         }
 
         return '';
