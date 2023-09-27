@@ -2,8 +2,6 @@
 
 namespace App\MessageHandler;
 
-use App\Exception\FilesystemException;
-use App\Exception\ImageFetchException;
 use App\Message\GeocoderMessage;
 use App\Message\ImageMessage;
 use App\Repository\ImageRepository;
