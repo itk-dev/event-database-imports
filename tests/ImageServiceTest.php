@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
+use App\Exception\ImageMineTypeException;
 use App\Service\ImageHandler;
 use App\Tests\Utils\PhpUnitUtils;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -56,6 +57,19 @@ final class ImageServiceTest extends KernelTestCase
             ['https://bora-bora.dk/wp-content/uploads/2023/06/DansBabyDans-Wesdfaæøåb-Mai.png&test=big', 'image/png']
         );
         $this->assertNotEquals($filename, $filename2);
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function testMineTypesException()
+    {
+        $this->expectException(ImageMineTypeException::class);
+        PhpUnitUtils::callPrivateMethod(
+            $this->getImageService(),
+            'generateLocalFilename',
+            ['https://bora-bora.dk/wp-content/uploads/2023/06/DansBabyDans-Web-Main-2600x1500px-scaled.jpg?size=big&color=true', 'image/gif']
+        );
     }
 
     /**

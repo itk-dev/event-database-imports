@@ -27,11 +27,15 @@ final class ImageHandler
             $image = $this->imageRepository->findOneBy(['id' => $imageId]);
             $source = $image?->getSource();
             if (isset($image, $source)) {
-                $local = $this->imageHandler->fetch($source);
-                $image->setLocal($local);
-                $this->imageRepository->save($image, true);
+                try {
+                    $local = $this->imageHandler->fetch($source);
+                    $image->setLocal($local);
+                    $this->imageRepository->save($image, true);
 
-                $this->imageHandler->transform($image);
+                    $this->imageHandler->transform($image);
+                } catch (\Exception) {
+                    throw new UnrecoverableMessageHandlingException(sprintf('Unable to fetch image: %s', $source));
+                }
             }
         }
 

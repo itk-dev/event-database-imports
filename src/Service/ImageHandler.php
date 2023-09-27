@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Entity\Image;
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
+use App\Exception\ImageMineTypeException;
 use Liip\ImagineBundle\Message\WarmupCache;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -12,6 +13,9 @@ use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\MimeTypes;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -20,14 +24,19 @@ final class ImageHandler implements ImageHandlerInterface
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly string $publicPath,
+        private readonly array $allowedMineTypes,
         private readonly MessageBusInterface $messageBus,
     ) {
     }
 
     /**
-     * @throws FilesystemException
-     * @throws TransportExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
      * @throws ImageFetchException
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws FilesystemException
+     * @throws ImageMineTypeException
      */
     public function fetch(string $url): string
     {
@@ -49,8 +58,7 @@ final class ImageHandler implements ImageHandlerInterface
         }
 
         $headers = $response->getHeaders();
-        $type = reset($headers['content-type']);
-        $dest = $path.$this->generateLocalFilename($url, $type);
+        $dest = $path.$this->generateLocalFilename($url, $this->detectMimetypes($headers));
 
         $fetchFile = true;
         if ($filesystem->exists($dest)) {
@@ -79,6 +87,12 @@ final class ImageHandler implements ImageHandlerInterface
         return false;
     }
 
+    /**
+     * Generate image transformation using message queue.
+     *
+     * @param Image $image
+     *   The image entity to make transformations on
+     */
     public function transform(Image $image): void
     {
         $path = $image->getLocal();
@@ -148,11 +162,39 @@ final class ImageHandler implements ImageHandlerInterface
      *
      * @return string
      *   Generated local filename
+     *
+     * @throws ImageMineTypeException
      */
     private function generateLocalFilename(string $url, string $mimetype): string
     {
+        if (!in_array($mimetype, $this->allowedMineTypes)) {
+            throw new ImageMineTypeException(sprintf('The mine type "%s" is not supported', $mimetype));
+        }
         $ext = (new MimeTypes())->getExtensions($mimetype)[0];
 
         return hash('sha256', $url).'.'.$ext;
+    }
+
+    /**
+     * Try to detect mime type based on http headers.
+     *
+     * @param array $headers
+     *   Array of http headers
+     *
+     * @return string
+     *   The mimetype or the empty string if not found
+     */
+    private function detectMimetypes(array $headers): string
+    {
+        $type = false;
+        if (isset($headers['content-type'])) {
+            $type = reset($headers['content-type']);
+        }
+
+        if ($type) {
+            return $type;
+        }
+
+        return '';
     }
 }
