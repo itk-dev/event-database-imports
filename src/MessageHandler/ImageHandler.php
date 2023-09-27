@@ -25,8 +25,9 @@ final class ImageHandler
 
         if (!is_null($imageId)) {
             $image = $this->imageRepository->findOneBy(['id' => $imageId]);
-            if (!is_null($image)) {
-                $local = $this->imageHandler->fetch($image->getSource());
+            $source = $image?->getSource();
+            if (isset($image, $source)) {
+                $local = $this->imageHandler->fetch($source);
                 $image->setLocal($local);
                 $this->imageRepository->save($image, true);
 

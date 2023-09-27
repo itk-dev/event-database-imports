@@ -16,12 +16,8 @@ final class ImageFactory
     {
         if (is_null($image) || $image->getSource() !== $url) {
             $image = new ImageEntity();
-            $image->setSource($url);
-        } else {
-            // @todo: should we soft delete and create new image.
-            $image->setSource($url);
-            $image->setUpdated(true);
         }
+        $image->setSource($url);
         $this->imageRepository->save($image);
 
         return $image;

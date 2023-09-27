@@ -30,9 +30,6 @@ class Image
     #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
     private ?Event $event = null;
 
-    #[ORM\Column]
-    private ?bool $updated = false;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -80,18 +77,6 @@ class Image
         }
 
         $this->event = $event;
-
-        return $this;
-    }
-
-    public function isUpdated(): ?bool
-    {
-        return $this->updated;
-    }
-
-    public function setUpdated(bool $updated): static
-    {
-        $this->updated = $updated;
 
         return $this;
     }
