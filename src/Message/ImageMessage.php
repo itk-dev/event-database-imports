@@ -5,7 +5,7 @@ namespace App\Message;
 final class ImageMessage
 {
     public function __construct(
-        private readonly ?int $eventId,
+        private readonly int $eventId,
         private readonly ?int $imageId,
     ) {
     }

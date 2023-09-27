@@ -29,6 +29,11 @@ final class EventHandler
             throw new UnrecoverableMessageHandlingException($e->getMessage());
         }
 
-        $this->messageBus->dispatch(new ImageMessage($entity->getId(), $entity->getImage()?->getId()));
+        $id = $entity->getId();
+        if (!is_null($id)) {
+            $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
+        } else {
+            throw new UnrecoverableMessageHandlingException('Event without it detected');
+        }
     }
 }
