@@ -7,8 +7,8 @@ namespace App\Tests;
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapper;
 use App\Services\Feeds\Mapper\Source\FeedItemSource;
-use App\Tests\Utils\FeedItemInput;
 use App\Tests\Utils\PhpUnitUtils;
+use App\Tests\Utils\TestData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -56,7 +56,7 @@ final class FeedItemSourceTest extends KernelTestCase
                 dateFormat: 'Y-m-d\TH:i:sP'
             )),
             'getValue',
-            [FeedItemInput::EXAMPLE_DATA, 'images.list']
+            [TestData::FEED_ITEM_DATA, 'images.list']
         );
         $this->assertEquals('https://www.aakb.dk/sites/www.aakb.dk/files/list_image/event/lampeprototyper.jpg', $value);
     }
@@ -84,7 +84,7 @@ final class FeedItemSourceTest extends KernelTestCase
         $value = PhpUnitUtils::callPrivateMethod(
             $this->getFeedItemSource($config),
             'getValue',
-            [FeedItemInput::EXAMPLE_DATA, $key]
+            [TestData::FEED_ITEM_DATA, $key]
         );
 
         PhpUnitUtils::callPrivateMethod(
@@ -115,7 +115,7 @@ final class FeedItemSourceTest extends KernelTestCase
             )),
             'getValues',
             [
-                FeedItemInput::EXAMPLE_DATA,
+                TestData::FEED_ITEM_DATA,
                 'occurrences.*.startDate',
             ]
         );
@@ -147,7 +147,7 @@ final class FeedItemSourceTest extends KernelTestCase
             $this->getFeedItemSource($config),
             'getValues',
             [
-                FeedItemInput::EXAMPLE_DATA,
+                TestData::FEED_ITEM_DATA,
                 'occurrences.*.startDate',
             ]
         );
@@ -199,36 +199,36 @@ final class FeedItemSourceTest extends KernelTestCase
 
         $feedItemSource = $this->getFeedItemSource($feedConfig);
 
-        $source = $feedItemSource->normalize(FeedItemInput::EXAMPLE_DATA);
+        $source = $feedItemSource->normalize(TestData::FEED_ITEM_DATA);
 
         $this->assertCount(12, $source);
         $this->assertEquals([
-            'id' => FeedItemInput::EXAMPLE_DATA['nid'],
-            'title' => FeedItemInput::EXAMPLE_DATA['title'],
-            'excerpt' => FeedItemInput::EXAMPLE_DATA['lead'],
-            'description' => FeedItemInput::EXAMPLE_DATA['body'],
-            'start' => FeedItemInput::EXAMPLE_DATA['date']['start'],
-            'end' => FeedItemInput::EXAMPLE_DATA['date']['stop'],
-            'url' => FeedItemInput::EXAMPLE_DATA['url'],
-            'image' => FeedItemInput::EXAMPLE_DATA['images']['list'],
-            'ticketUrl' => FeedItemInput::EXAMPLE_DATA['tickets']['url'],
+            'id' => TestData::FEED_ITEM_DATA['nid'],
+            'title' => TestData::FEED_ITEM_DATA['title'],
+            'excerpt' => TestData::FEED_ITEM_DATA['lead'],
+            'description' => TestData::FEED_ITEM_DATA['body'],
+            'start' => TestData::FEED_ITEM_DATA['date']['start'],
+            'end' => TestData::FEED_ITEM_DATA['date']['stop'],
+            'url' => TestData::FEED_ITEM_DATA['url'],
+            'image' => TestData::FEED_ITEM_DATA['images']['list'],
+            'ticketUrl' => TestData::FEED_ITEM_DATA['tickets']['url'],
             'location' => [
-                'name' => FeedItemInput::EXAMPLE_DATA['location']['name'],
-                'mail' => FeedItemInput::EXAMPLE_DATA['location']['mail'],
+                'name' => TestData::FEED_ITEM_DATA['location']['name'],
+                'mail' => TestData::FEED_ITEM_DATA['location']['mail'],
                 'coordinates' => [
-                    'latitude' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lat'],
-                    'longitude' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lon'],
+                    'latitude' => TestData::FEED_ITEM_DATA['location']['coordinates']['lat'],
+                    'longitude' => TestData::FEED_ITEM_DATA['location']['coordinates']['lon'],
                 ],
             ],
-            'tags' => explode(',', FeedItemInput::EXAMPLE_DATA['tags_string']),
+            'tags' => explode(',', TestData::FEED_ITEM_DATA['tags_string']),
             'occurrences' => [
                 [
-                    'start' => FeedItemInput::EXAMPLE_DATA['occurrences'][0]['startDate'],
-                    'end' => FeedItemInput::EXAMPLE_DATA['occurrences'][0]['endDate'],
+                    'start' => TestData::FEED_ITEM_DATA['occurrences'][0]['startDate'],
+                    'end' => TestData::FEED_ITEM_DATA['occurrences'][0]['endDate'],
                 ],
                 [
-                    'start' => FeedItemInput::EXAMPLE_DATA['occurrences'][1]['startDate'],
-                    'end' => FeedItemInput::EXAMPLE_DATA['occurrences'][1]['endDate'],
+                    'start' => TestData::FEED_ITEM_DATA['occurrences'][1]['startDate'],
+                    'end' => TestData::FEED_ITEM_DATA['occurrences'][1]['endDate'],
                 ],
             ],
         ], $source);

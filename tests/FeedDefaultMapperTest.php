@@ -6,7 +6,7 @@ namespace App\Tests;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Services\Feeds\FeedDefaultsMapper;
-use App\Tests\Utils\FeedItemInput;
+use App\Tests\Utils\TestData;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
@@ -66,19 +66,19 @@ final class FeedDefaultMapperTest extends KernelTestCase
         );
 
         $input = [
-            'id' => FeedItemInput::EXAMPLE_DATA['nid'],
-            'excerpt' => FeedItemInput::EXAMPLE_DATA['lead'],
-            'url' => FeedItemInput::EXAMPLE_DATA['url'],
-            'image' => FeedItemInput::EXAMPLE_DATA['images']['list'],
-            'ticketUrl' => FeedItemInput::EXAMPLE_DATA['tickets']['url'],
+            'id' => TestData::FEED_ITEM_DATA['nid'],
+            'excerpt' => TestData::FEED_ITEM_DATA['lead'],
+            'url' => TestData::FEED_ITEM_DATA['url'],
+            'image' => TestData::FEED_ITEM_DATA['images']['list'],
+            'ticketUrl' => TestData::FEED_ITEM_DATA['tickets']['url'],
             'location' => [
-                'name' => FeedItemInput::EXAMPLE_DATA['location']['name'],
+                'name' => TestData::FEED_ITEM_DATA['location']['name'],
                 'coordinates' => [
-                    'lat' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lat'],
-                    'long' => FeedItemInput::EXAMPLE_DATA['location']['coordinates']['lon'],
+                    'lat' => TestData::FEED_ITEM_DATA['location']['coordinates']['lat'],
+                    'long' => TestData::FEED_ITEM_DATA['location']['coordinates']['lon'],
                 ],
             ],
-            'tags' => FeedItemInput::EXAMPLE_DATA['tags'],
+            'tags' => TestData::FEED_ITEM_DATA['tags'],
         ];
 
         $defaultMapper = $this->getFeedDefaultMapper();

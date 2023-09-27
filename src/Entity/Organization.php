@@ -35,10 +35,14 @@ class Organization
     #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Event::class)]
     private Collection $events;
 
+    #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Feed::class)]
+    private Collection $feeds;
+
     public function __construct()
     {
         $this->Users = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->feeds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -130,6 +134,36 @@ class Organization
             // set the owning side to null (unless already changed)
             if ($event->getOrganization() === $this) {
                 $event->setOrganization(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Feed>
+     */
+    public function getFeeds(): Collection
+    {
+        return $this->feeds;
+    }
+
+    public function addFeed(Feed $feed): static
+    {
+        if (!$this->feeds->contains($feed)) {
+            $this->feeds->add($feed);
+            $feed->setOrganization($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeed(Feed $feed): static
+    {
+        if ($this->feeds->removeElement($feed)) {
+            // set the owning side to null (unless already changed)
+            if ($feed->getOrganization() === $this) {
+                $feed->setOrganization(null);
             }
         }
 

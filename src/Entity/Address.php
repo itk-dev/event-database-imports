@@ -35,7 +35,7 @@ class Address
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $country = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
     private ?string $postalCode = null;
 
     #[ORM\Column(nullable: true)]

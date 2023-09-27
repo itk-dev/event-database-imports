@@ -22,22 +22,23 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             'mapping' => [
                 'Id' => 'id',
                 'Title' => 'title',
-                'Teaser' => 'excerpt',
-                'Description' => 'description',
-                'DateFrom' => 'start',
-                'DateTo' => 'end',
+                'Teaser' => 'description',
                 'Url' => 'url',
                 'Image' => 'image',
                 'BuyTicketsLink' => 'ticketUrl',
                 'Tags' => 'tags.[,]',
+                'DateFrom' => 'occurrences.*.start',
+                'DateTo' => 'occurrences.*.end',
             ],
             'defaults' => [
                 'title' => 'missing',
+                'public' => true,
                 'tags' => [
                     'Aros',
                     'Aarhus',
                 ],
                 'location' => [
+                    'name' => 'Aros',
                     'country' => 'Danmark',
                     'city' => 'Aarhus C',
                     'postalCode' => 8000,
@@ -51,7 +52,6 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                     'url' => 'http://www.aros.dk/',
                     'telephone' => '87306600',
                     'mail' => 'info@aros.dk',
-                    'logo' => 'http://www.aros.dk/images/logo.png',
                 ],
             ],
         ];
@@ -59,7 +59,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -75,8 +76,6 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'title' => 'title',
                 'lead' => 'excerpt',
                 'body' => 'description',
-                'date.start' => 'start',
-                'date.stop' => 'end',
                 'url' => 'url',
                 'images.list' => 'image',
                 'tickets.url' => 'ticketUrl',
@@ -88,15 +87,23 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'location.coordinates.lon' => 'location.coordinates.longitude',
                 'location.mail' => 'location.mail',
                 'tags' => 'tags',
+                'date.start' => 'occurrences.*.start',
+                'date.stop' => 'occurrences.*.end',
+                'price' => 'occurrences.*.price',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'Aarhus Kommunea biblioteker',
+                ],
+                'public' => true,
             ],
         ];
 
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::AAKB));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -113,25 +120,43 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'description' => 'description',
                 'url' => 'url',
                 'image_url' => 'image',
-                'price' => 'price',
                 'occurrences.*.startDate' => 'occurrences.*.start',
                 'occurrences.*.endDate' => 'occurrences.*.end',
+                'price' => 'occurrences.*.price',
             ],
             'defaults' => [
+                'public' => false,
+                'location' => [
+                    'name' => 'Bora Bora',
+                    'country' => 'Danmark',
+                    'city' => 'Aarhus C',
+                    'postalCode' => 8000,
+                    'street' => 'Valdemarsgade 1',
+                    'region' => 'Jylland',
+                    'suite' => '',
+                    'coordinates' => [
+                        'latitude' => '56.15221473835729',
+                        'longitude' => '10.19933009834337',
+                    ],
+                    'url' => 'https://www.bora-bora.dk/',
+                    'telephone' => '86190079',
+                    'mail' => 'info@bora-bora.dk',
+                ],
             ],
         ];
 
         $feed->setName('Test feed - Bora-bora')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         $feed = new Feed();
         $config = [
             'type' => 'json',
             'url' => 'https://www.train.dk/calenderjsonrewrite.php',
-            'base' => 'https://www.bora-bora.dk/',
+            'base' => 'https://www.train.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/events/-',
             'dateFormat' => 'Y-m-d\TH:i:sP',
@@ -144,10 +169,19 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'ticketPriceRange' => 'price',
                 'purchaseUrl' => 'ticketUrl',
                 'tags' => 'tags.[]',
-                'starttime' => 'start',
-                'endtime' => 'end',
+                'starttime' => 'occurrences.*.start',
+                'endtime' => 'occurrences.*.end',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'Train Music',
+                    'country' => 'Danmark',
+                    'city' => 'Aarhus C',
+                    'postalCode' => 8000,
+                    'street' => 'Toldbodgade 6',
+                    'region' => 'Jylland',
+                ],
+                'public' => false,
             ],
         ];
 
@@ -172,13 +206,17 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'url' => 'url',
             ],
             'defaults' => [
+                'location' => [
+                    'name' => 'HeadQuarters',
+                ],
             ],
         ];
 
         $feed->setName('Test feed - HeadQuarters')
             ->setEnabled(false)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
         $manager->persist($feed);
 
         // Make it stick.
@@ -189,6 +227,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            OrganizationFixtures::class,
         ];
     }
 }

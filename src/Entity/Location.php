@@ -23,9 +23,6 @@ class Location
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
-
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
@@ -34,9 +31,6 @@ class Location
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $telephone = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $logo = null;
 
     #[ORM\Column]
     private ?bool $disabilityAccess = null;
@@ -73,18 +67,6 @@ class Location
         return $this;
     }
 
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -117,18 +99,6 @@ class Location
     public function setTelephone(?string $telephone): static
     {
         $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getLogo(): ?string
-    {
-        return $this->logo;
-    }
-
-    public function setLogo(?string $logo): static
-    {
-        $this->logo = $logo;
 
         return $this;
     }
