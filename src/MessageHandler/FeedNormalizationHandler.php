@@ -4,8 +4,8 @@ namespace App\MessageHandler;
 
 use App\Message\EventMessage;
 use App\Message\FeedNormalizationMessage;
-use App\Services\ContentNormalizer;
-use App\Services\TagsNormalizer;
+use App\Service\ContentNormalizer;
+use App\Service\TagsNormalizerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -20,7 +20,7 @@ final class FeedNormalizationHandler
     public function __construct(
         private readonly ContentNormalizer $contentNormalizer,
         private readonly MessageBusInterface $messageBus,
-        private readonly TagsNormalizer $tagsNormalizer,
+        private readonly TagsNormalizerInterface $tagsNormalizer,
     ) {
     }
 

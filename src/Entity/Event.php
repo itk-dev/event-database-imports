@@ -29,9 +29,6 @@ class Event
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
-
     #[ORM\Column(length: 255)]
     private ?string $url = null;
 
@@ -65,6 +62,9 @@ class Event
     #[ORM\Column(length: 255)]
     private ?string $hash = null;
 
+    #[ORM\OneToOne(inversedBy: 'event', cascade: ['persist', 'remove'])]
+    private ?Image $image = null;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
@@ -97,18 +97,6 @@ class Event
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
 
         return $this;
     }
@@ -289,6 +277,18 @@ class Event
     public function setHash(string $hash): static
     {
         $this->hash = $hash;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }

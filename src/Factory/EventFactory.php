@@ -17,6 +17,7 @@ final class EventFactory
         private readonly LocationFactory $locationFactory,
         private readonly TagsFactory $tagsFactory,
         private readonly OccurrencesFactory $occurrencesFactory,
+        private readonly ImageFactory $imageFactory,
     ) {
     }
 
@@ -87,13 +88,17 @@ final class EventFactory
     {
         $entity->setDescription($item->description)
             ->setExcerpt($item->excerpt)
-            ->setImage($item->image)
             ->setFeedItemId($item->id)
             ->setTicketUrl($item->ticketUrl)
             ->setUrl($item->url)
             ->setPublic($item->public)
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
+
+        if (!is_null($item->image)) {
+            $image = $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+            $entity->setImage($image);
+        }
 
         if (!is_null($item->tags)) {
             foreach ($this->tagsFactory->createOrLookup($item->tags) as $tag) {

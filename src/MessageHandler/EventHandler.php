@@ -4,6 +4,7 @@ namespace App\MessageHandler;
 
 use App\Factory\EventFactory;
 use App\Message\EventMessage;
+use App\Message\ImageMessage;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -28,7 +29,11 @@ final class EventHandler
             throw new UnrecoverableMessageHandlingException($e->getMessage());
         }
 
-        // @todo: create next message
-        throw new UnrecoverableMessageHandlingException('Not implemented yet');
+        $id = $entity->getId();
+        if (!is_null($id)) {
+            $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
+        } else {
+            throw new UnrecoverableMessageHandlingException('Event without id detected');
+        }
     }
 }

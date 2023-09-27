@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Services\Feeds\Mapper;
+namespace App\Service\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Model\Feed\FeedItem;
-use App\Services\Feeds\FeedDefaultsMapper;
-use App\Services\Feeds\Mapper\Source\FeedItemSource;
+use App\Service\Feeds\FeedDefaultsMapper;
+use App\Service\Feeds\Mapper\Source\FeedItemSource;
 use CuyZ\Valinor\Mapper\MappingError;
 use CuyZ\Valinor\Mapper\Source\Source;
 use CuyZ\Valinor\Mapper\Tree\Message\Messages;

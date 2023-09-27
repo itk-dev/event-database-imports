@@ -20,6 +20,7 @@ framework:
             'App\Message\FeedItemDataMessage': async
             'App\Message\FeedNormalizationMessage': async
             'App\Message\EventMessage': async
+            'Liip\ImagineBundle\Message\WarmupCache': async
 
 when@test:
     framework:
