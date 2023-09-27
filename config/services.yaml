@@ -22,6 +22,7 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\Image:
+    App\Service\ImageHandler:
         arguments:
             $publicPath: '%kernel.project_dir%/public/images/'
+            $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'

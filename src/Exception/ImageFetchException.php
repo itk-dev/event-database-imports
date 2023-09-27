@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-class ImageFetchException extends \Exception
+class ImageFetchException extends AppException
 {
 }

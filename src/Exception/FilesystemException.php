@@ -2,6 +2,6 @@
 
 namespace App\Exception;
 
-class FilesystemException extends \Exception
+class FilesystemException extends AppException
 {
 }
