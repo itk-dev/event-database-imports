@@ -14,10 +14,7 @@ final class ImageFactory
 
     public function createOrUpdate(string $url, ?ImageEntity $image): ImageEntity
     {
-        if (is_null($image)) {
-            $image = new ImageEntity();
-            $image->setSource($url);
-        } elseif ($image->getSource() !== $url) {
+        if (is_null($image) || $image->getSource() !== $url) {
             $image = new ImageEntity();
             $image->setSource($url);
         } else {

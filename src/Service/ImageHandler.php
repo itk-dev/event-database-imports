@@ -2,17 +2,19 @@
 
 namespace App\Service;
 
+use App\Entity\Image;
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
 use Liip\ImagineBundle\Message\WarmupCache;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-final class Image implements ImageInterface
+final class ImageHandler implements ImageHandlerInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
@@ -41,7 +43,7 @@ final class Image implements ImageInterface
         }
 
         $response = $this->client->request('GET', $url);
-        if (200 !== $response->getStatusCode()) {
+        if (Response::HTTP_OK !== $response->getStatusCode()) {
             throw new ImageFetchException(sprintf('Failed to fetch %s with code %s', $url, $response->getStatusCode()), $response->getStatusCode());
         }
 
@@ -55,13 +57,13 @@ final class Image implements ImageInterface
         return $this->getRelativePath($dest);
     }
 
-    public function remove(\App\Entity\Image $image): bool
+    public function remove(Image $image): bool
     {
         // TODO: Implement remove() method.
         return false;
     }
 
-    public function transform(\App\Entity\Image $image): void
+    public function transform(Image $image): void
     {
         $path = $image->getLocal();
         if (!is_null($path)) {

@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Tests;
 
-use App\Service\Image;
+use App\Service\ImageHandler;
 use App\Tests\Utils\PhpUnitUtils;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-#[CoversClass(Image::class)]
+#[CoversClass(ImageHandler::class)]
 final class ImageServiceTest extends KernelTestCase
 {
     /**
@@ -32,16 +32,16 @@ final class ImageServiceTest extends KernelTestCase
     /**
      * Helper function to bootstrap the service tested.
      *
-     * @return Image
+     * @return ImageHandler
      *   The service
      *
      * @throws \Exception
      */
-    private function getImageService(): Image
+    private function getImageService(): ImageHandler
     {
         self::bootKernel();
         $container = ImageServiceTest::getContainer();
 
-        return $container->get(Image::class);
+        return $container->get(ImageHandler::class);
     }
 }
