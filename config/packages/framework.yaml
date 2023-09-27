@@ -18,6 +18,15 @@ framework:
     php_errors:
         log: true
 
+    cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system
+        pools:
+            geo.cache:
+                adapter: cache.app
+                # Default time matches the one dawa sets in headers.
+                default_lifetime: 86400
+
 when@test:
     framework:
         test: true
