@@ -44,6 +44,7 @@ final class ImageHandler
         }
 
         if (!is_null($message->getEventId())) {
+            // Send message to the next step in the message import chain.
             $this->messageBus->dispatch(new GeocoderMessage($message->getEventId()));
         } else {
             throw new UnrecoverableMessageHandlingException('Missing event id in image handler');

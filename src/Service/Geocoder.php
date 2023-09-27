@@ -4,6 +4,10 @@ namespace App\Service;
 
 use App\Entity\Address;
 use App\Exception\GeocoderException;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -15,30 +19,43 @@ final class Geocoder implements GeocoderInterface
 {
     public function __construct(
         private readonly HttpClientInterface $client,
+        private readonly CacheInterface $geoCache,
     ) {
     }
 
+    /**
+     * @throws GeocoderException
+     * @throws InvalidArgumentException
+     */
     public function encode(Address $address): array
     {
         $query = $this->buildQuery($address);
-        $url = $this->runQuery($query);
-        $response = $this->client->request(
-            'GET',
-            $url
-        );
-        if (200 !== $response->getStatusCode()) {
-            throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
+        $item = $this->geoCache->get($query, function (ItemInterface $item) use ($query): ?array {
+            $url = $this->runQuery($query);
+            $response = $this->client->request(
+                'GET',
+                $url
+            );
+            if (Response::HTTP_OK !== $response->getStatusCode()) {
+                throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
+            }
+            $content = $response->toArray();
+
+            if (isset($content['adgangspunkt']['koordinater'])) {
+                $longitude = $content['adgangspunkt']['koordinater'][0];
+                $latitude = $content['adgangspunkt']['koordinater'][1];
+
+                return [$latitude, $longitude];
+            }
+
+            return null;
+        });
+
+        if (is_null($item)) {
+            throw new GeocoderException('Unable to look up address');
         }
-        $content = $response->toArray();
 
-        if (isset($content['adgangspunkt']['koordinater'])) {
-            $longitude = $content['adgangspunkt']['koordinater'][0];
-            $latitude = $content['adgangspunkt']['koordinater'][1];
-
-            return [$latitude, $longitude];
-        }
-
-        throw new GeocoderException('Unable to look up address');
+        return $item;
     }
 
     /**
