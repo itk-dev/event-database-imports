@@ -33,8 +33,8 @@ final class ImageHandler
                     $this->imageRepository->save($image, true);
 
                     $this->imageHandler->transform($image);
-                } catch (\Exception) {
-                    throw new UnrecoverableMessageHandlingException(sprintf('Unable to fetch image: %s', $source));
+                } catch (\Exception $e) {
+                    throw new UnrecoverableMessageHandlingException(sprintf('Unable to fetch image: %s', $source), (int) $e->getCode(), $e);
                 }
             }
         }
