@@ -11,6 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Mime\MimeTypes;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -47,12 +48,27 @@ final class ImageHandler implements ImageHandlerInterface
             throw new ImageFetchException(sprintf('Failed to fetch %s with code %s', $url, $response->getStatusCode()), $response->getStatusCode());
         }
 
-        $dest = $path.basename($url);
-        $fileHandler = fopen($dest, 'w');
-        foreach ($this->client->stream($response) as $chunk) {
-            fwrite($fileHandler, $chunk->getContent());
+        $headers = $response->getHeaders();
+        $type = reset($headers['content-type']);
+        $dest = $path.$this->generateLocalFilename($url, $type);
+
+        $fetchFile = true;
+        if ($filesystem->exists($dest)) {
+            $size = intval(reset($headers['content-length']));
+            if ($size === filesize($dest)) {
+                // File exist with the same file size.
+                $fetchFile = false;
+            }
         }
-        fclose($fileHandler);
+
+        // Only download files if changes detected in existing file.
+        if ($fetchFile) {
+            $fileHandler = fopen($dest, 'w');
+            foreach ($this->client->stream($response) as $chunk) {
+                fwrite($fileHandler, $chunk->getContent());
+            }
+            fclose($fileHandler);
+        }
 
         return $this->getRelativePath($dest);
     }
@@ -120,5 +136,23 @@ final class ImageHandler implements ImageHandlerInterface
         $parts = parse_url($url);
 
         return hash('sha256', $parts['host'] ?? 'unknown');
+    }
+
+    /**
+     * Create local filename based on URL and mine-type.
+     *
+     * @param string $url
+     *   URL for the file to generate name for
+     * @param string $mimetype
+     *   The files mine-type
+     *
+     * @return string
+     *   Generated local filename
+     */
+    private function generateLocalFilename(string $url, string $mimetype): string
+    {
+        $ext = (new MimeTypes())->getExtensions($mimetype)[0];
+
+        return hash('sha256', $url).'.'.$ext;
     }
 }
