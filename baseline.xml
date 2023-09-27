@@ -45,28 +45,4 @@
       <code>$source</code>
     </InvalidOperand>
   </file>
-  <file src="src/Service/Geocoder.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[function (ItemInterface $item) use ($query): ?array {
-            $url = $this->runQuery($query);
-            $response = $this->client->request(
-                'GET',
-                $url
-            );
-            if (Response::HTTP_OK !== $response->getStatusCode()) {
-                throw new GeocoderException('Non 200 status returned from service', $response->getStatusCode());
-            }
-            $content = $response->toArray();
-
-            if (isset($content['adgangspunkt']['koordinater'])) {
-                $longitude = $content['adgangspunkt']['koordinater'][0];
-                $latitude = $content['adgangspunkt']['koordinater'][1];
-
-                return [$latitude, $longitude];
-            }
-
-            return null;
-        }]]></code>
-    </ArgumentTypeCoercion>
-  </file>
 </files>

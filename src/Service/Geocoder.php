@@ -4,10 +4,10 @@ namespace App\Service;
 
 use App\Entity\Address;
 use App\Exception\GeocoderException;
+use Psr\Cache\CacheItemInterface;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Cache\CacheInterface;
-use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
@@ -30,7 +30,7 @@ final class Geocoder implements GeocoderInterface
     public function encode(Address $address): array
     {
         $query = $this->buildQuery($address);
-        $item = $this->geoCache->get($query, function (ItemInterface $item) use ($query): ?array {
+        $item = $this->geoCache->get($query, function (CacheItemInterface $item, bool $save) use ($query): ?array {
             $url = $this->runQuery($query);
             $response = $this->client->request(
                 'GET',
