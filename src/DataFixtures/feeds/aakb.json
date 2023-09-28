@@ -1,0 +1,914 @@
+[
+    {
+        "nid": "37752",
+        "url": "https://www.aakb.dk/arrangementer/boern/hyggelig-hoejtlaesning-27",
+        "title": "Hyggelig højtlæsning",
+        "language": "und",
+        "changed": "2023-01-03T17:04:25+01:00",
+        "category": "Børn",
+        "tags":
+        [
+            "højtlæsning",
+            "For børn"
+        ],
+        "category_tags":
+        [
+            "Børn",
+            "højtlæsning",
+            "For børn"
+        ],
+        "groups":
+        [],
+        "lead": "Kom og lyt til en god historie i børnebiblioteket",
+        "body": "<p><strong>Kom og lyt til en god historie i børnebiblioteket</strong></p> <p>Hver onsdag fra kl. 15.30 bliver der læst højt i børnebiblioteket af en &quot;bedstemor&quot;. </p>\n<p>Tag familien med og sæt jer godt til rette til en eftermiddag med hyggelig højtlæsning.<br />\nEfter højtlæsningen kan I låne bøgerne med hjem. </p>\n<p>Arrangementet er især for de yngste og egner sig godt til børnehavebørn og deres forældre. Men alle er selvfølgelig velkomne og vi vælger bøger ud fra dem, som dukker op. </p>\n<p>Arrangementet kræver ikke tilmelding, bare kom forbi.<br />\nVi glæder os til at se jer!</p>\n",
+        "date":
+        {
+            "start": "2022-12-07T14:30:00+00:00",
+            "stop": "2022-12-07T15:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/ebd81e/91b787/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/192x108/ebd81e/91b787/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Karen Blixens Boulevard 23",
+            "postal_code": "8220",
+            "locality": "Brabrand",
+            "mail": "Gellerupbibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Biblioteker",
+            "name": "Gellerup Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1555",
+                "lon": "10.1343"
+            }
+        },
+        "room": "Børnebiblioteket",
+        "price": "0",
+        "targets":
+        {
+            "tid": "11",
+            "vid": "4",
+            "name": "For børn",
+            "description": "",
+            "format": "plain_text",
+            "weight": "1",
+            "uuid": "b5058689-f90b-4df4-925c-9006b930bcb3",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": 0,
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "38008",
+        "url": "https://www.aakb.dk/arrangementer/blandet-godt/maker-for-studerende",
+        "title": "Maker for studerende",
+        "language": "und",
+        "changed": "2022-09-20T10:26:00+02:00",
+        "category": "Blandet godt",
+        "tags":
+        [
+            "studerende",
+            "Nyt bibliotek i Gellerup",
+            "Maker space"
+        ],
+        "category_tags":
+        [
+            "Blandet godt",
+            "studerende",
+            "Nyt bibliotek i Gellerup",
+            "Maker space"
+        ],
+        "groups":
+        [
+            {
+                "nid": "10023",
+                "title": "Studerende",
+                "link": "https://www.aakb.dk/studerende"
+            }
+        ],
+        "lead": "Kom og få en smagsprøve på bibliotekets nye Makerspace",
+        "body": "<p><strong>Kom og få en smagsprøve på bibliotekets nye Makerspace</strong></p> <p>Vi er i gang med at udvikle et nyt Makerspace. Du har mulighed for at snuse lidt til det vi har gang i og selv prøve kræfter med vores grej.</p>\n",
+        "date":
+        {
+            "start": "2022-09-26T13:30:00+00:00",
+            "stop": "2022-09-26T15:30:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/4f9cec/38b14c/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/120x100/4f9cec/38b14c/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Karen Blixens Boulevard 23",
+            "postal_code": "8220",
+            "locality": "Brabrand",
+            "mail": "Gellerupbibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Biblioteker",
+            "name": "Gellerup Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1555",
+                "lon": "10.1343"
+            }
+        },
+        "room": "",
+        "price": "0",
+        "targets":
+        {
+            "tid": "10",
+            "vid": "4",
+            "name": "For alle",
+            "description": "",
+            "format": "plain_text",
+            "weight": "0",
+            "uuid": "8c514b8e-c695-4cf7-a0ab-98ba5412b91a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2030-08-23T10:34:28+02:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "38010",
+        "url": "https://www.aakb.dk/arrangementer/blandet-godt/faellesspisning-og-musik-for-studerende",
+        "title": "Fællesspisning og musik for studerende",
+        "language": "und",
+        "changed": "2022-09-20T10:25:35+02:00",
+        "category": "Blandet godt",
+        "tags":
+        [
+            "studerende",
+            "Nyt bibliotek i Gellerup"
+        ],
+        "category_tags":
+        [
+            "Blandet godt",
+            "studerende",
+            "Nyt bibliotek i Gellerup"
+        ],
+        "groups":
+        [
+            {
+                "nid": "10023",
+                "title": "Studerende",
+                "link": "https://www.aakb.dk/studerende"
+            }
+        ],
+        "lead": "Vi inviterer alle studerende i området på gratis fællesspisning og musik",
+        "body": "<p><strong>Vi inviterer alle studerende i området på gratis fællesspisning og musik</strong></p> <p>Kom og bliv lidt klogere på hvad biblioteket og området har af muligheder for dig som er studerende.<br />\nVi sørger for aftensmaden og underholdningen denne aften, så du skal bare komme som du er. </p>\n<p>Fællesspisningen er støttet af Genlyd Aarhus</p>\n",
+        "date":
+        {
+            "start": "2022-09-29T16:30:00+00:00",
+            "stop": "2022-09-29T19:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/360x800/b12d4b/3ca9fb/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/36x80/b12d4b/3ca9fb/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Karen Blixens Boulevard 23",
+            "postal_code": "8220",
+            "locality": "Brabrand",
+            "mail": "Gellerupbibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Biblioteker",
+            "name": "Gellerup Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1555",
+                "lon": "10.1343"
+            }
+        },
+        "room": "",
+        "price": "0",
+        "targets":
+        {
+            "tid": "10",
+            "vid": "4",
+            "name": "For alle",
+            "description": "",
+            "format": "plain_text",
+            "weight": "0",
+            "uuid": "8c514b8e-c695-4cf7-a0ab-98ba5412b91a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2030-08-23T10:34:28+02:00",
+        "partners":
+        [
+            {
+                "id": "14002",
+                "name": "Genlyd aarhus",
+                "remote_id": "",
+                "url": ""
+            }
+        ],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "38468",
+        "url": "https://www.aakb.dk/arrangementer/boern/joergen-pingvin",
+        "title": "Jørgen Pingvin",
+        "language": "und",
+        "changed": "2022-11-04T11:44:45+01:00",
+        "category": "Børn",
+        "tags":
+        [
+            "albus familie",
+            "For børn"
+        ],
+        "category_tags":
+        [
+            "Børn",
+            "albus familie",
+            "For børn"
+        ],
+        "groups":
+        [
+            {
+                "nid": "18653",
+                "title": "ALBUS FESTIVAL",
+                "link": "https://www.aakb.dk/temaer/albus-festival"
+            }
+        ],
+        "lead": "Oplæsning og workshop ved Sabine Lemire og Rasmus Bregnhøi\r\n\r\n",
+        "body": "<p><strong>Oplæsning og workshop ved Sabine Lemire og Rasmus Bregnhøi\r\n\r\n</strong></p> <p>Børnene møder Jørgen Pingvin igennem oplæsning og bygger en raket præcis ligeså flot som Jørgens.</p>\n",
+        "date":
+        {
+            "start": "2022-11-19T09:30:00+00:00",
+            "stop": "2022-11-19T10:30:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/360x800/b12d4b/3ca9fb/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/36x80/b12d4b/3ca9fb/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Børnelab",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Børnelab",
+        "price": "0",
+        "targets":
+        {
+            "tid": "11",
+            "vid": "4",
+            "name": "For børn",
+            "description": "",
+            "format": "plain_text",
+            "weight": "1",
+            "uuid": "b5058689-f90b-4df4-925c-9006b930bcb3",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-01T18:09:38+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": "https://www.pretix.eu/aakb/38468/"
+        }
+    },
+    {
+        "nid": "38596",
+        "url": "https://www.aakb.dk/arrangementer/boern/juleklip-for-boern-fra-3-6-aar",
+        "title": "Juleklip for børn fra 3 -6 år",
+        "language": "und",
+        "changed": "2022-12-01T10:38:24+01:00",
+        "category": "Børn",
+        "tags":
+        [
+            "Kunst og kreativitet for børn",
+            "aktiviteter for børn i dagtilbud",
+            "Dagtilbud: Vær kreativ"
+        ],
+        "category_tags":
+        [
+            "Børn",
+            "Kunst og kreativitet for børn",
+            "aktiviteter for børn i dagtilbud",
+            "Dagtilbud: Vær kreativ"
+        ],
+        "groups":
+        [],
+        "lead": "Alle børnehavebørn i Tilst er velkomne til at komme til juleklipning, pynte juletræ og spise juleguf.\r\n\r\n",
+        "body": "<p><strong>Alle børnehavebørn i Tilst er velkomne til at komme til juleklipning, pynte juletræ og spise juleguf.\r\n\r\n</strong></p> <p>I er hjerteligt velkomne til at blive og spise jeres madpakker efter arrangementet.<br />\nTilmelding er anbefalet via <a href=\"mailto:tilstbibliotek@aarhus.dk\">tilstbibliotek@aarhus.dk</a> eller snak med personalet.</p>\n",
+        "date":
+        {
+            "start": "2022-12-01T09:00:00+00:00",
+            "stop": "2022-12-01T10:30:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/600x400/825e3c/e26367/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/60x40/825e3c/e26367/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Tilst Skolevej 13 A",
+            "postal_code": "8381",
+            "locality": "Tilst",
+            "mail": "Tilstbibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Tilst Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1884",
+                "lon": "10.1106"
+            }
+        },
+        "room": "",
+        "price": "0",
+        "targets":
+        {
+            "tid": "11",
+            "vid": "4",
+            "name": "For børn",
+            "description": "",
+            "format": "plain_text",
+            "weight": "1",
+            "uuid": "b5058689-f90b-4df4-925c-9006b930bcb3",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-01T10:34:28+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "39030",
+        "url": "https://www.aakb.dk/arrangementer/boern/ole-lund-kirkegaard-koncert-med-skrallebang",
+        "title": "Ole Lund Kirkegaard-koncert med SKRALLEBANG",
+        "language": "und",
+        "changed": "2023-01-04T14:11:54+01:00",
+        "category": "Børn",
+        "tags":
+        [
+            "For børn",
+            "gratis",
+            "aktiviteter for børn i dagtilbud",
+            "Dagtilbud: Musik og bevægelse"
+        ],
+        "category_tags":
+        [
+            "Børn",
+            "For børn",
+            "gratis",
+            "aktiviteter for børn i dagtilbud",
+            "Dagtilbud: Musik og bevægelse"
+        ],
+        "groups":
+        [],
+        "lead": "Kom og giv den gas, når vi hylder Danmarks store børnebogsforfatter Ole Lund Kirkegaard med et brag af en koncert. ",
+        "body": "<p><strong>Kom og giv den gas, når vi hylder Danmarks store børnebogsforfatter Ole Lund Kirkegaard med et brag af en koncert. </strong></p> <p>Vi skal rappe om Ivans slatne arme, lære at stave til BUKSEVAND, høre historien om Lille Virgil, om dragen Dagmar, næsehornet Otto og om en go' fidus!</p>\n<p>For de 3-6-årige</p>\n<p>Arrangementet er gratis, men tilmelding er nødvendig på tlf: 4185 4142</p>\n<p></p><div class=\"media media-element-container media-default\"><div id=\"file-55542\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <img class=\"media-element file-default\" delta=\"1\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/skrallebang-koncert-moelleparken-300822-0018.jpg\" width=\"1110\" height=\"420\" /></div>\n\n  \n</div>\n</div>",
+        "date":
+        {
+            "start": "2023-03-02T09:00:00+00:00",
+            "stop": "2023-03-02T10:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/6399ad/430dc8/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": ""
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Tilst Skolevej 13 A",
+            "postal_code": "8381",
+            "locality": "Tilst",
+            "mail": "Tilstbibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Tilst Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1884",
+                "lon": "10.1106"
+            }
+        },
+        "room": "",
+        "price": "0",
+        "targets":
+        {
+            "tid": "11",
+            "vid": "4",
+            "name": "For børn",
+            "description": "",
+            "format": "plain_text",
+            "weight": "1",
+            "uuid": "b5058689-f90b-4df4-925c-9006b930bcb3",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-11-01T01:36:06+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "39035",
+        "url": "https://www.aakb.dk/arrangementer/litteratur/ind-i-en-bog-med-forfatteren-nutidens-nymfer-er-snu-og-udoedelige-af-emma",
+        "title": "Ind i en bog med forfatteren: Nutidens Nymfer Er Snu Og udødelige af Emma Elver Wolff",
+        "language": "und",
+        "changed": "2023-01-16T13:20:27+01:00",
+        "category": "Litteratur",
+        "tags":
+        [
+            "LitteraturStedet",
+            "Mød en forfatter"
+        ],
+        "category_tags":
+        [
+            "Litteratur",
+            "LitteraturStedet",
+            "Mød en forfatter"
+        ],
+        "groups":
+        [
+            {
+                "nid": "13700",
+                "title": "LitteraturStedet",
+                "link": "https://www.aakb.dk/temaer/litteraturstedet"
+            }
+        ],
+        "lead": "Forfatteren tager læseren med på en mærkværdig men relaterbar rejse ind i en ung kvindes sind, som nu har gennemgået graviditet, moderskab og ikke mindst modet til at stå ved den, hun er.",
+        "body": "<p><strong>Forfatteren tager læseren med på en mærkværdig men relaterbar rejse ind i en ung kvindes sind, som nu har gennemgået graviditet, moderskab og ikke mindst modet til at stå ved den, hun er.</strong></p> <p>Novellerne er magiske, skræmmende, ærlige og fyldt med snørklede overvejelser om livet, døden og alt derimellem. Historierne er om den moderne kvinde, sommetider skrevet i en fortryllet eller formørket metafor, og selvfølgelig godt krydret med fortidens mytologiske fortællinger om sælsomme væsener.</p>\n<p>Bogen kan skaffes en måned før arrangementet. </p>\n<p>Der er 10 eksemplarer, og det er efter først-til-mølle princippet. </p>\n<p>Arrangementet er en del af Århundredets festival.</p>\n",
+        "date":
+        {
+            "start": "2023-03-08T10:00:00+00:00",
+            "stop": "2023-03-08T11:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/2d2f10/cccef2/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/192x108/2d2f10/cccef2/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "",
+            "thoroughfare": "Ludvig Feilbergs Vej 7",
+            "postal_code": "8230",
+            "locality": "Åbyhøj",
+            "mail": "aabybibliotek@aarhus.dk",
+            "phone": "89 40 95 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Åby Bibliotek",
+            "coordinates":
+            {
+                "lat": "56.1564",
+                "lon": "10.1625"
+            }
+        },
+        "room": "Studiekredslokalet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "13",
+            "vid": "4",
+            "name": "For voksne",
+            "description": "",
+            "format": "plain_text",
+            "weight": "4",
+            "uuid": "aceefc95-559b-44af-abcd-56cfba0f750a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-11-08T12:00:59+01:00",
+        "partners":
+        [
+            {
+                "id": "8462",
+                "name": "Åby Biblioteks venner",
+                "remote_id": "",
+                "url": ""
+            }
+        ],
+        "tickets":
+        {
+            "url": "https://pretix.eu/aakb/39035/"
+        }
+    },
+    {
+        "nid": "39141",
+        "url": "https://www.aakb.dk/arrangementer/blandet-godt/laeringsfaellesskaber-for-en-baeredygtig-fremtid-bokashi-workshop",
+        "title": "Læringsfællesskaber for en bæredygtig fremtid: Bokashi-workshop",
+        "language": "und",
+        "changed": "2023-05-03T13:50:23+02:00",
+        "category": "Blandet godt",
+        "tags":
+        [
+            "verdensrummet",
+            "p2pu",
+            "selvforsyning",
+            "bæredygtighed",
+            "læringsfællesskab",
+            "verdensmål"
+        ],
+        "category_tags":
+        [
+            "Blandet godt",
+            "verdensrummet",
+            "p2pu",
+            "selvforsyning",
+            "bæredygtighed",
+            "læringsfællesskab",
+            "verdensmål"
+        ],
+        "groups":
+        [],
+        "lead": "Prøv en lejlighedsegnet kompostform sammen med os!",
+        "body": "<p><strong>Prøv en lejlighedsegnet kompostform sammen med os!</strong></p> <p>Får de stigende fødevarepriser dig til at tænke på alternative måder at dyrke og spise på i hverdagen? Er det overhovedet muligt at blive selvforsynende om vinteren, og hvordan kan man som byboer gøde jorden for at nå det mål? Lad os sammen afprøve mulighederne for at bringe selvforsyning ind i den asfaltariske hverdag. Målet med fællesskabet er at udforske praktiske løsninger sammen, og imødegå de udfordringer, der følger med at leve grønt på få kvadratmeter</p>\n<p>De fleste er bekendte med klassisk kompostering, hvor kompostorme omdanner planteaffald til jord. Bokashi-kompostering er en teknik der er særligt velegnet til byboere, fordi komposteringen her udføres iltfrit og ved hjælp af en særlig gærtype. Dermed undgår man at have levende orme i en lugtende bøtte stående under køkkenvasken - men man kan stadig omdanne sit planteaffald til næringsrig jord.</p>\n<p>I læringsfællesskabet for en bæredygtig fremtid vil vi sammen kaste os over at lave bokashi-spande, som vi herefter kan tage med os hjem. Vi har materialer til at der kan laves 10 sæt bokashi-spande. Man behøver kun et sæt pr. husstand, så hvis man ønsker at deltage som et par/roommates/familie behøver man derfor kun at booke én billet.</p>\n<p><a href=\"https://www.aakb.dk/node/35917\">”Læringsfællesskaber for en bæredygtig fremtid”</a> er et modningsprojekt finansieret af Aarhus Kommunes Biblioteker, Ballerup Bibliotekerne og Peer 2 Peer University med tilskud fra Udviklingspuljen for folkebiblioteker og pædagogiske læringscentre, Slots- og Kulturstyrelsen. Det er anden gang vi afholder det på DOKK1, men man er meget velkommen til at tilmelde sig uanset om man har været med første gang eller ej.</p>",
+        "date":
+        {
+            "start": "2023-01-10T15:30:00+00:00",
+            "stop": "2023-01-10T17:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/600x400/26ebf5/2427df/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/60x40/26ebf5/2427df/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Verdensrummet under DOKK1",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Verdensrummet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "13",
+            "vid": "4",
+            "name": "For voksne",
+            "description": "",
+            "format": "plain_text",
+            "weight": "4",
+            "uuid": "aceefc95-559b-44af-abcd-56cfba0f750a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-31T01:15:56+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": "https://pretix.eu/aakb/39141/"
+        }
+    },
+    {
+        "nid": "39151",
+        "url": "https://www.aakb.dk/arrangementer/kunst-og-kreativitet/sy-vaerkstedet-59",
+        "title": "Sy-Værkstedet",
+        "language": "und",
+        "changed": "2022-12-21T15:21:50+01:00",
+        "category": "Kunst og kreativitet",
+        "tags":
+        [
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "category_tags":
+        [
+            "Kunst og kreativitet",
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "groups":
+        [],
+        "lead": "Åbent sy-værksted i Verdensrummet",
+        "body": "<p><strong>Åbent sy-værksted i Verdensrummet</strong></p> <p>Her kan du lære at sy, kaste dig ud i nye projekter eller bare låne vores maskiner, hvis du har noget, du skal have fikset.</p>\n<p>Vi har fokus på bæredygtighed. Tøj er en stor ressource for klimaet – så derfor skal vi værne om det. Det betyder, at vi skal reparere vores tøj, re-designe det – bytte, dele &amp; låne - så vi får brugt tøjet fuldt ud og kun køber nyt, når det er absolut nødvendigt.</p>\n<p>Vi har 2 overlockere og 6 symaskiner som kan bruges, og ellers har vi masser af nåle, sakse tråd etc.<br />Vi ligger også inde med stof og tøj, du kan kaste dig over at redesigne – og vi hjælper gerne med ideer.</p>\n<p>Du finder værkstedet i Verdensrummet under DOKK1</p>\n<p><img alt=\"\" data-delta=\"1\" data-fid=\"51254\" data-media-element=\"1\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensrummet_5.jpg?itok=qBIYbjRO\" title=\"\" /></p>",
+        "date":
+        {
+            "start": "2023-01-07T10:00:00+00:00",
+            "stop": "2023-01-07T14:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/600x400/2bd435/cb7b26/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/600x400/2bd435/cb7b26/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Verdensrummet under DOKK1",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Verdensrummet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "13",
+            "vid": "4",
+            "name": "For voksne",
+            "description": "",
+            "format": "plain_text",
+            "weight": "4",
+            "uuid": "aceefc95-559b-44af-abcd-56cfba0f750a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-13T01:15:56+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "39186",
+        "url": "https://www.aakb.dk/arrangementer/kunst-og-kreativitet/sy-vaerkstedet-37",
+        "title": "Sy-værkstedet",
+        "language": "und",
+        "changed": "2022-12-06T09:37:00+01:00",
+        "category": "Kunst og kreativitet",
+        "tags":
+        [
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "category_tags":
+        [
+            "Kunst og kreativitet",
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "groups":
+        [],
+        "lead": "Åbent sy-værksted i Verdensrummet",
+        "body": "<p><strong>Åbent sy-værksted i Verdensrummet</strong></p> <p>Her kan du lære at sy, kaste dig ud i nye projekter eller bare låne vores maskiner, hvis du har noget, du skal have fikset.</p>\n<div>Vi har fokus på bæredygtighed. Tøj er en stor ressource for klimaet – så derfor skal vi værne om det.</div>\n<div>Det betyder, at vi skal reparere vores tøj, re-designe det – bytte, dele &amp; låne - så vi får brugt tøjet fuldt ud og kun køber nyt, når det er absolut nødvendigt.</div>\n<p>Værkstedet er åbent hver onsdag fra kl. 15 – 19 (undtager juli, uge 42 &amp; uge 52)</p>\n<p>Det er gratis og du møder bare op.</p>\n<div>Vi hjælper hinanden, og der vil løbende være særlige workshops, du kan tilmelde dig.</div>\n<div>Vi ligger også inde med stof og tøj, du kan kaste dig over – vi hjælper gerne med ideer.</div>\n<div> </div>\n<div>Har du ideer eller spørgsmål – så kontakt Randi Heide <a href=\"mailto:mrahe@aarhus.dk\">mrahe@aarhus.dk</a></div>\n<p>Du finder værkstedet i Verdensrummet under Dokk1</p>\n<p></p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" data-delta=\"1\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensrummet_5.jpg?itok=qBIYbjRO\" width=\"220\" height=\"165\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" data-delta=\"3\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-13.png?itok=KeKrrljA\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" data-delta=\"2\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-12.png?itok=IhE6bbty\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div>",
+        "date":
+        {
+            "start": "2023-01-04T14:00:00+00:00",
+            "stop": "2023-01-04T18:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/720x480/c33434/97a60a/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/420x780/c33434/97a60a/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Dokk1",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Verdensrummet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "10",
+            "vid": "4",
+            "name": "For alle",
+            "description": "",
+            "format": "plain_text",
+            "weight": "0",
+            "uuid": "8c514b8e-c695-4cf7-a0ab-98ba5412b91a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-25T10:58:39+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "39187",
+        "url": "https://www.aakb.dk/arrangementer/kunst-og-kreativitet/sy-vaerkstedet-38",
+        "title": "Sy-værkstedet",
+        "language": "und",
+        "changed": "2023-01-11T11:32:26+01:00",
+        "category": "Kunst og kreativitet",
+        "tags":
+        [
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "category_tags":
+        [
+            "Kunst og kreativitet",
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima"
+        ],
+        "groups":
+        [],
+        "lead": "Åbent sy-værksted i Verdensrummet",
+        "body": "<p><strong>Åbent sy-værksted i Verdensrummet</strong></p> <p>Her kan du lære at sy, kaste dig ud i nye projekter eller bare låne vores maskiner, hvis du har noget, du skal have fikset.</p>\n<div>Vi har fokus på bæredygtighed. Tøj er en stor ressource for klimaet – så derfor skal vi værne om det.</div>\n<div>Det betyder, at vi skal reparere vores tøj, re-designe det – bytte, dele &amp; låne - så vi får brugt tøjet fuldt ud og kun køber nyt, når det er absolut nødvendigt.</div>\n<p>Værkstedet er åbent hver onsdag fra kl. 15 – 19 (undtager juli, uge 42 &amp; uge 52)</p>\n<p>Det er gratis og du møder bare op.</p>\n<div>Vi hjælper hinanden, og der vil løbende være særlige workshops, du kan tilmelde dig.</div>\n<div>Vi ligger også inde med stof og tøj, du kan kaste dig over – vi hjælper gerne med ideer.</div>\n<div> </div>\n<div>Har du ideer eller spørgsmål – så kontakt Randi Heide <a href=\"mailto:mrahe@aarhus.dk\">mrahe@aarhus.dk</a></div>\n<p>Du finder værkstedet i Verdensrummet under Dokk1</p>\n<p></p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254--2\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" data-delta=\"1\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensrummet_5.jpg?itok=qBIYbjRO\" width=\"220\" height=\"165\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269--2\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" data-delta=\"3\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-13.png?itok=KeKrrljA\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268--2\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" data-delta=\"2\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-12.png?itok=IhE6bbty\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div>",
+        "date":
+        {
+            "start": "2023-01-11T14:00:00+00:00",
+            "stop": "2023-01-11T18:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/556ee7/0432f7/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/1920x1080/556ee7/0432f7/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Dokk1",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Verdensrummet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "10",
+            "vid": "4",
+            "name": "For alle",
+            "description": "",
+            "format": "plain_text",
+            "weight": "0",
+            "uuid": "8c514b8e-c695-4cf7-a0ab-98ba5412b91a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-25T10:58:39+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    },
+    {
+        "nid": "39188",
+        "url": "https://www.aakb.dk/arrangementer/kunst-og-kreativitet/sy-vaerkstedet-39",
+        "title": "Sy-værkstedet",
+        "language": "und",
+        "changed": "2023-01-17T16:27:13+01:00",
+        "category": "Kunst og kreativitet",
+        "tags":
+        [
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima",
+            "arrangementer for unge"
+        ],
+        "category_tags":
+        [
+            "Kunst og kreativitet",
+            "krea for voksne",
+            "krea for unge",
+            "syværksted",
+            "Maker-Lab",
+            "DIY",
+            "verdensmål",
+            "klima",
+            "arrangementer for unge"
+        ],
+        "groups":
+        [],
+        "lead": "Åbent sy-værksted i Verdensrummet",
+        "body": "<p><strong>Åbent sy-værksted i Verdensrummet</strong></p> <p>Her kan du lære at sy, kaste dig ud i nye projekter eller bare låne vores maskiner, hvis du har noget, du skal have fikset.</p>\n<div>Vi har fokus på bæredygtighed. Tøj er en stor ressource for klimaet – så derfor skal vi værne om det.</div>\n<div>Det betyder, at vi skal reparere vores tøj, re-designe det – bytte, dele &amp; låne - så vi får brugt tøjet fuldt ud og kun køber nyt, når det er absolut nødvendigt.</div>\n<p>Værkstedet er åbent hver onsdag fra kl. 15 – 19 (undtager juli, uge 42 &amp; uge 52)</p>\n<p>Det er gratis og du møder bare op.</p>\n<div>Vi hjælper hinanden, og der vil løbende være særlige workshops, du kan tilmelde dig.</div>\n<div>Vi ligger også inde med stof og tøj, du kan kaste dig over – vi hjælper gerne med ideer.</div>\n<div> </div>\n<div>Har du ideer eller spørgsmål – så kontakt Randi Heide <a href=\"mailto:mrahe@aarhus.dk\">mrahe@aarhus.dk</a></div>\n<p>Du finder værkstedet i Verdensrummet under Dokk1</p>\n<p></p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254--3\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" data-delta=\"1\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensrummet_5.jpg?itok=qBIYbjRO\" width=\"220\" height=\"165\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269--3\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" data-delta=\"3\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-13.png?itok=KeKrrljA\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268--3\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"/file/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" data-delta=\"2\" alt=\"\" title=\"\" src=\"https://www.aakb.dk/sites/www.aakb.dk/files/styles/medium/public/verdensmaal-ikon-12.png?itok=IhE6bbty\" width=\"220\" height=\"220\" /></a>  </div>\n\n  \n</div>\n</div>",
+        "date":
+        {
+            "start": "2023-01-18T14:00:00+00:00",
+            "stop": "2023-01-18T18:00:00+00:00"
+        },
+        "images":
+        {
+            "list": "https://placehold.co/1920x1080/556ee7/0432f7/png?text=AAKB%0AThis%20is%20an%20image",
+            "title": "https://placehold.co/1920x1080/556ee7/0432f7/png?text=AAKB%0AThis%20is%20an%20image"
+        },
+        "location":
+        {
+            "hint": "Dokk1",
+            "thoroughfare": "Hack Kampmanns Plads 2",
+            "postal_code": "8000",
+            "locality": "Aarhus",
+            "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+            "phone": "89 40 92 00 Borgerservice og Bibliotekers hovednummer",
+            "name": "Hovedbiblioteket",
+            "coordinates":
+            {
+                "lat": "56.1535",
+                "lon": "10.2142"
+            }
+        },
+        "room": "Verdensrummet",
+        "price": "0",
+        "targets":
+        {
+            "tid": "10",
+            "vid": "4",
+            "name": "For alle",
+            "description": "",
+            "format": "plain_text",
+            "weight": "0",
+            "uuid": "8c514b8e-c695-4cf7-a0ab-98ba5412b91a",
+            "vocabulary_machine_name": "event_target"
+        },
+        "unpublish_on": "2023-12-25T10:58:39+01:00",
+        "partners":
+        [],
+        "tickets":
+        {
+            "url": ""
+        }
+    }
+]

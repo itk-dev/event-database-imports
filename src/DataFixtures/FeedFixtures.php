@@ -14,7 +14,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => 'https://www.aros.dk/umbraco/api/events/feed/?culture=da',
+            'url' => '/app/src/DataFixtures/feeds/aros.json',
             'base' => 'https://www.aros.dk',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -66,7 +66,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => 'https://www.aakb.dk/feeds/eventdb',
+            'url' => '/app/src/DataFixtures/feeds/aakb.json',
             'base' => 'https://www.aakb.dk/events',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -93,7 +93,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
             ],
             'defaults' => [
                 'location' => [
-                    'name' => 'Aarhus Kommunea biblioteker',
+                    'name' => 'Aarhus Kommunes biblioteker',
                 ],
                 'public' => true,
             ],
@@ -109,7 +109,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => 'https://bora-bora.dk/wp-json/feed/v1/events',
+            'url' => '/app/src/DataFixtures/feeds/bora.json',
             'base' => 'https://www.bora-bora.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -155,7 +155,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => 'https://www.train.dk/calenderjsonrewrite.php',
+            'url' => '/app/src/DataFixtures/feeds/train.json',
             'base' => 'https://www.train.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/events/-',
