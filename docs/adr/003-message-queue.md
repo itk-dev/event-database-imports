@@ -4,7 +4,7 @@ Date: 18-08-2023
 
 ## Status
 
-Accepted
+Deprecated
 
 ## Context
 
