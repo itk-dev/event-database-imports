@@ -11,7 +11,7 @@ The idea is that each organization/institution have an appointed admin that is a
 
 ## Decision
 For this first phase of the project users login by using username and password. If there needs to be a higher level of security sorounding user login in the future an IdP such as MitId can be connected to the project, but for now the customer has specifically requested (due to experiences with login in the existing solution) that we continue using username and password.
-Using MitID for login would be a more professional login method for the future but for now it's not a part of the project.
+Using SSO would be a more professional login method for the future but for now it's not a part of the project.
 
 ## Consequences
-Login using username and password is not as secure as using MitID  
+Login using username and password is not as secure as using SSO  
