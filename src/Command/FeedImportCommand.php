@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Feed;
 use App\Message\FeedItemDataMessage;
 use App\Repository\FeedRepository;
 use App\Service\Feeds\Mapper\FeedConfigurationMapper;
@@ -58,6 +59,7 @@ final class FeedImportCommand extends Command
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
 
+        /** @var Feed $feed */
         foreach ($feeds as $feed) {
             if (!$feed->isEnabled()) {
                 $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
@@ -68,19 +70,22 @@ final class FeedImportCommand extends Command
             $index = 0;
             $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
             foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
-                $message = new FeedItemDataMessage($feedId, $config, $item);
-                try {
-                    $this->messageBus->dispatch($message);
-                } catch (TransportException|\LogicException) {
-                    // Ensure that message get into failed queue if connection to AMQP fails.
-                    $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
-                }
+                $feedId = $feed->getId();
+                if (!is_null($feedId)) {
+                    $message = new FeedItemDataMessage($feedId, $config, $item);
+                    try {
+                        $this->messageBus->dispatch($message);
+                    } catch (TransportException|\LogicException) {
+                        // Ensure that message get into failed queue if connection to AMQP fails.
+                        $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
+                    }
 
-                $progressBar->advance();
+                    $progressBar->advance();
 
-                ++$index;
-                if ($limit > 0 && $index >= $limit) {
-                    break;
+                    ++$index;
+                    if ($limit > 0 && $index >= $limit) {
+                        break;
+                    }
                 }
             }
 
