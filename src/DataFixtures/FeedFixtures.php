@@ -14,7 +14,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => '/app/src/DataFixtures/feeds/aros.json',
+            'url' => 'src/DataFixtures/feeds/aros.json',
             'base' => 'https://www.aros.dk',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -66,7 +66,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => '/app/src/DataFixtures/feeds/aakb.json',
+            'url' => 'src/DataFixtures/feeds/aakb.json',
             'base' => 'https://www.aakb.dk/events',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -109,7 +109,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => '/app/src/DataFixtures/feeds/bora.json',
+            'url' => 'src/DataFixtures/feeds/bora.json',
             'base' => 'https://www.bora-bora.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/-',
@@ -155,7 +155,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed = new Feed();
         $config = [
             'type' => 'json',
-            'url' => '/app/src/DataFixtures/feeds/train.json',
+            'url' => 'src/DataFixtures/feeds/train.json',
             'base' => 'https://www.train.dk/',
             'timezone' => 'Europe/Copenhagen',
             'rootPointer' => '/events/-',
