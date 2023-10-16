@@ -8,23 +8,12 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriodImmutable;
 
-final class Time
+final class Time implements TimeInterface
 {
     public function __construct(
     ) {
     }
 
-    /**
-     * Split the time span into 1-day DateTimeInterval value objects.
-     *
-     * @param \DateTimeImmutable $start
-     *    The start time
-     * @param \DateTimeImmutable $end
-     *    The end time
-     *
-     * @return array<DateTimeInterval> array
-     *    Array of DateTimeInterval value objects spanning the start/end time
-     */
     public function getInterval(\DateTimeImmutable $start, \DateTimeImmutable $end): array
     {
         $periods = (new CarbonPeriodImmutable($start, '1 day', $end))->toArray();
