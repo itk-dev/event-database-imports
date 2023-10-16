@@ -43,7 +43,7 @@ final class OccurrencesFactory
                 }
             }
 
-            // Occurence found in input, so remove it from event.
+            // Occurrence found in input, so remove it from event.
             $eventOccurrences->removeElement($occurrence);
         }
 

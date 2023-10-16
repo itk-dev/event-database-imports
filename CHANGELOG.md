@@ -28,6 +28,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added image download and processing
 - Added geocoder services
 - Moved fixtures feeds into local filesystem
+- Added time service to help splitting occurrences into daily occurrences
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
