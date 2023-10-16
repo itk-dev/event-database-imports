@@ -52,7 +52,7 @@ final class Geocoder implements GeocoderInterface
         });
 
         if (is_null($item)) {
-            throw new GeocoderException('Unable to look up address');
+            throw new GeocoderException(sprintf('Unable to look up address (%d): %s', $address->getId() ?? -1, $query));
         }
 
         return $item;
@@ -112,6 +112,6 @@ final class Geocoder implements GeocoderInterface
             return $content['resultater'][0]['adresse']['href'];
         }
 
-        throw new GeocoderException('Unable to look up address');
+        throw new GeocoderException(sprintf('Unable to look up address (%s): no link in result', $query));
     }
 }

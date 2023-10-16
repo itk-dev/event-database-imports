@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Entity\Feed;
 use App\Message\FeedItemDataMessage;
 use App\Repository\FeedRepository;
 use App\Service\Feeds\Mapper\FeedConfigurationMapper;
@@ -10,7 +11,6 @@ use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -25,6 +25,8 @@ use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
 )]
 final class FeedImportCommand extends Command
 {
+    private const DEFAULT_OPTION = -1;
+
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly FeedParserInterface $feedParser,
@@ -36,8 +38,8 @@ final class FeedImportCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('feedId', InputArgument::REQUIRED, 'Database feed id')
-            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items outputted', -1);
+        $this->addOption('feed-id', '', InputOption::VALUE_REQUIRED, 'Limit imports to the feed ID given', self::DEFAULT_OPTION)
+            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', self::DEFAULT_OPTION);
     }
 
     /**
@@ -46,49 +48,81 @@ final class FeedImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $feedId = (int) $input->getArgument('feedId');
-        $limit = $input->getOption('limit');
+        $feedId = (int) $input->getOption('feed-id');
+        $limit = (int) $input->getOption('limit');
 
-        $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
-        if (is_null($feed)) {
-            $io->error(sprintf('Invalid feed id: %d', $feedId));
-
-            return Command::INVALID;
-        }
-        if (!$feed->isEnabled()) {
-            $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
-
+        $feeds = $this->loadFeeds($io, $feedId);
+        if (empty($feeds)) {
             return Command::FAILURE;
         }
 
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
 
-        $index = 0;
-        $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
-        foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
-            $message = new FeedItemDataMessage($feedId, $config, $item);
-            try {
-                $this->messageBus->dispatch($message);
-            } catch (TransportException|\LogicException) {
-                // Ensure that message get into failed queue if connection to AMQP fails.
-                $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
+        /** @var Feed $feed */
+        foreach ($feeds as $feed) {
+            if (!$feed->isEnabled()) {
+                $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
+
+                return Command::FAILURE;
             }
 
-            $progressBar->advance();
+            $index = 0;
+            $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
+            foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
+                $feedId = $feed->getId();
+                if (!is_null($feedId)) {
+                    $message = new FeedItemDataMessage($feedId, $config, $item);
+                    try {
+                        $this->messageBus->dispatch($message);
+                    } catch (TransportException|\LogicException) {
+                        // Ensure that message get into failed queue if connection to AMQP fails.
+                        $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
+                    }
 
-            ++$index;
-            if ($limit > 0 && $index >= $limit) {
-                break;
+                    $progressBar->advance();
+
+                    ++$index;
+                    if ($limit > 0 && $index >= $limit) {
+                        break;
+                    }
+                }
             }
+
+            $feed->setLastRead(new \DateTimeImmutable());
+            $this->feedRepository->save($feed, true);
         }
 
-        $feed->setLastRead(new \DateTimeImmutable());
-        $this->feedRepository->save($feed, true);
-
         $progressBar->finish();
-        $io->success('Feed import completed.');
+        $io->success('Feed(s) import completed.');
 
         return Command::SUCCESS;
+    }
+
+    /**
+     * Helper function to load feed entities.
+     *
+     * @param symfonyStyle $io
+     *   Symfony console output
+     * @param int $feedId
+     *   Given a feed id this will limit loading to that feed
+     *
+     * @return array
+     *   Array of feed(s) entities
+     */
+    private function loadFeeds(SymfonyStyle $io, int $feedId = self::DEFAULT_OPTION): array
+    {
+        if (self::DEFAULT_OPTION !== $feedId) {
+            $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
+            if (is_null($feed)) {
+                $io->error(sprintf('Invalid feed id: %d', $feedId));
+
+                return [];
+            }
+
+            return [$feed];
+        }
+
+        return $this->feedRepository->findBy(['enabled' => true]);
     }
 }
