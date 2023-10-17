@@ -26,3 +26,17 @@ services:
         arguments:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
+
+#    App\Service\Indexing\IndexingElasticService:
+#        arguments:
+#            $indexAliasName: '%env(INDEXING_ALIAS)%'
+#
+#    App\Service\Indexing\IndexingServiceInterface: '@App\Service\Indexing\IndexingElasticService'
+
+    Elastic\Elasticsearch\Client:
+        factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]
+        arguments:
+            $config:
+                hosts: ['%env(INDEXING_URL)%']
+
+    Elastic\Elasticsearch\ClientBuilder: ~
