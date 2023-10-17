@@ -29,6 +29,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
                 'Tags' => 'tags.[,]',
                 'DateFrom' => 'occurrences.*.start',
                 'DateTo' => 'occurrences.*.end',
+                'Price' => 'occurrences.*.price',
             ],
             'defaults' => [
                 'title' => 'missing',

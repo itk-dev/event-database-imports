@@ -1,0 +1,102 @@
+<?php
+
+namespace App\Factory;
+
+use App\Entity\DailyOccurrence;
+use App\Entity\Event;
+use App\Entity\Occurrence;
+use App\Model\DateTimeInterval;
+use App\Repository\DailyOccurrenceRepository;
+use App\Service\TimeInterface;
+use Psr\Log\LoggerInterface;
+
+final class DailyOccurrencesFactory
+{
+    public function __construct(
+        private readonly TimeInterface $time,
+        private readonly DailyOccurrenceRepository $dailyOccurrenceRepository,
+        private readonly LoggerInterface $logger
+    ) {
+    }
+
+    public function createOrUpdate(Event $event): void
+    {
+        $exitingDailyOccurrences = $event->getDailyOccurrences();
+        foreach ($event->getOccurrences() as $occurrence) {
+            // Each event occurrence can span more than one day.
+            $start = $occurrence->getStart();
+            $end = $occurrence->getEnd();
+            if (isset($start, $end)) {
+                $intervals = $this->time->getInterval($start, $end);
+                foreach ($exitingDailyOccurrences as $dailyOccurrence) {
+                    foreach ($intervals as $id => $interval) {
+                        // Check if interval exist in the old daily occurrences base on timestamps.
+                        if ($this->isEqualDates($interval, $dailyOccurrence)) {
+                            $this->setValues($interval, $dailyOccurrence, $occurrence);
+                            $this->dailyOccurrenceRepository->save($dailyOccurrence);
+
+                            // Removed processed interval from input.
+                            unset($intervals[$id]);
+
+                            // Jump to outer foreach.
+                            continue 2;
+                        }
+                    }
+
+                    // Daily occurrence not found in intervals, so remove it from event daily.
+                    $exitingDailyOccurrences->removeElement($dailyOccurrence);
+                }
+
+                // Loop over remaining intervals elements.
+                foreach ($intervals as $interval) {
+                    $dailyOccurrence = new DailyOccurrence();
+                    $this->setValues($interval, $dailyOccurrence, $occurrence);
+                    $this->dailyOccurrenceRepository->save($dailyOccurrence);
+
+                    $event->addDailyOccurrence($dailyOccurrence);
+                }
+            }
+        }
+
+        $this->dailyOccurrenceRepository->flush();
+    }
+
+    private function isEqualDates(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence): bool
+    {
+        $occurrenceStartDate = $dailyOccurrence->getStart();
+        $occurrenceEndDate = $dailyOccurrence->getEnd();
+        if (!isset($occurrenceStartDate, $occurrenceEndDate, $interval->start, $interval->end)) {
+            // This should not happen.
+            $this->logger->critical(sprintf('Daily occurrences (id: %d) entity has dates that are null', $dailyOccurrence->getId() ?? '-1'));
+
+            return false;
+        }
+
+        return $occurrenceStartDate->getTimestamp() === $interval->start->getTimestamp()
+          && $occurrenceEndDate->getTimestamp() === $interval->end->getTimestamp();
+    }
+
+    //    /**
+    //     * Helper to set value form feed item occurrences to database occurrence.
+    //     *
+    //     * @param FeedItemOccurrence $feedItemOccurrence
+    //     *   Normalized feed occurrence
+    //     * @param Occurrence $occurrence
+    //     *   Database occurrences entity
+    //     */
+    private function setValues(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence, Occurrence $occurrence): void
+    {
+        $dailyOccurrence->setStart($interval->start)
+            ->setEnd($interval->end)
+            ->setStatus($occurrence->getStatus())
+            ->setRoom($occurrence->getRoom())
+            ->setStatus($occurrence->getStatus())
+            ->setEvent($occurrence->getEvent())
+            ->setOccurrence($occurrence);
+
+        $priceRange = $occurrence->getTicketPriceRange();
+        if (!is_null($priceRange)) {
+            $dailyOccurrence->setTicketPriceRange($priceRange);
+        }
+    }
+}

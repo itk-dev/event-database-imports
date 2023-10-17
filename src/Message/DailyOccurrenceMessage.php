@@ -2,7 +2,7 @@
 
 namespace App\Message;
 
-final class OccurrenceSplitterMessage
+final class DailyOccurrenceMessage
 {
     public function __construct(
         private readonly int $eventId
