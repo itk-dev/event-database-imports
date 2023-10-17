@@ -61,6 +61,17 @@ final class DailyOccurrencesFactory
         $this->dailyOccurrenceRepository->flush();
     }
 
+    /**
+     * Check if the dates are the same in the interval and the daily occurrence,.
+     *
+     * @param DateTimeInterval $interval
+     *   Time interval for an occurrence
+     * @param DailyOccurrence $dailyOccurrence
+     *   The daily occurrence to test the interval against
+     *
+     * @return bool
+     *   True if dates int the objects are the equal
+     */
     private function isEqualDates(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence): bool
     {
         $occurrenceStartDate = $dailyOccurrence->getStart();
@@ -76,14 +87,16 @@ final class DailyOccurrencesFactory
           && $occurrenceEndDate->getTimestamp() === $interval->end->getTimestamp();
     }
 
-    //    /**
-    //     * Helper to set value form feed item occurrences to database occurrence.
-    //     *
-    //     * @param FeedItemOccurrence $feedItemOccurrence
-    //     *   Normalized feed occurrence
-    //     * @param Occurrence $occurrence
-    //     *   Database occurrences entity
-    //     */
+    /**
+     * Helper to set value form DateTimeInterval to daily occurrence entity.
+     *
+     * @param dateTimeInterval $interval
+     *   Time interval for the occurrence
+     * @param dailyOccurrence $dailyOccurrence
+     *   The entity to set value for
+     * @param occurrence $occurrence
+     *   The occurrence the daily occurrence is based on
+     */
     private function setValues(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence, Occurrence $occurrence): void
     {
         $dailyOccurrence->setStart($interval->start)

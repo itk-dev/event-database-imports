@@ -2,17 +2,13 @@
 
 namespace App\Message;
 
-final class ImageMessage
+final class ImageMessage extends AbstractEventIdMessage
 {
     public function __construct(
         private readonly int $eventId,
         private readonly ?int $imageId,
     ) {
-    }
-
-    public function getEventId(): ?int
-    {
-        return $this->eventId;
+        parent::__construct($this->eventId);
     }
 
     public function getImageId(): ?int

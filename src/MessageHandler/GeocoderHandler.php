@@ -12,7 +12,6 @@ use App\Service\Geocoder;
 use Psr\Cache\InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
@@ -29,12 +28,7 @@ final class GeocoderHandler
 
     public function __invoke(GeocoderMessage $message): void
     {
-        if (!is_null($message->getEventId())) {
-            $event = $this->eventRepository->findOneBy(['id' => $message->getEventId()]);
-        } else {
-            throw new UnrecoverableMessageHandlingException('Missing event id in geo-coder handler');
-        }
-
+        $event = $this->eventRepository->findOneBy(['id' => $message->getEventId()]);
         $address = $event?->getLocation()?->getAddress();
         if (!is_null($address)) {
             try {
@@ -51,6 +45,6 @@ final class GeocoderHandler
 
         // Send the event into the search index and at the same time to the occurrence splitter.
         $this->messageBus->dispatch(new DailyOccurrenceMessage($message->getEventId()));
-        //        $this->messageBus->dispatch(new IndexMessage($message->getEventId()));
+        $this->messageBus->dispatch(new IndexMessage($message->getEventId()));
     }
 }

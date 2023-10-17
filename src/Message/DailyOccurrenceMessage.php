@@ -2,15 +2,6 @@
 
 namespace App\Message;
 
-final class DailyOccurrenceMessage
+final class DailyOccurrenceMessage extends AbstractEventIdMessage
 {
-    public function __construct(
-        private readonly int $eventId
-    ) {
-    }
-
-    public function getEventId(): int
-    {
-        return $this->eventId;
-    }
 }
