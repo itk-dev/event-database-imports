@@ -23,6 +23,8 @@ services:
     networks:
       - app
       - frontend
+    ports:
+      - "9200"
     deploy:
       resources:
         limits:
@@ -33,6 +35,7 @@ services:
       - ./.docker/data/elasticsearch:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
 
   node:
     image: node:18

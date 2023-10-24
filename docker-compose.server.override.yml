@@ -34,6 +34,7 @@ services:
       - ./.docker/data/elasticsearch:/usr/share/elasticsearch/data
     environment:
       - discovery.type=single-node
+      - xpack.security.enabled=false
 
   supervisor:
     image: itkdev/supervisor-php8.1:alpine
