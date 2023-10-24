@@ -27,11 +27,13 @@ services:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
 
-#    App\Service\Indexing\IndexingElasticService:
-#        arguments:
-#            $indexAliasName: '%env(INDEXING_ALIAS)%'
-#
-#    App\Service\Indexing\IndexingServiceInterface: '@App\Service\Indexing\IndexingElasticService'
+    App\Service\Indexing\IndexingEvents:
+        arguments:
+            $indexAliasName: '%env(INDEXING_EVENTS_ALIAS)%'
+
+    App\Service\Indexing\IndexingDailyOccurrences:
+        arguments:
+            $indexAliasName: '%env(INDEXING_DAILY_OCCURRENCE_ALIAS)%'
 
     Elastic\Elasticsearch\Client:
         factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]

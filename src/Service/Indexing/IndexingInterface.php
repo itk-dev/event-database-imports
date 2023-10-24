@@ -4,7 +4,7 @@ namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
 
-interface IndexingServiceInterface
+interface IndexingInterface
 {
     /**
      * Add single item to the index.
