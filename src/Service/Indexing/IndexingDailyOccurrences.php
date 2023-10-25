@@ -85,7 +85,7 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
                 throw new IndexingException('Unable to create new index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

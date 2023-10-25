@@ -3,6 +3,7 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexItemInterface;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -37,7 +38,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -127,7 +128,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                 return false;
             }
 
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -160,7 +161,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             ]);
             $this->client->indices()->delete(['index' => $existingIndexName]);
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 
@@ -177,7 +178,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         try {
             $this->client->indices()->refresh(['index' => $indexName]);
         } catch (ClientResponseException|ServerResponseException $e) {
-            throw new IndexingException('Unable to refresh index', (int) $e->getCode(), $e);
+            throw new IndexingException('Unable to refresh index', $e->getCode(), $e);
         }
     }
 
@@ -204,7 +205,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
 
             return array_pop($aliases);
         } catch (ClientResponseException|ServerResponseException $e) {
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 

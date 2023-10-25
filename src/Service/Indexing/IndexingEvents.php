@@ -38,17 +38,10 @@ final class IndexingEvents extends AbstractIndexingElastic
                     'mappings' => [
                         'dynamic' => 'strict',
                         'properties' => [
-                            'isType' => [
-                                'type' => 'keyword',
+                            'id' => [
+                                'type' => 'integer',
                                 'index_options' => 'docs',
                                 'doc_values' => false,
-                                'norms' => false,
-                            ],
-                            'isIdentifier' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                // API responses are sorted by identifier
-                                'doc_values' => true,
                                 'norms' => false,
                             ],
                             'imageFormat' => [
@@ -57,24 +50,6 @@ final class IndexingEvents extends AbstractIndexingElastic
                                 'index' => false,
                                 'doc_values' => false,
                                 'norms' => false,
-                            ],
-                            'imageUrl' => [
-                                'type' => 'text',
-                                'index' => false,
-                                'norms' => false,
-                            ],
-                            'width' => [
-                                'type' => 'integer',
-                                'index' => false,
-                                'doc_values' => false,
-                            ],
-                            'height' => [
-                                'type' => 'integer',
-                                'doc_values' => false,
-                            ],
-                            'generic' => [
-                                'type' => 'boolean',
-                                'doc_values' => false,
                             ],
                         ],
                     ],
@@ -85,7 +60,7 @@ final class IndexingEvents extends AbstractIndexingElastic
                 throw new IndexingException('Unable to create new index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
-            throw new IndexingException($e->getMessage(), (int) $e->getCode(), $e);
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

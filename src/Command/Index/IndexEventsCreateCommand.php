@@ -16,9 +16,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class IndexEventsCreateCommand extends Command
 {
-    /**
-     * @param IndexingEvents $indexingService
-     */
     public function __construct(
         private readonly IndexingEvents $indexingService
     ) {
