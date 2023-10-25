@@ -35,4 +35,126 @@
       <code>$source</code>
     </InvalidOperand>
   </file>
+  <file src="src/Service/Indexing/AbstractIndexingElastic.php">
+    <InvalidArgument>
+      <code>$params</code>
+      <code>$params</code>
+      <code>$params</code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $newIndexName,
+                                'alias' => $this->indexAliasName,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $this->newIndexName,
+                                'alias' => $this->indexAliasName,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[['index' => $existingIndexName]]]></code>
+      <code><![CDATA[['index' => $indexName]]]></code>
+      <code><![CDATA[['name' => $this->indexAliasName]]]></code>
+      <code><![CDATA[['name' => $this->indexAliasName]]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
+    <InvalidArgument>
+      <code><![CDATA[[
+                'index' => $indexName,
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        'dynamic' => 'strict',
+                        'properties' => [
+                            'isType' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'isIdentifier' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                // API responses are sorted by identifier
+                                'doc_values' => true,
+                                'norms' => false,
+                            ],
+                            'imageFormat' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'imageUrl' => [
+                                'type' => 'text',
+                                'index' => false,
+                                'norms' => false,
+                            ],
+                            'width' => [
+                                'type' => 'integer',
+                                'index' => false,
+                                'doc_values' => false,
+                            ],
+                            'height' => [
+                                'type' => 'integer',
+                                'doc_values' => false,
+                            ],
+                            'generic' => [
+                                'type' => 'boolean',
+                                'doc_values' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Service/Indexing/IndexingEvents.php">
+    <InvalidArgument>
+      <code><![CDATA[[
+                'index' => $indexName,
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        'dynamic' => 'strict',
+                        'properties' => [
+                            'id' => [
+                                'type' => 'integer',
+                                'index_options' => 'docs',
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'imageFormat' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+    </InvalidArgument>
+  </file>
 </files>
