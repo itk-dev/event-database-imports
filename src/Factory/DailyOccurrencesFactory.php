@@ -105,11 +105,7 @@ final class DailyOccurrencesFactory
             ->setRoom($occurrence->getRoom())
             ->setStatus($occurrence->getStatus())
             ->setEvent($occurrence->getEvent())
+            ->setTicketPriceRange($occurrence->getTicketPriceRange())
             ->setOccurrence($occurrence);
-
-        $priceRange = $occurrence->getTicketPriceRange();
-        if (!is_null($priceRange)) {
-            $dailyOccurrence->setTicketPriceRange($priceRange);
-        }
     }
 }
