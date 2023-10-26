@@ -27,7 +27,7 @@ final class DailyOccurrencesFactory
             $start = $occurrence->getStart();
             $end = $occurrence->getEnd();
             if (isset($start, $end)) {
-                $intervals = $this->time->getInterval($start, $end);
+                $intervals = $this->time->getIntervals($start, $end);
                 foreach ($exitingDailyOccurrences as $dailyOccurrence) {
                     foreach ($intervals as $id => $interval) {
                         // Check if interval exist in the old daily occurrences based on timestamps.

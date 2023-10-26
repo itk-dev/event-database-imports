@@ -14,7 +14,7 @@ final class Time implements TimeInterface
     ) {
     }
 
-    public function getInterval(\DateTimeImmutable $start, \DateTimeImmutable $end): array
+    public function getIntervals(\DateTimeImmutable $start, \DateTimeImmutable $end): array
     {
         $periods = (new CarbonPeriodImmutable($start, '1 day', $end))->toArray();
 
@@ -29,7 +29,7 @@ final class Time implements TimeInterface
         $seconds = $this->getDiffInSeconds($lastPeriod->toDateTimeImmutable(), $end);
         $periods[\count($periods) - 1] = new CarbonImmutable($lastPeriod->addSeconds($seconds)->toDate());
 
-        return $this->CovertToTimeDateIntervals($periods);
+        return $this->periodsToDateTimeIntervals($periods);
     }
 
     /**
@@ -39,7 +39,7 @@ final class Time implements TimeInterface
      *
      * @return array<DateTimeInterval>
      */
-    private function CovertToTimeDateIntervals(array $periods): array
+    private function periodsToDateTimeIntervals(array $periods): array
     {
         $output = [];
 

@@ -21,7 +21,7 @@ final class TimeServiceTest extends KernelTestCase
         $start = new \DateTimeImmutable('2023-09-23T10:00:00+02:00');
         $end = new \DateTimeImmutable('2023-09-23T12:30:00+02:00');
 
-        $times = $time->getInterval($start, $end);
+        $times = $time->getIntervals($start, $end);
 
         $this->assertCount(1, $times);
         $this->assertEquals($start, $times[0]->start);
@@ -38,7 +38,7 @@ final class TimeServiceTest extends KernelTestCase
         $start = new \DateTimeImmutable('2023-09-29T10:00:00+02:00');
         $end = new \DateTimeImmutable('2023-09-30T12:30:00+02:00');
 
-        $times = $time->getInterval($start, $end);
+        $times = $time->getIntervals($start, $end);
 
         $this->assertCount(2, $times);
         $this->assertEquals($start, reset($times)->start);
@@ -57,7 +57,7 @@ final class TimeServiceTest extends KernelTestCase
         $start = new \DateTimeImmutable('2023-09-23T10:00:00+02:00');
         $end = new \DateTimeImmutable('2023-09-30T12:30:00+02:00');
 
-        $times = $time->getInterval($start, $end);
+        $times = $time->getIntervals($start, $end);
 
         $this->assertCount(8, $times);
         $this->assertEquals($start, reset($times)->start);
