@@ -30,12 +30,12 @@ final class DailyOccurrencesFactory
                 $intervals = $this->time->getInterval($start, $end);
                 foreach ($exitingDailyOccurrences as $dailyOccurrence) {
                     foreach ($intervals as $id => $interval) {
-                        // Check if interval exist in the old daily occurrences base on timestamps.
+                        // Check if interval exist in the old daily occurrences based on timestamps.
                         if ($this->isEqualDates($interval, $dailyOccurrence)) {
                             $this->setValues($interval, $dailyOccurrence, $occurrence);
                             $this->dailyOccurrenceRepository->save($dailyOccurrence);
 
-                            // Removed processed interval from input.
+                            // Remove processed interval from input.
                             unset($intervals[$id]);
 
                             // Jump to outer foreach.
@@ -43,11 +43,11 @@ final class DailyOccurrencesFactory
                         }
                     }
 
-                    // Daily occurrence not found in intervals, so remove it from event daily.
+                    // Daily occurrence not found in intervals, so remove it from event's daily occurrences.
                     $exitingDailyOccurrences->removeElement($dailyOccurrence);
                 }
 
-                // Loop over remaining intervals elements.
+                // Create daily occurrences for remaining intervals.
                 foreach ($intervals as $interval) {
                     $dailyOccurrence = new DailyOccurrence();
                     $this->setValues($interval, $dailyOccurrence, $occurrence);
@@ -62,7 +62,7 @@ final class DailyOccurrencesFactory
     }
 
     /**
-     * Check if the dates are the same in the interval and the daily occurrence,.
+     * Check if the dates are the same in the interval and the daily occurrence.
      *
      * @param DateTimeInterval $interval
      *   Time interval for an occurrence
@@ -70,7 +70,7 @@ final class DailyOccurrencesFactory
      *   The daily occurrence to test the interval against
      *
      * @return bool
-     *   True if dates int the objects are the equal
+     *   True if dates in the objects are equal
      */
     private function isEqualDates(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence): bool
     {
