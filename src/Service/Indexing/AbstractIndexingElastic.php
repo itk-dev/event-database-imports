@@ -3,7 +3,6 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
-use App\Model\Indexing\IndexItemInterface;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -253,4 +252,32 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         throw new IndexingException('Base elastic indexing class do not implement create index');
     }
+
+    /**
+     * Get common configuration that every index should use.
+     *
+     * @param string $indexName
+     *    Name of the index to create
+     *
+     * @return array
+     *   Basic/shared configuration between all indexes.
+     */
+    protected function getCommonIndexConfig(string $indexName): array
+    {
+        return [
+            'index' => $indexName,
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 5,
+                    'number_of_replicas' => 0,
+                ],
+                'mappings' => [
+                    // @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html#dynamic-parameters
+                    'dynamic' => 'strict',
+                    'properties' => [],
+                ],
+            ],
+        ];
+    }
+
 }

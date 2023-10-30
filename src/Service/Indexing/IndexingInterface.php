@@ -3,7 +3,6 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
-use App\Model\Indexing\IndexItemInterface;
 
 interface IndexingInterface
 {

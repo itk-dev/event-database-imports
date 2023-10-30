@@ -26,35 +26,67 @@ final class IndexingEvents extends AbstractIndexingElastic
      */
     protected function createEsIndex(string $indexName): void
     {
+        $configuration = $this->getCommonIndexConfig($indexName);
+        $configuration['body']['mappings']['properties'] = [
+            'entityId' => [
+                'type' => 'integer',
+                'doc_values' => false,
+            ],
+            'excerpt' => [
+                'type' => 'text',
+                'index_options' => 'docs',
+                'index' => false,
+                'norms' => false,
+            ],
+            'description' => [
+                'type' => 'text',
+                'index_options' => 'docs',
+                'index' => false,
+                'norms' => false,
+            ],
+            'url' => [
+                'type' => 'keyword',
+                'index_options' => 'docs',
+                'index' => false,
+                'doc_values' => false,
+                'norms' => false,
+            ],
+            'ticketUrl' => [
+                'type' => 'keyword',
+                'index_options' => 'docs',
+                'index' => false,
+                'doc_values' => false,
+                'norms' => false,
+            ],
+            'imageUrl' => [
+                'type' => 'keyword',
+                'index_options' => 'docs',
+                'index' => false,
+                'doc_values' => false,
+                'norms' => false,
+            ],
+            'public' => [
+                'type' => 'boolean',
+                'index' => false,
+                'doc_values' => false,
+            ],
+            'created' => [
+                'type' => 'date',
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+                'index' => false,
+                'doc_values' => true,
+            ],
+            'updated' => [
+                'type' => 'date',
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+                'index' => false,
+                'doc_values' => true,
+            ],
+        ];
+
         try {
             /** @var Elasticsearch $response */
-            $response = $this->client->indices()->create([
-                'index' => $indexName,
-                'body' => [
-                    'settings' => [
-                        'number_of_shards' => 5,
-                        'number_of_replicas' => 0,
-                    ],
-                    'mappings' => [
-                        'dynamic' => 'strict',
-                        'properties' => [
-                            'id' => [
-                                'type' => 'integer',
-                                'index_options' => 'docs',
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                            'imageFormat' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                'index' => false,
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                        ],
-                    ],
-                ],
-            ]);
+            $response = $this->client->indices()->create($configuration);
 
             if (Response::HTTP_OK !== $response->getStatusCode() && Response::HTTP_NO_CONTENT !== $response->getStatusCode()) {
                 throw new IndexingException('Unable to create new index', $response->getStatusCode());

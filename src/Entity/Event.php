@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EventRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -12,7 +13,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-class Event
+class Event implements IndexItemInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -291,5 +292,25 @@ class Event
         $this->image = $image;
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'entityId' => $this->id,
+            'excerpt' => $this->excerpt,
+            'description' => $this->description,
+            'url' => $this->url,
+            'ticketUrl' => $this->ticket_url,
+            'imageUrl' => $this->image->getLocal(),
+            'public' => $this->public,
+            'created' => $this->createdAt,
+            'updated' => $this->updatedAt,
+
+//            'tags' => $this->tags,
+//            'location' => $this->location,
+//            'organizer' => $this->organization,
+//            'occurrences' => $this->occurrences,
+        ];
     }
 }
