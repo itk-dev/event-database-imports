@@ -3,7 +3,6 @@
 namespace App\Command\Index;
 
 use App\Exception\IndexingException;
-use App\Service\Populate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
@@ -37,7 +36,7 @@ class IndexCreateCommand extends Command
             'Indexes to index (separate multiple indexes with a space)',
             $this->indexes,
             function (CompletionInput $input): array {
-                return array_filter($this->indexes, fn($item) => str_starts_with($item, $input->getCompletionValue()));
+                return array_filter($this->indexes, fn ($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         );
     }

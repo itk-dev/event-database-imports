@@ -69,6 +69,12 @@
       <code><![CDATA[['name' => $this->indexAliasName]]]></code>
       <code><![CDATA[['name' => $this->indexAliasName]]]></code>
     </InvalidArgument>
+    <PossiblyUndefinedMethod>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+    </PossiblyUndefinedMethod>
   </file>
   <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
     <InvalidArgument>
@@ -128,33 +134,7 @@
   </file>
   <file src="src/Service/Indexing/IndexingEvents.php">
     <InvalidArgument>
-      <code><![CDATA[[
-                'index' => $indexName,
-                'body' => [
-                    'settings' => [
-                        'number_of_shards' => 5,
-                        'number_of_replicas' => 0,
-                    ],
-                    'mappings' => [
-                        'dynamic' => 'strict',
-                        'properties' => [
-                            'id' => [
-                                'type' => 'integer',
-                                'index_options' => 'docs',
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                            'imageFormat' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                'index' => false,
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                        ],
-                    ],
-                ],
-            ]]]></code>
+      <code>$configuration</code>
     </InvalidArgument>
   </file>
 </files>

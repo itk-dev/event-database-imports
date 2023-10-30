@@ -6,8 +6,6 @@
 
 namespace App\Service;
 
-use App\Service\Indexing\IndexingInterface;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
@@ -76,8 +74,7 @@ class Populate
 
                 if (-1 !== $record_id) {
                     $indexingServices[$index]->index(reset($entities));
-                }
-                else {
+                } else {
                     // Send bulk.
                     $indexingServices[$index]->bulk($entities);
                 }

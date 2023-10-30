@@ -2,9 +2,6 @@
 
 namespace App\Command\Index;
 
-use App\Exception\IndexingException;
-use App\Service\Indexing\IndexingDailyOccurrences;
-use App\Service\Indexing\IndexingEvents;
 use App\Service\Populate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -41,7 +38,7 @@ class PopulateIndexCommand extends Command
             sprintf('Index to populate (one off %s)', implode(', ', $this->indexes)),
             null,
             function (CompletionInput $input): array {
-                return array_filter($this->indexes, fn($item) => str_starts_with($item, $input->getCompletionValue()));
+                return array_filter($this->indexes, fn ($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
@@ -54,7 +51,6 @@ class PopulateIndexCommand extends Command
         $index = $input->getArgument('index');
         $id = (int) $input->getOption('id');
         $force = $input->getOption('force');
-
 
         if (!in_array($index, $this->indexes)) {
             $io->error('Index service for index ('.$index.') do not exists');

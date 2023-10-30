@@ -218,7 +218,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
      *    Name of the index to create
      *
      * @return array
-     *   Basic/shared configuration between all indexes.
+     *   Basic/shared configuration between all indexes
      */
     protected function getCommonIndexConfig(string $indexName): array
     {
@@ -249,6 +249,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
      * inverted index for search and highlighting purposes.
      * 'docs': Only the doc number is indexed. Can answer the question
      * Does this term exist in this field?
+     *
      * @see https://www.elastic.co/guide/en/elasticsearch/reference/8.5/index-options.html
      *
      * 'doc_values' => false

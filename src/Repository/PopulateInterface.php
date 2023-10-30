@@ -2,9 +2,6 @@
 
 namespace App\Repository;
 
-use App\Exception\IndexingException;
-use App\Service\Indexing\IndexItemInterface;
-
 interface PopulateInterface
 {
     /**
