@@ -296,6 +296,12 @@ class Event implements IndexItemInterface
 
     public function toArray(): array
     {
+        $tags = [];
+        /** @var Tag $tag */
+        foreach ($this->tags as $tag) {
+            $tags[] = $tag->getName();
+        }
+
         return [
             'entityId' => $this->id,
             'excerpt' => $this->excerpt,
@@ -307,8 +313,7 @@ class Event implements IndexItemInterface
             // @TODO: move date format into config, matches the one in index config.
             'created' => $this->createdAt?->format('Y-m-d H:i:s'),
             'updated' => $this->updatedAt?->format('Y-m-d H:i:s'),
-
-//            'tags' => $this->tags,
+            'tags' => $tags,
 //            'location' => $this->location,
 //            'organizer' => $this->organization,
 //            'occurrences' => $this->occurrences,

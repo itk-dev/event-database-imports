@@ -82,6 +82,13 @@ final class IndexingEvents extends AbstractIndexingElastic
                 'index' => false,
                 'doc_values' => true,
             ],
+            'tags' => [
+                'type' => 'keyword',
+                'index_options' => 'docs',
+                'index' => false,
+                'doc_values' => false,
+                'norms' => false,
+            ],
         ];
 
         try {

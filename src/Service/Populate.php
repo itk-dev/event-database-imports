@@ -58,8 +58,6 @@ class Populate
             $entriesAdded = 0;
 
             while ($entriesAdded < $numberOfRecords) {
-                $items = [];
-
                 $criteria = [];
                 if ($this::DEFAULT_RECORD_ID !== $record_id) {
                     $criteria = ['id' => $record_id];
@@ -72,11 +70,13 @@ class Populate
                     break;
                 }
 
-                if (-1 !== $record_id) {
-                    $indexingServices[$index]->index(reset($entities));
-                } else {
+                if ($this::DEFAULT_RECORD_ID === $record_id) {
                     // Send bulk.
                     $indexingServices[$index]->bulk($entities);
+                } else {
+                    // Single indexing is very useful for debug as Elastic searches bulk indexing don't throw errors but
+                    // always returns HTTP_OK as the items are send into an intern queue in Elastic.
+                    $indexingServices[$index]->index(reset($entities));
                 }
 
                 $entriesAdded += count($entities);
@@ -90,6 +90,7 @@ class Populate
             }
 
             if ($this::DEFAULT_RECORD_ID === $record_id) {
+                // If single item was indexed there is no new index created, so don't try to switch indexes.
                 yield '<info>Switching alias and removing old index</info>';
                 $indexingServices[$index]->switchIndex();
             }
