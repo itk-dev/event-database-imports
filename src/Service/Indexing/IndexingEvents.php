@@ -8,8 +8,10 @@ use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
 
+#[AsTaggedItem(index: 'events', priority: 10)]
 final class IndexingEvents extends AbstractIndexingElastic
 {
     private ?string $newIndexName = null;

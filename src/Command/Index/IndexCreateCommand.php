@@ -21,13 +21,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class IndexCreateCommand extends Command
 {
     private array $indexes = [
-        'events' => 'indexingEvents',
-        'daily' => 'indexingDailyOccurrences',
+        'events',
+        'daily',
     ];
 
     public function __construct(
-        private readonly IndexingDailyOccurrences $indexingDailyOccurrences,
-        private readonly IndexingEvents $indexingEvents,
+        private readonly iterable $indexingServices,
     ) {
         parent::__construct();
     }
@@ -50,18 +49,24 @@ class IndexCreateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $inputIndexes = $input->getArgument('indexes');
+        $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
 
         foreach ($inputIndexes as $index) {
-            try {
-                $service = $this->{$this->indexes[$index]};
-            if (!$service->indexExists()) {
-                $service->createIndex();
-
-                $io->success('Index created');
-            } else {
-                $io->caution('Index exists. Aborting.');
+            if (!array_key_exists($index, $indexingServices)) {
+                $io->error('Index service for index ('.$index.') do not exists');
+                continue;
             }
-        } catch (IndexingException $e) {
+
+            $service = $indexingServices[$index];
+            try {
+                if (!$service->indexExists()) {
+                    $service->createIndex();
+
+                    $io->success('Index created: '.$index);
+                } else {
+                    $io->caution('Index exists ('.$index.'). Aborting.');
+                }
+            } catch (IndexingException $e) {
                 $io->error($e->getMessage());
 
                 return Command::FAILURE;
