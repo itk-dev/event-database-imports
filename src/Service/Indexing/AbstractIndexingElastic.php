@@ -81,7 +81,10 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                 $params['body'][] = $item->toArray();
             }
 
-            $this->client->bulk($params);
+            $response = $this->client->bulk($params);
+            if (Response::HTTP_OK !== $response->getStatusCode() && Response::HTTP_CREATED !== $response->getStatusCode() && Response::HTTP_NO_CONTENT !== $response->getStatusCode()) {
+                throw new IndexingException('Unable to add item to index', $response->getStatusCode());
+            }
         } catch (ClientResponseException|ServerResponseException $e) {
             throw new IndexingException($e->getMessage(), $e->getCode(), $e);
         }
@@ -209,17 +212,36 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     }
 
     /**
+     * Get common configuration that every index should use.
+     *
+     * @param string $indexName
+     *    Name of the index to create
+     *
+     * @return array
+     *   Basic/shared configuration between all indexes.
+     */
+    protected function getCommonIndexConfig(string $indexName): array
+    {
+        return [
+            'index' => $indexName,
+            'body' => [
+                'settings' => [
+                    'number_of_shards' => 5,
+                    'number_of_replicas' => 0,
+                ],
+                'mappings' => [
+                    // @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html#dynamic-parameters
+                    'dynamic' => 'strict',
+                    'properties' => [],
+                ],
+            ],
+        ];
+    }
+
+    /**
      * Create new index.
      *
      * Index optimizations
-     *
-     * @see https://www.inventaconsulting.net/post/a-guide-to-optimizing-elasticsearch-mappings
-     *
-     * 'dynamic' => 'strict'
-     *
-     * If new fields are detected, an exception is thrown and the document is rejected.
-     * New fields must be explicitly added to the mapping.
-     * @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html#dynamic-parameters
      *
      * 'index_options' => 'docs'
      *
@@ -252,32 +274,4 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         throw new IndexingException('Base elastic indexing class do not implement create index');
     }
-
-    /**
-     * Get common configuration that every index should use.
-     *
-     * @param string $indexName
-     *    Name of the index to create
-     *
-     * @return array
-     *   Basic/shared configuration between all indexes.
-     */
-    protected function getCommonIndexConfig(string $indexName): array
-    {
-        return [
-            'index' => $indexName,
-            'body' => [
-                'settings' => [
-                    'number_of_shards' => 5,
-                    'number_of_replicas' => 0,
-                ],
-                'mappings' => [
-                    // @see https://www.elastic.co/guide/en/elasticsearch/reference/current/dynamic.html#dynamic-parameters
-                    'dynamic' => 'strict',
-                    'properties' => [],
-                ],
-            ],
-        ];
-    }
-
 }

@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 #[AsTaggedItem(index: 'daily', priority: 10)]
 final class IndexingDailyOccurrences extends AbstractIndexingElastic
 {
-    private ?string $newIndexName = null;
-
     public function __construct(
         private readonly string $indexAliasName,
         private readonly Client $client,

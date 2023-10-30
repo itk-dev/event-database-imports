@@ -2,6 +2,8 @@
 
 namespace App\Model\Indexing;
 
+use App\Service\Indexing\IndexItemInterface;
+
 final class IndexItemEvent implements IndexItemInterface
 {
     public function __construct(

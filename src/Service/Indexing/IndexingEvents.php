@@ -14,8 +14,6 @@ use Symfony\Component\HttpFoundation\Response;
 #[AsTaggedItem(index: 'events', priority: 10)]
 final class IndexingEvents extends AbstractIndexingElastic
 {
-    private ?string $newIndexName = null;
-
     public function __construct(
         private readonly string $indexAliasName,
         private readonly Client $client,

@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Event;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
  * @extends ServiceEntityRepository<Event>
@@ -14,7 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Event[]    findAll()
  * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class EventRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: 'events', priority: 10)]
+final class EventRepository extends ServiceEntityRepository implements PopulateInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,5 +41,18 @@ final class EventRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getNumberOfRecords(): int
+    {
+        $query = $this->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
     }
 }

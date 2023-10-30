@@ -304,8 +304,8 @@ class Event implements IndexItemInterface
             'ticketUrl' => $this->ticket_url,
             'imageUrl' => $this->image->getLocal(),
             'public' => $this->public,
-            'created' => $this->createdAt,
-            'updated' => $this->updatedAt,
+            'created' => $this->createdAt->format('Y-m-d H:i:s'),
+            'updated' => $this->updatedAt->format('Y-m-d H:i:s'),
 
 //            'tags' => $this->tags,
 //            'location' => $this->location,

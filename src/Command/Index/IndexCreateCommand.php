@@ -3,14 +3,12 @@
 namespace App\Command\Index;
 
 use App\Exception\IndexingException;
-use App\Service\Indexing\IndexingDailyOccurrences;
-use App\Service\Indexing\IndexingEvents;
+use App\Service\Populate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -37,10 +35,9 @@ class IndexCreateCommand extends Command
             'indexes',
             InputArgument::IS_ARRAY,
             'Indexes to index (separate multiple indexes with a space)',
-            array_keys($this->indexes),
+            $this->indexes,
             function (CompletionInput $input): array {
-                $indexes = array_keys($this->indexes);
-                return array_filter($indexes, fn($item) => str_starts_with($item, $input->getCompletionValue()));
+                return array_filter($this->indexes, fn($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         );
     }
@@ -56,8 +53,8 @@ class IndexCreateCommand extends Command
                 $io->error('Index service for index ('.$index.') do not exists');
                 continue;
             }
-
             $service = $indexingServices[$index];
+
             try {
                 if (!$service->indexExists()) {
                     $service->createIndex();

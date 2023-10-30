@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\DailyOccurrence;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
  * @extends ServiceEntityRepository<DailyOccurrence>
@@ -14,7 +17,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method DailyOccurrence[]    findAll()
  * @method DailyOccurrence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class DailyOccurrenceRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: 'daily', priority: 10)]
+final class DailyOccurrenceRepository extends ServiceEntityRepository implements PopulateInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -42,5 +46,18 @@ final class DailyOccurrenceRepository extends ServiceEntityRepository
     public function flush(): void
     {
         $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getNumberOfRecords(): int
+    {
+        $query = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
     }
 }
