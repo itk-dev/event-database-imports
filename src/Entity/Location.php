@@ -182,15 +182,15 @@ class Location implements IndexItemInterface
             'telephone' => $this->telephone,
             'disabilityAccess' => $this->disabilityAccess,
             'mail' => $this->mail,
-            'city' => $address->getCity(),
-            'street' => $address->getStreet(),
-            'suite' => $address->getSuite(),
-            'region' => $address->getRegion(),
-            'postalCode' => $address->getPostalCode(),
-            'country' => $address->getCountry(),
+            'city' => $address?->getCity(),
+            'street' => $address?->getStreet(),
+            'suite' => $address?->getSuite(),
+            'region' => $address?->getRegion(),
+            'postalCode' => $address?->getPostalCode(),
+            'country' => $address?->getCountry(),
             'coordinates' => [
-                $address->getLatitude(),
-                $address->getLongitude(),
+                $address?->getLatitude(),
+                $address?->getLongitude(),
             ],
         ];
     }
