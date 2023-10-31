@@ -34,7 +34,7 @@ final class GeocoderHandler
             try {
                 $coordinates = $this->geocoderService->encode($address);
                 $address->setLatitude($coordinates[0]);
-                $address->setLongitude($coordinates[0]);
+                $address->setLongitude($coordinates[1]);
                 $this->addressRepository->save($address, true);
             } catch (GeocoderException|InvalidArgumentException $e) {
                 // It is fine that not all addresses are possible to geo-encode, so we just log the database id for later
