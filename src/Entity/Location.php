@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\LocationRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
-class Location
+class Location implements IndexItemInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -167,5 +168,30 @@ class Location
         }
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        $address = $this->getAddress();
+
+        return [
+            'entityId' => $this->id,
+            'name' => $this->name,
+            'image' => $this->image,
+            'url' => $this->url,
+            'telephone' => $this->telephone,
+            'disabilityAccess' => $this->disabilityAccess,
+            'mail' => $this->mail,
+            'city' => $address->getCity(),
+            'street' => $address->getStreet(),
+            'suite' => $address->getSuite(),
+            'region' => $address->getRegion(),
+            'postalCode' => $address->getPostalCode(),
+            'country' => $address->getCountry(),
+            'coordinates' => [
+                $address->getLatitude(),
+                $address->getLongitude(),
+            ],
+        ];
     }
 }

@@ -179,7 +179,6 @@ class Organization implements IndexItemInterface
             'name' => $this->name,
             'email' => $this->mail,
             'url' => $this->url,
-            // @TODO: move date format into config, matches the one in index config.
             'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
             'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
         ];

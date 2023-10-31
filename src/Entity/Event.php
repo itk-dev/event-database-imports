@@ -311,12 +311,11 @@ class Event implements IndexItemInterface
             'ticketUrl' => $this->ticket_url,
             'imageUrl' => $this->image?->getLocal(),
             'public' => $this->public,
-            // @TODO: move date format into config, matches the one in index config.
             'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
             'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
             'tags' => $tags,
             'organizer' => $this->organization?->toArray(),
-//            'location' => $this->location,
+            'location' => $this->location?->toArray(),
 //            'occurrences' => $this->occurrences,
         ];
     }
