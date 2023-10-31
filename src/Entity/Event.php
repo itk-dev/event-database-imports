@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexFieldTypes;
 use App\Repository\EventRepository;
 use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -311,11 +312,11 @@ class Event implements IndexItemInterface
             'imageUrl' => $this->image?->getLocal(),
             'public' => $this->public,
             // @TODO: move date format into config, matches the one in index config.
-            'created' => $this->createdAt?->format('Y-m-d H:i:s'),
-            'updated' => $this->updatedAt?->format('Y-m-d H:i:s'),
+            'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
+            'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
             'tags' => $tags,
+            'organizer' => $this->organization?->toArray(),
 //            'location' => $this->location,
-//            'organizer' => $this->organization,
 //            'occurrences' => $this->occurrences,
         ];
     }

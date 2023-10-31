@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Event;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -17,7 +18,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
  * @method Event[]    findAll()
  * @method Event[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-#[AsTaggedItem(index: 'events', priority: 10)]
+#[AsTaggedItem(index: IndexNames::Events->value, priority: 10)]
 final class EventRepository extends ServiceEntityRepository implements PopulateInterface
 {
     public function __construct(ManagerRegistry $registry)

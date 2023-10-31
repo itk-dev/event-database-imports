@@ -3,6 +3,7 @@
 namespace App\Command\Index;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexNames;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
@@ -17,11 +18,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class IndexCreateCommand extends Command
 {
-    private array $indexes = [
-        'events',
-        'daily',
-    ];
-
     public function __construct(
         private readonly iterable $indexingServices,
     ) {
@@ -34,9 +30,9 @@ class IndexCreateCommand extends Command
             'indexes',
             InputArgument::IS_ARRAY,
             'Indexes to index (separate multiple indexes with a space)',
-            $this->indexes,
+            IndexNames::values(),
             function (CompletionInput $input): array {
-                return array_filter($this->indexes, fn ($item) => str_starts_with($item, $input->getCompletionValue()));
+                return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         );
     }

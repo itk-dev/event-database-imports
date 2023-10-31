@@ -2,6 +2,7 @@
 
 namespace App\Command\Index;
 
+use App\Model\Indexing\IndexNames;
 use App\Service\Populate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -19,11 +20,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class PopulateIndexCommand extends Command
 {
-    private array $indexes = [
-        'events',
-        'daily',
-    ];
-
     public function __construct(
         private readonly Populate $populate,
     ) {
@@ -35,10 +31,10 @@ class PopulateIndexCommand extends Command
         $this->addArgument(
             'index',
             InputArgument::REQUIRED,
-            sprintf('Index to populate (one off %s)', implode(', ', $this->indexes)),
+            sprintf('Index to populate (one off %s)', implode(', ', IndexNames::values())),
             null,
             function (CompletionInput $input): array {
-                return array_filter($this->indexes, fn ($item) => str_starts_with($item, $input->getCompletionValue()));
+                return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
@@ -52,7 +48,7 @@ class PopulateIndexCommand extends Command
         $id = (int) $input->getOption('id');
         $force = $input->getOption('force');
 
-        if (!in_array($index, $this->indexes)) {
+        if (!in_array($index, IndexNames::values())) {
             $io->error('Index service for index ('.$index.') do not exists');
 
             return Command::FAILURE;

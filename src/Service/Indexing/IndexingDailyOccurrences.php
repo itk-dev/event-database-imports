@@ -3,6 +3,7 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexNames;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -11,7 +12,7 @@ use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsTaggedItem(index: 'daily', priority: 10)]
+#[AsTaggedItem(index: IndexNames::DailyOccurrences->value, priority: 10)]
 final class IndexingDailyOccurrences extends AbstractIndexingElastic
 {
     public function __construct(
@@ -38,42 +39,8 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
                     'mappings' => [
                         'dynamic' => 'strict',
                         'properties' => [
-                            'isType' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                            'isIdentifier' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                // API responses are sorted by identifier
-                                'doc_values' => true,
-                                'norms' => false,
-                            ],
-                            'imageFormat' => [
-                                'type' => 'keyword',
-                                'index_options' => 'docs',
-                                'index' => false,
-                                'doc_values' => false,
-                                'norms' => false,
-                            ],
-                            'imageUrl' => [
-                                'type' => 'text',
-                                'index' => false,
-                                'norms' => false,
-                            ],
-                            'width' => [
+                            'entityId' => [
                                 'type' => 'integer',
-                                'index' => false,
-                                'doc_values' => false,
-                            ],
-                            'height' => [
-                                'type' => 'integer',
-                                'doc_values' => false,
-                            ],
-                            'generic' => [
-                                'type' => 'boolean',
                                 'doc_values' => false,
                             ],
                         ],

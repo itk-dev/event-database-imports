@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\DailyOccurrence;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -17,7 +18,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
  * @method DailyOccurrence[]    findAll()
  * @method DailyOccurrence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-#[AsTaggedItem(index: 'daily', priority: 10)]
+#[AsTaggedItem(index: IndexNames::DailyOccurrences->value, priority: 10)]
 final class DailyOccurrenceRepository extends ServiceEntityRepository implements PopulateInterface
 {
     public function __construct(ManagerRegistry $registry)

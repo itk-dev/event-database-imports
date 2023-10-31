@@ -3,6 +3,8 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexFieldTypes;
+use App\Model\Indexing\IndexNames;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -11,7 +13,7 @@ use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsTaggedItem(index: 'events', priority: 10)]
+#[AsTaggedItem(index: IndexNames::Events->value, priority: 10)]
 final class IndexingEvents extends AbstractIndexingElastic
 {
     public function __construct(
@@ -72,13 +74,13 @@ final class IndexingEvents extends AbstractIndexingElastic
             ],
             'created' => [
                 'type' => 'date',
-                'format' => 'yyyy-MM-dd HH:mm:ss',
+                'format' => IndexFieldTypes::DATEFORMAT_ES,
                 'index' => false,
                 'doc_values' => true,
             ],
             'updated' => [
                 'type' => 'date',
-                'format' => 'yyyy-MM-dd HH:mm:ss',
+                'format' => IndexFieldTypes::DATEFORMAT_ES,
                 'index' => false,
                 'doc_values' => true,
             ],
@@ -88,6 +90,47 @@ final class IndexingEvents extends AbstractIndexingElastic
                 'index' => false,
                 'doc_values' => false,
                 'norms' => false,
+            ],
+            'organizer' => [
+                'properties' => [
+                    'entityId' => [
+                        'type' => 'integer',
+                        'doc_values' => false,
+                    ],
+                    'name' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'email' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'url' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'created' => [
+                        'type' => 'date',
+                        'format' => IndexFieldTypes::DATEFORMAT_ES,
+                        'index' => false,
+                        'doc_values' => true,
+                    ],
+                    'updated' => [
+                        'type' => 'date',
+                        'format' => IndexFieldTypes::DATEFORMAT_ES,
+                        'index' => false,
+                        'doc_values' => true,
+                    ],
+                ],
             ],
         ];
 

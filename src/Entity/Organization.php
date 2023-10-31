@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexFieldTypes;
 use App\Repository\OrganizationRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +12,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
-class Organization
+class Organization implements IndexItemInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -168,5 +170,18 @@ class Organization
         }
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'entityId' => $this->id,
+            'name' => $this->name,
+            'email' => $this->mail,
+            'url' => $this->url,
+            // @TODO: move date format into config, matches the one in index config.
+            'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
+            'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
+        ];
     }
 }
