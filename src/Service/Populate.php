@@ -11,9 +11,9 @@ use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
 
 /**
- * Class PopulateService.
+ * Class Populate.
  */
-class Populate
+final class Populate
 {
     final public const BATCH_SIZE = 10000;
     final public const LOCK_TIMEOUT = 3600;

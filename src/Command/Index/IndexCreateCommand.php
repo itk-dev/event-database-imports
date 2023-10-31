@@ -16,7 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:index:create',
     description: 'Create daily occurrences index if it doesnt exist',
 )]
-class IndexCreateCommand extends Command
+final class IndexCreateCommand extends Command
 {
     public function __construct(
         private readonly iterable $indexingServices,

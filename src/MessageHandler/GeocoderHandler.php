@@ -6,6 +6,7 @@ use App\Exception\GeocoderException;
 use App\Message\DailyOccurrenceMessage;
 use App\Message\GeocoderMessage;
 use App\Message\IndexMessage;
+use App\Model\Indexing\IndexNames;
 use App\Repository\AddressRepository;
 use App\Repository\EventRepository;
 use App\Service\Geocoder;
@@ -44,7 +45,7 @@ final class GeocoderHandler
         }
 
         // Send the event into the search index and at the same time to the occurrence splitter.
+        $this->messageBus->dispatch(new IndexMessage($message->getEventId(), IndexNames::Events));
         $this->messageBus->dispatch(new DailyOccurrenceMessage($message->getEventId()));
-        $this->messageBus->dispatch(new IndexMessage($message->getEventId()));
     }
 }

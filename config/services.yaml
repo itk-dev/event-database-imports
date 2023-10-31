@@ -38,6 +38,11 @@ services:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
             $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
 
+    App\MessageHandler\IndexHandler:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+
     App\Service\ImageHandler:
         arguments:
             $publicPath: '%kernel.project_dir%/public/images/'
