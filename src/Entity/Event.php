@@ -303,20 +303,25 @@ class Event implements IndexItemInterface
             $tags[] = $tag->getName();
         }
 
+        $occurrences = [];
+        foreach ($this->getOccurrences() as $occurrence) {
+            $occurrences[] = $occurrence->toArray();
+        }
+
         return [
-            'entityId' => $this->id,
-            'excerpt' => $this->excerpt,
-            'description' => $this->description,
-            'url' => $this->url,
-            'ticketUrl' => $this->ticket_url,
+            'entityId' => $this->getId(),
+            'excerpt' => $this->getExcerpt(),
+            'description' => $this->getDescription(),
+            'url' => $this->getUrl(),
+            'ticketUrl' => $this->getTicketUrl(),
             'imageUrl' => $this->image?->getLocal(),
-            'public' => $this->public,
-            'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
-            'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
+            'public' => $this->isPublic(),
+            'created' => $this->getCreatedAt()?->format(IndexFieldTypes::DATEFORMAT),
+            'updated' => $this->getUpdatedAt()?->format(IndexFieldTypes::DATEFORMAT),
             'tags' => $tags,
-            'organizer' => $this->organization?->toArray(),
-            'location' => $this->location?->toArray(),
-//            'occurrences' => $this->occurrences,
+            'organizer' => $this->getOrganization()?->toArray(),
+            'location' => $this->getLocation()?->toArray(),
+            'occurrences' => $occurrences,
         ];
     }
 }

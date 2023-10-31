@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexFieldTypes;
 use App\Repository\OccurrenceRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +12,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: OccurrenceRepository::class)]
-class Occurrence
+class Occurrence implements IndexItemInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -152,5 +154,16 @@ class Occurrence
         $this->status = $status;
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'entityId' => $this->getId(),
+            'start' => $this->getStart()?->format(IndexFieldTypes::DATEFORMAT),
+            'end' => $this->getEnd()?->format(IndexFieldTypes::DATEFORMAT),
+            'ticketPriceRange' => $this->getTicketPriceRange(),
+            'room' => $this->getRoom(),
+        ];
     }
 }

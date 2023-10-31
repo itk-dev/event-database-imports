@@ -227,6 +227,40 @@ final class IndexingEvents extends AbstractIndexingElastic
                     ],
                 ],
             ],
+            'occurrences' => [
+                'properties' => [
+                    'entityId' => [
+                        'type' => 'integer',
+                        'doc_values' => false,
+                    ],
+                    'start' => [
+                        'type' => 'date',
+                        'format' => IndexFieldTypes::DATEFORMAT_ES,
+                        'index' => false,
+                        'doc_values' => true,
+                    ],
+                    'end' => [
+                        'type' => 'date',
+                        'format' => IndexFieldTypes::DATEFORMAT_ES,
+                        'index' => false,
+                        'doc_values' => true,
+                    ],
+                    'ticketPriceRange' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'room' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                ],
+            ],
         ];
 
         try {
