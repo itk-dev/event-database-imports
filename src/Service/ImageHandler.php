@@ -6,6 +6,8 @@ use App\Entity\Image;
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
 use App\Exception\ImageMineTypeException;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
+use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Liip\ImagineBundle\Message\WarmupCache;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -13,6 +15,7 @@ use Symfony\Component\Filesystem\Path;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Mime\MimeTypes;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
@@ -26,6 +29,8 @@ final class ImageHandler implements ImageHandlerInterface
         private readonly string $publicPath,
         private readonly array $allowedMineTypes,
         private readonly MessageBusInterface $messageBus,
+        private readonly CacheManager $imagineCacheManager,
+        private readonly FilterManager $filterManager,
     ) {
     }
 
@@ -99,6 +104,17 @@ final class ImageHandler implements ImageHandlerInterface
         if (!is_null($path)) {
             $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
         }
+    }
+
+    public function getDerived(string $imageUrl, bool $absolute = true): array
+    {
+        $urls = [];
+        $filters = $this->filterManager->getFilterConfiguration()->all();
+        foreach ($filters as $name => $filter) {
+            $urls[$name] = $this->imagineCacheManager->generateUrl($imageUrl, $name, [], null, UrlGeneratorInterface::RELATIVE_PATH);
+        }
+
+        return $urls;
     }
 
     /**

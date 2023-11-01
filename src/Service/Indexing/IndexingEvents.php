@@ -5,6 +5,7 @@ namespace App\Service\Indexing;
 use App\Exception\IndexingException;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
+use App\Service\ImageHandlerInterface;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -21,6 +22,7 @@ final class IndexingEvents extends AbstractIndexingElastic
 {
     public function __construct(
         private readonly SerializerInterface $serializer,
+        private readonly ImageHandlerInterface $imageHandler,
         private readonly string $indexAliasName,
         private readonly Client $client,
     ) {
@@ -51,7 +53,8 @@ final class IndexingEvents extends AbstractIndexingElastic
         }
 
         // Fix image urls (with full path and derived sizes).
-        $image = $data['imageUrl']['original'];
+        $imageUrl = $data['imageUrl']['original'];
+        $data['imageUrl'] = $this->imageHandler->getDerived($imageUrl);
 
         return $data;
     }
@@ -137,7 +140,21 @@ final class IndexingEvents extends AbstractIndexingElastic
             ],
             'imageUrl' => [
                 'properties' => [
-                    'original' => [
+                    'small' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'medium' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                    'large' => [
                         'type' => 'keyword',
                         'index_options' => 'docs',
                         'index' => false,
