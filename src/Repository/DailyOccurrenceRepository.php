@@ -3,12 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\DailyOccurrence;
-use App\Model\Indexing\IndexNames;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
  * @extends ServiceEntityRepository<DailyOccurrence>

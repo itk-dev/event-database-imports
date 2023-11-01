@@ -30,6 +30,6 @@ final class DailyOccurrenceHandler
 
         $this->dailyOccurrencesFactory->createOrUpdate($event);
 
-        $this->messageBus->dispatch(new IndexMessage($message->getEventId(), IndexNames::DailyOccurrences));
+        $this->messageBus->dispatch(new IndexMessage($message->getEventId(), IndexNames::Events));
     }
 }

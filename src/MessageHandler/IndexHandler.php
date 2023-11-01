@@ -4,7 +4,6 @@ namespace App\MessageHandler;
 
 use App\Exception\IndexingException;
 use App\Message\IndexMessage;
-use App\Model\Indexing\IndexNames;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
@@ -23,11 +22,6 @@ final class IndexHandler
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
         $repositories = $this->repositories instanceof \Traversable ? iterator_to_array($this->repositories) : $this->repositories;
         $index = $message->getIndexName()->value;
-
-        // @TODO: handle daily
-        if (IndexNames::DailyOccurrences === $message->getIndexName()) {
-            return;
-        }
 
         $entity = $repositories[$index]->findOneBy(['id' => $message->getEntityId()]);
         if (!is_null($entity)) {

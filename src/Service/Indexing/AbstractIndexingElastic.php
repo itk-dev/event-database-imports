@@ -22,11 +22,10 @@ abstract class AbstractIndexingElastic implements IndexingInterface
 
     public function index(IndexItemInterface $item): void
     {
-        /** @var IndexItemInterface $item */
         $params = [
             'index' => $this->indexAliasName,
             'id' => $item->getId(),
-            'body' => $item->toArray(),
+            'body' => $this->serialize($item),
         ];
 
         try {
@@ -77,8 +76,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                         '_id' => $item->getId(),
                     ],
                 ];
-
-                $params['body'][] = $item->toArray();
+                $params['body'][] = $this->serialize($item);
             }
 
             $response = $this->client->bulk($params);
@@ -236,6 +234,16 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                 ],
             ],
         ];
+    }
+
+    /**
+     * Healer to convert entities to serialized data that the indexer understands.
+     *
+     * @throws IndexingException
+     */
+    public function serialize(IndexItemInterface $item): array
+    {
+        throw new IndexingException('Base elastic indexing class do not implement create index');
     }
 
     /**

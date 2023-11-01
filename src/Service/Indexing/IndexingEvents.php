@@ -12,15 +12,48 @@ use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Context\Normalizer\DateTimeNormalizerContextBuilder;
+use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsTaggedItem(index: IndexNames::Events->value, priority: 10)]
 final class IndexingEvents extends AbstractIndexingElastic
 {
     public function __construct(
+        private readonly SerializerInterface $serializer,
         private readonly string $indexAliasName,
         private readonly Client $client,
     ) {
         parent::__construct($this->indexAliasName, $this->client);
+    }
+
+    public function serialize(IndexItemInterface $item): array
+    {
+        $contextBuilder = (new ObjectNormalizerContextBuilder())
+            ->withGroups([IndexNames::Events->value]);
+        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+            ->withContext($contextBuilder)
+            ->withFormat(IndexFieldTypes::DATEFORMAT);
+        $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
+
+        // @todo: Figure out how to do these changes with the serializer. This is just....
+        // Flatten tags.
+        $data['tags'] = array_map(fn ($tag) => $tag['name'], $data['tags']);
+
+        // Flatten location address and convert lang/long to coordinate set.
+        $data['location'] += $data['location']['address'];
+        unset($data['location']['address']);
+        $data['location']['coordinates'] = [];
+        if (isset($data['location']['latitude'], $data['location']['longitude'])) {
+            $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
+            unset($data['location']['latitude']);
+            unset($data['location']['longitude']);
+        }
+
+        // Fix image urls (with full path and derived sizes).
+        $image = $data['imageUrl']['original'];
+
+        return $data;
     }
 
     /**
@@ -103,11 +136,15 @@ final class IndexingEvents extends AbstractIndexingElastic
                 'norms' => false,
             ],
             'imageUrl' => [
-                'type' => 'keyword',
-                'index_options' => 'docs',
-                'index' => false,
-                'doc_values' => false,
-                'norms' => false,
+                'properties' => [
+                    'original' => [
+                        'type' => 'keyword',
+                        'index_options' => 'docs',
+                        'index' => false,
+                        'doc_values' => false,
+                        'norms' => false,
+                    ],
+                ],
             ],
             'public' => [
                 'type' => 'boolean',

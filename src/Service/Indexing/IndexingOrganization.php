@@ -12,15 +12,30 @@ use Elastic\Elasticsearch\Exception\ServerResponseException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\Context\Normalizer\DateTimeNormalizerContextBuilder;
+use Symfony\Component\Serializer\Context\Normalizer\ObjectNormalizerContextBuilder;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[AsTaggedItem(index: IndexNames::Organization->value, priority: 10)]
 final class IndexingOrganization extends AbstractIndexingElastic
 {
     public function __construct(
+        private readonly SerializerInterface $serializer,
         private readonly string $indexAliasName,
         private readonly Client $client,
     ) {
         parent::__construct($this->indexAliasName, $this->client);
+    }
+
+    public function serialize(IndexItemInterface $item): array
+    {
+        $contextBuilder = (new ObjectNormalizerContextBuilder())
+            ->withGroups([IndexNames::Organization->value]);
+        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+            ->withContext($contextBuilder)
+            ->withFormat(IndexFieldTypes::DATEFORMAT);
+
+        return $this->serializer->normalize($item, null, $contextBuilder->toArray());
     }
 
     /**

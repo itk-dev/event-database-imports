@@ -56,4 +56,17 @@ interface IndexingInterface
      * @throws IndexingException
      */
     public function indexExists(): bool;
+
+    /**
+     * Healer to convert entities to serialized data that the indexer understands.
+     *
+     * @param IndexItemInterface $item
+     *    Item to add to the index
+     *
+     * @return array
+     *   The serialized data
+     *
+     * @throws IndexingException
+     */
+    public function serialize(IndexItemInterface $item): array;
 }

@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Model\Indexing\IndexFieldTypes;
+use App\Model\Indexing\IndexNames;
 use App\Repository\EventRepository;
 use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,8 +10,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
+use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event implements IndexItemInterface
@@ -23,24 +26,34 @@ class Event implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $excerpt = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $ticket_url = null;
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[ticketUrl]')]
+    private ?string $ticketUrl = null;
 
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
     private bool $public = true;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[organizer]')]
     private ?Organization $organization = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
@@ -50,22 +63,40 @@ class Event implements IndexItemInterface
     private ?string $feedItemId = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, orphanRemoval: true)]
+    #[Groups([IndexNames::Events->value])]
     private Collection $occurrences;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
+    #[Groups([IndexNames::Events->value])]
     private Collection $dailyOccurrences;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'events')]
+    #[Groups([IndexNames::Events->value])]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
+    #[Groups([IndexNames::Events->value])]
     private ?Location $location = null;
 
     #[ORM\Column(length: 255)]
     private ?string $hash = null;
 
     #[ORM\OneToOne(inversedBy: 'event', cascade: ['persist', 'remove'])]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[imageUrl]')]
     private ?Image $image = null;
+
+    #[Timestampable(on: 'create')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[created]')]
+    protected $createdAt;
+
+    #[Timestampable(on: 'update')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[updated]')]
+    protected $updatedAt;
 
     public function __construct()
     {
@@ -117,12 +148,12 @@ class Event implements IndexItemInterface
 
     public function getTicketUrl(): ?string
     {
-        return $this->ticket_url;
+        return $this->ticketUrl;
     }
 
-    public function setTicketUrl(?string $ticket_url): static
+    public function setTicketUrl(?string $ticketUrl): static
     {
-        $this->ticket_url = $ticket_url;
+        $this->ticketUrl = $ticketUrl;
 
         return $this;
     }
@@ -293,41 +324,5 @@ class Event implements IndexItemInterface
         $this->image = $image;
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        $tags = [];
-        /** @var Tag $tag */
-        foreach ($this->tags as $tag) {
-            $tags[] = $tag->getName();
-        }
-
-        $occurrences = [];
-        foreach ($this->getOccurrences() as $occurrence) {
-            $occurrences[] = $occurrence->toArray();
-        }
-
-        $daily = [];
-        foreach ($this->getDailyOccurrences() as $occurrence) {
-            $daily[] = $occurrence->toArray();
-        }
-
-        return [
-            'entityId' => $this->getId(),
-            'excerpt' => $this->getExcerpt(),
-            'description' => $this->getDescription(),
-            'url' => $this->getUrl(),
-            'ticketUrl' => $this->getTicketUrl(),
-            'imageUrl' => $this->image?->getLocal(),
-            'public' => $this->isPublic(),
-            'created' => $this->getCreatedAt()?->format(IndexFieldTypes::DATEFORMAT),
-            'updated' => $this->getUpdatedAt()?->format(IndexFieldTypes::DATEFORMAT),
-            'tags' => $tags,
-            'organizer' => $this->getOrganization()?->toArray(),
-            'location' => $this->getLocation()?->toArray(),
-            'occurrences' => $occurrences,
-            'dailyOccurrences' => $daily,
-        ];
     }
 }

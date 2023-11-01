@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexNames;
 use App\Repository\LocationRepository;
 use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,6 +10,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location implements IndexItemInterface
@@ -19,28 +22,38 @@ class Location implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $telephone = null;
 
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[disabilityAccess]')]
     private ?bool $disabilityAccess = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $mail = null;
 
     #[ORM\ManyToOne(inversedBy: 'locations')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups([IndexNames::Events->value])]
     private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]
@@ -168,30 +181,5 @@ class Location implements IndexItemInterface
         }
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        $address = $this->getAddress();
-
-        return [
-            'entityId' => $this->id,
-            'name' => $this->name,
-            'image' => $this->image,
-            'url' => $this->url,
-            'telephone' => $this->telephone,
-            'disabilityAccess' => $this->disabilityAccess,
-            'mail' => $this->mail,
-            'city' => $address?->getCity(),
-            'street' => $address?->getStreet(),
-            'suite' => $address?->getSuite(),
-            'region' => $address?->getRegion(),
-            'postalCode' => $address?->getPostalCode(),
-            'country' => $address?->getCountry(),
-            'coordinates' => [
-                $address?->getLatitude(),
-                $address?->getLongitude(),
-            ],
-        ];
     }
 }

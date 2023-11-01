@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
-use App\Model\Indexing\IndexFieldTypes;
+use App\Model\Indexing\IndexNames;
 use App\Repository\OrganizationRepository;
 use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
 class Organization implements IndexItemInterface
@@ -20,15 +24,21 @@ class Organization implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[email]')]
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
     private ?string $url = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'organizations')]
@@ -39,6 +49,18 @@ class Organization implements IndexItemInterface
 
     #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Feed::class)]
     private Collection $feeds;
+
+    #[Timestampable(on: 'create')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[created]')]
+    protected $createdAt;
+
+    #[Timestampable(on: 'update')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[SerializedPath('[updated]')]
+    protected $updatedAt;
 
     public function __construct()
     {
@@ -170,17 +192,5 @@ class Organization implements IndexItemInterface
         }
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'entityId' => $this->id,
-            'name' => $this->name,
-            'email' => $this->mail,
-            'url' => $this->url,
-            'created' => $this->createdAt?->format(IndexFieldTypes::DATEFORMAT),
-            'updated' => $this->updatedAt?->format(IndexFieldTypes::DATEFORMAT),
-        ];
     }
 }

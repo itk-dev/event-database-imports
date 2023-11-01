@@ -76,7 +76,15 @@
       <code>getStatusCode</code>
     </PossiblyUndefinedMethod>
   </file>
-  <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
+  <file src="src/Service/Indexing/IndexingEvents.php">
+    <InvalidArgument>
+      <code>$configuration</code>
+    </InvalidArgument>
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOrganization.php">
     <InvalidArgument>
       <code><![CDATA[[
                 'index' => $indexName,
@@ -92,15 +100,46 @@
                                 'type' => 'integer',
                                 'doc_values' => false,
                             ],
+                            'name' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'email' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'url' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'created' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
+                            ],
+                            'updated' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
+                            ],
                         ],
                     ],
                 ],
             ]]]></code>
     </InvalidArgument>
-  </file>
-  <file src="src/Service/Indexing/IndexingEvents.php">
-    <InvalidArgument>
-      <code>$configuration</code>
-    </InvalidArgument>
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
   </file>
 </files>

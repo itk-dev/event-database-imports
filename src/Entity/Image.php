@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexNames;
 use App\Repository\ImageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
@@ -25,6 +28,8 @@ class Image
     private ?string $source = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[original]')]
     private ?string $local = null;
 
     #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]

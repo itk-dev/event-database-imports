@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Model\Indexing\IndexFieldTypes;
+use App\Model\Indexing\IndexNames;
 use App\Repository\DailyOccurrenceRepository;
 use App\Service\Indexing\IndexItemInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: DailyOccurrenceRepository::class)]
 class DailyOccurrence implements IndexItemInterface
@@ -18,18 +20,24 @@ class DailyOccurrence implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
     private ?\DateTimeImmutable $start = null;
 
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
     private ?\DateTimeImmutable $end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $ticketPriceRange = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $room = null;
 
     #[ORM\ManyToOne(inversedBy: 'dailyOccurrences')]
@@ -41,6 +49,7 @@ class DailyOccurrence implements IndexItemInterface
     private ?Occurrence $occurrence = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $status = null;
 
     public function getId(): ?int
@@ -130,17 +139,5 @@ class DailyOccurrence implements IndexItemInterface
         $this->status = $status;
 
         return $this;
-    }
-
-    public function toArray(): array
-    {
-        return [
-            'entityId' => $this->getId(),
-            'start' => $this->getStart()?->format(IndexFieldTypes::DATEFORMAT),
-            'end' => $this->getEnd()?->format(IndexFieldTypes::DATEFORMAT),
-            'ticketPriceRange' => $this->getTicketPriceRange(),
-            'room' => $this->getRoom(),
-            'status' => $this->getStatus(),
-        ];
     }
 }
