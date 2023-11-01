@@ -52,9 +52,9 @@ services:
         arguments:
             $indexAliasName: '%env(INDEXING_EVENTS_ALIAS)%'
 
-    App\Service\Indexing\IndexingDailyOccurrences:
+    App\Service\Indexing\IndexingOrganization:
         arguments:
-            $indexAliasName: '%env(INDEXING_DAILY_OCCURRENCE_ALIAS)%'
+            $indexAliasName: '%env(INDEXING_ORGANIZATION_ALIAS)%'
 
     Elastic\Elasticsearch\Client:
         factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]

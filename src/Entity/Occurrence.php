@@ -164,6 +164,7 @@ class Occurrence implements IndexItemInterface
             'end' => $this->getEnd()?->format(IndexFieldTypes::DATEFORMAT),
             'ticketPriceRange' => $this->getTicketPriceRange(),
             'room' => $this->getRoom(),
+            'status' => $this->getStatus(),
         ];
     }
 }

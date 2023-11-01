@@ -308,6 +308,11 @@ class Event implements IndexItemInterface
             $occurrences[] = $occurrence->toArray();
         }
 
+        $daily = [];
+        foreach ($this->getDailyOccurrences() as $occurrence) {
+            $daily[] = $occurrence->toArray();
+        }
+
         return [
             'entityId' => $this->getId(),
             'excerpt' => $this->getExcerpt(),
@@ -322,6 +327,7 @@ class Event implements IndexItemInterface
             'organizer' => $this->getOrganization()?->toArray(),
             'location' => $this->getLocation()?->toArray(),
             'occurrences' => $occurrences,
+            'dailyOccurrences' => $daily,
         ];
     }
 }

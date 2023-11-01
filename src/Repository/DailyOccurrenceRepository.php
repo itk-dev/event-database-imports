@@ -18,8 +18,7 @@ use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
  * @method DailyOccurrence[]    findAll()
  * @method DailyOccurrence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-#[AsTaggedItem(index: IndexNames::DailyOccurrences->value, priority: 10)]
-final class DailyOccurrenceRepository extends ServiceEntityRepository implements PopulateInterface
+final class DailyOccurrenceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -47,18 +46,5 @@ final class DailyOccurrenceRepository extends ServiceEntityRepository implements
     public function flush(): void
     {
         $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @throws NonUniqueResultException
-     * @throws NoResultException
-     */
-    public function getNumberOfRecords(): int
-    {
-        $query = $this->createQueryBuilder('o')
-            ->select('COUNT(o.id)')
-            ->getQuery();
-
-        return $query->getSingleScalarResult();
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
@@ -12,8 +13,8 @@ use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\HttpFoundation\Response;
 
-#[AsTaggedItem(index: IndexNames::DailyOccurrences->value, priority: 10)]
-final class IndexingDailyOccurrences extends AbstractIndexingElastic
+#[AsTaggedItem(index: IndexNames::Organization->value, priority: 10)]
+final class IndexingOrganization extends AbstractIndexingElastic
 {
     public function __construct(
         private readonly string $indexAliasName,
@@ -42,6 +43,39 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
                             'entityId' => [
                                 'type' => 'integer',
                                 'doc_values' => false,
+                            ],
+                            'name' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'email' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'url' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'created' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
+                            ],
+                            'updated' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
                             ],
                         ],
                     ],

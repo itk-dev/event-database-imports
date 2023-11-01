@@ -28,6 +28,48 @@ final class IndexingEvents extends AbstractIndexingElastic
      */
     protected function createEsIndex(string $indexName): void
     {
+        $occurrences = [
+            'properties' => [
+                'entityId' => [
+                    'type' => 'integer',
+                    'doc_values' => false,
+                ],
+                'start' => [
+                    'type' => 'date',
+                    'format' => IndexFieldTypes::DATEFORMAT_ES,
+                    'index' => false,
+                    'doc_values' => true,
+                ],
+                'end' => [
+                    'type' => 'date',
+                    'format' => IndexFieldTypes::DATEFORMAT_ES,
+                    'index' => false,
+                    'doc_values' => true,
+                ],
+                'ticketPriceRange' => [
+                    'type' => 'keyword',
+                    'index_options' => 'docs',
+                    'index' => false,
+                    'doc_values' => false,
+                    'norms' => false,
+                ],
+                'room' => [
+                    'type' => 'keyword',
+                    'index_options' => 'docs',
+                    'index' => false,
+                    'doc_values' => false,
+                    'norms' => false,
+                ],
+                'status' => [
+                    'type' => 'keyword',
+                    'index_options' => 'docs',
+                    'index' => false,
+                    'doc_values' => false,
+                    'norms' => false,
+                ],
+            ],
+        ];
+
         $configuration = $this->getCommonIndexConfig($indexName);
         $configuration['body']['mappings']['properties'] = [
             'entityId' => [
@@ -227,40 +269,8 @@ final class IndexingEvents extends AbstractIndexingElastic
                     ],
                 ],
             ],
-            'occurrences' => [
-                'properties' => [
-                    'entityId' => [
-                        'type' => 'integer',
-                        'doc_values' => false,
-                    ],
-                    'start' => [
-                        'type' => 'date',
-                        'format' => IndexFieldTypes::DATEFORMAT_ES,
-                        'index' => false,
-                        'doc_values' => true,
-                    ],
-                    'end' => [
-                        'type' => 'date',
-                        'format' => IndexFieldTypes::DATEFORMAT_ES,
-                        'index' => false,
-                        'doc_values' => true,
-                    ],
-                    'ticketPriceRange' => [
-                        'type' => 'keyword',
-                        'index_options' => 'docs',
-                        'index' => false,
-                        'doc_values' => false,
-                        'norms' => false,
-                    ],
-                    'room' => [
-                        'type' => 'keyword',
-                        'index_options' => 'docs',
-                        'index' => false,
-                        'doc_values' => false,
-                        'norms' => false,
-                    ],
-                ],
-            ],
+            'occurrences' => $occurrences,
+            'dailyOccurrences' => $occurrences,
         ];
 
         try {

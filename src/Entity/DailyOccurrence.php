@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexFieldTypes;
 use App\Repository\DailyOccurrenceRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: DailyOccurrenceRepository::class)]
-class DailyOccurrence
+class DailyOccurrence implements IndexItemInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -128,5 +130,17 @@ class DailyOccurrence
         $this->status = $status;
 
         return $this;
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'entityId' => $this->getId(),
+            'start' => $this->getStart()?->format(IndexFieldTypes::DATEFORMAT),
+            'end' => $this->getEnd()?->format(IndexFieldTypes::DATEFORMAT),
+            'ticketPriceRange' => $this->getTicketPriceRange(),
+            'room' => $this->getRoom(),
+            'status' => $this->getStatus(),
+        ];
     }
 }
