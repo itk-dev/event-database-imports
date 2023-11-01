@@ -23,17 +23,17 @@ final class EventHandler
         $item = $message->getItem();
 
         try {
-            $entity = $this->eventFactory->createOrUpdate($item);
+            if ($this->eventFactory->isUpdatableOrNew($item)) {
+                $entity = $this->eventFactory->createOrUpdate($item);
+                $id = $entity->getId();
+                if (!is_null($id)) {
+                    $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
+                } else {
+                    throw new UnrecoverableMessageHandlingException('Event without id detected');
+                }
+            }
         } catch (\Exception $e) {
-            // @todo: better message.
             throw new UnrecoverableMessageHandlingException($e->getMessage());
-        }
-
-        $id = $entity->getId();
-        if (!is_null($id)) {
-            $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
-        } else {
-            throw new UnrecoverableMessageHandlingException('Event without id detected');
         }
     }
 }
