@@ -74,8 +74,8 @@ final class Populate
                     // Send bulk.
                     $indexingServices[$index]->bulk($entities);
                 } else {
-                    // Single indexing is very useful for debug as Elastic searches bulk indexing don't throw errors but
-                    // always returns HTTP_OK as the items are send into an intern queue in Elastic.
+                    // Single indexing is beneficial for debug as Elastic searches bulk indexing don't throw errors but
+                    // always returns HTTP_OK as the items are sent into an intern queue in Elastic.
                     $indexingServices[$index]->index(reset($entities));
                 }
 

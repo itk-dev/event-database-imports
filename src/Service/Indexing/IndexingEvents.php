@@ -42,17 +42,15 @@ final class IndexingEvents extends AbstractIndexingElastic
         // Flatten tags.
         $data['tags'] = array_map(fn ($tag) => $tag['name'], $data['tags']);
 
-        // Flatten location address and convert lang/long to coordinate set.
+        // Flatten location address and convert lang/long to coordinate point.
         $data['location'] += $data['location']['address'];
         unset($data['location']['address']);
         $data['location']['coordinates'] = [];
-        if (isset($data['location']['latitude'], $data['location']['longitude'])) {
-            $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
-            unset($data['location']['latitude']);
-            unset($data['location']['longitude']);
-        }
+        $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
+        unset($data['location']['latitude']);
+        unset($data['location']['longitude']);
 
-        // Fix image urls (with full path and derived sizes).
+        // Fix image urls (with a full path and derived sizes).
         $imageUrl = $data['imageUrl']['original'];
         $data['imageUrl'] = $this->imageHandler->getDerived($imageUrl);
 
