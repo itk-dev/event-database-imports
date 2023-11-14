@@ -2,15 +2,6 @@
 
 namespace App\Message;
 
-final class GeocoderMessage
+final class GeocoderMessage extends AbstractEventIdMessage
 {
-    public function __construct(
-        private readonly int $eventId,
-    ) {
-    }
-
-    public function getEventId(): ?int
-    {
-        return $this->eventId;
-    }
 }

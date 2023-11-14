@@ -24,7 +24,7 @@ class DailyOccurrence
     #[ORM\Column]
     private ?\DateTimeImmutable $end = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $ticketPriceRange = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -75,7 +75,7 @@ class DailyOccurrence
         return $this->ticketPriceRange;
     }
 
-    public function setTicketPriceRange(string $ticketPriceRange): static
+    public function setTicketPriceRange(?string $ticketPriceRange): static
     {
         $this->ticketPriceRange = $ticketPriceRange;
 

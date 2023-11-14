@@ -38,4 +38,9 @@ final class DailyOccurrenceRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function flush(): void
+    {
+        $this->getEntityManager()->flush();
+    }
 }
