@@ -38,7 +38,7 @@ final class PopulateIndexCommand extends Command
             }
         )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
-            ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try populate single record)', -1);
+            ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
