@@ -21,7 +21,7 @@ interface ImageHandlerInterface
      * Remove image from the filesystem.
      *
      * @param Image $image
-     *   The image top remove
+     *   The image to remove
      *
      * @return bool
      *   True if image was removed else false
