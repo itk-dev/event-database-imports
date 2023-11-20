@@ -47,8 +47,7 @@ final class IndexingEvents extends AbstractIndexingElastic
         unset($data['location']['address']);
         $data['location']['coordinates'] = [];
         $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
-        unset($data['location']['latitude']);
-        unset($data['location']['longitude']);
+        unset($data['location']['latitude'], $data['location']['longitude']);
 
         // Fix image urls (with a full path and derived sizes).
         $imageUrl = $data['imageUrl']['original'];
