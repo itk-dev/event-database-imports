@@ -39,8 +39,8 @@ final class IndexingEvents extends AbstractIndexingElastic
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
-        // Flatten tags.
-        $data['tags'] = array_map(fn ($tag) => $tag['name'], $data['tags']);
+        // Get tag names.
+        $data['tags'] = array_column($data['tags'], 'name');
 
         // Flatten location address and convert lang/long to coordinate point.
         $data['location'] += $data['location']['address'];
