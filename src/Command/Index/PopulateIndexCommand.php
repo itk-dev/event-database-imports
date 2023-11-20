@@ -57,7 +57,7 @@ final class PopulateIndexCommand extends Command
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
         $progressBar->start();
-        $progressBar->setMessage('Populating index...');
+        $progressBar->setMessage(sprintf('Populating index %s …', $index));
         $progressBar->display();
 
         foreach ($this->populate->populate($index, $id, $force) as $message) {
