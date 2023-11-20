@@ -32,7 +32,7 @@ interface ImageHandlerInterface
      * Make image transformations.
      *
      * @param Image $image
-     *   The image to make derived/transformation from
+     *   The image to transform
      */
     public function transform(Image $image): void;
 
