@@ -49,7 +49,7 @@ final class PopulateIndexCommand extends Command
         $force = $input->getOption('force');
 
         if (!in_array($index, IndexNames::values())) {
-            $io->error('Index service for index ('.$index.') do not exists');
+            $io->error(sprintf('Index %s does not exist', $index));
 
             return Command::FAILURE;
         }
