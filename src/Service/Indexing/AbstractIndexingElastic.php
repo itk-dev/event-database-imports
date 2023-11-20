@@ -32,7 +32,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->index($params);
 
-            if (Response::HTTP_OK !== $response->getStatusCode() && Response::HTTP_CREATED !== $response->getStatusCode() && Response::HTTP_NO_CONTENT !== $response->getStatusCode()) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT])) {
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
