@@ -45,7 +45,6 @@ final class IndexingEvents extends AbstractIndexingElastic
         // Flatten location address and convert lang/long to coordinate point.
         $data['location'] += $data['location']['address'];
         unset($data['location']['address']);
-        $data['location']['coordinates'] = [];
         $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
         unset($data['location']['latitude'], $data['location']['longitude']);
 
