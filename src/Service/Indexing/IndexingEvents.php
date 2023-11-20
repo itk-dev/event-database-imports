@@ -50,7 +50,7 @@ final class IndexingEvents extends AbstractIndexingElastic
 
         // Fix image urls (with a full path and derived sizes).
         $imageUrl = $data['imageUrls']['original'];
-        $data['imageUrls'] = $this->imageHandler->getDerived($imageUrl);
+        $data['imageUrls'] = $this->imageHandler->getTransformedImageUrls($imageUrl);
 
         return $data;
     }

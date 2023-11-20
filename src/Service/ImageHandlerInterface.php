@@ -24,7 +24,7 @@ interface ImageHandlerInterface
      *   The image to remove
      *
      * @return bool
-     *   True if image was removed else false
+     *   True if the image was removed else false
      */
     public function remove(Image $image): bool;
 
@@ -37,7 +37,7 @@ interface ImageHandlerInterface
     public function transform(Image $image): void;
 
     /**
-     * Get urls for derived images from image url.
+     * Get urls for transformed images from image url.
      *
      * @param string $imageUrl
      *   The local url for the image
@@ -46,5 +46,5 @@ interface ImageHandlerInterface
      *
      * @return array<string>
      */
-    public function getDerived(string $imageUrl, bool $absolute = true): array;
+    public function getTransformedImageUrls(string $imageUrl, bool $absolute = true): array;
 }

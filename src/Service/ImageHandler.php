@@ -106,7 +106,7 @@ final class ImageHandler implements ImageHandlerInterface
         }
     }
 
-    public function getDerived(string $imageUrl, bool $absolute = true): array
+    public function getTransformedImageUrls(string $imageUrl, bool $absolute = true): array
     {
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
@@ -118,7 +118,7 @@ final class ImageHandler implements ImageHandlerInterface
     }
 
     /**
-     * Get relative path from absolute path.
+     * Get a relative path from an absolute path.
      *
      * @param string $path
      *   The absolute path
@@ -132,7 +132,7 @@ final class ImageHandler implements ImageHandlerInterface
     }
 
     /**
-     * Generate safe path to storage file in based on URL.
+     * Generate a safe path to storage file in based on URL.
      *
      * @param string $url
      *   The files URL
