@@ -49,8 +49,8 @@ final class IndexingEvents extends AbstractIndexingElastic
         unset($data['location']['latitude'], $data['location']['longitude']);
 
         // Fix image urls (with a full path and derived sizes).
-        $imageUrl = $data['imageUrl']['original'];
-        $data['imageUrl'] = $this->imageHandler->getDerived($imageUrl);
+        $imageUrl = $data['imageUrls']['original'];
+        $data['imageUrls'] = $this->imageHandler->getDerived($imageUrl);
 
         return $data;
     }
@@ -134,7 +134,7 @@ final class IndexingEvents extends AbstractIndexingElastic
                 'doc_values' => false,
                 'norms' => false,
             ],
-            'imageUrl' => [
+            'imageUrls' => [
                 'properties' => [
                     'small' => [
                         'type' => 'keyword',

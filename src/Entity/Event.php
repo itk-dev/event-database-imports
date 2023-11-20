@@ -83,7 +83,7 @@ class Event implements IndexItemInterface
 
     #[ORM\OneToOne(inversedBy: 'event', cascade: ['persist', 'remove'])]
     #[Groups([IndexNames::Events->value])]
-    #[SerializedPath('[imageUrl]')]
+    #[SerializedPath('[imageUrls]')]
     private ?Image $image = null;
 
     #[Timestampable(on: 'create')]
