@@ -97,7 +97,7 @@ final class IndexingOrganization extends AbstractIndexingElastic
                 ],
             ]);
 
-            if (Response::HTTP_OK !== $response->getStatusCode() && Response::HTTP_NO_CONTENT !== $response->getStatusCode()) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT])) {
                 throw new IndexingException('Unable to create new index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
