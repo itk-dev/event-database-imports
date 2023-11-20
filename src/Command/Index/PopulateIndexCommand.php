@@ -31,7 +31,7 @@ final class PopulateIndexCommand extends Command
         $this->addArgument(
             'index',
             InputArgument::REQUIRED,
-            sprintf('Index to populate (one off %s)', implode(', ', IndexNames::values())),
+            sprintf('Index to populate (one of %s)', implode(', ', IndexNames::values())),
             null,
             function (CompletionInput $input): array {
                 return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
