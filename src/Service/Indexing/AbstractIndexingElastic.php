@@ -51,7 +51,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->delete($params);
 
-            if (Response::HTTP_OK !== $response->getStatusCode() && Response::HTTP_ACCEPTED !== $response->getStatusCode() && Response::HTTP_NO_CONTENT !== $response->getStatusCode()) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_ACCEPTED, Response::HTTP_NO_CONTENT])) {
                 throw new IndexingException('Unable to delete item from index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
