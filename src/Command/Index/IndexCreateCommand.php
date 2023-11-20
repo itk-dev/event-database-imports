@@ -45,7 +45,7 @@ final class IndexCreateCommand extends Command
 
         foreach ($inputIndexes as $index) {
             if (!array_key_exists($index, $indexingServices)) {
-                $io->error('Index service for index ('.$index.') do not exists');
+                $io->error('Indexing service for index '.$index.' does not exist');
                 continue;
             }
             $service = $indexingServices[$index];
