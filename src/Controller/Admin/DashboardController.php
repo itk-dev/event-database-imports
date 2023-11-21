@@ -19,6 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
+    // Default date time format used in the UI.
+    //
+    // @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
+    public const DATETIME_FORMAT = 'dd-MM-Y HH:mm:ss';
+
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {

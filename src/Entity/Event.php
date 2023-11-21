@@ -111,7 +111,7 @@ class Event implements IndexItemInterface
 
     public function __toString(): string
     {
-       return sprintf('%s (%d)', $this->title, $this->id);
+        return sprintf('%s (%d)', $this->title ?? '', $this->id ?? -1);
     }
 
     public function getId(): ?int

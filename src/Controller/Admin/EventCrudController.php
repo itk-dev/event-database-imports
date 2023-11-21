@@ -19,8 +19,7 @@ class EventCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['id' => 'DESC'])
-            ->setNumberFormat('%.2d');
+            ->setDefaultSort(['id' => 'DESC']);
     }
 
     /*
