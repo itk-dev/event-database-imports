@@ -62,6 +62,11 @@ class Address
         $this->locations = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf('%s, %s (%d)', $this->street, $this->city, $this->id);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

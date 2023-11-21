@@ -13,24 +13,24 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
     {
         $occurrence = new Occurrence();
         $occurrence->setEvent($this->getReference(EventFixture::EVENT1))
-            ->setStart(new \DateTimeImmutable())
-            ->setEnd(new \DateTimeImmutable('2024-12-07T14:30:00+02:00'))
-            ->setTicketPriceRange('2024-12-07T15:30:00+02:00')
+            ->setStart(new \DateTimeImmutable('2024-12-07T14:30:00+02:00'))
+            ->setEnd(new \DateTimeImmutable('2024-12-07T15:30:00+02:00'))
+            ->setTicketPriceRange('10.000 Kr.')
             ->setRoom('M2-5');
         $manager->persist($occurrence);
         $occurrence = new Occurrence();
         $occurrence->setEvent($this->getReference(EventFixture::EVENT1))
-            ->setStart(new \DateTimeImmutable())
-            ->setEnd(new \DateTimeImmutable('2024-12-08T10:30:00+02:00'))
-            ->setTicketPriceRange('2024-12-08T16:30:00+02:00')
+            ->setStart(new \DateTimeImmutable('2024-11-08T10:30:00+02:00'))
+            ->setEnd(new \DateTimeImmutable('2024-11-08T16:30:00+02:00'))
+            ->setTicketPriceRange('Free or 100')
             ->setRoom('M2-6');
         $manager->persist($occurrence);
 
         $occurrence = new Occurrence();
         $occurrence->setEvent($this->getReference(EventFixture::EVENT2))
-            ->setStart(new \DateTimeImmutable())
-            ->setEnd(new \DateTimeImmutable('2024-12-08T12:30:00+02:00'))
-            ->setTicketPriceRange('2024-12-08T14:30:00+02:00')
+            ->setStart(new \DateTimeImmutable('2024-12-08T12:30:00+02:00'))
+            ->setEnd(new \DateTimeImmutable('2024-12-08T14:30:00+02:00'))
+            ->setTicketPriceRange('Free in december')
             ->setRoom('M2-5');
         $manager->persist($occurrence);
 

@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Occurrence;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -15,6 +16,12 @@ class OccurrenceCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Occurrence::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['start' => 'ASC']);
     }
 
     public function configureFields(string $pageName): iterable
@@ -44,7 +51,8 @@ class OccurrenceCrudController extends AbstractCrudController
             DateTimeField::new('updated_at')
                 ->setLabel('Last updated')
                 ->setDisabled()
-                ->hideWhenCreating(),
+                ->hideWhenCreating()
+                ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
     }
 }

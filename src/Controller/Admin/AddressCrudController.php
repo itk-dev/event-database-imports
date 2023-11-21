@@ -47,7 +47,8 @@ class AddressCrudController extends AbstractCrudController
             DateTimeField::new('updated_at')
                 ->setLabel('Last updated')
                 ->setDisabled()
-                ->hideWhenCreating()->setFormat(DashboardController::DATETIME_FORMAT),
+                ->hideWhenCreating()
+                ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
     }
 }
