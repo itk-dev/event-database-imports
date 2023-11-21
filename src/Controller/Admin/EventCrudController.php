@@ -4,7 +4,6 @@ namespace App\Controller\Admin;
 
 use App\Entity\Event;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Locale;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -20,10 +19,7 @@ class EventCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            // first argument = datetime pattern or date format; second optional argument = time format
-//            ->setDateTimeFormat('...', '...')
-//            ->setTimezone(Locale::getDenmark())
-
+            ->setDefaultSort(['id' => 'DESC'])
             ->setNumberFormat('%.2d');
     }
 
