@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
+  <file src="src/DataFixtures/EventFixture.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
+      <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
+      <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
+    </ArgumentTypeCoercion>
+  </file>
   <file src="src/DataFixtures/FeedFixtures.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->getReference(OrganizationFixtures::AAKB)]]></code>
@@ -11,6 +19,18 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/DataFixtures/LocationFixture.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(AddressFixture::ITKDEV)]]></code>
+    </ArgumentTypeCoercion>
+  </file>
+  <file src="src/DataFixtures/OccurrenceFixture.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
+      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
+      <code><![CDATA[$this->getReference(EventFixture::EVENT2)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">
@@ -70,8 +90,6 @@
       <code><![CDATA[['name' => $this->indexAliasName]]]></code>
     </InvalidArgument>
     <PossiblyUndefinedMethod>
-      <code>getStatusCode</code>
-      <code>getStatusCode</code>
       <code>getStatusCode</code>
       <code>getStatusCode</code>
     </PossiblyUndefinedMethod>
