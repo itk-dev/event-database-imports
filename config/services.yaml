@@ -22,7 +22,44 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    _instanceof:
+        App\Service\Indexing\IndexingInterface:
+            tags: ['indexing_interface']
+
+        App\Repository\PopulateInterface:
+            tags: [ 'populate_interface' ]
+
+    App\Command\Index\IndexCreateCommand:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+
+    App\Service\Populate:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+
+    App\MessageHandler\IndexHandler:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+
     App\Service\ImageHandler:
         arguments:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
+
+    App\Service\Indexing\IndexingEvents:
+        arguments:
+            $indexAliasName: '%env(INDEXING_EVENTS_ALIAS)%'
+
+    App\Service\Indexing\IndexingOrganization:
+        arguments:
+            $indexAliasName: '%env(INDEXING_ORGANIZATION_ALIAS)%'
+
+    Elastic\Elasticsearch\Client:
+        factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]
+        arguments:
+            $config:
+                hosts: ['%env(INDEXING_URL)%']
+
+    Elastic\Elasticsearch\ClientBuilder: ~

@@ -35,4 +35,111 @@
       <code>$source</code>
     </InvalidOperand>
   </file>
+  <file src="src/Service/Indexing/AbstractIndexingElastic.php">
+    <InvalidArgument>
+      <code>$params</code>
+      <code>$params</code>
+      <code>$params</code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $newIndexName,
+                                'alias' => $this->indexAliasName,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $this->newIndexName,
+                                'alias' => $this->indexAliasName,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[['index' => $existingIndexName]]]></code>
+      <code><![CDATA[['index' => $indexName]]]></code>
+      <code><![CDATA[['name' => $this->indexAliasName]]]></code>
+      <code><![CDATA[['name' => $this->indexAliasName]]]></code>
+    </InvalidArgument>
+    <PossiblyUndefinedMethod>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingEvents.php">
+    <InvalidArgument>
+      <code>$configuration</code>
+    </InvalidArgument>
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOrganization.php">
+    <InvalidArgument>
+      <code><![CDATA[[
+                'index' => $indexName,
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        'dynamic' => 'strict',
+                        'properties' => [
+                            'entityId' => [
+                                'type' => 'integer',
+                                'doc_values' => false,
+                            ],
+                            'name' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'email' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'url' => [
+                                'type' => 'keyword',
+                                'index_options' => 'docs',
+                                'index' => false,
+                                'doc_values' => false,
+                                'norms' => false,
+                            ],
+                            'created' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
+                            ],
+                            'updated' => [
+                                'type' => 'date',
+                                'format' => IndexFieldTypes::DATEFORMAT_ES,
+                                'index' => false,
+                                'doc_values' => true,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+    </InvalidArgument>
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
 </files>

@@ -5,7 +5,6 @@ namespace App\MessageHandler;
 use App\Exception\GeocoderException;
 use App\Message\DailyOccurrenceMessage;
 use App\Message\GeocoderMessage;
-use App\Message\IndexMessage;
 use App\Repository\AddressRepository;
 use App\Repository\EventRepository;
 use App\Service\Geocoder;
@@ -34,7 +33,7 @@ final class GeocoderHandler
             try {
                 $coordinates = $this->geocoderService->encode($address);
                 $address->setLatitude($coordinates[0]);
-                $address->setLongitude($coordinates[0]);
+                $address->setLongitude($coordinates[1]);
                 $this->addressRepository->save($address, true);
             } catch (GeocoderException|InvalidArgumentException $e) {
                 // It is fine that not all addresses are possible to geo-encode, so we just log the database id for later
@@ -43,8 +42,6 @@ final class GeocoderHandler
             }
         }
 
-        // Send the event into the search index and at the same time to the occurrence splitter.
         $this->messageBus->dispatch(new DailyOccurrenceMessage($message->getEventId()));
-        $this->messageBus->dispatch(new IndexMessage($message->getEventId()));
     }
 }

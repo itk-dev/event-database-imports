@@ -4,6 +4,8 @@ namespace App\MessageHandler;
 
 use App\Factory\DailyOccurrencesFactory;
 use App\Message\DailyOccurrenceMessage;
+use App\Message\IndexMessage;
+use App\Model\Indexing\IndexNames;
 use App\Repository\EventRepository;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
@@ -28,6 +30,6 @@ final class DailyOccurrenceHandler
 
         $this->dailyOccurrencesFactory->createOrUpdate($event);
 
-        throw new UnrecoverableMessageHandlingException('Not implemented yet');
+        $this->messageBus->dispatch(new IndexMessage($message->getEventId(), IndexNames::Events));
     }
 }

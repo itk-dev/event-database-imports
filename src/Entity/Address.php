@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexNames;
 use App\Repository\AddressRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
 class Address
@@ -21,27 +23,35 @@ class Address
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $street = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $suite = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $region = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $country = null;
 
     #[ORM\Column]
+    #[Groups([IndexNames::Events->value])]
     private ?string $postalCode = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?float $latitude = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups([IndexNames::Events->value])]
     private ?float $longitude = null;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Location::class)]

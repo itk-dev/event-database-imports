@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Model\Indexing\IndexNames;
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
@@ -24,6 +26,7 @@ class Tag
     private Collection $vocabularies;
 
     #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'tags')]

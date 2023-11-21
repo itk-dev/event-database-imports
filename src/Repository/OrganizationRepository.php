@@ -3,8 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Organization;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
  * @extends ServiceEntityRepository<Organization>
@@ -14,7 +18,8 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Organization[]    findAll()
  * @method Organization[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class OrganizationRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: IndexNames::Organization->value, priority: 10)]
+final class OrganizationRepository extends ServiceEntityRepository implements PopulateInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -37,5 +42,18 @@ final class OrganizationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getNumberOfRecords(): int
+    {
+        $query = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery();
+
+        return $query->getSingleScalarResult();
     }
 }

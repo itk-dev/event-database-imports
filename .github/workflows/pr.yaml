@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.1' ]
+        php: [ '8.2' ]
     name: Validate composer (${{ matrix.php}})
     steps:
       - uses: actions/checkout@master
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.1' ]
+        php: [ '8.2' ]
     steps:
       - uses: actions/checkout@master
 
@@ -80,7 +80,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ["8.1"]
+        php: ["8.2"]
     name: PHP Coding Standards Fixer (PHP ${{ matrix.php }})
     steps:
       - name: Checkout
@@ -115,7 +115,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['8.1']
+        php: ['8.2']
     name: Psalm static analysis (${{ matrix.php}})
     steps:
       - uses: actions/checkout@master
@@ -151,19 +151,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      - name: Cache dependencies
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}-${{ matrix.dependency-version }}-
-          restore-keys: ${{ runner.os }}-composer-${{ matrix.dependency-version }}-
-      - name: Install Dependencies
-        run: |
-          composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-          bin/console cache:clear
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -207,7 +194,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ "8.1" ]
+        php: [ "8.2" ]
     name: Validate Doctrine Schema (PHP ${{ matrix.php}})
     services:
       mariadb:

@@ -53,6 +53,42 @@ final class EventFactory
         return $entity;
     }
 
+    /**
+     * Determine it the FeedItem is updatable or is a new FeedItem.
+     *
+     * @param FeedItem $item
+     *   The feed item to test
+     *
+     * @return bool
+     *   True if updatable or new feed item
+     *
+     * @throws FactoryException
+     */
+    public function isUpdatableOrNew(FeedItem $item): bool
+    {
+        $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
+        if (is_null($feed)) {
+            throw new FactoryException('Missing feed in event factory');
+        }
+
+        $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
+        if (!is_null($entity) && $entity->getHash() === $this->calculateHash($item)) {
+            // Entity exists for the item and the hash has not changed.
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Look up event in database based on field criteria.
+     *
+     * @param array $criteria
+     *   Doctrine field criteria
+     *
+     * @return Event|null
+     *   Event entity or null if not found
+     */
     public function get(array $criteria): ?Event
     {
         return $this->eventRepository->findOneBy($criteria);
