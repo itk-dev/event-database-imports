@@ -30,6 +30,10 @@ class Event implements IndexItemInterface
     #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
+    #[ORM\Column(length: 255)]
+    #[Groups([IndexNames::Events->value])]
+    private ?string $title = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value])]
     private ?string $excerpt = null;
@@ -105,9 +109,26 @@ class Event implements IndexItemInterface
         $this->tags = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+       return sprintf('%s (%d)', $this->title, $this->id);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
+
+        return $this;
     }
 
     public function getExcerpt(): ?string
