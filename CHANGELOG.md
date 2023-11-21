@@ -31,6 +31,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added time service to help splitting occurrences into daily occurrences
 - Added daily occurrence factory
 - Added indexing service and helper commands to populate and create indexes
+- Added Easy admin and event fixtures
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
