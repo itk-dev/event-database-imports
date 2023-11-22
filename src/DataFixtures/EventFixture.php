@@ -28,6 +28,8 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->setTicketUrl('https://www.aakb.dk/arrangementer/boern/skak-nu-eller-aldrig-18')
             ->setPublic(true)
             ->setLocation($this->getReference(LocationFixture::ITKDEV))
+            ->addTag($this->getReference(TagsFixtures::AROS))
+            ->addTag($this->getReference(TagsFixtures::RACE))
             ->setHash('4936efebda146f6775fb7e429d884fef');
         $manager->persist($event);
         $this->addReference(self::EVENT2, $event);
@@ -41,6 +43,8 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->setTicketUrl('https://www.aakb.dk/arrangementer/born/kreavaerksted-monsterboger-0')
             ->setPublic(true)
             ->setLocation($this->getReference(LocationFixture::ITKDEV))
+            ->addTag($this->getReference(TagsFixtures::CONCERT))
+            ->addTag($this->getReference(TagsFixtures::AROS))
             ->setHash('16d48c26d38f6d59b3d081e596b4d0e8');
         $manager->persist($event);
         $this->addReference(self::EVENT1, $event);
@@ -55,6 +59,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             UserFixtures::class,
             OrganizationFixtures::class,
             LocationFixture::class,
+            TagsFixtures::class,
         ];
     }
 }

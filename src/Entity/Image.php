@@ -35,6 +35,14 @@ class Image
     #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
     private ?Event $event = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $title = null;
+
+    public function __toString(): string
+    {
+        return sprintf('%s (%d)', $this->title ?? 'Missing', $this->id ?? -1);
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -82,6 +90,18 @@ class Image
         }
 
         $this->event = $event;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): static
+    {
+        $this->title = $title;
 
         return $this;
     }

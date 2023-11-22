@@ -47,7 +47,8 @@ class OccurrenceCrudController extends AbstractCrudController
             TextField::new('ticketPriceRange'),
             TextField::new('room'),
 
-            FormField::addFieldset('Edited'),
+            FormField::addFieldset('Edited')
+                ->hideWhenCreating(),
             DateTimeField::new('updated_at')
                 ->setLabel('Last updated')
                 ->setDisabled()

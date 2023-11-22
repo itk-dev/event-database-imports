@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Address;
 use App\Entity\Event;
 use App\Entity\Feed;
+use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Occurrence;
 use App\Entity\Organization;
@@ -45,6 +46,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Occurrences', 'fa fa-repeat', Occurrence::class);
         yield MenuItem::linkToCrud('Location', 'fa fa-location-dot', Location::class);
         yield MenuItem::linkToCrud('Address', 'fa fa-address-book', Address::class);
+        yield MenuItem::linkToCrud('Image', 'fa fa-image', Image::class);
         yield MenuItem::linkToCrud('Feeds', 'fa fa-rss', Feed::class);
         yield MenuItem::linkToCrud('Tags', 'fa fa-tags', Tag::class);
         yield MenuItem::linkToCrud('Organizer', 'fa fa-sitemap', Organization::class);

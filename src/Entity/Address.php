@@ -64,7 +64,7 @@ class Address
 
     public function __toString(): string
     {
-        return sprintf('%s, %s (%d)', $this->street, $this->city, $this->id);
+        return sprintf('%s, %s (%d)', $this->street ?? '', $this->city ?? '', $this->id ?? -1);
     }
 
     public function getId(): ?int

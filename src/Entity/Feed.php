@@ -25,7 +25,7 @@ class Feed
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'json')]
     private array $configuration = [];
 
     #[ORM\Column(nullable: true)]
@@ -75,6 +75,22 @@ class Feed
         $this->configuration = $configuration;
 
         return $this;
+    }
+
+    /**
+     * Helper function to display data in code-editor in easy admin.
+     */
+    public function getConfigurationField(): string
+    {
+        return json_encode($this->configuration, JSON_PRETTY_PRINT);
+    }
+
+    /**
+     * Helper function store data from code-editor in easy admin.
+     */
+    public function setConfigurationField(string $configuration): static
+    {
+        return $this->setConfiguration(json_decode($configuration, true));
     }
 
     public function getLastRead(): ?\DateTimeImmutable

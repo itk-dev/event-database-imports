@@ -2,20 +2,19 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Organization;
+use App\Entity\Image;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
-class OrganizationCrudController extends AbstractCrudController
+class ImageCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Organization::class;
+        return Image::class;
     }
 
     public function configureFields(string $pageName): iterable
@@ -25,9 +24,8 @@ class OrganizationCrudController extends AbstractCrudController
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            TextField::new('name'),
-            EmailField::new('mail'),
-            UrlField::new('url'),
+            TextField::new('title'),
+            UrlField::new('source'),
 
             FormField::addFieldset('Edited')
                 ->hideWhenCreating(),

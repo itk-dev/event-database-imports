@@ -38,6 +38,11 @@ class Tag
         $this->events = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return sprintf('%s (%d)', $this->name ?? '', $this->id ?? -1);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

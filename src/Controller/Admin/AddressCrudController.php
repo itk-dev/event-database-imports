@@ -40,10 +40,17 @@ class AddressCrudController extends AbstractCrudController
             TextField::new('postalCode'),
 
             FormField::addFieldset('Geo location'),
-            NumberField::new('latitude')->setNumDecimals(8)->setColumns(2)->hideOnIndex(),
-            NumberField::new('longitude')->setNumDecimals(8)->setColumns(2)->hideOnIndex(),
+            NumberField::new('latitude')
+                ->setNumDecimals(8)
+                ->setColumns(2)
+                ->hideOnIndex(),
+            NumberField::new('longitude')
+                ->setNumDecimals(8)
+                ->setColumns(2)
+                ->hideOnIndex(),
 
-            FormField::addFieldset('Edited'),
+            FormField::addFieldset('Edited')
+                ->hideWhenCreating(),
             DateTimeField::new('updated_at')
                 ->setLabel('Last updated')
                 ->setDisabled()

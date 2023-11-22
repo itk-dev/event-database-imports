@@ -6,6 +6,10 @@
       <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
       <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
+      <code><![CDATA[$this->getReference(TagsFixtures::AROS)]]></code>
+      <code><![CDATA[$this->getReference(TagsFixtures::AROS)]]></code>
+      <code><![CDATA[$this->getReference(TagsFixtures::CONCERT)]]></code>
+      <code><![CDATA[$this->getReference(TagsFixtures::RACE)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/FeedFixtures.php">
