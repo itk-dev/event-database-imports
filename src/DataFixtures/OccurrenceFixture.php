@@ -30,7 +30,7 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
         $occurrence->setEvent($this->getReference(EventFixture::EVENT2))
             ->setStart(new \DateTimeImmutable('2024-12-08T12:30:00+02:00'))
             ->setEnd(new \DateTimeImmutable('2024-12-08T14:30:00+02:00'))
-            ->setTicketPriceRange('Free in december')
+            ->setTicketPriceRange('Free in December')
             ->setRoom('M2-5');
         $manager->persist($occurrence);
 
