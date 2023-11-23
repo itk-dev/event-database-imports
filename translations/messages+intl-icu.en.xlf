@@ -353,6 +353,22 @@
         <source>admin.user.edited.updated</source>
         <target>Last updated</target>
       </trans-unit>
+      <trans-unit id="zPof34." resname="login.user.mail">
+        <source>login.user.mail</source>
+        <target>Mail address</target>
+      </trans-unit>
+      <trans-unit id="Ri3SpJz" resname="login.user.password">
+        <source>login.user.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="gP1oGEr" resname="login.label">
+        <source>login.label</source>
+        <target>Log in</target>
+      </trans-unit>
+      <trans-unit id="Ixl_ubC" resname="login.page.remember">
+        <source>login.page.remember</source>
+        <target>Remember me</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
