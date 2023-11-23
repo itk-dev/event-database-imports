@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Address;
+use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -22,7 +23,7 @@ class AddressCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['id' => 'DESC']);
+            ->setDefaultSort(['id' => Criteria::DESC]);
     }
 
     public function configureFields(string $pageName): iterable

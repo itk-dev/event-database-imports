@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Location;
+use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -26,7 +27,7 @@ class LocationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['id' => 'DESC']);
+            ->setDefaultSort(['id' => Criteria::DESC]);
     }
 
     public function configureFields(string $pageName): iterable

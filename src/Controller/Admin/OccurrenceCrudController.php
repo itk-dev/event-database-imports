@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Occurrence;
+use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -22,7 +23,7 @@ class OccurrenceCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['start' => 'ASC']);
+            ->setDefaultSort(['start' => Criteria::ASC]);
     }
 
     public function configureFields(string $pageName): iterable
