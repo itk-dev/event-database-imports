@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -41,15 +42,14 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Events', 'fa fa-calendar', Event::class);
-        yield MenuItem::linkToCrud('Occurrences', 'fa fa-repeat', Occurrence::class);
-        yield MenuItem::linkToCrud('Location', 'fa fa-location-dot', Location::class);
-        yield MenuItem::linkToCrud('Address', 'fa fa-address-book', Address::class);
-        yield MenuItem::linkToCrud('Image', 'fa fa-image', Image::class);
-        yield MenuItem::linkToCrud('Feeds', 'fa fa-rss', Feed::class);
-        yield MenuItem::linkToCrud('Tags', 'fa fa-tags', Tag::class);
-        yield MenuItem::linkToCrud('Organizer', 'fa fa-sitemap', Organization::class);
-        yield MenuItem::linkToCrud('Users', 'fa fa-user', User::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.events'), 'fa fa-calendar', Event::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.occurrences'), 'fa fa-repeat', Occurrence::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.location'), 'fa fa-location-dot', Location::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.address'), 'fa fa-address-book', Address::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.image'), 'fa fa-image', Image::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feeds'), 'fa fa-rss', Feed::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.tags'), 'fa fa-tags', Tag::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.organizer'), 'fa fa-sitemap', Organization::class);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.users'), 'fa fa-user', User::class);
     }
 }

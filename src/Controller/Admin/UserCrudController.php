@@ -19,6 +19,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -36,30 +37,35 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.user.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            TextField::new('name'),
-            EmailField::new('mail'),
+            TextField::new('name')
+                ->setLabel(new TranslatableMessage('admin.user.name')),
+            EmailField::new('mail')
+                ->setLabel(new TranslatableMessage('admin.user.mail')),
             TextField::new('password')
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
-                    'first_options' => ['label' => 'Password'],
-                    'second_options' => ['label' => '(Repeat)'],
+                    'first_options' => ['label' => new TranslatableMessage('admin.user.password')],
+                    'second_options' => ['label' => new TranslatableMessage('admin.user.password2')],
                     'mapped' => false,
                 ])
                 ->setRequired(Crud::PAGE_NEW === $pageName)
                 ->onlyOnForms(),
-            BooleanField::new('enabled'),
+            BooleanField::new('enabled')
+                ->setLabel(new TranslatableMessage('admin.user.enabled')),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.user.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.user.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
-                ->setFormat(DashboardController::DATETIME_FORMAT),        ];
+                ->setFormat(DashboardController::DATETIME_FORMAT),
+        ];
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface

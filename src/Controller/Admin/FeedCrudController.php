@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class FeedCrudController extends AbstractCrudController
 {
@@ -21,24 +22,27 @@ class FeedCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.feed.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            TextField::new('name'),
+            TextField::new('name')
+                ->setLabel(new TranslatableMessage('admin.feed.name')),
             CodeEditorField::new('configurationField')
+                ->setLabel(new TranslatableMessage('admin.feed.configuration'))
                 ->setLanguage('js')
                 ->hideOnIndex(),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.feed.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('last_read')
-                ->setLabel('Last parsed')
+                ->setLabel(new TranslatableMessage('admin.feed.edited.last_read'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
 
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.feed.edited.update'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),

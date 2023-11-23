@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class OccurrenceCrudController extends AbstractCrudController
 {
@@ -28,29 +29,36 @@ class OccurrenceCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.occurrence.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
             AssociationField::new('event')
-                ->setLabel('Link to event')
+                ->setLabel(new TranslatableMessage('admin.occurrence.event-link'))
                 ->autocomplete(),
 
-            FormField::addFieldset('Dates'),
+            FormField::addFieldset('Dates')
+                ->setLabel(new TranslatableMessage('admin.occurrence.dates.headline')),
             DateTimeField::new('start')
+                ->setLabel(new TranslatableMessage('admin.occurrence.dates.start'))
                 ->setColumns(2)
                 ->setLabel('Start time'),
             DateTimeField::new('end')
+                ->setLabel(new TranslatableMessage('admin.occurrence.dates.end'))
                 ->setColumns(2)
                 ->setLabel('End time'),
 
-            FormField::addFieldset('Basic information'),
-            TextField::new('ticketPriceRange'),
-            TextField::new('room'),
+            FormField::addFieldset('Basic information')
+                ->setLabel(new TranslatableMessage('admin.occurrence.basic.headline')),
+            TextField::new('ticketPriceRange')
+                ->setLabel(new TranslatableMessage('admin.occurrence.basic.price')),
+            TextField::new('room')
+                ->setLabel(new TranslatableMessage('admin.occurrence.basic.room')),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.occurrence.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.occurrence.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),

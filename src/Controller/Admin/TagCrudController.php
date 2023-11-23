@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class TagCrudController extends AbstractCrudController
 {
@@ -21,18 +22,22 @@ class TagCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.tag.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            TextField::new('name'),
-            AssociationField::new('vocabularies'),
+            TextField::new('name')
+                ->setLabel(new TranslatableMessage('admin.tag.name')),
+            AssociationField::new('vocabularies')
+                ->setLabel(new TranslatableMessage('admin.tag.vocabularies')),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.tag.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.tag.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
-                ->setFormat(DashboardController::DATETIME_FORMAT),        ];
+                ->setFormat(DashboardController::DATETIME_FORMAT),
+        ];
     }
 }

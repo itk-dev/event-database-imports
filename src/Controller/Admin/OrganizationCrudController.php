@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class OrganizationCrudController extends AbstractCrudController
 {
@@ -22,19 +23,24 @@ class OrganizationCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.organization.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            TextField::new('name'),
-            EmailField::new('mail'),
-            UrlField::new('url'),
+            TextField::new('name')
+                ->setLabel(new TranslatableMessage('admin.organization.name')),
+            EmailField::new('mail')
+                ->setLabel(new TranslatableMessage('admin.organization.mail')),
+            UrlField::new('url')
+                ->setLabel(new TranslatableMessage('admin.organization.url')),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.organization.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.organization.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
-                ->setFormat(DashboardController::DATETIME_FORMAT),        ];
+                ->setFormat(DashboardController::DATETIME_FORMAT),
+        ];
     }
 }

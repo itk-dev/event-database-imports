@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractCrudController
 {
@@ -30,29 +31,42 @@ class EventCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.event.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            FormField::addFieldset('Basic information'),
-            TextField::new('title'),
+            FormField::addFieldset('Basic information')
+                ->setLabel(new TranslatableMessage('admin.event.basic.headline')),
+            TextField::new('title')
+                ->setLabel(new TranslatableMessage('admin.event.basic.title')),
             TextEditorField::new('excerpt')
+                ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
                 ->hideOnIndex(),
             TextEditorField::new('description')
+                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
                 ->hideOnIndex(),
             AssociationField::new('image')
+                ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex(),
             AssociationField::new('tags')
+                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
                 ->hideOnIndex(),
 
-            FormField::addFieldset('Location information'),
-            UrlField::new('url'),
-            UrlField::new('ticketUrl'),
-            AssociationField::new('location'),
+            FormField::addFieldset('Location information')
+                ->setLabel(new TranslatableMessage('admin.event.location.headline')),
+            UrlField::new('url')
+                ->setLabel(new TranslatableMessage('admin.event.location.url')),
+            UrlField::new('ticketUrl')
+                ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl')),
+            AssociationField::new('location')
+                ->setLabel(new TranslatableMessage('admin.event.location.location')),
 
-            FormField::addFieldset('Edited'),
-            AssociationField::new('organization'),
+            FormField::addFieldset('Edited')
+                ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
+            AssociationField::new('organization')
+                ->setLabel(new TranslatableMessage('admin.event.edited.organization')),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),

@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
+use Symfony\Component\Translation\TranslatableMessage;
 
 class LocationCrudController extends AbstractCrudController
 {
@@ -32,27 +33,37 @@ class LocationCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
+                ->setLabel(new TranslatableMessage('admin.location.id'))
                 ->setDisabled()
                 ->hideWhenCreating(),
 
-            FormField::addFieldset('Basic information'),
-            TextField::new('name'),
+            FormField::addFieldset('Basic information')
+                ->setLabel(new TranslatableMessage('admin.location.basic.headline')),
+            TextField::new('name')
+                ->setLabel(new TranslatableMessage('admin.location.basic.name')),
             AssociationField::new('address')
+                ->setLabel(new TranslatableMessage('admin.location.basic.headline'))
                 ->hideOnIndex(),
 
-            FormField::addFieldset('Enriched information'),
-            UrlField::new('url'),
-            EmailField::new('mail'),
+            FormField::addFieldset('Enriched information')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.headline')),
+            UrlField::new('url')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.url')),
+            EmailField::new('mail')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.mail')),
             UrlField::new('image')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.image'))
                 ->hideOnIndex(),
             TelephoneField::new('telephone')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.telephone'))
                 ->hideOnIndex(),
-            BooleanField::new('disabilityAccess'),
+            BooleanField::new('disabilityAccess')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.disability-access')),
 
-            FormField::addFieldset('Edited')
+            FormField::addFieldset(new TranslatableMessage('admin.location.edited.headline'))
                 ->hideWhenCreating(),
             DateTimeField::new('updated_at')
-                ->setLabel('Last updated')
+                ->setLabel(new TranslatableMessage('admin.location.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
