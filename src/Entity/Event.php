@@ -102,6 +102,9 @@ class Event implements IndexItemInterface
     #[SerializedPath('[updated]')]
     protected $updatedAt;
 
+    #[ORM\Column]
+    private bool $editable = false;
+
     public function __construct()
     {
         $this->occurrences = new ArrayCollection();
@@ -343,6 +346,18 @@ class Event implements IndexItemInterface
     public function setImage(?Image $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }

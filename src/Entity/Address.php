@@ -57,6 +57,9 @@ class Address
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Location::class)]
     private Collection $locations;
 
+    #[ORM\Column]
+    private bool $editable = false;
+
     public function __construct()
     {
         $this->locations = new ArrayCollection();
@@ -194,6 +197,18 @@ class Address
                 $location->setAddress(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }

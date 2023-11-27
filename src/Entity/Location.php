@@ -59,6 +59,9 @@ class Location implements IndexItemInterface
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]
     private Collection $events;
 
+    #[ORM\Column]
+    private bool $editable = false;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -184,6 +187,18 @@ class Location implements IndexItemInterface
                 $event->setLocation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }

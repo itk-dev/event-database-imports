@@ -38,6 +38,9 @@ class Image
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\Column]
+    private bool $editable = false;
+
     public function __toString(): string
     {
         return sprintf('%s (%d)', $this->title ?? 'Missing', $this->id ?? -1);
@@ -102,6 +105,18 @@ class Image
     public function setTitle(string $title): static
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }

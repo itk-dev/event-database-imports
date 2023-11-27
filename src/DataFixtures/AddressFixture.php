@@ -20,7 +20,8 @@ final class AddressFixture extends Fixture
             ->setCountry('Danmark')
             ->setCity('Aarhus')
             ->setLatitude(56.1507645)
-            ->setLongitude(10.2112699);
+            ->setLongitude(10.2112699)
+            ->setEditable(true);
         $manager->persist($address);
         $this->addReference(self::ITKDEV, $address);
 

@@ -53,6 +53,9 @@ class Occurrence implements IndexItemInterface
     #[Groups([IndexNames::Events->value])]
     private ?string $status = null;
 
+    #[ORM\Column]
+    private bool $editable = false;
+
     public function __construct()
     {
         $this->dailyOccurrences = new ArrayCollection();
@@ -161,6 +164,18 @@ class Occurrence implements IndexItemInterface
     public function setStatus(?string $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }
