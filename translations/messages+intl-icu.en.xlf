@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="7ixbPM4" resname="admin.address.headline">
+        <source>admin.address.headline</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="Xgp.xNj" resname="admin.address.street">
+        <source>admin.address.street</source>
+        <target>Street</target>
+      </trans-unit>
+      <trans-unit id="lPhmX0t" resname="admin.address.suite">
+        <source>admin.address.suite</source>
+        <target>Suite</target>
+      </trans-unit>
+      <trans-unit id="iMZcb7T" resname="admin.address.region">
+        <source>admin.address.region</source>
+        <target>Region</target>
+      </trans-unit>
+      <trans-unit id="woqDWSt" resname="admin.address.city">
+        <source>admin.address.city</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="qn0SoaW" resname="admin.address.country">
+        <source>admin.address.country</source>
+        <target>Country</target>
+      </trans-unit>
+      <trans-unit id="H6tlGPs" resname="admin.address.postalCode">
+        <source>admin.address.postalCode</source>
+        <target>Postal code</target>
+      </trans-unit>
+      <trans-unit id="te5f3B6" resname="admin.address.location.headline">
+        <source>admin.address.location.headline</source>
+        <target>Geographical location</target>
+      </trans-unit>
+      <trans-unit id="aAHWiSP" resname="admin.address.location.latitude">
+        <source>admin.address.location.latitude</source>
+        <target>Latitude</target>
+      </trans-unit>
+      <trans-unit id="HlPqAMD" resname="admin.address.location.longitude">
+        <source>admin.address.location.longitude</source>
+        <target>Longitude</target>
+      </trans-unit>
+      <trans-unit id="2lG7RhG" resname="admin.address.edited.headline">
+        <source>admin.address.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="dNj1_lM" resname="admin.address.edited.updated">
+        <source>admin.address.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="tPg4pmq" resname="admin.address.id">
+        <source>admin.address.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="itEjSsQ" resname="admin.link.events">
+        <source>admin.link.events</source>
+        <target>Events</target>
+      </trans-unit>
+      <trans-unit id="u5sCZNu" resname="admin.link.occurrences">
+        <source>admin.link.occurrences</source>
+        <target>Occurrences</target>
+      </trans-unit>
+      <trans-unit id="I9SNJXS" resname="admin.link.location">
+        <source>admin.link.location</source>
+        <target>Locations</target>
+      </trans-unit>
+      <trans-unit id="gCHoRa." resname="admin.link.address">
+        <source>admin.link.address</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="p58tCKn" resname="admin.link.image">
+        <source>admin.link.image</source>
+        <target>Images</target>
+      </trans-unit>
+      <trans-unit id="1OcmqaW" resname="admin.link.feeds">
+        <source>admin.link.feeds</source>
+        <target>Feeds</target>
+      </trans-unit>
+      <trans-unit id="CHMIv90" resname="admin.link.tags">
+        <source>admin.link.tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="hKvTzZo" resname="admin.link.organizer">
+        <source>admin.link.organizer</source>
+        <target>Organizer</target>
+      </trans-unit>
+      <trans-unit id="3ohrj0." resname="admin.link.users">
+        <source>admin.link.users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="NfU36AS" resname="admin.event.id">
+        <source>admin.event.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="4bHsKHg" resname="admin.event.basic.headline">
+        <source>admin.event.basic.headline</source>
+        <target>Basic information</target>
+      </trans-unit>
+      <trans-unit id="cATaFWH" resname="admin.event.basic.title">
+        <source>admin.event.basic.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="dbv61rM" resname="admin.event.basic.excerpt">
+        <source>admin.event.basic.excerpt</source>
+        <target>Excerpt</target>
+      </trans-unit>
+      <trans-unit id="IjacDgE" resname="admin.event.basic.description">
+        <source>admin.event.basic.description</source>
+        <target>Description</target>
+      </trans-unit>
+      <trans-unit id="GCCXSLn" resname="admin.event.basic.image">
+        <source>admin.event.basic.image</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="cctuR7g" resname="admin.event.basic.tags">
+        <source>admin.event.basic.tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="3iZj9.F" resname="admin.event.location.headline">
+        <source>admin.event.location.headline</source>
+        <target>Location information</target>
+      </trans-unit>
+      <trans-unit id="uTBhtmJ" resname="admin.event.location.url">
+        <source>admin.event.location.url</source>
+        <target>Homepage link (URL)</target>
+      </trans-unit>
+      <trans-unit id="A7Kuh8o" resname="admin.event.location.ticketUrl">
+        <source>admin.event.location.ticketUrl</source>
+        <target>Ticket link (URL)</target>
+      </trans-unit>
+      <trans-unit id="gojVP0j" resname="admin.event.location.location">
+        <source>admin.event.location.location</source>
+        <target>Location</target>
+      </trans-unit>
+      <trans-unit id="8aKuECs" resname="admin.event.edited.headline">
+        <source>admin.event.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="qkrlf3q" resname="admin.event.edited.organization">
+        <source>admin.event.edited.organization</source>
+        <target>Organization</target>
+      </trans-unit>
+      <trans-unit id="7c_54qF" resname="admin.event.edited.updated">
+        <source>admin.event.edited.updated</source>
+        <target>Last update</target>
+      </trans-unit>
+      <trans-unit id="M_3TE2g" resname="admin.feed.id">
+        <source>admin.feed.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="RivQaEM" resname="admin.feed.name">
+        <source>admin.feed.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="f0RmQAC" resname="admin.feed.configuration">
+        <source>admin.feed.configuration</source>
+        <target>Configuration</target>
+      </trans-unit>
+      <trans-unit id="rjtWHu0" resname="admin.feed.edited.headline">
+        <source>admin.feed.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="T.UlgCd" resname="admin.feed.edited.last_read">
+        <source>admin.feed.edited.last_read</source>
+        <target>Last read</target>
+      </trans-unit>
+      <trans-unit id="1HvLxTE" resname="admin.feed.edited.update">
+        <source>admin.feed.edited.update</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="LGC.FCo" resname="admin.image.id">
+        <source>admin.image.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="_MBm65c" resname="admin.image.title">
+        <source>admin.image.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="18.tD8H" resname="admin.image.source">
+        <source>admin.image.source</source>
+        <target>Source (URL)</target>
+      </trans-unit>
+      <trans-unit id="YdvtBew" resname="admin.image.edited.headline">
+        <source>admin.image.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="sKu.hB1" resname="admin.image.edited.update">
+        <source>admin.image.edited.update</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="qkLipkd" resname="admin.location.id">
+        <source>admin.location.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="ft4KMCy" resname="admin.location.basic.headline">
+        <source>admin.location.basic.headline</source>
+        <target>Basic information</target>
+      </trans-unit>
+      <trans-unit id="tHYvYtQ" resname="admin.location.basic.name">
+        <source>admin.location.basic.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="PLqEtQb" resname="admin.location.enriched.headline">
+        <source>admin.location.enriched.headline</source>
+        <target>Enriched information</target>
+      </trans-unit>
+      <trans-unit id="CyTSjnm" resname="admin.location.enriched.url">
+        <source>admin.location.enriched.url</source>
+        <target>Homepage (URL)</target>
+      </trans-unit>
+      <trans-unit id="OEufWEF" resname="admin.location.enriched.mail">
+        <source>admin.location.enriched.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="SV..IwN" resname="admin.location.enriched.image">
+        <source>admin.location.enriched.image</source>
+        <target>Image (URL)</target>
+      </trans-unit>
+      <trans-unit id="AYvaT3d" resname="admin.location.enriched.telephone">
+        <source>admin.location.enriched.telephone</source>
+        <target>Telephone</target>
+      </trans-unit>
+      <trans-unit id="h.VlWhf" resname="admin.location.enriched.disability-access">
+        <source>admin.location.enriched.disability-access</source>
+        <target>Disability access</target>
+      </trans-unit>
+      <trans-unit id="T0OwwQh" resname="admin.location.edited.headline">
+        <source>admin.location.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="PknIJ0X" resname="admin.location.edited.updated">
+        <source>admin.location.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="PNaXHXs" resname="admin.occurrence.id">
+        <source>admin.occurrence.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="u0.n.DQ" resname="admin.occurrence.event-link">
+        <source>admin.occurrence.event-link</source>
+        <target>Linked to event</target>
+      </trans-unit>
+      <trans-unit id="ipU8EAl" resname="admin.occurrence.dates.headline">
+        <source>admin.occurrence.dates.headline</source>
+        <target>Event date</target>
+      </trans-unit>
+      <trans-unit id="82X3Sqg" resname="admin.occurrence.dates.start">
+        <source>admin.occurrence.dates.start</source>
+        <target>Start</target>
+      </trans-unit>
+      <trans-unit id="m1jC4Dd" resname="admin.occurrence.dates.end">
+        <source>admin.occurrence.dates.end</source>
+        <target>End</target>
+      </trans-unit>
+      <trans-unit id="ymz0gsx" resname="admin.occurrence.basic.headline">
+        <source>admin.occurrence.basic.headline</source>
+        <target>Basic information</target>
+      </trans-unit>
+      <trans-unit id="OdpsbfX" resname="admin.occurrence.basic.price">
+        <source>admin.occurrence.basic.price</source>
+        <target>Ticket price range</target>
+      </trans-unit>
+      <trans-unit id="xXnuFrt" resname="admin.occurrence.basic.room">
+        <source>admin.occurrence.basic.room</source>
+        <target>Room</target>
+      </trans-unit>
+      <trans-unit id="fDsTfkD" resname="admin.occurrence.edited.headline">
+        <source>admin.occurrence.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id=".EqFxan" resname="admin.occurrence.edited.updated">
+        <source>admin.occurrence.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="pB0NtRW" resname="admin.organization.id">
+        <source>admin.organization.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="MuuClgQ" resname="admin.organization.name">
+        <source>admin.organization.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="82jbkTZ" resname="admin.organization.mail">
+        <source>admin.organization.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="itYQFRs" resname="admin.organization.url">
+        <source>admin.organization.url</source>
+        <target>Homepage URL</target>
+      </trans-unit>
+      <trans-unit id="N_xsxXB" resname="admin.organization.edited.headline">
+        <source>admin.organization.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="EJX.62j" resname="admin.organization.edited.updated">
+        <source>admin.organization.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="kckcQQ2" resname="admin.tag.id">
+        <source>admin.tag.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="Y3git6Q" resname="admin.tag.name">
+        <source>admin.tag.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="UV6c3ad" resname="admin.tag.vocabularies">
+        <source>admin.tag.vocabularies</source>
+        <target>Vocabularies</target>
+      </trans-unit>
+      <trans-unit id="Hz2nmw9" resname="admin.tag.edited.headline">
+        <source>admin.tag.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="K4YYT9t" resname="admin.tag.edited.updated">
+        <source>admin.tag.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="3gHE26p" resname="admin.user.id">
+        <source>admin.user.id</source>
+        <target>ID</target>
+      </trans-unit>
+      <trans-unit id="hxMKWow" resname="admin.user.name">
+        <source>admin.user.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="rAd5xrd" resname="admin.user.mail">
+        <source>admin.user.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="tvBq3eb" resname="admin.user.password">
+        <source>admin.user.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="hgWXpR2" resname="admin.user.password2">
+        <source>admin.user.password2</source>
+        <target>Repeat password</target>
+      </trans-unit>
+      <trans-unit id="agZeVTI" resname="admin.user.enabled">
+        <source>admin.user.enabled</source>
+        <target>Enabled</target>
+      </trans-unit>
+      <trans-unit id="bbUpEoS" resname="admin.user.edited.headline">
+        <source>admin.user.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="mTWdcDt" resname="admin.user.edited.updated">
+        <source>admin.user.edited.updated</source>
+        <target>Last updated</target>
+      </trans-unit>
+      <trans-unit id="zPof34." resname="login.user.mail">
+        <source>login.user.mail</source>
+        <target>Mail address</target>
+      </trans-unit>
+      <trans-unit id="Ri3SpJz" resname="login.user.password">
+        <source>login.user.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="gP1oGEr" resname="login.label">
+        <source>login.label</source>
+        <target>Log in</target>
+      </trans-unit>
+      <trans-unit id="Ixl_ubC" resname="login.page.remember">
+        <source>login.page.remember</source>
+        <target>Remember me</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
