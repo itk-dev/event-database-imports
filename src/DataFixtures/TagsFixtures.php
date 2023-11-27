@@ -48,7 +48,6 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($tag);
         $this->addReference(self::ITKDEV, $tag);
 
-
         // Make it stick.
         $manager->flush();
     }
