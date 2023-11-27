@@ -21,4 +21,4 @@ All other data is editable and will trigger a reindex of the data changes and al
 
 Imported data from feeds are not editable, and some changes to data not from feeds will trigger a reindex of data,
 which may trigger a lager job to be processed based on which data is changed. E.g. if an address is changed, that will
-trigger an update of all content in indexes that contains that address. Which may be a large number of events. 
+trigger an update of all content in indexes that contains that address. Which may be a large number of events.
