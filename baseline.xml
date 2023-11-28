@@ -7,6 +7,8 @@
   </file>
   <file src="src/DataFixtures/EventFixture.php">
     <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(ImagesFixtures::AAK)]]></code>
+      <code><![CDATA[$this->getReference(ImagesFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
       <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
       <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
@@ -14,6 +16,7 @@
       <code><![CDATA[$this->getReference(TagsFixtures::AROS)]]></code>
       <code><![CDATA[$this->getReference(TagsFixtures::AROS)]]></code>
       <code><![CDATA[$this->getReference(TagsFixtures::CONCERT)]]></code>
+      <code><![CDATA[$this->getReference(TagsFixtures::ITKDEV)]]></code>
       <code><![CDATA[$this->getReference(TagsFixtures::RACE)]]></code>
     </ArgumentTypeCoercion>
   </file>
@@ -29,6 +32,12 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
     </ArgumentTypeCoercion>
+  </file>
+  <file src="src/DataFixtures/ImagesFixtures.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$image->getSource()]]></code>
+      <code><![CDATA[$image->getSource()]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/DataFixtures/LocationFixture.php">
     <ArgumentTypeCoercion>
@@ -50,6 +59,7 @@
   </file>
   <file src="src/DataFixtures/TagsFixtures.php">
     <ArgumentTypeCoercion>
+      <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
       <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
       <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
       <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>

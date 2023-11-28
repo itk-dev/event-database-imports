@@ -14,8 +14,7 @@ final class ImagesFixtures extends Fixture
 
     public function __construct(
         private readonly ImageHandlerInterface $imageHandler,
-    )
-    {
+    ) {
     }
 
     public function load(ObjectManager $manager): void
