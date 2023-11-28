@@ -11,6 +11,9 @@
       <code><![CDATA[$this->getReference(ImagesFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
       <code><![CDATA[$this->getReference(LocationFixture::ITKDEV)]]></code>
+      <code><![CDATA[$this->getReference(OccurrenceFixture::OCCURRENCE_241108)]]></code>
+      <code><![CDATA[$this->getReference(OccurrenceFixture::OCCURRENCE_241207)]]></code>
+      <code><![CDATA[$this->getReference(OccurrenceFixture::OCCURRENCE_241208)]]></code>
       <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(OrganizationFixtures::ITK)]]></code>
       <code><![CDATA[$this->getReference(TagsFixtures::AROS)]]></code>
@@ -42,13 +45,6 @@
   <file src="src/DataFixtures/LocationFixture.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->getReference(AddressFixture::ITKDEV)]]></code>
-    </ArgumentTypeCoercion>
-  </file>
-  <file src="src/DataFixtures/OccurrenceFixture.php">
-    <ArgumentTypeCoercion>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT2)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">

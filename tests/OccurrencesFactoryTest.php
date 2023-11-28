@@ -36,7 +36,7 @@ final class OccurrencesFactoryTest extends KernelTestCase
         $factory = $this->getFactory();
         $factory->createOrLookup($input, $event);
 
-        // Check that object is the same and price have been updated.
+        // Check that object is the same and the price has been updated.
         $this->assertEquals($eventOccurrence, $event->getOccurrences()[0]);
         $this->assertCount(count($input), $event->getOccurrences());
         $this->assertEquals($itemOccurrence->price, $event->getOccurrences()[0]->getTicketPriceRange());
@@ -70,7 +70,7 @@ final class OccurrencesFactoryTest extends KernelTestCase
         $factory = $this->getFactory();
         $factory->createOrLookup($input, $event);
 
-        // Check that object is the same and price have been updated.
+        // Check that object is the same and the price has been updated.
         $this->assertEquals($eventOccurrence, $event->getOccurrences()[0]);
         $this->assertCount(count($input), $event->getOccurrences());
         $this->assertEquals($itemOccurrence2->price, $event->getOccurrences()[1]->getTicketPriceRange());
@@ -106,7 +106,7 @@ final class OccurrencesFactoryTest extends KernelTestCase
         $factory = $this->getFactory();
         $factory->createOrLookup($input, $event);
 
-        // Check that object is the same and price have been updated.
+        // Check that object is the same and the price has been updated.
         $this->assertEquals($eventOccurrence, $event->getOccurrences()[0]);
         $this->assertCount(count($input), $event->getOccurrences());
         $this->assertEquals($itemOccurrence->price, $event->getOccurrences()[0]->getTicketPriceRange());

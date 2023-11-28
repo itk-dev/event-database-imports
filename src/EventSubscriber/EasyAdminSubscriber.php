@@ -8,10 +8,11 @@ use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
 use App\Message\ImageMessage;
-use App\Service\Finder;
+use App\Service\EventFinder;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -19,7 +20,8 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,
-        private readonly Finder $finder,
+        private readonly LoggerInterface $logger,
+        private readonly EventFinder $eventFinder,
     ) {
     }
 
@@ -51,41 +53,34 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $this->handle($entity);
     }
 
-    private function handle(object $entity)
+    // @TODO: change into message to not lock up UI.
+    private function handle(object $entity): void
     {
         switch (get_class($entity)) {
             case Image::class:
-                // Update/download image and find all events using that image and reindex the events.
-
-                break;
-
             case Tag::class:
-                // Find all events with that tag and reindex
-                $events = $this->finder->search(Tag::class, $entity);
+            case Address::class:
+            case Location::class:
+                $events = $this->eventFinder->findEvents($entity);
                 foreach ($events as $event) {
                     $this->reindex($event);
                 }
                 break;
 
-            case Address::class:
-                // Find all locations using this address and update all events using that location.
-
-                break;
-
-            case Location::class:
-                // Find all events using this location.
-
             case Event::class:
-                // We need to send create/updated events into the message processing queue, and we hook into the feed event
-                // processing at image processing.
-
-                // $this->messageBus->dispatch(new ImageMessage($entity->getId(), $entity->getImage()?->getId()));
+                $this->reindex($entity);
                 break;
         }
     }
 
     private function reindex(Event $event): void
     {
-        $this->messageBus->dispatch(new ImageMessage($event->getId(), $event->getImage()?->getId()));
+        $eventId = $event->getId();
+        if (!is_null($eventId)) {
+            $this->messageBus->dispatch(new ImageMessage($eventId, $event->getImage()?->getId()));
+        } else {
+            // This should be impossible.
+            $this->logger->error('Tried to reindex event without an ID');
+        }
     }
 }

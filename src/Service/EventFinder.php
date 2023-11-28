@@ -6,44 +6,79 @@ use App\Entity\Address;
 use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
-use App\Repository\TagRepository;
+use App\Exception\NotSupportedEntityException;
 
-final class Finder
+final class EventFinder implements EventFinderInterface
 {
-    public function __construct(
-        private readonly TagRepository $tagRepository,
-    ) {
-    }
-
-    public function search(string $className, object $entity): iterable
+    public function findEvents(object $entity): iterable
     {
-        switch ($className) {
+        switch (get_class($entity)) {
             case Image::class:
-                // Update/download image and find all events using that image and reindex the events.
-
+                yield $entity->getEvent();
                 break;
 
             case Tag::class:
-                // Find all events with that tag and reindex
-                return $this->findEventsFromTagId($entity->getId());
+                yield from $this->findEventsFromTag($entity);
                 break;
 
             case Address::class:
-                // Find all locations using this address and update all events using that location.
-
+                yield from $this->findEventsFromAddress($entity);
                 break;
 
             case Location::class:
-                // Find all events using this location.
-
+                yield from $this->findEventsFromLocation($entity);
                 break;
+
+            default:
+                throw new NotSupportedEntityException(sprintf('The class "%s" is not supported by the EventFinder service', get_class($entity)));
         }
     }
 
-    private function findEventsFromTagId(int $tagId): iterable
+    /**
+     * Find all events with using the provided tag.
+     *
+     * @param tag $tag
+     *   Tag to find events linked too
+     *
+     * @return iterable
+     *   All events that use the tag
+     */
+    private function findEventsFromTag(Tag $tag): iterable
     {
-        $tag = $this->tagRepository->find($tagId);
+        foreach ($tag->getEvents() as $event) {
+            yield $event;
+        }
+    }
 
-        return $tag->getEvents();
+    /**
+     * Find all events based on the address given.
+     *
+     * @param address $address
+     *   Address to find events from
+     *
+     * @return iterable
+     *   All events using the address
+     */
+    private function findEventsFromAddress(Address $address): iterable
+    {
+        foreach ($address->getLocations() as $location) {
+            yield from $this->findEventsFromLocation($location);
+        }
+    }
+
+    /**
+     * Find all events with the give location.
+     *
+     * @param location $location
+     *   Location to find event for
+     *
+     * @return iterable
+     *   All events using the location
+     */
+    private function findEventsFromLocation(Location $location): iterable
+    {
+        foreach ($location->getEvents() as $event) {
+            yield $event;
+        }
     }
 }

@@ -5,11 +5,9 @@ namespace App\DataFixtures;
 use App\Entity\Event;
 use App\Entity\Feed;
 use App\Factory\DailyOccurrencesFactory;
-use App\Repository\EventRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Messenger\MessageBusInterface;
 
 /**
  * Build event fixtures that do not come from feeds to be able to filter and edit events in the administrative UI, as

@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Occurrence;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 final class OccurrenceFixture extends Fixture
