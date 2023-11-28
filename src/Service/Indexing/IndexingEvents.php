@@ -108,6 +108,12 @@ final class IndexingEvents extends AbstractIndexingElastic
                 'type' => 'integer',
                 'doc_values' => false,
             ],
+            'title' => [
+                'type' => 'text',
+                'index_options' => 'docs',
+                'index' => false,
+                'norms' => false,
+            ],
             'excerpt' => [
                 'type' => 'text',
                 'index_options' => 'docs',
