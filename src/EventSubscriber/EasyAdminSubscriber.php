@@ -8,6 +8,7 @@ use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
 use App\Message\ImageMessage;
+use App\Service\ContentNormalizerInterface;
 use App\Service\EventFinder;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
@@ -19,10 +20,13 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
+    private const EXCERPT_MAX_LENGTH = 255;
+
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly LoggerInterface $logger,
         private readonly EventFinder $eventFinder,
+        private readonly ContentNormalizerInterface $contentNormalizer,
     ) {
     }
 
@@ -36,43 +40,61 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function beforeEntityUpdatedEvent(BeforeEntityPersistedEvent $event): void
+    public function beforeEntityUpdatedEvent(BeforeEntityUpdatedEvent $event): void
     {
-        // Event, tags
         $entity = $event->getEntityInstance();
-        // @TODO: Handle normalization of data.
+        $this->handleNormalization($entity);
     }
 
     public function beforeEntityPersisted(BeforeEntityPersistedEvent $event): void
     {
-        // Event, tags
         $entity = $event->getEntityInstance();
-        // @TODO: Handle normalization of data.
+        $this->handleNormalization($entity);
     }
 
     public function afterEntityUpdated(AfterEntityUpdatedEvent $event): void
     {
         $entity = $event->getEntityInstance();
-        $this->handle($entity);
+        $this->handleEntity($entity);
     }
 
     public function afterEntityPersisted(AfterEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
-        $this->handle($entity);
+        $this->handleEntity($entity);
     }
 
     /**
-     * Handling the updated entity and sends it to reindexing.
+     * Handle normalization of content.
+     *
+     * @param object $entity
+     *   The entity to preform normalization on
+     */
+    private function handleNormalization(object $entity): void
+    {
+        if (Event::class === get_class($entity)) {
+            $description = $entity->getDescription();
+            if (!is_null($description)) {
+                $entity->setDescription($this->contentNormalizer->normalize($description));
+            }
+
+            $excerpt = $entity->getExcerpt();
+            if (!is_null($excerpt)) {
+                $excerpt = $this->contentNormalizer->normalize($excerpt);
+                $excerpt = $this->contentNormalizer->trimLength($excerpt, self::EXCERPT_MAX_LENGTH);
+                $entity->setExcerpt($excerpt);
+            }
+        }
+    }
+
+    /**
+     * Handling the entity and sends it to reindexing.
      *
      * @TODO: change into message to not lock up UI.
      *
-     * @param object $entity
-     * @return void
-     *
      * @throws \App\Exception\NotSupportedEntityException
      */
-    private function handle(object $entity): void
+    private function handleEntity(object $entity): void
     {
         switch (get_class($entity)) {
             case Image::class:
@@ -81,12 +103,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             case Location::class:
                 $events = $this->eventFinder->findEvents($entity);
                 foreach ($events as $event) {
-                    $this->reindex($event);
+                    $this->index($event);
                 }
                 break;
 
             case Event::class:
-                $this->reindex($entity);
+                $this->index($entity);
                 break;
         }
     }
@@ -95,9 +117,9 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      * Re-index event by injection it into the queue system.
      *
      * @param Event $event
-     *   The event to reindex.
+     *   The event to reindex
      */
-    private function reindex(Event $event): void
+    private function index(Event $event): void
     {
         $eventId = $event->getId();
         if (!is_null($eventId)) {

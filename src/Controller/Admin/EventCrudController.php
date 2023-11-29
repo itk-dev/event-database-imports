@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
@@ -16,6 +17,8 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractBaseCrudController
 {
+    private const EXCERPT_MAX_LENGTH = 255;
+
     public static function getEntityFqcn(): string
     {
         return Event::class;
@@ -39,8 +42,9 @@ class EventCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.event.basic.headline')),
             TextField::new('title')
                 ->setLabel(new TranslatableMessage('admin.event.basic.title')),
-            TextEditorField::new('excerpt')
+            TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
+                ->setMaxLength(self::EXCERPT_MAX_LENGTH)
                 ->hideOnIndex(),
             TextEditorField::new('description')
                 ->setLabel(new TranslatableMessage('admin.event.basic.description'))
