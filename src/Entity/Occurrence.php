@@ -14,10 +14,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: OccurrenceRepository::class)]
-class Occurrence implements IndexItemInterface
+class Occurrence implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -52,9 +53,6 @@ class Occurrence implements IndexItemInterface
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value])]
     private ?string $status = null;
-
-    #[ORM\Column]
-    private bool $editable = false;
 
     public function __construct()
     {
@@ -164,18 +162,6 @@ class Occurrence implements IndexItemInterface
     public function setStatus(?string $status): static
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function isEditable(): bool
-    {
-        return $this->editable;
-    }
-
-    public function setEditable(bool $editable): static
-    {
-        $this->editable = $editable;
 
         return $this;
     }

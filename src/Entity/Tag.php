@@ -12,10 +12,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+class Tag implements EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,9 +32,6 @@ class Tag
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'tags')]
     private Collection $events;
-
-    #[ORM\Column]
-    private bool $editable = false;
 
     public function __construct()
     {
@@ -113,18 +111,6 @@ class Tag
         if ($this->events->removeElement($event)) {
             $event->removeTag($this);
         }
-
-        return $this;
-    }
-
-    public function isEditable(): bool
-    {
-        return $this->editable;
-    }
-
-    public function setEditable(bool $editable): static
-    {
-        $this->editable = $editable;
 
         return $this;
     }

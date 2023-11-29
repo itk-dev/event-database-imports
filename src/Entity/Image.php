@@ -13,11 +13,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
-class Image
+class Image implements EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
     use BlameableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -37,9 +38,6 @@ class Image
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-
-    #[ORM\Column]
-    private bool $editable = false;
 
     public function __toString(): string
     {
@@ -105,18 +103,6 @@ class Image
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function isEditable(): bool
-    {
-        return $this->editable;
-    }
-
-    public function setEditable(bool $editable): static
-    {
-        $this->editable = $editable;
 
         return $this;
     }

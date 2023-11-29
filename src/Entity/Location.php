@@ -14,10 +14,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
-class Location implements IndexItemInterface
+class Location implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -58,9 +59,6 @@ class Location implements IndexItemInterface
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]
     private Collection $events;
-
-    #[ORM\Column]
-    private bool $editable = false;
 
     public function __construct()
     {
@@ -187,18 +185,6 @@ class Location implements IndexItemInterface
                 $event->setLocation(null);
             }
         }
-
-        return $this;
-    }
-
-    public function isEditable(): bool
-    {
-        return $this->editable;
-    }
-
-    public function setEditable(bool $editable): static
-    {
-        $this->editable = $editable;
 
         return $this;
     }
