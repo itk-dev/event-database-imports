@@ -12,6 +12,7 @@ use App\Service\EventFinder;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
+use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -28,17 +29,25 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            BeforeEntityUpdatedEvent::class => ['beforeEntityUpdatedEvent'],
             BeforeEntityPersistedEvent::class => ['beforeEntityPersisted'],
-            AfterEntityPersistedEvent::class => ['afterEntityPersisted'],
             AfterEntityUpdatedEvent::class => ['afterEntityUpdated'],
+            AfterEntityPersistedEvent::class => ['afterEntityPersisted'],
         ];
+    }
+
+    public function beforeEntityUpdatedEvent(BeforeEntityPersistedEvent $event): void
+    {
+        // Event, tags
+        $entity = $event->getEntityInstance();
+        // @TODO: Handle normalization of data.
     }
 
     public function beforeEntityPersisted(BeforeEntityPersistedEvent $event): void
     {
         // Event, tags
         $entity = $event->getEntityInstance();
-        $t = 1;
+        // @TODO: Handle normalization of data.
     }
 
     public function afterEntityUpdated(AfterEntityUpdatedEvent $event): void
@@ -53,7 +62,16 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $this->handle($entity);
     }
 
-    // @TODO: change into message to not lock up UI.
+    /**
+     * Handling the updated entity and sends it to reindexing.
+     *
+     * @TODO: change into message to not lock up UI.
+     *
+     * @param object $entity
+     * @return void
+     *
+     * @throws \App\Exception\NotSupportedEntityException
+     */
     private function handle(object $entity): void
     {
         switch (get_class($entity)) {
@@ -73,6 +91,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         }
     }
 
+    /**
+     * Re-index event by injection it into the queue system.
+     *
+     * @param Event $event
+     *   The event to reindex.
+     */
     private function reindex(Event $event): void
     {
         $eventId = $event->getId();
