@@ -20,9 +20,7 @@ abstract class AbstractBaseCrudController extends AbstractCrudController
         return parent::configureActions($actions)
             ->update(Crud::PAGE_INDEX, Action::EDIT, static function (Action $action) {
                 return $action->displayIf(static function (object $entity) {
-                    $interfaces = class_implements($entity);
-
-                    return !isset($interfaces[EditableEntityInterface::class]) || $entity->isEditable();
+                    return !($entity instanceof EditableEntityInterface) || $entity->isEditable();
                 });
             })
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
