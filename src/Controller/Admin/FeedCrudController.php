@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Feed;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -11,7 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class FeedCrudController extends AbstractCrudController
+class FeedCrudController extends AbstractBaseCrudController
 {
     public static function getEntityFqcn(): string
     {

@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Image;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -11,7 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class ImageCrudController extends AbstractCrudController
+class ImageCrudController extends AbstractBaseCrudController
 {
     public static function getEntityFqcn(): string
     {

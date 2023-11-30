@@ -13,11 +13,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
-class Image
+class Image implements EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
     use BlameableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -12,10 +12,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
-class Address
+class Address implements EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -56,6 +57,9 @@ class Address
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Location::class)]
     private Collection $locations;
+
+    #[ORM\Column]
+    private bool $editable = false;
 
     public function __construct()
     {
@@ -194,6 +198,18 @@ class Address
                 $location->setAddress(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isEditable(): bool
+    {
+        return $this->editable;
+    }
+
+    public function setEditable(bool $editable): static
+    {
+        $this->editable = $editable;
 
         return $this;
     }

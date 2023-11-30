@@ -12,10 +12,11 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag
+class Tag implements EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

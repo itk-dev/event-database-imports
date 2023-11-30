@@ -13,6 +13,7 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
     public const KIDS = 'tags_kids';
     public const RACE = 'tags_race';
     public const AROS = 'tags_aros';
+    public const ITKDEV = 'tags_itkdev';
 
     public function load(ObjectManager $manager): void
     {
@@ -39,6 +40,13 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
             ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
         $manager->persist($tag);
         $this->addReference(self::CONCERT, $tag);
+
+        $tag = new Tag();
+        $tag->setName('ITKDev')
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED))
+            ->setEditable(true);
+        $manager->persist($tag);
+        $this->addReference(self::ITKDEV, $tag);
 
         // Make it stick.
         $manager->flush();

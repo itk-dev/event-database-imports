@@ -30,7 +30,10 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->setLocation($this->getReference(LocationFixture::ITKDEV))
             ->addTag($this->getReference(TagsFixtures::AROS))
             ->addTag($this->getReference(TagsFixtures::RACE))
-            ->setHash('4936efebda146f6775fb7e429d884fef');
+            ->addTag($this->getReference(TagsFixtures::ITKDEV))
+            ->setImage($this->getReference(ImagesFixtures::ITK))
+            ->setEditable(true)
+        ->setHash('4936efebda146f6775fb7e429d884fef');
         $manager->persist($event);
         $this->addReference(self::EVENT2, $event);
 
@@ -45,6 +48,8 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->setLocation($this->getReference(LocationFixture::ITKDEV))
             ->addTag($this->getReference(TagsFixtures::CONCERT))
             ->addTag($this->getReference(TagsFixtures::AROS))
+            ->setEditable(true)
+            ->setImage($this->getReference(ImagesFixtures::AAK))
             ->setHash('16d48c26d38f6d59b3d081e596b4d0e8');
         $manager->persist($event);
         $this->addReference(self::EVENT1, $event);
@@ -60,6 +65,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             OrganizationFixtures::class,
             LocationFixture::class,
             TagsFixtures::class,
+            ImagesFixtures::class,
         ];
     }
 }

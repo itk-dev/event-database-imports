@@ -14,10 +14,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
-class Location implements IndexItemInterface
+class Location implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

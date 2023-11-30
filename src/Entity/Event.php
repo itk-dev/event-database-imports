@@ -17,11 +17,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-class Event implements IndexItemInterface
+class Event implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
     use BlameableEntity;
+    use EditableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]

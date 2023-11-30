@@ -18,7 +18,8 @@ final class LocationFixture extends Fixture implements DependentFixtureInterface
             ->setMail('itkdev@mkb.aarhus.dk')
             ->setUrl('https://itk.aarhus.dk/om-itk/afdelinger/development/')
             ->setAddress($this->getReference(AddressFixture::ITKDEV))
-            ->setDisabilityAccess(true);
+            ->setDisabilityAccess(true)
+            ->setEditable(true);
         $manager->persist($location);
         $this->addReference(self::ITKDEV, $location);
 

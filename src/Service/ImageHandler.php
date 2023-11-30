@@ -69,7 +69,7 @@ final class ImageHandler implements ImageHandlerInterface
         if ($filesystem->exists($dest)) {
             $size = intval(reset($headers['content-length']));
             if ($size === filesize($dest)) {
-                // File exist with the same file size.
+                // File exists with the same file size.
                 $fetchFile = false;
             }
         }
@@ -192,7 +192,7 @@ final class ImageHandler implements ImageHandlerInterface
     }
 
     /**
-     * Try to detect mime type based on http headers.
+     * Try to detect mime-type based on http headers.
      *
      * @param array $headers
      *   Array of http headers
