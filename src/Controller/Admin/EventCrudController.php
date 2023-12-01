@@ -17,6 +17,11 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractBaseCrudController
 {
+    public function __construct(
+        protected readonly int $excerptMaxLength,
+    ) {
+    }
+
     public static function getEntityFqcn(): string
     {
         return Event::class;

@@ -48,7 +48,7 @@ services:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
 
-    App\Controller\Admin\AbstractBaseCrudController:
+    App\Controller\Admin\EventCrudController:
         arguments:
             $excerptMaxLength: '%env(int:APP_EXCERPT_MAX_LENGTH)%'
 
