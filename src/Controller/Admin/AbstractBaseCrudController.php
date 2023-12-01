@@ -10,6 +10,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 abstract class AbstractBaseCrudController extends AbstractCrudController
 {
+    public function __construct(
+        protected readonly int $excerptMaxLength,
+    ) {
+    }
+
     public static function getEntityFqcn(): string
     {
         return self::class;

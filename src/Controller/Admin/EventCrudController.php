@@ -17,8 +17,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractBaseCrudController
 {
-    private const EXCERPT_MAX_LENGTH = 255;
-
     public static function getEntityFqcn(): string
     {
         return Event::class;
@@ -44,7 +42,7 @@ class EventCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.event.basic.title')),
             TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
-                ->setMaxLength(self::EXCERPT_MAX_LENGTH)
+                ->setMaxLength($this->excerptMaxLength)
                 ->hideOnIndex(),
             TextEditorField::new('description')
                 ->setLabel(new TranslatableMessage('admin.event.basic.description'))

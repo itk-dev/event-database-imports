@@ -14,19 +14,19 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
+use phpDocumentor\Reflection\Types\This;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 class EasyAdminSubscriber implements EventSubscriberInterface
 {
-    private const EXCERPT_MAX_LENGTH = 255;
-
     public function __construct(
         private readonly MessageBusInterface $messageBus,
         private readonly LoggerInterface $logger,
         private readonly EventFinder $eventFinder,
         private readonly ContentNormalizerInterface $contentNormalizer,
+        private readonly int $excerptMaxLength,
     ) {
     }
 
@@ -81,7 +81,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             $excerpt = $entity->getExcerpt();
             if (!is_null($excerpt)) {
                 $excerpt = $this->contentNormalizer->normalize($excerpt);
-                $excerpt = $this->contentNormalizer->trimLength($excerpt, self::EXCERPT_MAX_LENGTH);
+                $excerpt = $this->contentNormalizer->trimLength($excerpt, $this->excerptMaxLength);
                 $entity->setExcerpt($excerpt);
             }
         }
