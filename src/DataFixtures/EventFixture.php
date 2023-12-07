@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Entity\Event;
 use App\Entity\Feed;
-use App\Factory\DailyOccurrencesFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -17,11 +16,6 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
 {
     public const EVENT1 = 'event1-itkdev';
     public const EVENT2 = 'event2-itkdev';
-
-    public function __construct(
-        private readonly DailyOccurrencesFactory $dailyOccurrencesFactory,
-    ) {
-    }
 
     public function load(ObjectManager $manager): void
     {
@@ -38,12 +32,9 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->addTag($this->getReference(TagsFixtures::RACE))
             ->addTag($this->getReference(TagsFixtures::ITKDEV))
             ->setImage($this->getReference(ImagesFixtures::ITK))
-            ->addOccurrence($this->getReference(OccurrenceFixture::OCCURRENCE_241207))
-            ->addOccurrence($this->getReference(OccurrenceFixture::OCCURRENCE_241108))
             ->setEditable(true)
         ->setHash('4936efebda146f6775fb7e429d884fef');
         $manager->persist($event);
-        $this->dailyOccurrencesFactory->createOrUpdate($event);
         $this->addReference(self::EVENT2, $event);
 
         $event = new Event();
@@ -59,10 +50,8 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->addTag($this->getReference(TagsFixtures::AROS))
             ->setEditable(true)
             ->setImage($this->getReference(ImagesFixtures::AAK))
-            ->addOccurrence($this->getReference(OccurrenceFixture::OCCURRENCE_241208))
             ->setHash('16d48c26d38f6d59b3d081e596b4d0e8');
         $manager->persist($event);
-        $this->dailyOccurrencesFactory->createOrUpdate($event);
         $this->addReference(self::EVENT1, $event);
 
         // Make it stick.
@@ -77,7 +66,6 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             LocationFixture::class,
             TagsFixtures::class,
             ImagesFixtures::class,
-            OccurrenceFixture::class,
         ];
     }
 }

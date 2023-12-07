@@ -10,6 +10,7 @@ use App\Entity\Tag;
 use App\Message\ImageMessage;
 use App\Service\ContentNormalizerInterface;
 use App\Service\EventFinder;
+use Doctrine\ORM\Mapping\Entity;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
@@ -72,7 +73,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      */
     private function handleNormalization(object $entity): void
     {
-        if (Event::class === get_class($entity)) {
+        if ($entity instanceof Event) {
             $description = $entity->getDescription();
             if (!is_null($description)) {
                 $entity->setDescription($this->contentNormalizer->normalize($description));
