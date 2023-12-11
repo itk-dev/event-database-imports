@@ -7,7 +7,7 @@ use App\Exception\IndexingException;
 interface IndexingInterface
 {
     /**
-     * Add single item to the index.
+     * Add a single item to the index.
      *
      * @param IndexItemInterface $item
      *   Item to add to the index
@@ -17,7 +17,7 @@ interface IndexingInterface
     public function index(IndexItemInterface $item): void;
 
     /**
-     * Remove single item from the index.
+     * Remove a single item from the index.
      *
      * @param int $id
      *   ID of the item to remove
@@ -69,4 +69,6 @@ interface IndexingInterface
      * @throws IndexingException
      */
     public function serialize(IndexItemInterface $item): array;
+
+    public function dumpIndex(): \Generator;
 }
