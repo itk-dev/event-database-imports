@@ -37,7 +37,7 @@ final class DumpIndexCommand extends Command
                 return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
             }
         )
-        ->addOption('file', null, InputOption::VALUE_OPTIONAL, 'File to output data too', './src/DataFixtures/indexes/[index].json');
+        ->addOption('file', null, InputOption::VALUE_OPTIONAL, 'File to write data to', './src/DataFixtures/indexes/[index].json');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
