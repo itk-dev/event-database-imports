@@ -7,6 +7,8 @@ use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
 use Elastic\Elasticsearch\Exception\ServerResponseException;
+use Elastic\Elasticsearch\Helper\Iterators\SearchHitIterator;
+use Elastic\Elasticsearch\Helper\Iterators\SearchResponseIterator;
 use Elastic\Elasticsearch\Response\Elasticsearch;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -113,6 +115,29 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             ]);
         } catch (ClientResponseException|ServerResponseException $e) {
             throw new IndexingException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    public function dumpIndex(): \Generator
+    {
+        $params = [
+            'index' => $this->indexAliasName,
+            'scroll' => '5m',
+            'size' => 100,
+            'body' => [
+                'query' => [
+                    'query_string' => [
+                        'query' => '*',
+                    ],
+                ],
+            ],
+        ];
+
+        $pages = new SearchResponseIterator($this->client, $params);
+        $hits = new SearchHitIterator($pages);
+
+        foreach ($hits as $hit) {
+            yield $hit['_source'];
         }
     }
 

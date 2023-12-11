@@ -32,10 +32,15 @@ final class Populate
     /**
      * Populate the search index with Search entities.
      *
+     * @param string $index
+     *   Name of the index to populate
      * @param int $record_id
      *   Limit populate to this single search record id
      * @param bool $force
      *   Force execution ignoring locks (default false)
+     *
+     * @return \Generator
+     *   Will yield back progress and error messages
      */
     public function populate(string $index, int $record_id = self::DEFAULT_RECORD_ID, bool $force = false): \Generator
     {
