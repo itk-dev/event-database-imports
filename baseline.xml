@@ -5,6 +5,12 @@
       <code>$user</code>
     </InvalidArgument>
   </file>
+  <file src="src/DataFixtures/DailyOccurrenceFixture.php">
+    <ArgumentTypeCoercion>
+      <code>$event</code>
+      <code>$event</code>
+    </ArgumentTypeCoercion>
+  </file>
   <file src="src/DataFixtures/EventFixture.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->getReference(ImagesFixtures::AAK)]]></code>

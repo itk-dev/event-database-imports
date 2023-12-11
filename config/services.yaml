@@ -48,6 +48,18 @@ services:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
 
+    App\Controller\Admin\EventCrudController:
+        arguments:
+            $excerptMaxLength: '%env(int:APP_EXCERPT_MAX_LENGTH)%'
+
+    App\EventSubscriber\EasyAdminSubscriber:
+        arguments:
+            $excerptMaxLength: '%env(int:APP_EXCERPT_MAX_LENGTH)%'
+
+    App\MessageHandler\FeedNormalizationHandler:
+        arguments:
+            $excerptMaxLength: '%env(int:APP_EXCERPT_MAX_LENGTH)%'
+
     App\Service\Indexing\IndexingEvents:
         arguments:
             $indexAliasName: '%env(INDEXING_EVENTS_ALIAS)%'

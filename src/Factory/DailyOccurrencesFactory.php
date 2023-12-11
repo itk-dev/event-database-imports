@@ -21,8 +21,10 @@ final class DailyOccurrencesFactory
 
     public function createOrUpdate(Event $event): void
     {
-        $exitingDailyOccurrences = $event->getDailyOccurrences();
         foreach ($event->getOccurrences() as $occurrence) {
+            // Only look at existing daily occurrences in the context of the current occurrences.
+            $exitingDailyOccurrences = $occurrence->getDailyOccurrences();
+
             // Each event occurrence can span more than one day.
             $start = $occurrence->getStart();
             $end = $occurrence->getEnd();
@@ -30,12 +32,12 @@ final class DailyOccurrencesFactory
                 $intervals = $this->time->getIntervals($start, $end);
                 foreach ($exitingDailyOccurrences as $dailyOccurrence) {
                     foreach ($intervals as $id => $interval) {
-                        // Check if interval exist in the old daily occurrences based on timestamps.
+                        // Check if the interval exists in the old daily occurrences based on timestamps.
                         if ($this->isEqualDates($interval, $dailyOccurrence)) {
                             $this->setValues($interval, $dailyOccurrence, $occurrence);
                             $this->dailyOccurrenceRepository->save($dailyOccurrence);
 
-                            // Remove processed interval from input.
+                            // Remove the processed interval from input.
                             unset($intervals[$id]);
 
                             // Jump to outer foreach.
