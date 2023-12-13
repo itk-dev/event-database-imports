@@ -2,10 +2,10 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Image;
-use App\Service\ImageHandlerInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use App\Entity\Image;
+use App\Service\ImageHandlerInterface;
 
 final class ImagesFixtures extends Fixture
 {
@@ -13,29 +13,55 @@ final class ImagesFixtures extends Fixture
     public const ITK = 'image_itk';
 
     public function __construct(
-        private readonly ImageHandlerInterface $imageHandler,
+        private readonly ImageHandlerInterface $imageHandler
     ) {
     }
 
     public function load(ObjectManager $manager): void
     {
-        $image = new Image();
-        $image->setEditable(true)
-            ->setTitle('ITK Test image')
-            ->setSource('https://itk.aarhus.dk/media/79711/itk-4f-10.png');
-        $image->setLocal($this->imageHandler->fetch($image->getSource()));
-        $manager->persist($image);
-        $this->addReference(self::ITK, $image);
+        $this->prepareAndPersistImage(
+            $manager,
+            'ITK Test image',
+            'https://itk.aarhus.dk/media/79711/itk-4f-10.png',
+            true,
+            self::ITK
+        );
 
-        $image = new Image();
-        $image->setEditable(false)
-            ->setTitle('AAK Test image')
-            ->setSource('https://placehold.co/600x400/0FF0FF/FF0000.png?text=AAK-Test');
-        $image->setLocal($this->imageHandler->fetch($image->getSource()));
-        $manager->persist($image);
-        $this->addReference(self::AAK, $image);
+        $this->prepareAndPersistImage(
+            $manager,
+            'AAK Test image',
+            'https://placehold.co/600x400/0FF0FF/FF0000.png?text=AAK-Test',
+            false,
+            self::AAK
+        );
 
-        // Make it stick.
         $manager->flush();
+    }
+
+    /**
+     * Prepare and persist an Image object.
+     *
+     * @param ObjectManager $manager
+     *   The ObjectManager instance.
+     * @param string $title
+     *   The title of the image.
+     * @param string $source
+     *   The source of the image.
+     * @param bool $editable
+     *   Whether the image is editable or not.
+     * @param string $reference
+     *   The reference for the image.
+     */
+    private function prepareAndPersistImage(ObjectManager $manager, string $title, string $source, bool $editable, string $reference): void
+    {
+        $image = new Image();
+
+        $image->setEditable($editable)
+            ->setTitle($title)
+            ->setSource($source)
+            ->setLocal($this->imageHandler->fetch($source));
+
+        $manager->persist($image);
+        $this->addReference($reference, $image);
     }
 }

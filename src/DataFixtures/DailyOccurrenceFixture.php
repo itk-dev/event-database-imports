@@ -23,7 +23,7 @@ final class DailyOccurrenceFixture extends Fixture implements DependentFixtureIn
         $this->dailyOccurrencesFactory->createOrUpdate($event);
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             EventFixture::class,

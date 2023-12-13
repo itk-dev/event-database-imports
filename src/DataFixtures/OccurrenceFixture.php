@@ -15,35 +15,35 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
 
     public function load(ObjectManager $manager): void
     {
-        $occurrence = new Occurrence();
-        $occurrence->setStart(new \DateTimeImmutable('2024-12-07T14:30:00+02:00'))
-            ->setEnd(new \DateTimeImmutable('2024-12-07T15:30:00+02:00'))
-            ->setTicketPriceRange('10.000 Kr.')
-            ->setRoom('M2-5')
-            ->setEditable(true)
-            ->setEvent($this->getReference(EventFixture::EVENT1));
-        $manager->persist($occurrence);
-        $this->addReference(self::OCCURRENCE_241207, $occurrence);
-
-        $occurrence = new Occurrence();
-        $occurrence->setStart(new \DateTimeImmutable('2024-11-08T10:30:00+02:00'))
-            ->setEnd(new \DateTimeImmutable('2024-11-08T16:30:00+02:00'))
-            ->setTicketPriceRange('Free or 100')
-            ->setRoom('M2-6')
-            ->setEditable(true)
-            ->setEvent($this->getReference(EventFixture::EVENT1));
-        $manager->persist($occurrence);
-        $this->addReference(self::OCCURRENCE_241108, $occurrence);
-
-        $occurrence = new Occurrence();
-        $occurrence->setStart(new \DateTimeImmutable('2024-12-08T12:30:00+02:00'))
-            ->setEnd(new \DateTimeImmutable('2024-12-08T14:30:00+02:00'))
-            ->setTicketPriceRange('Free in December')
-            ->setRoom('M2-5')
-            ->setEditable(true)
-            ->setEvent($this->getReference(EventFixture::EVENT2));
-        $manager->persist($occurrence);
-        $this->addReference(self::OCCURRENCE_241208, $occurrence);
+        $this->createOccurrence(
+            $manager,
+            '2024-12-07T14:30:00+02:00',
+            '2024-12-07T15:30:00+02:00',
+            '10.000 Kr.',
+            'M2-5',
+            true,
+            EventFixture::EVENT1,
+            self::OCCURRENCE_241207
+        );
+        $this->createOccurrence(
+            $manager,
+            '2024-11-08T10:30:00+02:00',
+            '2024-11-08T16:30:00+02:00',
+            'Free or 100',
+            'M2-6',
+            true,
+            EventFixture::EVENT1,
+            self::OCCURRENCE_241108
+        );
+        $this->createOccurrence($manager,
+            '2024-12-08T12:30:00+02:00',
+            '2024-12-08T14:30:00+02:00',
+            'Free in December',
+            'M2-5',
+            true,
+            EventFixture::EVENT2,
+            self::OCCURRENCE_241208
+        );
 
         // Make it stick.
         $manager->flush();
@@ -54,5 +54,41 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
         return [
             EventFixture::class,
         ];
+    }
+
+    /**
+     * Creates a new occurrence and persists it to the database.
+     *
+     * @param objectManager $manager
+     *   The object manager used for persisting the occurrence
+     * @param string $start
+     *   The start date and time of the occurrence
+     * @param string $end
+     *   The end date and time of the occurrence
+     * @param string $price
+     *   The ticket price range of the occurrence
+     * @param string $room
+     *   The room of the occurrence
+     * @param bool $editable
+     *   Whether the occurrence is editable
+     * @param string $event
+     *   The reference of the event associated with the occurrence
+     * @param string $reference
+     *   The reference for the occurrence
+     *
+     * @throws \Exception
+     */
+    private function createOccurrence(ObjectManager $manager, string $start, string $end, string $price, string $room, bool $editable, string $event, string $reference): void
+    {
+        $occurrence = new Occurrence();
+        $occurrence->setStart(new \DateTimeImmutable($start))
+            ->setEnd(new \DateTimeImmutable($end))
+            ->setTicketPriceRange($price)
+            ->setRoom($room)
+            ->setEditable($editable)
+            ->setEvent($this->getReference($event));
+
+        $manager->persist($occurrence);
+        $this->addReference($reference, $occurrence);
     }
 }

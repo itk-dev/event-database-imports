@@ -13,19 +13,30 @@ final class VocabularyFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $vocabulary = new Vocabulary();
-        $vocabulary->setName('managed')
-            ->setDescription('Managed tags vocabulary');
-        $manager->persist($vocabulary);
-        $this->addReference(self::MANAGED, $vocabulary);
-
-        $vocabulary = new Vocabulary();
-        $vocabulary->setName('feeds')
-            ->setDescription('Free tags from feeds');
-        $manager->persist($vocabulary);
-        $this->addReference(self::FREE, $vocabulary);
+        $this->createAndSaveVocabulary($manager, 'Managed', 'Managed tags vocabulary', self::MANAGED);
+        $this->createAndSaveVocabulary($manager, 'feeds', 'Free tags from feeds', self::FREE);
 
         // Make it stick.
         $manager->flush();
+    }
+
+    /**
+     * Creates and saves a new vocabulary.
+     *
+     * @param ObjectManager $manager
+     *   The object manager responsible for persisting the vocabulary
+     * @param string $name
+     *   The name of the vocabulary
+     * @param string $description
+     *   The description of the vocabulary
+     */
+    private function createAndSaveVocabulary(ObjectManager $manager, string $name, string $description, string $reference): void
+    {
+        $vocabulary = new Vocabulary();
+        $vocabulary->setName($name)
+            ->setDescription($description);
+
+        $manager->persist($vocabulary);
+        $this->addReference($reference, $vocabulary);
     }
 }

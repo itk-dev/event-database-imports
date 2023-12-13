@@ -14,21 +14,20 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
 
     public function load(ObjectManager $manager): void
     {
-        $org = new Organization();
-        $org->setName('ITKDev')
-            ->setMail('info@itkdev.dk')
-            ->setUrl('https://github.com/itk-dev')
-            ->addUser($this->getReference(UserFixtures::USER));
-        $manager->persist($org);
-        $this->addReference(self::ITK, $org);
-
-        $org = new Organization();
-        $org->setName('Aakb')
-            ->setMail('info@aakb.dk.dk')
-            ->setUrl('https://aakb.dk/')
-            ->addUser($this->getReference(UserFixtures::USER));
-        $manager->persist($org);
-        $this->addReference(self::AAKB, $org);
+        $this->createOrganization(
+            $manager,
+            'ITKDev',
+            'info@itkdev.dk',
+            'https://github.com/itk-dev',
+            self::ITK
+        );
+        $this->createOrganization(
+            $manager,
+            'Aakb',
+            'info@aakb.dk.dk',
+            'https://aakb.dk/',
+            self::AAKB
+        );
 
         // Make it stick.
         $manager->flush();
@@ -39,5 +38,30 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
         return [
             UserFixtures::class,
         ];
+    }
+
+    /**
+     * Create an organization.
+     *
+     * @param objectManager $manager
+     *   The instance of ObjectManager
+     * @param string $name
+     *   The name of the organization
+     * @param string $mail
+     *   The email address of the organization
+     * @param string $url
+     *   The website URL of the organization
+     * @param string $reference
+     *   The reference name for the organization
+     */
+    private function createOrganization(ObjectManager $manager, string $name, string $mail, string $url, string $reference): void
+    {
+        $org = new Organization();
+        $org->setName($name)
+            ->setMail($mail)
+            ->setUrl($url)
+            ->addUser($this->getReference(UserFixtures::USER));
+        $manager->persist($org);
+        $this->addReference($reference, $org);
     }
 }

@@ -17,38 +17,12 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $tag = new Tag();
-        $tag->setName('aros')
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
-        $manager->persist($tag);
-        $this->addReference(self::AROS, $tag);
+        $this->createTag($manager, 'aros', self::AROS);
+        $this->createTag($manager, 'theoceanraceaarhus', self::RACE);
+        $this->createTag($manager, 'For børn', self::KIDS);
+        $this->createTag($manager, 'Koncert', self::CONCERT);
+        $this->createTag($manager, 'ITKDev', self::ITKDEV, true);
 
-        $tag = new Tag();
-        $tag->setName('theoceanraceaarhus')
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
-        $manager->persist($tag);
-        $this->addReference(self::RACE, $tag);
-
-        $tag = new Tag();
-        $tag->setName('For børn')
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
-        $manager->persist($tag);
-        $this->addReference(self::KIDS, $tag);
-
-        $tag = new Tag();
-        $tag->setName('Koncert')
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED));
-        $manager->persist($tag);
-        $this->addReference(self::CONCERT, $tag);
-
-        $tag = new Tag();
-        $tag->setName('ITKDev')
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED))
-            ->setEditable(true);
-        $manager->persist($tag);
-        $this->addReference(self::ITKDEV, $tag);
-
-        // Make it stick.
         $manager->flush();
     }
 
@@ -57,5 +31,28 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
         return [
             VocabularyFixtures::class,
         ];
+    }
+
+    /**
+     * Create a new tag.
+     *
+     * @param objectManager $manager
+     *   The object manager instance
+     * @param string $name
+     *   The name of the tag
+     * @param string $reference
+     *   The reference for the tag
+     * @param bool $editable (optional)
+     *   Whether the tag is editable (default: false)
+     */
+    private function createTag(ObjectManager $manager, string $name, string $reference, bool $editable = false): void
+    {
+        $tag = new Tag();
+        $tag->setName($name)
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED))
+            ->setEditable($editable);
+
+        $manager->persist($tag);
+        $this->addReference($reference, $tag);
     }
 }
