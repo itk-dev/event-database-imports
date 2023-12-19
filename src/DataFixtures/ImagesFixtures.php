@@ -22,7 +22,7 @@ final class ImagesFixtures extends Fixture
         $this->prepareAndPersistImage(
             $manager,
             'ITK Test image',
-            'https://itk.aarhus.dk/media/79711/itk-4f-10.png',
+            'https://placehold.co/600x400/0FF4FF/FF0440.png?text=ITKDev-Test',
             true,
             self::ITK
         );

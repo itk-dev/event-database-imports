@@ -122,7 +122,8 @@ final class EventFactory
      */
     private function setValues(Event $entity, FeedItem $item, Feed $feed): void
     {
-        $entity->setDescription($item->description)
+        $entity->setTitle($item->title)
+            ->setDescription($item->description)
             ->setExcerpt($item->excerpt)
             ->setFeedItemId($item->id)
             ->setTicketUrl($item->ticketUrl)
