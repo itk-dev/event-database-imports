@@ -83,3 +83,11 @@ hence use this command:
 ```shell
 docker compose exec phpfpm composer install --no-dev --optimize-autoloader
 ```
+
+#### Recommend setup
+
+Using all three repositories, you can create the setup depicted below and have communication between the backend
+(imports) and the API (frontend) by using the
+[shared service's repository](https://github.com/itk-dev/event-database-services.git).
+
+![Network setup production](./docs/images/networks.png)
