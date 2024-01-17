@@ -3,7 +3,6 @@ version: "3"
 services:
   phpfpm:
     depends_on:
-      - elasticsearch
       - rabbit
 
   rabbit:
