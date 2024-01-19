@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\DataFixtures\UserFixtures;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
@@ -10,7 +9,6 @@ use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
@@ -22,12 +20,11 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractDashboardController
 {
     public function __construct(
-        private readonly EmailVerifier  $emailVerifier,
+        private readonly EmailVerifier $emailVerifier,
         private readonly UserRepository $userRepository,
-        private readonly string         $siteSendFromEmail,
-        private readonly string         $siteName
-    )
-    {
+        private readonly string $siteSendFromEmail,
+        private readonly string $siteName
+    ) {
     }
 
     #[Route('/register', name: 'app_register')]
@@ -64,7 +61,7 @@ class RegistrationController extends AbstractDashboardController
 
             return $this->render('registration/confirm.html.twig', [
                 'page_title' => 'Please confirm your email',
-                'email' => $user->getMail()
+                'email' => $user->getMail(),
             ]);
         }
 
@@ -76,7 +73,7 @@ class RegistrationController extends AbstractDashboardController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
-            'page_title' => 'Please register'
+            'page_title' => 'Please register',
         ]);
     }
 
