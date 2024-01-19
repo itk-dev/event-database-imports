@@ -39,12 +39,6 @@
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
     </ArgumentTypeCoercion>
   </file>
-  <file src="src/DataFixtures/ImagesFixtures.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$image->getSource()]]></code>
-      <code><![CDATA[$image->getSource()]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/DataFixtures/LocationFixture.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->getReference(AddressFixture::ITKDEV)]]></code>
@@ -52,25 +46,23 @@
   </file>
   <file src="src/DataFixtures/OccurrenceFixture.php">
     <ArgumentTypeCoercion>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT1)]]></code>
-      <code><![CDATA[$this->getReference(EventFixture::EVENT2)]]></code>
+      <code><![CDATA[$this->getReference($event)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/OrganizationFixtures.php">
     <ArgumentTypeCoercion>
-      <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
       <code><![CDATA[$this->getReference(UserFixtures::USER)]]></code>
     </ArgumentTypeCoercion>
   </file>
   <file src="src/DataFixtures/TagsFixtures.php">
     <ArgumentTypeCoercion>
       <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
-      <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
-      <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
-      <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
-      <code><![CDATA[$this->getReference(VocabularyFixtures::MANAGED)]]></code>
     </ArgumentTypeCoercion>
+  </file>
+  <file src="src/Factory/EventFactory.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$item->title]]></code>
+    </PossiblyNullArgument>
   </file>
   <file src="src/Service/Feeds/Mapper/Source/FeedItemSource.php">
     <InvalidOperand>
@@ -79,6 +71,9 @@
       <code>$source</code>
       <code>$source</code>
     </InvalidOperand>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$value ?? '']]></code>
+    </PossiblyInvalidArgument>
   </file>
   <file src="src/Service/Indexing/AbstractIndexingElastic.php">
     <InvalidArgument>
