@@ -2,10 +2,10 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
 use App\Entity\Image;
 use App\Service\ImageHandlerInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
 
 final class ImagesFixtures extends Fixture
 {
@@ -42,15 +42,15 @@ final class ImagesFixtures extends Fixture
      * Prepare and persist an Image object.
      *
      * @param ObjectManager $manager
-     *   The ObjectManager instance.
+     *   The ObjectManager instance
      * @param string $title
-     *   The title of the image.
+     *   The title of the image
      * @param string $source
-     *   The source of the image.
+     *   The source of the image
      * @param bool $editable
-     *   Whether the image is editable or not.
+     *   Whether the image is editable or not
      * @param string $reference
-     *   The reference for the image.
+     *   The reference for the image
      */
     private function prepareAndPersistImage(ObjectManager $manager, string $title, string $source, bool $editable, string $reference): void
     {

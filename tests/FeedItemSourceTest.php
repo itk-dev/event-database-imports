@@ -237,7 +237,7 @@ final class FeedItemSourceTest extends KernelTestCase
     /**
      * Helper function to bootstrap the service tested.
      *
-     * @param feedConfiguration $configuration
+     * @param FeedConfiguration $configuration
      *   Default feed configuration
      *
      * @return FeedItemSource

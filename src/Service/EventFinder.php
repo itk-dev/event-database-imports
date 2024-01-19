@@ -37,7 +37,7 @@ final class EventFinder implements EventFinderInterface
     /**
      * Find all events with using the provided tag.
      *
-     * @param tag $tag
+     * @param Tag $tag
      *   Tag to find events linked too
      *
      * @return iterable
@@ -53,7 +53,7 @@ final class EventFinder implements EventFinderInterface
     /**
      * Find all events based on the address given.
      *
-     * @param address $address
+     * @param Address $address
      *   Address to find events from
      *
      * @return iterable
@@ -69,7 +69,7 @@ final class EventFinder implements EventFinderInterface
     /**
      * Find all events with the give location.
      *
-     * @param location $location
+     * @param Location $location
      *   Location to find event for
      *
      * @return iterable

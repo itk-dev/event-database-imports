@@ -63,7 +63,7 @@ final class OccurrencesFactory
      *
      * @param FeedItemOccurrence $item
      *   The new input occurrence
-     * @param occurrence $occurrence
+     * @param Occurrence $occurrence
      *   An occurrences from an exiting database backed event
      * @param Event $event
      *   The event in question

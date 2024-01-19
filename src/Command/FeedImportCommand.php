@@ -102,7 +102,7 @@ final class FeedImportCommand extends Command
     /**
      * Helper function to load feed entities.
      *
-     * @param symfonyStyle $io
+     * @param SymfonyStyle $io
      *   Symfony console output
      * @param int $feedId
      *   Given a feed id this will limit loading to that feed

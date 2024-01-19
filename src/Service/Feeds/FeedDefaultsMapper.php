@@ -11,7 +11,7 @@ final class FeedDefaultsMapper
      *
      * @param array $input
      *   Array feed parsed data
-     * @param feedConfiguration $configuration
+     * @param FeedConfiguration $configuration
      *   Feed configuration
      *
      * @return array
