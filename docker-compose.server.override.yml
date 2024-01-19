@@ -3,7 +3,6 @@ version: "3"
 services:
   phpfpm:
     depends_on:
-      - elasticsearch
       - rabbit
 
   rabbit:
@@ -17,24 +16,6 @@ services:
       - "RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}"
     volumes:
       - "./.docker/data/rabbit:/var/lib/rabbitmq/mnesia"
-
-  elasticsearch:
-    image: elasticsearch:8.10.2
-    restart: unless-stopped
-    networks:
-      - app
-    deploy:
-      resources:
-        limits:
-          memory: 4096M
-        reservations:
-          memory: 4096M
-    user: "1042"
-    volumes:
-      - ./.docker/data/elasticsearch:/usr/share/elasticsearch/data
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
 
   supervisor:
     image: itkdev/supervisor-php8.2:alpine

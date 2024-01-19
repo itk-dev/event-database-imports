@@ -1,139 +1,1103 @@
 [{
-    "entityId": 2,
-    "title": "ITKDev test event 2",
-    "excerpt": "Quis vel eros donec ac odio tempor orci dapibus ultrices. Velit dignissim sodales ut eu sem integer. Massa tincidunt dui ut ornare lectus sit amet est placerat.",
-    "description": "<p>Quam vulputate dignissim suspendisse in est ante. Libero enim sed faucibus turpis in eu mi bibendum. Gravida rutrum quisque non tellus orci. Eget nunc lobortis mattis aliquam faucibus purus in massa. Tortor posuere ac ut consequat semper viverra nam. Sapien et ligula ullamcorper malesuada. Et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. At consectetur lorem donec massa sapien faucibus et. Ut consequat semper viverra nam libero. Hendrerit gravida rutrum quisque non tellus orci ac.<\/p>",
-    "url": "https:\/\/itk.aarhus.dk\/nyheder\/",
-    "ticketUrl": "https:\/\/www.aakb.dk\/arrangementer\/born\/kreavaerksted-monsterboger-0",
+    "entityId": 49,
+    "title": "Hassan Preisler & **Maise Njor \u2013 Identitet ",
+    "excerpt": null,
+    "description": "I samarbejde med Sparekassen Kronjylland pr\u00e6senterer ARoS Talks samtaleforedrag, der s\u00e6tter fokus p\u00e5 identitet, fashion og forf\u00e6ngelighed.",
+    "url": "https:\/\/www.aros.dk\/da\/besoeg\/kalender\/hassan-preisler-maise-njor-identitet\/",
+    "ticketUrl": "",
     "public": true,
     "organizer": {
-        "created": "2023-12-07T11:19:03+01:00",
-        "updated": "2023-12-07T11:19:03+01:00",
-        "entityId": 1,
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
         "name": "ITKDev",
         "email": "info@itkdev.dk",
         "url": "https:\/\/github.com\/itk-dev"
     },
     "occurrences": [
         {
-            "entityId": 1,
-            "start": "2024-12-07T14:30:00+01:00",
-            "end": "2024-12-07T15:30:00+01:00",
-            "ticketPriceRange": "10.000 Kr.",
-            "room": "M2-5",
-            "status": null
-        },
-        {
-            "entityId": 2,
-            "start": "2024-11-08T10:30:00+01:00",
-            "end": "2024-11-08T16:30:00+01:00",
-            "ticketPriceRange": "Free or 100",
-            "room": "M2-6",
+            "entityId": 93,
+            "start": "2023-09-28T19:00:00+02:00",
+            "end": "2023-09-30T20:30:00+02:00",
+            "ticketPriceRange": "140 kr. ex. entr\u00e9 til museet",
+            "room": null,
             "status": null
         }
     ],
     "dailyOccurrences": [
         {
-            "entityId": 1,
-            "start": "2024-12-07T14:30:00+01:00",
-            "end": "2024-12-07T15:30:00+01:00",
-            "ticketPriceRange": "10.000 Kr.",
-            "room": "M2-5",
+            "entityId": 95,
+            "start": "2023-09-28T19:00:00+02:00",
+            "end": "2023-09-28T23:59:59+02:00",
+            "ticketPriceRange": "140 kr. ex. entr\u00e9 til museet",
+            "room": null,
             "status": null
         },
         {
-            "entityId": 2,
-            "start": "2024-11-08T10:30:00+01:00",
-            "end": "2024-11-08T16:30:00+01:00",
-            "ticketPriceRange": "Free or 100",
-            "room": "M2-6",
+            "entityId": 96,
+            "start": "2023-09-29T00:00:00+02:00",
+            "end": "2023-09-29T23:59:59+02:00",
+            "ticketPriceRange": "140 kr. ex. entr\u00e9 til museet",
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 97,
+            "start": "2023-09-30T00:00:00+02:00",
+            "end": "2023-09-30T20:30:00+02:00",
+            "ticketPriceRange": "140 kr. ex. entr\u00e9 til museet",
+            "room": null,
             "status": null
         }
     ],
     "tags": [
         "aros",
+        "Aarhus"
+    ],
+    "location": {
+        "entityId": 12,
+        "name": "Aros",
+        "image": null,
+        "url": "http:\/\/www.aros.dk\/",
+        "telephone": "87306600",
+        "disabilityAccess": false,
+        "mail": "info@aros.dk",
+        "street": "Aros All\u00e9 2",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15390543,
+            10.19961783
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/1a1def9a922f4c73179b066aa47d82cb63eb342f012da1a10372efed75fd684a.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/1a1def9a922f4c73179b066aa47d82cb63eb342f012da1a10372efed75fd684a.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/1a1def9a922f4c73179b066aa47d82cb63eb342f012da1a10372efed75fd684a.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 53,
+    "title": "UDSOLGT \u2022 Vilhelm Lundstr\u00f8m, en formens mand",
+    "excerpt": null,
+    "description": "I denne formiddagskunst kigger vi n\u00e6rmere p\u00e5 den danske kunstner Vilhelm Lundstr\u00f8m. Lundstr\u00f8m er med sit stilsikre og formfokuserede udtryk en af de mest genkendelige danske malere i det 20. \u00e5rhundrede. Hans udtryk kan genkendes ud fra det rensede farvebrug og en puristisk tilgang til maleri, som har v\u00e6ret med til at definere god smag i Danmark i begyndelsen og midten af 1900-tallet. P\u00e5 ARoS har vi flere Lundstr\u00f8m-v\u00e6rker h\u00e6ngende.",
+    "url": "https:\/\/www.aros.dk\/da\/besoeg\/kalender\/formiddagskunst-3-oktober\/",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 97,
+            "start": "2023-10-03T11:00:00+02:00",
+            "end": "2023-10-03T11:45:00+02:00",
+            "ticketPriceRange": "30\u00a0kr. ekskl. entr\u00e9 til museet.",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 101,
+            "start": "2023-10-03T11:00:00+02:00",
+            "end": "2023-10-03T11:45:00+02:00",
+            "ticketPriceRange": "30\u00a0kr. ekskl. entr\u00e9 til museet.",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "aros",
+        "Aarhus"
+    ],
+    "location": {
+        "entityId": 12,
+        "name": "Aros",
+        "image": null,
+        "url": "http:\/\/www.aros.dk\/",
+        "telephone": "87306600",
+        "disabilityAccess": false,
+        "mail": "info@aros.dk",
+        "street": "Aros All\u00e9 2",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15390543,
+            10.19961783
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/62508660dbca44a36c7331ba1afcdaa7fa6df89d3fcb75819a5b5b8701072329.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/62508660dbca44a36c7331ba1afcdaa7fa6df89d3fcb75819a5b5b8701072329.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/62508660dbca44a36c7331ba1afcdaa7fa6df89d3fcb75819a5b5b8701072329.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 54,
+    "title": "Hyggelig h\u00f8jtl\u00e6sning",
+    "excerpt": "Kom og lyt til en god historie i b\u00f8rnebiblioteket",
+    "description": "<p><strong>Kom og lyt til en god historie i b\u00f8rnebiblioteket<\/strong><\/p> <p>Hver onsdag fra kl. 15.30 bliver der l\u00e6st h\u00f8jt i b\u00f8rnebiblioteket af en &#34;bedstemor&#34;. <\/p>\n<p>Tag familien med og s\u00e6t jer godt til rette til en eftermiddag med hyggelig h\u00f8jtl\u00e6sning.<br \/>\nEfter h\u00f8jtl\u00e6sningen kan I l\u00e5ne b\u00f8gerne med hjem. <\/p>\n<p>Arrangementet er is\u00e6r for de yngste og egner sig godt til b\u00f8rnehaveb\u00f8rn og deres for\u00e6ldre. Men alle er selvf\u00f8lgelig velkomne og vi v\u00e6lger b\u00f8ger ud fra dem, som dukker op. <\/p>\n<p>Arrangementet kr\u00e6ver ikke tilmelding, bare kom forbi.<br \/>\nVi gl\u00e6der os til at se jer!<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/boern\/hyggelig-hoejtlaesning-27",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 98,
+            "start": "2022-12-07T14:30:00+01:00",
+            "end": "2022-12-07T15:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 102,
+            "start": "2022-12-07T14:30:00+01:00",
+            "end": "2022-12-07T15:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "For b\u00f8rn",
+        "h\u00f8jtl\u00e6sning"
+    ],
+    "location": {
+        "entityId": 13,
+        "name": "Gellerup Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "Gellerupbibliotek@aarhus.dk",
+        "street": "Karen Blixens Boulevard 23",
+        "suite": null,
+        "region": null,
+        "city": "Brabrand",
+        "country": null,
+        "postalCode": "8220",
+        "coordinates": [
+            56.1597205,
+            10.13466085
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/8e2f355712e13bba955dc157c71bc07ee17ee0f73d0453f6472b6d6e4db1091e.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/8e2f355712e13bba955dc157c71bc07ee17ee0f73d0453f6472b6d6e4db1091e.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/8e2f355712e13bba955dc157c71bc07ee17ee0f73d0453f6472b6d6e4db1091e.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 62,
+    "title": "Sy-V\u00e6rkstedet",
+    "excerpt": "\u00c5bent sy-v\u00e6rksted i Verdensrummet",
+    "description": "<p><strong>\u00c5bent sy-v\u00e6rksted i Verdensrummet<\/strong><\/p> <p>Her kan du l\u00e6re at sy, kaste dig ud i nye projekter eller bare l\u00e5ne vores maskiner, hvis du har noget, du skal have fikset.<\/p>\n<p>Vi har fokus p\u00e5 b\u00e6redygtighed. T\u00f8j er en stor ressource for klimaet \u2013 s\u00e5 derfor skal vi v\u00e6rne om det. Det betyder, at vi skal reparere vores t\u00f8j, re-designe det \u2013 bytte, dele &amp; l\u00e5ne - s\u00e5 vi f\u00e5r brugt t\u00f8jet fuldt ud og kun k\u00f8ber nyt, n\u00e5r det er absolut n\u00f8dvendigt.<\/p>\n<p>Vi har 2 overlockere og 6 symaskiner som kan bruges, og ellers har vi masser af n\u00e5le, sakse tr\u00e5d etc.<br \/>Vi ligger ogs\u00e5 inde med stof og t\u00f8j, du kan kaste dig over at redesigne \u2013 og vi hj\u00e6lper gerne med ideer.<\/p>\n<p>Du finder v\u00e6rkstedet i Verdensrummet under DOKK1<\/p>\n<p><img alt src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensrummet_5.jpg?itok&#61;qBIYbjRO\" title \/><\/p>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/kunst-og-kreativitet\/sy-vaerkstedet-59",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 106,
+            "start": "2023-01-07T10:00:00+01:00",
+            "end": "2023-01-07T14:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 110,
+            "start": "2023-01-07T10:00:00+01:00",
+            "end": "2023-01-07T14:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "verdensm\u00e5l",
+        "krea for voksne",
+        "krea for unge",
+        "syv\u00e6rksted",
+        "Maker-Lab",
+        "DIY",
+        "klima"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
+        "postalCode": "8000",
+        "coordinates": [
+            56.15343598,
+            10.21377573
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/f2a4c8920481ed70c3982c2de44c3159c00c9328d773dcae51f84aa658a4a08e.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/f2a4c8920481ed70c3982c2de44c3159c00c9328d773dcae51f84aa658a4a08e.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/f2a4c8920481ed70c3982c2de44c3159c00c9328d773dcae51f84aa658a4a08e.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 73,
+    "title": "Liberty",
+    "excerpt": null,
+    "description": "6. - 8. februar 2024 - kl. 19.30\n\nDet fysiske festfyrv\u00e6rkeri Kristj\u00e1n Ingimarsson inviterer p\u00e5 en kakofonisk rejse gennem sine vildeste, vigtigste, v\u00e6rste og sjoveste forestillinger. En fejring af 25 \u00e5rs l\u00f8ssluppen kreativitet som evig drivkraft i jagten p\u00e5 den originale id\u00e9. Er der mening med galskaben?",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/liberty\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 141,
+            "start": "2024-02-07T19:30:00+01:00",
+            "end": "2024-02-07T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 142,
+            "start": "2024-02-06T19:30:00+01:00",
+            "end": "2024-02-06T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 145,
+            "start": "2024-02-07T19:30:00+01:00",
+            "end": "2024-02-07T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 146,
+            "start": "2024-02-06T19:30:00+01:00",
+            "end": "2024-02-06T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/5d11cd0cdbdcd9a25fe975f94409ef95b2e99539c967f4518379f81f77a2c217.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/5d11cd0cdbdcd9a25fe975f94409ef95b2e99539c967f4518379f81f77a2c217.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/5d11cd0cdbdcd9a25fe975f94409ef95b2e99539c967f4518379f81f77a2c217.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 75,
+    "title": "The Weather Report",
+    "excerpt": null,
+    "description": "24. - 26. april 2024 - kl. 19.30\n\nURPREMIERE: Dans, video og musik smelter sammen i en metaforisk rejse ind i turbulente vejrsystemer og bipolare lidelser. B\u00e5de pilot og patient fors\u00f8ger at man\u00f8vrere igennem det evigt omskiftelige og ukendte, hvor storm, mani, depression og luftfugtighed er en del af den samme vejrudsigt.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/the-weather-report\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 149,
+            "start": "2024-04-26T19:30:00+02:00",
+            "end": "2024-04-26T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 150,
+            "start": "2024-04-25T19:30:00+02:00",
+            "end": "2024-04-25T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 151,
+            "start": "2024-04-24T19:30:00+02:00",
+            "end": "2024-04-24T19:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 153,
+            "start": "2024-04-26T19:30:00+02:00",
+            "end": "2024-04-26T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 154,
+            "start": "2024-04-25T19:30:00+02:00",
+            "end": "2024-04-25T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 155,
+            "start": "2024-04-24T19:30:00+02:00",
+            "end": "2024-04-24T19:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/b73604258c05097207bf7fa43e23df8f029e317c439af9fb4cc6cae31a237fa8.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/b73604258c05097207bf7fa43e23df8f029e317c439af9fb4cc6cae31a237fa8.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/b73604258c05097207bf7fa43e23df8f029e317c439af9fb4cc6cae31a237fa8.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 76,
+    "title": "Under Skov",
+    "excerpt": null,
+    "description": "14. - 18. maj 2024 - kl. 19.30\n\nURPREMIERE: Vi har kaldt dig. Du er g\u00e5et ud. I skoven. Du ved ikke hvad der vil ske. Men du kan f\u00f8le dig tryg. En invitation til en tid med tr\u00e6er og deres \u00e6ldste partnere, svampene, mens vi sammen bev\u00e6ger os sammen rundt i landskabet.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/under-skov\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 152,
+            "start": "2024-05-18T19:30:00+02:00",
+            "end": "2024-05-18T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 153,
+            "start": "2024-05-17T19:30:00+02:00",
+            "end": "2024-05-17T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 154,
+            "start": "2024-05-16T19:30:00+02:00",
+            "end": "2024-05-16T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 155,
+            "start": "2024-05-15T19:30:00+02:00",
+            "end": "2024-05-15T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 156,
+            "start": "2024-05-14T19:30:00+02:00",
+            "end": "2024-05-14T19:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 156,
+            "start": "2024-05-18T19:30:00+02:00",
+            "end": "2024-05-18T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 157,
+            "start": "2024-05-17T19:30:00+02:00",
+            "end": "2024-05-17T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 158,
+            "start": "2024-05-16T19:30:00+02:00",
+            "end": "2024-05-16T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 159,
+            "start": "2024-05-15T19:30:00+02:00",
+            "end": "2024-05-15T19:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 160,
+            "start": "2024-05-14T19:30:00+02:00",
+            "end": "2024-05-14T19:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/7fb4854ab4b2b030fab797d0431b826cc8f21a86dca83eb55d07aa09fdb13aab.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/7fb4854ab4b2b030fab797d0431b826cc8f21a86dca83eb55d07aa09fdb13aab.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/7fb4854ab4b2b030fab797d0431b826cc8f21a86dca83eb55d07aa09fdb13aab.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 80,
+    "title": "CARL EMIL PETERSEN",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Carl Emil Petersen vender tilbage til TRAIN til efter\u00e5ret<br \/>\n\u00a0<br \/>\nCarl Emil Petersen, en af Danmarks mest talentfulde og anerkendte sangskrivere, er klar til at indtage landets scener til efter\u00e5ret med sin nye musik. Efter succesfulde udgivelser som b\u00e5de solist og med det hedengangne rock band Ulige Numre, er Carl Emil Petersen nu igen klar til at indfinde sig rundt omkring p\u00e5 landets koncertscener med sit live-band.<br \/>\nEn l\u00e6ngere pause fra live-koncerterne og musikudgivelserne har skabt frirum og plads til at lade musikken og lyduniverset spire frem l\u00f8bende. Publikum kan forvente en s\u00e6rlig oplevelse, n\u00e5r det univers skal pr\u00e6senteres fra scenekanten for f\u00f8rste gang<br \/>\n\u00a0<br \/>\n\u201cEfter min sidste plade satte jeg for f\u00f8rste gang i min karriere tempoet ned. Har taget luft ind og fyldt min tilv\u00e6relse med andet end musik. N\u00e6sten fire \u00e5r er g\u00e5et med store forandringer i mit liv, og jeg har denne gang ladet sangene komme, n\u00e5r de kom. Nu st\u00e5r jeg med det album, jeg altid har \u00f8nsket at lave, men som kr\u00e6vede en tid og en fordybelse, jeg ikke har fundet tidligere. Til september gl\u00e6der jeg mig til at pr\u00e6sentere de nye sange og mit nye band til storsl\u00e5ede rockkoncerter. Intet er som f\u00f8r, men alligevel er alt ved det gamle. Jeg tror, at de smukke \u00f8jeblikke vi vil huske, er dem vi deler sammen \u2013 analogt, virkeligt, badet i lys og i b\u00f8lger af elektrisk lyd.\u201d<\/div>\n<div class=\"content-column content-column-2 content-column-last\">Carl Emil Petersen form\u00e5r at skabe en unik forbindelse mellem sig selv og sit publikum med musikken som bindeled og evner at formidle sine sange med et vedr\u00f8rende n\u00e6rv\u00e6r. Med sin seneste single &#039;Modtager Betaler&#039; og sin st\u00e6rke tilstedev\u00e6relse p\u00e5 scenen er Carl Emil Petersen klar til at give publikum en uforglemmelig oplevelse de kommende livekoncerter.<br \/>\n\u00a0<br \/>\nCarl Emil Petersen gik solo med albummet \u2018Natradio\u2019. Sange som \u2018Liv F\u00f8r D\u00f8den\u2019 samt \u2018Finale P\u00e5 Et Filmset\u2019 blev radiohits og understregede endnu engang Carl Emils store evner som sangskriver. I 2019 udsendte den dengang 28-\u00e5rige Carl Emil Petersen sit l\u00e6nge ventede andet album \u2018Amager Forbr\u00e6nding\u2019. Albummet \u2018Amager Forbr\u00e6nding\u2019 cementerede Carl Emil Petersen som en af sin generations store sangskrivere.\n<p>\tSUPPORT: suisse air<br \/>\n\u00a0<\/p><\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10001",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/533261?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 164,
+            "start": "2023-10-06T20:00:00+02:00",
+            "end": "2023-10-06T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 168,
+            "start": "2023-10-06T20:00:00+02:00",
+            "end": "2023-10-06T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
         "Koncert"
     ],
     "location": {
-        "entityId": 1,
-        "name": "ITK Development",
+        "entityId": 18,
+        "name": "Train Music",
         "image": null,
-        "url": "https:\/\/itk.aarhus.dk\/om-itk\/afdelinger\/development\/",
+        "url": null,
         "telephone": null,
-        "disabilityAccess": true,
-        "mail": "itkdev@mkb.aarhus.dk",
-        "street": "Hack Kampmanns Plads 22",
-        "suite": "2.2",
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
         "region": "Jylland",
-        "city": "Aarhus",
+        "city": "Aarhus C",
         "country": "Danmark",
         "postalCode": "8000",
         "coordinates": [
-            56.15343598,
-            10.21377573
+            null,
+            null
         ]
     },
     "imageUrls": {
-        "small": "media\/cache\/resolve\/small\/438d0b1f\/50856725020664f9161133a2396cfddacd9aec930c259e4403837f55f4cb3cab.png",
-        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/50856725020664f9161133a2396cfddacd9aec930c259e4403837f55f4cb3cab.png",
-        "large": "media\/cache\/resolve\/large\/438d0b1f\/50856725020664f9161133a2396cfddacd9aec930c259e4403837f55f4cb3cab.png"
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/d285ce25884c0a989fb2a99ee221649d25ed15117ae275508232b709864a798a.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/d285ce25884c0a989fb2a99ee221649d25ed15117ae275508232b709864a798a.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/d285ce25884c0a989fb2a99ee221649d25ed15117ae275508232b709864a798a.png"
     },
-    "created": "2023-12-07T11:19:03+01:00",
-    "updated": "2023-12-07T11:19:03+01:00"
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
 },{
-    "entityId": 1,
-    "title": "ITKDev test event 1",
-    "excerpt": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    "description": "<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis blandit turpis cursus in. Nisl suscipit adipiscing bibendum est ultricies integer quis auctor. Diam donec adipiscing tristique risus nec feugiat. Tincidunt eget nullam non nisi est. Consectetur a erat nam at lectus urna. Vulputate sapien nec sagittis aliquam. Luctus venenatis lectus magna fringilla. Sit amet consectetur adipiscing elit duis tristique. Bibendum enim facilisis gravida neque convallis a.<\/div><div>Cursus eget nunc scelerisque viverra mauris in aliquam sem. Euismod elementum nisi quis eleifend quam adipiscing vitae proin sagittis.<br \/>Sodales ut eu sem integer vitae justo eget. Lacus sed viverra tellus in.<\/div>",
-    "url": "https:\/\/itk.aarhus.dk\/nyheder\/projektnyheder\/robotternes-bidrag-til-den-groenne-omstilling\/",
-    "ticketUrl": "https:\/\/www.aakb.dk\/arrangementer\/boern\/skak-nu-eller-aldrig-18",
+    "entityId": 50,
+    "title": "UDSOLGT \u2022 Kunst p\u00e5 barsel",
+    "excerpt": null,
+    "description": "ARoS tilbyder barslende for\u00e6ldre en mulighed for at blive stimuleret i et babyvenligt tempo.",
+    "url": "https:\/\/www.aros.dk\/da\/besoeg\/kalender\/kunst-paa-barsel-29-september\/",
+    "ticketUrl": "",
     "public": true,
     "organizer": {
-        "created": "2023-12-07T11:19:03+01:00",
-        "updated": "2023-12-07T11:19:03+01:00",
-        "entityId": 1,
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
         "name": "ITKDev",
         "email": "info@itkdev.dk",
         "url": "https:\/\/github.com\/itk-dev"
     },
     "occurrences": [
         {
-            "entityId": 3,
-            "start": "2024-12-08T12:30:00+01:00",
-            "end": "2024-12-08T14:30:00+01:00",
-            "ticketPriceRange": "Free in December",
-            "room": "M2-5",
+            "entityId": 94,
+            "start": "2023-09-29T10:30:00+02:00",
+            "end": "2023-09-29T11:30:00+02:00",
+            "ticketPriceRange": "30 kr. ekskl. entr\u00e9 til museet.",
+            "room": null,
             "status": null
         }
     ],
     "dailyOccurrences": [
         {
-            "entityId": 3,
-            "start": "2024-12-08T12:30:00+01:00",
-            "end": "2024-12-08T14:30:00+01:00",
-            "ticketPriceRange": "Free in December",
-            "room": "M2-5",
+            "entityId": 98,
+            "start": "2023-09-29T10:30:00+02:00",
+            "end": "2023-09-29T11:30:00+02:00",
+            "ticketPriceRange": "30 kr. ekskl. entr\u00e9 til museet.",
+            "room": null,
             "status": null
         }
     ],
     "tags": [
         "aros",
-        "theoceanraceaarhus",
-        "ITKDev"
+        "Aarhus"
     ],
     "location": {
-        "entityId": 1,
-        "name": "ITK Development",
+        "entityId": 12,
+        "name": "Aros",
         "image": null,
-        "url": "https:\/\/itk.aarhus.dk\/om-itk\/afdelinger\/development\/",
-        "telephone": null,
-        "disabilityAccess": true,
-        "mail": "itkdev@mkb.aarhus.dk",
-        "street": "Hack Kampmanns Plads 22",
-        "suite": "2.2",
+        "url": "http:\/\/www.aros.dk\/",
+        "telephone": "87306600",
+        "disabilityAccess": false,
+        "mail": "info@aros.dk",
+        "street": "Aros All\u00e9 2",
+        "suite": "",
         "region": "Jylland",
-        "city": "Aarhus",
+        "city": "Aarhus C",
         "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15390543,
+            10.19961783
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/f981c85ba699518549fb9da00dd5e3648c3bb57158c4531ddcc28c1d9f574b8f.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/f981c85ba699518549fb9da00dd5e3648c3bb57158c4531ddcc28c1d9f574b8f.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/f981c85ba699518549fb9da00dd5e3648c3bb57158c4531ddcc28c1d9f574b8f.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 51,
+    "title": "Koncert med f\u00e6r\u00f8ske Marius Ziska  ",
+    "excerpt": null,
+    "description": "Det er med stolthed at vi kan pr\u00e6sentere en koncert med f\u00e6r\u00f8ske Marius Ziska p\u00e5 ARoS efter lukketid l\u00f8rdag den 30. september.",
+    "url": "https:\/\/www.aros.dk\/da\/besoeg\/kalender\/koncert-den-30-september\/",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 95,
+            "start": "2023-09-30T18:00:00+02:00",
+            "end": "2023-09-30T19:00:00+02:00",
+            "ticketPriceRange": "140 kr. med \u00e5rskort \/ 170 kr. uden \u00e5rskort",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 99,
+            "start": "2023-09-30T18:00:00+02:00",
+            "end": "2023-09-30T19:00:00+02:00",
+            "ticketPriceRange": "140 kr. med \u00e5rskort \/ 170 kr. uden \u00e5rskort",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "aros",
+        "Aarhus"
+    ],
+    "location": {
+        "entityId": 12,
+        "name": "Aros",
+        "image": null,
+        "url": "http:\/\/www.aros.dk\/",
+        "telephone": "87306600",
+        "disabilityAccess": false,
+        "mail": "info@aros.dk",
+        "street": "Aros All\u00e9 2",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15390543,
+            10.19961783
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/52d6e913f1da0f204a5f85e49c5d66eb7436ed988cc17e590c5c8f0a0833115a.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/52d6e913f1da0f204a5f85e49c5d66eb7436ed988cc17e590c5c8f0a0833115a.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/52d6e913f1da0f204a5f85e49c5d66eb7436ed988cc17e590c5c8f0a0833115a.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 55,
+    "title": "Maker for studerende",
+    "excerpt": "Kom og f\u00e5 en smagspr\u00f8ve p\u00e5 bibliotekets nye Makerspace",
+    "description": "<p><strong>Kom og f\u00e5 en smagspr\u00f8ve p\u00e5 bibliotekets nye Makerspace<\/strong><\/p> <p>Vi er i gang med at udvikle et nyt Makerspace. Du har mulighed for at snuse lidt til det vi har gang i og selv pr\u00f8ve kr\u00e6fter med vores grej.<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/blandet-godt\/maker-for-studerende",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 99,
+            "start": "2022-09-26T13:30:00+02:00",
+            "end": "2022-09-26T15:30:00+02:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 103,
+            "start": "2022-09-26T13:30:00+02:00",
+            "end": "2022-09-26T15:30:00+02:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "studerende",
+        "Nyt bibliotek i Gellerup",
+        "Maker space"
+    ],
+    "location": {
+        "entityId": 13,
+        "name": "Gellerup Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "Gellerupbibliotek@aarhus.dk",
+        "street": "Karen Blixens Boulevard 23",
+        "suite": null,
+        "region": null,
+        "city": "Brabrand",
+        "country": null,
+        "postalCode": "8220",
+        "coordinates": [
+            56.1597205,
+            10.13466085
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/cea5f2ead8413a13eacb8daa31e914231454a4bab3b16cbe488e2bdf56036f5d.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/cea5f2ead8413a13eacb8daa31e914231454a4bab3b16cbe488e2bdf56036f5d.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/cea5f2ead8413a13eacb8daa31e914231454a4bab3b16cbe488e2bdf56036f5d.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 56,
+    "title": "F\u00e6llesspisning og musik for studerende",
+    "excerpt": "Vi inviterer alle studerende i omr\u00e5det p\u00e5 gratis f\u00e6llesspisning og musik",
+    "description": "<p><strong>Vi inviterer alle studerende i omr\u00e5det p\u00e5 gratis f\u00e6llesspisning og musik<\/strong><\/p> <p>Kom og bliv lidt klogere p\u00e5 hvad biblioteket og omr\u00e5det har af muligheder for dig som er studerende.<br \/>\nVi s\u00f8rger for aftensmaden og underholdningen denne aften, s\u00e5 du skal bare komme som du er. <\/p>\n<p>F\u00e6llesspisningen er st\u00f8ttet af Genlyd Aarhus<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/blandet-godt\/faellesspisning-og-musik-for-studerende",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 100,
+            "start": "2022-09-29T16:30:00+02:00",
+            "end": "2022-09-29T19:00:00+02:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 104,
+            "start": "2022-09-29T16:30:00+02:00",
+            "end": "2022-09-29T19:00:00+02:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "studerende",
+        "Nyt bibliotek i Gellerup"
+    ],
+    "location": {
+        "entityId": 13,
+        "name": "Gellerup Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "Gellerupbibliotek@aarhus.dk",
+        "street": "Karen Blixens Boulevard 23",
+        "suite": null,
+        "region": null,
+        "city": "Brabrand",
+        "country": null,
+        "postalCode": "8220",
+        "coordinates": [
+            56.1597205,
+            10.13466085
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 59,
+    "title": "Ole Lund Kirkegaard-koncert med SKRALLEBANG",
+    "excerpt": "Kom og giv den gas, n\u00e5r vi hylder Danmarks store b\u00f8rnebogsforfatter Ole Lund Kirkegaard med et brag af en koncert.",
+    "description": "<p><strong>Kom og giv den gas, n\u00e5r vi hylder Danmarks store b\u00f8rnebogsforfatter Ole Lund Kirkegaard med et brag af en koncert. <\/strong><\/p> <p>Vi skal rappe om Ivans slatne arme, l\u00e6re at stave til BUKSEVAND, h\u00f8re historien om Lille Virgil, om dragen Dagmar, n\u00e6sehornet Otto og om en go&#039; fidus!<\/p>\n<p>For de 3-6-\u00e5rige<\/p>\n<p>Arrangementet er gratis, men tilmelding er n\u00f8dvendig p\u00e5 tlf: 4185 4142<\/p>\n<p><\/p><div class=\"media media-element-container media-default\"><div id=\"file-55542\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <img class=\"media-element file-default\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/skrallebang-koncert-moelleparken-300822-0018.jpg\" width=\"1110\" height=\"420\" \/><\/div>\n\n  \n<\/div>\n<\/div>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/boern\/ole-lund-kirkegaard-koncert-med-skrallebang",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 103,
+            "start": "2023-03-02T09:00:00+01:00",
+            "end": "2023-03-02T10:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 107,
+            "start": "2023-03-02T09:00:00+01:00",
+            "end": "2023-03-02T10:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "For b\u00f8rn",
+        "aktiviteter for b\u00f8rn i dagtilbud",
+        "gratis",
+        "Dagtilbud: Musik og bev\u00e6gelse"
+    ],
+    "location": {
+        "entityId": 15,
+        "name": "Tilst Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "Tilstbibliotek@aarhus.dk",
+        "street": "Tilst Skolevej 13 A",
+        "suite": null,
+        "region": null,
+        "city": "Tilst",
+        "country": null,
+        "postalCode": "8381",
+        "coordinates": [
+            56.18834182,
+            10.11068439
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/e46c6d99bb5d13f2d95d4888d0b7d93e854fdebc8bbc464f76aa085da8bed170.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/e46c6d99bb5d13f2d95d4888d0b7d93e854fdebc8bbc464f76aa085da8bed170.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/e46c6d99bb5d13f2d95d4888d0b7d93e854fdebc8bbc464f76aa085da8bed170.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 60,
+    "title": "Ind i en bog med forfatteren: Nutidens Nymfer Er Snu Og ud\u00f8delige af Emma Elver Wolff",
+    "excerpt": "Forfatteren tager l\u00e6seren med p\u00e5 en m\u00e6rkv\u00e6rdig men relaterbar rejse ind i en ung kvindes sind, som nu har gennemg\u00e5et graviditet, moderskab og ikke mindst modet til at st\u00e5 ved den, hun er.",
+    "description": "<p><strong>Forfatteren tager l\u00e6seren med p\u00e5 en m\u00e6rkv\u00e6rdig men relaterbar rejse ind i en ung kvindes sind, som nu har gennemg\u00e5et graviditet, moderskab og ikke mindst modet til at st\u00e5 ved den, hun er.<\/strong><\/p> <p>Novellerne er magiske, skr\u00e6mmende, \u00e6rlige og fyldt med sn\u00f8rklede overvejelser om livet, d\u00f8den og alt derimellem. Historierne er om den moderne kvinde, sommetider skrevet i en fortryllet eller form\u00f8rket metafor, og selvf\u00f8lgelig godt krydret med fortidens mytologiske fort\u00e6llinger om s\u00e6lsomme v\u00e6sener.<\/p>\n<p>Bogen kan skaffes en m\u00e5ned f\u00f8r arrangementet. <\/p>\n<p>Der er 10 eksemplarer, og det er efter f\u00f8rst-til-m\u00f8lle princippet. <\/p>\n<p>Arrangementet er en del af \u00c5rhundredets festival.<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/litteratur\/ind-i-en-bog-med-forfatteren-nutidens-nymfer-er-snu-og-udoedelige-af-emma",
+    "ticketUrl": "https:\/\/pretix.eu\/aakb\/39035\/",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 104,
+            "start": "2023-03-08T10:00:00+01:00",
+            "end": "2023-03-08T11:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 108,
+            "start": "2023-03-08T10:00:00+01:00",
+            "end": "2023-03-08T11:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "LitteraturStedet",
+        "M\u00f8d en forfatter"
+    ],
+    "location": {
+        "entityId": 16,
+        "name": "\u00c5by Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "aabybibliotek@aarhus.dk",
+        "street": "Ludvig Feilbergs Vej 7",
+        "suite": null,
+        "region": null,
+        "city": "\u00c5byh\u00f8j",
+        "country": null,
+        "postalCode": "8230",
+        "coordinates": [
+            56.15642032,
+            10.16258696
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/fb6647aec896976a2f13ba0a9e7c31d77c3380529e474591c33f37ba873b8a2d.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/fb6647aec896976a2f13ba0a9e7c31d77c3380529e474591c33f37ba873b8a2d.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/fb6647aec896976a2f13ba0a9e7c31d77c3380529e474591c33f37ba873b8a2d.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 61,
+    "title": "L\u00e6ringsf\u00e6llesskaber for en b\u00e6redygtig fremtid: Bokashi-workshop",
+    "excerpt": "Pr\u00f8v en lejlighedsegnet kompostform sammen med os!",
+    "description": "<p><strong>Pr\u00f8v en lejlighedsegnet kompostform sammen med os!<\/strong><\/p> <p>F\u00e5r de stigende f\u00f8devarepriser dig til at t\u00e6nke p\u00e5 alternative m\u00e5der at dyrke og spise p\u00e5 i hverdagen? Er det overhovedet muligt at blive selvforsynende om vinteren, og hvordan kan man som byboer g\u00f8de jorden for at n\u00e5 det m\u00e5l? Lad os sammen afpr\u00f8ve mulighederne for at bringe selvforsyning ind i den asfaltariske hverdag. M\u00e5let med f\u00e6llesskabet er at udforske praktiske l\u00f8sninger sammen, og im\u00f8deg\u00e5 de udfordringer, der f\u00f8lger med at leve gr\u00f8nt p\u00e5 f\u00e5 kvadratmeter<\/p>\n<p>De fleste er bekendte med klassisk kompostering, hvor kompostorme omdanner planteaffald til jord. Bokashi-kompostering er en teknik der er s\u00e6rligt velegnet til byboere, fordi komposteringen her udf\u00f8res iltfrit og ved hj\u00e6lp af en s\u00e6rlig g\u00e6rtype. Dermed undg\u00e5r man at have levende orme i en lugtende b\u00f8tte st\u00e5ende under k\u00f8kkenvasken - men man kan stadig omdanne sit planteaffald til n\u00e6ringsrig jord.<\/p>\n<p>I l\u00e6ringsf\u00e6llesskabet for en b\u00e6redygtig fremtid vil vi sammen kaste os over at lave bokashi-spande, som vi herefter kan tage med os hjem. Vi har materialer til at der kan laves 10 s\u00e6t bokashi-spande. Man beh\u00f8ver kun et s\u00e6t pr. husstand, s\u00e5 hvis man \u00f8nsker at deltage som et par\/roommates\/familie beh\u00f8ver man derfor kun at booke \u00e9n billet.<\/p>\n<p><a href=\"https:\/\/www.aakb.dk\/node\/35917\">\u201dL\u00e6ringsf\u00e6llesskaber for en b\u00e6redygtig fremtid\u201d<\/a> er et modningsprojekt finansieret af Aarhus Kommunes Biblioteker, Ballerup Bibliotekerne og Peer 2 Peer University med tilskud fra Udviklingspuljen for folkebiblioteker og p\u00e6dagogiske l\u00e6ringscentre, Slots- og Kulturstyrelsen. Det er anden gang vi afholder det p\u00e5 DOKK1, men man er meget velkommen til at tilmelde sig uanset om man har v\u00e6ret med f\u00f8rste gang eller ej.<\/p>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/blandet-godt\/laeringsfaellesskaber-for-en-baeredygtig-fremtid-bokashi-workshop",
+    "ticketUrl": "https:\/\/pretix.eu\/aakb\/39141\/",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 105,
+            "start": "2023-01-10T15:30:00+01:00",
+            "end": "2023-01-10T17:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 109,
+            "start": "2023-01-10T15:30:00+01:00",
+            "end": "2023-01-10T17:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "verdensrummet",
+        "p2pu",
+        "selvforsyning",
+        "b\u00e6redygtighed",
+        "l\u00e6ringsf\u00e6llesskab",
+        "verdensm\u00e5l"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
         "postalCode": "8000",
         "coordinates": [
             56.15343598,
@@ -141,10 +1105,2098 @@
         ]
     },
     "imageUrls": {
-        "small": "media\/cache\/resolve\/small\/ddcad90c\/fb87fdc506a97fa8a1f801b4f57bfab7f5094bf54f6c1300bfc8cd22d87197a7.png",
-        "medium": "media\/cache\/resolve\/medium\/ddcad90c\/fb87fdc506a97fa8a1f801b4f57bfab7f5094bf54f6c1300bfc8cd22d87197a7.png",
-        "large": "media\/cache\/resolve\/large\/ddcad90c\/fb87fdc506a97fa8a1f801b4f57bfab7f5094bf54f6c1300bfc8cd22d87197a7.png"
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/3d8d58b4c8212f80eb103e15aecb50903c48f4c2d1a0f71733839f8ea9f7999a.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/3d8d58b4c8212f80eb103e15aecb50903c48f4c2d1a0f71733839f8ea9f7999a.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/3d8d58b4c8212f80eb103e15aecb50903c48f4c2d1a0f71733839f8ea9f7999a.png"
     },
-    "created": "2023-12-07T11:19:03+01:00",
-    "updated": "2023-12-07T11:24:18+01:00"
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 64,
+    "title": "Sy-v\u00e6rkstedet",
+    "excerpt": "\u00c5bent sy-v\u00e6rksted i Verdensrummet",
+    "description": "<p><strong>\u00c5bent sy-v\u00e6rksted i Verdensrummet<\/strong><\/p> <p>Her kan du l\u00e6re at sy, kaste dig ud i nye projekter eller bare l\u00e5ne vores maskiner, hvis du har noget, du skal have fikset.<\/p>\n<div>Vi har fokus p\u00e5 b\u00e6redygtighed. T\u00f8j er en stor ressource for klimaet \u2013 s\u00e5 derfor skal vi v\u00e6rne om det.<\/div>\n<div>Det betyder, at vi skal reparere vores t\u00f8j, re-designe det \u2013 bytte, dele &amp; l\u00e5ne - s\u00e5 vi f\u00e5r brugt t\u00f8jet fuldt ud og kun k\u00f8ber nyt, n\u00e5r det er absolut n\u00f8dvendigt.<\/div>\n<p>V\u00e6rkstedet er \u00e5bent hver onsdag fra kl. 15 \u2013 19 (undtager juli, uge 42 &amp; uge 52)<\/p>\n<p>Det er gratis og du m\u00f8der bare op.<\/p>\n<div>Vi hj\u00e6lper hinanden, og der vil l\u00f8bende v\u00e6re s\u00e6rlige workshops, du kan tilmelde dig.<\/div>\n<div>Vi ligger ogs\u00e5 inde med stof og t\u00f8j, du kan kaste dig over \u2013 vi hj\u00e6lper gerne med ideer.<\/div>\n<div>\u00a0<\/div>\n<div>Har du ideer eller sp\u00f8rgsm\u00e5l \u2013 s\u00e5 kontakt Randi Heide <a href=\"mailto:mrahe&#64;aarhus.dk\">mrahe&#64;aarhus.dk<\/a><\/div>\n<p>Du finder v\u00e6rkstedet i Verdensrummet under Dokk1<\/p>\n<p><\/p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254--2\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensrummet_5.jpg?itok&#61;qBIYbjRO\" width=\"220\" height=\"165\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269--2\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-13.png?itok&#61;KeKrrljA\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268--2\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-12.png?itok&#61;IhE6bbty\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/kunst-og-kreativitet\/sy-vaerkstedet-38",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 108,
+            "start": "2023-01-11T14:00:00+01:00",
+            "end": "2023-01-11T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 112,
+            "start": "2023-01-11T14:00:00+01:00",
+            "end": "2023-01-11T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "verdensm\u00e5l",
+        "krea for voksne",
+        "krea for unge",
+        "syv\u00e6rksted",
+        "Maker-Lab",
+        "DIY",
+        "klima"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
+        "postalCode": "8000",
+        "coordinates": [
+            56.15343598,
+            10.21377573
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 65,
+    "title": "Sy-v\u00e6rkstedet",
+    "excerpt": "\u00c5bent sy-v\u00e6rksted i Verdensrummet",
+    "description": "<p><strong>\u00c5bent sy-v\u00e6rksted i Verdensrummet<\/strong><\/p> <p>Her kan du l\u00e6re at sy, kaste dig ud i nye projekter eller bare l\u00e5ne vores maskiner, hvis du har noget, du skal have fikset.<\/p>\n<div>Vi har fokus p\u00e5 b\u00e6redygtighed. T\u00f8j er en stor ressource for klimaet \u2013 s\u00e5 derfor skal vi v\u00e6rne om det.<\/div>\n<div>Det betyder, at vi skal reparere vores t\u00f8j, re-designe det \u2013 bytte, dele &amp; l\u00e5ne - s\u00e5 vi f\u00e5r brugt t\u00f8jet fuldt ud og kun k\u00f8ber nyt, n\u00e5r det er absolut n\u00f8dvendigt.<\/div>\n<p>V\u00e6rkstedet er \u00e5bent hver onsdag fra kl. 15 \u2013 19 (undtager juli, uge 42 &amp; uge 52)<\/p>\n<p>Det er gratis og du m\u00f8der bare op.<\/p>\n<div>Vi hj\u00e6lper hinanden, og der vil l\u00f8bende v\u00e6re s\u00e6rlige workshops, du kan tilmelde dig.<\/div>\n<div>Vi ligger ogs\u00e5 inde med stof og t\u00f8j, du kan kaste dig over \u2013 vi hj\u00e6lper gerne med ideer.<\/div>\n<div>\u00a0<\/div>\n<div>Har du ideer eller sp\u00f8rgsm\u00e5l \u2013 s\u00e5 kontakt Randi Heide <a href=\"mailto:mrahe&#64;aarhus.dk\">mrahe&#64;aarhus.dk<\/a><\/div>\n<p>Du finder v\u00e6rkstedet i Verdensrummet under Dokk1<\/p>\n<p><\/p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254--3\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensrummet_5.jpg?itok&#61;qBIYbjRO\" width=\"220\" height=\"165\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269--3\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-13.png?itok&#61;KeKrrljA\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268--3\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-12.png?itok&#61;IhE6bbty\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/kunst-og-kreativitet\/sy-vaerkstedet-39",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 109,
+            "start": "2023-01-18T14:00:00+01:00",
+            "end": "2023-01-18T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 113,
+            "start": "2023-01-18T14:00:00+01:00",
+            "end": "2023-01-18T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "verdensm\u00e5l",
+        "krea for voksne",
+        "krea for unge",
+        "syv\u00e6rksted",
+        "Maker-Lab",
+        "DIY",
+        "klima",
+        "arrangementer for unge"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
+        "postalCode": "8000",
+        "coordinates": [
+            56.15343598,
+            10.21377573
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/5abc6abf51451e54432935d9eabfe9b446c9649827fec128d1f467f6e91a4879.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 81,
+    "title": "STEVE WYNN",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Hans e-mailadresse og hans Instagram-handle er begge &#34;cultartist&#34;. Han har aldrig haft en sang p\u00e5 top 40 eller vundet en Grammy-pris.<br \/>\n\u00a0<br \/>\nOg alligevel har Steve Wynn skabt en karriere p\u00e5 fire \u00e5rtier, hvor han har indspillet over 400 sange og spillet langt over 3000 shows for fans over hele verden, som kan hele hans materiale. Materiale, der kommer i forskellige musikalske afskygninger.<br \/>\n\u00a0<br \/>\nEn virkelig kultkunstner. Og alligevel, for at tale om Wynn, er det n\u00e6sten, som om det var designet fra starten.<\/div>\n<div class=\"content-column content-column-2 content-column-last\">Philadelphia Weekly beskriver Steve Wynn som v\u00e6rende: &#34;One of rock&#039;s true heroes of the underground.&#34;<br \/>\n\u00a0<br \/>\nGl\u00e6d dig til at opleve Steve Wynn live p\u00e5 HeadQuarters til oktober.<br \/>\n\u00a0<br \/>\nKoncerten er p\u00e5 HeadQuarters, Valdemarsgade 1, 8000 Aarhus C.<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10116",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/534947?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 165,
+            "start": "2023-10-07T20:00:00+02:00",
+            "end": "2023-10-07T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 169,
+            "start": "2023-10-07T20:00:00+02:00",
+            "end": "2023-10-07T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/e62e17c49dfd92cda745c2c3a76008562e1b7babcb8b8429f01580e34d20acc6.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/e62e17c49dfd92cda745c2c3a76008562e1b7babcb8b8429f01580e34d20acc6.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/e62e17c49dfd92cda745c2c3a76008562e1b7babcb8b8429f01580e34d20acc6.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 85,
+    "title": "DAVID EUGENE EDWARDS",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">David Eugene Edwards (US) fra Wovenhand og 16 Horsepower kan opleves p\u00e5 TRAIN, hvor han spiller sange fra hele bagkataloget.<br \/>\n\u00a0<br \/>\nGennem \u00e5rene har den amerikanske musiker og sangskriver David Eugene Edwards i Wovenhand, 16 Horsepower og som soloartist udforsket genre og stilarter med afstikkere til alt fra amerikansk folkrock til m\u00f8rk gotisk americana.<\/div>\n<div class=\"content-column content-column-2 content-column-last\">David Eugene Edwards blev f\u00f8dt ind i en ekstremt troende kristen familie i Colorado, hvor han blev forbudt at lytte til radio og ikke-kristen musik. Det stoppede imidlertid ikke den unge Edwards, der snart kastede sig over musik som Joy Division og Nick Cave. Det endte med at gennemsyre hans musikalske udfoldelser, mens hans kristne tro fortsat har fulgt ham livet igennem, hvis budskaber han fortolker p\u00e5 sin helt egen m\u00e5de i sit m\u00f8rke og melankolske univers.<br \/>\n\u00a0<br \/>\n\u00a0<br \/>\nHans dystre fort\u00e6llinger kredser om temaer som tro, k\u00e6rlighed og livets vanskeligheder, og teksterne rummer p\u00e5 dybt personlige erfaringer fra Edwards eget liv. Bev\u00e6bnet med et v\u00e6ld af instrumenter, som guitar, banjo m.m. omslutter han sit publikum og suger dem dybt ind i sit stormfulde og spirituelle univers.<br \/>\n\u00a0<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10111",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/534861?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 169,
+            "start": "2023-10-12T20:00:00+02:00",
+            "end": "2023-10-12T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 173,
+            "start": "2023-10-12T20:00:00+02:00",
+            "end": "2023-10-12T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/33590730fc2bc8b0929c0aa2c96c1919c8f01e58523e5ff45db8039b954ef3fd.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/33590730fc2bc8b0929c0aa2c96c1919c8f01e58523e5ff45db8039b954ef3fd.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/33590730fc2bc8b0929c0aa2c96c1919c8f01e58523e5ff45db8039b954ef3fd.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 88,
+    "title": "PAGE FOUR",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Et af Danmarks st\u00f8rste boyband er tilbage p\u00e5 landevejen efter fem \u00e5rs pause!<br \/>\n\u00a0<br \/>\nPage Four er med deres nye single \u201cDu Hader Mig\u201d tilbage. For et lille \u00e5rs tid siden m\u00f8dtes de fire bandmedlemmer Lauritz, Stefan, Jonas og Pelle i studiet efter en l\u00e6ngere pause. De havde alle savnet at spille numre, der efterh\u00e5nden roligt kan kaldes store hits. Numre som \u201cSommer\u201d, \u201cBedre End Din Ex\u201d, \u201cFucking Smuk\u201d og ikke mindst \u201cKoldt Udenfor\u201d. De fire drenge oplevede i studiet en begejstring for at spille sammen igen, og det resulterede ogs\u00e5 \u2013 om end uventet og uopfordret \u2013 i en fornyet energi til at give sig i kast med ny musik.<\/div>\n<div class=\"content-column content-column-2 content-column-last\">Nostalgien og fornyelsen bliver forenet og fremf\u00f8rt af de fire drenge, som du m\u00e5ske har glemt, du har savnet.<br \/>\n\u00a0<br \/>\nSUPPORT: LUCY<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10166",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/535867?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 172,
+            "start": "2023-10-14T20:00:00+02:00",
+            "end": "2023-10-14T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 176,
+            "start": "2023-10-14T20:00:00+02:00",
+            "end": "2023-10-14T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/23ed0a0c703f331139c7a3364f6e38ab7a9aada31638eb4da1831323f7de5a93.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/23ed0a0c703f331139c7a3364f6e38ab7a9aada31638eb4da1831323f7de5a93.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/23ed0a0c703f331139c7a3364f6e38ab7a9aada31638eb4da1831323f7de5a93.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 58,
+    "title": "Juleklip for b\u00f8rn fra 3 -6 \u00e5r",
+    "excerpt": "Alle b\u00f8rnehaveb\u00f8rn i Tilst er velkomne til at komme til juleklipning, pynte juletr\u00e6 og spise juleguf.",
+    "description": "<p><strong>Alle b\u00f8rnehaveb\u00f8rn i Tilst er velkomne til at komme til juleklipning, pynte juletr\u00e6 og spise juleguf.\n\n<\/strong><\/p> <p>I er hjerteligt velkomne til at blive og spise jeres madpakker efter arrangementet.<br \/>\nTilmelding er anbefalet via <a href=\"mailto:tilstbibliotek&#64;aarhus.dk\">tilstbibliotek&#64;aarhus.dk<\/a> eller snak med personalet.<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/boern\/juleklip-for-boern-fra-3-6-aar",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 102,
+            "start": "2022-12-01T09:00:00+01:00",
+            "end": "2022-12-01T10:30:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 106,
+            "start": "2022-12-01T09:00:00+01:00",
+            "end": "2022-12-01T10:30:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Kunst og kreativitet for b\u00f8rn",
+        "aktiviteter for b\u00f8rn i dagtilbud",
+        "Dagtilbud: V\u00e6r kreativ"
+    ],
+    "location": {
+        "entityId": 15,
+        "name": "Tilst Bibliotek",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "Tilstbibliotek@aarhus.dk",
+        "street": "Tilst Skolevej 13 A",
+        "suite": null,
+        "region": null,
+        "city": "Tilst",
+        "country": null,
+        "postalCode": "8381",
+        "coordinates": [
+            56.18834182,
+            10.11068439
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/fc253295bfe3f9f2333b73e47a390d6f60c145a07757728fc532cc3978436623.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/fc253295bfe3f9f2333b73e47a390d6f60c145a07757728fc532cc3978436623.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/fc253295bfe3f9f2333b73e47a390d6f60c145a07757728fc532cc3978436623.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 67,
+    "title": "Univers",
+    "excerpt": null,
+    "description": "27. - 29. september 2023, kl. 09.45 &amp; 15.00\n\nDel af Dans Baby Dans Festivalen\n\n(0 TIL 2 \u00c5R) Sanseoplevelse af visuel poesi og levende musik, hvor b\u00f8rn og for\u00e6ldre udforsker scenen sammen med danserne. Kroppe og objekter bev\u00e6ger sig p\u00e5 uventede m\u00e5der og finder deres balance og harmoni igen. Et legesygt kaos, hvor alt er forbundet med hinanden.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/univers\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 123,
+            "start": "2023-09-29T15:00:00+02:00",
+            "end": "2023-09-29T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 124,
+            "start": "2023-09-28T15:00:00+02:00",
+            "end": "2023-09-28T15:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 127,
+            "start": "2023-09-29T15:00:00+02:00",
+            "end": "2023-09-29T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 128,
+            "start": "2023-09-28T15:00:00+02:00",
+            "end": "2023-09-28T15:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/a8cf9d4ceb7edb3069515f96ac34cf314fdf8ac8388645a06651376ea07c5212.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/a8cf9d4ceb7edb3069515f96ac34cf314fdf8ac8388645a06651376ea07c5212.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/a8cf9d4ceb7edb3069515f96ac34cf314fdf8ac8388645a06651376ea07c5212.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 72,
+    "title": "Carcass",
+    "excerpt": null,
+    "description": "4. - 6. december 2023 - Hverdage kl. 19.30 (90 min.)\nEKSTRA SPILLEDAG TILF\u00d8JET!\n\nFor\u00e5rets helt udsolgte forestilling vender tilbage!\nT\u00f8r vi forholde os til det uundg\u00e5elige? At vi skal herfra - ligesom alle vore k\u00e6re? En gribende, brutal og skr\u00f8belig forestilling tager livtag med livets afslutning. Foran en massiv spejlv\u00e6g finder seks performere og deres kroppe et livsbekr\u00e6ftende svar p\u00e5 det, der ikke kan siges med ord.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/carcass-efteraar-2023\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 138,
+            "start": "2023-12-06T19:30:00+01:00",
+            "end": "2023-12-06T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 139,
+            "start": "2023-12-05T19:30:00+01:00",
+            "end": "2023-12-05T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 140,
+            "start": "2023-12-04T19:30:00+01:00",
+            "end": "2023-12-04T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 142,
+            "start": "2023-12-06T19:30:00+01:00",
+            "end": "2023-12-06T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 143,
+            "start": "2023-12-05T19:30:00+01:00",
+            "end": "2023-12-05T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 144,
+            "start": "2023-12-04T19:30:00+01:00",
+            "end": "2023-12-04T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/963351eb35b884135b2f271e82ea2adf0f41c302b3bc5950d9819ed66162928a.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/963351eb35b884135b2f271e82ea2adf0f41c302b3bc5950d9819ed66162928a.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/963351eb35b884135b2f271e82ea2adf0f41c302b3bc5950d9819ed66162928a.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 77,
+    "title": "The Genderhouse Festival",
+    "excerpt": null,
+    "description": "27. - 30. maj 2024\n\nGl\u00e6d jer til den tredje udgave at Aarhus&#039; queer art festival. Program offentligg\u00f8res og billetsalg starter senere.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/the-genderhouse-festival\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 157,
+            "start": "2024-05-31T17:00:00+02:00",
+            "end": "2024-05-31T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 158,
+            "start": "2024-05-30T17:00:00+02:00",
+            "end": "2024-05-30T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 159,
+            "start": "2024-05-29T17:00:00+02:00",
+            "end": "2024-05-29T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 160,
+            "start": "2024-05-28T17:00:00+02:00",
+            "end": "2024-05-28T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 161,
+            "start": "2024-05-27T17:00:00+02:00",
+            "end": "2024-05-27T23:00:00+02:00",
+            "ticketPriceRange": "Kr. 0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 161,
+            "start": "2024-05-31T17:00:00+02:00",
+            "end": "2024-05-31T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 162,
+            "start": "2024-05-30T17:00:00+02:00",
+            "end": "2024-05-30T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 163,
+            "start": "2024-05-29T17:00:00+02:00",
+            "end": "2024-05-29T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 164,
+            "start": "2024-05-28T17:00:00+02:00",
+            "end": "2024-05-28T23:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 165,
+            "start": "2024-05-27T17:00:00+02:00",
+            "end": "2024-05-27T23:00:00+02:00",
+            "ticketPriceRange": "Kr. 0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/fe6caccc238b83b5baa62fe2964e8a529948c34af98af911773907c075579b81.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/fe6caccc238b83b5baa62fe2964e8a529948c34af98af911773907c075579b81.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/fe6caccc238b83b5baa62fe2964e8a529948c34af98af911773907c075579b81.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 78,
+    "title": "TILMELD TRAINs NYHEDSBREV",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\"><strong>TILMELD TRAINs NYHEDSBREV<\/strong><br \/>\n\u00a0<br \/>\nF\u00e5 de nyeste koncertnyheder, updates p\u00e5 kommende koncerter og informationer om eksklusive presales ved at tilmelde dig vores nyhedsbrev.<br \/>\n\u00a0<br \/>\n<a href=\"https:\/\/train92738.activehosted.com\/f\/7\"><strong>Tilmeld dig her<\/strong><\/a><br \/>\n\u00a0<\/div>\n<div class=\"content-column content-column-2 content-column-last\">\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-8836",
+    "ticketUrl": "https:\/\/train92738.activehosted.com\/f\/7",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 162,
+            "start": "2023-09-30T16:00:00+02:00",
+            "end": "2023-09-30T16:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 166,
+            "start": "2023-09-30T16:00:00+02:00",
+            "end": "2023-09-30T16:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/70b541bb2d719195a76ca8bdfb0df730ac0591b31e599e9dc1ddc6c0ce14ecec.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/70b541bb2d719195a76ca8bdfb0df730ac0591b31e599e9dc1ddc6c0ce14ecec.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/70b541bb2d719195a76ca8bdfb0df730ac0591b31e599e9dc1ddc6c0ce14ecec.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 84,
+    "title": "DAWDA JOBARTEH + STEFAN PASBORG",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Denne duo er et unikt m\u00f8de mellem to herrer fra to forskellige musikkulturer og fra to forskellige kontinenter! To karismatiske og mesterlige musikere sl\u00e5r sig sammen i dette nye og unikke samarbejde.\u00a0En smeltedigel af stilarter blandet sammen til et output baseret p\u00e5 gensidig k\u00e6rlighed til st\u00e6rke rytmiske former, smukke melodier og den rene energi i musikken!<\/div>\n<div class=\"content-column content-column-2 content-column-last\">DAWDA JOBARTEH: kora (Gambia)<br \/>\n\tSTEFAN PASBORG: trommer (Danmark)\n<p>\tKoncerten er p\u00e5 Erlings Jazz- &amp; \u00d8lbar, N\u00f8rreport 8, 8000 Aarhus C.<br \/>\n\u00a0<\/p><\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10331",
+    "ticketUrl": "https:\/\/www.jazzbilletten.dk\/arrangementer\/22415\/stefan-pasborg-dawda-jobarteh\/",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 168,
+            "start": "2023-10-11T20:00:00+02:00",
+            "end": "2023-10-11T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 172,
+            "start": "2023-10-11T20:00:00+02:00",
+            "end": "2023-10-11T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/e1320cda2cea3011c6671767cd44f6528f0d50cee387500348dc617817132311.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/e1320cda2cea3011c6671767cd44f6528f0d50cee387500348dc617817132311.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/e1320cda2cea3011c6671767cd44f6528f0d50cee387500348dc617817132311.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 57,
+    "title": "J\u00f8rgen Pingvin",
+    "excerpt": "Opl\u00e6sning og workshop ved Sabine Lemire og Rasmus Bregnh\u00f8i",
+    "description": "<p><strong>Opl\u00e6sning og workshop ved Sabine Lemire og Rasmus Bregnh\u00f8i\n\n<\/strong><\/p> <p>B\u00f8rnene m\u00f8der J\u00f8rgen Pingvin igennem opl\u00e6sning og bygger en raket pr\u00e6cis liges\u00e5 flot som J\u00f8rgens.<\/p>\n",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/boern\/joergen-pingvin",
+    "ticketUrl": "https:\/\/www.pretix.eu\/aakb\/38468\/",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 101,
+            "start": "2022-11-19T09:30:00+01:00",
+            "end": "2022-11-19T10:30:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 105,
+            "start": "2022-11-19T09:30:00+01:00",
+            "end": "2022-11-19T10:30:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "For b\u00f8rn",
+        "albus familie"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
+        "postalCode": "8000",
+        "coordinates": [
+            56.15343598,
+            10.21377573
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/2e867b3939b0809582ba40d254b654110e4685b565774f7584d602fa70b3f79d.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 68,
+    "title": "Untz Baby Untz",
+    "excerpt": null,
+    "description": "28. - 30. september 2023, kl. 10.00 &amp; 13.00\n\nDel af Dans Baby Dans Festivalen\n\n(6 MDR. til 5 \u00c5R) V\u00e6r med til at fejre dansegulvets euforiske f\u00e6llesskab og opdag en magisk og interaktiv danseforestilling, hvor bas og techno m\u00f8der b\u00f8rnefester! Inspireret af 90\u2019ernes ravekultur og \u201cpeace, love, unity &amp; respect!\u201d Ingen burde vokse op uden techno. Yay!",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/untz-baby-untz\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 125,
+            "start": "2023-10-01T10:00:00+02:00",
+            "end": "2023-10-01T13:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 126,
+            "start": "2023-09-30T10:00:00+02:00",
+            "end": "2023-09-30T13:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 127,
+            "start": "2023-09-29T10:00:00+02:00",
+            "end": "2023-09-29T13:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 129,
+            "start": "2023-10-01T10:00:00+02:00",
+            "end": "2023-10-01T13:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 130,
+            "start": "2023-09-30T10:00:00+02:00",
+            "end": "2023-09-30T13:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 131,
+            "start": "2023-09-29T10:00:00+02:00",
+            "end": "2023-09-29T13:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/39f985c53e79e8edfb39300c93c61e9b4d15b9acc0c75ace2fc0f115d248529f.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/39f985c53e79e8edfb39300c93c61e9b4d15b9acc0c75ace2fc0f115d248529f.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/39f985c53e79e8edfb39300c93c61e9b4d15b9acc0c75ace2fc0f115d248529f.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 71,
+    "title": "Axial Figures",
+    "excerpt": null,
+    "description": "21. - 23. november 2023 - kl. 19.30 (60 min.) \n\nURPREMIERE: Kalejdoskopisk og akrobatisk forestilling i tre dimensioner. Som meditative, sv\u00e6vende figurer viser fem reb-artister b\u00e5de deres r\u00e5styrke og s\u00e5rbarhed. Sammen skaber de en v\u00e6gtl\u00f8s koreografi inspireret af arkitekturens legende linjer og en refleksion over de systemer, vi indg\u00e5r i. Hvad sker der, hvis nogen pludselig giver slip?",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/axial-figures\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 135,
+            "start": "2023-11-23T19:30:00+01:00",
+            "end": "2023-11-23T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 136,
+            "start": "2023-11-22T19:30:00+01:00",
+            "end": "2023-11-22T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 137,
+            "start": "2023-11-21T19:30:00+01:00",
+            "end": "2023-11-21T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 139,
+            "start": "2023-11-23T19:30:00+01:00",
+            "end": "2023-11-23T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 140,
+            "start": "2023-11-22T19:30:00+01:00",
+            "end": "2023-11-22T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 141,
+            "start": "2023-11-21T19:30:00+01:00",
+            "end": "2023-11-21T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/2fa774d8c1225285756de7e6fed9eea25ba526c424fcb7d4b379592d9594c6d5.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/2fa774d8c1225285756de7e6fed9eea25ba526c424fcb7d4b379592d9594c6d5.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/2fa774d8c1225285756de7e6fed9eea25ba526c424fcb7d4b379592d9594c6d5.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 87,
+    "title": "TABLOID",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Koncerten med\u00a0Tabloid\u00a0flyttes til d.\u00a013. oktober p\u00e5 VinDanmark,\u00a0Kystpromenaden 2, 8000 Aarhus C<br \/>\nAlle tidligere k\u00f8bte billetter er ogs\u00e5 gyldige til den nye dato p\u00e5 VinDanmark.<br \/>\n\u00a0<br \/>\n*********************<br \/>\n\tFem af landets fremmeste musikere fra pop- og jazzscenen er ga\u030aet sammen i Tabloid.<br \/>\n\t\u00a0<br \/>\nHer skaber de musik, som minder os om ikke at d\u00f8mme og begr\u00e6nse os selv, og pa\u030a deres album disker de op med elementer fra ba\u030ade country og J-pop.\n<p>\tDeres f\u00e6lles cv er et af de mest respektaftvingende for nogen dansk gruppe. Jadas musikalske h\u00f8jre ha\u030and, Malthe Rostrup, den ene halvdel af Bremer\/McCoy Jonathan Bremer, den nye jazzgenerations mest renommerede saxofonist Oilly Wallace, trommeslageren fra blandt andre Nik &amp; Jay og Drew Sycamore Felix Ewert og guitarist, komponist og initiativtager Johannes Wamberg. Han var i mange a\u030ar optaget af omverdenens blik pa\u030a ham og drevet af at tilpasse sine tekniske evner og sin lyd til det blik. Men han opdagede, at han savnede nerve og impulsivitet. Slet og ret menneskelighed.<br \/>\n\u00a0<br \/>\n\u201dJeg ha\u030aber, at man i Tabloids musik kan m\u00e6rke min personlige udvikling: At man ikke skal putte sig selv ned i en boks. Ikke d\u00f8mme sig selv, ikke begr\u00e6nse sig selv. Man bliver sit eget f\u00e6ngsel, og sa\u030a oplever man ikke nye ting, men kun de samme ting igen og igen. Hvis bare en smule af det kommer ud, er jeg glad,\u201d siger Johannes Wamberg.<br \/>\n\u00a0<br \/>\nUdviklingen har accelereret i arbejdet med deres 2. album \u2019Open Mind\u2019, fordi Tabloid gik fra at v\u00e6re Wambergs personlige vision til at v\u00e6re et egentlig band. Det selvbetitlede debutalbum fra 2021 havde guitaristen skabt i sit hovede, inden han samlede orkestret, mens han op til andet album slap de kreative kr\u00e6fter fri. I stedet for at t\u00e6nke alt til ende skrev Wamberg ukomplicerede og umiddelbare melodier, som pa\u030a to sommerhusture til Kyndel\u00f8se blev til igennem f\u00e6llesskabet og formet til fulde numre.<\/p><\/div>\n<div class=\"content-column content-column-2 content-column-last\">\u201dAlle har v\u00e6ret klar pa\u030a at pr\u00f8ve sig selv af i den her ramme. Vi kommer fra at arbejde i nogle konstellationer med klare ide\u0301er om, hvad det skal munde ud i, og var sp\u00e6ndte pa\u030a at s\u00e6nke forventningerne til os selv og lade kollektivet b\u00e6re det. Vi er alle fem nogle karakterer med egne stemmer. Ba\u030ade personligt og musikalsk. Men der er overraskende lidt ego, na\u030ar vi spiller sammen, og det synes jeg, man kan h\u00f8re,\u201d \u2013 pianist Malthe Rostrup.<br \/>\n\u00a0<br \/>\nKaraktererne er bassisten Jonathan Bremer, indbegrebet af zen. Trommeslager Felix Ewert, en spradebasse, der har siddet pa\u030a de st\u00f8rste scener. Det er den virtuose, men ydmyg saxofonist Oilly Wallace. Det er den eftert\u00e6nksomme Malthe Rostrup, der som Jadas producer har vist sin fornemmelse for rum og arrangementer. Og i midten melodimager Johannes Wamberg, der med sin a\u030abne invitation og engagerende facon har skabt et s\u00e6rligt rum.<br \/>\n\u00a0<br \/>\nSammen har de lavet et album, der filtrerer ingredienser fra Steely Dan \u2013 og i s\u00e6rdeleshed frontmand Donald Fagan \u2013 jazzkoryf\u00e6er som Bill Evans og John Coltrane, 90\u2019er-r&amp;b og cool J-pop. Og et album med visse afstikkere. Et countrynummer hist, en discobanger her. Men med en klarhed, som mange straks t\u00e6nder pa\u030a. Det blev eksemplificeret, da Johannes Wamberg \u2013 i endnu et anfald af impulsivitet \u2013 sendte de nye sange til Sony Musics direkt\u00f8r, Henrik Daldorph. En halv time senere havde han et svar: Det ville selskabet gerne udgive.<br \/>\n\u00a0<br \/>\nJohannes Wamberg - guitar\u00a0<br \/>\nOilly Wallace - sax<br \/>\n\tMalthe Rostrup - keys\u00a0<br \/>\nJonathan Bremer - bass\u00a0<br \/>\nFelix Ewert - trommer\u00a0<br \/>\n\u00a0<br \/>\nKoncerten er p\u00e5 VinDanmark, Kystpromenaden 2, 8000 Aarhus C.<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-9866",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/T230928?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 171,
+            "start": "2023-10-13T20:00:00+02:00",
+            "end": "2023-10-13T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 175,
+            "start": "2023-10-13T20:00:00+02:00",
+            "end": "2023-10-13T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/fb2c91509c26a01f90afe346abeb7dbbc731394236908a3ad75e2300a4422309.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/fb2c91509c26a01f90afe346abeb7dbbc731394236908a3ad75e2300a4422309.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/fb2c91509c26a01f90afe346abeb7dbbc731394236908a3ad75e2300a4422309.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 52,
+    "title": "Annette Messager \u2013 D\u00e9sirs d\u00e9sordonn\u00e9s \/ Disordered Desires",
+    "excerpt": null,
+    "description": "P\u00e5 denne s\u00f8ndagsrundvisning introduceres du til den internationalt anerkendte franske kunstner Annette Messager i sin f\u00f8rste soloudstilling i Danmark, D\u00e9sirs d\u00e9sordonn\u00e9s \/ Disordered Desires.",
+    "url": "https:\/\/www.aros.dk\/da\/besoeg\/kalender\/1-oktober-annette-messager-d\u00e9sirs-d\u00e9sordonn\u00e9s-disordered-desires\/",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 96,
+            "start": "2023-10-01T15:00:00+02:00",
+            "end": "2023-10-01T15:45:00+02:00",
+            "ticketPriceRange": "Med \u00e5rskort:\u00a025 kr \/ Uden \u00e5rskort:\u00a050 kr. ex. entr\u00e9 til museet.",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 100,
+            "start": "2023-10-01T15:00:00+02:00",
+            "end": "2023-10-01T15:45:00+02:00",
+            "ticketPriceRange": "Med \u00e5rskort:\u00a025 kr \/ Uden \u00e5rskort:\u00a050 kr. ex. entr\u00e9 til museet.",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "aros",
+        "Aarhus"
+    ],
+    "location": {
+        "entityId": 12,
+        "name": "Aros",
+        "image": null,
+        "url": "http:\/\/www.aros.dk\/",
+        "telephone": "87306600",
+        "disabilityAccess": false,
+        "mail": "info@aros.dk",
+        "street": "Aros All\u00e9 2",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15390543,
+            10.19961783
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/27962db0ae8f0f630549d118965dabbd0db0e747b707b64ebf77c9455715be1f.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/27962db0ae8f0f630549d118965dabbd0db0e747b707b64ebf77c9455715be1f.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/27962db0ae8f0f630549d118965dabbd0db0e747b707b64ebf77c9455715be1f.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 63,
+    "title": "Sy-v\u00e6rkstedet",
+    "excerpt": "\u00c5bent sy-v\u00e6rksted i Verdensrummet",
+    "description": "<p><strong>\u00c5bent sy-v\u00e6rksted i Verdensrummet<\/strong><\/p> <p>Her kan du l\u00e6re at sy, kaste dig ud i nye projekter eller bare l\u00e5ne vores maskiner, hvis du har noget, du skal have fikset.<\/p>\n<div>Vi har fokus p\u00e5 b\u00e6redygtighed. T\u00f8j er en stor ressource for klimaet \u2013 s\u00e5 derfor skal vi v\u00e6rne om det.<\/div>\n<div>Det betyder, at vi skal reparere vores t\u00f8j, re-designe det \u2013 bytte, dele &amp; l\u00e5ne - s\u00e5 vi f\u00e5r brugt t\u00f8jet fuldt ud og kun k\u00f8ber nyt, n\u00e5r det er absolut n\u00f8dvendigt.<\/div>\n<p>V\u00e6rkstedet er \u00e5bent hver onsdag fra kl. 15 \u2013 19 (undtager juli, uge 42 &amp; uge 52)<\/p>\n<p>Det er gratis og du m\u00f8der bare op.<\/p>\n<div>Vi hj\u00e6lper hinanden, og der vil l\u00f8bende v\u00e6re s\u00e6rlige workshops, du kan tilmelde dig.<\/div>\n<div>Vi ligger ogs\u00e5 inde med stof og t\u00f8j, du kan kaste dig over \u2013 vi hj\u00e6lper gerne med ideer.<\/div>\n<div>\u00a0<\/div>\n<div>Har du ideer eller sp\u00f8rgsm\u00e5l \u2013 s\u00e5 kontakt Randi Heide <a href=\"mailto:mrahe&#64;aarhus.dk\">mrahe&#64;aarhus.dk<\/a><\/div>\n<p>Du finder v\u00e6rkstedet i Verdensrummet under Dokk1<\/p>\n<p><\/p><div class=\"media media-element-container media-teaser\"><div id=\"file-51254\" class=\"file file-image file-image-jpeg\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensrummetjpg-8\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensrummet_5.jpg?itok&#61;qBIYbjRO\" width=\"220\" height=\"165\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51269\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-13png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-13.png?itok&#61;KeKrrljA\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div><div class=\"media media-element-container media-teaser\"><div id=\"file-51268\" class=\"file file-image file-image-png\">\n\n  \n  <div class=\"content\">\n    <a href=\"\/file\/verdensmaal-ikon-12png\"><img class=\"media-element file-teaser\" alt title src=\"https:\/\/www.aakb.dk\/sites\/www.aakb.dk\/files\/styles\/medium\/public\/verdensmaal-ikon-12.png?itok&#61;IhE6bbty\" width=\"220\" height=\"220\" \/><\/a>  <\/div>\n\n  \n<\/div>\n<\/div>",
+    "url": "https:\/\/www.aakb.dk\/arrangementer\/kunst-og-kreativitet\/sy-vaerkstedet-37",
+    "ticketUrl": "",
+    "public": true,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 8,
+        "name": "Aakb",
+        "email": "info@aakb.dk.dk",
+        "url": "https:\/\/aakb.dk\/"
+    },
+    "occurrences": [
+        {
+            "entityId": 107,
+            "start": "2023-01-04T14:00:00+01:00",
+            "end": "2023-01-04T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 111,
+            "start": "2023-01-04T14:00:00+01:00",
+            "end": "2023-01-04T18:00:00+01:00",
+            "ticketPriceRange": "0",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "verdensm\u00e5l",
+        "krea for voksne",
+        "krea for unge",
+        "syv\u00e6rksted",
+        "Maker-Lab",
+        "DIY",
+        "klima"
+    ],
+    "location": {
+        "entityId": 14,
+        "name": "Hovedbiblioteket",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": "dokk1-hovedbiblioteket@aarhus.dk",
+        "street": "Hack Kampmanns Plads 2",
+        "suite": null,
+        "region": null,
+        "city": "Aarhus",
+        "country": null,
+        "postalCode": "8000",
+        "coordinates": [
+            56.15343598,
+            10.21377573
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/d93b488171948f66485a9e63307383a8d0ee9d2a21061701fd678b69abf35c23.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/d93b488171948f66485a9e63307383a8d0ee9d2a21061701fd678b69abf35c23.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/d93b488171948f66485a9e63307383a8d0ee9d2a21061701fd678b69abf35c23.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 66,
+    "title": "Dans Baby Dans Festival",
+    "excerpt": null,
+    "description": "Dans Baby Dans er Bora Boras interaktive dansefestival for babyer, sm\u00e5folk og deres voksne. Oplev fem forestillinger, der v\u00e6kker b\u00f8rnenes nysgerrighed, underst\u00f8tter deres fantasi og skaber n\u00e6rv\u00e6rende m\u00f8der mellem dansen og b\u00f8rnene.  Tag din baby med eller l\u00e5n \u00e9n, hvis du ikke har en selv!",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/dans-baby-dans-festival\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 110,
+            "start": "2023-10-05T10:59:00+02:00",
+            "end": "2023-10-05T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 111,
+            "start": "2023-10-04T10:59:00+02:00",
+            "end": "2023-10-04T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 112,
+            "start": "2023-10-03T10:59:00+02:00",
+            "end": "2023-10-03T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 113,
+            "start": "2023-10-02T10:59:00+02:00",
+            "end": "2023-10-02T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 114,
+            "start": "2023-10-01T10:59:00+02:00",
+            "end": "2023-10-01T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 115,
+            "start": "2023-09-30T10:59:00+02:00",
+            "end": "2023-09-30T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 116,
+            "start": "2023-09-29T10:59:00+02:00",
+            "end": "2023-09-29T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 117,
+            "start": "2023-09-28T10:59:00+02:00",
+            "end": "2023-09-28T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 118,
+            "start": "2023-09-27T10:59:00+02:00",
+            "end": "2023-09-27T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 119,
+            "start": "2023-09-26T10:59:00+02:00",
+            "end": "2023-09-26T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 120,
+            "start": "2023-09-25T10:59:00+02:00",
+            "end": "2023-09-25T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 121,
+            "start": "2023-09-24T10:59:00+02:00",
+            "end": "2023-09-24T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 122,
+            "start": "2023-09-23T10:59:00+02:00",
+            "end": "2023-09-23T23:59:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a0100\u00a0\u2013\u00a0150",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 114,
+            "start": "2023-10-05T10:59:00+02:00",
+            "end": "2023-10-05T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 115,
+            "start": "2023-10-04T10:59:00+02:00",
+            "end": "2023-10-04T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 116,
+            "start": "2023-10-03T10:59:00+02:00",
+            "end": "2023-10-03T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 117,
+            "start": "2023-10-02T10:59:00+02:00",
+            "end": "2023-10-02T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 118,
+            "start": "2023-10-01T10:59:00+02:00",
+            "end": "2023-10-01T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 119,
+            "start": "2023-09-30T10:59:00+02:00",
+            "end": "2023-09-30T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 120,
+            "start": "2023-09-29T10:59:00+02:00",
+            "end": "2023-09-29T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 121,
+            "start": "2023-09-28T10:59:00+02:00",
+            "end": "2023-09-28T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 122,
+            "start": "2023-09-27T10:59:00+02:00",
+            "end": "2023-09-27T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 123,
+            "start": "2023-09-26T10:59:00+02:00",
+            "end": "2023-09-26T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 124,
+            "start": "2023-09-25T10:59:00+02:00",
+            "end": "2023-09-25T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 125,
+            "start": "2023-09-24T10:59:00+02:00",
+            "end": "2023-09-24T23:59:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 126,
+            "start": "2023-09-23T10:59:00+02:00",
+            "end": "2023-09-23T23:59:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a0100\u00a0\u2013\u00a0150",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/9626160ef88f98c46348b9ab40be7572769face8d69ac9e43a61604661a6bdc7.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/9626160ef88f98c46348b9ab40be7572769face8d69ac9e43a61604661a6bdc7.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/9626160ef88f98c46348b9ab40be7572769face8d69ac9e43a61604661a6bdc7.png"
+    },
+    "created": "2024-01-16T14:05:36+01:00",
+    "updated": "2024-01-16T14:05:36+01:00"
+},{
+    "entityId": 69,
+    "title": "Fields of Tender",
+    "excerpt": null,
+    "description": "2. - 4. oktober, 2023 - kl. 9.30 &amp; 13.30\n\nDel af Dans Baby Dans Festivalen\n\n(0 til 18 MDR) &#34;Fields of Tender&#34; inviterer publikum ind i en verden fyldt med hengivenhed og k\u00e6rlighed. Dans, musik, lyde, genstande og interaktive videoprojektioner taler til publikums nysgerrighed og skaber et roligt og intimt rum til afslapning. \nOgs\u00e5 egnet for neurodiverse b\u00f8rn (0 til 2 \u00e5r).",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/fields-of-tender\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 128,
+            "start": "2023-10-05T09:30:00+02:00",
+            "end": "2023-10-05T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 129,
+            "start": "2023-10-04T09:30:00+02:00",
+            "end": "2023-10-04T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 130,
+            "start": "2023-10-03T09:30:00+02:00",
+            "end": "2023-10-03T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 131,
+            "start": "2023-10-02T09:30:00+02:00",
+            "end": "2023-10-02T15:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0150",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 132,
+            "start": "2023-10-05T09:30:00+02:00",
+            "end": "2023-10-05T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 133,
+            "start": "2023-10-04T09:30:00+02:00",
+            "end": "2023-10-04T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 134,
+            "start": "2023-10-03T09:30:00+02:00",
+            "end": "2023-10-03T15:30:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 135,
+            "start": "2023-10-02T09:30:00+02:00",
+            "end": "2023-10-02T15:30:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0150",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/af02ed382885276c76e664670740ea73625de092c7b73931d668dbcef3a3cd6b.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/af02ed382885276c76e664670740ea73625de092c7b73931d668dbcef3a3cd6b.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/af02ed382885276c76e664670740ea73625de092c7b73931d668dbcef3a3cd6b.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 70,
+    "title": "Impulz",
+    "excerpt": null,
+    "description": "2. - 4. oktober 2023, kl. 10.00 &amp; 15.00\n\nDel af Dans Baby Dans Festivalen\n\n(1 TIL 4 \u00c5R) Hvad sker der, hvis du trykker p\u00e5 knappen? Interaktiv forestilling, hvor b\u00f8rnene selv s\u00e6tter danseren, musikeren og automatiske lydopfindelser i gang. Et vovet og sjovt show, hvor performere og publikum venter p\u00e5 impulsen fra hinanden.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/impulz\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 132,
+            "start": "2023-10-04T15:00:00+02:00",
+            "end": "2023-10-04T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 133,
+            "start": "2023-10-03T15:00:00+02:00",
+            "end": "2023-10-03T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 134,
+            "start": "2023-10-02T15:00:00+02:00",
+            "end": "2023-10-02T15:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 136,
+            "start": "2023-10-04T15:00:00+02:00",
+            "end": "2023-10-04T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 137,
+            "start": "2023-10-03T15:00:00+02:00",
+            "end": "2023-10-03T15:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 138,
+            "start": "2023-10-02T15:00:00+02:00",
+            "end": "2023-10-02T15:00:00+02:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a050\u00a0\u2013\u00a0100",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/a7c85154b700c5a8dd40aa4a5211fbeaef81d99804f9b34ca1efc5d28ef7b09c.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/a7c85154b700c5a8dd40aa4a5211fbeaef81d99804f9b34ca1efc5d28ef7b09c.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/a7c85154b700c5a8dd40aa4a5211fbeaef81d99804f9b34ca1efc5d28ef7b09c.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 74,
+    "title": "Tennis",
+    "excerpt": null,
+    "description": "9. - 14. marts 2024 - kl. 19.30\n\nURPREMIERE: Kampen alle har ventet p\u00e5! DON og GNU er tilbage i deres livs form og tager os med p\u00e5 en actionfyldt, sveddryppende og poetisk jagt p\u00e5 sandheden om \u00e6gte kamp\u00e5nd. Med slapstick komik og r\u00f8rende dans, fors\u00f8ger de to antihelte at vikle sig ud af det net, de selv har rodet sig ind i.",
+    "url": "https:\/\/bora-bora.dk\/forestillinger\/tennis-don-gnu\/",
+    "ticketUrl": null,
+    "public": false,
+    "organizer": {
+        "created": "2024-01-16T13:55:16+01:00",
+        "updated": "2024-01-16T13:55:16+01:00",
+        "entityId": 7,
+        "name": "ITKDev",
+        "email": "info@itkdev.dk",
+        "url": "https:\/\/github.com\/itk-dev"
+    },
+    "occurrences": [
+        {
+            "entityId": 143,
+            "start": "2024-03-14T19:30:00+01:00",
+            "end": "2024-03-14T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 144,
+            "start": "2024-03-13T19:30:00+01:00",
+            "end": "2024-03-13T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 145,
+            "start": "2024-03-12T19:30:00+01:00",
+            "end": "2024-03-12T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 146,
+            "start": "2024-03-11T19:30:00+01:00",
+            "end": "2024-03-11T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 147,
+            "start": "2024-03-10T19:30:00+01:00",
+            "end": "2024-03-10T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 148,
+            "start": "2024-03-09T19:30:00+01:00",
+            "end": "2024-03-09T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 147,
+            "start": "2024-03-14T19:30:00+01:00",
+            "end": "2024-03-14T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 148,
+            "start": "2024-03-13T19:30:00+01:00",
+            "end": "2024-03-13T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 149,
+            "start": "2024-03-12T19:30:00+01:00",
+            "end": "2024-03-12T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 150,
+            "start": "2024-03-11T19:30:00+01:00",
+            "end": "2024-03-11T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 151,
+            "start": "2024-03-10T19:30:00+01:00",
+            "end": "2024-03-10T19:30:00+01:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        },
+        {
+            "entityId": 152,
+            "start": "2024-03-09T19:30:00+01:00",
+            "end": "2024-03-09T19:30:00+01:00",
+            "ticketPriceRange": "Fra\u00a0Kr.\u00a065\u00a0\u2013\u00a0180",
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [],
+    "location": {
+        "entityId": 17,
+        "name": "Bora Bora",
+        "image": null,
+        "url": "https:\/\/www.bora-bora.dk\/",
+        "telephone": "86190079",
+        "disabilityAccess": false,
+        "mail": "info@bora-bora.dk",
+        "street": "Valdemarsgade 1",
+        "suite": "",
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            56.15182645,
+            10.19903581
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/7530c1555f2f9a51287c051205a8efe8283c7a69c742b71965a4e07dbc20a938.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/7530c1555f2f9a51287c051205a8efe8283c7a69c742b71965a4e07dbc20a938.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/7530c1555f2f9a51287c051205a8efe8283c7a69c742b71965a4e07dbc20a938.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 79,
+    "title": "SPRAGLGEV\u00c6R x CALA",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">CALA<br \/>\nCALA er lyden af en 25-\u00e5rig, der b\u00e5de er fortabt og forgabt i ungdommen. Om en kerne af alternativ pop, smyger CALAs stemme sig i st\u00e6rke, melodi\u00f8se linjer \u2013 omfavnet af pulserende synths og st\u00f8vede shoegaze-guitarer. Det er som at se The War On Drugs m\u00f8de London Grammar p\u00e5 en rasteplads eller h\u00f8re The National m\u00f8de Bj\u00f3rk i en brandert. Der er h\u00f8jt til loftet og langt til det rationelle. N\u00e5r CALA g\u00e5r live, kan publikum komme helt t\u00e6t p\u00e5 paniske tanker og uflatterende f\u00f8lelser - pakket ind i ungdomsmagi. Det er en invitation direkte ind i det univers, der findes bag den smilende facade. Med et dragende blik og en dansende krop, der med hendes egne ord ikke helt kan danse, n\u00e5r CALA langt ud mellem publikummernes silhuetter og kaster mavepustere og kys rundt med sin musik og tilstedev\u00e6relse. Det bliver hviskende og sart. Det bliver stormende og sitrende. Og tider endda dansabelt!<br \/>\n\u00a0<br \/>\nDen 30. september 2022 udgav CALA sit debutalbum, WE\u2019RE STILL YOUNG - en titel, der ligesom musikken rammer ned i et virvar af tvivlstanker, frygt, frihed og neonoplyste n\u00e6tter. \u201cCALA er liges\u00e5 musik til hjertets refleksioner, som det er til det fyldte dansegulv\u201d - HQ Music<\/div>\n<div class=\"content-column content-column-2 content-column-last\">Spraglgev\u00e6r<br \/>\nSpraglgev\u00e6r er romantisk smadderrock. Den intense frontmand Sebastian Gall \u00e5bner op for b\u00e5de tanker og hjertets udr\u00e5b med fandenivoldske og \u00e6rlige sange fra den ukuelige idiots vedvarende h\u00e5b. Lydens r\u00e5 og konfronterende udtryk kr\u00e6ver lytterens opm\u00e6rksomhed fra f\u00f8rste \u00f8jeblik. Sk\u00e6rende guitarer og dundrende trommer sl\u00e5r som en hammer og ops\u00e6tter rammerne for den kompromisl\u00f8se vokal.<br \/>\n\u00a0<br \/>\nBandet opstod i Aalborg efter\u00e5ret 2019 med sangskriver Sebastian Gall som samlingspunkt.<br \/>\nMed nedlukningen i 2020 blev en masse nye sange til der endelig kunne deles i januar 2022, da bandet udgav deres debut EP \u201cHjernebrand\u201d. Ep\u2019en handler om et forhold til en roomie, der blev \u00f8delagt af ustyrlige f\u00f8lelser og manglende \u00e6rlighed. Live er Spraglgev\u00e6r en flammende energiudladning, en hudl\u00f8st \u00e6rlig skr\u00f8belighed og en menneskelig fort\u00e6lling om storhed og hverdag. Det seks personer store dansksprogede smadderrockorkester bev\u00e6ger sig mellem det spinkle og det storladne, det \u00e6rlige og det overdrevne.<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-9936",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/H230930?language=da-dk&camefrom=traindk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 163,
+            "start": "2023-09-30T20:00:00+02:00",
+            "end": "2023-09-30T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 167,
+            "start": "2023-09-30T20:00:00+02:00",
+            "end": "2023-09-30T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/6eb437c3f49c902ebbcf3fa334c5a49da70bc52f4d13bc29396111c6cf4ddc3e.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/6eb437c3f49c902ebbcf3fa334c5a49da70bc52f4d13bc29396111c6cf4ddc3e.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/6eb437c3f49c902ebbcf3fa334c5a49da70bc52f4d13bc29396111c6cf4ddc3e.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 82,
+    "title": "DANSER MED PIGER",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Danser Med Piger sparker d\u00f8ren ind og byder op til dans p\u00e5 TRAIN den 7. oktober<br \/>\n\u00a0<br \/>\nDanser Med Piger er lyden af venskab og musikalsk talent. Et vaske\u00e6gte band best\u00e5ende af fem bedste venner, som elsker at spille musik sammen: \u201dVi har det for fedt, n\u00e5r vi spiller og skriver sange sammen! Vi kunne sagtens have spillet musik hver for sig, men sammen er det bare meget sjovere. N\u00e5r vi laver musik, er vi fem bedste venner, der h\u00e6nger ud, samtidig med at vi laver musik lige pr\u00e6cis p\u00e5 denne m\u00e5de, som vi elsker.\u201d<\/div>\n<div class=\"content-column content-column-2 content-column-last\">Danser Med Piger er rendyrket pop og disco anno 2023, som tr\u00e6kker tr\u00e5de fra 80\u2019erne: \u201dDet er helt klart pop, det kan vi ikke l\u00f8be fra! Og s\u00e5 er det 80\u2019er-inspireret. Men vi pr\u00f8ver at lave en ny \u00e6ra inden for disco. Vores generations form for disco med inspiration fra den gamle skole, s\u00e5som Earth, Wind &amp; Fire og Michael Jackson.\u201d Disco-referencerne kan is\u00e6r m\u00e6rkes p\u00e5 det helt store hit \u201cDanser Med Piger\u201d, som l\u00e5 p\u00e5 de danske hitlister hele sommeren 2022.<br \/>\n\u00a0<br \/>\n\u201cVi skriver sangtekster om at v\u00e6re ung og dum, og om k\u00e6rlighed. Vores sange taler ud til en stor gruppe unge, ud til vores egen generation, i hele Danmark. Vi vil gerne have, at folk f\u00e5r energi og et smil p\u00e5 l\u00e6ben, af den musik vi laver.\u201d \u2013 Danser Med Piger<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10156",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/534825?language=da-dk&camefrom=train_dk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 166,
+            "start": "2023-10-07T20:00:00+02:00",
+            "end": "2023-10-07T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 170,
+            "start": "2023-10-07T20:00:00+02:00",
+            "end": "2023-10-07T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/e9aa97f46cc51125e3533cac5760cd7c6b99404da2be15638b7cb1d87cb83070.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/e9aa97f46cc51125e3533cac5760cd7c6b99404da2be15638b7cb1d87cb83070.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/e9aa97f46cc51125e3533cac5760cd7c6b99404da2be15638b7cb1d87cb83070.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 83,
+    "title": "KEN MODE + FANGE",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\">Oplev KEN mode og Fange live p\u00e5 HeadQuarters til oktober<br \/>\n\t\u00a0<br \/>\nKEN MODE<br \/>\nKill Everyone Now mode: KEN mode \u2013 en rammende beskrivelse af bandets sindstilstand, n\u00e5r bandet indtager scenen p\u00e5 den endel\u00f8se turn\u00e9cyklus for deres genre-trodsende klassiske album \u201cMy War\u201d. KEN mode er det psykologiske grundlag og holdning til projektet, som de Royal Conservatory of Music-uddannede br\u00f8dre Jesse Matthewson og Shane Matthewson ville vie hele deres voksne liv til. De havde et \u00f8nske om at sprede en manisk form for metal og hardcore-infunderet st\u00f8jrock over hele kloden.<br \/>\n\u00a0<br \/>\n\u201cNULL\u201d, bandets splinternye album, er m\u00e5ske gruppens mest essentielle udgivelse om mentalt sammenbrud og fortvivlelse. Albummet er en direkte psykologisk reaktion p\u00e5 den kollektive oplevelse af de sidste to et halvt \u00e5r. Med udgangspunkt i den desperate st\u00f8j og de industrielle lyde fra 80&#039;erne og 90&#039;erne (ala Swans, Einsturzende Neubauten eller Nine Inch Nails), og med tilf\u00f8jelsen af en mere desperat tone til deres allerede spidse metalliske hardcore-p\u00e5virkede &#34;ekstrem st\u00f8jrock&#34;. P\u00e5 albummet blev ogs\u00e5 instrumenteringen udvidet med saxofon og albummet er f\u00f8rste del af to v\u00e6rker.<br \/>\n\u00a0<br \/>\nV\u00e6rkerne blotl\u00e6gger den f\u00f8lelsesm\u00e6ssige kerne af bek\u00e6mpelse af psykisk sygdom, n\u00e5r ens finjusterede mestrings- og ledelsesmekanismer ufrivilligt er blevet strippet v\u00e6k, og du er tvunget til at navigere i dette intenst splittede og elendige politiske klima gennem en global pandemi. Raseri, frygt og forvirring efterfulgt af en dyb sorg der s\u00f8rgende tr\u00e6kker dig ned, mens det sk\u00e6rer og st\u00f8der, som om du oplever hvert eneste af dine laveste \u00f8jeblikke igen og igen. Bev\u00e6bnet med disse nye v\u00e6rker er bandet parat til at indtage deres plads som en af \u200b\u200bkongerne af metal og hardcores mest st\u00f8jende bands.<br \/>\n\u00a0<\/div>\n<div class=\"content-column content-column-2 content-column-last\">FANGE<br \/>\nDannet i 2013 af Huatas Benjamin Moreau i Rennes, Frankrig, har FANGEs line-up gennemg\u00e5et en lang r\u00e6kke former gennem \u00e5rene, stabiliseret med ankomsten af \u200b\u200bvokalisten Matthias Jungbluth i 2015 og tilf\u00f8jelsen af bassist Antoine Perron i 2018.<br \/>\n\u00a0<br \/>\nMed deres f\u00e6lles bes\u00e6ttelse af skarp \u00e6stetik, dristige bev\u00e6gelser og ubehagelige lyde, udviklede bandets musik sig siden dannelsen i 2013 og forvandlede deres sludge-r\u00f8dder med d\u00f8dsmetal og industrielle p\u00e5virkninger. En singularitet bekr\u00e6ftet med et uventet, brutalt skifte til trommemaskiner i slutningen af \u200b\u200b2019.<br \/>\n\u00a0<br \/>\nI den f\u00f8rste halvdel af pandemien udforskede bandet deres nyfundne lyd over en plade af vilde udgivelser (&#34;Pudeur&#34;, &#34;Poigne&#34; og &#34;Pantocrator&#34;), hvor anden halvdel blev brugt off-grid, fuldt dedikeret til deres n\u00e6ste tr\u00e6k.<br \/>\n\u00a0<br \/>\nResultatet vises under formen &#34;Privation&#34;, bandets fjerde fuldl\u00e6ngdealbum. Med 40 minutter og syv numre h\u00e6ver nu-kvartetten barren p\u00e5 hvert enkelt niveau for at tjene deres vision: at skrive mere mindev\u00e6rdige, f\u00f8lelsesladede numre uden at ofre det maniske slid i deres tidligere materiale.<br \/>\n\u00a0<br \/>\nDette album fremst\u00e5r som FANGEs mest udtryksfulde v\u00e6rk, hvor de ikke er bange for at balancere deres varem\u00e6rke af st\u00f8j med mere tempererede elementer. Den nylige tilf\u00f8jelse af guitaristen Titouan Le Gal (Epectase) giver bandet mulighed for at udvide dette form\u00e5l med rene guitarer, der kanaliserer dysterheden af post-pun. Med den samme hensigt fremst\u00e5r vokalen mere alsidig og nuanceret end nogensinde, mens det sl\u00e5ende arbejde med lyddesign og produktion afsl\u00f8rer nye detaljer ved hver lytning.<br \/>\n\u00a0<br \/>\n&#34;Privation&#34; er intet andet end en tour-de-force i en nu stensikker diskografi fra et band, der ignorerer, hvordan man spiller det sikkert, og heller ikke hvordan man opfylder noget andet end deres egne \u00f8nsker.<br \/>\n\u00a0<br \/>\nKoncerten er p\u00e5 HeadQuarters, Valdemarsgade 1, 8000 Aarhus C.<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-10006",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/H231008?language=da-dk&camefrom=train_dk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 167,
+            "start": "2023-10-08T20:00:00+02:00",
+            "end": "2023-10-08T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 171,
+            "start": "2023-10-08T20:00:00+02:00",
+            "end": "2023-10-08T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/4481638787336a79f53a159414adbd8bd75954c93c31ba776d27fc9b27a81f23.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/4481638787336a79f53a159414adbd8bd75954c93c31ba776d27fc9b27a81f23.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/4481638787336a79f53a159414adbd8bd75954c93c31ba776d27fc9b27a81f23.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
+},{
+    "entityId": 86,
+    "title": "FOLKEKLUBBEN",
+    "excerpt": null,
+    "description": "<div class=\"content-column content-column-2 content-column-first\"><strong>Folkeklubben annoncerer nyt album og kommer forbi TRAIN p\u00e5 stor turn\u00e9 til efter\u00e5ret<\/strong><br \/>\nFolkeklubben udgiver nyt album til for\u00e5ret og drager p\u00e5 stor efter\u00e5rsturn\u00e9. Under titlen \u2019Mere end en klub tur\u2019 kommer bandet hele landet rundt med 25 koncerter til efter\u00e5ret 2023, og du kan gl\u00e6de dig til at opleve bandet live p\u00e5 TRAIN fredag den 13. oktober.<br \/>\n\u00a0<br \/>\nDet er g\u00e5et st\u00e6rkt for Folkeklubben de sidste par \u00e5r. Det brede gennembrud kom med hits som \u2019Fedter\u00f8v\u2019, Suspekt-samarbejdet \u2019Danmark\/Danmarksfilm\u2019 og albummet \u2019Sort Tulipan\u2019.<br \/>\nSeneste udspil \u2019B\u00f8rn af den tabte tid\u2019 str\u00f8g direkte ind som nr. 1 p\u00e5 albumhitlisten, og sendte klubben forbi en udsolgt KB Hallen og store koncerter p\u00e5 pl\u00e6nerne i Tivoli i K\u00f8benhavn og Friheden i \u00c5rhus.<\/div>\n<div class=\"content-column content-column-2 content-column-last\"><strong>Nyt album<\/strong><br \/>\nBandet har brugt vinteren 22\/23 i pladestudiet og rammer s\u00e5ledes landets spillesteder til efter\u00e5ret med et spritnyt album i ryggen. 11 nye sange. Den sjette plade p\u00e5 bare 12 \u00e5r. F\u00f8rste udspil fra det nye album forventes at falde i starten af marts, og hele albummet forventes p\u00e5 gaden slut april.<br \/>\n\u00a0<br \/>\n<strong>Hvem er Folkeklubben i 2023?<\/strong><br \/>\n- \u201dVi er mere end en klub! S\u00f8ger du et mere fyldestg\u00f8rende svar, finder du det p\u00e5 dit lokale spillested til efter\u00e5ret. Vi gl\u00e6der os til at spille den nye plade, hits og sange fra bagkataloget. Det var sjovt at spille i en arena som KB-Hallen, men nu gl\u00e6der vi os til at genbes\u00f8ge de byer og spillesteder som har givet os s\u00e5 store oplevelser og gjort Folkeklubben til det, vi er i dag \u2013 et orkester i bev\u00e6gelse\u201d, lyder det fra Kjartan Arngrim, Rasmus Jusjong og Rasmus Dall.\u00a0<br \/>\n\u00a0<\/div>\n",
+    "url": "http:\/\/train.dk\/#_event-9716",
+    "ticketUrl": "https:\/\/www.ticketmaster.dk\/event\/T231013?language=da-dk&brand=dk_train",
+    "public": false,
+    "organizer": null,
+    "occurrences": [
+        {
+            "entityId": 170,
+            "start": "2023-10-13T20:00:00+02:00",
+            "end": "2023-10-13T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "dailyOccurrences": [
+        {
+            "entityId": 174,
+            "start": "2023-10-13T20:00:00+02:00",
+            "end": "2023-10-13T20:00:00+02:00",
+            "ticketPriceRange": null,
+            "room": null,
+            "status": null
+        }
+    ],
+    "tags": [
+        "Koncert"
+    ],
+    "location": {
+        "entityId": 18,
+        "name": "Train Music",
+        "image": null,
+        "url": null,
+        "telephone": null,
+        "disabilityAccess": false,
+        "mail": null,
+        "street": "Toldbodgade 6",
+        "suite": null,
+        "region": "Jylland",
+        "city": "Aarhus C",
+        "country": "Danmark",
+        "postalCode": "8000",
+        "coordinates": [
+            null,
+            null
+        ]
+    },
+    "imageUrls": {
+        "small": "media\/cache\/resolve\/small\/438d0b1f\/f836a324e8017d0ab991c64152e5c74645420c487f9d540263d85a7c1a8501be.png",
+        "medium": "media\/cache\/resolve\/medium\/438d0b1f\/f836a324e8017d0ab991c64152e5c74645420c487f9d540263d85a7c1a8501be.png",
+        "large": "media\/cache\/resolve\/large\/438d0b1f\/f836a324e8017d0ab991c64152e5c74645420c487f9d540263d85a7c1a8501be.png"
+    },
+    "created": "2024-01-16T14:05:37+01:00",
+    "updated": "2024-01-16T14:05:37+01:00"
 }]
