@@ -43,7 +43,7 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
     /**
      * Create an organization.
      *
-     * @param objectManager $manager
+     * @param ObjectManager $manager
      *   The instance of ObjectManager
      * @param string $name
      *   The name of the organization

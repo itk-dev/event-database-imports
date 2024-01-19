@@ -99,7 +99,7 @@ final class EventFactory
      *
      * This hash should be used to see if event have changed it's content.
      *
-     * @param feedItem $item
+     * @param FeedItem $item
      *   The feed item object to calculate hash value for
      *
      * @return string
@@ -115,9 +115,9 @@ final class EventFactory
      *
      * @param Event $entity
      *   Entity to map values to
-     * @param feedItem $item
+     * @param FeedItem $item
      *   The normalized feed item
-     * @param feed $feed
+     * @param Feed $feed
      *   The feed that the item came from
      */
     private function setValues(Event $entity, FeedItem $item, Feed $feed): void

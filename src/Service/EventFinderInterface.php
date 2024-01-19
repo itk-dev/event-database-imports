@@ -15,7 +15,7 @@ interface EventFinderInterface
      * @return iterable
      *   All events linked to that entity
      *
-     *  @throws notSupportedEntityException
+     *  @throws NotSupportedEntityException
      *   If the entity given is not supported by the implementation
      */
     public function findEvents(object $entity): iterable;

@@ -61,7 +61,7 @@ final class Geocoder implements GeocoderInterface
     /**
      * Build query to use with DAWA "datavask".
      *
-     * @param address $address
+     * @param Address $address
      *   Address entity to extract address from
      *
      * @return string
