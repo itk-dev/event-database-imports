@@ -36,7 +36,7 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
     /**
      * Create a new tag.
      *
-     * @param objectManager $manager
+     * @param ObjectManager $manager
      *   The object manager instance
      * @param string $name
      *   The name of the tag

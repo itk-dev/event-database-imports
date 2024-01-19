@@ -93,10 +93,12 @@ final class FeedItemSource
      *   The array to insert data into
      * @param string $dest
      *   The array location to insert data into (levels operated by a '.' dot).
-     * @param $value
+     * @param mixed $value
      *   The value to insert into the array location
+     *
+     * @psalm-param list{mixed|string,...} $value
      */
-    private function setValue(array &$output, string $dest, $value): void
+    private function setValue(array &$output, string $dest, mixed $value): void
     {
         $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
             ->disableExceptionOnInvalidPropertyPath()

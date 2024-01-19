@@ -15,7 +15,7 @@ final class FeedConfigurationMapper
      * @param array $configuration
      *   Raw configuration array
      *
-     * @return feedConfiguration
+     * @return FeedConfiguration
      *   Parsed configuration object
      *
      * @throws MappingError

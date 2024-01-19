@@ -13,7 +13,7 @@ interface FeedMapperInterface
      *
      * @param array  $data
      *   Array with data from feed
-     * @param feedConfiguration $configuration
+     * @param FeedConfiguration $configuration
      *   Feed configuration
      *
      * @throws MappingError

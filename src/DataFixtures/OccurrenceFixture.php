@@ -59,7 +59,7 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
     /**
      * Creates a new occurrence and persists it to the database.
      *
-     * @param objectManager $manager
+     * @param ObjectManager $manager
      *   The object manager used for persisting the occurrence
      * @param string $start
      *   The start date and time of the occurrence

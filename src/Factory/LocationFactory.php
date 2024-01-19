@@ -19,7 +19,7 @@ final class LocationFactory
     /**
      * Create or update location entity.
      *
-     * @param feedItemLocation $input
+     * @param FeedItemLocation $input
      *   Location information from feed item
      *
      * @return Location
@@ -82,7 +82,7 @@ final class LocationFactory
     /**
      * Try to get address for at location base on feed data.
      *
-     * @param feedItemLocation $location
+     * @param FeedItemLocation $location
      *   Location information from feed
      *
      * @return Address|null

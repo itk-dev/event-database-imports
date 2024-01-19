@@ -44,7 +44,7 @@ final class UserFixtures extends Fixture
     /**
      * Creates a new user and saves it to the database.
      *
-     * @param objectManager $manager
+     * @param ObjectManager $manager
      *   The object manager used to persist the user
      * @param string $name
      *   The name of the user

@@ -92,11 +92,11 @@ final class DailyOccurrencesFactory
     /**
      * Helper to set value form DateTimeInterval to daily occurrence entity.
      *
-     * @param dateTimeInterval $interval
+     * @param DateTimeInterval $interval
      *   Time interval for the occurrence
-     * @param dailyOccurrence $dailyOccurrence
+     * @param DailyOccurrence $dailyOccurrence
      *   The entity to set value for
-     * @param occurrence $occurrence
+     * @param Occurrence $occurrence
      *   The occurrence the daily occurrence is based on
      */
     private function setValues(DateTimeInterval $interval, DailyOccurrence $dailyOccurrence, Occurrence $occurrence): void
