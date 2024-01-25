@@ -353,10 +353,6 @@
         <source>admin.user.edited.updated</source>
         <target state="needs-l10n">__admin.user.edited.updated</target>
       </trans-unit>
-      <trans-unit id="SapGUZS" resname="login.page.title">
-        <source>login.page.title</source>
-        <target state="needs-l10n">__login.page.title</target>
-      </trans-unit>
       <trans-unit id="zPof34." resname="login.user.mail">
         <source>login.user.mail</source>
         <target state="needs-l10n">__login.user.mail</target>
@@ -372,6 +368,10 @@
       <trans-unit id="Ixl_ubC" resname="login.page.remember">
         <source>login.page.remember</source>
         <target state="needs-l10n">__login.page.remember</target>
+      </trans-unit>
+      <trans-unit id=".hsboMJ" resname="admin.user.roles">
+        <source>admin.user.roles</source>
+        <target state="needs-l10n">__admin.user.roles</target>
       </trans-unit>
     </body>
   </file>
