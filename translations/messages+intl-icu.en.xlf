@@ -369,6 +369,10 @@
         <source>login.page.remember</source>
         <target>Remember me</target>
       </trans-unit>
+      <trans-unit id=".hsboMJ" resname="admin.user.roles">
+        <source>admin.user.roles</source>
+        <target>Roles</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

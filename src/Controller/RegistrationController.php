@@ -67,7 +67,7 @@ class RegistrationController extends AbstractDashboardController
 
         if ($form->isSubmitted()) {
             foreach ($form->getErrors(true) as $error) {
-                $this->addFlash('error', $error->getMessage());
+                $this->addFlash('danger', $error->getMessage());
             }
         }
 
