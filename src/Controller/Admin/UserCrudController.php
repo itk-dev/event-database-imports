@@ -3,11 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Types\UserRoles;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -44,6 +46,10 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.user.name')),
             EmailField::new('mail')
                 ->setLabel(new TranslatableMessage('admin.user.mail')),
+            ChoiceField::new('roles')
+                ->setChoices(UserRoles::array())
+                ->allowMultipleChoices()
+                ->setLabel(new TranslatableMessage('admin.user.roles')),
             TextField::new('password')
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([

@@ -35,6 +35,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Make data imported from feeds read-only in easy admin
 - Added event subscriber to index content created in the UI
 - Added command to dump index to json for API fixture generation
+- Added "roles" to user create and edit forms
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
