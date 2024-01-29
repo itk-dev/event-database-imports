@@ -37,6 +37,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added command to dump index to json for API fixture generation
 - Added registration form with email verification
 - Added "roles" to user create and edit forms
+- Updated ITK docker templates
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
