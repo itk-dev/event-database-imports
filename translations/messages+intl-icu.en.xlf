@@ -373,6 +373,66 @@
         <source>admin.user.roles</source>
         <target>Roles</target>
       </trans-unit>
+      <trans-unit id="GKzsmph" resname="registration.page.confirm_email">
+        <source>registration.page.confirm_email</source>
+        <target>Please Confirm your Email</target>
+      </trans-unit>
+      <trans-unit id="VJ3xlvs" resname="registration.page.please_register">
+        <source>registration.page.please_register</source>
+        <target>Please register</target>
+      </trans-unit>
+      <trans-unit id="QR0JYsl" resname="registration.page.email_verified">
+        <source>registration.page.email_verified</source>
+        <target>Your email address has been verified</target>
+      </trans-unit>
+      <trans-unit id="8zCqkkq" resname="registration.form.agree_terms">
+        <source>registration.form.agree_terms</source>
+        <target>You should agree to our terms</target>
+      </trans-unit>
+      <trans-unit id="xP101pW" resname="registration.form.enter_password">
+        <source>registration.form.enter_password</source>
+        <target>Please enter a password</target>
+      </trans-unit>
+      <trans-unit id="h34BTI9" resname="registration.form.min_password">
+        <source>registration.form.min_password</source>
+        <target>Your password should be at least { limit } characters</target>
+      </trans-unit>
+      <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
+        <source>page.confirm.confirmation_link_sent</source>
+        <target>An email with a confirmation link has been sent to { email }</target>
+      </trans-unit>
+      <trans-unit id="duskp3J" resname="registration.page.btn.register">
+        <source>registration.page.btn.register</source>
+        <target>Register</target>
+      </trans-unit>
+      <trans-unit id="RDglhHy" resname="page.confirm.click_to_activate">
+        <source>page.confirm.click_to_activate</source>
+        <target>Please click the link to confirm your email and activate your account</target>
+      </trans-unit>
+      <trans-unit id="v5QHyEO" resname="page.confirm.already_confirmed">
+        <source>page.confirm.already_confirmed</source>
+        <target>Already confirmed? Please </target>
+      </trans-unit>
+      <trans-unit id="YExI9dt" resname="page.confirm.log_in">
+        <source>page.confirm.log_in</source>
+        <target>Log in</target>
+      </trans-unit>
+      <trans-unit id="RDHEmHH" resname="email.confirm.please_confirm">
+        <source>email.confirm.please_confirm</source>
+        <target>Please confirm your email!</target>
+      </trans-unit>
+      <trans-unit id="6AOGnCa" resname="email.confirm.click_link">
+        <source>email.confirm.click_link</source>
+        <target>Please confirm your email address by clicking the following link</target>
+      </trans-unit>
+      <trans-unit id="TFYhq0F" resname="email.confirm.confirm_my_email">
+        <source>email.confirm.confirm_my_email</source>
+        <target>Confirm my Email</target>
+      </trans-unit>
+      <trans-unit id="DIwKV9d" resname="email.confirm.link_will_expire_in">
+        <source>email.confirm.link_will_expire_in</source>
+        <target>This link will expire in</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

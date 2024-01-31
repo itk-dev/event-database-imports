@@ -9,6 +9,14 @@
         <source>Error</source>
         <target>Fejl</target>
       </trans-unit>
+      <trans-unit id="3ZTV5Le" resname="user.mail.not_unique">
+        <source>user.mail.not_unique</source>
+        <target state="needs-l10n">__user.mail.not_unique</target>
+      </trans-unit>
+      <trans-unit id="f8NF5B0" resname="user.mail.not_valid">
+        <source>user.mail.not_valid</source>
+        <target state="needs-l10n">__user.mail.not_valid</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

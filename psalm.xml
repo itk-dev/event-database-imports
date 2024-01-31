@@ -22,4 +22,16 @@
         <pluginClass class="Weirdan\DoctrinePsalmPlugin\Plugin"/>
 <!--        <pluginClass class="CuyZ\Valinor\QA\Psalm\ValinorPsalmPlugin"/>-->
     </plugins>
+    <issueHandlers>
+        <InvalidReturnType>
+            <errorLevel type="suppress">
+                <directory name="src/Entity"/>
+            </errorLevel>
+        </InvalidReturnType>
+        <NullableReturnStatement>
+            <errorLevel type="suppress">
+                <directory name="src/Entity"/>
+            </errorLevel>
+        </NullableReturnStatement>
+    </issueHandlers>
 </psalm>

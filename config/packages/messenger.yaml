@@ -25,6 +25,7 @@ framework:
             'App\Message\ImageMessage': async
             'App\Message\IndexMessage': async
             'Liip\ImagineBundle\Message\WarmupCache': async
+            'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
 
 when@test:
     framework:

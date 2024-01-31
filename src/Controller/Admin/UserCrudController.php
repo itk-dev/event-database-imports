@@ -47,7 +47,12 @@ class UserCrudController extends AbstractBaseCrudController
             EmailField::new('mail')
                 ->setLabel(new TranslatableMessage('admin.user.mail')),
             ChoiceField::new('roles')
-                ->setChoices(UserRoles::array())
+                ->setTranslatableChoices(
+                    array_map(
+                        fn ($value): string => \strtolower('admin.user.role.'.$value),
+                        UserRoles::array()
+                    )
+                )
                 ->allowMultipleChoices()
                 ->setLabel(new TranslatableMessage('admin.user.roles')),
             TextField::new('password')

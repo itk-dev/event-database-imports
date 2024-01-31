@@ -3,16 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Security\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['mail'], message: 'user.mail.not_unique')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
@@ -28,13 +31,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Email(
+        message: 'user.mail.not_valid',
+    )]
     private ?string $mail = null;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
 
-    #[ORM\Column(length: 255)]
-    private bool $enabled = true;
+    #[ORM\Column(type: 'boolean')]
+    private bool $enabled = false;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
@@ -45,18 +51,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
     private Collection $feeds;
 
+    #[ORM\Column(type: 'boolean')]
+    private bool $isVerified = false;
+
     public function __construct()
     {
         $this->organizations = new ArrayCollection();
         $this->feeds = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -68,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getMail(): string
     {
         return $this->mail;
     }
@@ -190,5 +199,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return (string) $this->mail;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
     }
 }

@@ -373,6 +373,66 @@
         <source>admin.user.roles</source>
         <target state="needs-l10n">__admin.user.roles</target>
       </trans-unit>
+      <trans-unit id="GKzsmph" resname="registration.page.confirm_email">
+        <source>registration.page.confirm_email</source>
+        <target state="needs-l10n">__registration.page.confirm_email</target>
+      </trans-unit>
+      <trans-unit id="VJ3xlvs" resname="registration.page.please_register">
+        <source>registration.page.please_register</source>
+        <target state="needs-l10n">__registration.page.please_register</target>
+      </trans-unit>
+      <trans-unit id="QR0JYsl" resname="registration.page.email_verified">
+        <source>registration.page.email_verified</source>
+        <target state="needs-l10n">__registration.page.email_verified</target>
+      </trans-unit>
+      <trans-unit id="8zCqkkq" resname="registration.form.agree_terms">
+        <source>registration.form.agree_terms</source>
+        <target state="needs-l10n">__registration.form.agree_terms</target>
+      </trans-unit>
+      <trans-unit id="xP101pW" resname="registration.form.enter_password">
+        <source>registration.form.enter_password</source>
+        <target state="needs-l10n">__registration.form.enter_password</target>
+      </trans-unit>
+      <trans-unit id="h34BTI9" resname="registration.form.min_password">
+        <source>registration.form.min_password</source>
+        <target state="needs-l10n">__registration.form.min_password</target>
+      </trans-unit>
+      <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
+        <source>page.confirm.confirmation_link_sent</source>
+        <target state="needs-l10n">__page.confirm.confirmation_link_sent</target>
+      </trans-unit>
+      <trans-unit id="duskp3J" resname="registration.page.btn.register">
+        <source>registration.page.btn.register</source>
+        <target state="needs-l10n">__registration.page.btn.register</target>
+      </trans-unit>
+      <trans-unit id="RDglhHy" resname="page.confirm.click_to_activate">
+        <source>page.confirm.click_to_activate</source>
+        <target state="needs-l10n">__page.confirm.click_to_activate</target>
+      </trans-unit>
+      <trans-unit id="v5QHyEO" resname="page.confirm.already_confirmed">
+        <source>page.confirm.already_confirmed</source>
+        <target state="needs-l10n">__page.confirm.already_confirmed</target>
+      </trans-unit>
+      <trans-unit id="YExI9dt" resname="page.confirm.log_in">
+        <source>page.confirm.log_in</source>
+        <target state="needs-l10n">__page.confirm.log_in</target>
+      </trans-unit>
+      <trans-unit id="RDHEmHH" resname="email.confirm.please_confirm">
+        <source>email.confirm.please_confirm</source>
+        <target state="needs-l10n">__email.confirm.please_confirm</target>
+      </trans-unit>
+      <trans-unit id="6AOGnCa" resname="email.confirm.click_link">
+        <source>email.confirm.click_link</source>
+        <target state="needs-l10n">__email.confirm.click_link</target>
+      </trans-unit>
+      <trans-unit id="TFYhq0F" resname="email.confirm.confirm_my_email">
+        <source>email.confirm.confirm_my_email</source>
+        <target state="needs-l10n">__email.confirm.confirm_my_email</target>
+      </trans-unit>
+      <trans-unit id="DIwKV9d" resname="email.confirm.link_will_expire_in">
+        <source>email.confirm.link_will_expire_in</source>
+        <target state="needs-l10n">__email.confirm.link_will_expire_in</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

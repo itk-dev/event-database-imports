@@ -35,6 +35,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Make data imported from feeds read-only in easy admin
 - Added event subscriber to index content created in the UI
 - Added command to dump index to json for API fixture generation
+- Added registration form with email verification
 - Added "roles" to user create and edit forms
 - Updated ITK docker templates
 
