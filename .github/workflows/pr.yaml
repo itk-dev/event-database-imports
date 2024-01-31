@@ -151,14 +151,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Yarn install
+      - name: npm install
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'yarn'
-      - run: yarn install
+          cache: 'npm'
+      - run: npm install
       - name: markdownlint
-        run: yarn run coding-standards-check
+        run: npm run coding-standards-check
 
   changelog:
     runs-on: ubuntu-latest
