@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Feed;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -31,6 +32,8 @@ class FeedCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.feed.configuration'))
                 ->setLanguage('js')
                 ->hideOnIndex(),
+
+            BooleanField::new('enabled'),
 
             FormField::addFieldset(new TranslatableMessage('admin.feed.edited.headline'))
                 ->hideWhenCreating(),
