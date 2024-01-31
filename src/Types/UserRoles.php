@@ -4,9 +4,9 @@ namespace App\Types;
 
 enum UserRoles: string
 {
-    case ROLE_USER = 'USER';
-    case ROLE_ADMIN = 'ADMIN';
-    case ROLE_API_USER = 'API USER';
+    case ROLE_USER = 'ROLE_USER';
+    case ROLE_ADMIN = 'ROLE_ADMIN';
+    case ROLE_API_USER = 'ROLE_API_USER';
 
     public static function array(): array
     {

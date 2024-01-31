@@ -4,9 +4,10 @@
    or from any other Symfony controller, where 'ea' is not defined #}
 {% extends ea is defined ? ea.templatePath('layout') : '@EasyAdmin/page/login_minimal.html.twig' %}
 {% trans_default_domain ea is defined ? ea.i18n.translationDomain : (translation_domain is defined ? translation_domain ?? 'messages') %}
+{% trans_default_domain 'messages' %}
 
 {% block body_class 'page-login' %}
-{% block page_title %}{{ page_title is defined ? page_title|raw : (ea is defined ? ea.dashboardTitle|raw : '') }}{% endblock %}
+{% block page_title %}{{ page_title is defined ? page_title|trans : (ea is defined ? ea.dashboardTitle|raw : '') }}{% endblock %}
 
 {% block head_favicon %}
     {% if favicon_path|default(false) %}
@@ -27,12 +28,12 @@
                 {% block header_logo %}
                     {% if page_title %}
                         {% if ea is defined %}
-                            <a class="logo {{ page_title|length > 14 ? 'logo-long' }}" title="{{ page_title|striptags }}" href="{{ path(ea.dashboardRouteName) }}">
-                                {{ page_title|raw }}
+                            <a class="logo {{ page_title|length > 14 ? 'logo-long' }}" title="{{ page_title|trans }}" href="{{ path(ea.dashboardRouteName) }}">
+                                {{ page_title|trans }}
                             </a>
                         {% else %}
                             <div class="logo {{ page_title|length > 14 ? 'logo-long' }}">
-                                {{ page_title|raw }}
+                                {{ page_title|trans }}
                             </div>
                         {% endif %}
                     {% endif %}
@@ -41,9 +42,9 @@
         </header>
 
         <section class="content">
-            <p>An email with a confirmation link has been sent to {{ email }}.</p>
-            <p>Please click the link to confirm your email and activate your account.</p>
-            <p>Already confirmed? Please <a href="{{ path('app_login') }}">Log in</a></p>
+            <p>{{ 'page.confirm.confirmation_link_sent' | trans({'%email%': email}) }}.</p>
+            <p>{{ 'page.confirm.click_to_activate' | trans }}.</p>
+            <p>{{ 'page.confirm.already_confirmed' | trans }} <a href="{{ path('app_login') }}">{{ 'page.confirm.log_in' | trans }}</a></p>
         </section>
     </div>
 {% endblock %}
