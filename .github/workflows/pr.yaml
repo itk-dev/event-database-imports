@@ -70,10 +70,12 @@ jobs:
         run: ./vendor/bin/phpunit --coverage-clover=coverage/unit.xml
 
       - name: Upload coverage to Codecov test
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage/unit.xml
           flags: unittests, ${{ matrix.php }}
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   php-cs-fixer:
     runs-on: ubuntu-latest
