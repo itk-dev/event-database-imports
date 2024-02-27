@@ -38,6 +38,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added registration form with email verification
 - Added "roles" to user create and edit forms
 - Updated ITK docker templates
+- Updated to PHP 8.3 og Symfony 6.4
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
