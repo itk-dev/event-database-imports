@@ -7,7 +7,7 @@ services:
       - rabbit
 
   rabbit:
-    image: rabbitmq:3.12.4-management-alpine
+    image: rabbitmq:3.12-management-alpine
     networks:
       - app
       - frontend
@@ -16,7 +16,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=user
       - RABBITMQ_DEFAULT_PASS=password
-      - RABBITMQ_ERLANG_COOKIE='d53f319cd7376f8f840aaf9889f315ab
+      - RABBITMQ_ERLANG_COOKIE='d53f319cd7376f8f840aaf9889f315ab'
 
   elasticsearch:
     image: elasticsearch:8.10.2
