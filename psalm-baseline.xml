@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.21.0@04ba9358e3f7d14a9dc3edd4e814a9d51d8c637f">
+  <file src="src/Controller/Admin/UserCrudController.php">
+    <InvalidArgument>
+      <code>$user</code>
+    </InvalidArgument>
+  </file>
+  <file src="src/Factory/EventFactory.php">
+    <PossiblyNullArgument>
+      <code><![CDATA[$item->title]]></code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Service/Feeds/Mapper/Source/FeedItemSource.php">
+    <InvalidOperand>
+      <code>$source</code>
+      <code>$source</code>
+      <code>$source</code>
+      <code>$source</code>
+    </InvalidOperand>
+    <PossiblyInvalidArgument>
+      <code><![CDATA[$value ?? '']]></code>
+    </PossiblyInvalidArgument>
+  </file>
+  <file src="src/Service/Indexing/AbstractIndexingElastic.php">
+    <ArgumentTypeCoercion>
+      <code>$params</code>
+      <code>$params</code>
+    </ArgumentTypeCoercion>
+    <InvalidArgument>
+      <code>$params</code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $newIndexName,
+                                'alias' => $this::INDEX_ALIAS,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[[
+                'body' => [
+                    'actions' => [
+                        [
+                            'add' => [
+                                'index' => $this->newIndexName,
+                                'alias' => $this::INDEX_ALIAS,
+                            ],
+                        ],
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[[
+                'index' => $indexName,
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        'dynamic' => 'strict',
+                        'properties' => $this->getIndexProperties(),
+                    ],
+                ],
+            ]]]></code>
+      <code><![CDATA[['index' => $existingIndexName]]]></code>
+      <code><![CDATA[['index' => $indexName]]]></code>
+    </InvalidArgument>
+    <PossiblyUndefinedMethod>
+      <code>getStatusCode</code>
+      <code>getStatusCode</code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingEvents.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingLocations.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOccurrences.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOrganizations.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingTags.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingVocabularies.php">
+    <UndefinedInterfaceMethod>
+      <code>normalize</code>
+    </UndefinedInterfaceMethod>
+  </file>
+</files>
