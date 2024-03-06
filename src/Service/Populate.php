@@ -6,6 +6,10 @@
 
 namespace App\Service;
 
+use App\Exception\IndexingException;
+use App\Model\Indexing\Criteria\PopulateCriteriaFactory;
+use App\Repository\PopulateInterface;
+use App\Service\Indexing\IndexingInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
@@ -15,15 +19,16 @@ use Symfony\Component\Lock\LockInterface;
  */
 final class Populate
 {
-    final public const BATCH_SIZE = 10000;
-    final public const LOCK_TIMEOUT = 3600;
-    final public const DEFAULT_RECORD_ID = -1;
+    final public const int BATCH_SIZE = 10000;
+    final public const int LOCK_TIMEOUT = 3600;
+    final public const int DEFAULT_RECORD_ID = -1;
 
     private LockInterface $lock;
 
     public function __construct(
         private readonly iterable $indexingServices,
         private readonly iterable $repositories,
+        private readonly PopulateCriteriaFactory $criteriaFactory,
         private readonly LockFactory $lockFactory,
         private readonly EntityManagerInterface $entityManager,
     ) {
@@ -41,16 +46,20 @@ final class Populate
      *
      * @return \Generator
      *   Will yield back progress and error messages
+     *
+     * @throws IndexingException
      */
     public function populate(string $index, int $record_id = self::DEFAULT_RECORD_ID, bool $force = false): \Generator
     {
+        /** @var IndexingInterface[] $indexingServices */
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
+        /** @var PopulateInterface[] $repositories */
         $repositories = $this->repositories instanceof \Traversable ? iterator_to_array($this->repositories) : $this->repositories;
 
         if ($this->acquireLock($force)) {
             $numberOfRecords = 1;
             if (-1 === $record_id) {
-                $numberOfRecords = $repositories[$index]->getNumberOfRecords();
+                $numberOfRecords = $repositories[$index]->count([]);
             }
 
             // Make sure there are entries in the Search table to process.
@@ -67,7 +76,11 @@ final class Populate
                 if ($this::DEFAULT_RECORD_ID !== $record_id) {
                     $criteria = ['id' => $record_id];
                 }
-                $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
+
+                $criteria = $this->criteriaFactory->getPopulateCriteria($index);
+
+                // $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
+                $entities = $repositories[$index]->findToPopulate($criteria, self::BATCH_SIZE, $entriesAdded);
 
                 // No more results.
                 if (0 === count($entities)) {

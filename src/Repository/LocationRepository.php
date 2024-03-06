@@ -3,18 +3,20 @@
 namespace App\Repository;
 
 use App\Entity\Location;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
- * @extends ServiceEntityRepository<Location>
+ * @extends AbstractPopulateRepository<Location>
  *
  * @method Location|null find($id, $lockMode = null, $lockVersion = null)
  * @method Location|null findOneBy(array $criteria, array $orderBy = null)
  * @method Location[]    findAll()
  * @method Location[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class LocationRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: IndexNames::Locations->value, priority: 10)]
+final class LocationRepository extends AbstractPopulateRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

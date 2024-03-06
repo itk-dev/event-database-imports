@@ -3,18 +3,20 @@
 namespace App\Repository;
 
 use App\Entity\Tag;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
- * @extends ServiceEntityRepository<Tag>
+ * @extends AbstractPopulateRepository<Tag>
  *
  * @method Tag|null find($id, $lockMode = null, $lockVersion = null)
  * @method Tag|null findOneBy(array $criteria, array $orderBy = null)
  * @method Tag[]    findAll()
  * @method Tag[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class TagRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: IndexNames::Tags->value, priority: 10)]
+final class TagRepository extends AbstractPopulateRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

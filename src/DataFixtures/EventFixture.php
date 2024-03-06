@@ -21,6 +21,8 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
     {
         $event = new Event();
         $event->setOrganization($this->getReference(OrganizationFixtures::ITK))
+            ->addPartner($this->getReference(OrganizationFixtures::AAKB))
+            ->addPartner($this->getReference(OrganizationFixtures::DOKK1))
             ->setTitle('ITKDev test event 1')
             ->setExcerpt('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')
             ->setDescription('<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis blandit turpis cursus in. Nisl suscipit adipiscing bibendum est ultricies integer quis auctor. Diam donec adipiscing tristique risus nec feugiat. Tincidunt eget nullam non nisi est. Consectetur a erat nam at lectus urna. Vulputate sapien nec sagittis aliquam. Luctus venenatis lectus magna fringilla. Sit amet consectetur adipiscing elit duis tristique. Bibendum enim facilisis gravida neque convallis a.</p><p>Cursus eget nunc scelerisque viverra mauris in aliquam sem. Euismod elementum nisi quis eleifend quam adipiscing vitae proin sagittis.<br />Sodales ut eu sem integer vitae justo eget. Lacus sed viverra tellus in.</p>')
@@ -33,7 +35,7 @@ final class EventFixture extends Fixture implements DependentFixtureInterface
             ->addTag($this->getReference(TagsFixtures::ITKDEV))
             ->setImage($this->getReference(ImagesFixtures::ITK))
             ->setEditable(true)
-        ->setHash('4936efebda146f6775fb7e429d884fef');
+            ->setHash('4936efebda146f6775fb7e429d884fef');
         $manager->persist($event);
         $this->addReference(self::EVENT2, $event);
 

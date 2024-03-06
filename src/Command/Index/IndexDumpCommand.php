@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:index:dump',
     description: 'Dump an index',
 )]
-final class DumpIndexCommand extends Command
+final class IndexDumpCommand extends Command
 {
     public function __construct(
         private readonly Dump $dump,

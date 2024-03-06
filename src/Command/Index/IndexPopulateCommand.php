@@ -18,7 +18,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
     name: 'app:index:populate',
     description: 'Populate (re-index) an index',
 )]
-final class PopulateIndexCommand extends Command
+final class IndexPopulateCommand extends Command
 {
     public function __construct(
         private readonly Populate $populate,

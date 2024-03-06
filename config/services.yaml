@@ -69,14 +69,6 @@ services:
         arguments:
             $excerptMaxLength: '%env(int:APP_EXCERPT_MAX_LENGTH)%'
 
-    App\Service\Indexing\IndexingEvents:
-        arguments:
-            $indexAliasName: '%env(INDEXING_EVENTS_ALIAS)%'
-
-    App\Service\Indexing\IndexingOrganization:
-        arguments:
-            $indexAliasName: '%env(INDEXING_ORGANIZATION_ALIAS)%'
-
     Elastic\Elasticsearch\Client:
         factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]
         arguments:

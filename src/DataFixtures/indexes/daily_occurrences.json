@@ -1,0 +1,22 @@
+[{
+    "entityId": 9,
+    "start": "2024-12-08T12:30:00+01:00",
+    "end": "2024-12-08T14:30:00+01:00",
+    "ticketPriceRange": "Free in December",
+    "room": "M2-5",
+    "status": null
+},{
+    "entityId": 7,
+    "start": "2024-12-07T14:30:00+01:00",
+    "end": "2024-12-07T15:30:00+01:00",
+    "ticketPriceRange": "10.000 Kr.",
+    "room": "M2-5",
+    "status": null
+},{
+    "entityId": 8,
+    "start": "2024-11-08T10:30:00+01:00",
+    "end": "2024-11-08T16:30:00+01:00",
+    "ticketPriceRange": "Free or 100",
+    "room": "M2-6",
+    "status": null
+}]

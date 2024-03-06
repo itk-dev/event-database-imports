@@ -20,24 +20,24 @@ class DailyOccurrence implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?\DateTimeImmutable $start = null;
 
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?\DateTimeImmutable $end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?string $ticketPriceRange = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?string $room = null;
 
     #[ORM\ManyToOne(inversedBy: 'dailyOccurrences')]
@@ -49,7 +49,7 @@ class DailyOccurrence implements IndexItemInterface
     private ?Occurrence $occurrence = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?string $status = null;
 
     public function getId(): ?int

@@ -4,6 +4,7 @@ namespace App\Command\Index;
 
 use App\Exception\IndexingException;
 use App\Model\Indexing\IndexNames;
+use App\Service\Indexing\IndexingInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
@@ -14,7 +15,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
     name: 'app:index:create',
-    description: 'Create daily occurrences index if it doesnt exist',
+    description: 'Create index(es) if it/they doesnt exist',
 )]
 final class IndexCreateCommand extends Command
 {
@@ -29,7 +30,7 @@ final class IndexCreateCommand extends Command
         $this->addArgument(
             'indexes',
             InputArgument::IS_ARRAY,
-            'Indexes to index (separate multiple indexes with a space)',
+            'Indexes to create (separate multiple indexes with a space)',
             IndexNames::values(),
             function (CompletionInput $input): array {
                 return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
@@ -41,6 +42,8 @@ final class IndexCreateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $inputIndexes = $input->getArgument('indexes');
+
+        /** @var IndexingInterface[] $indexingServices */
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
 
         foreach ($inputIndexes as $index) {

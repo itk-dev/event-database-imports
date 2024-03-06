@@ -3,18 +3,20 @@
 namespace App\Repository;
 
 use App\Entity\Vocabulary;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
- * @extends ServiceEntityRepository<Vocabulary>
+ * @extends AbstractPopulateRepository<Vocabulary>
  *
  * @method Vocabulary|null find($id, $lockMode = null, $lockVersion = null)
  * @method Vocabulary|null findOneBy(array $criteria, array $orderBy = null)
  * @method Vocabulary[]    findAll()
  * @method Vocabulary[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class VocabularyRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: IndexNames::Vocabularies->value, priority: 10)]
+final class VocabularyRepository extends AbstractPopulateRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

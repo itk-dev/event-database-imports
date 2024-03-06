@@ -11,6 +11,7 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
 {
     public const ITK = 'itk';
     public const AAKB = 'aakb';
+    public const DOKK1 = 'dokk1';
 
     public function load(ObjectManager $manager): void
     {
@@ -24,9 +25,16 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
         $this->createOrganization(
             $manager,
             'Aakb',
-            'info@aakb.dk.dk',
+            'info@aakb.dk',
             'https://aakb.dk/',
             self::AAKB
+        );
+        $this->createOrganization(
+            $manager,
+            'Dokk1',
+            'info@dokk1.dk',
+            'https://dokk1.dk/',
+            self::DOKK1
         );
 
         // Make it stick.

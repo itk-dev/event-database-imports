@@ -24,35 +24,35 @@ class Address implements EditableEntityInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $street = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $suite = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $region = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $country = null;
 
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $postalCode = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?float $latitude = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?float $longitude = null;
 
     #[ORM\OneToMany(mappedBy: 'address', targetEntity: Location::class)]

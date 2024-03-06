@@ -70,5 +70,13 @@ interface IndexingInterface
      */
     public function serialize(IndexItemInterface $item): array;
 
+    /**
+     * Get doctrine criteria to limit indexing.
+     *
+     * If only a subset of the entities need to be indexed
+     * a criteria can be defined to limit the selection.
+     */
+    public function criteria(): array;
+
     public function dumpIndex(): \Generator;
 }

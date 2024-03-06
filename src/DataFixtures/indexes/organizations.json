@@ -1,0 +1,15 @@
+[{
+    "entityId": 2,
+    "name": "Aakb",
+    "email": "info@aakb.dk.dk",
+    "url": "https:\/\/aakb.dk\/",
+    "created": "2023-12-19T12:52:52+01:00",
+    "updated": "2023-12-19T12:52:52+01:00"
+},{
+    "entityId": 1,
+    "name": "ITKDev",
+    "email": "info@itkdev.dk",
+    "url": "https:\/\/github.com\/itk-dev",
+    "created": "2023-12-19T12:52:52+01:00",
+    "updated": "2023-12-19T12:52:52+01:00"
+}]
