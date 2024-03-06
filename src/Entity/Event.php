@@ -86,7 +86,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[Groups([IndexNames::Events->value])]
     private ?Location $location = null;
 
     #[ORM\Column(length: 255)]
@@ -99,13 +98,13 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     #[Timestampable(on: 'create')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
+    #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[created]')]
     protected $createdAt;
 
     #[Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
+    #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[updated]')]
     protected $updatedAt;
 

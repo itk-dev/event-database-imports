@@ -64,7 +64,7 @@ final class Populate
 
             // Make sure there are entries in the Search table to process.
             if (0 === $numberOfRecords) {
-                yield 'No entries in Search table.';
+                yield sprintf('%s: No entries in Search table.', ucfirst($index));
 
                 return;
             }
@@ -84,7 +84,7 @@ final class Populate
 
                 // No more results.
                 if (0 === count($entities)) {
-                    yield sprintf('%d of %d processed. No more results.', number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
+                    yield sprintf('%s: %s of %s processed. No more results.', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
                     break;
                 }
 
@@ -100,7 +100,7 @@ final class Populate
                 $entriesAdded += count($entities);
 
                 // Update progress message.
-                yield sprintf('%s of %s added', number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
+                yield sprintf('%s: %s of %s added', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
 
                 // Free up memory usages.
                 $this->entityManager->clear();
@@ -109,13 +109,13 @@ final class Populate
 
             if ($this::DEFAULT_RECORD_ID === $record_id) {
                 // If single item was indexed there is no new index created, so don't try to switch indexes.
-                yield '<info>Switching alias and removing old index</info>';
+                yield sprintf('<info>%s: Switching alias and removing old index</info>', ucfirst($index));
                 $indexingServices[$index]->switchIndex();
             }
 
             $this->releaseLock();
         } else {
-            yield '<error>Process is already running use "--force" to run command</error>';
+            yield sprintf('<error>%s: Process is already running use "--force" to run command</error>', ucfirst($index));
         }
     }
 

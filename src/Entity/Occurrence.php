@@ -45,6 +45,7 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
 
     #[ORM\ManyToOne(inversedBy: 'occurrences')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups([IndexNames::Occurrences->value])]
     private ?Event $event = null;
 
     #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, orphanRemoval: true)]

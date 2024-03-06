@@ -11,7 +11,8 @@ enum IndexNames: string
     case Tags = 'tags';
     case Vocabularies = 'vocabularies';
     case Locations = 'locations';
-    case ApiKeys = 'api_keys';
+    // @todo add apikeys index
+    // case ApiKeys = 'api_keys';
 
     public static function values(): array
     {

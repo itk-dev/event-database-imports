@@ -23,20 +23,23 @@ final class Dump
      *
      * @param string $index
      *   The index to dump into a file
-     * @param string $file
-     *   The file to store the json int
+     * @param string $path
+     *   The file to store the json file in
      *
      * @return \Generator
      *   Yield back progress
      */
-    public function dump(string $index, string $file): \Generator
+    public function dump(string $index, string $path): \Generator
     {
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
+
+        $path = rtrim($path, '/').'/';
+        $file = $path.$index.'.json';
 
         $filesystem = new Filesystem();
         $filesystem->dumpFile($file, '[');
         foreach ($indexingServices[$index]->dumpIndex() as $i => $item) {
-            yield sprintf('Fetched document "%s"', $item['name'] ?? $item['title'] ?? 'unknown');
+            yield sprintf('%s: Fetched document "%s"', ucfirst($index), $item['name'] ?? $item['title'] ?? 'unknown');
             $filesystem->appendToFile($file, (0 !== $i ? ',' : '').json_encode($item, JSON_PRETTY_PRINT));
         }
 

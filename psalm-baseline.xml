@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files psalm-version="5.21.0@04ba9358e3f7d14a9dc3edd4e814a9d51d8c637f">
+  <file src="src/Command/Index/IndexDumpCommand.php">
+    <UndefinedInterfaceMethod>
+      <code>section</code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Command/Index/IndexPopulateCommand.php">
+    <UndefinedInterfaceMethod>
+      <code>section</code>
+    </UndefinedInterfaceMethod>
+  </file>
   <file src="src/Controller/Admin/UserCrudController.php">
     <InvalidArgument>
       <code>$user</code>
@@ -72,14 +82,19 @@
       <code>getStatusCode</code>
       <code>getStatusCode</code>
     </PossiblyUndefinedMethod>
+    <UndefinedConstant>
+      <code>IndexNames::ApiKeys</code>
+    </UndefinedConstant>
   </file>
   <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
     <UndefinedInterfaceMethod>
+      <code>getEvent</code>
       <code>normalize</code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingEvents.php">
     <UndefinedInterfaceMethod>
+      <code>getLocation</code>
       <code>normalize</code>
     </UndefinedInterfaceMethod>
   </file>
@@ -90,6 +105,7 @@
   </file>
   <file src="src/Service/Indexing/IndexingOccurrences.php">
     <UndefinedInterfaceMethod>
+      <code>getEvent</code>
       <code>normalize</code>
     </UndefinedInterfaceMethod>
   </file>

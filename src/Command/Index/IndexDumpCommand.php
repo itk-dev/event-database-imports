@@ -28,43 +28,48 @@ final class IndexDumpCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument(
-            'index',
-            InputArgument::REQUIRED,
-            sprintf('Index to dump (one of %s)', implode(', ', IndexNames::values())),
-            null,
-            function (CompletionInput $input): array {
-                return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
-            }
-        )
-        ->addOption('file', null, InputOption::VALUE_OPTIONAL, 'File to write data to', './src/DataFixtures/indexes/[index].json');
+        $this
+            ->addArgument(
+                'indexes',
+                InputArgument::IS_ARRAY,
+                'Indexes to dump (separate multiple indexes with a space)',
+                IndexNames::values(),
+                function (CompletionInput $input): array {
+                    return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
+                }
+            )
+            ->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path to write data to', './src/DataFixtures/indexes')
+            ->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Create all indexes', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $index = $input->getArgument('index');
-        $file = (string) $input->getOption('file');
-        $file = strtr($file, ['[index]' => $index]);
+        $all = $input->getOption('all');
+        $inputIndexes = $input->getArgument('indexes');
+        $path = (string) $input->getOption('path');
 
-        if (!in_array($index, IndexNames::values())) {
-            $io->error(sprintf('Index %s does not exist', $index));
+        foreach ($inputIndexes as $index) {
+            if (!in_array($index, IndexNames::values())) {
+                $io->error(sprintf('Index %s does not exist', $index));
 
-            return Command::FAILURE;
+                return Command::FAILURE;
+            }
+
+            $section = $output->section();
+            $progressBar = new ProgressBar($section);
+            $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
+            $progressBar->start();
+            $progressBar->setMessage(sprintf('Dumping index %s …', $index));
+            $progressBar->display();
+
+            foreach ($this->dump->dump($index, $path) as $message) {
+                $progressBar->setMessage($message);
+                $progressBar->advance();
+            }
+
+            $progressBar->finish();
         }
-
-        $progressBar = new ProgressBar($output);
-        $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
-        $progressBar->start();
-        $progressBar->setMessage(sprintf('Dumping index %s …', $index));
-        $progressBar->display();
-
-        foreach ($this->dump->dump($index, $file) as $message) {
-            $progressBar->setMessage($message);
-            $progressBar->advance();
-        }
-
-        $progressBar->finish();
 
         // Start the command line on a new line.
         $output->writeln('');

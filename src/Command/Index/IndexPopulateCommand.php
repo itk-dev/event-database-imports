@@ -28,44 +28,63 @@ final class IndexPopulateCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument(
-            'index',
-            InputArgument::REQUIRED,
-            sprintf('Index to populate (one of %s)', implode(', ', IndexNames::values())),
-            null,
-            function (CompletionInput $input): array {
-                return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
-            }
-        )
+        $this
+            ->addArgument(
+                'indexes',
+                InputArgument::IS_ARRAY,
+                'Indexes to create (separate multiple indexes with a space)',
+                IndexNames::values(),
+                function (CompletionInput $input): array {
+                    return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
+                }
+            )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
-            ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1);
+            ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1)
+            ->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Create all indexes', false)
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $index = $input->getArgument('index');
+
+        if (false === $input->getOption('all') && false === $input->getArgument('index')) {
+            $io->error('You must specify an index or run the command with --all');
+
+            return Command::INVALID;
+        }
+
+        $inputIndexes = $input->getArgument('indexes');
         $id = (int) $input->getOption('id');
         $force = $input->getOption('force');
+        $all = $input->getOption('all');
 
-        if (!in_array($index, IndexNames::values())) {
-            $io->error(sprintf('Index %s does not exist', $index));
-
-            return Command::FAILURE;
+        // --all was passed
+        if (null === $all) {
+            $inputIndexes = IndexNames::values();
         }
 
-        $progressBar = new ProgressBar($output);
-        $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
-        $progressBar->start();
-        $progressBar->setMessage(sprintf('Populating index %s …', $index));
-        $progressBar->display();
+        foreach ($inputIndexes as $index) {
+            if (!in_array($index, IndexNames::values())) {
+                $io->error(sprintf('Index %s does not exist', $index));
 
-        foreach ($this->populate->populate($index, $id, $force) as $message) {
-            $progressBar->setMessage($message);
-            $progressBar->advance();
+                return Command::FAILURE;
+            }
+
+            $section = $output->section();
+            $progressBar = new ProgressBar($section);
+            $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
+            $progressBar->start();
+            $progressBar->setMessage(sprintf('Populating index %s …', $index));
+            $progressBar->display();
+
+            foreach ($this->populate->populate($index, $id, $force) as $message) {
+                $progressBar->setMessage($message);
+                $progressBar->advance();
+            }
+
+            $progressBar->finish();
         }
-
-        $progressBar->finish();
 
         // Start the command line on a new line.
         $output->writeln('');

@@ -17,6 +17,7 @@ final class IndexingEvents extends AbstractIndexingElastic
     protected const string INDEX_ALIAS = IndexNames::Events->value;
 
     public function __construct(
+        private readonly IndexingLocations $indexingLocations,
         private readonly SerializerInterface $serializer,
         private readonly ImageHandlerInterface $imageHandler,
         private readonly Client $client,
@@ -37,15 +38,12 @@ final class IndexingEvents extends AbstractIndexingElastic
         // Get tag names.
         $data['tags'] = array_column($data['tags'], 'name');
 
-        // Flatten location address and convert lang/long to coordinate point.
-        $data['location'] += $data['location']['address'];
-        unset($data['location']['address']);
-        $data['location']['coordinates'] = [$data['location']['latitude'], $data['location']['longitude']];
-        unset($data['location']['latitude'], $data['location']['longitude']);
-
         // Fix image urls (with a full path and derived sizes).
         $imageUrl = $data['imageUrls']['original'];
         $data['imageUrls'] = $this->imageHandler->getTransformedImageUrls($imageUrl);
+
+        // @todo: Figure out how to do these changes with the serializer. This is just....
+        $data['location'] = $this->indexingLocations->serialize($item->getLocation());
 
         return $data;
     }

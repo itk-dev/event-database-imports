@@ -16,6 +16,7 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
     protected const string INDEX_ALIAS = IndexNames::DailyOccurrences->value;
 
     public function __construct(
+        private readonly IndexingEvents $indexingEvents,
         private readonly SerializerInterface $serializer,
         private readonly Client $client,
     ) {
@@ -30,6 +31,11 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
             ->withContext($contextBuilder)
             ->withFormat(IndexFieldTypes::DATEFORMAT);
 
-        return $this->serializer->normalize($item, null, $contextBuilder->toArray());
+        $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
+
+        // @todo: Figure out how to do these changes with the serializer. This is just....
+        $data['event'] = $this->indexingEvents->serialize($item->getEvent());
+
+        return $data;
     }
 }
