@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Model\Indexing\IndexNames;
 use App\Repository\TagRepository;
+use App\Service\Indexing\IndexItemInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -12,7 +13,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag implements EditableEntityInterface
+class Tag implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -24,10 +25,11 @@ class Tag implements EditableEntityInterface
     private ?int $id = null;
 
     #[ORM\ManyToMany(targetEntity: Vocabulary::class, mappedBy: 'tags')]
+    #[Groups([IndexNames::Tags->value])]
     private Collection $vocabularies;
 
-    #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value])]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Groups([IndexNames::Tags->value, IndexNames::Vocabularies->value, IndexNames::Events->value])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'tags')]

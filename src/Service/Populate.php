@@ -6,6 +6,10 @@
 
 namespace App\Service;
 
+use App\Exception\IndexingException;
+use App\Model\Indexing\Criteria\PopulateCriteriaFactory;
+use App\Repository\PopulateInterface;
+use App\Service\Indexing\IndexingInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Lock\LockFactory;
 use Symfony\Component\Lock\LockInterface;
@@ -15,15 +19,16 @@ use Symfony\Component\Lock\LockInterface;
  */
 final class Populate
 {
-    final public const BATCH_SIZE = 10000;
-    final public const LOCK_TIMEOUT = 3600;
-    final public const DEFAULT_RECORD_ID = -1;
+    final public const int BATCH_SIZE = 10000;
+    final public const int LOCK_TIMEOUT = 3600;
+    final public const int DEFAULT_RECORD_ID = -1;
 
     private LockInterface $lock;
 
     public function __construct(
         private readonly iterable $indexingServices,
         private readonly iterable $repositories,
+        private readonly PopulateCriteriaFactory $criteriaFactory,
         private readonly LockFactory $lockFactory,
         private readonly EntityManagerInterface $entityManager,
     ) {
@@ -41,21 +46,25 @@ final class Populate
      *
      * @return \Generator
      *   Will yield back progress and error messages
+     *
+     * @throws IndexingException
      */
     public function populate(string $index, int $record_id = self::DEFAULT_RECORD_ID, bool $force = false): \Generator
     {
+        /** @var IndexingInterface[] $indexingServices */
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
+        /** @var PopulateInterface[] $repositories */
         $repositories = $this->repositories instanceof \Traversable ? iterator_to_array($this->repositories) : $this->repositories;
 
         if ($this->acquireLock($force)) {
             $numberOfRecords = 1;
             if (-1 === $record_id) {
-                $numberOfRecords = $repositories[$index]->getNumberOfRecords();
+                $numberOfRecords = $repositories[$index]->count([]);
             }
 
             // Make sure there are entries in the Search table to process.
             if (0 === $numberOfRecords) {
-                yield 'No entries in Search table.';
+                yield sprintf('%s: No entries in Search table.', ucfirst($index));
 
                 return;
             }
@@ -67,11 +76,15 @@ final class Populate
                 if ($this::DEFAULT_RECORD_ID !== $record_id) {
                     $criteria = ['id' => $record_id];
                 }
-                $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
+
+                $criteria = $this->criteriaFactory->getPopulateCriteria($index);
+
+                // $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
+                $entities = $repositories[$index]->findToPopulate($criteria, self::BATCH_SIZE, $entriesAdded);
 
                 // No more results.
                 if (0 === count($entities)) {
-                    yield sprintf('%d of %d processed. No more results.', number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
+                    yield sprintf('%s: %s of %s processed. No more results.', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
                     break;
                 }
 
@@ -87,7 +100,7 @@ final class Populate
                 $entriesAdded += count($entities);
 
                 // Update progress message.
-                yield sprintf('%s of %s added', number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
+                yield sprintf('%s: %s of %s added', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
 
                 // Free up memory usages.
                 $this->entityManager->clear();
@@ -96,13 +109,13 @@ final class Populate
 
             if ($this::DEFAULT_RECORD_ID === $record_id) {
                 // If single item was indexed there is no new index created, so don't try to switch indexes.
-                yield '<info>Switching alias and removing old index</info>';
+                yield sprintf('<info>%s: Switching alias and removing old index</info>', ucfirst($index));
                 $indexingServices[$index]->switchIndex();
             }
 
             $this->releaseLock();
         } else {
-            yield '<error>Process is already running use "--force" to run command</error>';
+            yield sprintf('<error>%s: Process is already running use "--force" to run command</error>', ucfirst($index));
         }
     }
 

@@ -3,18 +3,20 @@
 namespace App\Repository;
 
 use App\Entity\Occurrence;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Model\Indexing\IndexNames;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
- * @extends ServiceEntityRepository<Occurrence>
+ * @extends AbstractPopulateRepository<Occurrence>
  *
  * @method Occurrence|null find($id, $lockMode = null, $lockVersion = null)
  * @method Occurrence|null findOneBy(array $criteria, array $orderBy = null)
  * @method Occurrence[]    findAll()
  * @method Occurrence[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-final class OccurrenceRepository extends ServiceEntityRepository
+#[AsTaggedItem(index: IndexNames::Occurrences->value, priority: 10)]
+final class OccurrenceRepository extends AbstractPopulateRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

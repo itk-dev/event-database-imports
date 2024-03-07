@@ -24,21 +24,21 @@ class Organization implements IndexItemInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     #[SerializedPath('[email]')]
     private ?string $mail = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     private ?string $url = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'organizations')]
@@ -52,21 +52,25 @@ class Organization implements IndexItemInterface
 
     #[Timestampable(on: 'create')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     #[SerializedPath('[created]')]
     protected $createdAt;
 
     #[Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     #[SerializedPath('[updated]')]
     protected $updatedAt;
+
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'partners')]
+    private Collection $partnerEvents;
 
     public function __construct()
     {
         $this->Users = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->feeds = new ArrayCollection();
+        $this->partnerEvents = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -194,6 +198,33 @@ class Organization implements IndexItemInterface
             if ($feed->getOrganization() === $this) {
                 $feed->setOrganization(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Event>
+     */
+    public function getPartnerEvents(): Collection
+    {
+        return $this->partnerEvents;
+    }
+
+    public function addPartnerEvent(Event $partnerEvent): static
+    {
+        if (!$this->partnerEvents->contains($partnerEvent)) {
+            $this->partnerEvents->add($partnerEvent);
+            $partnerEvent->addPartner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartnerEvent(Event $partnerEvent): static
+    {
+        if ($this->partnerEvents->removeElement($partnerEvent)) {
+            $partnerEvent->removePartner($this);
         }
 
         return $this;

@@ -3,6 +3,13 @@
 namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
+use App\Model\Indexing\IndexNames;
+use App\Model\Indexing\Mappings\EventWithOccurrences;
+use App\Model\Indexing\Mappings\Location;
+use App\Model\Indexing\Mappings\OccurrenceWithEvent;
+use App\Model\Indexing\Mappings\Organizer;
+use App\Model\Indexing\Mappings\Tag;
+use App\Model\Indexing\Mappings\Vocabularies;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -14,18 +21,22 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractIndexingElastic implements IndexingInterface
 {
+    /**
+     * Subclasses should override this value.
+     */
+    protected const string INDEX_ALIAS = 'abstract_error';
     private ?string $newIndexName = null;
 
     public function __construct(
-        private readonly string $indexAliasName,
         private readonly Client $client,
     ) {
     }
 
+    #[\Override]
     public function index(IndexItemInterface $item): void
     {
         $params = [
-            'index' => $this->indexAliasName,
+            'index' => $this::INDEX_ALIAS,
             'id' => $item->getId(),
             'body' => $this->serialize($item),
         ];
@@ -42,10 +53,11 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         }
     }
 
+    #[\Override]
     public function delete(int $id): void
     {
         $params = [
-            'index' => $this->indexAliasName,
+            'index' => $this::INDEX_ALIAS,
             'id' => $id,
         ];
 
@@ -61,11 +73,12 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         }
     }
 
+    #[\Override]
     public function bulk(array $items): void
     {
         try {
             if (null === $this->newIndexName) {
-                $this->newIndexName = $this->indexAliasName.'_'.date('Y-m-d-His');
+                $this->newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
                 $this->createEsIndex($this->newIndexName);
             }
 
@@ -90,13 +103,14 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         }
     }
 
+    #[\Override]
     public function createIndex(): void
     {
         if ($this->indexExists()) {
             throw new IndexingException('Index already exists');
         }
 
-        $newIndexName = $this->indexAliasName.'_'.date('Y-m-d-His');
+        $newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
         $this->createEsIndex($newIndexName);
         $this->refreshIndex($newIndexName);
 
@@ -107,7 +121,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                         [
                             'add' => [
                                 'index' => $newIndexName,
-                                'alias' => $this->indexAliasName,
+                                'alias' => $this::INDEX_ALIAS,
                             ],
                         ],
                     ],
@@ -118,10 +132,11 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         }
     }
 
+    #[\Override]
     public function dumpIndex(): \Generator
     {
         $params = [
-            'index' => $this->indexAliasName,
+            'index' => $this::INDEX_ALIAS,
             'scroll' => '5m',
             'size' => 100,
             'body' => [
@@ -141,11 +156,12 @@ abstract class AbstractIndexingElastic implements IndexingInterface
         }
     }
 
+    #[\Override]
     public function indexExists(): bool
     {
         try {
             /** @var Elasticsearch $response */
-            $response = $this->client->indices()->getAlias(['name' => $this->indexAliasName]);
+            $response = $this->client->indices()->getAlias(['name' => $this::INDEX_ALIAS]);
 
             return Response::HTTP_OK === $response->getStatusCode();
         } catch (ClientResponseException|ServerResponseException $e) {
@@ -162,6 +178,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
      *
      * @throws IndexingException
      */
+    #[\Override]
     public function switchIndex(): void
     {
         if (null === $this->newIndexName) {
@@ -178,7 +195,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                         [
                             'add' => [
                                 'index' => $this->newIndexName,
-                                'alias' => $this->indexAliasName,
+                                'alias' => $this::INDEX_ALIAS,
                             ],
                         ],
                     ],
@@ -219,7 +236,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         try {
             /** @var Elasticsearch $response */
-            $response = $this->client->indices()->getAlias(['name' => $this->indexAliasName]);
+            $response = $this->client->indices()->getAlias(['name' => $this::INDEX_ALIAS]);
 
             if (Response::HTTP_OK !== $response->getStatusCode()) {
                 throw new IndexingException('Unable to get aliases', $response->getStatusCode());
@@ -266,6 +283,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
      *
      * @throws IndexingException
      */
+    #[\Override]
     public function serialize(IndexItemInterface $item): array
     {
         throw new IndexingException('Base elastic indexing class do not implement create index');
@@ -306,6 +324,51 @@ abstract class AbstractIndexingElastic implements IndexingInterface
      */
     protected function createEsIndex(string $indexName): void
     {
-        throw new IndexingException('Base elastic indexing class do not implement create index');
+        try {
+            /** @var Elasticsearch $response */
+            $response = $this->client->indices()->create([
+                'index' => $indexName,
+                'body' => [
+                    'settings' => [
+                        'number_of_shards' => 5,
+                        'number_of_replicas' => 0,
+                    ],
+                    'mappings' => [
+                        'dynamic' => 'strict',
+                        'properties' => $this->getIndexProperties(),
+                    ],
+                ],
+            ]);
+
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT])) {
+                throw new IndexingException('Unable to create new index: '.$this::INDEX_ALIAS, $response->getStatusCode());
+            }
+        } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
+            throw new IndexingException($e->getMessage(), $e->getCode(), $e);
+        }
+    }
+
+    #[\Override]
+    public function criteria(): array
+    {
+        return [];
+    }
+
+    /**
+     * @throws IndexingException
+     */
+    private function getIndexProperties(): array
+    {
+        $index = IndexNames::from($this::INDEX_ALIAS);
+
+        return match ($index) {
+            IndexNames::Organizations => Organizer::getProperties(),
+            IndexNames::Events => EventWithOccurrences::getProperties(),
+            IndexNames::Locations => Location::getProperties(),
+            IndexNames::Tags => Tag::getProperties(),
+            IndexNames::Vocabularies => Vocabularies::getProperties(),
+            IndexNames::Occurrences, IndexNames::DailyOccurrences => OccurrenceWithEvent::getProperties(),
+            IndexNames::ApiKeys => throw new \Exception('To be implemented'),
+        };
     }
 }

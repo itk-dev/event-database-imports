@@ -2,13 +2,20 @@
 
 namespace App\Repository;
 
+use Doctrine\Common\Collections\Criteria;
+
 interface PopulateInterface
 {
     /**
-     * Find the number of records in the database.
+     * Counts entities by a set of criteria.
      *
-     * @return int
-     *   The number of records
+     * @psalm-param array<string, mixed> $criteria
+     *
+     * @return int the cardinality of the objects that match the given criteria
      */
-    public function getNumberOfRecords(): int;
+    public function count(array $criteria);
+
+    public function findToPopulate(array $criteria, int $limit, int $offset): array;
+
+    public function countToPopulate(array $criteria): int;
 }

@@ -23,38 +23,38 @@ class Location implements IndexItemInterface, EditableEntityInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?string $image = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?string $url = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?string $telephone = null;
 
     #[ORM\Column]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     #[SerializedPath('[disabilityAccess]')]
     private ?bool $disabilityAccess = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?string $mail = null;
 
     #[ORM\ManyToOne(inversedBy: 'locations')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups([IndexNames::Events->value])]
+    #[Groups([IndexNames::Locations->value])]
     private ?Address $address = null;
 
     #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]

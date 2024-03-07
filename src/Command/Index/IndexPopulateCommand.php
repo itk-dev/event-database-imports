@@ -2,12 +2,12 @@
 
 namespace App\Command\Index;
 
-use App\Exception\IndexingException;
 use App\Model\Indexing\IndexNames;
-use App\Service\Indexing\IndexingInterface;
+use App\Service\Populate;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Completion\CompletionInput;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -15,13 +15,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:index:create',
-    description: 'Create index(es) if it/they doesnt exist',
+    name: 'app:index:populate',
+    description: 'Populate (re-index) an index',
 )]
-final class IndexCreateCommand extends Command
+final class IndexPopulateCommand extends Command
 {
     public function __construct(
-        private readonly iterable $indexingServices,
+        private readonly Populate $populate,
     ) {
         parent::__construct();
     }
@@ -38,6 +38,8 @@ final class IndexCreateCommand extends Command
                     return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
                 }
             )
+            ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
+            ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1)
             ->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Create all indexes', false)
         ;
     }
@@ -45,38 +47,47 @@ final class IndexCreateCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $all = $input->getOption('all');
+
+        if (false === $input->getOption('all') && false === $input->getArgument('index')) {
+            $io->error('You must specify an index or run the command with --all');
+
+            return Command::INVALID;
+        }
+
         $inputIndexes = $input->getArgument('indexes');
+        $id = (int) $input->getOption('id');
+        $force = $input->getOption('force');
+        $all = $input->getOption('all');
 
         // --all was passed
         if (null === $all) {
             $inputIndexes = IndexNames::values();
         }
 
-        /** @var IndexingInterface[] $indexingServices */
-        $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
-
         foreach ($inputIndexes as $index) {
-            if (!array_key_exists($index, $indexingServices)) {
-                $io->error('Indexing service for index '.$index.' does not exist');
-                continue;
-            }
-            $service = $indexingServices[$index];
-
-            try {
-                if (!$service->indexExists()) {
-                    $service->createIndex();
-
-                    $io->success('Index created: '.$index);
-                } else {
-                    $io->caution('Index exists ('.$index.'). Aborting.');
-                }
-            } catch (IndexingException $e) {
-                $io->error($e->getMessage());
+            if (!in_array($index, IndexNames::values())) {
+                $io->error(sprintf('Index %s does not exist', $index));
 
                 return Command::FAILURE;
             }
+
+            $section = $output->section();
+            $progressBar = new ProgressBar($section);
+            $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
+            $progressBar->start();
+            $progressBar->setMessage(sprintf('Populating index %s …', $index));
+            $progressBar->display();
+
+            foreach ($this->populate->populate($index, $id, $force) as $message) {
+                $progressBar->setMessage($message);
+                $progressBar->advance();
+            }
+
+            $progressBar->finish();
         }
+
+        // Start the command line on a new line.
+        $output->writeln('');
 
         return Command::SUCCESS;
     }

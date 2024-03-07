@@ -54,12 +54,18 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     #[ORM\Column]
     #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[publicAccess]')]
     private bool $public = true;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[organizer]')]
     private ?Organization $organization = null;
+
+    #[ORM\ManyToMany(targetEntity: Organization::class, inversedBy: 'partnerEvents')]
+    #[Groups([IndexNames::Events->value])]
+    #[SerializedPath('[partners]')]
+    private Collection $partners;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Feed $feed = null;
@@ -80,7 +86,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    #[Groups([IndexNames::Events->value])]
     private ?Location $location = null;
 
     #[ORM\Column(length: 255)]
@@ -93,13 +98,13 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     #[Timestampable(on: 'create')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[created]')]
     protected $createdAt;
 
     #[Timestampable(on: 'update')]
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups([IndexNames::Events->value, IndexNames::Organization->value])]
+    #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[updated]')]
     protected $updatedAt;
 
@@ -108,6 +113,7 @@ class Event implements IndexItemInterface, EditableEntityInterface
         $this->occurrences = new ArrayCollection();
         $this->dailyOccurrences = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->partners = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -344,6 +350,30 @@ class Event implements IndexItemInterface, EditableEntityInterface
     public function setImage(?Image $image): static
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Organization>
+     */
+    public function getPartners(): Collection
+    {
+        return $this->partners;
+    }
+
+    public function addPartner(Organization $partner): static
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners->add($partner);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Organization $partner): static
+    {
+        $this->partners->removeElement($partner);
 
         return $this;
     }

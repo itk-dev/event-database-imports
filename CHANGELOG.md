@@ -39,6 +39,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added "roles" to user create and edit forms
 - Updated ITK docker templates
 - Updated to PHP 8.3 og Symfony 6.4
+- Added ES indexes needed to support endpoints in the API
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
