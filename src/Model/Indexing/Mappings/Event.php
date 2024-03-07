@@ -26,7 +26,7 @@ class Event implements MappingsInterface
         'description' => [
             'type' => 'text',
             'index_options' => 'docs',
-            'index' => false,
+            'index' => true,
             'norms' => false,
         ],
         'url' => [

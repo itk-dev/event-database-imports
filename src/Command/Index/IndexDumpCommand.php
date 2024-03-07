@@ -38,14 +38,12 @@ final class IndexDumpCommand extends Command
                     return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
                 }
             )
-            ->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path to write data to', './src/DataFixtures/indexes')
-            ->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Create all indexes', false);
+            ->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path to write data to', './src/DataFixtures/indexes');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $all = $input->getOption('all');
         $inputIndexes = $input->getArgument('indexes');
         $path = (string) $input->getOption('path');
 
