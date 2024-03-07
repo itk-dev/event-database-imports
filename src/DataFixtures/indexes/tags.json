@@ -1,26 +1,26 @@
 [{
-    "vocabularies": [
-        "aarhusguiden.dk"
-    ],
-    "name": "aros"
+    "name": "aros",
+    "vocabulary": [
+        "aarhusguiden"
+    ]
 },{
-    "vocabularies": [
-        "aarhusguiden.dk"
-    ],
-    "name": "For b\u00f8rn"
+    "name": "theoceanraceaarhus",
+    "vocabulary": [
+        "aarhusguiden"
+    ]
 },{
-    "vocabularies": [
-        "aarhusguiden.dk"
-    ],
-    "name": "Koncert"
+    "name": "Koncert",
+    "vocabulary": [
+        "aarhusguiden"
+    ]
 },{
-    "vocabularies": [
-        "aarhusguiden.dk"
-    ],
-    "name": "theoceanraceaarhus"
+    "name": "For b\u00f8rn",
+    "vocabulary": [
+        "aarhusguiden"
+    ]
 },{
-    "vocabularies": [
-        "aarhusguiden.dk"
-    ],
-    "name": "ITKDev"
+    "name": "ITKDev",
+    "vocabulary": [
+        "aarhusguiden"
+    ]
 }]

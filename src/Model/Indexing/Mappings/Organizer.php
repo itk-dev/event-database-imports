@@ -12,10 +12,9 @@ class Organizer implements MappingsInterface
             'doc_values' => false,
         ],
         'name' => [
-            'type' => 'keyword',
+            'type' => 'text',
             'index_options' => 'docs',
             'index' => true,
-            'doc_values' => false,
             'norms' => false,
         ],
         'email' => [

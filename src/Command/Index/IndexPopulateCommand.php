@@ -40,7 +40,6 @@ final class IndexPopulateCommand extends Command
             )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
             ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1)
-            ->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Create all indexes', false)
         ;
     }
 
@@ -48,21 +47,9 @@ final class IndexPopulateCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
 
-        if (false === $input->getOption('all') && false === $input->getArgument('index')) {
-            $io->error('You must specify an index or run the command with --all');
-
-            return Command::INVALID;
-        }
-
         $inputIndexes = $input->getArgument('indexes');
         $id = (int) $input->getOption('id');
         $force = $input->getOption('force');
-        $all = $input->getOption('all');
-
-        // --all was passed
-        if (null === $all) {
-            $inputIndexes = IndexNames::values();
-        }
 
         foreach ($inputIndexes as $index) {
             if (!in_array($index, IndexNames::values())) {

@@ -13,7 +13,7 @@ final class VocabularyFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $this->createAndSaveVocabulary($manager, 'aarhusguiden.dk', 'Managed tags vocabulary for aarhusguiden.dk', self::MANAGED);
+        $this->createAndSaveVocabulary($manager, 'aarhusguiden', 'Managed tags vocabulary for aarhusguiden.dk', self::MANAGED);
         $this->createAndSaveVocabulary($manager, 'feeds', 'Free tags from feeds', self::FREE);
 
         // Make it stick.

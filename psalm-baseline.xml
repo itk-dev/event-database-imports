@@ -82,9 +82,6 @@
       <code>getStatusCode</code>
       <code>getStatusCode</code>
     </PossiblyUndefinedMethod>
-    <UndefinedConstant>
-      <code>IndexNames::ApiKeys</code>
-    </UndefinedConstant>
   </file>
   <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
     <UndefinedInterfaceMethod>

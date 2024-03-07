@@ -34,7 +34,9 @@ final class IndexingTags extends AbstractIndexingElastic
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
         // Get vocabulary names.
-        $data['vocabularies'] = array_column($data['vocabularies'], 'name');
+        // Use singular "vocabulary" because we want the api filter to use the singular form.
+        $data['vocabulary'] = array_column($data['vocabularies'], 'name');
+        unset($data['vocabularies']);
 
         return $data;
     }

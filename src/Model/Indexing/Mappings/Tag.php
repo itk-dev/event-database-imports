@@ -11,7 +11,7 @@ class Tag implements MappingsInterface
             'index' => true,
             'norms' => false,
         ],
-        'vocabularies' => [
+        'vocabulary' => [
             'type' => 'keyword',
             'index_options' => 'docs',
             'index' => true,

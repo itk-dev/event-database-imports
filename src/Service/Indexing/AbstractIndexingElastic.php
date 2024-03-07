@@ -368,7 +368,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             IndexNames::Tags => Tag::getProperties(),
             IndexNames::Vocabularies => Vocabularies::getProperties(),
             IndexNames::Occurrences, IndexNames::DailyOccurrences => OccurrenceWithEvent::getProperties(),
-            IndexNames::ApiKeys => throw new \Exception('To be implemented'),
+            // IndexNames::ApiKeys => throw new \Exception('To be implemented'),
         };
     }
 }
