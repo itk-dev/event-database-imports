@@ -126,11 +126,19 @@ final class EventFactory
             ->setDescription($item->description)
             ->setExcerpt($item->excerpt)
             ->setFeedItemId($item->id)
-            ->setTicketUrl($item->ticketUrl)
-            ->setUrl($item->url)
-            ->setPublic($item->public)
+            ->setTicketUrl($this->getAbsoluteUrl($item->ticketUrl, $feed))
+            ->setUrl($this->getAbsoluteUrl($item->url, $feed) ?? '')
+            ->setPublicAccess($item->publicAccess)
             ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
+
+        $description = $entity->getDescription();
+        if (empty($entity->getExcerpt()) && !is_null($description)) {
+            $decoded = htmlspecialchars_decode($description);
+            $stripped = strip_tags($decoded);
+            $trimmed = trim($stripped);
+            $entity->setExcerpt($trimmed);
+        }
 
         if (!is_null($item->image)) {
             $image = $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
@@ -151,5 +159,30 @@ final class EventFactory
         $this->occurrencesFactory->createOrLookup($item->occurrences, $entity);
 
         // @todo: Created_by (should we have feed user)
+    }
+
+    private function getAbsoluteUrl(?string $url, Feed $feed): ?string
+    {
+        if (null === $url) {
+            return null;
+        }
+
+        if (isset(parse_url($url)['host'])) {
+            return $url;
+        }
+
+        $conf = $feed->getConfiguration();
+
+        if (isset($conf['base'])) {
+            $baseUrl = rtrim($conf['base'], '/');
+            $path = ltrim($url, '/');
+
+            $abs = $baseUrl.'/'.$path;
+            if (filter_var($abs, FILTER_VALIDATE_URL)) {
+                return $abs;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('Could not convert feed (%d) url (%s) to absolute url', $feed->getId() ?? 0, $url));
     }
 }

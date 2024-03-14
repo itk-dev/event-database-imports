@@ -14,7 +14,6 @@ final class AddressFixture extends Fixture
     {
         $address = new Address();
         $address->setStreet('Hack Kampmanns Plads 2')
-            ->setSuite('2.2')
             ->setRegion('Jylland')
             ->setPostalCode('8000')
             ->setCountry('Danmark')

@@ -3,12 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Service\ImageHandlerInterface;
 use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -19,6 +22,7 @@ class EventCrudController extends AbstractBaseCrudController
 {
     public function __construct(
         protected readonly int $excerptMaxLength,
+        private readonly ImageHandlerInterface $imageHandler
     ) {
     }
 
@@ -43,15 +47,26 @@ class EventCrudController extends AbstractBaseCrudController
 
             FormField::addFieldset('Basic information')
                 ->setLabel(new TranslatableMessage('admin.event.basic.headline')),
-            TextField::new('title')
-                ->setLabel(new TranslatableMessage('admin.event.basic.title')),
+            TextField::new('title'),
+            ImageField::new('image')
+                ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
+                ->formatValue(function ($value) {
+                    return $this->imageHandler->getTransformedImageUrls($value->getLocal())['large'];
+                }
+                )->hideOnIndex()->hideOnForm(),
             TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
                 ->setMaxLength($this->excerptMaxLength)
                 ->hideOnIndex(),
             TextEditorField::new('description')
                 ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+                ->hideOnDetail()
                 ->hideOnIndex(),
+            TextareaField::new('description')
+                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+                ->renderAsHtml()
+                ->hideOnIndex()
+                ->hideOnForm(),
             AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex(),
@@ -59,12 +74,21 @@ class EventCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
                 ->hideOnIndex(),
 
+            FormField::addFieldset('Occurrences')
+                ->setLabel(new TranslatableMessage('admin.event.occurrences')),
+            AssociationField::new('occurrences')
+                ->hideOnIndex(),
+            AssociationField::new('dailyOccurrences')
+                ->hideOnIndex(),
+
             FormField::addFieldset('Location information')
                 ->setLabel(new TranslatableMessage('admin.event.location.headline')),
             UrlField::new('url')
-                ->setLabel(new TranslatableMessage('admin.event.location.url')),
+                ->setLabel(new TranslatableMessage('admin.event.location.url'))
+                ->hideOnIndex(),
             UrlField::new('ticketUrl')
-                ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl')),
+                ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl'))
+                ->hideOnIndex(),
             AssociationField::new('location')
                 ->setLabel(new TranslatableMessage('admin.event.location.location')),
 
@@ -78,5 +102,14 @@ class EventCrudController extends AbstractBaseCrudController
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('organization')
+            ->add('location')
+            ->add('title')
+        ;
     }
 }

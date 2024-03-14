@@ -16,8 +16,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 final class FeedItemSource
 {
-    private const SRC_WILDCARD = '*';
-    private const SRC_SEPARATOR = '.';
+    private const string SRC_WILDCARD = '*';
+    private const string SRC_SEPARATOR = '.';
 
     public function __construct(
         private readonly FeedConfiguration $configuration,
@@ -83,7 +83,9 @@ final class FeedItemSource
             ->getPropertyAccessor();
         $key = $this->transformKey($src);
 
-        return $propertyAccessor->getValue($data, $key);
+        $value = $propertyAccessor->getValue($data, $key);
+
+        return $value;
     }
 
     /**
@@ -126,6 +128,7 @@ final class FeedItemSource
         $keys = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR, $src);
         $key = $this->transformKey(reset($keys));
         $items = $propertyAccessor->getValue($data, $key);
+        $items = $items ?? [];
 
         // Find nested array key and extra values.
         $key = $this->transformKey(array_pop($keys));

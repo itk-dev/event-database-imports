@@ -46,9 +46,6 @@ final class LocationFactory
         if (!is_null($input->street)) {
             $address->setStreet($input->street);
         }
-        if (!is_null($input->suite)) {
-            $address->setSuite($input->suite);
-        }
         $coordinates = $input->coordinates;
         if (isset($coordinates->latitude, $coordinates->longitude)) {
             $address->setLatitude(floatval($coordinates->latitude));
@@ -92,22 +89,22 @@ final class LocationFactory
     {
         $values = [];
 
+        // @TODO Figure out if we can lookup by coordinates. Problem 1: precision, Problem 2: We also goecode the street address with DAWA coordinates, overriding the given coordinates.
         // Lookup base on coordinates
-        $latitude = $location->coordinates?->latitude;
-        $longitude = $location->coordinates?->longitude;
-        if (!is_null($longitude) && !is_null($latitude)) {
-            $values = [
-                'latitude' => floatval($latitude),
-                'longitude' => floatval($longitude),
-            ];
-        }
+        // $latitude = $location->coordinates?->latitude;
+        // $longitude = $location->coordinates?->longitude;
+        // if (!is_null($longitude) && !is_null($latitude)) {
+        //    $values = [
+        //        'latitude' => floatval($latitude),
+        //        'longitude' => floatval($longitude),
+        //    ];
+        // }
 
         // Lookup base on city, street (as it may not have been geolocation encoded yet).
         if (empty($values)) {
             $values = array_filter([
-                'city' => $location->city,
+                'postalCode' => $location->postalCode,
                 'street' => $location->street,
-                'suite' => $location->suite,
             ]);
         }
 

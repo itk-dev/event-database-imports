@@ -23,7 +23,12 @@ final class TagsFactory
      */
     public function createOrLookup(array $tagNames): iterable
     {
-        foreach ($tagNames as $tagName) {
+        // Normalize to lowercase
+        $tagNames = array_map(fn ($value): string => mb_strtolower($value), $tagNames);
+        // Ensure we don't have duplicates
+        $tagNames = array_flip($tagNames);
+
+        foreach ($tagNames as $tagName => $value) {
             $tag = $this->tagRepository->findOneBy(['name' => $tagName]);
             if (is_null($tag)) {
                 $tag = new Tag();

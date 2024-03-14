@@ -6,6 +6,7 @@ use App\Message\GeocoderMessage;
 use App\Message\ImageMessage;
 use App\Repository\ImageRepository;
 use App\Service\ImageHandlerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -17,6 +18,7 @@ final class ImageHandler
         private readonly ImageHandlerInterface $imageHandler,
         private readonly ImageRepository $imageRepository,
         private readonly MessageBusInterface $messageBus,
+        private readonly LoggerInterface $logger,
     ) {
     }
 
@@ -31,11 +33,15 @@ final class ImageHandler
                 try {
                     $local = $this->imageHandler->fetch($source);
                     $image->setLocal($local);
+
+                    $image->setTitle(basename($source));
+
                     $this->imageRepository->save($image, true);
 
                     $this->imageHandler->transform($image);
                 } catch (\Exception $e) {
-                    throw new UnrecoverableMessageHandlingException(sprintf('Unable to fetch image: %s', $source), (int) $e->getCode(), $e);
+                    // Indexing should continue even if we cannot fetch the image
+                    $this->logger->info(sprintf('Unable to fetch remote image: %d', $source));
                 }
             }
         }

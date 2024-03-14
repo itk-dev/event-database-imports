@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Feed;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CodeEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -10,12 +12,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Component\Validator\Constraints\Json;
 
 class FeedCrudController extends AbstractBaseCrudController
 {
     public static function getEntityFqcn(): string
     {
         return Feed::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+        ;
     }
 
     public function configureFields(string $pageName): iterable
@@ -28,10 +38,15 @@ class FeedCrudController extends AbstractBaseCrudController
 
             TextField::new('name')
                 ->setLabel(new TranslatableMessage('admin.feed.name')),
+            AssociationField::new('organization'),
             CodeEditorField::new('configurationField')
                 ->setLabel(new TranslatableMessage('admin.feed.configuration'))
+                ->setHelp(new TranslatableMessage('admin.feed.configuration.help'))
                 ->setLanguage('js')
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->setFormTypeOptions(
+                    ['constraints' => [new Json(['message' => 'Configuration JSON is not valid'])]]
+                ),
 
             BooleanField::new('enabled'),
 
@@ -47,6 +62,7 @@ class FeedCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.feed.edited.update'))
                 ->setDisabled()
                 ->hideWhenCreating()
+                ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
     }

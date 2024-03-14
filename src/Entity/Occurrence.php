@@ -48,7 +48,7 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Occurrences->value])]
     private ?Event $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $dailyOccurrences;
 
     #[ORM\Column(length: 255, nullable: true)]

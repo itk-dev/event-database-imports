@@ -12,7 +12,7 @@ final class ContentNormalizer implements ContentNormalizerInterface
     ) {
     }
 
-    public function normalize(string $content): string
+    public function sanitize(string $content): string
     {
         return $this->feedHtmlSanitizer->sanitize($content);
     }

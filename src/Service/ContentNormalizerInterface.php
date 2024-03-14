@@ -5,15 +5,15 @@ namespace App\Service;
 interface ContentNormalizerInterface
 {
     /**
-     * Normalize HTML content.
+     * Sanitize HTML content.
      *
      * @param string $content
      *   The HTML string
      *
      * @return string
-     *   Normalized and cleaned HTML
+     *   Sanitize HTML
      */
-    public function normalize(string $content): string;
+    public function sanitize(string $content): string;
 
     /**
      * Trim content length.

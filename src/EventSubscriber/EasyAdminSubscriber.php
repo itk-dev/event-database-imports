@@ -4,6 +4,7 @@ namespace App\EventSubscriber;
 
 use App\Entity\Address;
 use App\Entity\Event;
+use App\Entity\Feed;
 use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
@@ -44,12 +45,14 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     public function beforeEntityUpdatedEvent(BeforeEntityUpdatedEvent $event): void
     {
         $entity = $event->getEntityInstance();
+
         $this->handleNormalization($entity);
     }
 
     public function beforeEntityPersisted(BeforeEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
+
         $this->handleNormalization($entity);
     }
 
@@ -76,15 +79,21 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if ($entity instanceof Event) {
             $description = $entity->getDescription();
             if (!is_null($description)) {
-                $entity->setDescription($this->contentNormalizer->normalize($description));
+                $entity->setDescription($this->contentNormalizer->sanitize($description));
             }
 
             $excerpt = $entity->getExcerpt();
-            if (!is_null($excerpt)) {
-                $excerpt = $this->contentNormalizer->normalize($excerpt);
+            if (!empty($excerpt)) {
+                $excerpt = $this->contentNormalizer->sanitize($excerpt);
                 $excerpt = $this->contentNormalizer->trimLength($excerpt, $this->excerptMaxLength);
                 $entity->setExcerpt($excerpt);
+            } elseif (!is_null($description)) {
+                $entity->setExcerpt($description);
             }
+        }
+
+        if ($entity instanceof Feed) {
+            $entity->setConfigurationValue();
         }
     }
 
