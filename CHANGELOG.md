@@ -40,6 +40,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Updated ITK docker templates
 - Updated to PHP 8.3 og Symfony 6.4
 - Added ES indexes needed to support endpoints in the API
+- Updated feed import suite to support more feeds
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
