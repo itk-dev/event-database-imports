@@ -17,6 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\UniqueConstraint(name: 'feed_feedItemId_unique', columns: ['feed_id', 'feed_item_id'])]
 class Event implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
@@ -55,14 +56,14 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[ORM\Column]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[publicAccess]')]
-    private bool $public = true;
+    private bool $publicAccess = true;
 
-    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'events')]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[organizer]')]
     private ?Organization $organization = null;
 
-    #[ORM\ManyToMany(targetEntity: Organization::class, inversedBy: 'partnerEvents')]
+    #[ORM\ManyToMany(targetEntity: Organization::class, inversedBy: 'partnerEvents', cascade: ['persist'])]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[partners]')]
     private Collection $partners;
@@ -73,15 +74,15 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $feedItemId = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, cascade: ['persist'], orphanRemoval: true)]
     #[Groups([IndexNames::Events->value])]
     private Collection $occurrences;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, cascade: ['persist'], orphanRemoval: true)]
     #[Groups([IndexNames::Events->value])]
     private Collection $dailyOccurrences;
 
-    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'events')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'events', cascade: ['persist'])]
     #[Groups([IndexNames::Events->value])]
     private Collection $tags;
 
@@ -145,6 +146,10 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     public function setExcerpt(?string $excerpt): static
     {
+        if (null !== $excerpt) {
+            $excerpt = mb_substr($excerpt, 0, 255);
+        }
+
         $this->excerpt = $excerpt;
 
         return $this;
@@ -186,14 +191,14 @@ class Event implements IndexItemInterface, EditableEntityInterface
         return $this;
     }
 
-    public function isPublic(): ?bool
+    public function hasPublicAccess(): ?bool
     {
-        return $this->public;
+        return $this->publicAccess;
     }
 
-    public function setPublic(bool $public): static
+    public function setPublicAccess(bool $publicAccess): static
     {
-        $this->public = $public;
+        $this->publicAccess = $publicAccess;
 
         return $this;
     }

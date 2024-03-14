@@ -18,7 +18,7 @@ final class ContentNormalizationTest extends KernelTestCase
     public function testNormalization()
     {
         $service = $this->getContentNormalizerService();
-        $normalized = $service->normalize('<p>test<b>test<p><a href="http://aakb.dk/test.php"></a></p>');
+        $normalized = $service->sanitize('<p>test<b>test<p><a href="http://aakb.dk/test.php"></a></p>');
 
         $this->assertEquals('<p>test<b>test</b></p><p><a href="https://aakb.dk/test.php"></a></p>', $normalized);
     }

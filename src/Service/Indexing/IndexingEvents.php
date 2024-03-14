@@ -38,9 +38,13 @@ final class IndexingEvents extends AbstractIndexingElastic
         // Get tag names.
         $data['tags'] = array_column($data['tags'], 'name');
 
+        // @todo figure out why doctrine sometimes returns a keyed array. E.g. [1 => Occurrence]. This results in an "Indexing exception"
+        $data['occurrences'] = array_values($data['occurrences']);
+        $data['dailyOccurrences'] = array_values($data['dailyOccurrences']);
+
         // Fix image urls (with a full path and derived sizes).
         $imageUrl = $data['imageUrls']['original'];
-        $data['imageUrls'] = $this->imageHandler->getTransformedImageUrls($imageUrl);
+        $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageHandler->getTransformedImageUrls($imageUrl);
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
         $data['location'] = $this->indexingLocations->serialize($item->getLocation());

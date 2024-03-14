@@ -85,9 +85,9 @@
         <source>admin.link.tags</source>
         <target>Tags</target>
       </trans-unit>
-      <trans-unit id="hKvTzZo" resname="admin.link.organizer">
-        <source>admin.link.organizer</source>
-        <target>Organizer</target>
+      <trans-unit id="hKvTzZo" resname="admin.link.organizations">
+        <source>admin.link.organizations</source>
+        <target>Organizations</target>
       </trans-unit>
       <trans-unit id="3ohrj0." resname="admin.link.users">
         <source>admin.link.users</source>
@@ -160,6 +160,10 @@
       <trans-unit id="f0RmQAC" resname="admin.feed.configuration">
         <source>admin.feed.configuration</source>
         <target>Configuration</target>
+      </trans-unit>
+      <trans-unit id="f0RmQAD" resname="admin.feed.configuration.help">
+        <source>admin.feed.configuration</source>
+        <target>Configuration mapping: feedKey -> eventDbKey</target>
       </trans-unit>
       <trans-unit id="rjtWHu0" resname="admin.feed.edited.headline">
         <source>admin.feed.edited.headline</source>

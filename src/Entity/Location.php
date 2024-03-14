@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
+#[ORM\UniqueConstraint(name: 'location_unique', columns: ['name', 'url', 'mail'])]
 class Location implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
@@ -52,7 +53,7 @@ class Location implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Locations->value])]
     private ?string $mail = null;
 
-    #[ORM\ManyToOne(inversedBy: 'locations')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'locations')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups([IndexNames::Locations->value])]
     private ?Address $address = null;

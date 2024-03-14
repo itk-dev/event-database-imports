@@ -89,7 +89,7 @@ final class ImageHandler implements ImageHandlerInterface
     public function remove(Image $image): bool
     {
         // TODO: Implement remove() method.
-        return false;
+        throw new \RuntimeException('Not implemented');
     }
 
     /**
@@ -111,7 +111,7 @@ final class ImageHandler implements ImageHandlerInterface
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
         foreach ($filters as $name => $filter) {
-            $urls[$name] = $this->imagineCacheManager->generateUrl($imageUrl, $name, [], null, UrlGeneratorInterface::RELATIVE_PATH);
+            $urls[$name] = $this->imagineCacheManager->generateUrl($imageUrl, $name, [], null, UrlGeneratorInterface::ABSOLUTE_URL);
         }
 
         return $urls;

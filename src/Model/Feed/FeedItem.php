@@ -12,10 +12,11 @@ final class FeedItem
         public ?string $ticketUrl = null,
         public ?string $title = null,
         public string $url = '',
-        public bool $public = true,
+        public bool $publicAccess = true,
         /** @var array<FeedItemOccurrence> */
         public array $occurrences = [],
         public ?FeedItemLocation $location = null,
+        public ?FeedItemOrganization $organization = null,
         public int $feedId = 0,
         /** @var array<string> */
         public array $tags = [],

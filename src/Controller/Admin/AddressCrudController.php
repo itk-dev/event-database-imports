@@ -36,18 +36,21 @@ class AddressCrudController extends AbstractBaseCrudController
             FormField::addFieldset(new TranslatableMessage('admin.address.headline')),
             TextField::new('street')
                 ->setLabel(new TranslatableMessage('admin.address.street')),
-            TextField::new('suite')
-                ->setLabel(new TranslatableMessage('admin.address.suite')),
             TextField::new('city')
                 ->setLabel(new TranslatableMessage('admin.address.city')),
             TextField::new('postalCode')
                 ->setLabel(new TranslatableMessage('admin.address.postalCode')),
             TextField::new('country')
-                ->setLabel(new TranslatableMessage('admin.address.country')),
+                ->setLabel(new TranslatableMessage('admin.address.country'))
+                ->hideOnIndex(),
             TextField::new('region')
-                ->setLabel(new TranslatableMessage('admin.address.region')),
+                ->setLabel(new TranslatableMessage('admin.address.region'))
+                ->hideOnIndex(),
 
             FormField::addFieldset(new TranslatableMessage('admin.address.location.headline')),
+            TextField::new('coordinates')
+                ->hideOnDetail()
+                ->hideOnForm(),
             NumberField::new('latitude')
                 ->setLabel(new TranslatableMessage('admin.address.location.latitude'))
                 ->setNumDecimals(8)

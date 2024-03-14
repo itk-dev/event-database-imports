@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.21.0@04ba9358e3f7d14a9dc3edd4e814a9d51d8c637f">
+<files psalm-version="5.23.0@005e3184fb6de4350a873b9b8c4dc3cede9db762">
   <file src="src/Command/Index/IndexDumpCommand.php">
     <UndefinedInterfaceMethod>
-      <code>section</code>
+      <code><![CDATA[section]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Command/Index/IndexPopulateCommand.php">
     <UndefinedInterfaceMethod>
-      <code>section</code>
+      <code><![CDATA[section]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Controller/Admin/UserCrudController.php">
     <InvalidArgument>
-      <code>$user</code>
+      <code><![CDATA[$user]]></code>
     </InvalidArgument>
   </file>
   <file src="src/Factory/EventFactory.php">
@@ -20,12 +20,18 @@
       <code><![CDATA[$item->title]]></code>
     </PossiblyNullArgument>
   </file>
+  <file src="src/Factory/LocationFactory.php">
+    <RedundantCondition>
+      <code><![CDATA[empty($values)]]></code>
+      <code><![CDATA[empty($values)]]></code>
+    </RedundantCondition>
+  </file>
   <file src="src/Service/Feeds/Mapper/Source/FeedItemSource.php">
     <InvalidOperand>
-      <code>$source</code>
-      <code>$source</code>
-      <code>$source</code>
-      <code>$source</code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
     </InvalidOperand>
     <PossiblyInvalidArgument>
       <code><![CDATA[$value ?? '']]></code>
@@ -33,11 +39,11 @@
   </file>
   <file src="src/Service/Indexing/AbstractIndexingElastic.php">
     <ArgumentTypeCoercion>
-      <code>$params</code>
-      <code>$params</code>
+      <code><![CDATA[$params]]></code>
+      <code><![CDATA[$params]]></code>
     </ArgumentTypeCoercion>
     <InvalidArgument>
-      <code>$params</code>
+      <code><![CDATA[$params]]></code>
       <code><![CDATA[[
                 'body' => [
                     'actions' => [
@@ -79,46 +85,46 @@
       <code><![CDATA[['index' => $indexName]]]></code>
     </InvalidArgument>
     <PossiblyUndefinedMethod>
-      <code>getStatusCode</code>
-      <code>getStatusCode</code>
+      <code><![CDATA[getStatusCode]]></code>
+      <code><![CDATA[getStatusCode]]></code>
     </PossiblyUndefinedMethod>
   </file>
   <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
     <UndefinedInterfaceMethod>
-      <code>getEvent</code>
-      <code>normalize</code>
+      <code><![CDATA[getEvent]]></code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingEvents.php">
     <UndefinedInterfaceMethod>
-      <code>getLocation</code>
-      <code>normalize</code>
+      <code><![CDATA[getLocation]]></code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingLocations.php">
     <UndefinedInterfaceMethod>
-      <code>normalize</code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingOccurrences.php">
     <UndefinedInterfaceMethod>
-      <code>getEvent</code>
-      <code>normalize</code>
+      <code><![CDATA[getEvent]]></code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingOrganizations.php">
     <UndefinedInterfaceMethod>
-      <code>normalize</code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingTags.php">
     <UndefinedInterfaceMethod>
-      <code>normalize</code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
   <file src="src/Service/Indexing/IndexingVocabularies.php">
     <UndefinedInterfaceMethod>
-      <code>normalize</code>
+      <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>
 </files>

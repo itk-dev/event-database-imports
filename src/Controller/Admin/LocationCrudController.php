@@ -58,7 +58,8 @@ class LocationCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.location.enriched.telephone'))
                 ->hideOnIndex(),
             BooleanField::new('disabilityAccess')
-                ->setLabel(new TranslatableMessage('admin.location.enriched.disability-access')),
+                ->setLabel(new TranslatableMessage('admin.location.enriched.disability-access'))
+                ->renderAsSwitch(false),
 
             FormField::addFieldset(new TranslatableMessage('admin.location.edited.headline'))
                 ->hideWhenCreating(),

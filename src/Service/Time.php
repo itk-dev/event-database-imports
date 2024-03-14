@@ -18,6 +18,11 @@ final class Time implements TimeInterface
     {
         $periods = (new CarbonPeriodImmutable($start, '1 day', $end))->toArray();
 
+        // Invalid start/end. Best we can do is return empty array.
+        if (0 === count($periods)) {
+            return [];
+        }
+
         // If start and end is within the same day, simple fast track a return those dates.
         if (1 === count($periods)) {
             return [new DateTimeInterval(start: $start, end: $end)];

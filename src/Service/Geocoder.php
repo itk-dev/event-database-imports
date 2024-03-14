@@ -71,7 +71,6 @@ final class Geocoder implements GeocoderInterface
     {
         $query = [];
         $query[] = $address->getStreet() ?? '';
-        $query[] = $address->getSuite() ?? '';
         $query[] = $address->getPostalCode() ?? '';
         $query[] = $address->getCity() ?? '';
 

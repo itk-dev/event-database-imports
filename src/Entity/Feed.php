@@ -9,8 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Feed
 {
     use TimestampableEntity;
@@ -42,6 +45,8 @@ class Feed
 
     #[ORM\ManyToOne(inversedBy: 'feeds')]
     private ?Organization $organization = null;
+
+    private ?string $tmpConfig = null;
 
     public function __construct()
     {
@@ -87,10 +92,37 @@ class Feed
 
     /**
      * Helper function store data from code-editor in easy admin.
+     *
+     * @throws \InvalidArgumentException
      */
-    public function setConfigurationField(string $configuration): static
+    public function setConfigurationField(string $json): static
     {
-        return $this->setConfiguration(json_decode($configuration, true));
+        $this->tmpConfig = $json;
+
+        return $this;
+    }
+
+    #[Assert\Callback]
+    public function validate(ExecutionContextInterface $context, mixed $payload): void
+    {
+        if (null !== $this->tmpConfig) {
+            if (false === \json_validate($this->tmpConfig)) {
+                $context->buildViolation('Json error: '.\json_last_error_msg())->atPath('configuration')->addViolation();
+            }
+        }
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function setConfigurationValue(): void
+    {
+        if (null !== $this->tmpConfig) {
+            try {
+                $this->configuration = json_decode($this->tmpConfig, true, 512, JSON_THROW_ON_ERROR);
+            } catch (\JsonException $e) {
+                throw new \InvalidArgumentException(\json_last_error_msg(), \json_last_error(), $e);
+            }
+        }
     }
 
     public function getLastRead(): ?\DateTimeImmutable

@@ -12,6 +12,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AddressRepository::class)]
+#[ORM\UniqueConstraint(name: 'street_postcode_unique', columns: ['street', 'postal_code'])]
 class Address implements EditableEntityInterface
 {
     use TimestampableEntity;
@@ -26,10 +27,6 @@ class Address implements EditableEntityInterface
     #[ORM\Column(length: 255)]
     #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?string $street = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
-    private ?string $suite = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
@@ -84,18 +81,6 @@ class Address implements EditableEntityInterface
     public function setStreet(string $street): static
     {
         $this->street = $street;
-
-        return $this;
-    }
-
-    public function getSuite(): ?string
-    {
-        return $this->suite;
-    }
-
-    public function setSuite(string $suite): static
-    {
-        $this->suite = $suite;
 
         return $this;
     }
@@ -170,6 +155,15 @@ class Address implements EditableEntityInterface
         $this->longitude = $longitude;
 
         return $this;
+    }
+
+    public function getCoordinates(): ?string
+    {
+        if (null !== $this->latitude && null !== $this->longitude) {
+            return sprintf('[%s, %s]', $this->latitude, $this->longitude);
+        }
+
+        return null;
     }
 
     /**
