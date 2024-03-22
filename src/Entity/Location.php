@@ -44,7 +44,7 @@ class Location implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Locations->value])]
     private ?string $telephone = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     #[Groups([IndexNames::Locations->value])]
     #[SerializedPath('[disabilityAccess]')]
     private ?bool $disabilityAccess = null;
@@ -129,7 +129,7 @@ class Location implements IndexItemInterface, EditableEntityInterface
         return $this->disabilityAccess;
     }
 
-    public function setDisabilityAccess(bool $disabilityAccess): static
+    public function setDisabilityAccess(?bool $disabilityAccess): static
     {
         $this->disabilityAccess = $disabilityAccess;
 

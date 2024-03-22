@@ -25,6 +25,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class FeedDebugCommand extends Command
 {
+    private const int DEFAULT_OPTION = -1;
+
     public function __construct(
         private readonly FeedParserInterface $feedParser,
         private readonly FeedMapperInterface $feedMapper,
@@ -37,8 +39,8 @@ final class FeedDebugCommand extends Command
 
     protected function configure(): void
     {
-        $this->addArgument('feedId', InputArgument::REQUIRED, 'Database feed id')
-            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items outputted', -1);
+        $this->addOption('feed-id', '', InputOption::VALUE_REQUIRED, 'Limit imports to the feed ID given', self::DEFAULT_OPTION)
+            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', self::DEFAULT_OPTION);
     }
 
     /**
@@ -47,8 +49,8 @@ final class FeedDebugCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $feedId = (int) $input->getArgument('feedId');
-        $limit = $input->getOption('limit');
+        $feedId = (int) $input->getOption('feed-id');
+        $limit = (int) $input->getOption('limit');
 
         // @todo: Convert config array to value object.
         $feed = $this->feedRepository->findOneBy(['id' => $feedId]);

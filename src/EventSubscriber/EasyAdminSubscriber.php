@@ -28,7 +28,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         private readonly LoggerInterface $logger,
         private readonly EventFinder $eventFinder,
         private readonly ContentNormalizerInterface $contentNormalizer,
-        private readonly int $excerptMaxLength,
     ) {
     }
 
@@ -85,7 +84,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             $excerpt = $entity->getExcerpt();
             if (!empty($excerpt)) {
                 $excerpt = $this->contentNormalizer->sanitize($excerpt);
-                $excerpt = $this->contentNormalizer->trimLength($excerpt, $this->excerptMaxLength);
+                $excerpt = $this->contentNormalizer->trimLength($excerpt, Event::EXCERPT_MAX_LENGTH);
                 $entity->setExcerpt($excerpt);
             } elseif (!is_null($description)) {
                 $entity->setExcerpt($description);

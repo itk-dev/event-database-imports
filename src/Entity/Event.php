@@ -24,6 +24,7 @@ class Event implements IndexItemInterface, EditableEntityInterface
     use SoftDeleteableEntity;
     use BlameableEntity;
     use EditableEntity;
+    public const int EXCERPT_MAX_LENGTH = 255;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -36,7 +37,7 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Events->value])]
     private ?string $title = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: self::EXCERPT_MAX_LENGTH, nullable: true)]
     #[Groups([IndexNames::Events->value])]
     private ?string $excerpt = null;
 

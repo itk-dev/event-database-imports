@@ -12,13 +12,13 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-final class ImageHandler
+final readonly class ImageHandler
 {
     public function __construct(
-        private readonly ImageHandlerInterface $imageHandler,
-        private readonly ImageRepository $imageRepository,
-        private readonly MessageBusInterface $messageBus,
-        private readonly LoggerInterface $logger,
+        private ImageHandlerInterface $imageHandler,
+        private ImageRepository       $imageRepository,
+        private MessageBusInterface   $messageBus,
+        private LoggerInterface       $logger,
     ) {
     }
 

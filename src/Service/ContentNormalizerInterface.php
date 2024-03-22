@@ -19,4 +19,6 @@ interface ContentNormalizerInterface
      * Trim content length.
      */
     public function trimLength(string $content, int $maxLength, bool $onWords = true): string;
+
+    public function getTextFromHtml(string $htmlContent): string;
 }

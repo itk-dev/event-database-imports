@@ -12,12 +12,12 @@ use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-final class DailyOccurrenceHandler
+final readonly class DailyOccurrenceHandler
 {
     public function __construct(
-        private readonly DailyOccurrencesFactory $dailyOccurrencesFactory,
-        private readonly EventRepository $eventRepository,
-        private readonly MessageBusInterface $messageBus,
+        private DailyOccurrencesFactory $dailyOccurrencesFactory,
+        private EventRepository         $eventRepository,
+        private MessageBusInterface     $messageBus,
     ) {
     }
 

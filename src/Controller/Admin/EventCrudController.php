@@ -21,7 +21,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 class EventCrudController extends AbstractBaseCrudController
 {
     public function __construct(
-        protected readonly int $excerptMaxLength,
         private readonly ImageHandlerInterface $imageHandler
     ) {
     }
@@ -56,7 +55,7 @@ class EventCrudController extends AbstractBaseCrudController
                 )->hideOnIndex()->hideOnForm(),
             TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
-                ->setMaxLength($this->excerptMaxLength)
+                ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
                 ->hideOnIndex(),
             TextEditorField::new('description')
                 ->setLabel(new TranslatableMessage('admin.event.basic.description'))
@@ -96,6 +95,10 @@ class EventCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
             AssociationField::new('organization')
                 ->setLabel(new TranslatableMessage('admin.event.edited.organization')),
+            AssociationField::new('feed')
+                ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
+                ->hideOnForm()
+                ->hideOnIndex(),
             DateTimeField::new('updated_at')
                 ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
                 ->setDisabled()

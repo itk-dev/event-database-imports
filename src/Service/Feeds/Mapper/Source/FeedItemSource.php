@@ -57,7 +57,7 @@ final class FeedItemSource
                 $this->setValues($output, $dest, [$value]);
             } else {
                 $value = $this->getValue([...$source], $src);
-                $this->setValue($output, $dest, $value ?? '');
+                $this->setValue($output, $dest, $value);
             }
         }
 

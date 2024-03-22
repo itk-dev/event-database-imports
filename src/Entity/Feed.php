@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\Feed\FeedConfiguration;
 use App\Repository\FeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,6 +52,12 @@ class Feed
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->configuration = FeedConfiguration::getConfigurationTemplate();
+    }
+
+    public function __toString(): string
+    {
+        return sprintf('%s (%d)', $this->name ?? '', $this->id ?? -1);
     }
 
     public function getId(): ?int

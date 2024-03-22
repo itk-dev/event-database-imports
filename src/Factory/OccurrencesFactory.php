@@ -8,11 +8,11 @@ use App\Model\Feed\FeedItemOccurrence;
 use App\Repository\OccurrenceRepository;
 use Psr\Log\LoggerInterface;
 
-final class OccurrencesFactory
+final readonly class OccurrencesFactory
 {
     public function __construct(
-        private readonly OccurrenceRepository $occurrenceRepository,
-        private readonly LoggerInterface $logger
+        private OccurrenceRepository $occurrenceRepository,
+        private LoggerInterface $logger
     ) {
     }
 
