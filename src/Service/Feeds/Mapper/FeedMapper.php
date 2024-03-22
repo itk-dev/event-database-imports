@@ -16,7 +16,7 @@ final readonly class FeedMapper implements FeedMapperInterface
 {
     public function __construct(
         private FeedDefaultsMapper $defaultsMapperService,
-        private LoggerInterface    $logger,
+        private LoggerInterface $logger,
     ) {
     }
 

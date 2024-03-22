@@ -32,7 +32,6 @@ final readonly class ContentNormalizer implements ContentNormalizerInterface
         return $crawler->filterXPath('//text()')->text();
     }
 
-
     /**
      * Trim content length on whole words.
      *

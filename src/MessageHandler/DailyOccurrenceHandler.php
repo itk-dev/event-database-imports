@@ -16,8 +16,8 @@ final readonly class DailyOccurrenceHandler
 {
     public function __construct(
         private DailyOccurrencesFactory $dailyOccurrencesFactory,
-        private EventRepository         $eventRepository,
-        private MessageBusInterface     $messageBus,
+        private EventRepository $eventRepository,
+        private MessageBusInterface $messageBus,
     ) {
     }
 

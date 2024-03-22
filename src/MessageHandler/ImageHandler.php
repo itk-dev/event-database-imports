@@ -16,9 +16,9 @@ final readonly class ImageHandler
 {
     public function __construct(
         private ImageHandlerInterface $imageHandler,
-        private ImageRepository       $imageRepository,
-        private MessageBusInterface   $messageBus,
-        private LoggerInterface       $logger,
+        private ImageRepository $imageRepository,
+        private MessageBusInterface $messageBus,
+        private LoggerInterface $logger,
     ) {
     }
 

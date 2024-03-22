@@ -17,10 +17,10 @@ use Symfony\Component\Messenger\MessageBusInterface;
 final readonly class GeocoderHandler
 {
     public function __construct(
-        private EventRepository     $eventRepository,
-        private Geocoder            $geocoderService,
-        private AddressRepository   $addressRepository,
-        private LoggerInterface     $logger,
+        private EventRepository $eventRepository,
+        private Geocoder $geocoderService,
+        private AddressRepository $addressRepository,
+        private LoggerInterface $logger,
         private MessageBusInterface $messageBus,
     ) {
     }
