@@ -5,10 +5,10 @@ namespace App\Factory;
 use App\Entity\Image as ImageEntity;
 use App\Repository\ImageRepository;
 
-final class ImageFactory
+final readonly class ImageFactory
 {
     public function __construct(
-        private readonly ImageRepository $imageRepository,
+        private ImageRepository $imageRepository,
     ) {
     }
 

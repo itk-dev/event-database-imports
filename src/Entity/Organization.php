@@ -33,12 +33,12 @@ class Organization implements IndexItemInterface
     #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     #[SerializedPath('[email]')]
     private ?string $mail = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value, IndexNames::Organizations->value])]
     private ?string $url = null;
 

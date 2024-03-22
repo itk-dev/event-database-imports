@@ -8,12 +8,12 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-final class IndexHandler
+final readonly class IndexHandler
 {
     public function __construct(
-        private readonly LoggerInterface $logger,
-        private readonly iterable $indexingServices,
-        private readonly iterable $repositories,
+        private LoggerInterface $logger,
+        private iterable $indexingServices,
+        private iterable $repositories,
     ) {
     }
 

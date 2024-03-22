@@ -14,14 +14,14 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
 #[AsMessageHandler]
-final class GeocoderHandler
+final readonly class GeocoderHandler
 {
     public function __construct(
-        private readonly EventRepository $eventRepository,
-        private readonly Geocoder $geocoderService,
-        private readonly AddressRepository $addressRepository,
-        private readonly LoggerInterface $logger,
-        private readonly MessageBusInterface $messageBus,
+        private EventRepository $eventRepository,
+        private Geocoder $geocoderService,
+        private AddressRepository $addressRepository,
+        private LoggerInterface $logger,
+        private MessageBusInterface $messageBus,
     ) {
     }
 

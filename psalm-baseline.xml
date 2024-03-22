@@ -15,11 +15,6 @@
       <code><![CDATA[$user]]></code>
     </InvalidArgument>
   </file>
-  <file src="src/Factory/EventFactory.php">
-    <PossiblyNullArgument>
-      <code><![CDATA[$item->title]]></code>
-    </PossiblyNullArgument>
-  </file>
   <file src="src/Factory/LocationFactory.php">
     <RedundantCondition>
       <code><![CDATA[empty($values)]]></code>
@@ -33,9 +28,6 @@
       <code><![CDATA[$source]]></code>
       <code><![CDATA[$source]]></code>
     </InvalidOperand>
-    <PossiblyInvalidArgument>
-      <code><![CDATA[$value ?? '']]></code>
-    </PossiblyInvalidArgument>
   </file>
   <file src="src/Service/Indexing/AbstractIndexingElastic.php">
     <ArgumentTypeCoercion>

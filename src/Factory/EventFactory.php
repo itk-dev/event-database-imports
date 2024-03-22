@@ -8,16 +8,18 @@ use App\Exception\FactoryException;
 use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
+use App\Utils\UriHelper;
 
-final class EventFactory
+final readonly class EventFactory
 {
     public function __construct(
-        private readonly EventRepository $eventRepository,
-        private readonly FeedRepository $feedRepository,
-        private readonly LocationFactory $locationFactory,
-        private readonly TagsFactory $tagsFactory,
-        private readonly OccurrencesFactory $occurrencesFactory,
-        private readonly ImageFactory $imageFactory,
+        private EventRepository $eventRepository,
+        private FeedRepository $feedRepository,
+        private LocationFactory $locationFactory,
+        private OrganizationFactory $organizationFactory,
+        private TagsFactory $tagsFactory,
+        private OccurrencesFactory $occurrencesFactory,
+        private ImageFactory $imageFactory,
     ) {
     }
 
@@ -32,10 +34,16 @@ final class EventFactory
         }
         $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
         $hash = $this->calculateHash($item);
+
+        $editedBy = $feed->getUser() ?? $feed;
+
         if (is_null($entity)) {
             $entity = new Event();
             $entity->setHash($hash);
             $this->setValues($entity, $item, $feed);
+
+            $entity->setCreatedBy((string) $editedBy);
+            $entity->setUpdatedBy((string) $editedBy);
 
             // Make it stick.
             $this->eventRepository->save($entity, true);
@@ -44,6 +52,8 @@ final class EventFactory
             if ($entity->getHash() !== $hash) {
                 $this->setValues($entity, $item, $feed);
                 $entity->setHash($hash);
+
+                $entity->setUpdatedBy((string) $editedBy);
 
                 // Make it stick.
                 $this->eventRepository->save($entity, true);
@@ -122,22 +132,23 @@ final class EventFactory
      */
     private function setValues(Event $entity, FeedItem $item, Feed $feed): void
     {
-        $entity->setTitle($item->title)
+        $base = $feed->getConfiguration()['base'] ?? null;
+
+        $entity->setTitle($item->title ?? '')
             ->setDescription($item->description)
             ->setExcerpt($item->excerpt)
             ->setFeedItemId($item->id)
-            ->setTicketUrl($this->getAbsoluteUrl($item->ticketUrl, $feed))
-            ->setUrl($this->getAbsoluteUrl($item->url, $feed) ?? '')
             ->setPublicAccess($item->publicAccess)
-            ->setOrganization($feed->getOrganization())
             ->setFeed($feed);
 
         $description = $entity->getDescription();
-        if (empty($entity->getExcerpt()) && !is_null($description)) {
-            $decoded = htmlspecialchars_decode($description);
-            $stripped = strip_tags($decoded);
-            $trimmed = trim($stripped);
-            $entity->setExcerpt($trimmed);
+
+        if (!is_null($item->ticketUrl)) {
+            $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
+        }
+
+        if (null !== $item->url && '' !== $item->url) {
+            $entity->setUrl(UriHelper::getAbsoluteUrl($item->url, $base));
         }
 
         if (!is_null($item->image)) {
@@ -155,34 +166,13 @@ final class EventFactory
             $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
         }
 
+        if (!is_null($item->organization)) {
+            $entity->setOrganization($this->organizationFactory->createOrUpdate($item->organization));
+        } else {
+            $entity->setOrganization($feed->getOrganization());
+        }
+
         // The feed items may come with occurrences The daly occurrences will be handled later on.
         $this->occurrencesFactory->createOrLookup($item->occurrences, $entity);
-
-        // @todo: Created_by (should we have feed user)
-    }
-
-    private function getAbsoluteUrl(?string $url, Feed $feed): ?string
-    {
-        if (null === $url) {
-            return null;
-        }
-
-        if (isset(parse_url($url)['host'])) {
-            return $url;
-        }
-
-        $conf = $feed->getConfiguration();
-
-        if (isset($conf['base'])) {
-            $baseUrl = rtrim($conf['base'], '/');
-            $path = ltrim($url, '/');
-
-            $abs = $baseUrl.'/'.$path;
-            if (filter_var($abs, FILTER_VALIDATE_URL)) {
-                return $abs;
-            }
-        }
-
-        throw new \RuntimeException(sprintf('Could not convert feed (%d) url (%s) to absolute url', $feed->getId() ?? 0, $url));
     }
 }

@@ -11,7 +11,7 @@ final class FeedItem
         public ?string $image = null,
         public ?string $ticketUrl = null,
         public ?string $title = null,
-        public string $url = '',
+        public ?string $url = null,
         public bool $publicAccess = true,
         /** @var array<FeedItemOccurrence> */
         public array $occurrences = [],

@@ -7,12 +7,13 @@ use App\Entity\Location;
 use App\Model\Feed\FeedItemLocation;
 use App\Repository\AddressRepository;
 use App\Repository\LocationRepository;
+use App\Utils\UriHelper;
 
-final class LocationFactory
+final readonly class LocationFactory
 {
     public function __construct(
-        private readonly LocationRepository $locationRepository,
-        private readonly AddressRepository $addressRepository
+        private LocationRepository $locationRepository,
+        private AddressRepository $addressRepository
     ) {
     }
 
@@ -59,7 +60,7 @@ final class LocationFactory
             $location->setImage($input->image);
         }
         if (!is_null($input->url)) {
-            $location->setUrl($input->url);
+            $location->setUrl(UriHelper::getAbsoluteUrl($input->url));
         }
         if (!is_null($input->name)) {
             $location->setName($input->name);

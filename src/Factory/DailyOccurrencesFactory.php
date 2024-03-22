@@ -10,12 +10,12 @@ use App\Repository\DailyOccurrenceRepository;
 use App\Service\TimeInterface;
 use Psr\Log\LoggerInterface;
 
-final class DailyOccurrencesFactory
+final readonly class DailyOccurrencesFactory
 {
     public function __construct(
-        private readonly TimeInterface $time,
-        private readonly DailyOccurrenceRepository $dailyOccurrenceRepository,
-        private readonly LoggerInterface $logger
+        private TimeInterface $time,
+        private DailyOccurrenceRepository $dailyOccurrenceRepository,
+        private LoggerInterface $logger
     ) {
     }
 

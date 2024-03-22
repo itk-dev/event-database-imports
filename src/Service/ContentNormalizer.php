@@ -2,13 +2,14 @@
 
 namespace App\Service;
 
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HtmlSanitizer\HtmlSanitizerInterface;
 use Symfony\Component\String\UnicodeString;
 
-final class ContentNormalizer implements ContentNormalizerInterface
+final readonly class ContentNormalizer implements ContentNormalizerInterface
 {
     public function __construct(
-        private readonly HtmlSanitizerInterface $feedHtmlSanitizer,
+        private HtmlSanitizerInterface $feedHtmlSanitizer,
     ) {
     }
 
@@ -21,7 +22,14 @@ final class ContentNormalizer implements ContentNormalizerInterface
     {
         $str = new UnicodeString($content);
 
-        return $onWords ? $this->wordSplitter($str, $maxLength) : $str->truncate($maxLength)->trim()->toString();
+        return $onWords ? $this->wordSplitter($str, $maxLength) : $str->trim()->truncate($maxLength)->toString();
+    }
+
+    public function getTextFromHtml(string $htmlContent): string
+    {
+        $crawler = new Crawler($htmlContent);
+
+        return $crawler->filterXPath('//text()')->text();
     }
 
     /**

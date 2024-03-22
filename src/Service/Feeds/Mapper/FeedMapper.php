@@ -12,11 +12,11 @@ use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 use Psr\Log\LoggerInterface;
 
-final class FeedMapper implements FeedMapperInterface
+final readonly class FeedMapper implements FeedMapperInterface
 {
     public function __construct(
-        private readonly FeedDefaultsMapper $defaultsMapperService,
-        private readonly LoggerInterface $logger,
+        private FeedDefaultsMapper $defaultsMapperService,
+        private LoggerInterface $logger,
     ) {
     }
 

@@ -17,15 +17,15 @@ framework:
                 dsn: '%env(MESSENGER_TRANSPORT_DSN_FAILED)%'
 
         routing:
-            'App\Message\DailyOccurrenceMessage': async
-            'App\Message\EventMessage': async
-            'App\Message\FeedItemDataMessage': async
-            'App\Message\FeedNormalizationMessage': async
-            'App\Message\GeocoderMessage': async
-            'App\Message\ImageMessage': async
-            'App\Message\IndexMessage': async
-            'Liip\ImagineBundle\Message\WarmupCache': async
-            'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
+#            'App\Message\DailyOccurrenceMessage': async
+#            'App\Message\EventMessage': async
+#            'App\Message\FeedItemDataMessage': async
+#            'App\Message\FeedNormalizationMessage': async
+#            'App\Message\GeocoderMessage': async
+#            'App\Message\ImageMessage': async
+#            'App\Message\IndexMessage': async
+#            'Liip\ImagineBundle\Message\WarmupCache': async
+#            'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
 
 when@test:
     framework:
