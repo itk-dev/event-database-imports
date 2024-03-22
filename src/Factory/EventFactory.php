@@ -134,12 +134,11 @@ final readonly class EventFactory
     {
         $base = $feed->getConfiguration()['base'] ?? null;
 
-        $entity->setTitle($item->title)
+        $entity->setTitle($item->title ?? '')
             ->setDescription($item->description)
             ->setExcerpt($item->excerpt)
             ->setFeedItemId($item->id)
             ->setPublicAccess($item->publicAccess)
-            ->setUrl($item->url)
             ->setFeed($feed);
 
         $description = $entity->getDescription();
@@ -148,7 +147,7 @@ final readonly class EventFactory
             $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
         }
 
-        if ('' !== $item->url) {
+        if (null !== $item->url && '' !== $item->url) {
             $entity->setUrl(UriHelper::getAbsoluteUrl($item->url, $base));
         }
 

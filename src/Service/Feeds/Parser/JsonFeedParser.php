@@ -74,6 +74,6 @@ final readonly class JsonFeedParser implements FeedParserInterface
             $query .= '&'.$pageParameter.'='.$page.'&'.$limitParameter.'='.$limit;
         }
 
-        return $uri->withQuery($query);
+        return $uri->withQuery($query)->toString();
     }
 }

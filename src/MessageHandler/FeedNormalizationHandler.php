@@ -39,7 +39,7 @@ final readonly class FeedNormalizationHandler
         if (empty($item->excerpt) && !empty($item->description)) {
             $item->excerpt = $item->description;
         }
-        $item->excerpt = $this->contentNormalizer->sanitize($item->excerpt);
+        $item->excerpt = $this->contentNormalizer->sanitize($item->excerpt ?? '');
         $item->excerpt = $this->contentNormalizer->getTextFromHtml($item->excerpt);
         $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, Event::EXCERPT_MAX_LENGTH);
 
