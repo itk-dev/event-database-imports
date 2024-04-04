@@ -47,9 +47,11 @@ class MigrateTagsCommand extends Command
             return Command::FAILURE;
         }
 
+        $view = null;
+
         do {
             try {
-                $path = $view->{'hydra:next'} ?? self::TAGS_ENDPOINT;
+                $path = $view?->{'hydra:next'} ?? self::TAGS_ENDPOINT;
                 $url = self::LEGACY_API.$path;
 
                 $response = $this->client->request('GET', $url, ['headers' => ['accept' => 'application/ld+json']]);
