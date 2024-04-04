@@ -17,6 +17,10 @@
         <source>user.mail.not_valid</source>
         <target state="needs-l10n">__user.mail.not_valid</target>
       </trans-unit>
+      <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
+        <source>admin.feed.configuration.json_invalid</source>
+        <target state="needs-l10n">__admin.feed.configuration.json_invalid</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -28,6 +28,7 @@ class Vocabulary implements IndexItemInterface
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'vocabularies', cascade: ['persist'])]
+    #[ORM\OrderBy(['name' => 'ASC'])]
     #[Groups([IndexNames::Vocabularies->value])]
     private Collection $tags;
 

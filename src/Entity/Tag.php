@@ -43,7 +43,7 @@ class Tag implements IndexItemInterface, EditableEntityInterface
 
     public function __toString(): string
     {
-        return sprintf('%s (%d)', $this->name ?? '', $this->id ?? -1);
+        return $this->name ?? '';
     }
 
     public function getId(): ?int

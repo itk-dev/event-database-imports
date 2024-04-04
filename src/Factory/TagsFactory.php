@@ -3,6 +3,7 @@
 namespace App\Factory;
 
 use App\Entity\Tag;
+use App\Entity\Vocabulary;
 use App\Repository\TagRepository;
 
 final readonly class TagsFactory
@@ -21,7 +22,7 @@ final readonly class TagsFactory
      * @return iterable<Tag>
      *   Yield tag entities from the database
      */
-    public function createOrLookup(array $tagNames): iterable
+    public function createOrLookup(array $tagNames, ?Vocabulary $vocabulary = null): iterable
     {
         // Normalize to lowercase
         $tagNames = array_map(fn ($value): string => mb_strtolower($value), $tagNames);
@@ -33,8 +34,13 @@ final readonly class TagsFactory
             if (is_null($tag)) {
                 $tag = new Tag();
                 $tag->setName($tagName);
-                $this->tagRepository->save($tag);
             }
+
+            if (!is_null($vocabulary)) {
+                $tag->addVocabulary($vocabulary);
+            }
+
+            $this->tagRepository->save($tag);
 
             yield $tag;
         }
