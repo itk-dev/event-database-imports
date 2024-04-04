@@ -48,6 +48,7 @@ class MigrateTagsCommand extends Command
         }
 
         $view = null;
+        $created = 0;
 
         do {
             try {
@@ -65,7 +66,9 @@ class MigrateTagsCommand extends Command
                 }
 
                 foreach ($decoded->{'hydra:member'} as $member) {
-                    $this->tagsFactory->createOrLookup([$member->name], $vocabulary);
+                    foreach ($this->tagsFactory->createOrLookup([$member->name], $vocabulary) as $tag) {
+                        ++$created;
+                    }
                     $io->progressAdvance();
                 }
             } catch (TransportExceptionInterface|\JsonException|ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface $e) {
@@ -79,7 +82,7 @@ class MigrateTagsCommand extends Command
 
         $io->progressFinish();
 
-        $io->success(sprintf('%s tags migrated', $decoded->{'hydra:totalItems'}));
+        $io->success(sprintf('%s tags migrated', $created));
 
         return Command::SUCCESS;
     }
