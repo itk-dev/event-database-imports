@@ -45,7 +45,7 @@ class FeedCrudController extends AbstractBaseCrudController
                 ->setLanguage('js')
                 ->hideOnIndex()
                 ->setFormTypeOptions(
-                    ['constraints' => [new Json(['message' => 'Configuration JSON is not valid'])]]
+                    ['constraints' => [new Json(['message' => 'admin.feed.configuration.json_invalid'])]]
                 ),
 
             BooleanField::new('enabled'),

@@ -17,6 +17,10 @@
         <source>user.mail.not_valid</source>
         <target>The email {{ value }} is not a valid email</target>
       </trans-unit>
+      <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
+        <source>admin.feed.configuration.json_invalid</source>
+        <target>Configuration JSON is not valid</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

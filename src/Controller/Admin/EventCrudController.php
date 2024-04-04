@@ -50,7 +50,7 @@ class EventCrudController extends AbstractBaseCrudController
             ImageField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
                 ->formatValue(function ($value) {
-                    return $this->imageHandler->getTransformedImageUrls($value->getLocal())['large'];
+                    return null === $value ? null : $this->imageHandler->getTransformedImageUrls($value->getLocal())['large'];
                 }
                 )->hideOnIndex()->hideOnForm(),
             TextareaField::new('excerpt')

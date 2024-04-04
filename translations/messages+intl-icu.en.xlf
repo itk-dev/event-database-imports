@@ -13,10 +13,6 @@
         <source>admin.address.street</source>
         <target>Street</target>
       </trans-unit>
-      <trans-unit id="lPhmX0t" resname="admin.address.suite">
-        <source>admin.address.suite</source>
-        <target>Suite</target>
-      </trans-unit>
       <trans-unit id="iMZcb7T" resname="admin.address.region">
         <source>admin.address.region</source>
         <target>Region</target>
@@ -85,7 +81,7 @@
         <source>admin.link.tags</source>
         <target>Tags</target>
       </trans-unit>
-      <trans-unit id="hKvTzZo" resname="admin.link.organizations">
+      <trans-unit id="uyCCXxW" resname="admin.link.organizations">
         <source>admin.link.organizations</source>
         <target>Organizations</target>
       </trans-unit>
@@ -100,10 +96,6 @@
       <trans-unit id="4bHsKHg" resname="admin.event.basic.headline">
         <source>admin.event.basic.headline</source>
         <target>Basic information</target>
-      </trans-unit>
-      <trans-unit id="cATaFWH" resname="admin.event.basic.title">
-        <source>admin.event.basic.title</source>
-        <target>Title</target>
       </trans-unit>
       <trans-unit id="dbv61rM" resname="admin.event.basic.excerpt">
         <source>admin.event.basic.excerpt</source>
@@ -161,9 +153,9 @@
         <source>admin.feed.configuration</source>
         <target>Configuration</target>
       </trans-unit>
-      <trans-unit id="f0RmQAD" resname="admin.feed.configuration.help">
-        <source>admin.feed.configuration</source>
-        <target>Configuration mapping: feedKey -> eventDbKey</target>
+      <trans-unit id="SXndqQM" resname="admin.feed.configuration.help">
+        <source>admin.feed.configuration.help</source>
+        <target><![CDATA[Configuration mapping: feedKey -> eventDbKey]]></target>
       </trans-unit>
       <trans-unit id="rjtWHu0" resname="admin.feed.edited.headline">
         <source>admin.feed.edited.headline</source>
@@ -305,10 +297,6 @@
         <source>admin.organization.edited.updated</source>
         <target>Last updated</target>
       </trans-unit>
-      <trans-unit id="kckcQQ2" resname="admin.tag.id">
-        <source>admin.tag.id</source>
-        <target>ID</target>
-      </trans-unit>
       <trans-unit id="Y3git6Q" resname="admin.tag.name">
         <source>admin.tag.name</source>
         <target>Name</target>
@@ -436,6 +424,46 @@
       <trans-unit id="DIwKV9d" resname="email.confirm.link_will_expire_in">
         <source>email.confirm.link_will_expire_in</source>
         <target>This link will expire in</target>
+      </trans-unit>
+      <trans-unit id="AUw9Rk3" resname="admin.event.admin.image.local">
+        <source>admin.event.admin.image.local</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="CqnvasT" resname="admin.event.occurrences">
+        <source>admin.event.occurrences</source>
+        <target>Occurrences</target>
+      </trans-unit>
+      <trans-unit id="fVICSO8" resname="admin.event.edited.feed">
+        <source>admin.event.edited.feed</source>
+        <target>Feed</target>
+      </trans-unit>
+      <trans-unit id="TF0JmdU" resname="admin.link.vocabularies">
+        <source>admin.link.vocabularies</source>
+        <target>Vocabularies</target>
+      </trans-unit>
+      <trans-unit id="MlEyI2c" resname="admin.image.event">
+        <source>admin.image.event</source>
+        <target>Event</target>
+      </trans-unit>
+      <trans-unit id="0SuBxKI" resname="admin.image.local">
+        <source>admin.image.local</source>
+        <target>Image</target>
+      </trans-unit>
+      <trans-unit id="xpmbUfG" resname="admin.vocabulary.name">
+        <source>admin.vocabulary.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="QeiEWm5" resname="admin.vocabulary.tags">
+        <source>admin.vocabulary.tags</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="QlL7qDl" resname="admin.vocabulary.edited.headline">
+        <source>admin.vocabulary.edited.headline</source>
+        <target>Authoring information</target>
+      </trans-unit>
+      <trans-unit id="CvrRLOt" resname="admin.vocabulary.edited.updated">
+        <source>admin.vocabulary.edited.updated</source>
+        <target>Updated</target>
       </trans-unit>
     </body>
   </file>

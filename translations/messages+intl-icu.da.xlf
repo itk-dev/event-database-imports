@@ -13,10 +13,6 @@
         <source>admin.address.street</source>
         <target state="needs-l10n">__admin.address.street</target>
       </trans-unit>
-      <trans-unit id="lPhmX0t" resname="admin.address.suite">
-        <source>admin.address.suite</source>
-        <target state="needs-l10n">__admin.address.suite</target>
-      </trans-unit>
       <trans-unit id="iMZcb7T" resname="admin.address.region">
         <source>admin.address.region</source>
         <target state="needs-l10n">__admin.address.region</target>
@@ -65,10 +61,6 @@
         <source>admin.link.tags</source>
         <target state="needs-l10n">__admin.link.tags</target>
       </trans-unit>
-      <trans-unit id="hKvTzZo" resname="admin.link.organizer">
-        <source>admin.link.organizer</source>
-        <target state="needs-l10n">__admin.link.organizer</target>
-      </trans-unit>
       <trans-unit id="3ohrj0." resname="admin.link.users">
         <source>admin.link.users</source>
         <target state="needs-l10n">__admin.link.users</target>
@@ -100,10 +92,6 @@
       <trans-unit id="4bHsKHg" resname="admin.event.basic.headline">
         <source>admin.event.basic.headline</source>
         <target state="needs-l10n">__admin.event.basic.headline</target>
-      </trans-unit>
-      <trans-unit id="cATaFWH" resname="admin.event.basic.title">
-        <source>admin.event.basic.title</source>
-        <target state="needs-l10n">__admin.event.basic.title</target>
       </trans-unit>
       <trans-unit id="dbv61rM" resname="admin.event.basic.excerpt">
         <source>admin.event.basic.excerpt</source>
@@ -301,10 +289,6 @@
         <source>admin.organization.edited.updated</source>
         <target state="needs-l10n">__admin.organization.edited.updated</target>
       </trans-unit>
-      <trans-unit id="kckcQQ2" resname="admin.tag.id">
-        <source>admin.tag.id</source>
-        <target state="needs-l10n">__admin.tag.id</target>
-      </trans-unit>
       <trans-unit id="Y3git6Q" resname="admin.tag.name">
         <source>admin.tag.name</source>
         <target state="needs-l10n">__admin.tag.name</target>
@@ -432,6 +416,54 @@
       <trans-unit id="DIwKV9d" resname="email.confirm.link_will_expire_in">
         <source>email.confirm.link_will_expire_in</source>
         <target state="needs-l10n">__email.confirm.link_will_expire_in</target>
+      </trans-unit>
+      <trans-unit id="SXndqQM" resname="admin.feed.configuration.help">
+        <source>admin.feed.configuration.help</source>
+        <target state="needs-l10n">__admin.feed.configuration.help</target>
+      </trans-unit>
+      <trans-unit id="AUw9Rk3" resname="admin.event.admin.image.local">
+        <source>admin.event.admin.image.local</source>
+        <target state="needs-l10n">__admin.event.admin.image.local</target>
+      </trans-unit>
+      <trans-unit id="CqnvasT" resname="admin.event.occurrences">
+        <source>admin.event.occurrences</source>
+        <target state="needs-l10n">__admin.event.occurrences</target>
+      </trans-unit>
+      <trans-unit id="fVICSO8" resname="admin.event.edited.feed">
+        <source>admin.event.edited.feed</source>
+        <target state="needs-l10n">__admin.event.edited.feed</target>
+      </trans-unit>
+      <trans-unit id="TF0JmdU" resname="admin.link.vocabularies">
+        <source>admin.link.vocabularies</source>
+        <target state="needs-l10n">__admin.link.vocabularies</target>
+      </trans-unit>
+      <trans-unit id="uyCCXxW" resname="admin.link.organizations">
+        <source>admin.link.organizations</source>
+        <target state="needs-l10n">__admin.link.organizations</target>
+      </trans-unit>
+      <trans-unit id="MlEyI2c" resname="admin.image.event">
+        <source>admin.image.event</source>
+        <target state="needs-l10n">__admin.image.event</target>
+      </trans-unit>
+      <trans-unit id="0SuBxKI" resname="admin.image.local">
+        <source>admin.image.local</source>
+        <target state="needs-l10n">__admin.image.local</target>
+      </trans-unit>
+      <trans-unit id="xpmbUfG" resname="admin.vocabulary.name">
+        <source>admin.vocabulary.name</source>
+        <target state="needs-l10n">__admin.vocabulary.name</target>
+      </trans-unit>
+      <trans-unit id="QeiEWm5" resname="admin.vocabulary.tags">
+        <source>admin.vocabulary.tags</source>
+        <target state="needs-l10n">__admin.vocabulary.tags</target>
+      </trans-unit>
+      <trans-unit id="QlL7qDl" resname="admin.vocabulary.edited.headline">
+        <source>admin.vocabulary.edited.headline</source>
+        <target state="needs-l10n">__admin.vocabulary.edited.headline</target>
+      </trans-unit>
+      <trans-unit id="CvrRLOt" resname="admin.vocabulary.edited.updated">
+        <source>admin.vocabulary.edited.updated</source>
+        <target state="needs-l10n">__admin.vocabulary.edited.updated</target>
       </trans-unit>
     </body>
   </file>
