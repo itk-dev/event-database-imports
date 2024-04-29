@@ -15,7 +15,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
         "easycorp/easyadmin-bundle": "^4.8",
-        "elasticsearch/elasticsearch": "^8.10",
+        "elasticsearch/elasticsearch": "^8.13",
         "guzzlehttp/guzzle": "^7.7",
         "league/uri": "^7.4",
         "liip/imagine-bundle": "^2.11",

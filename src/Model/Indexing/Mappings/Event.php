@@ -3,6 +3,7 @@
 namespace App\Model\Indexing\Mappings;
 
 use App\Model\Indexing\IndexFieldTypes;
+use App\Service\Indexing\AbstractIndexingElastic;
 
 class Event implements MappingsInterface
 {
@@ -13,9 +14,17 @@ class Event implements MappingsInterface
         ],
         'title' => [
             'type' => 'text',
+            'analyzer' => AbstractIndexingElastic::EDGE_NGRAM_ANALYZER,
+            'search_analyzer' => 'standard',
+            'fields' => [
+                'keyword' => [
+                    'type' => 'keyword',
+                ],
+            ],
             'index_options' => 'docs',
             'index' => true,
             'norms' => false,
+            'fielddata' => true,
         ],
         'excerpt' => [
             'type' => 'text',

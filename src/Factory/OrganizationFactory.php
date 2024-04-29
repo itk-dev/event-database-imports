@@ -51,10 +51,12 @@ final readonly class OrganizationFactory
      */
     private function getOrganization(FeedItemOrganization $organization): ?Organization
     {
-        $values = array_filter([
+        if (null === $organization->name || '' === trim($organization->name)) {
+            return null;
+        }
+
+        return $this->organizationRepository->findOneBy([
             'name' => $organization->name,
         ]);
-
-        return $this->organizationRepository->findOneBy($values);
     }
 }

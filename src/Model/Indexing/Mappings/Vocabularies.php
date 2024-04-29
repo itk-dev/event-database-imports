@@ -9,7 +9,14 @@ class Vocabularies implements MappingsInterface
             'type' => 'keyword',
             'index_options' => 'docs',
             'index' => true,
-            'doc_values' => false,
+            'doc_values' => true,
+            'norms' => false,
+        ],
+        'slug' => [
+            'type' => 'keyword',
+            'index_options' => 'docs',
+            'index' => true,
+            'doc_values' => true,
             'norms' => false,
         ],
         'description' => [

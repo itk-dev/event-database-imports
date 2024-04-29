@@ -43,8 +43,10 @@ final class IndexingEvents extends AbstractIndexingElastic
         $data['dailyOccurrences'] = array_values($data['dailyOccurrences']);
 
         // Fix image urls (with a full path and derived sizes).
-        $imageUrl = $data['imageUrls']['original'];
-        $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageHandler->getTransformedImageUrls($imageUrl);
+        if ($data['imageUrls']) {
+            $imageUrl = $data['imageUrls']['original'];
+            $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageHandler->getTransformedImageUrls($imageUrl);
+        }
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
         $data['location'] = $this->indexingLocations->serialize($item->getLocation());

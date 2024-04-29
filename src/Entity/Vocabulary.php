@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Model\Indexing\IndexNames;
 use App\Repository\VocabularyRepository;
 use App\Service\Indexing\IndexItemInterface;
+use App\Service\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VocabularyRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Vocabulary implements IndexItemInterface
 {
     use TimestampableEntity;
@@ -26,6 +28,10 @@ class Vocabulary implements IndexItemInterface
     #[ORM\Column(length: 255, unique: true)]
     #[Groups([IndexNames::Vocabularies->value, IndexNames::Tags->value])]
     private ?string $name = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+    #[Groups([IndexNames::Vocabularies->value, IndexNames::Tags->value])]
+    private ?string $slug = null;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'vocabularies', cascade: ['persist'])]
     #[ORM\OrderBy(['name' => 'ASC'])]
@@ -59,6 +65,20 @@ class Vocabulary implements IndexItemInterface
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function setSlug(): static
+    {
+        $this->slug = Slugger::slugify($this->name);
 
         return $this;
     }

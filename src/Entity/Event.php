@@ -45,7 +45,7 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Events->value])]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value])]
     private ?string $url = null;
 

@@ -2,6 +2,8 @@
 
 namespace App\Model\Indexing\Mappings;
 
+use App\Service\Indexing\AbstractIndexingElastic;
+
 class Location implements MappingsInterface
 {
     public const array PROPERTIES = [
@@ -11,9 +13,17 @@ class Location implements MappingsInterface
         ],
         'name' => [
             'type' => 'text',
+            'analyzer' => AbstractIndexingElastic::EDGE_NGRAM_ANALYZER,
+            'search_analyzer' => 'standard',
+            'fields' => [
+                'keyword' => [
+                    'type' => 'keyword',
+                ],
+            ],
             'index_options' => 'docs',
             'index' => true,
             'norms' => false,
+            'fielddata' => true,
         ],
         'image' => [
             'type' => 'keyword',

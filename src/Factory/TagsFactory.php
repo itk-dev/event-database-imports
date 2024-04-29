@@ -5,6 +5,7 @@ namespace App\Factory;
 use App\Entity\Tag;
 use App\Entity\Vocabulary;
 use App\Repository\TagRepository;
+use App\Service\Slugger;
 
 final readonly class TagsFactory
 {
@@ -30,7 +31,7 @@ final readonly class TagsFactory
         $tagNames = array_flip($tagNames);
 
         foreach ($tagNames as $tagName => $value) {
-            $tag = $this->tagRepository->findOneBy(['name' => $tagName]);
+            $tag = $this->tagRepository->findOneBy(['slug' => Slugger::slugify($tagName)]);
             if (is_null($tag)) {
                 $tag = new Tag();
                 $tag->setName($tagName);

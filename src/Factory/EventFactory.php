@@ -44,21 +44,14 @@ final readonly class EventFactory
 
             $entity->setCreatedBy((string) $editedBy);
             $entity->setUpdatedBy((string) $editedBy);
-
-            // Make it stick.
-            $this->eventRepository->save($entity, true);
         } else {
-            // Check if hash has changed, before trying to update it.
-            if ($entity->getHash() !== $hash) {
-                $this->setValues($entity, $item, $feed);
-                $entity->setHash($hash);
+            $this->setValues($entity, $item, $feed);
+            $entity->setHash($hash);
 
-                $entity->setUpdatedBy((string) $editedBy);
-
-                // Make it stick.
-                $this->eventRepository->save($entity, true);
-            }
+            $entity->setUpdatedBy((string) $editedBy);
         }
+
+        $this->eventRepository->save($entity, true);
 
         return $entity;
     }
@@ -84,7 +77,7 @@ final readonly class EventFactory
         $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
         if (!is_null($entity) && $entity->getHash() === $this->calculateHash($item)) {
             // Entity exists for the item and the hash has not changed.
-            return false;
+            // return false;
         }
 
         return true;

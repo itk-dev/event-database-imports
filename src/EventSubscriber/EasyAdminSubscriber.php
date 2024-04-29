@@ -8,6 +8,7 @@ use App\Entity\Feed;
 use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
+use App\Entity\Vocabulary;
 use App\Message\ImageMessage;
 use App\Service\ContentNormalizerInterface;
 use App\Service\EventFinder;
@@ -93,6 +94,14 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
         if ($entity instanceof Feed) {
             $entity->setConfigurationValue();
+        }
+
+        if ($entity instanceof Tag) {
+            $entity->setSlug();
+        }
+
+        if ($entity instanceof Vocabulary) {
+            $entity->setSlug();
         }
     }
 

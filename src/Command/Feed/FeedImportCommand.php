@@ -11,6 +11,10 @@ use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableCell;
+use Symfony\Component\Console\Helper\TableCellStyle;
+use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -56,16 +60,30 @@ final class FeedImportCommand extends Command
             return Command::FAILURE;
         }
 
-        $progressBar = new ProgressBar($output);
-        $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current%');
+        $section = $output->section();
+
+        $progressBar = new ProgressBar($section);
+        $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current% - %message%');
+
+        $table = new Table($section);
+        $table->setHeaders(['ID', 'Feed', '#imported', 'Time']);
+        $table->render();
+
+        $count = count($feeds);
+        $pointer = 0;
+        $totalTime = 0.0;
 
         /** @var Feed $feed */
         foreach ($feeds as $feed) {
+            $start = hrtime(true);
+
             if (!$feed->isEnabled()) {
                 $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
 
                 return Command::FAILURE;
             }
+
+            $progressBar->setMessage(sprintf('%d/%d Importing feed %s …', ++$pointer, $count, $feed));
 
             $index = 0;
             $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
@@ -89,11 +107,31 @@ final class FeedImportCommand extends Command
                 }
             }
 
+            $end = hrtime(true);
+            $time = ($end - $start) / 1000000000;
+            $totalTime += $time;
+
+            $table->appendRow([
+                new TableCell((string) $feed->getId(), ['style' => new TableCellStyle(['align' => 'right'])]),
+                $feed->getName(),
+                new TableCell((string) $index, ['style' => new TableCellStyle(['align' => 'right'])]),
+                new TableCell(number_format($time, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+            ]);
+
             $feed->setLastRead(new \DateTimeImmutable());
             $this->feedRepository->save($feed, true);
         }
 
         $progressBar->finish();
+
+        $table->appendRow(new TableSeparator());
+        $table->appendRow([
+            '',
+            '',
+            new TableCell((string) $progressBar->getProgress(), ['style' => new TableCellStyle(['align' => 'right'])]),
+            new TableCell(number_format($totalTime, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+        ]);
+
         $io->success('Feed(s) import completed.');
 
         return Command::SUCCESS;

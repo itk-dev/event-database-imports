@@ -9,7 +9,9 @@ class OccurrenceWithEvent implements MappingsInterface
     {
         $properties = Occurrence::getProperties();
 
-        $properties['event'] = ['properties' => EventWithOccurrences::getProperties()];
+        $properties['event'] = [
+            'properties' => EventWithOccurrences::getProperties(),
+        ];
 
         return $properties;
     }
