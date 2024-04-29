@@ -43,6 +43,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Updated feed import suite to support more feeds
 - Updated feed mapping to support data migration
 - Added migrate command fro tags from legacy db
+- Updated elastic indexes to support the API
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop

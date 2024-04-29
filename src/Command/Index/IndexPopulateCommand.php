@@ -51,31 +51,37 @@ final class IndexPopulateCommand extends Command
         $id = (int) $input->getOption('id');
         $force = $input->getOption('force');
 
-        foreach ($inputIndexes as $index) {
-            if (!in_array($index, IndexNames::values())) {
-                $io->error(sprintf('Index %s does not exist', $index));
+        try {
+            foreach ($inputIndexes as $index) {
+                if (!in_array($index, IndexNames::values())) {
+                    $io->error(sprintf('Index %s does not exist', $index));
 
-                return Command::FAILURE;
+                    return Command::FAILURE;
+                }
+
+                $section = $output->section();
+                $progressBar = new ProgressBar($section);
+                $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
+                $progressBar->start();
+                $progressBar->setMessage(sprintf('Populating index %s …', $index));
+                $progressBar->display();
+
+                foreach ($this->populate->populate($index, $id, $force) as $message) {
+                    $progressBar->setMessage($message);
+                    $progressBar->advance();
+                }
+
+                $progressBar->finish();
             }
 
-            $section = $output->section();
-            $progressBar = new ProgressBar($section);
-            $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
-            $progressBar->start();
-            $progressBar->setMessage(sprintf('Populating index %s …', $index));
-            $progressBar->display();
+            // Start the command line on a new line.
+            $output->writeln('');
 
-            foreach ($this->populate->populate($index, $id, $force) as $message) {
-                $progressBar->setMessage($message);
-                $progressBar->advance();
-            }
+            return Command::SUCCESS;
+        } catch (\Exception $exception) {
+            $io->error($exception->getMessage());
 
-            $progressBar->finish();
+            return Command::FAILURE;
         }
-
-        // Start the command line on a new line.
-        $output->writeln('');
-
-        return Command::SUCCESS;
     }
 }

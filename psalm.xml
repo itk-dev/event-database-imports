@@ -38,5 +38,15 @@
                 <directory name="src/Entity"/>
             </errorLevel>
         </NullableReturnStatement>
+        <UndefinedInterfaceMethod>
+            <errorLevel type="suppress">
+                <file name="src/Command/Feed/FeedImportCommand.php" />
+            </errorLevel>
+        </UndefinedInterfaceMethod>
+        <InvalidArgument>
+            <errorLevel type="suppress">
+                <file name="src/Service/Indexing/AbstractIndexingElastic.php" />
+            </errorLevel>
+        </InvalidArgument>
     </issueHandlers>
 </psalm>

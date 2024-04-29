@@ -99,7 +99,7 @@ final class Geocoder implements GeocoderInterface
             'GET',
             'https://api.dataforsyningen.dk/datavask/adgangsadresser',
             [
-              'query' => ['betegnelse' => $query],
+                'query' => ['betegnelse' => $query],
             ]
         );
         if (Response::HTTP_OK !== $response->getStatusCode()) {

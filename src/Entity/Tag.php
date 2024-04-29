@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Model\Indexing\IndexNames;
 use App\Repository\TagRepository;
 use App\Service\Indexing\IndexItemInterface;
+use App\Service\Slugger;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,6 +14,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Tag implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
@@ -31,6 +33,10 @@ class Tag implements IndexItemInterface, EditableEntityInterface
     #[ORM\Column(length: 255, unique: true)]
     #[Groups([IndexNames::Tags->value, IndexNames::Vocabularies->value, IndexNames::Events->value])]
     private ?string $name = null;
+
+    #[ORM\Column(length: 255, unique: true)]
+    #[Groups([IndexNames::Tags->value, IndexNames::Vocabularies->value, IndexNames::Events->value])]
+    private ?string $slug = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'tags')]
     private Collection $events;
@@ -86,6 +92,20 @@ class Tag implements IndexItemInterface, EditableEntityInterface
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
+    public function setSlug(): static
+    {
+        $this->slug = Slugger::slugify($this->name);
 
         return $this;
     }

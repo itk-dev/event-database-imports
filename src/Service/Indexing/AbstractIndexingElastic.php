@@ -21,10 +21,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractIndexingElastic implements IndexingInterface
 {
+    public const string EDGE_NGRAM_ANALYZER = 'edge_ngram_analyzer';
+
     /**
      * Subclasses should override this value.
      */
     protected const string INDEX_ALIAS = 'abstract_error';
+
     private ?string $newIndexName = null;
 
     public function __construct(
@@ -332,6 +335,24 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                     'settings' => [
                         'number_of_shards' => 5,
                         'number_of_replicas' => 0,
+                        'analysis' => [
+                            'analyzer' => [
+                                self::EDGE_NGRAM_ANALYZER => [
+                                    'tokenizer' => 'edge_ngram_tokenizer',
+                                ],
+                            ],
+                            'tokenizer' => [
+                                'edge_ngram_tokenizer' => [
+                                    'type' => 'edge_ngram',
+                                    'min_gram' => 2,
+                                    'max_gram' => 10,
+                                    'token_chars' => [
+                                        'letter',
+                                        'digit',
+                                    ],
+                                ],
+                            ],
+                        ],
                     ],
                     'mappings' => [
                         'dynamic' => 'strict',

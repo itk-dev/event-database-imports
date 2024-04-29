@@ -54,7 +54,18 @@ final class FeedItemSource
             // Match dest with ".*." single value into array mapping.
             elseif (str_contains($dest, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $value = $this->getValue([...$source], $src);
-                $this->setValues($output, $dest, [$value]);
+                $exploded = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR, $dest);
+                $key = array_shift($exploded);
+                $key = $this->transformKey($key);
+
+                $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
+                    ->disableExceptionOnInvalidPropertyPath()
+                    ->getPropertyAccessor();
+
+                $valueCount = count($propertyAccessor->getValue($output, $key));
+                $values = array_fill(0, $valueCount, $value);
+
+                $this->setValues($output, $dest, $values);
             } else {
                 $value = $this->getValue([...$source], $src);
                 $this->setValue($output, $dest, $value);
@@ -83,9 +94,7 @@ final class FeedItemSource
             ->getPropertyAccessor();
         $key = $this->transformKey($src);
 
-        $value = $propertyAccessor->getValue($data, $key);
-
-        return $value;
+        return $propertyAccessor->getValue($data, $key);
     }
 
     /**
