@@ -62,7 +62,7 @@ class ImageCrudController extends AbstractBaseCrudController
                 ->hideWhenCreating()
                 ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
-            ];
+        ];
     }
 
     private function getImageUrl(?string $imageUrl, string $size): ?string
