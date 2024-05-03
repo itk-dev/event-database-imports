@@ -15,13 +15,13 @@ security:
             security: false
         main:
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: app_admin_login
+                check_path: app_admin_login
                 enable_csrf: true
 
             logout:
-                path: app_logout
-                target: app_login
+                path: app_admin_logout
+                target: app_admin_login
 
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
@@ -29,6 +29,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/admin/login, , roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: !php/enum App\Types\UserRoles::ROLE_API_USER->value }
         # - { path: ^/profile, roles: ROLE_USER }
 
