@@ -42,3 +42,6 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - .:/app
+    depends_on:
+      - rabbit
+      - mariadb
