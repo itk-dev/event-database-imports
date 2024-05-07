@@ -44,4 +44,3 @@ services:
       - .:/app
     depends_on:
       - rabbit
-      - mariadb
