@@ -29,6 +29,10 @@ services:
         App\Repository\PopulateInterface:
             tags: [ 'populate_interface' ]
 
+    App\Asset\EasyAdminAssetPackage:
+        arguments:
+            $assetBasePath: '%env(APP_PATH_PREFIX)%'
+
     App\Command\Index\IndexCreateCommand:
         arguments:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }

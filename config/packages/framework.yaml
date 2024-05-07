@@ -21,6 +21,9 @@ framework:
     php_errors:
         log: true
 
+    assets:
+        base_path: '%env(APP_PATH_PREFIX)%'
+
     cache:
         app: cache.adapter.filesystem
         system: cache.adapter.system
