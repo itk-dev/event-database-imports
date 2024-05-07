@@ -62,10 +62,14 @@ final class FeedItemSource
                     ->disableExceptionOnInvalidPropertyPath()
                     ->getPropertyAccessor();
 
-                $valueCount = count($propertyAccessor->getValue($output, $key));
-                $values = array_fill(0, $valueCount, $value);
+                $v = $propertyAccessor->getValue($output, $key);
+                if (is_countable($v)) {
+                    $valueCount = count($v);
+                    $values = array_fill(0, $valueCount, $value);
 
-                $this->setValues($output, $dest, $values);
+                    $this->setValues($output, $dest, $values);
+                }
+
             } else {
                 $value = $this->getValue([...$source], $src);
                 $this->setValue($output, $dest, $value);
