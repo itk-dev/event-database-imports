@@ -111,7 +111,7 @@ final class ImageHandler implements ImageHandlerInterface
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
         foreach ($filters as $name => $filter) {
-            $urls[$name] = $this->imagineCacheManager->generateUrl($imageUrl, $name, [], null, UrlGeneratorInterface::ABSOLUTE_URL);
+            $urls[$name] = $this->imagineCacheManager->getBrowserPath($imageUrl, $name, [], null, UrlGeneratorInterface::ABSOLUTE_URL);
         }
 
         return $urls;
