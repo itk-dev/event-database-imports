@@ -14,7 +14,7 @@ class Organizer implements MappingsInterface
         ],
         'name' => [
             'type' => 'text',
-            'analyzer' => AbstractIndexingElastic::EDGE_NGRAM_ANALYZER,
+            'analyzer' => 'standard',
             'search_analyzer' => 'standard',
             'fields' => [
                 'keyword' => [

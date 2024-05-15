@@ -14,7 +14,7 @@ class Event implements MappingsInterface
         ],
         'title' => [
             'type' => 'text',
-            'analyzer' => AbstractIndexingElastic::EDGE_NGRAM_ANALYZER,
+            'analyzer' => 'standard',
             'search_analyzer' => 'standard',
             'fields' => [
                 'keyword' => [
