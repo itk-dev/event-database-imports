@@ -6,11 +6,18 @@ class Vocabularies implements MappingsInterface
 {
     public const array PROPERTIES = [
         'name' => [
-            'type' => 'keyword',
+            'type' => 'text',
+            'analyzer' => 'standard',
+            'search_analyzer' => 'standard',
+            'fields' => [
+                'keyword' => [
+                    'type' => 'keyword',
+                ],
+            ],
             'index_options' => 'docs',
             'index' => true,
-            'doc_values' => true,
             'norms' => false,
+            'fielddata' => true,
         ],
         'slug' => [
             'type' => 'keyword',
