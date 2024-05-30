@@ -22,14 +22,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\Exception\TransportException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
+use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
 #[AsCommand(
     name: 'app:feed:import',
     description: 'Parse feed and import events from it',
 )]
+#[AsCronTask(expression: '20 * * * *')]
 final class FeedImportCommand extends Command
 {
-    private const DEFAULT_OPTION = -1;
+    private const int DEFAULT_OPTION = -1;
 
     public function __construct(
         private readonly MessageBusInterface $messageBus,
