@@ -45,6 +45,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Added migrate command fro tags from legacy db
 - Updated elastic indexes to support the API
 - Added PethPrefix scope to traefik rules to allow co-hosting with legacy eventdb
+- Use Symfony scheduler to run periodic tasks
 - Remove redundant CORS bundle
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
