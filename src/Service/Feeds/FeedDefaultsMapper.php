@@ -25,6 +25,9 @@ final class FeedDefaultsMapper
         foreach ($input as $key => $data) {
             if (array_key_exists($key, $defaults)) {
                 if (is_array($data)) {
+                    // Purge empty data from input to allow array_merge to set default values
+                    $this->purgeEmptyValues($data);
+
                     // Append values into array.
                     $output[$key] = array_merge($defaults[$key], $data);
                 } else {
@@ -42,5 +45,16 @@ final class FeedDefaultsMapper
 
         // Merge defaults not in input data.
         return array_merge_recursive($output, $defaults);
+    }
+
+    private function purgeEmptyValues(array &$input): void
+    {
+        foreach ($input as $key => $value) {
+            if (is_array($value)) {
+                $this->purgeEmptyValues($value);
+            } elseif (null === $value || '' === $value) {
+                unset($input[$key]);
+            }
+        }
     }
 }
