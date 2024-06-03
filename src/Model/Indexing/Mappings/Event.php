@@ -3,7 +3,6 @@
 namespace App\Model\Indexing\Mappings;
 
 use App\Model\Indexing\IndexFieldTypes;
-use App\Service\Indexing\AbstractIndexingElastic;
 
 class Event implements MappingsInterface
 {

@@ -2,8 +2,6 @@
 
 namespace App\Model\Indexing\Mappings;
 
-use App\Service\Indexing\AbstractIndexingElastic;
-
 class Location implements MappingsInterface
 {
     public const array PROPERTIES = [
