@@ -9,6 +9,7 @@ use App\Model\Feed\FeedItem;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 use App\Utils\UriHelper;
+use Psr\Log\LoggerInterface;
 
 final readonly class EventFactory
 {
@@ -20,6 +21,7 @@ final readonly class EventFactory
         private TagsFactory $tagsFactory,
         private OccurrencesFactory $occurrencesFactory,
         private ImageFactory $imageFactory,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -137,11 +139,19 @@ final readonly class EventFactory
         $description = $entity->getDescription();
 
         if (!is_null($item->ticketUrl)) {
-            $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
+            try {
+                $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
+            } catch (\RuntimeException $exception) {
+                $this->logger->error('Ticket URL error: '.$exception->getMessage());
+            }
         }
 
         if (null !== $item->url && '' !== $item->url) {
-            $entity->setUrl(UriHelper::getAbsoluteUrl($item->url, $base));
+            try {
+                $entity->setUrl(UriHelper::getAbsoluteUrl($item->url, $base));
+            } catch (\RuntimeException $exception) {
+                $this->logger->error('Event URL error: '.$exception->getMessage());
+            }
         }
 
         if (!is_null($item->image)) {

@@ -8,12 +8,14 @@ use App\Model\Feed\FeedItemLocation;
 use App\Repository\AddressRepository;
 use App\Repository\LocationRepository;
 use App\Utils\UriHelper;
+use Psr\Log\LoggerInterface;
 
 final readonly class LocationFactory
 {
     public function __construct(
         private LocationRepository $locationRepository,
-        private AddressRepository $addressRepository
+        private AddressRepository $addressRepository,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -60,7 +62,11 @@ final readonly class LocationFactory
             $location->setImage($input->image);
         }
         if (!is_null($input->url)) {
-            $location->setUrl(UriHelper::getAbsoluteUrl($input->url));
+            try {
+                $location->setUrl(UriHelper::getAbsoluteUrl($input->url));
+            } catch (\RuntimeException $e) {
+                $this->logger->error('Location: '.$e->getMessage());
+            }
         }
         if (!is_null($input->name)) {
             $location->setName($input->name);

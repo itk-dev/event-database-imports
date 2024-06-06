@@ -19,7 +19,7 @@ use Symfony\Component\Lock\LockInterface;
  */
 final class Populate
 {
-    final public const int BATCH_SIZE = 100;
+    final public const int BATCH_SIZE = 10;
     final public const int LOCK_TIMEOUT = 3600;
     final public const int DEFAULT_RECORD_ID = -1;
 

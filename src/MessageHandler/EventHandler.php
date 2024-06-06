@@ -24,12 +24,17 @@ final readonly class EventHandler
 
         try {
             if ($this->eventFactory->isUpdatableOrNew($item)) {
-                $entity = $this->eventFactory->createOrUpdate($item);
-                $id = $entity->getId();
-                if (!is_null($id)) {
-                    $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
-                } else {
-                    throw new UnrecoverableMessageHandlingException('Event without id detected');
+                try {
+                    $entity = $this->eventFactory->createOrUpdate($item);
+
+                    $id = $entity->getId();
+                    if (!is_null($id)) {
+                        $this->messageBus->dispatch(new ImageMessage($id, $entity->getImage()?->getId()));
+                    } else {
+                        throw new UnrecoverableMessageHandlingException('Event without id detected');
+                    }
+                } catch (\Exception $exception) {
+                    throw new UnrecoverableMessageHandlingException($exception->getMessage());
                 }
             }
         } catch (\Exception $e) {

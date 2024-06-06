@@ -7,6 +7,7 @@ use App\Message\EventMessage;
 use App\Message\FeedNormalizationMessage;
 use App\Service\ContentNormalizer;
 use App\Service\TagsNormalizerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -17,6 +18,7 @@ final readonly class FeedNormalizationHandler
         private ContentNormalizer $contentNormalizer,
         private MessageBusInterface $messageBus,
         private TagsNormalizerInterface $tagsNormalizer,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -29,9 +31,6 @@ final readonly class FeedNormalizationHandler
 
         $item->url = $item->url ?? '';
 
-        // Url normalization (relative path to full path)
-        // @todo should we detect relative paths?
-
         // Content normalizations check up. HTML fixer etc.
         $item->description = $this->contentNormalizer->sanitize($item->description ?? '');
 
@@ -39,9 +38,16 @@ final readonly class FeedNormalizationHandler
         if (empty($item->excerpt) && !empty($item->description)) {
             $item->excerpt = $item->description;
         }
-        $item->excerpt = $this->contentNormalizer->sanitize($item->excerpt ?? '');
-        $item->excerpt = $this->contentNormalizer->getTextFromHtml($item->excerpt);
-        $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, Event::EXCERPT_MAX_LENGTH);
+
+        if (!empty($item->excerpt)) {
+            try {
+                $item->excerpt = $this->contentNormalizer->sanitize($item->excerpt);
+                $item->excerpt = $this->contentNormalizer->getTextFromHtml($item->excerpt);
+                $item->excerpt = $this->contentNormalizer->trimLength($item->excerpt, Event::EXCERPT_MAX_LENGTH);
+            } catch (\Exception $exception) {
+                $this->logger->error($exception->getMessage());
+            }
+        }
 
         $this->messageBus->dispatch(new EventMessage($item));
     }
