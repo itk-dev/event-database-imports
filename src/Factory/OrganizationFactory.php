@@ -7,11 +7,13 @@ use App\Entity\Organization;
 use App\Model\Feed\FeedItemOrganization;
 use App\Repository\OrganizationRepository;
 use App\Utils\UriHelper;
+use Psr\Log\LoggerInterface;
 
 final readonly class OrganizationFactory
 {
     public function __construct(
         private OrganizationRepository $organizationRepository,
+        private LoggerInterface $logger,
     ) {
     }
 
@@ -30,7 +32,11 @@ final readonly class OrganizationFactory
         $organization ??= new Organization();
 
         if (is_null($organization->getUrl()) && !is_null($input->url)) {
-            $organization->setUrl(UriHelper::getAbsoluteUrl($input->url));
+            try {
+                $organization->setUrl(UriHelper::getAbsoluteUrl($input->url));
+            } catch (\Exception $e) {
+                $this->logger->error('Organization: '.$e->getMessage());
+            }
         }
         if (is_null($organization->getName()) && !is_null($input->name)) {
             $organization->setName($input->name);
