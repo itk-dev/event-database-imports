@@ -8,7 +8,7 @@ use Doctrine\DBAL\Types\DateTimeType;
 
 class UTCDateTimeType extends DateTimeType
 {
-    private static \DateTimeZone $utc;
+    private static ?\DateTimeZone $utc;
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
@@ -19,7 +19,7 @@ class UTCDateTimeType extends DateTimeType
         return parent::convertToDatabaseValue($value, $platform);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTime
+    public function convertToPHPValue($value, AbstractPlatform $platform): \DateTime|\DateTimeInterface|null
     {
         if (null === $value || $value instanceof \DateTime) {
             return $value;
