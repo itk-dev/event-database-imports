@@ -12,6 +12,7 @@ use App\Entity\Organization;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Entity\Vocabulary;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -22,10 +23,15 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class DashboardController extends AbstractDashboardController
 {
+    public const string MODEL_TIMEZONE = 'UTC';
+    public const string VIEW_TIMEZONE = 'Europe/Copenhagen';
+
     // Default date time format used in the UI.
     //
     // @see https://unicode-org.github.io/icu/userguide/format_parse/datetime/#datetime-format-syntax
-    public const DATETIME_FORMAT = 'dd-MM-Y HH:mm:ss';
+    public const string DATETIME_FORMAT = 'dd-MM-Y HH:mm:ss';
+    public const string TIME_FORMAT = 'HH:mm:ss';
+    public const string DATE_FORMAT = 'dd-MM-Y';
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
@@ -53,5 +59,18 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.vocabularies'), 'fa fa-book', Vocabulary::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.organizations'), 'fa fa-sitemap', Organization::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.users'), 'fa fa-user', User::class);
+    }
+
+    public function configureCrud(): Crud
+    {
+        // Default config for all cruds in this controller.
+        // Only impact index and detail actions.
+        // For Forms, use ->setFormTypeOption('view_timezone', '...') on all fields
+        // Done globally in App\EasyAdmin\DateTimeFieldConfigurator
+        return Crud::new()
+            ->setTimezone(self::VIEW_TIMEZONE)
+            ->setDateTimeFormat(self::DATETIME_FORMAT)
+            ->setDateFormat(self::DATE_FORMAT)
+            ->setTimeFormat(self::TIME_FORMAT);
     }
 }
