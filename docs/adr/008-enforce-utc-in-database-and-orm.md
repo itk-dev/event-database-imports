@@ -33,7 +33,7 @@ timestamps persisted in the database and exposed through the API.
 ## Decision
 
 All datetime fields must be converted to UTC before they are persisted to database. This is done by overwriting the
-standard doctrine `DateTime` and `DateTimeImmutable` types by custom types as specified by Doctrine 
+standard doctrine `DateTime` and `DateTimeImmutable` types by custom types as specified by Doctrine
 [Handling different Timezones with the DateTime Type](https://www.doctrine-project.org/projects/doctrine-orm/en/3.2/cookbook/working-with-datetime.html#handling-different-timezones-with-the-datetime-type)
 
 ```yaml
@@ -48,6 +48,6 @@ doctrine:
 ## Consequences
 
 All "view layers" need to be configured to factor in the model timezone. For the API this means that all datetime fields
-must be serialized with timezone (already the default). For EasyAdmin all datetime fields must be configured with 
+must be serialized with timezone (already the default). For EasyAdmin all datetime fields must be configured with
 correct "model" and "view" timezones. This is done with [field configurators](https://symfony.com/bundles/EasyAdminBundle/current/fields.html#field-configurators)
 and filter configurators. See `App\EasyAdmin\DateTimeFieldConfigurator` and `App\EasyAdmin\DateTimeFilterConfigurator`
