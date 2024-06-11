@@ -28,6 +28,6 @@ final readonly class FeedItemDataHandler
             throw new UnrecoverableMessageHandlingException($e->getMessage(), $e->getCode(), $e);
         }
 
-        $this->messageBus->dispatch(new FeedNormalizationMessage($message->getConfiguration(), $feedItem));
+        $this->messageBus->dispatch(new FeedNormalizationMessage($message->getConfiguration(), $feedItem, $message->isForceUpdate()));
     }
 }

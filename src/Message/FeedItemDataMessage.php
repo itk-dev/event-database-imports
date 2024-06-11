@@ -10,6 +10,7 @@ final class FeedItemDataMessage
         private readonly int $feedId,
         private readonly FeedConfiguration $configuration,
         private readonly array $data,
+        private readonly bool $forceUpdate = false
     ) {
     }
 
@@ -26,5 +27,10 @@ final class FeedItemDataMessage
     public function getData(): array
     {
         return $this->data;
+    }
+
+    public function isForceUpdate(): bool
+    {
+        return $this->forceUpdate;
     }
 }

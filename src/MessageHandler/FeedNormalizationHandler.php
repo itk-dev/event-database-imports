@@ -49,6 +49,6 @@ final readonly class FeedNormalizationHandler
             }
         }
 
-        $this->messageBus->dispatch(new EventMessage($item));
+        $this->messageBus->dispatch(new EventMessage($item, $message->isForceUpdate()));
     }
 }

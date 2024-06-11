@@ -45,7 +45,8 @@ final class FeedImportCommand extends Command
     protected function configure(): void
     {
         $this->addOption('feed-id', '', InputOption::VALUE_REQUIRED, 'Limit imports to the feed ID given', self::DEFAULT_OPTION)
-            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', self::DEFAULT_OPTION);
+            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', self::DEFAULT_OPTION)
+            ->addOption('force', '', InputOption::VALUE_NONE, 'Force update from feed ignoring hash');
     }
 
     /**
@@ -56,6 +57,7 @@ final class FeedImportCommand extends Command
         $io = new SymfonyStyle($input, $output);
         $feedId = (int) $input->getOption('feed-id');
         $limit = (int) $input->getOption('limit');
+        $force = $input->getOption('force');
 
         $feeds = $this->loadFeeds($io, $feedId);
         if (empty($feeds)) {
@@ -92,7 +94,7 @@ final class FeedImportCommand extends Command
             foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
                 $feedId = $feed->getId();
                 if (!is_null($feedId)) {
-                    $message = new FeedItemDataMessage($feedId, $config, $item);
+                    $message = new FeedItemDataMessage($feedId, $config, $item, $force);
                     try {
                         $this->messageBus->dispatch($message);
                     } catch (TransportException|\LogicException) {
