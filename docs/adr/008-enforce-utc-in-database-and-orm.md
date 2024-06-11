@@ -9,7 +9,7 @@ Accepted
 ## Context
 
 Doctrine ORM by design does NOT handle timezones when persisting DateTime objects. E.g. if you do for a
-doctrine entity
+doctrine entity (note different timezones)
 
 ```php
 $event->start = new \DateTimeImmutable('2024-06-04 17:17:17.000000', new \DateTimeZone('UTC'));
@@ -27,8 +27,8 @@ Then in the database these will have been persisted as
 
 Thereby discarding the timezone and timezone offset.
 
-Because we accept any valid timestamp regardless of timezone this doctrine behavior will lead to inconsistencies in the
-timestamps persisted in the database and exposed through the API.
+Because we accept any valid timestamp in the feed imports regardless of timezone this doctrine behavior will lead to 
+inconsistencies in the timestamps persisted in the database and exposed through the API.
 
 ## Decision
 
