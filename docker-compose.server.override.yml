@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_SERVER_DOMAIN}`) && (PathPrefix(`${APP_PATH_PREFIX}`) || PathPrefix(`/images`))"
 
   rabbit:
-    image: rabbitmq:3.12-management-alpine
+    image: rabbitmq:3.13-management-alpine
     restart: unless-stopped
     networks:
       - app
