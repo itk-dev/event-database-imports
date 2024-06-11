@@ -27,7 +27,7 @@ Then in the database these will have been persisted as
 
 Thereby discarding the timezone and timezone offset.
 
-Because we accept any valid timestamp in the feed imports regardless of timezone this doctrine behavior will lead to 
+Because we accept any valid timestamp in the feed imports regardless of timezone this doctrine behavior will lead to
 inconsistencies in the timestamps persisted in the database and exposed through the API.
 
 ## Decision
