@@ -54,8 +54,7 @@ final class IndexDumpCommand extends Command
                 return Command::FAILURE;
             }
 
-            $section = $output->section();
-            $progressBar = new ProgressBar($section);
+            $progressBar = new ProgressBar($output);
             $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
             $progressBar->start();
             $progressBar->setMessage(sprintf('Dumping index %s …', $index));

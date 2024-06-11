@@ -19,7 +19,7 @@ use Symfony\Component\Scheduler\Attribute\AsCronTask;
     name: 'app:index:populate',
     description: 'Populate (re-index) an index',
 )]
-#[AsCronTask(expression: '30 * * * *')]
+#[AsCronTask(expression: '30 * * * *', schedule: 'default')]
 final class IndexPopulateCommand extends Command
 {
     public function __construct(
@@ -61,8 +61,7 @@ final class IndexPopulateCommand extends Command
                     return Command::FAILURE;
                 }
 
-                $section = $output->section();
-                $progressBar = new ProgressBar($section);
+                $progressBar = new ProgressBar($output);
                 $progressBar->setFormat('[%bar%] %elapsed% (%memory%) - %message%');
                 $progressBar->start();
                 $progressBar->setMessage(sprintf('Populating index %s …', $index));

@@ -17,6 +17,7 @@ use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Messenger\Exception\TransportException;
@@ -28,7 +29,7 @@ use Symfony\Component\Scheduler\Attribute\AsCronTask;
     name: 'app:feed:import',
     description: 'Parse feed and import events from it',
 )]
-#[AsCronTask(expression: '20 * * * *')]
+#[AsCronTask(expression: '20 * * * *', schedule: 'default')]
 final class FeedImportCommand extends Command
 {
     private const int DEFAULT_OPTION = -1;
@@ -64,18 +65,21 @@ final class FeedImportCommand extends Command
             return Command::FAILURE;
         }
 
-        $section = $output->section();
-
-        $progressBar = new ProgressBar($section);
+        $progressBar = new ProgressBar($output);
         $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current% - %message%');
 
-        $table = new Table($section);
-        $table->setHeaders(['ID', 'Feed', '#imported', 'Time']);
-        $table->render();
+        // When running as CronTask $output is instance of Symfony\Component\Console\Output\BufferedOutput
+        // which does not support "section"
+        if ($output instanceof ConsoleOutputInterface) {
+            $section = $output->section();
+            $table = new Table($section);
+            $table->setHeaders(['ID', 'Feed', '#imported', 'Time']);
+            $table->render();
 
-        $count = count($feeds);
-        $pointer = 0;
-        $totalTime = 0.0;
+            $count = count($feeds);
+            $pointer = 0;
+            $totalTime = 0.0;
+        }
 
         /** @var Feed $feed */
         foreach ($feeds as $feed) {
@@ -111,16 +115,18 @@ final class FeedImportCommand extends Command
                 }
             }
 
-            $end = hrtime(true);
-            $time = ($end - $start) / 1000000000;
-            $totalTime += $time;
+            if ($output instanceof ConsoleOutputInterface) {
+                $end = hrtime(true);
+                $time = ($end - $start) / 1000000000;
+                $totalTime += $time;
 
-            $table->appendRow([
-                new TableCell((string) $feed->getId(), ['style' => new TableCellStyle(['align' => 'right'])]),
-                $feed->getName(),
-                new TableCell((string) $index, ['style' => new TableCellStyle(['align' => 'right'])]),
-                new TableCell(number_format($time, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
-            ]);
+                $table->appendRow([
+                    new TableCell((string) $feed->getId(), ['style' => new TableCellStyle(['align' => 'right'])]),
+                    $feed->getName(),
+                    new TableCell((string) $index, ['style' => new TableCellStyle(['align' => 'right'])]),
+                    new TableCell(number_format($time, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+                ]);
+            }
 
             $feed->setLastRead(new \DateTimeImmutable());
             $this->feedRepository->save($feed, true);
@@ -128,13 +134,15 @@ final class FeedImportCommand extends Command
 
         $progressBar->finish();
 
-        $table->appendRow(new TableSeparator());
-        $table->appendRow([
-            '',
-            '',
-            new TableCell((string) $progressBar->getProgress(), ['style' => new TableCellStyle(['align' => 'right'])]),
-            new TableCell(number_format($totalTime, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
-        ]);
+        if ($output instanceof ConsoleOutputInterface) {
+            $table->appendRow(new TableSeparator());
+            $table->appendRow([
+                '',
+                '',
+                new TableCell((string) $progressBar->getProgress(), ['style' => new TableCellStyle(['align' => 'right'])]),
+                new TableCell(number_format($totalTime, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+            ]);
+        }
 
         $io->success('Feed(s) import completed.');
 
