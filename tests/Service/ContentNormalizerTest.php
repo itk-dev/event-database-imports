@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Service;
 
 use App\Service\ContentNormalizer;
 use App\Tests\Utils\TestData;
@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(ContentNormalizer::class)]
-final class ContentNormalizationTest extends KernelTestCase
+final class ContentNormalizerTest extends KernelTestCase
 {
     /**
      * @throws \Exception
@@ -54,7 +54,7 @@ final class ContentNormalizationTest extends KernelTestCase
     private function getContentNormalizerService(): ContentNormalizer
     {
         self::bootKernel();
-        $container = ContentNormalizationTest::getContainer();
+        $container = ContentNormalizerTest::getContainer();
 
         return $container->get(ContentNormalizer::class);
     }

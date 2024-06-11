@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Service;
 
 use App\Service\Time;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(Time::class)]
-final class TimeServiceTest extends KernelTestCase
+final class TimeTest extends KernelTestCase
 {
     /**
      * @throws \Exception
@@ -79,7 +79,7 @@ final class TimeServiceTest extends KernelTestCase
     private function getTimeService(): Time
     {
         self::bootKernel();
-        $container = TimeServiceTest::getContainer();
+        $container = TimeTest::getContainer();
 
         return $container->get(Time::class);
     }

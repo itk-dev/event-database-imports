@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Service\Feeds;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Service\Feeds\FeedDefaultsMapper;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(FeedDefaultsMapper::class)]
-final class FeedDefaultMapperTest extends KernelTestCase
+final class FeedDefaultsMapperTest extends KernelTestCase
 {
     /**
      * Test mapping of default values.
@@ -108,7 +108,7 @@ final class FeedDefaultMapperTest extends KernelTestCase
     private function getFeedDefaultMapper(): FeedDefaultsMapper
     {
         self::bootKernel();
-        $container = FeedDefaultMapperTest::getContainer();
+        $container = FeedDefaultsMapperTest::getContainer();
 
         return $container->get(FeedDefaultsMapper::class);
     }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Service;
 
 use App\Service\TagsNormalizer;
 use App\Tests\Utils\PhpUnitUtils;
@@ -10,7 +10,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(TagsNormalizer::class)]
-final class TagsNormalizationTest extends KernelTestCase
+final class TagsNormalizerTest extends KernelTestCase
 {
     /**
      * @throws \Exception
@@ -46,7 +46,7 @@ final class TagsNormalizationTest extends KernelTestCase
     private function getTagsNormalizerService(): TagsNormalizer
     {
         self::bootKernel();
-        $container = TagsNormalizationTest::getContainer();
+        $container = TagsNormalizerTest::getContainer();
 
         return $container->get(TagsNormalizer::class);
     }

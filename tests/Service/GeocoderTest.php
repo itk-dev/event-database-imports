@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests;
+namespace App\Tests\Service;
 
 use App\Entity\Address;
 use App\Service\Geocoder;
@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(Geocoder::class)]
-final class GeocoderServiceTest extends KernelTestCase
+final class GeocoderTest extends KernelTestCase
 {
     /**
      * @throws \Exception
@@ -43,7 +43,7 @@ final class GeocoderServiceTest extends KernelTestCase
     private function getGeocoderService(): Geocoder
     {
         self::bootKernel();
-        $container = GeocoderServiceTest::getContainer();
+        $container = GeocoderTest::getContainer();
 
         return $container->get(Geocoder::class);
     }
