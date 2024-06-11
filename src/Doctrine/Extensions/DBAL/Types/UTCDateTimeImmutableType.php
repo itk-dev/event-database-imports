@@ -14,10 +14,7 @@ class UTCDateTimeImmutableType extends DateTimeImmutableType
     {
         if ($value instanceof \DateTimeImmutable) {
             if (self::getUtc()->getName() !== $value->getTimezone()->getName()) {
-                $mutable = \DateTime::createFromImmutable($value);
-                $mutable->setTimezone(self::getUtc());
-
-                $value = \DateTimeImmutable::createFromMutable($mutable);
+                $value = $value->setTimezone(self::getUtc());
             }
         }
 
