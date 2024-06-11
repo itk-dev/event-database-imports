@@ -29,6 +29,7 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
             ->withGroups([IndexNames::Occurrences->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
+            ->withTimezone('Europe/Copenhagen')
             ->withFormat(IndexFieldTypes::DATEFORMAT);
 
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());

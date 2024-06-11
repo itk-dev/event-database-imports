@@ -28,6 +28,7 @@ final class IndexingVocabularies extends AbstractIndexingElastic
             ->withGroups([IndexNames::Vocabularies->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
+            ->withTimezone('Europe/Copenhagen')
             ->withFormat(IndexFieldTypes::DATEFORMAT);
 
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());

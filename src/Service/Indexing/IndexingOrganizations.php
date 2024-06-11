@@ -28,6 +28,7 @@ final class IndexingOrganizations extends AbstractIndexingElastic
             ->withGroups([IndexNames::Organizations->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
+            ->withTimezone('Europe/Copenhagen')
             ->withFormat(IndexFieldTypes::DATEFORMAT);
 
         return $this->serializer->normalize($item, null, $contextBuilder->toArray());

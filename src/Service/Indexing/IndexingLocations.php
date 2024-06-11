@@ -28,6 +28,7 @@ final class IndexingLocations extends AbstractIndexingElastic
             ->withGroups([IndexNames::Locations->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
+            ->withTimezone('Europe/Copenhagen')
             ->withFormat(IndexFieldTypes::DATEFORMAT);
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
 
