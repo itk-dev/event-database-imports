@@ -10,6 +10,7 @@ final class FeedNormalizationMessage
     public function __construct(
         private readonly FeedConfiguration $configuration,
         private readonly FeedItem $item,
+        private readonly bool $forceUpdate,
     ) {
     }
 
@@ -21,5 +22,10 @@ final class FeedNormalizationMessage
     public function getItem(): FeedItem
     {
         return $this->item;
+    }
+
+    public function isForceUpdate(): bool
+    {
+        return $this->forceUpdate;
     }
 }

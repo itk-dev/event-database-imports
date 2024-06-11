@@ -23,7 +23,7 @@ final readonly class EventHandler
         $item = $message->getItem();
 
         try {
-            if ($this->eventFactory->isUpdatableOrNew($item)) {
+            if ($message->isForceUpdate() || $this->eventFactory->isUpdatableOrNew($item)) {
                 try {
                     $entity = $this->eventFactory->createOrUpdate($item);
 
