@@ -16,11 +16,11 @@ class FeedItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'feedEvents')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'feedItems')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Feed $feed = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'feedItem', cascade: ['persist', 'remove'])]
     private ?Event $event = null;
 
     #[ORM\Column(length: 255, nullable: true)]
