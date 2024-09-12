@@ -2,23 +2,17 @@
 
 namespace App\Message;
 
-use App\Model\Feed\FeedItem;
+use App\Model\Feed\FeedItemData;
 
 final class EventMessage
 {
     public function __construct(
-        private readonly FeedItem $item,
-        private readonly bool $forceUpdate = false
+        private readonly FeedItemData $item,
     ) {
     }
 
-    public function getItem(): FeedItem
+    public function getFeedItemData(): FeedItemData
     {
         return $this->item;
-    }
-
-    public function isForceUpdate(): bool
-    {
-        return $this->forceUpdate;
     }
 }

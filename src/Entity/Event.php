@@ -17,7 +17,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-#[ORM\UniqueConstraint(name: 'feed_feedItemId_unique', columns: ['feed_id', 'feed_item_id'])]
 class Event implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
@@ -72,8 +71,12 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Feed $feed = null;
 
+    /** @deprecated field kept to allow mapping of already imported events. Replaced by FeedItem relation. */
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $feedItemId = null;
+
+    #[ORM\OneToOne(mappedBy: 'event', cascade: ['persist', 'remove'])]
+    private ?FeedItem $feedItem = null;
 
     #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, cascade: ['persist'], orphanRemoval: true)]
     #[Groups([IndexNames::Events->value])]
@@ -89,9 +92,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Location $location = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $hash = null;
 
     #[ORM\OneToOne(inversedBy: 'event', cascade: ['persist', 'remove'])]
     #[Groups([IndexNames::Events->value])]
@@ -228,18 +228,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
         return $this;
     }
 
-    public function getFeedItemId(): ?string
-    {
-        return $this->feedItemId;
-    }
-
-    public function setFeedItemId(?string $feedItemId): static
-    {
-        $this->feedItemId = $feedItemId;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Occurrence>
      */
@@ -336,18 +324,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
         return $this;
     }
 
-    public function getHash(): ?string
-    {
-        return $this->hash;
-    }
-
-    public function setHash(string $hash): static
-    {
-        $this->hash = $hash;
-
-        return $this;
-    }
-
     public function getImage(): ?Image
     {
         return $this->image;
@@ -380,6 +356,28 @@ class Event implements IndexItemInterface, EditableEntityInterface
     public function removePartner(Organization $partner): static
     {
         $this->partners->removeElement($partner);
+
+        return $this;
+    }
+
+    public function getFeedItem(): ?FeedItem
+    {
+        return $this->feedItem;
+    }
+
+    public function setFeedItem(?FeedItem $feedItem): static
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $feedItem && null !== $this->feedItem) {
+            $this->feedItem->setEvent(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if (null !== $feedItem && $feedItem->getEvent() !== $this) {
+            $feedItem->setEvent($this);
+        }
+
+        $this->feedItem = $feedItem;
 
         return $this;
     }

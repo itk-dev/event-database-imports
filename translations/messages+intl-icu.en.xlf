@@ -161,10 +161,6 @@
         <source>admin.feed.edited.headline</source>
         <target>Authoring information</target>
       </trans-unit>
-      <trans-unit id="T.UlgCd" resname="admin.feed.edited.last_read">
-        <source>admin.feed.edited.last_read</source>
-        <target>Last read</target>
-      </trans-unit>
       <trans-unit id="1HvLxTE" resname="admin.feed.edited.update">
         <source>admin.feed.edited.update</source>
         <target>Last updated</target>
@@ -464,6 +460,22 @@
       <trans-unit id="CvrRLOt" resname="admin.vocabulary.edited.updated">
         <source>admin.vocabulary.edited.updated</source>
         <target>Updated</target>
+      </trans-unit>
+      <trans-unit id="U9HWfcL" resname="admin.feed.last_read.headline">
+        <source>admin.feed.last_read.headline</source>
+        <target>Last Read</target>
+      </trans-unit>
+      <trans-unit id="FJ3a25z" resname="admin.feed.ast_read.datetime">
+        <source>admin.feed.ast_read.datetime</source>
+        <target>Last Read</target>
+      </trans-unit>
+      <trans-unit id="YMZxXCA" resname="admin.feed.last_read.count">
+        <source>admin.feed.last_read.count</source>
+        <target>Count</target>
+      </trans-unit>
+      <trans-unit id="apt9ajY" resname="admin.feed.last_read.error">
+        <source>admin.feed.last_read.error</source>
+        <target>Error</target>
       </trans-unit>
     </body>
   </file>

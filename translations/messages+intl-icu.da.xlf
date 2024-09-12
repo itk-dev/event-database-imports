@@ -153,10 +153,6 @@
         <source>admin.feed.edited.headline</source>
         <target state="needs-l10n">__admin.feed.edited.headline</target>
       </trans-unit>
-      <trans-unit id="T.UlgCd" resname="admin.feed.edited.last_read">
-        <source>admin.feed.edited.last_read</source>
-        <target state="needs-l10n">__admin.feed.edited.last_read</target>
-      </trans-unit>
       <trans-unit id="1HvLxTE" resname="admin.feed.edited.update">
         <source>admin.feed.edited.update</source>
         <target state="needs-l10n">__admin.feed.edited.update</target>
@@ -464,6 +460,22 @@
       <trans-unit id="CvrRLOt" resname="admin.vocabulary.edited.updated">
         <source>admin.vocabulary.edited.updated</source>
         <target state="needs-l10n">__admin.vocabulary.edited.updated</target>
+      </trans-unit>
+      <trans-unit id="U9HWfcL" resname="admin.feed.last_read.headline">
+        <source>admin.feed.last_read.headline</source>
+        <target state="needs-l10n">__admin.feed.last_read.headline</target>
+      </trans-unit>
+      <trans-unit id="FJ3a25z" resname="admin.feed.ast_read.datetime">
+        <source>admin.feed.ast_read.datetime</source>
+        <target state="needs-l10n">__admin.feed.ast_read.datetime</target>
+      </trans-unit>
+      <trans-unit id="YMZxXCA" resname="admin.feed.last_read.count">
+        <source>admin.feed.last_read.count</source>
+        <target state="needs-l10n">__admin.feed.last_read.count</target>
+      </trans-unit>
+      <trans-unit id="apt9ajY" resname="admin.feed.last_read.error">
+        <source>admin.feed.last_read.error</source>
+        <target state="needs-l10n">__admin.feed.last_read.error</target>
       </trans-unit>
     </body>
   </file>

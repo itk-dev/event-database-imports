@@ -4,6 +4,8 @@ framework:
         failure_transport: failed
 
         transports:
+            sync: 'sync://'
+
             async:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
                 options:
@@ -20,7 +22,7 @@ framework:
             'App\Message\DailyOccurrenceMessage': async
             'App\Message\EventMessage': async
             'App\Message\FeedItemDataMessage': async
-            'App\Message\FeedNormalizationMessage': async
+            'App\Message\FeedItemNormalizationMessage': async
             'App\Message\GeocoderMessage': async
             'App\Message\ImageMessage': async
             'App\Message\IndexMessage': async
