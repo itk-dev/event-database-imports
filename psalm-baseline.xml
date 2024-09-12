@@ -17,6 +17,7 @@
       <code><![CDATA[$source]]></code>
       <code><![CDATA[$source]]></code>
       <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
     </InvalidOperand>
   </file>
   <file src="src/Service/Indexing/AbstractIndexingElastic.php">
