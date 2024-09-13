@@ -2,7 +2,7 @@
 
 namespace App\Model\Feed;
 
-final class FeedItem
+final class FeedItemData
 {
     public function __construct(
         public readonly string $id,

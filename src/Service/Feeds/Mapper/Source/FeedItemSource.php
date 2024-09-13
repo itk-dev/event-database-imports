@@ -68,6 +68,9 @@ final class FeedItemSource
                     $values = array_fill(0, $valueCount, $value);
 
                     $this->setValues($output, $dest, $values);
+                } else {
+                    $value = $this->getValue([...$source], $src);
+                    $this->setValues($output, $dest, [$value]);
                 }
             } else {
                 $value = $this->getValue([...$source], $src);

@@ -49,9 +49,9 @@ final readonly class JsonFeedParser implements FeedParserInterface
         }
     }
 
-    public function parseUrl(Feed $feed, RequestInterface $data, string $pointerPath = '/-'): \Generator
+    public function parseUrl(Feed $feed, RequestInterface $request, string $pointerPath = '/-'): \Generator
     {
-        $parser = new JsonParser($data);
+        $parser = new JsonParser($request);
         $parser->pointer($pointerPath);
 
         try {

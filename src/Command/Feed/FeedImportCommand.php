@@ -3,10 +3,7 @@
 namespace App\Command\Feed;
 
 use App\Entity\Feed;
-use App\Message\FeedItemDataMessage;
-use App\Repository\FeedRepository;
-use App\Service\Feeds\Mapper\FeedConfigurationMapper;
-use App\Service\Feeds\Parser\FeedParserInterface;
+use App\Service\Feeds\Reader\FeedReaderInterface;
 use CuyZ\Valinor\Mapper\MappingError;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -20,33 +17,23 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\ConsoleOutputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Messenger\Exception\TransportException;
-use Symfony\Component\Messenger\MessageBusInterface;
-use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
-use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
 #[AsCommand(
     name: 'app:feed:import',
     description: 'Parse feed and import events from it',
 )]
-#[AsCronTask(expression: '20 * * * *', schedule: 'default')]
 final class FeedImportCommand extends Command
 {
-    private const int DEFAULT_OPTION = -1;
-
     public function __construct(
-        private readonly MessageBusInterface $messageBus,
-        private readonly FeedParserInterface $feedParser,
-        private readonly FeedConfigurationMapper $configurationMapper,
-        private readonly FeedRepository $feedRepository,
+        private readonly FeedReaderInterface $feedReader,
     ) {
         parent::__construct();
     }
 
     protected function configure(): void
     {
-        $this->addOption('feed-id', '', InputOption::VALUE_REQUIRED, 'Limit imports to the feed ID given', self::DEFAULT_OPTION)
-            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', self::DEFAULT_OPTION)
+        $this->addOption('feed-id', '', InputOption::VALUE_REQUIRED, 'Limit imports to the feed ID given', FeedReaderInterface::DEFAULT_OPTION)
+            ->addOption('limit', '', InputOption::VALUE_REQUIRED, 'Limit the number of items parsed pr. feed', FeedReaderInterface::DEFAULT_OPTION)
             ->addOption('force', '', InputOption::VALUE_NONE, 'Force update from feed ignoring hash');
     }
 
@@ -55,124 +42,104 @@ final class FeedImportCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        if (!$output instanceof ConsoleOutputInterface) {
+            // ConsoleOutputInterface is required for Sections & Table output
+            throw new \RuntimeException('Command not running in console');
+        }
+
         $io = new SymfonyStyle($input, $output);
+
         $feedId = (int) $input->getOption('feed-id');
         $limit = (int) $input->getOption('limit');
         $force = $input->getOption('force');
 
-        $feeds = $this->loadFeeds($io, $feedId);
-        if (empty($feeds)) {
-            return Command::FAILURE;
-        }
+        $feedIds = FeedReaderInterface::DEFAULT_OPTION === $feedId ? [] : [$feedId];
 
-        $progressBar = new ProgressBar($output);
-        $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current% - %message%');
+        $feeds = $this->feedReader->getEnabledFeeds($limit, $force, $feedIds);
 
-        // When running as CronTask $output is instance of Symfony\Component\Console\Output\BufferedOutput
-        // which does not support "section"
-        if ($output instanceof ConsoleOutputInterface) {
-            $section = $output->section();
-            $table = new Table($section);
-            $table->setHeaders(['ID', 'Feed', '#imported', 'Time']);
-            $table->render();
+        $table = $this->initializeTable($output);
+        $progressBar = $this->initializeProgressbar($output);
 
-            $count = count($feeds);
-            $pointer = 0;
-            $totalTime = 0.0;
-        }
+        $count = count($feeds);
+        $pointer = 0;
+        $totalTime = 0.0;
 
-        /** @var Feed $feed */
         foreach ($feeds as $feed) {
-            $start = hrtime(true);
-
-            if (!$feed->isEnabled()) {
-                $io->error(sprintf('The feed "%s" is disabled', $feed->getName() ?? 'unknown'));
-
-                return Command::FAILURE;
-            }
-
-            $progressBar->setMessage(sprintf('%d/%d Importing feed %s …', ++$pointer, $count, $feed));
-
             $index = 0;
-            $config = $this->configurationMapper->getConfigurationFromArray($feed->getConfiguration());
-            foreach ($this->feedParser->parse($feed, $config->url, $config->rootPointer) as $item) {
-                $feedId = $feed->getId();
-                if (!is_null($feedId)) {
-                    $message = new FeedItemDataMessage($feedId, $config, $item, $force);
-                    try {
-                        $this->messageBus->dispatch($message);
-                    } catch (TransportException|\LogicException) {
-                        // Ensure that message get into failed queue if connection to AMQP fails.
-                        $this->messageBus->dispatch($message, [new TransportNamesStamp('failed')]);
-                    }
+            $start = \hrtime(true);
+            try {
+                $progressBar->setMessage(sprintf('%d/%d Importing feed %s …', ++$pointer, $count, $feed));
 
+                foreach ($this->feedReader->readFeed($feed, $limit, $force) as $i) {
                     $progressBar->advance();
-
                     ++$index;
-                    if ($limit > 0 && $index >= $limit) {
-                        break;
-                    }
                 }
-            }
 
-            if ($output instanceof ConsoleOutputInterface) {
-                $end = hrtime(true);
+                $end = \hrtime(true);
                 $time = ($end - $start) / 1000000000;
                 $totalTime += $time;
 
-                $table->appendRow([
-                    new TableCell((string) $feed->getId(), ['style' => new TableCellStyle(['align' => 'right'])]),
-                    $feed->getName(),
-                    new TableCell((string) $index, ['style' => new TableCellStyle(['align' => 'right'])]),
-                    new TableCell(number_format($time, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
-                ]);
+                $this->appendTableRow($table, $feed, $index, $time, 'Success');
+            } catch (\Exception $e) {
+                $time = (\hrtime(true) - $start) / 1000000000;
+                $this->appendTableRow($table, $feed, $index, $time, $e->getMessage());
             }
-
-            $feed->setLastRead(new \DateTimeImmutable());
-            $this->feedRepository->save($feed, true);
         }
 
         $progressBar->finish();
-
-        if ($output instanceof ConsoleOutputInterface) {
-            $table->appendRow(new TableSeparator());
-            $table->appendRow([
-                '',
-                '',
-                new TableCell((string) $progressBar->getProgress(), ['style' => new TableCellStyle(['align' => 'right'])]),
-                new TableCell(number_format($totalTime, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
-            ]);
-        }
-
+        $this->appendTableFooter($table, $progressBar, $totalTime);
         $io->success('Feed(s) import completed.');
 
         return Command::SUCCESS;
     }
 
-    /**
-     * Helper function to load feed entities.
-     *
-     * @param SymfonyStyle $io
-     *   Symfony console output
-     * @param int $feedId
-     *   Given a feed id this will limit loading to that feed
-     *
-     * @return array
-     *   Array of feed(s) entities
-     */
-    private function loadFeeds(SymfonyStyle $io, int $feedId = self::DEFAULT_OPTION): array
+    private function initializeProgressbar(ConsoleOutputInterface $output): ProgressBar
     {
-        if (self::DEFAULT_OPTION !== $feedId) {
-            $feed = $this->feedRepository->findOneBy(['id' => $feedId]);
-            if (is_null($feed)) {
-                $io->error(sprintf('Invalid feed id: %d', $feedId));
+        $progressSection = $output->section();
 
-                return [];
-            }
+        $progressBar = new ProgressBar($progressSection);
+        $progressBar->setFormat('Memory:%memory% [%bar%] Time:%elapsed%, Items:%current% - %message%');
 
-            return [$feed];
-        }
+        return $progressBar;
+    }
 
-        return $this->feedRepository->findBy(['enabled' => true]);
+    private function initializeTable(ConsoleOutputInterface $output): Table
+    {
+        $tableSection = $output->section();
+
+        $table = new Table($tableSection);
+        $table->setHeaders(['ID', 'Feed', '#imported', 'Time', 'Status']);
+        $table->setColumnWidths([2, 20, 9, 5, 28]);
+        $table->setColumnMaxWidth(0, 2);
+        $table->setColumnMaxWidth(1, 20);
+        $table->setColumnMaxWidth(2, 9);
+        $table->setColumnMaxWidth(3, 5);
+        $table->setColumnMaxWidth(4, 28);
+        $table->render();
+
+        return $table;
+    }
+
+    private function appendTableRow(Table $table, Feed $feed, int $index, float $time, string $status): void
+    {
+        $table->appendRow([
+            new TableCell((string) $feed->getId(), ['style' => new TableCellStyle(['align' => 'right'])]),
+            $feed->getName(),
+            new TableCell((string) $index, ['style' => new TableCellStyle(['align' => 'right'])]),
+            new TableCell(number_format($time, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+            $status,
+        ]);
+    }
+
+    private function appendTableFooter(Table $table, ProgressBar $progressBar, float $totalTime): void
+    {
+        $table->appendRow(new TableSeparator());
+        $table->appendRow([
+            '',
+            '',
+            new TableCell((string) $progressBar->getProgress(), ['style' => new TableCellStyle(['align' => 'right'])]),
+            new TableCell(number_format($totalTime, 2), ['style' => new TableCellStyle(['align' => 'right'])]),
+            '',
+        ]);
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Service\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Model\Feed\FeedItem;
+use App\Model\Feed\FeedItemData;
 use CuyZ\Valinor\Mapper\MappingError;
 
 interface FeedMapperInterface
@@ -18,5 +18,5 @@ interface FeedMapperInterface
      *
      * @throws MappingError
      */
-    public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItem;
+    public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItemData;
 }

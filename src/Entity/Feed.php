@@ -6,6 +6,7 @@ use App\Model\Feed\FeedConfiguration;
 use App\Repository\FeedRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -49,10 +50,26 @@ class Feed
 
     private ?string $tmpConfig = null;
 
+    /**
+     * @var Collection<int, FeedItem>
+     */
+    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: FeedItem::class, orphanRemoval: true)]
+    private Collection $feedItems;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $lastReadCount = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $message = null;
+
+    #[ORM\Column]
+    private bool $syncToFeed = false;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
         $this->configuration = FeedConfiguration::getConfigurationTemplate();
+        $this->feedItems = new ArrayCollection();
     }
 
     public function __toString(): string
@@ -206,6 +223,72 @@ class Feed
     public function setOrganization(?Organization $organization): static
     {
         $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, FeedItem>
+     */
+    public function getFeedItems(): Collection
+    {
+        return $this->feedItems;
+    }
+
+    public function addFeedItem(FeedItem $feedItem): static
+    {
+        if (!$this->feedItems->contains($feedItem)) {
+            $this->feedItems->add($feedItem);
+            $feedItem->setFeed($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFeedItem(FeedItem $feedItem): static
+    {
+        if ($this->feedItems->removeElement($feedItem)) {
+            // set the owning side to null (unless already changed)
+            if ($feedItem->getFeed() === $this) {
+                $feedItem->setFeed(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getLastReadCount(): ?int
+    {
+        return $this->lastReadCount;
+    }
+
+    public function setLastReadCount(?int $lastReadCount): static
+    {
+        $this->lastReadCount = $lastReadCount;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(?string $message): static
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function isSyncToFeed(): bool
+    {
+        return $this->syncToFeed;
+    }
+
+    public function setSyncToFeed(bool $syncToFeed): static
+    {
+        $this->syncToFeed = $syncToFeed;
 
         return $this;
     }

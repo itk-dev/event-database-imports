@@ -4,8 +4,9 @@ namespace App\Factory;
 
 use App\Entity\Event;
 use App\Entity\Feed;
+use App\Entity\FeedItem;
 use App\Exception\FactoryException;
-use App\Model\Feed\FeedItem;
+use App\Model\Feed\FeedItemData;
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 use App\Utils\UriHelper;
@@ -28,61 +29,29 @@ final readonly class EventFactory
     /**
      * @throws FactoryException
      */
-    public function createOrUpdate(FeedItem $item): Event
+    public function createOrUpdate(FeedItemData $item, FeedItem $feedItemEntity): Event
     {
         $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
         if (is_null($feed)) {
             throw new FactoryException('Missing feed in event factory');
         }
-        $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
-        $hash = $this->calculateHash($item);
+        $event = $this->getEvent(['feed' => $feed, 'feedItemId' => $item->id]);
 
         $editedBy = $feed->getUser() ?? $feed;
 
-        if (is_null($entity)) {
-            $entity = new Event();
-            $entity->setHash($hash);
-            $this->setValues($entity, $item, $feed);
+        if (is_null($event)) {
+            $event = new Event();
 
-            $entity->setCreatedBy((string) $editedBy);
-            $entity->setUpdatedBy((string) $editedBy);
+            $event->setCreatedBy((string) $editedBy);
+            $event->setUpdatedBy((string) $editedBy);
         } else {
-            $this->setValues($entity, $item, $feed);
-            $entity->setHash($hash);
-
-            $entity->setUpdatedBy((string) $editedBy);
+            $event->setUpdatedBy((string) $editedBy);
         }
 
-        $this->eventRepository->save($entity, true);
+        $this->setValues($event, $feedItemEntity, $item, $feed);
+        $this->eventRepository->save($event, true);
 
-        return $entity;
-    }
-
-    /**
-     * Determine it the FeedItem is updatable or is a new FeedItem.
-     *
-     * @param FeedItem $item
-     *   The feed item to test
-     *
-     * @return bool
-     *   True if updatable or new feed item
-     *
-     * @throws FactoryException
-     */
-    public function isUpdatableOrNew(FeedItem $item): bool
-    {
-        $feed = $this->feedRepository->findOneBy(['id' => $item->feedId]);
-        if (is_null($feed)) {
-            throw new FactoryException('Missing feed in event factory');
-        }
-
-        $entity = $this->get(['feed' => $feed, 'feedItemId' => $item->id]);
-        if (!is_null($entity) && $entity->getHash() === $this->calculateHash($item)) {
-            // Entity exists for the item and the hash has not changed.
-            return false;
-        }
-
-        return true;
+        return $event;
     }
 
     /**
@@ -94,25 +63,9 @@ final readonly class EventFactory
      * @return Event|null
      *   Event entity or null if not found
      */
-    public function get(array $criteria): ?Event
+    public function getEvent(array $criteria): ?Event
     {
         return $this->eventRepository->findOneBy($criteria);
-    }
-
-    /**
-     * Calculate hash string base on typed value event object.
-     *
-     * This hash should be used to see if event have changed it's content.
-     *
-     * @param FeedItem $item
-     *   The feed item object to calculate hash value for
-     *
-     * @return string
-     *   The calculated hash string
-     */
-    private function calculateHash(FeedItem $item): string
-    {
-        return hash('sha256', serialize($item));
     }
 
     /**
@@ -120,19 +73,19 @@ final readonly class EventFactory
      *
      * @param Event $entity
      *   Entity to map values to
-     * @param FeedItem $item
+     * @param FeedItemData $item
      *   The normalized feed item
      * @param Feed $feed
      *   The feed that the item came from
      */
-    private function setValues(Event $entity, FeedItem $item, Feed $feed): void
+    private function setValues(Event $entity, FeedItem $feedItemEntity, FeedItemData $item, Feed $feed): void
     {
         $base = $feed->getConfiguration()['base'] ?? null;
 
         $entity->setTitle($item->title ?? '')
             ->setDescription($item->description)
             ->setExcerpt($item->excerpt)
-            ->setFeedItemId($item->id)
+            ->setFeedItem($feedItemEntity)
             ->setPublicAccess($item->publicAccess)
             ->setFeed($feed);
 

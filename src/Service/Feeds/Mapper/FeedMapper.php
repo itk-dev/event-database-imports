@@ -3,7 +3,7 @@
 namespace App\Service\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
-use App\Model\Feed\FeedItem;
+use App\Model\Feed\FeedItemData;
 use App\Service\Feeds\FeedDefaultsMapper;
 use App\Service\Feeds\Mapper\Source\FeedItemSource;
 use CuyZ\Valinor\Mapper\MappingError;
@@ -20,7 +20,7 @@ final readonly class FeedMapper implements FeedMapperInterface
     ) {
     }
 
-    public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItem
+    public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItemData
     {
         try {
             return (new MapperBuilder())
@@ -29,7 +29,7 @@ final readonly class FeedMapper implements FeedMapperInterface
                 ->supportDateFormats($configuration->dateFormat)
                 ->mapper()
                 ->map(
-                    FeedItem::class,
+                    FeedItemData::class,
                     Source::iterable((new FeedItemSource($configuration, $this->defaultsMapperService))->normalize($data))
                 );
         } catch (MappingError $error) {
