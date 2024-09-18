@@ -35,9 +35,9 @@ final readonly class EventFactory
         if (is_null($feed)) {
             throw new FactoryException('Missing feed in event factory');
         }
-        $event = $this->getEvent(['feed' => $feed, 'feedItemId' => $item->id]);
-
         $editedBy = $feed->getUser() ?? $feed;
+
+        $event = $feedItemEntity->getEvent();
 
         if (is_null($event)) {
             $event = new Event();
@@ -87,7 +87,8 @@ final readonly class EventFactory
             ->setExcerpt($item->excerpt)
             ->setFeedItem($feedItemEntity)
             ->setPublicAccess($item->publicAccess)
-            ->setFeed($feed);
+            ->setFeed($feed)
+            ->setFeedItem($feedItemEntity);
 
         $description = $entity->getDescription();
 

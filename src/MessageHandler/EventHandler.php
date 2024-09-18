@@ -36,7 +36,6 @@ final readonly class EventHandler
         try {
             $event = $this->eventFactory->createOrUpdate($feedItemData, $feedItemEntity);
 
-            $feedItemEntity->setEvent($event);
             $this->entityManager->persist($feedItemEntity);
             $this->entityManager->flush();
 
