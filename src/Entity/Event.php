@@ -71,10 +71,6 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[ORM\ManyToOne(inversedBy: 'events')]
     private ?Feed $feed = null;
 
-    /** @deprecated field kept to allow mapping of already imported events. Replaced by FeedItem relation. */
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $feedItemId = null;
-
     #[ORM\OneToOne(mappedBy: 'event', cascade: ['persist', 'remove'])]
     private ?FeedItem $feedItem = null;
 

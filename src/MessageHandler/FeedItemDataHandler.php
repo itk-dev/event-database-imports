@@ -5,7 +5,6 @@ namespace App\MessageHandler;
 use App\Entity\FeedItem;
 use App\Message\FeedItemDataMessage;
 use App\Message\FeedItemNormalizationMessage;
-use App\Repository\EventRepository;
 use App\Repository\FeedItemRepository;
 use App\Repository\FeedRepository;
 use App\Service\Feeds\Mapper\FeedMapperInterface;
@@ -22,7 +21,6 @@ final readonly class FeedItemDataHandler
         private FeedMapperInterface $feedMapper,
         private FeedRepository $feedRepository,
         private FeedItemRepository $feedItemRepository,
-        private EventRepository $eventRepository,
     ) {
     }
 
@@ -43,12 +41,6 @@ final readonly class FeedItemDataHandler
 
             if (null === $feedItemEntity) {
                 $feedItemEntity = new FeedItem($feed, $feedItemData->id, $message->getData());
-            }
-
-            // Map previously imported events.
-            $event = $this->eventRepository->findOneBy(['feed' => $feed, 'feedItemId' => $feedItemData->id]);
-            if (null !== $event) {
-                $feedItemEntity->setEvent($event);
             }
 
             $feedItemEntity->setLastSeenAt();
