@@ -477,6 +477,14 @@
         <source>admin.feed.last_read.error</source>
         <target>Error</target>
       </trans-unit>
+      <trans-unit id="SCtCqae" resname="admin.event.organizer.headline">
+        <source>admin.event.organizer.headline</source>
+        <target>Organizer &amp; Partners</target>
+      </trans-unit>
+      <trans-unit id="wuiqJUz" resname="admin.event.edited.partners">
+        <source>admin.event.edited.partners</source>
+        <target>Partners</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

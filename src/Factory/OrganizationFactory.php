@@ -26,14 +26,14 @@ final readonly class OrganizationFactory
      * @return Organization
      *   Organization entity base on feed data
      */
-    public function createOrUpdate(FeedItemOrganization $input): Organization
+    public function createOrUpdate(FeedItemOrganization $input, ?string $base = null): Organization
     {
         $organization = $this->getOrganization($input);
         $organization ??= new Organization();
 
         if (is_null($organization->getUrl()) && !is_null($input->url)) {
             try {
-                $organization->setUrl(UriHelper::getAbsoluteUrl($input->url));
+                $organization->setUrl(UriHelper::getAbsoluteUrl($input->url, $base));
             } catch (\Exception $e) {
                 $this->logger->error('Organization: '.$e->getMessage());
             }

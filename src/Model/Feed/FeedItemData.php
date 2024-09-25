@@ -17,6 +17,8 @@ final class FeedItemData
         public array $occurrences = [],
         public ?FeedItemLocation $location = null,
         public ?FeedItemOrganization $organization = null,
+        /** @var array<FeedItemOrganization> */
+        public array $partners = [],
         public int $feedId = 0,
         /** @var array<string> */
         public array $tags = [],
