@@ -52,12 +52,12 @@ class FeedReader implements FeedReaderInterface
      *
      * @throws MappingError
      */
-    public function readFeeds(int $limit = FeedReaderInterface::DEFAULT_OPTION, bool $force = false, array $feedIds = []): iterable
+    public function readFeeds(int $limit = FeedReaderInterface::DEFAULT_OPTION, bool $force = false, array $feedIds = []): void
     {
         $feeds = $this->getEnabledFeeds($limit, $force, $feedIds);
 
         foreach ($feeds as $feed) {
-            yield from $this->readFeed($feed, $limit, $force);
+            $this->readFeed($feed, $limit, $force);
         }
     }
 

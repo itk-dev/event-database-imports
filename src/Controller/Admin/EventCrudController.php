@@ -91,10 +91,15 @@ class EventCrudController extends AbstractBaseCrudController
             AssociationField::new('location')
                 ->setLabel(new TranslatableMessage('admin.event.location.location')),
 
-            FormField::addFieldset('Edited')
-                ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
+            FormField::addFieldset('Organizer information')
+                ->setLabel(new TranslatableMessage('admin.event.organizer.headline')),
             AssociationField::new('organization')
                 ->setLabel(new TranslatableMessage('admin.event.edited.organization')),
+            AssociationField::new('partners')
+                ->setLabel(new TranslatableMessage('admin.event.edited.partners')),
+
+            FormField::addFieldset('Edited')
+                ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
             AssociationField::new('feed')
                 ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
                 ->hideOnForm()

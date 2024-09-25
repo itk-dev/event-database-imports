@@ -28,7 +28,7 @@ final readonly class LocationFactory
      * @return Location
      *   Location entity base on feed data
      */
-    public function createOrUpdate(FeedItemLocation $input): Location
+    public function createOrUpdate(FeedItemLocation $input, ?string $base = null): Location
     {
         $address = $this->getAddress($input);
         $location = $this->getLocation($input);
@@ -63,7 +63,7 @@ final readonly class LocationFactory
         }
         if (!is_null($input->url)) {
             try {
-                $location->setUrl(UriHelper::getAbsoluteUrl($input->url));
+                $location->setUrl(UriHelper::getAbsoluteUrl($input->url, $base));
             } catch (\RuntimeException $e) {
                 $this->logger->error('Location: '.$e->getMessage());
             }

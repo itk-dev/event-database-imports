@@ -109,7 +109,7 @@ final readonly class EventFactory
         }
 
         if (!is_null($item->image)) {
-            $image = $this->imageFactory->createOrUpdate($item->image, $entity->getImage());
+            $image = $this->imageFactory->createOrUpdate($item->image, $entity->getImage(), $base);
             $entity->setImage($image);
         }
 
@@ -120,13 +120,18 @@ final readonly class EventFactory
         }
 
         if (!is_null($item->location)) {
-            $entity->setLocation($this->locationFactory->createOrUpdate($item->location));
+            $entity->setLocation($this->locationFactory->createOrUpdate($item->location, $base));
         }
 
         if (!is_null($item->organization)) {
             $entity->setOrganization($this->organizationFactory->createOrUpdate($item->organization));
         } else {
             $entity->setOrganization($feed->getOrganization());
+        }
+
+        foreach ($item->partners as $partner) {
+            $partner = $this->organizationFactory->createOrUpdate($partner);
+            $partner->addPartnerEvent($entity);
         }
 
         // The feed items may come with occurrences The daly occurrences will be handled later on.
