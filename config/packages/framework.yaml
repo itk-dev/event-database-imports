@@ -21,6 +21,9 @@ framework:
     php_errors:
         log: true
 
+    router:
+        default_uri: '%env(APP_DEFAULT_URI)%'
+
     assets:
         base_path: '%env(APP_PATH_PREFIX)%'
 

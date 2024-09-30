@@ -12,12 +12,11 @@ use App\Entity\Vocabulary;
 use App\Message\ImageMessage;
 use App\Service\ContentNormalizerInterface;
 use App\Service\EventFinder;
-use Doctrine\ORM\Mapping\Entity;
+use App\Utils\UriHelper;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
-use phpDocumentor\Reflection\Types\This;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -29,6 +28,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         private readonly LoggerInterface $logger,
         private readonly EventFinder $eventFinder,
         private readonly ContentNormalizerInterface $contentNormalizer,
+        private readonly UriHelper $uriHelper,
     ) {
     }
 
@@ -90,6 +90,12 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             } elseif (!is_null($description)) {
                 $entity->setExcerpt($description);
             }
+
+            $this->setImageSource($entity->getImage());
+        }
+
+        if ($entity instanceof Image) {
+            $this->setImageSource($entity);
         }
 
         if ($entity instanceof Feed) {
@@ -102,6 +108,19 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
         if ($entity instanceof Vocabulary) {
             $entity->setSlug();
+        }
+    }
+
+    private function setImageSource(?Image $image): void
+    {
+        if (null !== $image) {
+            $local = $image->getLocal();
+
+            if (null !== $local) {
+                $url = $this->uriHelper->getAbsoluteLocalFileUrl($local);
+
+                $image->setSource($url);
+            }
         }
     }
 

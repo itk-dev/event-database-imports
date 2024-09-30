@@ -58,8 +58,13 @@ services:
 
     App\Service\ImageHandler:
         arguments:
+            $defaultUri: '%env(string:APP_DEFAULT_URI)%'
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
+
+    App\Utils\UriHelper:
+        arguments:
+            $defaultUri: '%env(string:APP_DEFAULT_URI)%'
 
     Elastic\Elasticsearch\Client:
         factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]

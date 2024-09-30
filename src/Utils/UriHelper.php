@@ -2,8 +2,28 @@
 
 namespace App\Utils;
 
+use Symfony\Component\Asset\UrlPackage;
+use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
+
 class UriHelper
 {
+    public const string UPLOAD_DIR = 'public/images/uploads';
+
+    public function __construct(
+        private readonly string $defaultUri,
+    ) {
+    }
+
+    public function getAbsoluteLocalFileUrl(string $file): string
+    {
+        $urlPackage = new UrlPackage(
+            $this->defaultUri.substr(self::UPLOAD_DIR, 6),
+            new EmptyVersionStrategy(),
+        );
+
+        return $urlPackage->getUrl('/'.$file);
+    }
+
     public static function getAbsoluteUrl(string $inputUrl, ?string $base = null): string
     {
         $url = trim($inputUrl);
