@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\Admin\DashboardController;
 use App\Model\Indexing\IndexNames;
 use App\Repository\DailyOccurrenceRepository;
 use App\Service\Indexing\IndexItemInterface;
@@ -51,6 +52,28 @@ class DailyOccurrence implements IndexItemInterface
     #[ORM\Column(length: 255, nullable: true)]
     #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?string $status = null;
+
+    public function __toString(): string
+    {
+        // @TODO find a way to do this better and avoid leaking EasyAdmin stuff into the entity model!
+        // In EasyAdmin the value used for display is chosen in EasyAdminTwigExtension::representAsString()
+        // There doesn't seem to be a way to change this from any of the Easyadmin option or filters. In the
+        // case of using CollectionField this means the __toString() is called :-(
+
+        $viewTimezone = new \DateTimeZone(DashboardController::VIEW_TIMEZONE);
+        $start = $this->start?->setTimezone($viewTimezone);
+        $end = $this->end?->setTimezone($viewTimezone);
+
+        $viewTimezone = new \DateTimeZone(DashboardController::VIEW_TIMEZONE);
+        $format = 'Y-m-d H:i';
+        $start?->setTimezone($viewTimezone);
+        $end?->setTimezone($viewTimezone);
+
+        return $start?->format($format).
+            ' - '.$end?->format($format).
+            ' / '.$this->getTicketPriceRange().
+            ' / '.$this->getRoom();
+    }
 
     public function getId(): ?int
     {

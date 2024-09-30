@@ -27,6 +27,7 @@ final class ImageHandler implements ImageHandlerInterface
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly string $publicPath,
+        private readonly string $defaultUri,
         private readonly array $allowedMineTypes,
         private readonly MessageBusInterface $messageBus,
         private readonly CacheManager $imagineCacheManager,
@@ -44,6 +45,32 @@ final class ImageHandler implements ImageHandlerInterface
      * @throws ImageMineTypeException
      */
     public function fetch(string $url): string
+    {
+        return $this->isLocalResource($url) ? $this->getLocalResourcePath($url) : $this->fetchRemoteResource($url);
+    }
+
+    private function isLocalResource(string $url): bool
+    {
+        return str_starts_with($url, $this->defaultUri);
+    }
+
+    private function getLocalResourcePath(string $url): string
+    {
+        $file = str_replace($this->defaultUri.'/images', '', $url);
+
+        return $this->getRelativePath($file);
+    }
+
+    /**
+     * @throws RedirectionExceptionInterface
+     * @throws ClientExceptionInterface
+     * @throws ImageFetchException
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws FilesystemException
+     * @throws ImageMineTypeException
+     */
+    private function fetchRemoteResource(string $url): string
     {
         $filesystem = new Filesystem();
 

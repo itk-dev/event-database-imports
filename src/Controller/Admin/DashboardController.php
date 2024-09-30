@@ -5,9 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Address;
 use App\Entity\Event;
 use App\Entity\Feed;
-use App\Entity\Image;
 use App\Entity\Location;
-use App\Entity\Occurrence;
 use App\Entity\Organization;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -50,10 +48,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.events'), 'fa fa-calendar', Event::class);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.occurrences'), 'fa fa-repeat', Occurrence::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.location'), 'fa fa-location-dot', Location::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.address'), 'fa fa-address-book', Address::class);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.image'), 'fa fa-image', Image::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feeds'), 'fa fa-rss', Feed::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.tags'), 'fa fa-tags', Tag::class);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.vocabularies'), 'fa fa-book', Vocabulary::class);

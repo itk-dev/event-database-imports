@@ -34,7 +34,9 @@ final readonly class ImageHandler
                     $local = $this->imageHandler->fetch($source);
                     $image->setLocal($local);
 
-                    $image->setTitle(basename($source));
+                    if (null === $image->getTitle()) {
+                        $image->setTitle(basename($source));
+                    }
 
                     $this->imageRepository->save($image, true);
 

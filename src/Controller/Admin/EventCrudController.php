@@ -8,9 +8,9 @@ use Doctrine\Common\Collections\Criteria;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -39,20 +39,17 @@ class EventCrudController extends AbstractBaseCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->setLabel(new TranslatableMessage('admin.event.id'))
-                ->setDisabled()
-                ->hideWhenCreating(),
-
             FormField::addFieldset('Basic information')
                 ->setLabel(new TranslatableMessage('admin.event.basic.headline')),
             TextField::new('title'),
             ImageField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
                 ->formatValue(function ($value) {
-                    return null === $value ? null : $this->imageHandler->getTransformedImageUrls($value->getLocal())['large'];
-                }
-                )->hideOnIndex()->hideOnForm(),
+                    $local = $value?->getLocal();
+                    $transformed = null === $local ? null : $this->imageHandler->getTransformedImageUrls($local);
+
+                    return $transformed['large'] ?? null;
+                })->hideOnIndex()->hideOnForm(),
             TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
                 ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
@@ -68,17 +65,18 @@ class EventCrudController extends AbstractBaseCrudController
                 ->hideOnForm(),
             AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
-                ->hideOnIndex(),
+                ->hideOnIndex()
+                ->renderAsEmbeddedForm(ImageEmbedController::class),
             AssociationField::new('tags')
                 ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
                 ->hideOnIndex(),
 
             FormField::addFieldset('Occurrences')
                 ->setLabel(new TranslatableMessage('admin.event.occurrences')),
-            AssociationField::new('occurrences')
-                ->hideOnIndex(),
-            AssociationField::new('dailyOccurrences')
-                ->hideOnIndex(),
+            CollectionField::new('occurrences')
+                ->hideOnIndex()
+                ->renderExpanded(false)
+                ->useEntryCrudForm(),
 
             FormField::addFieldset('Location information')
                 ->setLabel(new TranslatableMessage('admin.event.location.headline')),
@@ -107,8 +105,7 @@ class EventCrudController extends AbstractBaseCrudController
             DateTimeField::new('updated_at')
                 ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
                 ->setDisabled()
-                ->hideWhenCreating()
-                ->setFormat(DashboardController::DATETIME_FORMAT),
+                ->hideWhenCreating(),
         ];
     }
 
