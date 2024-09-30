@@ -52,6 +52,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Force UTC for all timestamps persisted in the database
 - Add `--force` option to `app:feed:import` command
 - Refactor feed import to enable feed cleanup
+- Handle local images
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
