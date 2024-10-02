@@ -13,13 +13,11 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
 #[AsCommand(
     name: 'app:index:populate',
     description: 'Populate (re-index) an index',
 )]
-#[AsCronTask(expression: '30 * * * *', schedule: 'default')]
 final class IndexPopulateCommand extends Command
 {
     public function __construct(
