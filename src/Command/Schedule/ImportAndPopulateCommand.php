@@ -15,7 +15,7 @@ use Symfony\Component\Scheduler\Attribute\AsCronTask;
     name: 'app:schedule:import-and-populate',
     description: 'Import feeds and populate index',
 )]
-#[AsCronTask(expression: '20 * * * *', schedule: 'default')]
+#[AsCronTask(expression: '25 * * * *', schedule: 'default')]
 class ImportAndPopulateCommand extends Command
 {
     public function __construct(
