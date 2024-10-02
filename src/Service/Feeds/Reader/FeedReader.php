@@ -55,7 +55,9 @@ class FeedReader implements FeedReaderInterface
         $feeds = $this->getEnabledFeeds($limit, $force, $feedIds);
 
         foreach ($feeds as $feed) {
-            $this->readFeed($feed, $limit, $force);
+            foreach ($this->readFeed($feed, $limit, $force) as $item) {
+                // Do nothing
+            }
         }
     }
 
