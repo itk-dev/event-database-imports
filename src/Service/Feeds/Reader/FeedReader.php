@@ -13,9 +13,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Exception\TransportException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
-use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
-#[AsCronTask(expression: '20 * * * *', schedule: 'default', method: 'readFeeds')]
 class FeedReader implements FeedReaderInterface
 {
     public const string SYNC_QUEUE = 'sync';

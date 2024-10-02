@@ -53,6 +53,7 @@ See [keep a changelog] for information about writing changes to this log.
 - Add `--force` option to `app:feed:import` command
 - Refactor feed import to enable feed cleanup
 - Handle local images
+- Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
