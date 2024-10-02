@@ -14,7 +14,6 @@ use Symfony\Component\Messenger\Exception\TransportException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\TransportNamesStamp;
 
-
 class FeedReader implements FeedReaderInterface
 {
     public const string SYNC_QUEUE = 'sync';
