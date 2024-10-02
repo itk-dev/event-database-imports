@@ -2,6 +2,7 @@
 
 namespace App\Service\Indexing;
 
+use App\Entity\Event;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
 use App\Service\ImageHandlerInterface;
@@ -27,6 +28,10 @@ final class IndexingEvents extends AbstractIndexingElastic
 
     public function serialize(IndexItemInterface $item): array
     {
+        if (!$item instanceof Event) {
+            throw new \InvalidArgumentException('Item must be an instance of Event.');
+        }
+
         $contextBuilder = (new ObjectNormalizerContextBuilder())
             ->withGroups([IndexNames::Events->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
@@ -50,7 +55,9 @@ final class IndexingEvents extends AbstractIndexingElastic
         }
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
-        $data['location'] = $this->indexingLocations->serialize($item->getLocation());
+        // @todo: Handle validation. Location should never be null
+        $location = $item->getLocation();
+        $data['location'] = null === $location ? null : $this->indexingLocations->serialize($item->getLocation());
 
         return $data;
     }
