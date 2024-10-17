@@ -37,10 +37,6 @@
         <source>admin.link.events</source>
         <target state="needs-l10n">__admin.link.events</target>
       </trans-unit>
-      <trans-unit id="u5sCZNu" resname="admin.link.occurrences">
-        <source>admin.link.occurrences</source>
-        <target state="needs-l10n">__admin.link.occurrences</target>
-      </trans-unit>
       <trans-unit id="I9SNJXS" resname="admin.link.location">
         <source>admin.link.location</source>
         <target state="needs-l10n">__admin.link.location</target>
@@ -48,10 +44,6 @@
       <trans-unit id="gCHoRa." resname="admin.link.address">
         <source>admin.link.address</source>
         <target state="needs-l10n">__admin.link.address</target>
-      </trans-unit>
-      <trans-unit id="p58tCKn" resname="admin.link.image">
-        <source>admin.link.image</source>
-        <target state="needs-l10n">__admin.link.image</target>
       </trans-unit>
       <trans-unit id="1OcmqaW" resname="admin.link.feeds">
         <source>admin.link.feeds</source>
@@ -64,10 +56,6 @@
       <trans-unit id="3ohrj0." resname="admin.link.users">
         <source>admin.link.users</source>
         <target state="needs-l10n">__admin.link.users</target>
-      </trans-unit>
-      <trans-unit id="NfU36AS" resname="admin.event.id">
-        <source>admin.event.id</source>
-        <target state="needs-l10n">__admin.event.id</target>
       </trans-unit>
       <trans-unit id="te5f3B6" resname="admin.address.location.headline">
         <source>admin.address.location.headline</source>
@@ -221,14 +209,6 @@
         <source>admin.location.edited.updated</source>
         <target state="needs-l10n">__admin.location.edited.updated</target>
       </trans-unit>
-      <trans-unit id="PNaXHXs" resname="admin.occurrence.id">
-        <source>admin.occurrence.id</source>
-        <target state="needs-l10n">__admin.occurrence.id</target>
-      </trans-unit>
-      <trans-unit id="u0.n.DQ" resname="admin.occurrence.event-link">
-        <source>admin.occurrence.event-link</source>
-        <target state="needs-l10n">__admin.occurrence.event-link</target>
-      </trans-unit>
       <trans-unit id="ipU8EAl" resname="admin.occurrence.dates.headline">
         <source>admin.occurrence.dates.headline</source>
         <target state="needs-l10n">__admin.occurrence.dates.headline</target>
@@ -252,14 +232,6 @@
       <trans-unit id="xXnuFrt" resname="admin.occurrence.basic.room">
         <source>admin.occurrence.basic.room</source>
         <target state="needs-l10n">__admin.occurrence.basic.room</target>
-      </trans-unit>
-      <trans-unit id="fDsTfkD" resname="admin.occurrence.edited.headline">
-        <source>admin.occurrence.edited.headline</source>
-        <target state="needs-l10n">__admin.occurrence.edited.headline</target>
-      </trans-unit>
-      <trans-unit id=".EqFxan" resname="admin.occurrence.edited.updated">
-        <source>admin.occurrence.edited.updated</source>
-        <target state="needs-l10n">__admin.occurrence.edited.updated</target>
       </trans-unit>
       <trans-unit id="pB0NtRW" resname="admin.organization.id">
         <source>admin.organization.id</source>
@@ -484,6 +456,14 @@
       <trans-unit id="wuiqJUz" resname="admin.event.edited.partners">
         <source>admin.event.edited.partners</source>
         <target state="needs-l10n">__admin.event.edited.partners</target>
+      </trans-unit>
+      <trans-unit id="_sDYXeE" resname="terms.page.accept_terms">
+        <source>terms.page.accept_terms</source>
+        <target state="needs-l10n">__terms.page.accept_terms</target>
+      </trans-unit>
+      <trans-unit id="rlmv7i8" resname="terms.page.btn.accept">
+        <source>terms.page.btn.accept</source>
+        <target state="needs-l10n">__terms.page.btn.accept</target>
       </trans-unit>
     </body>
   </file>
