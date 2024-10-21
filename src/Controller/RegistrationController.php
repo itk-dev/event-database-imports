@@ -53,7 +53,7 @@ class RegistrationController extends AbstractDashboardController
             );
 
             $user->setTermsAcceptedAt(new \DateTimeImmutable());
-            $user->setRoles([UserRoles::ROLE_API_USER]);
+            $user->setRoles([UserRoles::ROLE_USER]);
             $user->setCreatedBy($user->getName());
             $user->setUpdatedBy($user->getName());
 
@@ -116,5 +116,13 @@ class RegistrationController extends AbstractDashboardController
         $this->addFlash('success', new TranslatableMessage('registration.page.email_verified'));
 
         return $this->redirectToRoute('app_admin_login');
+    }
+
+    #[Route('/email-not-verified', name: 'app_email_not_verified')]
+    public function emailNotVerified(Request $request, TranslatorInterface $translator): Response
+    {
+        return $this->render('registration/email_not_verified.html.twig', [
+            'page_title' => new TranslatableMessage('registration.page.email_not_verified'),
+        ]);
     }
 }

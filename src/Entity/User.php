@@ -40,7 +40,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(type: 'boolean')]
-    private bool $enabled = false;
+    private bool $enabled = true;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;

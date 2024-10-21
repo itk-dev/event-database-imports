@@ -289,10 +289,6 @@
         <source>admin.user.name</source>
         <target>Name</target>
       </trans-unit>
-      <trans-unit id="rAd5xrd" resname="admin.user.mail">
-        <source>admin.user.mail</source>
-        <target>Mail</target>
-      </trans-unit>
       <trans-unit id="tvBq3eb" resname="admin.user.password">
         <source>admin.user.password</source>
         <target>Password</target>
@@ -464,6 +460,26 @@
       <trans-unit id="rlmv7i8" resname="terms.page.btn.accept">
         <source>terms.page.btn.accept</source>
         <target>Accept terms</target>
+      </trans-unit>
+      <trans-unit id=".nBxX2W" resname="admin.user.role.role_admin">
+        <source>admin.user.role.role_admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="rAd5xrd" resname="admin.user.mail">
+        <source>admin.user.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="lBtWT0e" resname="admin.user.role.role_user">
+        <source>admin.user.role.role_user</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="qnk8Rwy" resname="admin.user.role.role_api_user">
+        <source>admin.user.role.role_api_user</source>
+        <target>API User</target>
+      </trans-unit>
+      <trans-unit id="A7PG0hf" resname="admin.user.role.role_editor">
+        <source>admin.user.role.role_editor</source>
+        <target>Editor</target>
       </trans-unit>
     </body>
   </file>

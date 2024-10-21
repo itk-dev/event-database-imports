@@ -8,6 +8,7 @@ use App\Entity\Feed;
 use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
+use App\Entity\User;
 use App\Entity\Vocabulary;
 use App\Message\ImageMessage;
 use App\Service\ContentNormalizerInterface;
@@ -108,6 +109,11 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
         if ($entity instanceof Vocabulary) {
             $entity->setSlug();
+        }
+
+        if ($entity instanceof User) {
+            // Bypass email verification for manually created users
+            $entity->setIsVerified(true);
         }
     }
 

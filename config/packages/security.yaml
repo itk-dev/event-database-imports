@@ -33,11 +33,17 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/admin/login, , roles: PUBLIC_ACCESS }
-        - { path: ^/admin, roles: !php/enum App\Types\UserRoles::ROLE_API_USER->value }
+        - { path: ^/admin, roles: !php/enum App\Types\UserRoles::ROLE_USER->value }
         # - { path: ^/profile, roles: ROLE_USER }
 
+    access_decision_manager:
+        strategy: unanimous
+
     role_hierarchy:
-        !php/enum App\Types\UserRoles::ROLE_ADMIN->value:       !php/enum App\Types\UserRoles::ROLE_API_USER->value
+        !php/enum App\Types\UserRoles::ROLE_ADMIN->value:       !php/enum App\Types\UserRoles::ROLE_EDITOR->value
+        !php/enum App\Types\UserRoles::ROLE_EDITOR->value:       !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_ADMIN->value
+        !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_ADMIN->value:    !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_EDITOR->value
+        !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_EDITOR->value:    !php/enum App\Types\UserRoles::ROLE_API_USER->value
         !php/enum App\Types\UserRoles::ROLE_API_USER->value:    !php/enum App\Types\UserRoles::ROLE_USER->value
 
 when@test:

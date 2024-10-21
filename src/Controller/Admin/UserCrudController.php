@@ -4,10 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Types\UserRoles;
+use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\SearchDto;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -34,6 +41,18 @@ class UserCrudController extends AbstractBaseCrudController
         return User::class;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        if (!$this->isGranted(UserRoles::ROLE_ADMIN->value)) {
+            $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+            $actions->remove(Crud::PAGE_DETAIL, Action::DELETE);
+        }
+
+        return $actions;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -46,14 +65,19 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.user.name')),
             EmailField::new('mail')
                 ->setLabel(new TranslatableMessage('admin.user.mail')),
+            AssociationField::new('organizations')
+                ->setFormTypeOption('by_reference', false),
             ChoiceField::new('roles')
-                ->setTranslatableChoices(
-                    array_map(
-                        fn ($value): string => \strtolower('admin.user.role.'.$value),
-                        UserRoles::array()
-                    )
-                )
+                ->setTranslatableChoices([
+                    'ROLE_ADMIN' => new TranslatableMessage('admin.user.role.role_admin'),
+                    'ROLE_EDITOR' => new TranslatableMessage('admin.user.role.role_editor'),
+                    'ROLE_ORGANIZATION_ADMIN' => new TranslatableMessage('admin.user.role.role_organization_admin'),
+                    'ROLE_ORGANIZATION_EDITOR' => new TranslatableMessage('admin.user.role.role_organization_editor'),
+                    'ROLE_API_USER' => new TranslatableMessage('admin.user.role.role_api_user'),
+                    'ROLE_USER' => new TranslatableMessage('admin.user.role.role_user'),
+                ])
                 ->allowMultipleChoices()
+                ->renderExpanded()
                 ->setLabel(new TranslatableMessage('admin.user.roles')),
             TextField::new('password')
                 ->setFormType(RepeatedType::class)
@@ -67,6 +91,14 @@ class UserCrudController extends AbstractBaseCrudController
                 ->onlyOnForms(),
             BooleanField::new('enabled')
                 ->setLabel(new TranslatableMessage('admin.user.enabled')),
+            BooleanField::new('isVerified')
+                ->setLabel(new TranslatableMessage('admin.user.email_verified'))
+                ->setDisabled()
+                ->hideOnIndex(),
+            DateTimeField::new('termsAcceptedAt')
+                ->setLabel(new TranslatableMessage('admin.user.terms_accepted_at'))
+                ->setDisabled()
+                ->hideOnIndex(),
 
             FormField::addFieldset(new TranslatableMessage('admin.user.edited.headline'))
                 ->hideWhenCreating(),
@@ -76,6 +108,17 @@ class UserCrudController extends AbstractBaseCrudController
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
+    }
+
+    public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
+    {
+        $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
+
+        if (!$this->isGranted(UserRoles::ROLE_ADMIN->value)) {
+            $qb->andWhere('entity.id = :userId')->setParameter('userId', $this->getUser()->getId());
+        }
+
+        return $qb;
     }
 
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface

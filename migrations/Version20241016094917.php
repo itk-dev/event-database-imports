@@ -21,6 +21,7 @@ final class Version20241016094917 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE user ADD terms_accepted_at DATETIME DEFAULT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
+        $this->addSql('UPDATE user set is_verified = 1');
     }
 
     public function down(Schema $schema): void

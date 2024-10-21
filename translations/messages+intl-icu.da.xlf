@@ -281,10 +281,6 @@
         <source>admin.user.name</source>
         <target state="needs-l10n">__admin.user.name</target>
       </trans-unit>
-      <trans-unit id="rAd5xrd" resname="admin.user.mail">
-        <source>admin.user.mail</source>
-        <target state="needs-l10n">__admin.user.mail</target>
-      </trans-unit>
       <trans-unit id="tvBq3eb" resname="admin.user.password">
         <source>admin.user.password</source>
         <target state="needs-l10n">__admin.user.password</target>
@@ -464,6 +460,26 @@
       <trans-unit id="rlmv7i8" resname="terms.page.btn.accept">
         <source>terms.page.btn.accept</source>
         <target state="needs-l10n">__terms.page.btn.accept</target>
+      </trans-unit>
+      <trans-unit id=".nBxX2W" resname="admin.user.role.role_admin">
+        <source>admin.user.role.role_admin</source>
+        <target state="needs-l10n">__admin.user.role.role_admin</target>
+      </trans-unit>
+      <trans-unit id="rAd5xrd" resname="admin.user.mail">
+        <source>admin.user.mail</source>
+        <target state="needs-l10n">__admin.user.mail</target>
+      </trans-unit>
+      <trans-unit id="lBtWT0e" resname="admin.user.role.role_user">
+        <source>admin.user.role.role_user</source>
+        <target state="needs-l10n">__admin.user.role.role_user</target>
+      </trans-unit>
+      <trans-unit id="qnk8Rwy" resname="admin.user.role.role_api_user">
+        <source>admin.user.role.role_api_user</source>
+        <target state="needs-l10n">__admin.user.role.role_api_user</target>
+      </trans-unit>
+      <trans-unit id="A7PG0hf" resname="admin.user.role.role_editor">
+        <source>admin.user.role.role_editor</source>
+        <target state="needs-l10n">__admin.user.role.role_editor</target>
       </trans-unit>
     </body>
   </file>
