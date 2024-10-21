@@ -4,13 +4,15 @@ namespace App\Controller\Admin;
 
 use App\Entity\Event;
 use App\Service\ImageHandlerInterface;
-use Doctrine\Common\Collections\Criteria;
+use App\Types\UserRoles;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -21,7 +23,7 @@ use Symfony\Component\Translation\TranslatableMessage;
 class EventCrudController extends AbstractBaseCrudController
 {
     public function __construct(
-        private readonly ImageHandlerInterface $imageHandler
+        private readonly ImageHandlerInterface $imageHandler,
     ) {
     }
 
@@ -32,8 +34,10 @@ class EventCrudController extends AbstractBaseCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        return $crud
-            ->setDefaultSort(['id' => Criteria::DESC]);
+        $crud->setDefaultSort(['id' => Order::Descending->value]);
+        $crud->showEntityActionsInlined();
+
+        return $crud;
     }
 
     public function configureFields(string $pageName): iterable
@@ -41,6 +45,7 @@ class EventCrudController extends AbstractBaseCrudController
         return [
             FormField::addFieldset('Basic information')
                 ->setLabel(new TranslatableMessage('admin.event.basic.headline')),
+            IdField::new('id', 'admin.event.id'),
             TextField::new('title'),
             ImageField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
@@ -66,7 +71,7 @@ class EventCrudController extends AbstractBaseCrudController
             AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex()
-                ->renderAsEmbeddedForm(ImageEmbedController::class),
+                ->renderAsEmbeddedForm(EmbedImageController::class),
             AssociationField::new('tags')
                 ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
                 ->hideOnIndex(),
@@ -93,8 +98,8 @@ class EventCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.event.organizer.headline')),
             AssociationField::new('organization')
                 ->setLabel(new TranslatableMessage('admin.event.edited.organization')),
-            AssociationField::new('partners')
-                ->setLabel(new TranslatableMessage('admin.event.edited.partners')),
+            AssociationField::new('feed')
+                ->setLabel(new TranslatableMessage('admin.event.edited.feed')),
 
             FormField::addFieldset('Edited')
                 ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
@@ -111,8 +116,11 @@ class EventCrudController extends AbstractBaseCrudController
 
     public function configureFilters(Filters $filters): Filters
     {
+        if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $filters->add('organization');
+        }
+
         return $filters
-            ->add('organization')
             ->add('location')
             ->add('title')
         ;
