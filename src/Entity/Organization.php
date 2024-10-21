@@ -43,7 +43,7 @@ class Organization implements IndexItemInterface
     private ?string $url = null;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'organizations')]
-    private Collection $Users;
+    private Collection $users;
 
     #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Event::class)]
     private Collection $events;

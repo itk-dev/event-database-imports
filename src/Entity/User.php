@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'Users')]
+    #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'users')]
     private Collection $organizations;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
