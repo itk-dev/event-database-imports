@@ -3,9 +3,11 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Event;
+use App\Entity\Organization;
 use App\Service\ImageHandlerInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
+use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -97,12 +99,20 @@ class EventCrudController extends AbstractBaseCrudController
             FormField::addFieldset('Organizer information')
                 ->setLabel(new TranslatableMessage('admin.event.organizer.headline')),
             AssociationField::new('organization')
-                ->setLabel(new TranslatableMessage('admin.event.edited.organization')),
-            AssociationField::new('feed')
-                ->setLabel(new TranslatableMessage('admin.event.edited.feed')),
+                ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
+                ->setQueryBuilder(
+                    fn (QueryBuilder $queryBuilder) => $queryBuilder
+                        ->select('o')
+                        ->from(Organization::class, 'o')
+                        ->where(':user MEMBER OF o.users')
+                        ->setParameter('user', $this->getUser())
+                ),
+            AssociationField::new('partners')
+                ->setLabel(new TranslatableMessage('admin.event.edited.partners')),
 
             FormField::addFieldset('Edited')
-                ->setLabel(new TranslatableMessage('admin.event.edited.headline')),
+                ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
+                ->hideWhenCreating(),
             AssociationField::new('feed')
                 ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
                 ->hideOnForm()
@@ -124,5 +134,15 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('location')
             ->add('title')
         ;
+    }
+
+    protected function getOrganizationChoices(): array
+    {
+        $choices = [];
+        foreach ($this->getUser()->getOrganizations() as $organization) {
+            $choices[$organization->getName()] = $organization->getId();
+        }
+
+        return $choices;
     }
 }

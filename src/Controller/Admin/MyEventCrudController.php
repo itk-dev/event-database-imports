@@ -28,10 +28,7 @@ class MyEventCrudController extends EventCrudController
 
     public function configureFilters(Filters $filters): Filters
     {
-        $choices = [];
-        foreach ($this->getUser()->getOrganizations() as $organization) {
-            $choices[$organization->getName()] = $organization->getId();
-        }
+        $choices = $this->getOrganizationChoices();
 
         if (0 < count($choices)) {
             $filters->add(ChoiceFilter::new('organization')->setChoices($choices));
