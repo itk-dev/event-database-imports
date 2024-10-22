@@ -149,7 +149,10 @@ class EventCrudController extends AbstractBaseCrudController
     {
         $choices = [];
         foreach ($this->getUser()->getOrganizations() as $organization) {
-            $choices[$organization->getName()] = $organization->getId();
+            $key = $organization->getName() ?? $organization->getId();
+            if (null !== $key) {
+                $choices[$key] = $organization->getId();
+            }
         }
 
         return $choices;

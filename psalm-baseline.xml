@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
-  <file src="src/Controller/Admin/UserCrudController.php">
-    <InvalidArgument>
-      <code><![CDATA[$user]]></code>
-    </InvalidArgument>
-  </file>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
   <file src="src/Factory/LocationFactory.php">
     <RedundantCondition>
       <code><![CDATA[empty($values)]]></code>
@@ -38,7 +33,6 @@
   </file>
   <file src="src/Service/Indexing/IndexingEvents.php">
     <UndefinedInterfaceMethod>
-      <code><![CDATA[getLocation]]></code>
       <code><![CDATA[normalize]]></code>
     </UndefinedInterfaceMethod>
   </file>

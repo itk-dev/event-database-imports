@@ -166,12 +166,9 @@ class UserCrudController extends AbstractBaseCrudController
                 return;
             }
 
-            // It will never be null at this point, but static code analyse do not know this.
             $user = $this->getUser();
-            if (!is_null($user)) {
-                $hash = $this->userPasswordHasher->hashPassword($user, $password);
-                $form->getData()->setPassword($hash);
-            }
+            $hash = $this->userPasswordHasher->hashPassword($user, $password);
+            $form->getData()->setPassword($hash);
         };
     }
 }

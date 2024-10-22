@@ -61,11 +61,6 @@ final class LocationVoter extends Voter
             return true;
         }
 
-        // Organization admins can only edit their own locations
-        if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
-            return $user->getOrganizations()->contains($location);
-        }
-
         return false;
     }
 }

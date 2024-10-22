@@ -57,7 +57,7 @@ final class IndexingEvents extends AbstractIndexingElastic
         // @todo: Figure out how to do these changes with the serializer. This is just....
         // @todo: Handle validation. Location should never be null
         $location = $item->getLocation();
-        $data['location'] = null === $location ? null : $this->indexingLocations->serialize($item->getLocation());
+        $data['location'] = null === $location ? null : $this->indexingLocations->serialize($location);
 
         return $data;
     }
