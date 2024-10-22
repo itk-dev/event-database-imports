@@ -1,485 +1,601 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="da" datatype="plaintext" original="file.ext">
+  <file source-language="da" target-language="da" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
       <trans-unit id="7ixbPM4" resname="admin.address.headline">
         <source>admin.address.headline</source>
-        <target state="needs-l10n">__admin.address.headline</target>
+        <target state="translated">Adresse</target>
       </trans-unit>
       <trans-unit id="Xgp.xNj" resname="admin.address.street">
         <source>admin.address.street</source>
-        <target state="needs-l10n">__admin.address.street</target>
+        <target state="translated">Vej</target>
       </trans-unit>
       <trans-unit id="iMZcb7T" resname="admin.address.region">
         <source>admin.address.region</source>
-        <target state="needs-l10n">__admin.address.region</target>
+        <target state="translated">Region</target>
       </trans-unit>
       <trans-unit id="woqDWSt" resname="admin.address.city">
         <source>admin.address.city</source>
-        <target state="needs-l10n">__admin.address.city</target>
+        <target state="translated">By</target>
       </trans-unit>
       <trans-unit id="qn0SoaW" resname="admin.address.country">
         <source>admin.address.country</source>
-        <target state="needs-l10n">__admin.address.country</target>
+        <target state="translated">Land</target>
       </trans-unit>
       <trans-unit id="H6tlGPs" resname="admin.address.postalCode">
         <source>admin.address.postalCode</source>
-        <target state="needs-l10n">__admin.address.postalCode</target>
+        <target state="translated">Postnummer</target>
       </trans-unit>
       <trans-unit id="tPg4pmq" resname="admin.address.id">
         <source>admin.address.id</source>
-        <target state="needs-l10n">__admin.address.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="itEjSsQ" resname="admin.link.events">
         <source>admin.link.events</source>
-        <target state="needs-l10n">__admin.link.events</target>
+        <target state="translated">Begivenheder</target>
       </trans-unit>
       <trans-unit id="I9SNJXS" resname="admin.link.location">
         <source>admin.link.location</source>
-        <target state="needs-l10n">__admin.link.location</target>
+        <target state="translated">Steder</target>
       </trans-unit>
       <trans-unit id="gCHoRa." resname="admin.link.address">
         <source>admin.link.address</source>
-        <target state="needs-l10n">__admin.link.address</target>
+        <target state="translated">Addresser</target>
       </trans-unit>
       <trans-unit id="1OcmqaW" resname="admin.link.feeds">
         <source>admin.link.feeds</source>
-        <target state="needs-l10n">__admin.link.feeds</target>
+        <target state="translated">Feeds</target>
       </trans-unit>
       <trans-unit id="CHMIv90" resname="admin.link.tags">
         <source>admin.link.tags</source>
-        <target state="needs-l10n">__admin.link.tags</target>
+        <target state="translated">Tags</target>
       </trans-unit>
       <trans-unit id="3ohrj0." resname="admin.link.users">
         <source>admin.link.users</source>
-        <target state="needs-l10n">__admin.link.users</target>
+        <target state="translated">Brugere</target>
       </trans-unit>
       <trans-unit id="te5f3B6" resname="admin.address.location.headline">
         <source>admin.address.location.headline</source>
-        <target state="needs-l10n">__admin.address.location.headline</target>
+        <target state="translated">Steder</target>
       </trans-unit>
       <trans-unit id="aAHWiSP" resname="admin.address.location.latitude">
         <source>admin.address.location.latitude</source>
-        <target state="needs-l10n">__admin.address.location.latitude</target>
+        <target state="translated">Breddegrad</target>
       </trans-unit>
       <trans-unit id="HlPqAMD" resname="admin.address.location.longitude">
         <source>admin.address.location.longitude</source>
-        <target state="needs-l10n">__admin.address.location.longitude</target>
+        <target state="translated">Længdegrad</target>
       </trans-unit>
       <trans-unit id="2lG7RhG" resname="admin.address.edited.headline">
         <source>admin.address.edited.headline</source>
-        <target state="needs-l10n">__admin.address.edited.headline</target>
+        <target state="translated">Adresse</target>
       </trans-unit>
       <trans-unit id="dNj1_lM" resname="admin.address.edited.updated">
         <source>admin.address.edited.updated</source>
-        <target state="needs-l10n">__admin.address.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="4bHsKHg" resname="admin.event.basic.headline">
         <source>admin.event.basic.headline</source>
-        <target state="needs-l10n">__admin.event.basic.headline</target>
+        <target state="translated">Basis information</target>
       </trans-unit>
       <trans-unit id="dbv61rM" resname="admin.event.basic.excerpt">
         <source>admin.event.basic.excerpt</source>
-        <target state="needs-l10n">__admin.event.basic.excerpt</target>
+        <target state="translated">Uddrag</target>
       </trans-unit>
       <trans-unit id="IjacDgE" resname="admin.event.basic.description">
         <source>admin.event.basic.description</source>
-        <target state="needs-l10n">__admin.event.basic.description</target>
+        <target state="translated">Beskrivelse</target>
       </trans-unit>
       <trans-unit id="GCCXSLn" resname="admin.event.basic.image">
         <source>admin.event.basic.image</source>
-        <target state="needs-l10n">__admin.event.basic.image</target>
+        <target state="translated">Billede</target>
       </trans-unit>
       <trans-unit id="cctuR7g" resname="admin.event.basic.tags">
         <source>admin.event.basic.tags</source>
-        <target state="needs-l10n">__admin.event.basic.tags</target>
+        <target state="translated">Tags</target>
       </trans-unit>
       <trans-unit id="3iZj9.F" resname="admin.event.location.headline">
         <source>admin.event.location.headline</source>
-        <target state="needs-l10n">__admin.event.location.headline</target>
+        <target state="translated">Sted</target>
       </trans-unit>
       <trans-unit id="uTBhtmJ" resname="admin.event.location.url">
         <source>admin.event.location.url</source>
-        <target state="needs-l10n">__admin.event.location.url</target>
+        <target state="translated">Url</target>
       </trans-unit>
       <trans-unit id="A7Kuh8o" resname="admin.event.location.ticketUrl">
         <source>admin.event.location.ticketUrl</source>
-        <target state="needs-l10n">__admin.event.location.ticketUrl</target>
+        <target state="translated">Billet Url</target>
       </trans-unit>
       <trans-unit id="gojVP0j" resname="admin.event.location.location">
         <source>admin.event.location.location</source>
-        <target state="needs-l10n">__admin.event.location.location</target>
+        <target state="translated">Sted</target>
       </trans-unit>
       <trans-unit id="8aKuECs" resname="admin.event.edited.headline">
         <source>admin.event.edited.headline</source>
-        <target state="needs-l10n">__admin.event.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="qkrlf3q" resname="admin.event.edited.organization">
         <source>admin.event.edited.organization</source>
-        <target state="needs-l10n">__admin.event.edited.organization</target>
+        <target state="translated">Arrangør</target>
       </trans-unit>
       <trans-unit id="7c_54qF" resname="admin.event.edited.updated">
         <source>admin.event.edited.updated</source>
-        <target state="needs-l10n">__admin.event.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="M_3TE2g" resname="admin.feed.id">
         <source>admin.feed.id</source>
-        <target state="needs-l10n">__admin.feed.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="RivQaEM" resname="admin.feed.name">
         <source>admin.feed.name</source>
-        <target state="needs-l10n">__admin.feed.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="f0RmQAC" resname="admin.feed.configuration">
         <source>admin.feed.configuration</source>
-        <target state="needs-l10n">__admin.feed.configuration</target>
+        <target state="translated">Konfiguration</target>
       </trans-unit>
       <trans-unit id="rjtWHu0" resname="admin.feed.edited.headline">
         <source>admin.feed.edited.headline</source>
-        <target state="needs-l10n">__admin.feed.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="1HvLxTE" resname="admin.feed.edited.update">
         <source>admin.feed.edited.update</source>
-        <target state="needs-l10n">__admin.feed.edited.update</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="LGC.FCo" resname="admin.image.id">
         <source>admin.image.id</source>
-        <target state="needs-l10n">__admin.image.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="_MBm65c" resname="admin.image.title">
         <source>admin.image.title</source>
-        <target state="needs-l10n">__admin.image.title</target>
+        <target state="translated">Titel</target>
       </trans-unit>
       <trans-unit id="18.tD8H" resname="admin.image.source">
         <source>admin.image.source</source>
-        <target state="needs-l10n">__admin.image.source</target>
+        <target state="translated">Kilde</target>
       </trans-unit>
       <trans-unit id="YdvtBew" resname="admin.image.edited.headline">
         <source>admin.image.edited.headline</source>
-        <target state="needs-l10n">__admin.image.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="sKu.hB1" resname="admin.image.edited.update">
         <source>admin.image.edited.update</source>
-        <target state="needs-l10n">__admin.image.edited.update</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="qkLipkd" resname="admin.location.id">
         <source>admin.location.id</source>
-        <target state="needs-l10n">__admin.location.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="ft4KMCy" resname="admin.location.basic.headline">
         <source>admin.location.basic.headline</source>
-        <target state="needs-l10n">__admin.location.basic.headline</target>
+        <target state="translated">Basis Information</target>
       </trans-unit>
       <trans-unit id="tHYvYtQ" resname="admin.location.basic.name">
         <source>admin.location.basic.name</source>
-        <target state="needs-l10n">__admin.location.basic.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="PLqEtQb" resname="admin.location.enriched.headline">
         <source>admin.location.enriched.headline</source>
-        <target state="needs-l10n">__admin.location.enriched.headline</target>
+        <target state="translated">Beriget Information</target>
       </trans-unit>
       <trans-unit id="CyTSjnm" resname="admin.location.enriched.url">
         <source>admin.location.enriched.url</source>
-        <target state="needs-l10n">__admin.location.enriched.url</target>
+        <target state="translated">Url</target>
       </trans-unit>
       <trans-unit id="OEufWEF" resname="admin.location.enriched.mail">
         <source>admin.location.enriched.mail</source>
-        <target state="needs-l10n">__admin.location.enriched.mail</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="SV..IwN" resname="admin.location.enriched.image">
         <source>admin.location.enriched.image</source>
-        <target state="needs-l10n">__admin.location.enriched.image</target>
+        <target state="translated">Billede</target>
       </trans-unit>
       <trans-unit id="AYvaT3d" resname="admin.location.enriched.telephone">
         <source>admin.location.enriched.telephone</source>
-        <target state="needs-l10n">__admin.location.enriched.telephone</target>
+        <target state="translated">Telefon</target>
       </trans-unit>
       <trans-unit id="h.VlWhf" resname="admin.location.enriched.disability-access">
         <source>admin.location.enriched.disability-access</source>
-        <target state="needs-l10n">__admin.location.enriched.disability-access</target>
+        <target state="translated">Handicap Adgang</target>
       </trans-unit>
       <trans-unit id="T0OwwQh" resname="admin.location.edited.headline">
         <source>admin.location.edited.headline</source>
-        <target state="needs-l10n">__admin.location.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="PknIJ0X" resname="admin.location.edited.updated">
         <source>admin.location.edited.updated</source>
-        <target state="needs-l10n">__admin.location.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="ipU8EAl" resname="admin.occurrence.dates.headline">
         <source>admin.occurrence.dates.headline</source>
-        <target state="needs-l10n">__admin.occurrence.dates.headline</target>
+        <target state="translated"><![CDATA[Dato & Tid]]></target>
       </trans-unit>
       <trans-unit id="82X3Sqg" resname="admin.occurrence.dates.start">
         <source>admin.occurrence.dates.start</source>
-        <target state="needs-l10n">__admin.occurrence.dates.start</target>
+        <target state="translated">Start</target>
       </trans-unit>
       <trans-unit id="m1jC4Dd" resname="admin.occurrence.dates.end">
         <source>admin.occurrence.dates.end</source>
-        <target state="needs-l10n">__admin.occurrence.dates.end</target>
+        <target state="translated">Slut</target>
       </trans-unit>
       <trans-unit id="ymz0gsx" resname="admin.occurrence.basic.headline">
         <source>admin.occurrence.basic.headline</source>
-        <target state="needs-l10n">__admin.occurrence.basic.headline</target>
+        <target state="translated">Basis Information</target>
       </trans-unit>
       <trans-unit id="OdpsbfX" resname="admin.occurrence.basic.price">
         <source>admin.occurrence.basic.price</source>
-        <target state="needs-l10n">__admin.occurrence.basic.price</target>
+        <target state="translated">Pris</target>
       </trans-unit>
       <trans-unit id="xXnuFrt" resname="admin.occurrence.basic.room">
         <source>admin.occurrence.basic.room</source>
-        <target state="needs-l10n">__admin.occurrence.basic.room</target>
+        <target state="translated">Sal/Lokale</target>
       </trans-unit>
       <trans-unit id="pB0NtRW" resname="admin.organization.id">
         <source>admin.organization.id</source>
-        <target state="needs-l10n">__admin.organization.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="MuuClgQ" resname="admin.organization.name">
         <source>admin.organization.name</source>
-        <target state="needs-l10n">__admin.organization.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="82jbkTZ" resname="admin.organization.mail">
         <source>admin.organization.mail</source>
-        <target state="needs-l10n">__admin.organization.mail</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="itYQFRs" resname="admin.organization.url">
         <source>admin.organization.url</source>
-        <target state="needs-l10n">__admin.organization.url</target>
+        <target state="translated">Url</target>
       </trans-unit>
       <trans-unit id="N_xsxXB" resname="admin.organization.edited.headline">
         <source>admin.organization.edited.headline</source>
-        <target state="needs-l10n">__admin.organization.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="EJX.62j" resname="admin.organization.edited.updated">
         <source>admin.organization.edited.updated</source>
-        <target state="needs-l10n">__admin.organization.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="Y3git6Q" resname="admin.tag.name">
         <source>admin.tag.name</source>
-        <target state="needs-l10n">__admin.tag.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="UV6c3ad" resname="admin.tag.vocabularies">
         <source>admin.tag.vocabularies</source>
-        <target state="needs-l10n">__admin.tag.vocabularies</target>
+        <target state="translated">Vokabularer</target>
       </trans-unit>
       <trans-unit id="Hz2nmw9" resname="admin.tag.edited.headline">
         <source>admin.tag.edited.headline</source>
-        <target state="needs-l10n">__admin.tag.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="K4YYT9t" resname="admin.tag.edited.updated">
         <source>admin.tag.edited.updated</source>
-        <target state="needs-l10n">__admin.tag.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="3gHE26p" resname="admin.user.id">
         <source>admin.user.id</source>
-        <target state="needs-l10n">__admin.user.id</target>
+        <target state="translated">Id</target>
       </trans-unit>
       <trans-unit id="hxMKWow" resname="admin.user.name">
         <source>admin.user.name</source>
-        <target state="needs-l10n">__admin.user.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="tvBq3eb" resname="admin.user.password">
         <source>admin.user.password</source>
-        <target state="needs-l10n">__admin.user.password</target>
+        <target state="translated">Kodeord</target>
       </trans-unit>
       <trans-unit id="hgWXpR2" resname="admin.user.password2">
         <source>admin.user.password2</source>
-        <target state="needs-l10n">__admin.user.password2</target>
+        <target state="translated">Gentag kodeord</target>
       </trans-unit>
       <trans-unit id="agZeVTI" resname="admin.user.enabled">
         <source>admin.user.enabled</source>
-        <target state="needs-l10n">__admin.user.enabled</target>
+        <target state="translated">Aktiveret</target>
       </trans-unit>
       <trans-unit id="bbUpEoS" resname="admin.user.edited.headline">
         <source>admin.user.edited.headline</source>
-        <target state="needs-l10n">__admin.user.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="mTWdcDt" resname="admin.user.edited.updated">
         <source>admin.user.edited.updated</source>
-        <target state="needs-l10n">__admin.user.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="zPof34." resname="login.user.mail">
         <source>login.user.mail</source>
-        <target state="needs-l10n">__login.user.mail</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="Ri3SpJz" resname="login.user.password">
         <source>login.user.password</source>
-        <target state="needs-l10n">__login.user.password</target>
+        <target state="translated">Kodeord</target>
       </trans-unit>
       <trans-unit id="gP1oGEr" resname="login.label">
         <source>login.label</source>
-        <target state="needs-l10n">__login.label</target>
+        <target state="translated">Log ind</target>
       </trans-unit>
       <trans-unit id="Ixl_ubC" resname="login.page.remember">
         <source>login.page.remember</source>
-        <target state="needs-l10n">__login.page.remember</target>
+        <target state="translated">Husk mig</target>
       </trans-unit>
       <trans-unit id=".hsboMJ" resname="admin.user.roles">
         <source>admin.user.roles</source>
-        <target state="needs-l10n">__admin.user.roles</target>
+        <target state="translated">Roller</target>
       </trans-unit>
       <trans-unit id="GKzsmph" resname="registration.page.confirm_email">
         <source>registration.page.confirm_email</source>
-        <target state="needs-l10n">__registration.page.confirm_email</target>
+        <target state="translated">Bekræft email</target>
       </trans-unit>
       <trans-unit id="VJ3xlvs" resname="registration.page.please_register">
         <source>registration.page.please_register</source>
-        <target state="needs-l10n">__registration.page.please_register</target>
+        <target state="translated">Registrer dig</target>
       </trans-unit>
       <trans-unit id="QR0JYsl" resname="registration.page.email_verified">
         <source>registration.page.email_verified</source>
-        <target state="needs-l10n">__registration.page.email_verified</target>
+        <target state="translated">Email bekræftet</target>
       </trans-unit>
       <trans-unit id="8zCqkkq" resname="registration.form.agree_terms">
         <source>registration.form.agree_terms</source>
-        <target state="needs-l10n">__registration.form.agree_terms</target>
+        <target state="translated">Godkend Brugeraftale</target>
       </trans-unit>
       <trans-unit id="xP101pW" resname="registration.form.enter_password">
         <source>registration.form.enter_password</source>
-        <target state="needs-l10n">__registration.form.enter_password</target>
+        <target state="translated">Angiv venligst kodeord</target>
       </trans-unit>
       <trans-unit id="h34BTI9" resname="registration.form.min_password">
         <source>registration.form.min_password</source>
-        <target state="needs-l10n">__registration.form.min_password</target>
+        <target state="translated">Dit kodeord skal være mindst { limit } karakterer langt</target>
       </trans-unit>
       <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
         <source>page.confirm.confirmation_link_sent</source>
-        <target state="needs-l10n">__page.confirm.confirmation_link_sent</target>
+        <target state="translated">Der er sendt en email til { email } med et link til bekræftelse af kontoen</target>
       </trans-unit>
       <trans-unit id="duskp3J" resname="registration.page.btn.register">
         <source>registration.page.btn.register</source>
-        <target state="needs-l10n">__registration.page.btn.register</target>
+        <target state="translated">Registrer dig</target>
       </trans-unit>
       <trans-unit id="RDglhHy" resname="page.confirm.click_to_activate">
         <source>page.confirm.click_to_activate</source>
-        <target state="needs-l10n">__page.confirm.click_to_activate</target>
+        <target state="translated">Klik venligst på linket for at aktivere din konto</target>
       </trans-unit>
       <trans-unit id="v5QHyEO" resname="page.confirm.already_confirmed">
         <source>page.confirm.already_confirmed</source>
-        <target state="needs-l10n">__page.confirm.already_confirmed</target>
+        <target state="translated">Allerede aktiveret? </target>
       </trans-unit>
       <trans-unit id="YExI9dt" resname="page.confirm.log_in">
         <source>page.confirm.log_in</source>
-        <target state="needs-l10n">__page.confirm.log_in</target>
+        <target state="translated">Log ind</target>
       </trans-unit>
       <trans-unit id="RDHEmHH" resname="email.confirm.please_confirm">
         <source>email.confirm.please_confirm</source>
-        <target state="needs-l10n">__email.confirm.please_confirm</target>
+        <target state="translated">Bekræft venligst din email</target>
       </trans-unit>
       <trans-unit id="6AOGnCa" resname="email.confirm.click_link">
         <source>email.confirm.click_link</source>
-        <target state="needs-l10n">__email.confirm.click_link</target>
+        <target state="translated">Bekræft venligst din email ved at klikke på følgende link</target>
       </trans-unit>
       <trans-unit id="TFYhq0F" resname="email.confirm.confirm_my_email">
         <source>email.confirm.confirm_my_email</source>
-        <target state="needs-l10n">__email.confirm.confirm_my_email</target>
+        <target state="translated">Bekræft min email</target>
       </trans-unit>
       <trans-unit id="DIwKV9d" resname="email.confirm.link_will_expire_in">
         <source>email.confirm.link_will_expire_in</source>
-        <target state="needs-l10n">__email.confirm.link_will_expire_in</target>
+        <target state="translated">Dette liunk vil udløbe om</target>
       </trans-unit>
       <trans-unit id="SXndqQM" resname="admin.feed.configuration.help">
         <source>admin.feed.configuration.help</source>
-        <target state="needs-l10n">__admin.feed.configuration.help</target>
+        <target state="translated"><![CDATA[Konfigurations mapping: feedKey -> eventDbKey]]></target>
       </trans-unit>
       <trans-unit id="AUw9Rk3" resname="admin.event.admin.image.local">
         <source>admin.event.admin.image.local</source>
-        <target state="needs-l10n">__admin.event.admin.image.local</target>
+        <target state="translated">Lokalt billede</target>
       </trans-unit>
       <trans-unit id="CqnvasT" resname="admin.event.occurrences">
         <source>admin.event.occurrences</source>
-        <target state="needs-l10n">__admin.event.occurrences</target>
+        <target state="translated"><![CDATA[Dato & Tid]]></target>
       </trans-unit>
       <trans-unit id="fVICSO8" resname="admin.event.edited.feed">
         <source>admin.event.edited.feed</source>
-        <target state="needs-l10n">__admin.event.edited.feed</target>
+        <target state="translated">Feed</target>
       </trans-unit>
       <trans-unit id="TF0JmdU" resname="admin.link.vocabularies">
         <source>admin.link.vocabularies</source>
-        <target state="needs-l10n">__admin.link.vocabularies</target>
+        <target state="translated">Vokabular</target>
       </trans-unit>
       <trans-unit id="uyCCXxW" resname="admin.link.organizations">
         <source>admin.link.organizations</source>
-        <target state="needs-l10n">__admin.link.organizations</target>
+        <target state="translated">Arrangører</target>
       </trans-unit>
       <trans-unit id="MlEyI2c" resname="admin.image.event">
         <source>admin.image.event</source>
-        <target state="needs-l10n">__admin.image.event</target>
+        <target state="translated">Begivenhed</target>
       </trans-unit>
       <trans-unit id="0SuBxKI" resname="admin.image.local">
         <source>admin.image.local</source>
-        <target state="needs-l10n">__admin.image.local</target>
+        <target state="translated">Billede</target>
       </trans-unit>
       <trans-unit id="xpmbUfG" resname="admin.vocabulary.name">
         <source>admin.vocabulary.name</source>
-        <target state="needs-l10n">__admin.vocabulary.name</target>
+        <target state="translated">Navn</target>
       </trans-unit>
       <trans-unit id="QeiEWm5" resname="admin.vocabulary.tags">
         <source>admin.vocabulary.tags</source>
-        <target state="needs-l10n">__admin.vocabulary.tags</target>
+        <target state="translated">Tags</target>
       </trans-unit>
       <trans-unit id="QlL7qDl" resname="admin.vocabulary.edited.headline">
         <source>admin.vocabulary.edited.headline</source>
-        <target state="needs-l10n">__admin.vocabulary.edited.headline</target>
+        <target state="translated">Redigeret</target>
       </trans-unit>
       <trans-unit id="CvrRLOt" resname="admin.vocabulary.edited.updated">
         <source>admin.vocabulary.edited.updated</source>
-        <target state="needs-l10n">__admin.vocabulary.edited.updated</target>
+        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="U9HWfcL" resname="admin.feed.last_read.headline">
         <source>admin.feed.last_read.headline</source>
-        <target state="needs-l10n">__admin.feed.last_read.headline</target>
+        <target state="translated">Sidst læst</target>
       </trans-unit>
       <trans-unit id="FJ3a25z" resname="admin.feed.ast_read.datetime">
         <source>admin.feed.ast_read.datetime</source>
-        <target state="needs-l10n">__admin.feed.ast_read.datetime</target>
+        <target state="translated">Sidst læst</target>
       </trans-unit>
       <trans-unit id="YMZxXCA" resname="admin.feed.last_read.count">
         <source>admin.feed.last_read.count</source>
-        <target state="needs-l10n">__admin.feed.last_read.count</target>
+        <target state="translated">Antal</target>
       </trans-unit>
       <trans-unit id="apt9ajY" resname="admin.feed.last_read.error">
         <source>admin.feed.last_read.error</source>
-        <target state="needs-l10n">__admin.feed.last_read.error</target>
+        <target state="translated">Fejl</target>
       </trans-unit>
       <trans-unit id="SCtCqae" resname="admin.event.organizer.headline">
         <source>admin.event.organizer.headline</source>
-        <target state="needs-l10n">__admin.event.organizer.headline</target>
+        <target state="translated"><![CDATA[Arrangør & Partnere]]></target>
       </trans-unit>
       <trans-unit id="wuiqJUz" resname="admin.event.edited.partners">
         <source>admin.event.edited.partners</source>
-        <target state="needs-l10n">__admin.event.edited.partners</target>
+        <target state="translated">Partnere</target>
       </trans-unit>
       <trans-unit id="_sDYXeE" resname="terms.page.accept_terms">
         <source>terms.page.accept_terms</source>
-        <target state="needs-l10n">__terms.page.accept_terms</target>
+        <target state="translated">Godkend Brugeraftale</target>
       </trans-unit>
       <trans-unit id="rlmv7i8" resname="terms.page.btn.accept">
         <source>terms.page.btn.accept</source>
-        <target state="needs-l10n">__terms.page.btn.accept</target>
+        <target state="translated">Godkend</target>
       </trans-unit>
       <trans-unit id=".nBxX2W" resname="admin.user.role.role_admin">
         <source>admin.user.role.role_admin</source>
-        <target state="needs-l10n">__admin.user.role.role_admin</target>
+        <target state="translated">Administrator</target>
       </trans-unit>
       <trans-unit id="rAd5xrd" resname="admin.user.mail">
         <source>admin.user.mail</source>
-        <target state="needs-l10n">__admin.user.mail</target>
+        <target state="translated">Email</target>
       </trans-unit>
       <trans-unit id="lBtWT0e" resname="admin.user.role.role_user">
         <source>admin.user.role.role_user</source>
-        <target state="needs-l10n">__admin.user.role.role_user</target>
+        <target state="translated">Bruger</target>
       </trans-unit>
       <trans-unit id="qnk8Rwy" resname="admin.user.role.role_api_user">
         <source>admin.user.role.role_api_user</source>
-        <target state="needs-l10n">__admin.user.role.role_api_user</target>
+        <target state="translated">API Bruger</target>
       </trans-unit>
       <trans-unit id="A7PG0hf" resname="admin.user.role.role_editor">
         <source>admin.user.role.role_editor</source>
-        <target state="needs-l10n">__admin.user.role.role_editor</target>
+        <target state="translated">Redaktør</target>
+      </trans-unit>
+      <trans-unit id="M55dXJB" resname="admin.tag.tag">
+        <source>admin.tag.tag</source>
+        <target state="translated">Tag</target>
+      </trans-unit>
+      <trans-unit id="n_xox7u" resname="admin.user.role.role_organization_admin">
+        <source>admin.user.role.role_organization_admin</source>
+        <target state="translated">Arrangør administrator</target>
+      </trans-unit>
+      <trans-unit id="1zj.9Q7" resname="admin.user.role.role_organization_editor">
+        <source>admin.user.role.role_organization_editor</source>
+        <target state="translated">Arrangør redaktør</target>
+      </trans-unit>
+      <trans-unit id="B8BbLIw" resname="admin.user.email_verified">
+        <source>admin.user.email_verified</source>
+        <target state="translated">Email bekræftet</target>
+      </trans-unit>
+      <trans-unit id="0GsNMwo" resname="admin.user.terms_accepted_at">
+        <source>admin.user.terms_accepted_at</source>
+        <target state="translated">Brugeraftale godkendt</target>
+      </trans-unit>
+      <trans-unit id="5zzxoNU" resname="admin.address.locations">
+        <source>admin.address.locations</source>
+        <target state="translated">Steder</target>
+      </trans-unit>
+      <trans-unit id="DvP6Sse" resname="registration.page.email_not_verified">
+        <source>registration.page.email_not_verified</source>
+        <target state="translated">Din email er ikke bekræftet</target>
+      </trans-unit>
+      <trans-unit id="5.td1tT" resname="admin.label.my_content">
+        <source>admin.label.my_content</source>
+        <target state="translated">Mit indhold</target>
+      </trans-unit>
+      <trans-unit id="mfW9ymU" resname="admin.label.all_content">
+        <source>admin.label.all_content</source>
+        <target state="translated">Alt indhold</target>
+      </trans-unit>
+      <trans-unit id="SBkhqKy" resname="admin.label.feeds">
+        <source>admin.label.feeds</source>
+        <target state="translated">Feeds</target>
+      </trans-unit>
+      <trans-unit id="QIu9FCE" resname="admin.label.users">
+        <source>admin.label.users</source>
+        <target state="translated">Brugere</target>
+      </trans-unit>
+      <trans-unit id="NfU36AS" resname="admin.event.id">
+        <source>admin.event.id</source>
+        <target state="translated">Id</target>
+      </trans-unit>
+      <trans-unit id="nj9kiP7" resname="admin.event.title">
+        <source>admin.event.title</source>
+        <target state="translated">Titel</target>
+      </trans-unit>
+      <trans-unit id="sr1Zwj2" resname="admin.user_menu.my_profile">
+        <source>admin.user_menu.my_profile</source>
+        <target state="translated">Min profil</target>
+      </trans-unit>
+      <trans-unit id="lfQL8wk" resname="admin.user.edit.title">
+        <source>admin.user.edit.title</source>
+        <target state="translated">Bruger</target>
+      </trans-unit>
+      <trans-unit id="0KxZUue" resname="admin.user.index.title">
+        <source>admin.user.index.title</source>
+        <target state="translated">Brugere</target>
+      </trans-unit>
+      <trans-unit id="ct.vZDz" resname="admin.user.organizers">
+        <source>admin.user.organizers</source>
+        <target state="translated">Arrangører</target>
+      </trans-unit>
+      <trans-unit id="81CfV1." resname="admin.user_menu.terms">
+        <source>admin.user_menu.terms</source>
+        <target state="translated">Brugeraftale</target>
+      </trans-unit>
+      <trans-unit id="9LXepMs" resname="admin.event.edit.title">
+        <source>admin.event.edit.title</source>
+        <target state="translated">Begivenhed</target>
+      </trans-unit>
+      <trans-unit id="HYy.lUq" resname="admin.event.index.title">
+        <source>admin.event.index.title</source>
+        <target state="translated">Begivenheder</target>
+      </trans-unit>
+      <trans-unit id="rEPELPx" resname="admin.organizer.edit.title">
+        <source>admin.organizer.edit.title</source>
+        <target state="translated">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="qzz47f3" resname="admin.organizer.index.title">
+        <source>admin.organizer.index.title</source>
+        <target state="translated">Arrangører</target>
+      </trans-unit>
+      <trans-unit id="DfqXjxA" resname="admin.location.edit.title">
+        <source>admin.location.edit.title</source>
+        <target state="translated">Sted</target>
+      </trans-unit>
+      <trans-unit id="54PwOp." resname="admin.location.index.title">
+        <source>admin.location.index.title</source>
+        <target state="translated">Steder</target>
+      </trans-unit>
+      <trans-unit id="jojKXJ." resname="admin.vocabulary.edit.title">
+        <source>admin.vocabulary.edit.title</source>
+        <target state="translated">Vokabular</target>
+      </trans-unit>
+      <trans-unit id="HWdtB7L" resname="admin.vocabulary.index.title">
+        <source>admin.vocabulary.index.title</source>
+        <target state="translated">Vokabularer</target>
+      </trans-unit>
+      <trans-unit id="nZLK.S_" resname="admin.address.edit.title">
+        <source>admin.address.edit.title</source>
+        <target state="translated">Adresse</target>
+      </trans-unit>
+      <trans-unit id="lOLI8Rv" resname="admin.address.index.title">
+        <source>admin.address.index.title</source>
+        <target state="translated">Adresser</target>
+      </trans-unit>
+      <trans-unit id="PX1uRj6" resname="admin.address.location.coordinates">
+        <source>admin.address.location.coordinates</source>
+        <target state="translated">Koordinater</target>
       </trans-unit>
     </body>
   </file>

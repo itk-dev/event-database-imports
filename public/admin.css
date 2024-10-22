@@ -1,0 +1,20 @@
+:root {
+    --font-family-sans-serif: Arial, Helvetica, sans-serif;
+
+    --body-max-width: 100%;
+    --sidebar-bg: rgb(246, 246, 246);
+    /* make the base font size smaller */
+    --button-primary-bg: rgb(0,156,220);
+    --pagination-active-bg: rgb(0,156,220);
+    --link-color: rgb(0,156,220);
+    --sidebar-menu-active-item-color: rgb(0,156,220);
+    --badge-boolean-true-bg: rgb(0,156,220);
+    --badge-boolean-false-bg: rgb(238, 0, 37);
+    --badge-boolean-false-color: var(--white);
+    --sidebar-menu-color: rgb(66,66,66);
+
+    --text-color: rgb(51, 51, 51);
+    --text-color-dark: rgb(66,66,66);
+
+    --bs-danger-rgb: rgb(228, 73, 48);
+}

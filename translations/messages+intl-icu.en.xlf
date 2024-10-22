@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="da" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -480,6 +480,122 @@
       <trans-unit id="A7PG0hf" resname="admin.user.role.role_editor">
         <source>admin.user.role.role_editor</source>
         <target>Editor</target>
+      </trans-unit>
+      <trans-unit id="M55dXJB" resname="admin.tag.tag">
+        <source>admin.tag.tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="n_xox7u" resname="admin.user.role.role_organization_admin">
+        <source>admin.user.role.role_organization_admin</source>
+        <target>Organization admin</target>
+      </trans-unit>
+      <trans-unit id="1zj.9Q7" resname="admin.user.role.role_organization_editor">
+        <source>admin.user.role.role_organization_editor</source>
+        <target>Organization editor</target>
+      </trans-unit>
+      <trans-unit id="B8BbLIw" resname="admin.user.email_verified">
+        <source>admin.user.email_verified</source>
+        <target>Email verified</target>
+      </trans-unit>
+      <trans-unit id="0GsNMwo" resname="admin.user.terms_accepted_at">
+        <source>admin.user.terms_accepted_at</source>
+        <target>Terms accepted</target>
+      </trans-unit>
+      <trans-unit id="5zzxoNU" resname="admin.address.locations">
+        <source>admin.address.locations</source>
+        <target>Locations</target>
+      </trans-unit>
+      <trans-unit id="DvP6Sse" resname="registration.page.email_not_verified">
+        <source>registration.page.email_not_verified</source>
+        <target>Your email is not verified</target>
+      </trans-unit>
+      <trans-unit id="5.td1tT" resname="admin.label.my_content">
+        <source>admin.label.my_content</source>
+        <target>My Content</target>
+      </trans-unit>
+      <trans-unit id="mfW9ymU" resname="admin.label.all_content">
+        <source>admin.label.all_content</source>
+        <target>All Content</target>
+      </trans-unit>
+      <trans-unit id="SBkhqKy" resname="admin.label.feeds">
+        <source>admin.label.feeds</source>
+        <target>Feeds</target>
+      </trans-unit>
+      <trans-unit id="QIu9FCE" resname="admin.label.users">
+        <source>admin.label.users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="NfU36AS" resname="admin.event.id">
+        <source>admin.event.id</source>
+        <target>admin.event.id</target>
+      </trans-unit>
+      <trans-unit id="nj9kiP7" resname="admin.event.title">
+        <source>admin.event.title</source>
+        <target>admin.event.title</target>
+      </trans-unit>
+      <trans-unit id="sr1Zwj2" resname="admin.user_menu.my_profile">
+        <source>admin.user_menu.my_profile</source>
+        <target>admin.user_menu.my_profile</target>
+      </trans-unit>
+      <trans-unit id="lfQL8wk" resname="admin.user.edit.title">
+        <source>admin.user.edit.title</source>
+        <target>admin.user.edit.title</target>
+      </trans-unit>
+      <trans-unit id="0KxZUue" resname="admin.user.index.title">
+        <source>admin.user.index.title</source>
+        <target>admin.user.index.title</target>
+      </trans-unit>
+      <trans-unit id="ct.vZDz" resname="admin.user.organizers">
+        <source>admin.user.organizers</source>
+        <target>admin.user.organizers</target>
+      </trans-unit>
+      <trans-unit id="81CfV1." resname="admin.user_menu.terms">
+        <source>admin.user_menu.terms</source>
+        <target>admin.user_menu.terms</target>
+      </trans-unit>
+      <trans-unit id="9LXepMs" resname="admin.event.edit.title">
+        <source>admin.event.edit.title</source>
+        <target>admin.event.edit.title</target>
+      </trans-unit>
+      <trans-unit id="HYy.lUq" resname="admin.event.index.title">
+        <source>admin.event.index.title</source>
+        <target>admin.event.index.title</target>
+      </trans-unit>
+      <trans-unit id="rEPELPx" resname="admin.organizer.edit.title">
+        <source>admin.organizer.edit.title</source>
+        <target>admin.organizer.edit.title</target>
+      </trans-unit>
+      <trans-unit id="qzz47f3" resname="admin.organizer.index.title">
+        <source>admin.organizer.index.title</source>
+        <target>admin.organizer.index.title</target>
+      </trans-unit>
+      <trans-unit id="DfqXjxA" resname="admin.location.edit.title">
+        <source>admin.location.edit.title</source>
+        <target>admin.location.edit.title</target>
+      </trans-unit>
+      <trans-unit id="54PwOp." resname="admin.location.index.title">
+        <source>admin.location.index.title</source>
+        <target>admin.location.index.title</target>
+      </trans-unit>
+      <trans-unit id="jojKXJ." resname="admin.vocabulary.edit.title">
+        <source>admin.vocabulary.edit.title</source>
+        <target>admin.vocabulary.edit.title</target>
+      </trans-unit>
+      <trans-unit id="HWdtB7L" resname="admin.vocabulary.index.title">
+        <source>admin.vocabulary.index.title</source>
+        <target>admin.vocabulary.index.title</target>
+      </trans-unit>
+      <trans-unit id="nZLK.S_" resname="admin.address.edit.title">
+        <source>admin.address.edit.title</source>
+        <target>admin.address.edit.title</target>
+      </trans-unit>
+      <trans-unit id="lOLI8Rv" resname="admin.address.index.title">
+        <source>admin.address.index.title</source>
+        <target>admin.address.index.title</target>
+      </trans-unit>
+      <trans-unit id="PX1uRj6" resname="admin.address.location.coordinates">
+        <source>admin.address.location.coordinates</source>
+        <target>admin.address.location.coordinates</target>
       </trans-unit>
     </body>
   </file>
