@@ -50,7 +50,7 @@ class EventCrudController extends AbstractBaseCrudController
     {
         $actions = parent::configureActions($actions);
 
-        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+        if (!$this->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
             $actions->remove(Crud::PAGE_INDEX, Action::NEW);
         }
 
