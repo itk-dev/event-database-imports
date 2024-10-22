@@ -104,7 +104,7 @@ class RegistrationController extends AbstractDashboardController
             return $this->redirectToRoute('app_register');
         }
 
-        // validate email confirmation link, sets User::isVerified=true and persists
+        // validate email confirmation link, sets User::emailVerifiedAt=NOW and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {

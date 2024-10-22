@@ -2,7 +2,7 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Event;
+use App\Entity\Address;
 use App\Entity\User;
 use App\Types\UserRoles;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -11,7 +11,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class EventVoter extends Voter
+final class AddressVoter extends Voter
 {
     public function __construct(
         private readonly Security $security,
@@ -22,7 +22,7 @@ final class EventVoter extends Voter
     {
         return Permission::EA_EXECUTE_ACTION == $attribute
             && null !== $subject['entity']
-            && Event::class === $subject['entity']->getFqcn();
+            && Address::class === $subject['entity']->getFqcn();
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
@@ -30,8 +30,8 @@ final class EventVoter extends Voter
         $user = $token->getUser();
         assert($user instanceof User);
 
-        $event = $subject['entity']->getInstance();
-        assert($event instanceof Event);
+        $address = $subject['entity']->getInstance();
+        assert($address instanceof Address);
 
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
@@ -41,30 +41,24 @@ final class EventVoter extends Voter
         }
 
         if (Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) {
-            // Allow event creation
-            if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
+            // Allow address creation
+            if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
                 return true;
             }
         }
 
-        // Feed events can never be edited or deleted
-        if (null !== $event->getFeed()) {
-            return false;
+        // Delete and New actions are only allowed for editors
+        if (Action::DELETE === $action || Action::NEW === $action) {
+            if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
+                return 0 === $address->getLocations()->count();
+            } else {
+                return false;
+            }
         }
 
-        // Global Admin/Editor users can edit all events except feed events
+        // Global Admin/Editor users can edit all addresses
         if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
             return true;
-        }
-
-        // Organization users can only edit non-feed events from their organizations
-        if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
-            $organization = $event->getOrganization();
-            if (null === $organization) {
-                return false;
-            } else {
-                return $user->getOrganizations()->contains($organization);
-            }
         }
 
         return false;

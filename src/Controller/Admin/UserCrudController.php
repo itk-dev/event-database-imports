@@ -41,9 +41,20 @@ class UserCrudController extends AbstractBaseCrudController
         return User::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return parent::configureCrud($crud)
+            ->showEntityActionsInlined()
+            ->setPageTitle('edit', new TranslatableMessage('admin.user.edit.title'))
+            ->setPageTitle('index', new TranslatableMessage('admin.user.index.title'))
+            ->setPageTitle('detail', new TranslatableMessage('admin.user.edit.title'));
+    }
+
+
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
+
 
         if (!$this->isGranted(UserRoles::ROLE_ADMIN->value)) {
             $actions->remove(Crud::PAGE_INDEX, Action::NEW);
@@ -66,6 +77,7 @@ class UserCrudController extends AbstractBaseCrudController
             EmailField::new('mail')
                 ->setLabel(new TranslatableMessage('admin.user.mail')),
             AssociationField::new('organizations')
+                ->setLabel(new TranslatableMessage('admin.user.organizers'))
                 ->setFormTypeOption('by_reference', false),
             ChoiceField::new('roles')
                 ->setTranslatableChoices([
@@ -91,7 +103,7 @@ class UserCrudController extends AbstractBaseCrudController
                 ->onlyOnForms(),
             BooleanField::new('enabled')
                 ->setLabel(new TranslatableMessage('admin.user.enabled')),
-            BooleanField::new('isVerified')
+            DateTimeField::new('emailVerifiedAt')
                 ->setLabel(new TranslatableMessage('admin.user.email_verified'))
                 ->setDisabled()
                 ->hideOnIndex(),
@@ -106,6 +118,7 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.user.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
+                ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
     }

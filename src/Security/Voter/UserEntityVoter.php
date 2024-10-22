@@ -9,7 +9,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-final class UserVoter extends Voter
+final class UserEntityVoter extends Voter
 {
     public function __construct(
         private readonly Security $security,

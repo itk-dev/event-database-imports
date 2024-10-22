@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -26,10 +27,12 @@ class OrganizationCrudController extends AbstractBaseCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        $crud->setDefaultSort(['name' => Order::Ascending->value]);
-        $crud->showEntityActionsInlined();
-
-        return $crud;
+        return $crud
+            ->setDefaultSort(['name' => Order::Ascending->value])
+            ->showEntityActionsInlined()
+            ->setPageTitle('edit', new TranslatableMessage('admin.organizer.edit.title'))
+            ->setPageTitle('index', new TranslatableMessage('admin.organizer.index.title'))
+            ->setPageTitle('detail', new TranslatableMessage('admin.organizer.edit.title'));
     }
 
     public function configureActions(Actions $actions): Actions
@@ -65,6 +68,7 @@ class OrganizationCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.organization.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
+                ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
     }

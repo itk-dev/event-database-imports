@@ -110,11 +110,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         if ($entity instanceof Vocabulary) {
             $entity->setSlug();
         }
-
-        if ($entity instanceof User) {
-            // Bypass email verification for manually created users
-            $entity->setIsVerified(true);
-        }
     }
 
     private function setImageSource(?Image $image): void

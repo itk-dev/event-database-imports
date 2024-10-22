@@ -51,8 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
     private Collection $feeds;
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $isVerified = false;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $emailVerifiedAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $termsAcceptedAt = null;
@@ -209,14 +209,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->mail;
     }
 
-    public function isVerified(): bool
+    public function getEmailVerifiedAt(): ?\DateTimeImmutable
     {
-        return $this->isVerified;
+        return $this->emailVerifiedAt;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setEmailVerifiedAt(\DateTimeImmutable $emailVerifiedAt): static
     {
-        $this->isVerified = $isVerified;
+        $this->emailVerifiedAt = $emailVerifiedAt;
 
         return $this;
     }

@@ -68,7 +68,7 @@ class Organization implements IndexItemInterface
 
     public function __construct()
     {
-        $this->Users = new ArrayCollection();
+        $this->users = new ArrayCollection();
         $this->events = new ArrayCollection();
         $this->feeds = new ArrayCollection();
         $this->partnerEvents = new ArrayCollection();
@@ -125,13 +125,13 @@ class Organization implements IndexItemInterface
      */
     public function getUsers(): Collection
     {
-        return $this->Users;
+        return $this->users;
     }
 
     public function addUser(User $user): static
     {
-        if (!$this->Users->contains($user)) {
-            $this->Users->add($user);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
         }
 
         return $this;
@@ -139,7 +139,7 @@ class Organization implements IndexItemInterface
 
     public function removeUser(User $user): static
     {
-        $this->Users->removeElement($user);
+        $this->users->removeElement($user);
 
         return $this;
     }

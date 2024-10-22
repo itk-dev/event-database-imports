@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\Security\EventListener;
 
 use App\Entity\User;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
