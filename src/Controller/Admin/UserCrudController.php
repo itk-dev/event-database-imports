@@ -76,7 +76,8 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.user.mail')),
             AssociationField::new('organizations')
                 ->setLabel(new TranslatableMessage('admin.user.organizers'))
-                ->setFormTypeOption('by_reference', false),
+                ->setFormTypeOption('by_reference', false)
+                ->setPermission(UserRoles::ROLE_ADMIN->value),
             ChoiceField::new('roles')
                 ->setTranslatableChoices([
                     'ROLE_ADMIN' => new TranslatableMessage('admin.user.role.role_admin'),
@@ -88,7 +89,8 @@ class UserCrudController extends AbstractBaseCrudController
                 ])
                 ->allowMultipleChoices()
                 ->renderExpanded()
-                ->setLabel(new TranslatableMessage('admin.user.roles')),
+                ->setLabel(new TranslatableMessage('admin.user.roles'))
+                ->setPermission(UserRoles::ROLE_ADMIN->value),
             TextField::new('password')
                 ->setFormType(RepeatedType::class)
                 ->setFormTypeOptions([
@@ -100,7 +102,8 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setRequired(Crud::PAGE_NEW === $pageName)
                 ->onlyOnForms(),
             BooleanField::new('enabled')
-                ->setLabel(new TranslatableMessage('admin.user.enabled')),
+                ->setLabel(new TranslatableMessage('admin.user.enabled'))
+                ->setPermission(UserRoles::ROLE_ADMIN->value),
             DateTimeField::new('emailVerifiedAt')
                 ->setLabel(new TranslatableMessage('admin.user.email_verified'))
                 ->setDisabled()
