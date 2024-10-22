@@ -9,6 +9,7 @@
         "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pdo": "*",
         "cerbero/json-parser": "^1.0",
         "cuyz/valinor": "^1.4",
         "doctrine/doctrine-bundle": "^2.10",
@@ -64,6 +65,8 @@
         "symfony/css-selector": "6.4.*",
         "symfony/maker-bundle": "^1.49",
         "symfony/phpunit-bridge": "^6.3",
+        "symfony/stopwatch": "^6.4",
+        "symfony/web-profiler-bundle": "^6.4",
         "vimeo/psalm": "^5.13",
         "weirdan/doctrine-psalm-plugin": "^2.8"
     },
