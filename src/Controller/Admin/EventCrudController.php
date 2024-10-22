@@ -49,7 +49,9 @@ class EventCrudController extends AbstractBaseCrudController
         yield FormField::addFieldset('Basic information')
             ->setLabel(new TranslatableMessage('admin.event.basic.headline'));
         yield IdField::new('id')
-            ->setLabel(new TranslatableMessage('admin.event.id'));
+            ->setLabel(new TranslatableMessage('admin.event.id'))
+            ->setDisabled()
+            ->hideWhenCreating();
         yield TextField::new('title')
             ->setLabel(new TranslatableMessage('admin.event.title'));
         yield ImageField::new('image')
