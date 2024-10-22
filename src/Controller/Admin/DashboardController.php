@@ -68,7 +68,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // My Content
-        yield MenuItem::section(new TranslatableMessage('admin.label.my_content'));
+        yield MenuItem::section(new TranslatableMessage('admin.label.my_content'))
+            ->setPermission(UserRoles::ROLE_ORGANIZATION_EDITOR->value);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.events'), 'fa fa-calendar', Event::class)
             ->setController(MyEventCrudController::class)
             ->setPermission(UserRoles::ROLE_ORGANIZATION_EDITOR->value);

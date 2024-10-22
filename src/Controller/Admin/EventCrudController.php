@@ -8,6 +8,8 @@ use App\Service\ImageHandlerInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -42,6 +44,17 @@ class EventCrudController extends AbstractBaseCrudController
             ->setPageTitle('edit', new TranslatableMessage('admin.event.edit.title'))
             ->setPageTitle('index', new TranslatableMessage('admin.event.index.title'))
             ->setPageTitle('detail', new TranslatableMessage('admin.event.edit.title'));
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+        }
+
+        return $actions;
     }
 
     public function configureFields(string $pageName): iterable
