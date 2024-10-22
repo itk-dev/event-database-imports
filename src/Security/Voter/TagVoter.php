@@ -2,7 +2,6 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Address;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Types\UserRoles;

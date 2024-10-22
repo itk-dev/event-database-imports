@@ -110,7 +110,7 @@ class EventCrudController extends AbstractBaseCrudController
             yield AssociationField::new('organization')
                 ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
                 ->setQueryBuilder(
-                    fn(QueryBuilder $queryBuilder) => $queryBuilder
+                    fn (QueryBuilder $queryBuilder) => $queryBuilder
                         ->select('o')
                         ->from(Organization::class, 'o')
                         ->where(':user MEMBER OF o.users')

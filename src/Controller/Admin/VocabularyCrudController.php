@@ -48,7 +48,6 @@ class VocabularyCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
-
     public function configureFields(string $pageName): iterable
     {
         return [

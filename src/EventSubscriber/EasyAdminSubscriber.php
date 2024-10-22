@@ -8,7 +8,6 @@ use App\Entity\Feed;
 use App\Entity\Image;
 use App\Entity\Location;
 use App\Entity\Tag;
-use App\Entity\User;
 use App\Entity\Vocabulary;
 use App\Message\ImageMessage;
 use App\Service\ContentNormalizerInterface;

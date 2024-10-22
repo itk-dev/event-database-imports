@@ -50,11 +50,9 @@ class UserCrudController extends AbstractBaseCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.user.edit.title'));
     }
 
-
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
-
 
         if (!$this->isGranted(UserRoles::ROLE_ADMIN->value)) {
             $actions->remove(Crud::PAGE_INDEX, Action::NEW);

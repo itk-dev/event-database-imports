@@ -11,7 +11,7 @@ use Symfony\Component\Translation\TranslatableMessage;
 class LoginController extends AbstractDashboardController
 {
     public function __construct(
-        private readonly AuthenticationUtils $authenticationUtils
+        private readonly AuthenticationUtils $authenticationUtils,
     ) {
     }
 
