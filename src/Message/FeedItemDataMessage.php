@@ -10,7 +10,7 @@ final class FeedItemDataMessage
         private readonly int $feedId,
         private readonly FeedConfiguration $configuration,
         private readonly array $data,
-        private readonly bool $forceUpdate = false
+        private readonly bool $forceUpdate = false,
     ) {
     }
 

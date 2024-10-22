@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\EditableEntityInterface;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -18,11 +18,14 @@ abstract class AbstractBaseCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         return parent::configureActions($actions)
-            ->update(Crud::PAGE_INDEX, Action::EDIT, static function (Action $action) {
-                return $action->displayIf(static function (object $entity) {
-                    return !($entity instanceof EditableEntityInterface) || $entity->isEditable();
-                });
-            })
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
+    protected function getUser(): User
+    {
+        $user = parent::getUser();
+        assert($user instanceof User);
+
+        return $user;
     }
 }

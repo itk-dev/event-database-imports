@@ -3,14 +3,14 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Occurrence;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class OccurrenceCrudController extends AbstractBaseCrudController
+class EmbedOccurrenceCrudController extends AbstractBaseCrudController
 {
     public static function getEntityFqcn(): string
     {
@@ -20,7 +20,7 @@ class OccurrenceCrudController extends AbstractBaseCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['start' => Criteria::ASC]);
+            ->setDefaultSort(['start' => Order::Ascending->value]);
     }
 
     public function configureFields(string $pageName): iterable

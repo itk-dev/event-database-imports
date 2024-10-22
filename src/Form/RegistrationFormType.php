@@ -50,7 +50,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => self::MIN_LENGTH,
-                        'minMessage' => $this->translator->trans('registration.form.min_password', ['%limit%' => self::MIN_LENGTH], 'messages'),
+                        'minMessage' => new TranslatableMessage('registration.form.min_password', ['%limit%' => self::MIN_LENGTH], 'messages'),
                         // max length allowed by Symfony for security reasons
                         'max' => self::MAX_LENGTH,
                     ]),

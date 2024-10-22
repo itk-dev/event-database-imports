@@ -21,7 +21,7 @@ final class FeedItemSource
 
     public function __construct(
         private readonly FeedConfiguration $configuration,
-        private readonly FeedDefaultsMapper $defaultsMapperService
+        private readonly FeedDefaultsMapper $defaultsMapperService,
     ) {
     }
 

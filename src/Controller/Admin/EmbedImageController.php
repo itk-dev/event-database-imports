@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class ImageEmbedController extends AbstractBaseCrudController
+class EmbedImageController extends AbstractBaseCrudController
 {
     public function __construct(private readonly ImageHandlerInterface $imageHandler)
     {

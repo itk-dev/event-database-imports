@@ -44,7 +44,7 @@
         <section class="content">
             <p>{{ 'page.confirm.confirmation_link_sent' | trans({'%email%': email}) }}.</p>
             <p>{{ 'page.confirm.click_to_activate' | trans }}.</p>
-            <p>{{ 'page.confirm.already_confirmed' | trans }} <a href="{{ path('app_login') }}">{{ 'page.confirm.log_in' | trans }}</a></p>
+            <p>{{ 'page.confirm.already_confirmed' | trans }} <a href="{{ path('app_admin_login') }}">{{ 'page.confirm.log_in' | trans }}</a></p>
         </section>
     </div>
 {% endblock %}

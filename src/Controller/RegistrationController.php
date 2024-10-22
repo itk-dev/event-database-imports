@@ -19,17 +19,24 @@ use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+#[Route('/admin/register')]
 class RegistrationController extends AbstractDashboardController
 {
     public function __construct(
         private readonly EmailVerifier $emailVerifier,
         private readonly UserRepository $userRepository,
         private readonly string $siteSendFromEmail,
-        private readonly string $siteName
+        private readonly string $siteName,
     ) {
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/admin')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('admin');
+    }
+
+    #[Route('/', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = new User();
@@ -45,7 +52,8 @@ class RegistrationController extends AbstractDashboardController
                 )
             );
 
-            $user->setRoles([UserRoles::ROLE_API_USER]);
+            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setRoles([UserRoles::ROLE_USER]);
             $user->setCreatedBy($user->getName());
             $user->setUpdatedBy($user->getName());
 
@@ -79,7 +87,7 @@ class RegistrationController extends AbstractDashboardController
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verify-email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
         $id = $request->query->get('id');
@@ -96,7 +104,7 @@ class RegistrationController extends AbstractDashboardController
             return $this->redirectToRoute('app_register');
         }
 
-        // validate email confirmation link, sets User::isVerified=true and persists
+        // validate email confirmation link, sets User::emailVerifiedAt=NOW and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
@@ -107,6 +115,14 @@ class RegistrationController extends AbstractDashboardController
 
         $this->addFlash('success', new TranslatableMessage('registration.page.email_verified'));
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_admin_login');
+    }
+
+    #[Route('/email-not-verified', name: 'app_email_not_verified')]
+    public function emailNotVerified(Request $request, TranslatorInterface $translator): Response
+    {
+        return $this->render('registration/email_not_verified.html.twig', [
+            'page_title' => new TranslatableMessage('registration.page.email_not_verified'),
+        ]);
     }
 }

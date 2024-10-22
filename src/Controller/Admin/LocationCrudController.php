@@ -3,8 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Location;
-use Doctrine\Common\Collections\Criteria;
+use App\Types\UserRoles;
+use Doctrine\Common\Collections\Order;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -26,7 +30,23 @@ class LocationCrudController extends AbstractBaseCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['id' => Criteria::DESC]);
+            ->setDefaultSort(['name' => Order::Ascending->value])
+            ->showEntityActionsInlined()
+            ->setPageTitle('edit', new TranslatableMessage('admin.location.edit.title'))
+            ->setPageTitle('index', new TranslatableMessage('admin.location.index.title'))
+            ->setPageTitle('detail', new TranslatableMessage('admin.location.edit.title'));
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        if (!$this->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
+            $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+            $actions->remove(Crud::PAGE_DETAIL, Action::DELETE);
+        }
+
+        return $actions;
     }
 
     public function configureFields(string $pageName): iterable
@@ -60,6 +80,9 @@ class LocationCrudController extends AbstractBaseCrudController
             BooleanField::new('disabilityAccess')
                 ->setLabel(new TranslatableMessage('admin.location.enriched.disability-access'))
                 ->renderAsSwitch(false),
+            AssociationField::new('events')
+                ->setLabel('admin.location.enriched.events')
+                ->setDisabled(),
 
             FormField::addFieldset(new TranslatableMessage('admin.location.edited.headline'))
                 ->hideWhenCreating(),
@@ -67,7 +90,19 @@ class LocationCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.location.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
+                ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('name')
+            ->add('mail')
+            ->add('url')
+            ->add('disabilityAccess')
+            ->add('address')
+        ;
     }
 }

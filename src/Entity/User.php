@@ -40,19 +40,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     #[ORM\Column(type: 'boolean')]
-    private bool $enabled = false;
+    private bool $enabled = true;
 
     #[ORM\Column(length: 255)]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'Users')]
+    #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'users')]
     private Collection $organizations;
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
     private Collection $feeds;
 
-    #[ORM\Column(type: 'boolean')]
-    private bool $isVerified = false;
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $emailVerifiedAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $termsAcceptedAt = null;
 
     public function __construct()
     {
@@ -206,14 +209,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->mail;
     }
 
-    public function isVerified(): bool
+    public function getEmailVerifiedAt(): ?\DateTimeImmutable
     {
-        return $this->isVerified;
+        return $this->emailVerifiedAt;
     }
 
-    public function setIsVerified(bool $isVerified): self
+    public function setEmailVerifiedAt(\DateTimeImmutable $emailVerifiedAt): static
     {
-        $this->isVerified = $isVerified;
+        $this->emailVerifiedAt = $emailVerifiedAt;
+
+        return $this;
+    }
+
+    public function getTermsAcceptedAt(): ?\DateTimeImmutable
+    {
+        return $this->termsAcceptedAt;
+    }
+
+    public function setTermsAcceptedAt(?\DateTimeImmutable $termsAcceptedAt): static
+    {
+        $this->termsAcceptedAt = $termsAcceptedAt;
 
         return $this;
     }

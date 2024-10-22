@@ -31,7 +31,7 @@ final class FeedDebugCommand extends Command
         private readonly FeedMapperInterface $feedMapper,
         private readonly FeedConfigurationMapper $configurationMapper,
         private readonly FeedRepository $feedRepository,
-        private readonly TagsNormalizer $tagsNormalizer
+        private readonly TagsNormalizer $tagsNormalizer,
     ) {
         parent::__construct();
     }

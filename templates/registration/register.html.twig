@@ -75,6 +75,8 @@
                     </div>
                 </div>
 
+                {% include('accept_terms/terms.html.twig') %}
+
                 <div class="form-group">
                     <label class="form-check-label" for="remember_me">
                         {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}

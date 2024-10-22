@@ -13,7 +13,7 @@ final class ImagesFixtures extends Fixture
     public const ITK = 'image_itk';
 
     public function __construct(
-        private readonly ImageHandlerInterface $imageHandler
+        private readonly ImageHandlerInterface $imageHandler,
     ) {
     }
 

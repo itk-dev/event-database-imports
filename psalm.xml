@@ -53,5 +53,10 @@
                 <file name="src/Command/Feed/FeedImportCommand.php" />
             </errorLevel>
         </PossiblyUndefinedVariable>
+        <MissingTemplateParam>
+            <errorLevel type="suppress">
+                <directory name="src"/>
+            </errorLevel>
+        </MissingTemplateParam>
     </issueHandlers>
 </psalm>

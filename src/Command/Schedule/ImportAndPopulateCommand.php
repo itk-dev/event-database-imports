@@ -11,6 +11,13 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
 
+/**
+ * Command to import feeds and populate the index.
+ *
+ * This command is designed to be run with Symfony's scheduler component.
+ * Because of this it has no output because some output options are
+ * incompatible with running in a scheduled worker.
+ */
 #[AsCommand(
     name: 'app:schedule:import-and-populate',
     description: 'Import feeds and populate index',
@@ -30,8 +37,10 @@ class ImportAndPopulateCommand extends Command
         try {
             $this->feedReader->readFeeds();
 
-            foreach (IndexNames::values() as $indexName) {
-                $this->populate->populate($indexName);
+            foreach (IndexNames::values() as $index) {
+                foreach ($this->populate->populate($index) as $message) {
+                    // Do nothing
+                }
             }
 
             return Command::SUCCESS;

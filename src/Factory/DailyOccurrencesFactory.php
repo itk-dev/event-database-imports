@@ -15,7 +15,7 @@ final readonly class DailyOccurrencesFactory
     public function __construct(
         private TimeInterface $time,
         private DailyOccurrenceRepository $dailyOccurrenceRepository,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 
