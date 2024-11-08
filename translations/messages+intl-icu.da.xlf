@@ -433,10 +433,6 @@
         <source>admin.feed.last_read.headline</source>
         <target state="translated">Sidst læst</target>
       </trans-unit>
-      <trans-unit id="FJ3a25z" resname="admin.feed.ast_read.datetime">
-        <source>admin.feed.ast_read.datetime</source>
-        <target state="translated">Sidst læst</target>
-      </trans-unit>
       <trans-unit id="YMZxXCA" resname="admin.feed.last_read.count">
         <source>admin.feed.last_read.count</source>
         <target state="translated">Antal</target>
@@ -596,6 +592,62 @@
       <trans-unit id="PX1uRj6" resname="admin.address.location.coordinates">
         <source>admin.address.location.coordinates</source>
         <target state="translated">Koordinater</target>
+      </trans-unit>
+      <trans-unit id="uI6us_2" resname="admin.my.event.edit.title">
+        <source>admin.my.event.edit.title</source>
+        <target state="translated">Rediger begivenhed</target>
+      </trans-unit>
+      <trans-unit id="qDMYVnb" resname="admin.my.event.index.title">
+        <source>admin.my.event.index.title</source>
+        <target state="translated">Begivenhed</target>
+      </trans-unit>
+      <trans-unit id="Rhoqs0i" resname="admin.feed.organization">
+        <source>admin.feed.organization</source>
+        <target state="translated">Arrangør</target>
+      </trans-unit>
+      <trans-unit id="jr9z5q7" resname="admin.feed.last_read.datetime">
+        <source>admin.feed.last_read.datetime</source>
+        <target state="translated">Sidst læst</target>
+      </trans-unit>
+      <trans-unit id="3CeSFyF" resname="admin.link.feedItems">
+        <source>admin.link.feedItems</source>
+        <target state="translated">Feed kilder</target>
+      </trans-unit>
+      <trans-unit id="mPZQjfY" resname="admin.feeditem.id">
+        <source>admin.feeditem.id</source>
+        <target state="translated">id</target>
+      </trans-unit>
+      <trans-unit id="DWAjP5j" resname="admin.feeditem.feed">
+        <source>admin.feeditem.feed</source>
+        <target state="translated">Feed</target>
+      </trans-unit>
+      <trans-unit id="LsJbnpQ" resname="admin.feeditem.feeditemid">
+        <source>admin.feeditem.feeditemid</source>
+        <target state="translated">Kilde id</target>
+      </trans-unit>
+      <trans-unit id="L_w9Z0j" resname="admin.feeditem.event">
+        <source>admin.feeditem.event</source>
+        <target state="translated">Begivenhed</target>
+      </trans-unit>
+      <trans-unit id="rYENOys" resname="admin.feeditem.message">
+        <source>admin.feeditem.message</source>
+        <target state="translated">Fejl</target>
+      </trans-unit>
+      <trans-unit id="SOJ.XZb" resname="admin.feeditem.last_read.datetime">
+        <source>admin.feeditem.last_read.datetime</source>
+        <target state="translated">Sidst læst</target>
+      </trans-unit>
+      <trans-unit id="VJEzcX9" resname="admin.feeditem.data">
+        <source>admin.feeditem.data</source>
+        <target state="translated">Data</target>
+      </trans-unit>
+      <trans-unit id="snG5Z4E" resname="admin.my.organizer.edit.title">
+        <source>admin.my.organizer.edit.title</source>
+        <target state="translated">Rediger Arrangør</target>
+      </trans-unit>
+      <trans-unit id="8ZhFyLa" resname="admin.my.organizer.index.title">
+        <source>admin.my.organizer.index.title</source>
+        <target state="translated">Mine Arrangører</target>
       </trans-unit>
     </body>
   </file>

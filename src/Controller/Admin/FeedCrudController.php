@@ -56,7 +56,9 @@ class FeedCrudController extends AbstractBaseCrudController
 
             TextField::new('name')
                 ->setLabel(new TranslatableMessage('admin.feed.name')),
-            AssociationField::new('organization')->hideOnIndex(),
+            AssociationField::new('organization')
+                ->setLabel(new TranslatableMessage('admin.feed.organization'))
+                ->hideOnIndex(),
             CodeEditorField::new('configurationField')
                 ->setLabel(new TranslatableMessage('admin.feed.configuration'))
                 ->setHelp(new TranslatableMessage('admin.feed.configuration.help'))
@@ -71,8 +73,8 @@ class FeedCrudController extends AbstractBaseCrudController
 
             FormField::addFieldset(new TranslatableMessage('admin.feed.last_read.headline'))
                 ->hideWhenCreating(),
-            DateTimeField::new('last_read')
-                ->setLabel(new TranslatableMessage('admin.feed.ast_read.datetime'))
+            DateTimeField::new('lastRead')
+                ->setLabel(new TranslatableMessage('admin.feed.last_read.datetime'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),

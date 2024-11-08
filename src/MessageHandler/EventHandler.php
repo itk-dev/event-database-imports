@@ -29,14 +29,16 @@ final readonly class EventHandler
         $feedItemData = $message->getFeedItemData();
 
         $feedItemEntity = $this->feedItemRepository->findOneBy(['feed' => $feedItemData->feedId, 'feedItemId' => $feedItemData->id]);
+
         if (null === $feedItemEntity) {
             throw new UnrecoverableMessageHandlingException('No feed item entity found for feed ID '.$feedItemData->feedId);
         }
 
+        $feedItemEntity->setMessage(null);
+
         try {
             $event = $this->eventFactory->createOrUpdate($feedItemData, $feedItemEntity);
 
-            $this->entityManager->persist($feedItemEntity);
             $this->entityManager->flush();
 
             $id = $event->getId();

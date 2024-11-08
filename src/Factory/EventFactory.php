@@ -92,12 +92,14 @@ final readonly class EventFactory
 
         $description = $entity->getDescription();
 
-        if (!is_null($item->ticketUrl)) {
+        if (null !== $item->ticketUrl && '' !== $item->ticketUrl) {
             try {
                 $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
             } catch (\RuntimeException $exception) {
                 $this->logger->error('Ticket URL error: '.$exception->getMessage());
             }
+        } else {
+            $entity->setTicketUrl(null);
         }
 
         if (null !== $item->url && '' !== $item->url) {

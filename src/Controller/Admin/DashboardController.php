@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Address;
 use App\Entity\Event;
 use App\Entity\Feed;
+use App\Entity\FeedItem;
 use App\Entity\Location;
 use App\Entity\Organization;
 use App\Entity\Tag;
@@ -102,6 +103,9 @@ class DashboardController extends AbstractDashboardController
             ->setPermission(UserRoles::ROLE_ADMIN->value);
         yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feeds'), 'fa fa-rss', Feed::class)
             ->setController(FeedCrudController::class)
+            ->setPermission(UserRoles::ROLE_ADMIN->value);
+        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feedItems'), 'fa fa-list-alt', FeedItem::class)
+            ->setController(FeedItemCrudController::class)
             ->setPermission(UserRoles::ROLE_ADMIN->value);
 
         yield MenuItem::section(new TranslatableMessage('admin.label.users'))

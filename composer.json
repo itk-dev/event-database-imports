@@ -125,7 +125,7 @@
             "./vendor/bin/psalm --no-cache"
         ],
         "queues": [
-            "bin/console messenger:consume async_priority_high --failure-limit=1 -vvv"
+            "bin/console messenger:consume async scheduler_default --failure-limit=1 -vvv"
         ],
         "elastic-fix-flood": [
             "curl -X PUT \"elasticsearch:9200/_cluster/settings?pretty\" -H 'Content-Type: application/json' -d'\n{\n    \"persistent\": {\n        \"cluster.routing.allocation.disk.watermark.low\": \"90%\",\n        \"cluster.routing.allocation.disk.watermark.low.max_headroom\": \"100MB\",\n        \"cluster.routing.allocation.disk.watermark.high\": \"98%\",\n        \"cluster.routing.allocation.disk.watermark.high.max_headroom\": \"20MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.max_headroom\": \"5MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen.max_headroom\": \"5MB\"\n    }\n}\n'",

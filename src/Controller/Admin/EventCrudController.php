@@ -151,12 +151,18 @@ class EventCrudController extends AbstractBaseCrudController
     public function configureFilters(Filters $filters): Filters
     {
         if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            $filters->add('organization');
+            $filters->add('feed');
         }
 
         return $filters
+            ->add('id')
+            ->add('organization')
+            ->add('partners')
             ->add('location')
+            ->add('tags')
             ->add('title')
+            ->add('url')
+            ->add('ticketUrl')
         ;
     }
 

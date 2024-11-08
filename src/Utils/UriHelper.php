@@ -28,7 +28,12 @@ class UriHelper
     {
         $url = trim($inputUrl);
 
+        if ('' === $url) {
+            throw new \RuntimeException('Cannot convert empty URL to absolute URL.');
+        }
+
         if (parse_url($url, PHP_URL_HOST) && parse_url($url, PHP_URL_SCHEME)) {
+            // URL is absolute, return unmodified
             return $url;
         }
 

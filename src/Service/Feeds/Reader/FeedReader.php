@@ -56,7 +56,7 @@ class FeedReader implements FeedReaderInterface
 
         foreach ($feeds as $feed) {
             foreach ($this->readFeed($feed, $limit, $force) as $item) {
-                // Do nothing
+                // Do nothing, work is done in readFeed
             }
         }
     }
@@ -102,8 +102,8 @@ class FeedReader implements FeedReaderInterface
                 yield;
             }
 
-            if ($feed->isSyncToFeed() && FeedReaderInterface::DEFAULT_OPTION === $limit) {
-                // We can only do cleanup if we run without limit
+            // We can only do cleanup if we run without limit
+            if (FeedReaderInterface::DEFAULT_OPTION === $limit) {
                 $this->cleanUp($feed, $start);
             }
 
@@ -132,10 +132,17 @@ class FeedReader implements FeedReaderInterface
         return $index >= $limit;
     }
 
+    /**
+     * Clean up FeedItems/Events. Remove all FeedItems where
+     *  - item was not seen on last run and event is null.
+     *  - item was not seen on last run and "sync to feed is active for feed.
+     */
     private function cleanUp(Feed $feed, \DateTimeInterface $date): void
     {
         foreach ($this->feedItemRepository->findByByLastSeen($feed, $date) as $feedItem) {
-            $this->feedItemRepository->remove($feedItem);
+            if (null === $feedItem->getEvent() || $feed->isSyncToFeed()) {
+                $this->feedItemRepository->remove($feedItem);
+            }
         }
     }
 }
