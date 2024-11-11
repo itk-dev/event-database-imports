@@ -109,7 +109,7 @@ class FeedReader implements FeedReaderInterface
 
             $feed->setLastRead(new \DateTimeImmutable());
             $feed->setLastReadCount($index);
-            $feed->setMessage('');
+            $feed->setMessage(null);
             $this->feedRepository->save($feed, true);
         } catch (\Exception $exception) {
             $feed->setMessage($exception->getMessage());

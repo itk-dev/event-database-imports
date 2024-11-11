@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\FeedItem;
 use App\Types\UserRoles;
+use Doctrine\Common\Collections\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -26,6 +27,7 @@ class FeedItemCrudController extends AbstractBaseCrudController
     {
         return $crud
             ->showEntityActionsInlined()
+            ->setDefaultSort(['lastSeenAt' => Order::Descending->value])
         ;
     }
 

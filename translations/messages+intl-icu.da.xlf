@@ -599,7 +599,7 @@
       </trans-unit>
       <trans-unit id="qDMYVnb" resname="admin.my.event.index.title">
         <source>admin.my.event.index.title</source>
-        <target state="translated">Begivenhed</target>
+        <target state="translated">Mine Begivenheder</target>
       </trans-unit>
       <trans-unit id="Rhoqs0i" resname="admin.feed.organization">
         <source>admin.feed.organization</source>
