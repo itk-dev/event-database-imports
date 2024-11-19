@@ -21,6 +21,18 @@
         <source>admin.feed.configuration.json_invalid</source>
         <target>Configuration JSON is not valid</target>
       </trans-unit>
+      <trans-unit id="YXZ26gK" resname="Please enter a password">
+        <source>Please enter a password</source>
+        <target>Please enter a password</target>
+      </trans-unit>
+      <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
+        <source>Your password should be at least {{ limit }} characters</source>
+        <target>Your password should be at least {{ limit }} characters</target>
+      </trans-unit>
+      <trans-unit id="Fe2zEyl" resname="Please enter your email">
+        <source>Please enter your email</source>
+        <target>Please enter your email</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -26,6 +26,7 @@ class RegistrationController extends AbstractDashboardController
         private readonly EmailVerifier $emailVerifier,
         private readonly UserRepository $userRepository,
         private readonly string $siteSendFromEmail,
+        private readonly string $siteReplyToEmail,
         private readonly string $siteName,
     ) {
     }
@@ -64,6 +65,7 @@ class RegistrationController extends AbstractDashboardController
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address($this->siteSendFromEmail, $this->siteName))
+                    ->replyTo(new Address($this->siteReplyToEmail, $this->siteName))
                     ->to($user->getMail())
                     ->subject($translator->trans('registration.page.confirm_email', [], 'messages'))
                     ->htmlTemplate('registration/confirmation_email.html.twig')

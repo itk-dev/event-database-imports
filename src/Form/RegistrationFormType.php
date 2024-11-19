@@ -32,6 +32,7 @@ class RegistrationFormType extends AbstractType
             ->add('name', TextType::class)
             ->add('mail', EmailType::class)
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => new TranslatableMessage('registration.form.agree_terms'),
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

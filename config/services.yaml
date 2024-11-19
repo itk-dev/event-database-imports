@@ -41,6 +41,7 @@ services:
     App\Controller\RegistrationController:
         arguments:
             $siteSendFromEmail: '%env(SITE_SEND_FROM_EMAIL)%'
+            $siteReplyToEmail: '%env(SITE_REPLY_TO_EMAIL)%'
             $siteName: '%env(SITE_NAME)%'
 
     App\Service\Populate:
