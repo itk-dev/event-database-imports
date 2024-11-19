@@ -19,6 +19,7 @@ class MyEventCrudController extends EventCrudController
         $crud = parent::configureCrud($crud);
 
         return $crud
+            ->setHelp('index', new TranslatableMessage('admin.my.event.index.help'))
             ->setPageTitle('edit', new TranslatableMessage('admin.my.event.edit.title'))
             ->setPageTitle('index', new TranslatableMessage('admin.my.event.index.title'))
             ->setPageTitle('detail', new TranslatableMessage('admin.my.event.edit.title'));
@@ -38,10 +39,24 @@ class MyEventCrudController extends EventCrudController
     {
         $choices = $this->getOrganizationChoices();
 
-        if (0 < count($choices)) {
+        // Filter only make sense if there are more than 2 choices
+        if (2 <= count($choices)) {
             $filters->add(ChoiceFilter::new('organization')->setChoices($choices));
         }
 
-        return parent::configureFilters($filters);
+        return parent::configureBaseFilters($filters);
+    }
+
+    private function getOrganizationChoices(): array
+    {
+        $choices = [];
+        foreach ($this->getUser()->getOrganizations() as $organization) {
+            $key = $organization->getName() ?? $organization->getId();
+            if (null !== $key) {
+                $choices[$key] = $organization->getId();
+            }
+        }
+
+        return $choices;
     }
 }

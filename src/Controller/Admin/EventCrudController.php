@@ -154,9 +154,16 @@ class EventCrudController extends AbstractBaseCrudController
             $filters->add('feed');
         }
 
+        // 'organization' filter has additional config when added in MyEventCrudController
+        $filters->add('organization');
+
+        return $this->configureBaseFilters($filters);
+    }
+
+    protected function configureBaseFilters(Filters $filters): Filters
+    {
         return $filters
             ->add('id')
-            ->add('organization')
             ->add('partners')
             ->add('location')
             ->add('tags')
@@ -164,18 +171,5 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('url')
             ->add('ticketUrl')
         ;
-    }
-
-    protected function getOrganizationChoices(): array
-    {
-        $choices = [];
-        foreach ($this->getUser()->getOrganizations() as $organization) {
-            $key = $organization->getName() ?? $organization->getId();
-            if (null !== $key) {
-                $choices[$key] = $organization->getId();
-            }
-        }
-
-        return $choices;
     }
 }

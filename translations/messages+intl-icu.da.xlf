@@ -649,6 +649,10 @@
         <source>admin.my.organizer.index.title</source>
         <target state="translated">Mine Arrangører</target>
       </trans-unit>
+      <trans-unit id="bWmjvNa" resname="admin.my.event.index.help">
+        <source>admin.my.event.index.help</source>
+        <target state="translated">"Mine begivenheder" er begivenheder med en dine arrangører som arrangør. Se dine arrangører under "Mit indhold -> Arrangører"</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

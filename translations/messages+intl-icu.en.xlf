@@ -645,9 +645,13 @@
         <source>admin.my.organizer.edit.title</source>
         <target>Edit Organization</target>
       </trans-unit>
-      <trans-unit id="8ZhFyLa" resname="My Organizations">
+      <trans-unit id="8ZhFyLa" resname="admin.my.organizer.index.title">
         <source>admin.my.organizer.index.title</source>
-        <target>My Organizations</target>
+        <target>My Organizers</target>
+      </trans-unit>
+      <trans-unit id="bWmjvNa" resname="admin.my.event.index.help">
+        <source>admin.my.event.index.help</source>
+        <target>"My Events" are events with one of your organizers as organizer. To see your organizers go to "My Content -> Organizers"</target>
       </trans-unit>
     </body>
   </file>
