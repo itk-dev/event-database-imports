@@ -30,8 +30,11 @@ final class LoginSuccessListener
             $event->setResponse($response);
         }
 
-        // Ensure email verified for non editor/admin users
-        if (null === $user->getEmailVerifiedAt() && !$this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
+        // Ensure email verified for non org. editor/admin users
+        // Self registered users must have verified email
+        // If a role (ROLE_ORGANIZATION_EDITOR or above) has been granted we assume email is valid
+        // @TODO Add "resend confirmation" email page to enable email verification for all users
+        if (null === $user->getEmailVerifiedAt() && !$this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
             $session = $event->getRequest()->getSession();
             assert($session instanceof FlashBagAwareSessionInterface);
 
