@@ -139,8 +139,7 @@ class DashboardController extends AbstractDashboardController
 
         return parent::configureUserMenu($user)
             ->setName($user->getName())
-            ->displayUserAvatar(true)
-            ->setGravatarEmail($user->getMail())
+            ->displayUserAvatar(false)
             ->addMenuItems([
                 MenuItem::linkToUrl(new TranslatableMessage('admin.user_menu.my_profile'), 'fa fa-id-card', $profileUrl),
                 MenuItem::linkToUrl(new TranslatableMessage('admin.user_menu.terms'), 'fa-file-signature', 'https://arrangoer.aarhus.dk/markedsfoering/det-sker-i-aarhus-eventdatabasen/brugeraftale'),
