@@ -25,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private int $id = 0;
+    private ?int $id = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -70,6 +70,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getId(): int
     {
+        assert(null !== $this->id, 'User id should not be null. Did you forget to persist the entity?');
+
         return $this->id;
     }
 

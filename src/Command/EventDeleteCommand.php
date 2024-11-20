@@ -50,6 +50,8 @@ class EventDeleteCommand extends Command
             try {
                 $this->eventRepository->remove($event, true);
 
+                $io->success(sprintf('Event with ID %s: %s deleted', $eventId, $event->getTitle()));
+
                 return Command::SUCCESS;
             } catch (\Throwable $e) {
                 $io->error(sprintf('Error deleting event with ID %s: %s', $eventId, $e->getMessage()));
