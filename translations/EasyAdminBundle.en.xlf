@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="da" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="4J45.H4" resname="login_page.username">
+        <source>login_page.username</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="V56_FDR" resname="login_page.password">
+        <source>login_page.password</source>
+        <target>Password</target>
+      </trans-unit>
+      <trans-unit id="W0jkiQG" resname="login_page.sign_in">
+        <source>login_page.sign_in</source>
+        <target>Sign in</target>
+      </trans-unit>
+      <trans-unit id="iWZtM1U" resname="login_page.forgot_password">
+        <source>login_page.forgot_password</source>
+        <target>Forgot Your Password?</target>
+      </trans-unit>
+      <trans-unit id="eHA8HYd" resname="login_page.remember_me">
+        <source>login_page.remember_me</source>
+        <target>Remember me</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

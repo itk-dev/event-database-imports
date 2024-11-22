@@ -119,12 +119,4 @@ class RegistrationController extends AbstractDashboardController
 
         return $this->redirectToRoute('app_admin_login');
     }
-
-    #[Route('/email-not-verified', name: 'app_email_not_verified')]
-    public function emailNotVerified(Request $request, TranslatorInterface $translator): Response
-    {
-        return $this->render('registration/email_not_verified.html.twig', [
-            'page_title' => new TranslatableMessage('registration.page.email_not_verified'),
-        ]);
-    }
 }

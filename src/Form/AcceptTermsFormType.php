@@ -12,7 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /** @extends AbstractType<mixed> */
 class AcceptTermsFormType extends AbstractType
 {
-    public function __construct(private readonly TranslatorInterface $translator)
+    public function __construct()
     {
     }
 
@@ -20,6 +20,7 @@ class AcceptTermsFormType extends AbstractType
     {
         $builder
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => new TranslatableMessage('registration.form.agree_terms'),
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([

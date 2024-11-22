@@ -341,10 +341,6 @@
         <source>registration.form.enter_password</source>
         <target state="translated">Angiv venligst kodeord</target>
       </trans-unit>
-      <trans-unit id="h34BTI9" resname="registration.form.min_password">
-        <source>registration.form.min_password</source>
-        <target state="translated">Dit kodeord skal være mindst { limit } karakterer langt</target>
-      </trans-unit>
       <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
         <source>page.confirm.confirmation_link_sent</source>
         <target state="translated">Der er sendt en email til { email } med et link til bekræftelse af kontoen</target>
@@ -651,7 +647,15 @@
       </trans-unit>
       <trans-unit id="bWmjvNa" resname="admin.my.event.index.help">
         <source>admin.my.event.index.help</source>
-        <target state="translated">"Mine begivenheder" er begivenheder med en dine arrangører som arrangør. Se dine arrangører under "Mit indhold -> Arrangører"</target>
+        <target state="translated"><![CDATA["Mine begivenheder" er begivenheder med en dine arrangører som arrangør. Se dine arrangører under "Mit indhold -> Arrangører"]]></target>
+      </trans-unit>
+      <trans-unit id="s1CDVTq" resname="registration.form.name">
+        <source>registration.form.name</source>
+        <target state="translated">Navn</target>
+      </trans-unit>
+      <trans-unit id="tWTqBeb" resname="registration.form.mail">
+        <source>registration.form.mail</source>
+        <target state="translated">Email</target>
       </trans-unit>
     </body>
   </file>

@@ -349,10 +349,6 @@
         <source>registration.form.enter_password</source>
         <target>Please enter a password</target>
       </trans-unit>
-      <trans-unit id="h34BTI9" resname="registration.form.min_password">
-        <source>registration.form.min_password</source>
-        <target>Your password should be at least { limit } characters</target>
-      </trans-unit>
       <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
         <source>page.confirm.confirmation_link_sent</source>
         <target>An email with a confirmation link has been sent to { email }</target>
@@ -651,7 +647,15 @@
       </trans-unit>
       <trans-unit id="bWmjvNa" resname="admin.my.event.index.help">
         <source>admin.my.event.index.help</source>
-        <target>"My Events" are events with one of your organizers as organizer. To see your organizers go to "My Content -> Organizers"</target>
+        <target><![CDATA["My Events" are events with one of your organizers as organizer. To see your organizers go to "My Content -> Organizers"]]></target>
+      </trans-unit>
+      <trans-unit id="s1CDVTq" resname="registration.form.name">
+        <source>registration.form.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="tWTqBeb" resname="registration.form.mail">
+        <source>registration.form.mail</source>
+        <target>Mail</target>
       </trans-unit>
     </body>
   </file>

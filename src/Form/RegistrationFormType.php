@@ -19,8 +19,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /** @extends AbstractType<mixed> */
 class RegistrationFormType extends AbstractType
 {
-    private const MIN_LENGTH = 8;
-    private const MAX_LENGTH = 4096;
+    private const int MIN_LENGTH = 8;
+    private const int MAX_LENGTH = 4096;
 
     public function __construct(private readonly TranslatorInterface $translator)
     {
@@ -29,18 +29,10 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('mail', EmailType::class)
-            ->add('agreeTerms', CheckboxType::class, [
-                'label' => new TranslatableMessage('registration.form.agree_terms'),
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => new TranslatableMessage('registration.form.agree_terms'),
-                    ]),
-                ],
-            ])
+            ->add('name', TextType::class, ['label' => new TranslatableMessage('registration.form.name')])
+            ->add('mail', EmailType::class, ['label' => new TranslatableMessage('registration.form.mail')])
             ->add('plainPassword', PasswordType::class, [
+                'label' => new TranslatableMessage('registration.form.enter_password'),
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,
@@ -51,9 +43,18 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => self::MIN_LENGTH,
-                        'minMessage' => new TranslatableMessage('registration.form.min_password', ['%limit%' => self::MIN_LENGTH], 'messages'),
+                        'minMessage' => 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         'max' => self::MAX_LENGTH,
+                    ]),
+                ],
+            ])
+            ->add('agreeTerms', CheckboxType::class, [
+                'label' => new TranslatableMessage('registration.form.agree_terms'),
+                'mapped' => false,
+                'constraints' => [
+                    new IsTrue([
+                        'message' => new TranslatableMessage('registration.form.agree_terms'),
                     ]),
                 ],
             ])

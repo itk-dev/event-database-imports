@@ -1,0 +1,89 @@
+/* EasyAdmin extra styles */
+:root {
+    --font-family-sans-serif: Arial, Helvetica, sans-serif;
+
+    --body-max-width: 100%;
+    --sidebar-bg: rgb(246, 246, 246);
+    /* make the base font size smaller */
+    --button-primary-bg: rgb(0,156,220);
+    --pagination-active-bg: rgb(0,156,220);
+    --link-color: rgb(0,156,220);
+    --sidebar-menu-active-item-color: rgb(0,156,220);
+    --badge-boolean-true-bg: rgb(0,156,220);
+    --badge-boolean-false-bg: rgb(238, 0, 37);
+    --badge-boolean-false-color: var(--white);
+    --sidebar-menu-color: rgb(66,66,66);
+
+    --text-color: rgb(51, 51, 51);
+    --text-color-dark: rgb(66,66,66);
+
+    --bs-danger-rgb: rgb(228, 73, 48);
+}
+
+/* Landing page styles */
+.landing-page {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, rgb(255, 255, 255) 60%, rgb(246, 246, 246) 40%);
+
+    h1, h2, p {
+        box-sizing: border-box;
+        color: rgb(51, 51, 51);
+        font-family: "Arial", "Helvetica", sans-serif;
+        font-style: normal;
+        font-variant-alternates: normal;
+        font-variant-caps: normal;
+        font-variant-east-asian: normal;
+        font-variant-ligatures: normal;
+        font-variant-numeric: normal;
+        font-variant-position: normal;
+        hyphens: manual;
+    }
+
+    h1 {
+        font-size: 40px;
+        font-weight: 600;
+        line-height: 52px
+    }
+
+    h2 {
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 42px
+    }
+
+    p {
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 27.9px;
+        margin-bottom: 20px;
+        margin-top: 0px;
+        text-rendering: optimizelegibility;
+    }
+
+    .col-12 {
+        height: 100vh;
+    }
+
+    .text-pane {
+        background: rgb(255, 255, 255);
+    }
+
+    .login-pane {
+        background: rgb(246, 246, 246);
+        box-shadow: inset 1px 0 0 #e2e8f0;
+    }
+
+    .login-wrapper {
+        margin-top: 2em;
+
+        .content {
+            background: none;
+            box-shadow: none;
+        }
+
+        .form-check-input:checked {
+            background-color: rgb(0,156,220);
+        }
+
+    }
+}

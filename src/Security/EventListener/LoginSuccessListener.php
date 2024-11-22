@@ -39,8 +39,7 @@ final class LoginSuccessListener
             assert($session instanceof FlashBagAwareSessionInterface);
 
             $session->getFlashBag()->add('danger', 'registration.page.email_not_verified');
-            // @TODO Add "resend confirmation" email page
-            // $response = new RedirectResponse($this->router->generate('app_email_not_verified'));
+            // @TODO Add "resend confirmation" email option
             $response = new RedirectResponse($this->router->generate('app_admin_login'));
             $event->setResponse($response);
         }
