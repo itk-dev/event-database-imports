@@ -21,7 +21,7 @@ class UriHelper
             new EmptyVersionStrategy(),
         );
 
-        return $urlPackage->getUrl('/'.$file);
+        return $urlPackage->getUrl($file);
     }
 
     public static function getAbsoluteUrl(string $inputUrl, ?string $base = null): string
