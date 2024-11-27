@@ -21,7 +21,6 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use function PHPUnit\Framework\stringContains;
 
 final readonly class ImageService implements ImageServiceInterface
 {
@@ -138,8 +137,8 @@ final readonly class ImageService implements ImageServiceInterface
     {
         // Uploaded files only have the filename in the db, but are actually in the uploads dir to support the ImageField in EasyAdmin
         // Fetched files have the subfolder in the db field
-        if (!str_contains('/', $imageUrl)) {
-            $imageUrl = 'uploads/' . $imageUrl;
+        if (!str_contains($imageUrl, '/')) {
+            $imageUrl = 'uploads/'.$imageUrl;
         }
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
