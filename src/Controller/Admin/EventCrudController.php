@@ -26,11 +26,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractBaseCrudController
 {
-    public function __construct(
-        private readonly ImageHandlerInterface $imageHandler,
-    ) {
-    }
-
     public static function getEntityFqcn(): string
     {
         return Event::class;
@@ -67,14 +62,6 @@ class EventCrudController extends AbstractBaseCrudController
             ->hideWhenCreating();
         yield TextField::new('title')
             ->setLabel(new TranslatableMessage('admin.event.title'));
-        yield ImageField::new('image')
-                ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
-                ->formatValue(function ($value) {
-                    $local = $value?->getLocal();
-                    $transformed = null === $local ? null : $this->imageHandler->getTransformedImageUrls($local);
-
-                    return $transformed['large'] ?? null;
-                })->hideOnIndex()->hideOnForm();
         yield TextareaField::new('excerpt')
                 ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
                 ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
@@ -88,6 +75,14 @@ class EventCrudController extends AbstractBaseCrudController
                 ->renderAsHtml()
                 ->hideOnIndex()
                 ->hideOnForm();
+        // Image / Detail view
+        yield ImageField::new('image')
+            ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
+            ->formatValue(function ($value) {
+                return '/images/uploads/'.$value?->getLocal();
+            })
+        ->hideOnIndex()->hideOnForm();
+        // Image / Form view
         yield AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex()

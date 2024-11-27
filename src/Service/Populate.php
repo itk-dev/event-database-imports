@@ -72,16 +72,13 @@ final class Populate
             $entriesAdded = 0;
 
             while ($entriesAdded < $numberOfRecords) {
-                // @TODO Cleanup/Set criteria
                 $criteria = [];
                 if ($this::DEFAULT_RECORD_ID !== $record_id) {
                     $criteria = ['id' => $record_id];
                 }
 
-                $criteria = $this->criteriaFactory->getPopulateCriteria($index);
+                $criteria = array_merge($criteria, $this->criteriaFactory->getPopulateCriteria($index));
 
-                // @TODO Cleanup
-                // $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
                 $entities = $repositories[$index]->findToPopulate($criteria, self::BATCH_SIZE, $entriesAdded);
 
                 // No more results.

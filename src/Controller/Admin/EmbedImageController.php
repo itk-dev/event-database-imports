@@ -28,7 +28,7 @@ class EmbedImageController extends AbstractBaseCrudController
             ImageField::new('local')
                 ->setLabel(new TranslatableMessage('admin.image.local'))
                 ->setUploadDir(UriHelper::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('uploads/[slug]-[randomhash].[extension]'),
+                ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]'),
         ];
     }
 
