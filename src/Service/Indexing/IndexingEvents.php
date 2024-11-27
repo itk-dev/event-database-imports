@@ -5,7 +5,7 @@ namespace App\Service\Indexing;
 use App\Entity\Event;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
-use App\Service\ImageHandlerInterface;
+use App\Service\ImageServiceInterface;
 use Elastic\Elasticsearch\Client;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 use Symfony\Component\Serializer\Context\Normalizer\DateTimeNormalizerContextBuilder;
@@ -20,7 +20,7 @@ final class IndexingEvents extends AbstractIndexingElastic
     public function __construct(
         private readonly IndexingLocations $indexingLocations,
         private readonly SerializerInterface $serializer,
-        private readonly ImageHandlerInterface $imageHandler,
+        private readonly ImageServiceInterface $imageService,
         private readonly Client $client,
     ) {
         parent::__construct($this->client);
@@ -51,7 +51,7 @@ final class IndexingEvents extends AbstractIndexingElastic
         // Fix image urls (with a full path and derived sizes).
         if ($data['imageUrls']) {
             $imageUrl = $data['imageUrls']['original'];
-            $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageHandler->getTransformedImageUrls($imageUrl);
+            $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageService->getTransformedImageUrls($imageUrl);
         }
 
         // @todo: Figure out how to do these changes with the serializer. This is just....

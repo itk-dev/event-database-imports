@@ -7,7 +7,6 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\IsTrue;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** @extends AbstractType<mixed> */
 class AcceptTermsFormType extends AbstractType

@@ -58,7 +58,7 @@ services:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
             $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
 
-    App\Service\ImageHandler:
+    App\Service\ImageService:
         arguments:
             $defaultUri: '%env(string:APP_DEFAULT_URI)%'
             $publicPath: '%kernel.project_dir%/public/images/'

@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Event;
 use App\Entity\Organization;
-use App\Service\ImageHandlerInterface;
+use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
@@ -26,6 +26,11 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EventCrudController extends AbstractBaseCrudController
 {
+    public function __construct(
+        private readonly ImageServiceInterface $imageService,
+    ) {
+    }
+
     public static function getEntityFqcn(): string
     {
         return Event::class;
@@ -79,7 +84,10 @@ class EventCrudController extends AbstractBaseCrudController
         yield ImageField::new('image')
             ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
             ->formatValue(function ($value) {
-                return '/images/uploads/'.$value?->getLocal();
+                $local = $value?->getLocal();
+                $transformed = null === $local ? null : $this->imageService->getTransformedImageUrls($local);
+
+                return $transformed['large'] ?? null;
             })
         ->hideOnIndex()->hideOnForm();
         // Image / Form view

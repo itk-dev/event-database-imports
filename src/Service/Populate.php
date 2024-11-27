@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains a service to populate search index.

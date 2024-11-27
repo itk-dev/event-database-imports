@@ -21,17 +21,18 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use function PHPUnit\Framework\stringContains;
 
-final class ImageHandler implements ImageHandlerInterface
+final readonly class ImageService implements ImageServiceInterface
 {
     public function __construct(
-        private readonly HttpClientInterface $client,
-        private readonly string $publicPath,
-        private readonly string $defaultUri,
-        private readonly array $allowedMineTypes,
-        private readonly MessageBusInterface $messageBus,
-        private readonly CacheManager $imagineCacheManager,
-        private readonly FilterManager $filterManager,
+        private HttpClientInterface $client,
+        private string $publicPath,
+        private string $defaultUri,
+        private array $allowedMineTypes,
+        private MessageBusInterface $messageBus,
+        private CacheManager $imagineCacheManager,
+        private FilterManager $filterManager,
     ) {
     }
 
@@ -135,6 +136,11 @@ final class ImageHandler implements ImageHandlerInterface
 
     public function getTransformedImageUrls(string $imageUrl, bool $absolute = true): array
     {
+        // Uploaded files only have the filename in the db, but are actually in the uploads dir to support the ImageField in EasyAdmin
+        // Fetched files have the subfolder in the db field
+        if (!str_contains('/', $imageUrl)) {
+            $imageUrl = 'uploads/' . $imageUrl;
+        }
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
         foreach ($filters as $name => $filter) {
