@@ -37,7 +37,7 @@ class AcceptTermsController extends AbstractDashboardController
             return $this->redirectToRoute('admin');
         }
 
-        return $this->render('accept_terms/accept_terms_form.html.twig', [
+        return $this->render('app/accept_terms/accept_terms_form.html.twig', [
             'registrationForm' => $form->createView(),
             'page_title' => new TranslatableMessage('terms.page.accept_terms'),
         ]);

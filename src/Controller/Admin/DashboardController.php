@@ -61,7 +61,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('<img src="/admin/aak-logo-1.svg" width="119px" height="60px" alt="\'Det sker i Aarhus\' Eventdatabasen">')
+            ->setTitle('<img src="/admin/styles/aak-logo-1.svg" width="119px" height="60px" alt="\'Det sker i Aarhus\' Eventdatabasen">')
             ->setFaviconPath('img/favicon.ico')
             ->renderContentMaximized();
     }
@@ -148,6 +148,6 @@ class DashboardController extends AbstractDashboardController
 
     public function configureAssets(): Assets
     {
-        return Assets::new()->addCssFile('css/admin.css');
+        return Assets::new()->addCssFile('/admin/styles/admin.css');
     }
 }

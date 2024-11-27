@@ -68,10 +68,10 @@ class RegistrationController extends AbstractDashboardController
                     ->replyTo(new Address($this->siteReplyToEmail, $this->siteName))
                     ->to($user->getMail())
                     ->subject($translator->trans('registration.page.confirm_email', [], 'messages'))
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('app/registration/confirmation_email.html.twig')
             );
 
-            return $this->render('registration/confirm.html.twig', [
+            return $this->render('app/registration/confirm.html.twig', [
                 'page_title' => new TranslatableMessage('registration.page.confirm_email'),
                 'email' => $user->getMail(),
             ]);
@@ -83,7 +83,7 @@ class RegistrationController extends AbstractDashboardController
             }
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('app/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'page_title' => new TranslatableMessage('registration.page.please_register'),
         ]);

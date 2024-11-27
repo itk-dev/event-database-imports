@@ -20,6 +20,12 @@
     --bs-danger-rgb: rgb(228, 73, 48);
 }
 
+.main-header #header-logo svg {
+    height: 60px;
+    width: 119px;
+    fill: var(--sidebar-logo-color);
+}
+
 /* Landing page styles */
 .landing-page {
     font-family: Arial, Helvetica, sans-serif;

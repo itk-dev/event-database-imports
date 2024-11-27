@@ -21,7 +21,7 @@ class LoginController extends AbstractDashboardController
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        return $this->render('landing_page/index.html.twig', [
+        return $this->render('app/landing_page/index.html.twig', [
             // parameters usually defined in Symfony login forms
             'error' => $error,
             'last_username' => $lastUsername,

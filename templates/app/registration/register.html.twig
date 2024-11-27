@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends "app/base.html.twig" %}
 
 {% set _username_label = username_label is defined ? username_label|trans : 'login_page.username'|trans({}, 'EasyAdminBundle') %}
 {% set _password_label = password_label is defined ? password_label|trans : 'login_page.password'|trans({}, 'EasyAdminBundle') %}
@@ -10,7 +10,7 @@
     <p>Få dine arrangementer og events bredt ud ved at lægge dem ind i Aarhus Kommunes eventdatabase. Er du arrangør og ønsker at få dine events med, så læs mere på: <a href="https://arrangoer.aarhus.dk/markedsfoering/det-sker-i-aarhus-eventdatabasen/">arrangoer.aarhus.dk</a></p>
     <h2>Brugeraftale</h2>
 
-    {% include('accept_terms/terms.html.twig') %}
+    {% include('app/accept_terms/terms.html.twig') %}
 
     <h2>Kontakt</h2>
     <p><a href="mailto:kommunikation@mkb.aarhus.dk">kommunikation@mkb.aarhus.dk</a></p>
