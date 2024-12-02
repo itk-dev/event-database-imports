@@ -4,11 +4,14 @@ namespace App\Command\Schedule;
 
 use App\Service\Feeds\Reader\FeedReader;
 use App\Service\Populate;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Scheduler\Attribute\AsCronTask;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * Command to import feeds and populate the index.
@@ -26,6 +29,9 @@ class ImportCommand extends Command
 {
     public function __construct(
         private readonly FeedReader $feedReader,
+        private readonly LoggerInterface $logger,
+        private readonly HttpClientInterface $client,
+        private readonly string $monitoringUrl,
     ) {
         parent::__construct();
     }
@@ -33,11 +39,31 @@ class ImportCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         try {
-            $this->feedReader->readFeeds();
+            $progressBar = new ProgressBar($output);
+            $progressBar->setFormat('[%bar%] %elapsed% (%memory%): Imported %current% events');
+            $progressBar->start();
+
+            foreach ($this->feedReader->readFeeds() as $item) {
+                $progressBar->advance();
+            }
+
+            $progressBar->finish();
+
+            if ('' !== $this->monitoringUrl) {
+                try {
+                    $this->client->request('GET', $this->monitoringUrl);
+                } catch (\Throwable $e) {
+                    $this->logger->error('Error calling monitoringUrl: '.$e->getMessage());
+                }
+            }
+
+            $this->logger->info('Successfully imported feeds');
 
             return Command::SUCCESS;
         } catch (\Throwable $e) {
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
+
+            $this->logger->error('Error importing feeds: '.$e->getMessage());
 
             return Command::FAILURE;
         }

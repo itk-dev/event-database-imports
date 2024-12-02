@@ -132,10 +132,11 @@ class DashboardController extends AbstractDashboardController
     {
         assert($user instanceof User);
 
-        $profileUrl = (string) $this->adminUrlGenerator
+        $profileUrl = $this->adminUrlGenerator
             ->setController(UserCrudController::class)
             ->setAction(Action::DETAIL)
-            ->setEntityId($user->getId());
+            ->setEntityId($user->getId())
+            ->generateUrl();
 
         return parent::configureUserMenu($user)
             ->setName($user->getName())

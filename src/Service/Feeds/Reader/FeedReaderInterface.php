@@ -21,7 +21,7 @@ interface FeedReaderInterface
      *
      * @throws MappingError
      */
-    public function readFeeds(int $limit = self::DEFAULT_OPTION, bool $force = false, array $feedIds = []): void;
+    public function readFeeds(int $limit = self::DEFAULT_OPTION, bool $force = false, array $feedIds = []): iterable;
 
     /**
      * Read feed.

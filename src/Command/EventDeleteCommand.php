@@ -8,7 +8,6 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
@@ -43,14 +42,14 @@ class EventDeleteCommand extends Command
             return Command::FAILURE;
         }
 
-        $helper = $this->getHelper('question');
-        $question = new ConfirmationQuestion(sprintf('Delete event with ID %s: %s?', $eventId, $event->getTitle()), false);
+        $eventTitle = $event->getTitle() ?? 'UNKNOWN TITLE';
+        $question = sprintf('Delete event with ID %s: %s?', $eventId, $eventTitle);
 
-        if ($helper->ask($input, $output, $question)) {
+        if ($io->confirm($question, false)) {
             try {
                 $this->eventRepository->remove($event, true);
 
-                $io->success(sprintf('Event with ID %s: %s deleted', $eventId, $event->getTitle()));
+                $io->success(sprintf('Event with ID %s: %s deleted', $eventId, $eventTitle));
 
                 return Command::SUCCESS;
             } catch (\Throwable $e) {

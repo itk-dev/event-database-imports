@@ -11,7 +11,6 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -39,7 +38,6 @@ class ChangePasswordCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $helper = $this->getHelper('question');
 
         $email = $input->getArgument('email');
 
@@ -49,14 +47,13 @@ class ChangePasswordCommand extends Command
             throw new InvalidArgumentException(sprintf('User %s does not exist', $email));
         }
 
-        $password = $input->getOption('password');
-        $question = new Question('Password: ', null);
-        $question->setHidden(true);
-        $question->setHiddenFallback(false);
+        $password = $io->askHidden('New Password?', function (string $password): string {
+            if (empty($password)) {
+                throw new \RuntimeException('Password cannot be empty.');
+            }
 
-        while (empty($password)) {
-            $password = $helper->ask($input, $output, $question);
-        }
+            return $password;
+        });
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($hashedPassword);

@@ -38,6 +38,14 @@ services:
         arguments:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
 
+    App\Command\Schedule\ImportCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_IMPORT_MONITORING_URL)%'
+
+    App\Command\Schedule\PopulateCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_POPULATE_MONITORING_URL)%'
+
     App\Controller\RegistrationController:
         arguments:
             $siteSendFromEmail: '%env(SITE_SEND_FROM_EMAIL)%'
