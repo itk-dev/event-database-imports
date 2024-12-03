@@ -62,7 +62,7 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('<img src="/admin/styles/aak-logo-1.svg" width="119px" height="60px" alt="\'Det sker i Aarhus\' Eventdatabasen">')
-            ->setFaviconPath('img/favicon.ico')
+            ->setFaviconPath('/admin/styles/logo.svg')
             ->renderContentMaximized();
     }
 
