@@ -5,6 +5,10 @@ services:
     depends_on:
       - rabbit
 
+  nginx:
+    environment:
+      APP_PATH_PREFIX: ${APP_PATH_PREFIX}
+
   supervisor:
     # @TODO: Create supervisor with ansible, when merged with Ture's PR
     image: itkdev/supervisor-php8.3:alpine

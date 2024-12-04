@@ -4,6 +4,10 @@ services:
       - elasticsearch
       - rabbit
 
+  nginx:
+    environment:
+      APP_PATH_PREFIX: ${APP_PATH_PREFIX}
+
   rabbit:
     image: rabbitmq:3.13-management-alpine
     networks:
