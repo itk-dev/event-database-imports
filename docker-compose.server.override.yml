@@ -26,18 +26,6 @@ services:
     depends_on:
       - rabbit
 
-  nginx:
-    environment:
-      APP_PATH_PREFIX: ${APP_PATH_PREFIX}
-    labels:
-      # Scope hosting by path prefix to allow shared hosting with legacy EventDB
-      # 'https://api.detskeriaarhus.dk/easyadmin/' -> Legacy EventDB
-      # 'https://api.detskeriaarhus.dk/media/' -> Legacy EventDB
-      # 'https://api.detskeriaarhus.dk/admin/' -> EventDB v2
-      # 'https://api.detskeriaarhus.dk/images/' -> EventDB v2
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}-http.rule=Host(`${COMPOSE_SERVER_DOMAIN}`) && (PathPrefix(`${APP_PATH_PREFIX}`) || PathPrefix(`/images`))"
-      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_SERVER_DOMAIN}`) && (PathPrefix(`${APP_PATH_PREFIX}`) || PathPrefix(`/images`))"
-
   rabbit:
     image: rabbitmq:3.13-management-alpine
     restart: unless-stopped
