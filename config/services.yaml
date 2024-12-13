@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    locale: 'en'
 
 services:
     # default configuration for services in *this* file
@@ -37,9 +38,18 @@ services:
         arguments:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
 
+    App\Command\Schedule\ImportCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_IMPORT_MONITORING_URL)%'
+
+    App\Command\Schedule\PopulateCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_POPULATE_MONITORING_URL)%'
+
     App\Controller\RegistrationController:
         arguments:
             $siteSendFromEmail: '%env(SITE_SEND_FROM_EMAIL)%'
+            $siteReplyToEmail: '%env(SITE_REPLY_TO_EMAIL)%'
             $siteName: '%env(SITE_NAME)%'
 
     App\Service\Populate:
@@ -56,7 +66,7 @@ services:
             $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
             $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
 
-    App\Service\ImageHandler:
+    App\Service\ImageService:
         arguments:
             $defaultUri: '%env(string:APP_DEFAULT_URI)%'
             $publicPath: '%kernel.project_dir%/public/images/'

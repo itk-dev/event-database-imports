@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller;
 
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Translation\TranslatableMessage;
 
 class LoginController extends AbstractDashboardController
 {
     public function __construct(
-        private readonly AuthenticationUtils $authenticationUtils
+        private readonly AuthenticationUtils $authenticationUtils,
     ) {
     }
 
@@ -21,7 +21,7 @@ class LoginController extends AbstractDashboardController
         $error = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        return $this->render('@EasyAdmin/page/login.html.twig', [
+        return $this->render('app/landing_page/index.html.twig', [
             // parameters usually defined in Symfony login forms
             'error' => $error,
             'last_username' => $lastUsername,

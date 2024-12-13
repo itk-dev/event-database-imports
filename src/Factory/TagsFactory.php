@@ -10,7 +10,7 @@ use App\Service\Slugger;
 final readonly class TagsFactory
 {
     public function __construct(
-        private TagRepository $tagRepository
+        private TagRepository $tagRepository,
     ) {
     }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+  <file source-language="da" target-language="en" datatype="plaintext" original="file.ext">
     <header>
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
@@ -57,10 +57,6 @@
         <source>admin.link.events</source>
         <target>Events</target>
       </trans-unit>
-      <trans-unit id="u5sCZNu" resname="admin.link.occurrences">
-        <source>admin.link.occurrences</source>
-        <target>Occurrences</target>
-      </trans-unit>
       <trans-unit id="I9SNJXS" resname="admin.link.location">
         <source>admin.link.location</source>
         <target>Locations</target>
@@ -68,10 +64,6 @@
       <trans-unit id="gCHoRa." resname="admin.link.address">
         <source>admin.link.address</source>
         <target>Addresses</target>
-      </trans-unit>
-      <trans-unit id="p58tCKn" resname="admin.link.image">
-        <source>admin.link.image</source>
-        <target>Images</target>
       </trans-unit>
       <trans-unit id="1OcmqaW" resname="admin.link.feeds">
         <source>admin.link.feeds</source>
@@ -88,10 +80,6 @@
       <trans-unit id="3ohrj0." resname="admin.link.users">
         <source>admin.link.users</source>
         <target>Users</target>
-      </trans-unit>
-      <trans-unit id="NfU36AS" resname="admin.event.id">
-        <source>admin.event.id</source>
-        <target>ID</target>
       </trans-unit>
       <trans-unit id="4bHsKHg" resname="admin.event.basic.headline">
         <source>admin.event.basic.headline</source>
@@ -229,14 +217,6 @@
         <source>admin.location.edited.updated</source>
         <target>Last updated</target>
       </trans-unit>
-      <trans-unit id="PNaXHXs" resname="admin.occurrence.id">
-        <source>admin.occurrence.id</source>
-        <target>ID</target>
-      </trans-unit>
-      <trans-unit id="u0.n.DQ" resname="admin.occurrence.event-link">
-        <source>admin.occurrence.event-link</source>
-        <target>Linked to event</target>
-      </trans-unit>
       <trans-unit id="ipU8EAl" resname="admin.occurrence.dates.headline">
         <source>admin.occurrence.dates.headline</source>
         <target>Event date</target>
@@ -260,14 +240,6 @@
       <trans-unit id="xXnuFrt" resname="admin.occurrence.basic.room">
         <source>admin.occurrence.basic.room</source>
         <target>Room</target>
-      </trans-unit>
-      <trans-unit id="fDsTfkD" resname="admin.occurrence.edited.headline">
-        <source>admin.occurrence.edited.headline</source>
-        <target>Authoring information</target>
-      </trans-unit>
-      <trans-unit id=".EqFxan" resname="admin.occurrence.edited.updated">
-        <source>admin.occurrence.edited.updated</source>
-        <target>Last updated</target>
       </trans-unit>
       <trans-unit id="pB0NtRW" resname="admin.organization.id">
         <source>admin.organization.id</source>
@@ -316,10 +288,6 @@
       <trans-unit id="hxMKWow" resname="admin.user.name">
         <source>admin.user.name</source>
         <target>Name</target>
-      </trans-unit>
-      <trans-unit id="rAd5xrd" resname="admin.user.mail">
-        <source>admin.user.mail</source>
-        <target>Mail</target>
       </trans-unit>
       <trans-unit id="tvBq3eb" resname="admin.user.password">
         <source>admin.user.password</source>
@@ -380,10 +348,6 @@
       <trans-unit id="xP101pW" resname="registration.form.enter_password">
         <source>registration.form.enter_password</source>
         <target>Please enter a password</target>
-      </trans-unit>
-      <trans-unit id="h34BTI9" resname="registration.form.min_password">
-        <source>registration.form.min_password</source>
-        <target>Your password should be at least { limit } characters</target>
       </trans-unit>
       <trans-unit id="0t1dZme" resname="page.confirm.confirmation_link_sent">
         <source>page.confirm.confirmation_link_sent</source>
@@ -465,10 +429,6 @@
         <source>admin.feed.last_read.headline</source>
         <target>Last Read</target>
       </trans-unit>
-      <trans-unit id="FJ3a25z" resname="admin.feed.ast_read.datetime">
-        <source>admin.feed.ast_read.datetime</source>
-        <target>Last Read</target>
-      </trans-unit>
       <trans-unit id="YMZxXCA" resname="admin.feed.last_read.count">
         <source>admin.feed.last_read.count</source>
         <target>Count</target>
@@ -479,11 +439,223 @@
       </trans-unit>
       <trans-unit id="SCtCqae" resname="admin.event.organizer.headline">
         <source>admin.event.organizer.headline</source>
-        <target>Organizer &amp; Partners</target>
+        <target><![CDATA[Organizer & Partners]]></target>
       </trans-unit>
       <trans-unit id="wuiqJUz" resname="admin.event.edited.partners">
         <source>admin.event.edited.partners</source>
         <target>Partners</target>
+      </trans-unit>
+      <trans-unit id="_sDYXeE" resname="terms.page.accept_terms">
+        <source>terms.page.accept_terms</source>
+        <target>Please Accept the Terms</target>
+      </trans-unit>
+      <trans-unit id="rlmv7i8" resname="terms.page.btn.accept">
+        <source>terms.page.btn.accept</source>
+        <target>Accept terms</target>
+      </trans-unit>
+      <trans-unit id=".nBxX2W" resname="admin.user.role.role_admin">
+        <source>admin.user.role.role_admin</source>
+        <target>Admin</target>
+      </trans-unit>
+      <trans-unit id="rAd5xrd" resname="admin.user.mail">
+        <source>admin.user.mail</source>
+        <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="lBtWT0e" resname="admin.user.role.role_user">
+        <source>admin.user.role.role_user</source>
+        <target>User</target>
+      </trans-unit>
+      <trans-unit id="qnk8Rwy" resname="admin.user.role.role_api_user">
+        <source>admin.user.role.role_api_user</source>
+        <target>API User</target>
+      </trans-unit>
+      <trans-unit id="A7PG0hf" resname="admin.user.role.role_editor">
+        <source>admin.user.role.role_editor</source>
+        <target>Editor</target>
+      </trans-unit>
+      <trans-unit id="M55dXJB" resname="admin.tag.tag">
+        <source>admin.tag.tag</source>
+        <target>Tag</target>
+      </trans-unit>
+      <trans-unit id="n_xox7u" resname="admin.user.role.role_organization_admin">
+        <source>admin.user.role.role_organization_admin</source>
+        <target>Organization admin</target>
+      </trans-unit>
+      <trans-unit id="1zj.9Q7" resname="admin.user.role.role_organization_editor">
+        <source>admin.user.role.role_organization_editor</source>
+        <target>Organization editor</target>
+      </trans-unit>
+      <trans-unit id="B8BbLIw" resname="admin.user.email_verified">
+        <source>admin.user.email_verified</source>
+        <target>Email verified</target>
+      </trans-unit>
+      <trans-unit id="0GsNMwo" resname="admin.user.terms_accepted_at">
+        <source>admin.user.terms_accepted_at</source>
+        <target>Terms accepted</target>
+      </trans-unit>
+      <trans-unit id="5zzxoNU" resname="admin.address.locations">
+        <source>admin.address.locations</source>
+        <target>Locations</target>
+      </trans-unit>
+      <trans-unit id="DvP6Sse" resname="registration.page.email_not_verified">
+        <source>registration.page.email_not_verified</source>
+        <target>Your email is not verified</target>
+      </trans-unit>
+      <trans-unit id="5.td1tT" resname="admin.label.my_content">
+        <source>admin.label.my_content</source>
+        <target>My Content</target>
+      </trans-unit>
+      <trans-unit id="mfW9ymU" resname="admin.label.all_content">
+        <source>admin.label.all_content</source>
+        <target>All Content</target>
+      </trans-unit>
+      <trans-unit id="SBkhqKy" resname="admin.label.feeds">
+        <source>admin.label.feeds</source>
+        <target>Feeds</target>
+      </trans-unit>
+      <trans-unit id="QIu9FCE" resname="admin.label.users">
+        <source>admin.label.users</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="NfU36AS" resname="admin.event.id">
+        <source>admin.event.id</source>
+        <target>id</target>
+      </trans-unit>
+      <trans-unit id="nj9kiP7" resname="admin.event.title">
+        <source>admin.event.title</source>
+        <target>Title</target>
+      </trans-unit>
+      <trans-unit id="sr1Zwj2" resname="admin.user_menu.my_profile">
+        <source>admin.user_menu.my_profile</source>
+        <target>My Profile</target>
+      </trans-unit>
+      <trans-unit id="lfQL8wk" resname="admin.user.edit.title">
+        <source>admin.user.edit.title</source>
+        <target>Edit User</target>
+      </trans-unit>
+      <trans-unit id="0KxZUue" resname="admin.user.index.title">
+        <source>admin.user.index.title</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="ct.vZDz" resname="admin.user.organizers">
+        <source>admin.user.organizers</source>
+        <target>Organizers</target>
+      </trans-unit>
+      <trans-unit id="81CfV1." resname="admin.user_menu.terms">
+        <source>admin.user_menu.terms</source>
+        <target>Terms</target>
+      </trans-unit>
+      <trans-unit id="9LXepMs" resname="admin.event.edit.title">
+        <source>admin.event.edit.title</source>
+        <target>Edit Event</target>
+      </trans-unit>
+      <trans-unit id="HYy.lUq" resname="admin.event.index.title">
+        <source>admin.event.index.title</source>
+        <target>Events</target>
+      </trans-unit>
+      <trans-unit id="rEPELPx" resname="admin.organizer.edit.title">
+        <source>admin.organizer.edit.title</source>
+        <target>Edit Organizer</target>
+      </trans-unit>
+      <trans-unit id="qzz47f3" resname="admin.organizer.index.title">
+        <source>admin.organizer.index.title</source>
+        <target>Organizers</target>
+      </trans-unit>
+      <trans-unit id="DfqXjxA" resname="admin.location.edit.title">
+        <source>admin.location.edit.title</source>
+        <target>Edit Location</target>
+      </trans-unit>
+      <trans-unit id="54PwOp." resname="admin.location.index.title">
+        <source>admin.location.index.title</source>
+        <target>Locations</target>
+      </trans-unit>
+      <trans-unit id="jojKXJ." resname="admin.vocabulary.edit.title">
+        <source>admin.vocabulary.edit.title</source>
+        <target>Edit Vocabulary</target>
+      </trans-unit>
+      <trans-unit id="HWdtB7L" resname="admin.vocabulary.index.title">
+        <source>admin.vocabulary.index.title</source>
+        <target>Vocabularies</target>
+      </trans-unit>
+      <trans-unit id="nZLK.S_" resname="admin.address.edit.title">
+        <source>admin.address.edit.title</source>
+        <target>Edit Address</target>
+      </trans-unit>
+      <trans-unit id="lOLI8Rv" resname="admin.address.index.title">
+        <source>admin.address.index.title</source>
+        <target>Addresses</target>
+      </trans-unit>
+      <trans-unit id="PX1uRj6" resname="admin.address.location.coordinates">
+        <source>admin.address.location.coordinates</source>
+        <target>Coordinates</target>
+      </trans-unit>
+      <trans-unit id="uI6us_2" resname="admin.my.event.edit.title">
+        <source>admin.my.event.edit.title</source>
+        <target>Edit Event</target>
+      </trans-unit>
+      <trans-unit id="qDMYVnb" resname="admin.my.event.index.title">
+        <source>admin.my.event.index.title</source>
+        <target>My Events</target>
+      </trans-unit>
+      <trans-unit id="Rhoqs0i" resname="admin.feed.organization">
+        <source>admin.feed.organization</source>
+        <target>Organization</target>
+      </trans-unit>
+      <trans-unit id="jr9z5q7" resname="admin.feed.last_read.datetime">
+        <source>admin.feed.last_read.datetime</source>
+        <target>Last read</target>
+      </trans-unit>
+      <trans-unit id="3CeSFyF" resname="admin.link.feedItems">
+        <source>admin.link.feedItems</source>
+        <target>Feed Items</target>
+      </trans-unit>
+      <trans-unit id="mPZQjfY" resname="admin.feeditem.id">
+        <source>admin.feeditem.id</source>
+        <target>id</target>
+      </trans-unit>
+      <trans-unit id="DWAjP5j" resname="admin.feeditem.feed">
+        <source>admin.feeditem.feed</source>
+        <target>Feed</target>
+      </trans-unit>
+      <trans-unit id="LsJbnpQ" resname="admin.feeditem.feeditemid">
+        <source>admin.feeditem.feeditemid</source>
+        <target>Item ID</target>
+      </trans-unit>
+      <trans-unit id="L_w9Z0j" resname="admin.feeditem.event">
+        <source>admin.feeditem.event</source>
+        <target>Event</target>
+      </trans-unit>
+      <trans-unit id="rYENOys" resname="admin.feeditem.message">
+        <source>admin.feeditem.message</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="SOJ.XZb" resname="admin.feeditem.last_read.datetime">
+        <source>admin.feeditem.last_read.datetime</source>
+        <target>Last read</target>
+      </trans-unit>
+      <trans-unit id="VJEzcX9" resname="admin.feeditem.data">
+        <source>admin.feeditem.data</source>
+        <target>Data</target>
+      </trans-unit>
+      <trans-unit id="snG5Z4E" resname="admin.my.organizer.edit.title">
+        <source>admin.my.organizer.edit.title</source>
+        <target>Edit Organization</target>
+      </trans-unit>
+      <trans-unit id="8ZhFyLa" resname="admin.my.organizer.index.title">
+        <source>admin.my.organizer.index.title</source>
+        <target>My Organizers</target>
+      </trans-unit>
+      <trans-unit id="bWmjvNa" resname="admin.my.event.index.help">
+        <source>admin.my.event.index.help</source>
+        <target><![CDATA["My Events" are events with one of your organizers as organizer. To see your organizers go to "My Content -> Organizers"]]></target>
+      </trans-unit>
+      <trans-unit id="s1CDVTq" resname="registration.form.name">
+        <source>registration.form.name</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="tWTqBeb" resname="registration.form.mail">
+        <source>registration.form.mail</source>
+        <target>Mail</target>
       </trans-unit>
     </body>
   </file>

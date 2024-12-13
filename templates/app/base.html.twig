@@ -1,0 +1,33 @@
+{% include '@EasyAdmin/flash_messages.html.twig' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>'Det sker i Aarhus' Eventdatabasen</title>
+{#    <link href="/css/bootstrap.min.css" rel="stylesheet">#}
+    <link rel="stylesheet" href="{{ asset('app.css', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}">
+    <link href="/admin/styles/admin.css" rel="stylesheet">
+    <link rel="shortcut icon" type="image/svg" href="{{ asset('/admin/styles/logo.svg', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}" />
+</head>
+<body class="landing-page">
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 pt-5 pe-md-5 text-pane">
+            <img src="/admin/styles/aak-logo-1.svg" width="119px" height="60px" alt="'Det sker i Aarhus' Eventdatabasen" class="img-fluid">
+            <h1 class="pt-5">
+                {% block title %}'Det sker i Aarhus' Eventdatabasen{% endblock %}
+            </h1>
+            {% block text_pane %}{% endblock %}
+        </div>
+        <div class="col-12 col-md-4 login-pane">
+            <div class="login-wrapper pt-md-5 mt-md-5">
+                <section class="content">
+                    {% block form_pane %}{% endblock %}
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

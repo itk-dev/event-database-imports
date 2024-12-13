@@ -3,6 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Feed;
+use App\Types\UserRoles;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
@@ -29,6 +32,20 @@ class FeedCrudController extends AbstractBaseCrudController
         ;
     }
 
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        $actions->setPermission(Action::INDEX, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::NEW, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::EDIT, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::DELETE, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::DETAIL, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::BATCH_DELETE, UserRoles::ROLE_ADMIN->value);
+
+        return $actions;
+    }
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -39,7 +56,9 @@ class FeedCrudController extends AbstractBaseCrudController
 
             TextField::new('name')
                 ->setLabel(new TranslatableMessage('admin.feed.name')),
-            AssociationField::new('organization')->hideOnIndex(),
+            AssociationField::new('organization')
+                ->setLabel(new TranslatableMessage('admin.feed.organization'))
+                ->hideOnIndex(),
             CodeEditorField::new('configurationField')
                 ->setLabel(new TranslatableMessage('admin.feed.configuration'))
                 ->setHelp(new TranslatableMessage('admin.feed.configuration.help'))
@@ -54,8 +73,8 @@ class FeedCrudController extends AbstractBaseCrudController
 
             FormField::addFieldset(new TranslatableMessage('admin.feed.last_read.headline'))
                 ->hideWhenCreating(),
-            DateTimeField::new('last_read')
-                ->setLabel(new TranslatableMessage('admin.feed.ast_read.datetime'))
+            DateTimeField::new('lastRead')
+                ->setLabel(new TranslatableMessage('admin.feed.last_read.datetime'))
                 ->setDisabled()
                 ->hideWhenCreating()
                 ->setFormat(DashboardController::DATETIME_FORMAT),

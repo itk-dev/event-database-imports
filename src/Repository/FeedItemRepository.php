@@ -35,6 +35,11 @@ class FeedItemRepository extends ServiceEntityRepository
         }
     }
 
+    /**
+     * Find all feedItems from a Feed where "lastSeenAt" is before a given datetime.
+     *
+     * @return iterable<FeedItem>
+     */
     public function findByByLastSeen(Feed $feed, \DateTimeInterface $after): iterable
     {
         $qb = $this->getEntityManager()->createQueryBuilder();

@@ -41,6 +41,8 @@ final readonly class FeedItemDataHandler
 
             if (null === $feedItemEntity) {
                 $feedItemEntity = new FeedItem($feed, $feedItemData->id, $message->getData());
+            } else {
+                $feedItemEntity->setData($message->getData());
             }
 
             $feedItemEntity->setLastSeenAt();

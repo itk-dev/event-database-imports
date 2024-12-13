@@ -12,7 +12,7 @@ final readonly class OccurrencesFactory
 {
     public function __construct(
         private OccurrenceRepository $occurrenceRepository,
-        private LoggerInterface $logger
+        private LoggerInterface $logger,
     ) {
     }
 

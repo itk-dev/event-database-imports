@@ -64,6 +64,11 @@ final readonly class FeedConfiguration
                     'mail' => '',
                     'disabilityAccess' => true,
                 ],
+                'organization' => [
+                    'name' => '',
+                    'email' => '',
+                    'url' => '',
+                ],
             ],
         ];
     }

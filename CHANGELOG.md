@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-### Added
+## [1.0.0] - 2024-12-13
 
 - Symfony core
 - Messenger
@@ -57,3 +57,4 @@ See [keep a changelog] for information about writing changes to this log.
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
+[1.0.0]: https://github.com/itk-dev/event-database-imports/releases/tag/1.0.0

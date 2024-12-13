@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Contains a service to populate search index.
@@ -71,17 +72,14 @@ final class Populate
 
             $entriesAdded = 0;
 
+            $criteria = [];
+            if ($this::DEFAULT_RECORD_ID !== $record_id) {
+                $criteria = ['id' => $record_id];
+            }
+
+            $criteria = array_merge($criteria, $this->criteriaFactory->getPopulateCriteria($index));
+
             while ($entriesAdded < $numberOfRecords) {
-                // @TODO Cleanup/Set criteria
-                $criteria = [];
-                if ($this::DEFAULT_RECORD_ID !== $record_id) {
-                    $criteria = ['id' => $record_id];
-                }
-
-                $criteria = $this->criteriaFactory->getPopulateCriteria($index);
-
-                // @TODO Cleanup
-                // $entities = $repositories[$index]->findBy($criteria, ['id' => 'ASC'], self::BATCH_SIZE, $entriesAdded);
                 $entities = $repositories[$index]->findToPopulate($criteria, self::BATCH_SIZE, $entriesAdded);
 
                 // No more results.
@@ -101,12 +99,13 @@ final class Populate
 
                 $entriesAdded += count($entities);
 
-                // Update progress message.
-                yield sprintf('%s: %s of %s added', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
-
                 // Free up memory usages.
+                $entities = null;
                 $this->entityManager->clear();
                 gc_collect_cycles();
+
+                // Update progress message.
+                yield sprintf('%s: %s of %s added', ucfirst($index), number_format($entriesAdded, 0, ',', '.'), number_format($numberOfRecords, 0, ',', '.'));
             }
 
             if ($this::DEFAULT_RECORD_ID === $record_id) {

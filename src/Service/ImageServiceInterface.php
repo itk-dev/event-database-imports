@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Entity\Image;
 
-interface ImageHandlerInterface
+interface ImageServiceInterface
 {
     /**
      * Fetch image from remote server.

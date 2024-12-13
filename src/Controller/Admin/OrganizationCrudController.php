@@ -3,6 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Organization;
+use App\Types\UserRoles;
+use Doctrine\Common\Collections\Order;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
@@ -16,6 +22,27 @@ class OrganizationCrudController extends AbstractBaseCrudController
     public static function getEntityFqcn(): string
     {
         return Organization::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['name' => Order::Ascending->value])
+            ->showEntityActionsInlined()
+            ->setPageTitle('edit', new TranslatableMessage('admin.organizer.edit.title'))
+            ->setPageTitle('index', new TranslatableMessage('admin.organizer.index.title'))
+            ->setPageTitle('detail', new TranslatableMessage('admin.organizer.edit.title'));
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        $actions = parent::configureActions($actions);
+
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $actions->remove(Crud::PAGE_INDEX, Action::NEW);
+        }
+
+        return $actions;
     }
 
     public function configureFields(string $pageName): iterable
@@ -39,7 +66,17 @@ class OrganizationCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.organization.edited.updated'))
                 ->setDisabled()
                 ->hideWhenCreating()
+                ->hideOnIndex()
                 ->setFormat(DashboardController::DATETIME_FORMAT),
         ];
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        return $filters
+            ->add('name')
+            ->add('mail')
+            ->add('url')
+        ;
     }
 }

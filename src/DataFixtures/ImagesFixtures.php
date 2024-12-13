@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Image;
-use App\Service\ImageHandlerInterface;
+use App\Service\ImageServiceInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -13,7 +13,7 @@ final class ImagesFixtures extends Fixture
     public const ITK = 'image_itk';
 
     public function __construct(
-        private readonly ImageHandlerInterface $imageHandler
+        private readonly ImageServiceInterface $imageHandler,
     ) {
     }
 

@@ -61,7 +61,7 @@ final class AddUserCommand extends Command
         private readonly EntityManagerInterface $entityManager,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly Validator $validator,
-        private readonly UserRepository $users
+        private readonly UserRepository $users,
     ) {
         parent::__construct();
     }

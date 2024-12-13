@@ -58,7 +58,7 @@ final class FeedListCommand extends Command
         $feeds = match ($status) {
             'all' => $this->feedRepository->findAll(),
             'enabled' => $this->feedRepository->findBy(['enabled' => true]),
-            'disabled' => $this->feedRepository->findBy(['enabled' => false])
+            'disabled' => $this->feedRepository->findBy(['enabled' => false]),
         };
 
         foreach ($feeds as $feed) {

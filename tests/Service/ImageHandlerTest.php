@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Tests\Service;
 
 use App\Exception\ImageMineTypeException;
-use App\Service\ImageHandler;
+use App\Service\ImageService;
 use App\Tests\Utils\PhpUnitUtils;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-#[CoversClass(ImageHandler::class)]
+#[CoversClass(ImageService::class)]
 final class ImageHandlerTest extends KernelTestCase
 {
     /**
@@ -75,16 +75,16 @@ final class ImageHandlerTest extends KernelTestCase
     /**
      * Helper function to bootstrap the service tested.
      *
-     * @return ImageHandler
+     * @return ImageService
      *   The service
      *
      * @throws \Exception
      */
-    private function getImageService(): ImageHandler
+    private function getImageService(): ImageService
     {
         self::bootKernel();
         $container = ImageHandlerTest::getContainer();
 
-        return $container->get(ImageHandler::class);
+        return $container->get(ImageService::class);
     }
 }

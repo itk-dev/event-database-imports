@@ -3,15 +3,15 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Image;
-use App\Service\ImageHandlerInterface;
+use App\Service\ImageServiceInterface;
 use App\Utils\UriHelper;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Translation\TranslatableMessage;
 
-class ImageEmbedController extends AbstractBaseCrudController
+class EmbedImageController extends AbstractBaseCrudController
 {
-    public function __construct(private readonly ImageHandlerInterface $imageHandler)
+    public function __construct(private readonly ImageServiceInterface $imageService)
     {
     }
 
@@ -38,6 +38,6 @@ class ImageEmbedController extends AbstractBaseCrudController
             return null;
         }
 
-        return $this->imageHandler->getTransformedImageUrls($imageUrl)[$size];
+        return $this->imageService->getTransformedImageUrls($imageUrl)[$size];
     }
 }

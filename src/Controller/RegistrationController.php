@@ -14,22 +14,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+#[Route('/admin/register')]
 class RegistrationController extends AbstractDashboardController
 {
     public function __construct(
         private readonly EmailVerifier $emailVerifier,
         private readonly UserRepository $userRepository,
         private readonly string $siteSendFromEmail,
-        private readonly string $siteName
+        private readonly string $siteReplyToEmail,
+        private readonly string $siteName,
     ) {
     }
 
-    #[Route('/register', name: 'app_register')]
+    #[Route('/admin')]
+    public function index(): Response
+    {
+        return $this->redirectToRoute('admin');
+    }
+
+    #[Route('/', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
     {
         $user = new User();
@@ -45,7 +53,8 @@ class RegistrationController extends AbstractDashboardController
                 )
             );
 
-            $user->setRoles([UserRoles::ROLE_API_USER]);
+            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setRoles([UserRoles::ROLE_USER]);
             $user->setCreatedBy($user->getName());
             $user->setUpdatedBy($user->getName());
 
@@ -56,12 +65,13 @@ class RegistrationController extends AbstractDashboardController
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address($this->siteSendFromEmail, $this->siteName))
+                    ->replyTo(new Address($this->siteReplyToEmail, $this->siteName))
                     ->to($user->getMail())
                     ->subject($translator->trans('registration.page.confirm_email', [], 'messages'))
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
+                    ->htmlTemplate('app/registration/confirmation_email.html.twig')
             );
 
-            return $this->render('registration/confirm.html.twig', [
+            return $this->render('app/registration/confirm.html.twig', [
                 'page_title' => new TranslatableMessage('registration.page.confirm_email'),
                 'email' => $user->getMail(),
             ]);
@@ -73,13 +83,13 @@ class RegistrationController extends AbstractDashboardController
             }
         }
 
-        return $this->render('registration/register.html.twig', [
+        return $this->render('app/registration/register.html.twig', [
             'registrationForm' => $form->createView(),
             'page_title' => new TranslatableMessage('registration.page.please_register'),
         ]);
     }
 
-    #[Route('/verify/email', name: 'app_verify_email')]
+    #[Route('/verify-email', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
     {
         $id = $request->query->get('id');
@@ -96,7 +106,7 @@ class RegistrationController extends AbstractDashboardController
             return $this->redirectToRoute('app_register');
         }
 
-        // validate email confirmation link, sets User::isVerified=true and persists
+        // validate email confirmation link, sets User::emailVerifiedAt=NOW and persists
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
@@ -107,6 +117,6 @@ class RegistrationController extends AbstractDashboardController
 
         $this->addFlash('success', new TranslatableMessage('registration.page.email_verified'));
 
-        return $this->redirectToRoute('app_login');
+        return $this->redirectToRoute('app_admin_login');
     }
 }

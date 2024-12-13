@@ -10,5 +10,7 @@ interface UserInterface extends \Symfony\Component\Security\Core\User\UserInterf
 
     public function setEnabled(bool $enabled): static;
 
-    public function setIsVerified(bool $isVerified): self;
+    public function setEmailVerifiedAt(\DateTimeImmutable $emailVerifiedAt): static;
+
+    public function setTermsAcceptedAt(?\DateTimeImmutable $termsAcceptedAt): static;
 }

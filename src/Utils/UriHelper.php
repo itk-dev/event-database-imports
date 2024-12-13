@@ -21,14 +21,19 @@ class UriHelper
             new EmptyVersionStrategy(),
         );
 
-        return $urlPackage->getUrl('/'.$file);
+        return $urlPackage->getUrl($file);
     }
 
     public static function getAbsoluteUrl(string $inputUrl, ?string $base = null): string
     {
         $url = trim($inputUrl);
 
+        if ('' === $url) {
+            throw new \RuntimeException('Cannot convert empty URL to absolute URL.');
+        }
+
         if (parse_url($url, PHP_URL_HOST) && parse_url($url, PHP_URL_SCHEME)) {
+            // URL is absolute, return unmodified
             return $url;
         }
 
