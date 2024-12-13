@@ -1,0 +1,10 @@
+framework:
+    html_sanitizer:
+        sanitizers:
+            feed.html_sanitizer:
+                # enable either of these
+                allow_safe_elements: true
+                allow_static_elements: true
+                force_https_urls: true
+                allowed_link_schemes: [ 'http', 'https', 'mailto' ]
+                allow_relative_links: true

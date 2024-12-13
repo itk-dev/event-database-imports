@@ -1,0 +1,22 @@
+# Scope hosting by path prefix to allow shared hosting with legacy EventDB
+# 'https://api.detskeriaarhus.dk/media/..' -> Legacy EventDB
+# 'https://api.detskeriaarhus.dk/images/...' -> EventDB v2
+liip_imagine_filter_runtime:
+    path: /images/cache/resolve/{filter}/rc/{hash}/{path}
+    defaults:
+        _controller: '%liip_imagine.controller.filter_runtime_action%'
+    methods:
+        - GET
+    requirements:
+        filter: '[A-z0-9_-]*'
+        path: .+
+
+liip_imagine_filter:
+    path: /images/cache/resolve/{filter}/{path}
+    defaults:
+        _controller: '%liip_imagine.controller.filter_action%'
+    methods:
+        - GET
+    requirements:
+        filter: '[A-z0-9_-]*'
+        path: .+

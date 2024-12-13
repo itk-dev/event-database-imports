@@ -1,0 +1,68 @@
+{% extends "app/base.html.twig" %}
+
+{% set _username_label = username_label is defined ? username_label|trans : 'login_page.username'|trans({}, 'EasyAdminBundle') %}
+{% set _password_label = password_label is defined ? password_label|trans : 'login_page.password'|trans({}, 'EasyAdminBundle') %}
+{% set _forgot_password_label = forgot_password_label is defined ? forgot_password_label|trans : 'login_page.forgot_password'|trans({}, 'EasyAdminBundle') %}
+{% set _remember_me_label = remember_me_label is defined ? remember_me_label|trans : 'login_page.remember_me'|trans({}, 'EasyAdminBundle') %}
+{% set _sign_in_label = sign_in_label is defined ? sign_in_label|trans : 'login_page.sign_in'|trans({}, 'EasyAdminBundle') %}
+
+{% block text_pane %}
+    <p>Få dine arrangementer og events bredt ud ved at lægge dem ind i Aarhus Kommunes eventdatabase. Er du arrangør og ønsker at få dine events med, så læs mere på: <a href="https://arrangoer.aarhus.dk/markedsfoering/det-sker-i-aarhus-eventdatabasen/">arrangoer.aarhus.dk</a></p>
+    <h2>Brugeraftale</h2>
+
+    {% include('app/accept_terms/terms.html.twig') %}
+
+    <h2>Kontakt</h2>
+    <p><a href="mailto:kommunikation@mkb.aarhus.dk">kommunikation@mkb.aarhus.dk</a></p>
+{% endblock %}
+
+{% block form_pane %}
+    <h2 class="pb-2 pt-md-5">{{ page_title|raw|trans }}</h2>
+
+    {% if error|default(false) %}
+        <div class="w-100 alert alert-danger rounded mb-3">
+            {{ form_errors(registrationForm) }}
+        </div>
+    {% endif %}
+
+    {{ form_start(registrationForm) }}
+    {% if csrf_token_intention|default(false) %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_intention) }}">
+    {% endif %}
+
+    <div class="form-group">
+        {{ form_label(registrationForm.name, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        <div class="form-widget">
+            {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.mail, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        <div class="form-widget">
+            {{ form_widget(registrationForm.mail, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        {{ form_label(registrationForm.plainPassword, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        <div class="form-widget">
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="form-check-label" for="remember_me">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+        </label>
+        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{ 'registration.page.btn.register'|trans }}</button>
+    </div>
+
+    {{ form_end(registrationForm) }}
+
+    <script src="{{ asset('login.js', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}"></script>
+{% endblock %}

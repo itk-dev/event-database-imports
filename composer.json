@@ -6,18 +6,70 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-pdo": "*",
+        "cerbero/json-parser": "^1.0",
+        "cuyz/valinor": "^1.4",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
-        "symfony/console": "6.3.*",
-        "symfony/dotenv": "6.3.*",
+        "dragonmantank/cron-expression": "^3.3",
+        "easycorp/easyadmin-bundle": "^4.8",
+        "elasticsearch/elasticsearch": "^8.13",
+        "guzzlehttp/guzzle": "^7.7",
+        "league/uri": "^7.4",
+        "liip/imagine-bundle": "^2.11",
+        "nesbot/carbon": "^2.71",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "^1.22",
+        "psr/http-message": "^2.0",
+        "stof/doctrine-extensions-bundle": "^1.7",
+        "symfony/amqp-messenger": "6.4.*",
+        "symfony/asset": "6.4.*",
+        "symfony/cache": "6.4.*",
+        "symfony/console": "6.4.*",
+        "symfony/doctrine-messenger": "6.4.*",
+        "symfony/dom-crawler": "^7.0",
+        "symfony/dotenv": "6.4.*",
+        "symfony/expression-language": "6.4.*",
+        "symfony/filesystem": "6.4.*",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.3.*",
-        "symfony/runtime": "6.3.*",
-        "symfony/yaml": "6.3.*"
+        "symfony/framework-bundle": "6.4.*",
+        "symfony/html-sanitizer": "6.4.*",
+        "symfony/http-client": "6.4.*",
+        "symfony/lock": "6.4.*",
+        "symfony/mailer": "6.4.*",
+        "symfony/messenger": "6.4.*",
+        "symfony/monolog-bundle": "^3.8",
+        "symfony/property-access": "6.4.*",
+        "symfony/property-info": "6.4.*",
+        "symfony/runtime": "6.4.*",
+        "symfony/scheduler": "6.4.*",
+        "symfony/security-bundle": "6.4.*",
+        "symfony/serializer": "6.4.*",
+        "symfony/string": "6.4.*",
+        "symfony/translation": "6.4.*",
+        "symfony/twig-bundle": "6.4.*",
+        "symfony/validator": "6.4.*",
+        "symfony/yaml": "6.4.*",
+        "symfonycasts/reset-password-bundle": "^1.23",
+        "symfonycasts/verify-email-bundle": "^1.16"
+    },
+    "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "friendsofphp/php-cs-fixer": "^3.20",
+        "phpunit/phpunit": "^10.3",
+        "psalm/plugin-symfony": "^5.0",
+        "symfony/browser-kit": "6.4.*",
+        "symfony/css-selector": "6.4.*",
+        "symfony/maker-bundle": "^1.49",
+        "symfony/phpunit-bridge": "^6.3",
+        "symfony/stopwatch": "^6.4",
+        "symfony/web-profiler-bundle": "^6.4",
+        "vimeo/psalm": "^5.13",
+        "weirdan/doctrine-psalm-plugin": "^2.8"
     },
     "config": {
         "allow-plugins": {
@@ -56,6 +108,32 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "coding-standards-apply": [
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix"
+        ],
+        "coding-standards-check": [
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run"
+        ],
+        "translations-update": [
+            "# We need a translation from en to en (!) (without prefix) to be able to process placeholders in en.",
+            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force en --prefix=''",
+            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force da",
+            "# Mark default translations (prefixed with `__`) as “Needs work” in Danish translations",
+            "sed --in-place='' 's/<target>__/<target state=\"needs-l10n\">__/' translations/*.da.*xlf"
+        ],
+        "psalm": [
+            "./vendor/bin/psalm --no-cache"
+        ],
+        "queues": [
+            "bin/console messenger:consume async scheduler_default --failure-limit=1 -vvv"
+        ],
+        "elastic-fix-flood": [
+            "curl -X PUT \"elasticsearch:9200/_cluster/settings?pretty\" -H 'Content-Type: application/json' -d'\n{\n    \"persistent\": {\n        \"cluster.routing.allocation.disk.watermark.low\": \"90%\",\n        \"cluster.routing.allocation.disk.watermark.low.max_headroom\": \"100MB\",\n        \"cluster.routing.allocation.disk.watermark.high\": \"98%\",\n        \"cluster.routing.allocation.disk.watermark.high.max_headroom\": \"20MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.max_headroom\": \"5MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen.max_headroom\": \"5MB\"\n    }\n}\n'",
+            "curl -X PUT \"elasticsearch:9200/*/_settings?expand_wildcards=all&pretty\" -H 'Content-Type: application/json' -d'\n{\n    \"index.blocks.read_only_allow_delete\": null\n}\n'"
+        ],
+        "elastic-health": [
+            "curl -X GET \"elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty\"\n"
         ]
     },
     "conflict": {
@@ -64,11 +142,8 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "6.3.*",
+            "require": "76.4.*",
             "docker": false
         }
-    },
-    "require-dev": {
-        "symfony/maker-bundle": "^1.49"
     }
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="da" target-language="da" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="VKDowX6" resname="Error">
+        <source>Error</source>
+        <target>Fejl</target>
+      </trans-unit>
+      <trans-unit id="3ZTV5Le" resname="user.mail.not_unique">
+        <source>user.mail.not_unique</source>
+        <target state="needs-l10n">Email adresse allerede registreret</target>
+      </trans-unit>
+      <trans-unit id="f8NF5B0" resname="user.mail.not_valid">
+        <source>user.mail.not_valid</source>
+        <target state="needs-l10n">Email adresse ikke gyldig</target>
+      </trans-unit>
+      <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
+        <source>admin.feed.configuration.json_invalid</source>
+        <target state="needs-l10n">Fejl i JSON</target>
+      </trans-unit>
+      <trans-unit id="YXZ26gK" resname="Please enter a password">
+        <source>Please enter a password</source>
+        <target state="needs-l10n">Vælg venligst et kodeord</target>
+      </trans-unit>
+      <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
+        <source>Your password should be at least {{ limit }} characters</source>
+        <target state="needs-l10n">Dit kodeord skal være mindst {{ limit }} karakterer langt</target>
+      </trans-unit>
+      <trans-unit id="Fe2zEyl" resname="Please enter your email">
+        <source>Please enter your email</source>
+        <target state="needs-l10n">Indtast venligst din email adresse</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

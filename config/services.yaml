@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    locale: 'en'
 
 services:
     # default configuration for services in *this* file
@@ -22,3 +23,63 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    _instanceof:
+        App\Service\Indexing\IndexingInterface:
+            tags: ['indexing_interface']
+
+        App\Repository\PopulateInterface:
+            tags: [ 'populate_interface' ]
+
+    App\Asset\EasyAdminAssetPackage:
+        arguments:
+            $assetBasePath: '%env(APP_PATH_PREFIX)%'
+
+    App\Command\Index\IndexCreateCommand:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+
+    App\Command\Schedule\ImportCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_IMPORT_MONITORING_URL)%'
+
+    App\Command\Schedule\PopulateCommand:
+        arguments:
+            $monitoringUrl: '%env(SCHEDULED_POPULATE_MONITORING_URL)%'
+
+    App\Controller\RegistrationController:
+        arguments:
+            $siteSendFromEmail: '%env(SITE_SEND_FROM_EMAIL)%'
+            $siteReplyToEmail: '%env(SITE_REPLY_TO_EMAIL)%'
+            $siteName: '%env(SITE_NAME)%'
+
+    App\Service\Populate:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+
+    App\Service\Dump:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+
+    App\MessageHandler\IndexHandler:
+        arguments:
+            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+
+    App\Service\ImageService:
+        arguments:
+            $defaultUri: '%env(string:APP_DEFAULT_URI)%'
+            $publicPath: '%kernel.project_dir%/public/images/'
+            $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
+
+    App\Utils\UriHelper:
+        arguments:
+            $defaultUri: '%env(string:APP_DEFAULT_URI)%'
+
+    Elastic\Elasticsearch\Client:
+        factory: ['@Elastic\Elasticsearch\ClientBuilder', fromConfig]
+        arguments:
+            $config:
+                hosts: ['%env(INDEXING_URL)%']
+
+    Elastic\Elasticsearch\ClientBuilder: ~

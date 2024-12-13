@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.26.1@d747f6500b38ac4f7dfc5edbcae6e4b637d7add0">
+  <file src="src/Factory/LocationFactory.php">
+    <RedundantCondition>
+      <code><![CDATA[empty($values)]]></code>
+      <code><![CDATA[empty($values)]]></code>
+    </RedundantCondition>
+  </file>
+  <file src="src/Service/Feeds/Mapper/Source/FeedItemSource.php">
+    <InvalidOperand>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+      <code><![CDATA[$source]]></code>
+    </InvalidOperand>
+  </file>
+  <file src="src/Service/Indexing/AbstractIndexingElastic.php">
+    <ArgumentTypeCoercion>
+      <code><![CDATA[$params]]></code>
+      <code><![CDATA[$params]]></code>
+    </ArgumentTypeCoercion>
+    <PossiblyUndefinedMethod>
+      <code><![CDATA[getStatusCode]]></code>
+      <code><![CDATA[getStatusCode]]></code>
+    </PossiblyUndefinedMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingDailyOccurrences.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[getEvent]]></code>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingEvents.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingLocations.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOccurrences.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[getEvent]]></code>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingOrganizations.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingTags.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+  <file src="src/Service/Indexing/IndexingVocabularies.php">
+    <UndefinedInterfaceMethod>
+      <code><![CDATA[normalize]]></code>
+    </UndefinedInterfaceMethod>
+  </file>
+</files>

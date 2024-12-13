@@ -1,0 +1,35 @@
+{% extends "app/registration/register.html.twig" %}
+
+{% block form_pane %}
+    <h2 class="pb-2 pt-md-5">{{ page_title|raw|trans }}</h2>
+
+    {% if error|default(false) %}
+        <div class="w-100 alert alert-danger rounded mb-3">
+            {{ form_errors(registrationForm) }}
+        </div>
+    {% endif %}
+
+    <div class="alert alert-warning mb-3" role="alert">
+        Du skal læse og godkende <a class="text-reset" href="https://arrangoer.aarhus.dk/markedsfoering/det-sker-i-aarhus-eventdatabasen/brugeraftale/" target="_blank">
+            <i class="fas fa-external-link-square-alt"></i> brugeraftalen</a> før du kan logge på.
+    </div>
+
+
+    {{ form_start(registrationForm) }}
+    {% if csrf_token_intention|default(false) %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_intention) }}">
+    {% endif %}
+
+    <div class="form-group">
+        <label class="form-check-label" for="remember_me">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+        </label>
+        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{{ 'terms.page.btn.accept'|trans }}</button>
+    </div>
+
+    {{ form_end(registrationForm) }}
+{% endblock %}
