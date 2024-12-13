@@ -22,7 +22,7 @@ jobs:
         run: |
           docker network create frontend
           docker compose run --rm --user=root phpfpm composer install --no-dev --optimize-autoloader
-          docker compose run --rm --user=root phpfpm composer clear-cache
+          docker compose run --rm --user=root phpfpm composer --env=prod clear-cache
 
       - name: Make assets dir
         run: |
