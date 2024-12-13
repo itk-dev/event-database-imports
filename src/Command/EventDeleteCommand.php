@@ -84,51 +84,49 @@ class EventDeleteCommand extends Command
             }
         }
 
-        if (null !== $feedId) {
-            $feed = $this->feedRepository->find($feedId);
-            if (!$feed) {
-                $io->error(sprintf('Feed with ID %s not found', $feedId));
+        $feed = $this->feedRepository->find($feedId);
+        if (!$feed) {
+            $io->error(sprintf('Feed with ID %s not found', $feedId));
+
+            return Command::FAILURE;
+        }
+
+        $name = $feed->getName() ?? 'UNKNOWN';
+        $question = sprintf('Delete ALL events from feed  %s: %s?', $feedId, $name);
+
+        if ($io->confirm($question, false)) {
+            try {
+                $events = $feed->getEvents();
+                $count = count($events);
+
+                $progressBar = new ProgressBar($output, $count);
+                $progressBar->start();
+                $progressBar->setMessage(sprintf('Deleting events from feed  %s: %s?', $feedId, $name));
+                $progressBar->display();
+
+                foreach ($events as $event) {
+                    $image = $event->getImage()?->getLocal();
+                    if (null !== $image) {
+                        $this->imageCacheManager->remove($image);
+                    }
+
+                    $this->eventRepository->remove($event, true);
+
+                    $progressBar->advance();
+                }
+
+                $progressBar->finish();
+
+                return Command::SUCCESS;
+            } catch (\Throwable $e) {
+                $io->error(sprintf('Error deleting events with ID %s: %s', $feedId, $e->getMessage()));
 
                 return Command::FAILURE;
             }
+        } else {
+            $io->info('Events not deleted');
 
-            $name = $feed->getName() ?? 'UNKNOWN';
-            $question = sprintf('Delete ALL events from feed  %s: %s?', $feedId, $name);
-
-            if ($io->confirm($question, false)) {
-                try {
-                    $events = $feed->getEvents();
-                    $count = count($events);
-
-                    $progressBar = new ProgressBar($output, $count);
-                    $progressBar->start();
-                    $progressBar->setMessage(sprintf('Deleting events from feed  %s: %s?', $feedId, $name));
-                    $progressBar->display();
-
-                    foreach ($events as $event) {
-                        $image = $event->getImage()?->getLocal();
-                        if (null !== $image) {
-                            $this->imageCacheManager->remove($image);
-                        }
-
-                        $this->eventRepository->remove($event, true);
-
-                        $progressBar->advance();
-                    }
-
-                    $progressBar->finish();
-
-                    return Command::SUCCESS;
-                } catch (\Throwable $e) {
-                    $io->error(sprintf('Error deleting events with ID %s: %s', $feedId, $e->getMessage()));
-
-                    return Command::FAILURE;
-                }
-            } else {
-                $io->info('Events not deleted');
-
-                return Command::INVALID;
-            }
+            return Command::INVALID;
         }
     }
 }
