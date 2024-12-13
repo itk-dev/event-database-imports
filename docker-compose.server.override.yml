@@ -32,6 +32,8 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - .:/app
+      - ../../shared/.env.local:/app/.env.local
+      - ../../shared/images:/app/public/images/
     depends_on:
       - rabbit
 
