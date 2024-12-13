@@ -4,10 +4,15 @@ services:
       - PHP_MEMORY_LIMIT=256M
     depends_on:
       - rabbit
+    volumes:
+      - ../../shared/.env.local:/app/.env.local
+      - ../../shared/images:/app/public/images/
 
   nginx:
     environment:
       APP_PATH_PREFIX: ${APP_PATH_PREFIX}
+    volumes:
+      - ../../shared/images:/app/public/images/
 
   supervisor:
     # @TODO: Create supervisor with ansible, when merged with Ture's PR
