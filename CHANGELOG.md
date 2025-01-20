@@ -13,7 +13,8 @@ See [keep a changelog] for information about writing changes to this log.
 - Switch from Psalm to PHPStan
 - Upgrade to PHP 8.4
 - Upgrade to RabbitMQ 4
-- 
+-
+
 ## [1.0.1] - 2025-01-20
 
 - Fix upload size
