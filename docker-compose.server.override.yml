@@ -2,6 +2,8 @@ services:
   phpfpm:
     environment:
       - PHP_MEMORY_LIMIT=256M
+      - PHP_UPLOAD_MAX_FILESIZE=40M
+      - PHP_POST_MAX_SIZE=50M
     depends_on:
       - rabbit
     volumes:
@@ -11,6 +13,7 @@ services:
   nginx:
     environment:
       APP_PATH_PREFIX: ${APP_PATH_PREFIX}
+      NGINX_MAX_BODY_SIZE: 50M
     volumes:
       - ../../shared/images:/app/public/images/
 
