@@ -110,7 +110,7 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: php-cs-fixer
-        run: phpdbg -qrr ./vendor/bin/php-cs-fixer fix --dry-run
+        run: composer coding-standards-check
 
   phpstan:
     name: PHPStan (${{ matrix.php }})
@@ -156,7 +156,7 @@ jobs:
       - name: npm install
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
       - run: npm install
       - name: markdownlint
