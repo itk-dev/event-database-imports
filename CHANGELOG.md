@@ -7,6 +7,8 @@ All notable changes to this project will be documented in this file.
 See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
+- Update dependencies
+- Enable EasyAdmin pretty URLs
 
 ## [1.0.0] - 2024-12-13
 
