@@ -36,3 +36,6 @@ node_modules/
 ###< liip/imagine-bundle ###
 
 !.gitkeep
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
