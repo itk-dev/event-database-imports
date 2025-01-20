@@ -5,8 +5,7 @@ controllers:
     type: attribute
 
 root_redirect:
-    path: /{_locale}
+    path: /
     controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController
     defaults:
-        route: 'admin'
-        _locale: '%locale%'
+        route: 'app_admin_login'
