@@ -1,5 +1,8 @@
 services:
   phpfpm:
+    environment:
+      - PHP_UPLOAD_MAX_FILESIZE=40M
+      - PHP_POST_MAX_SIZE=50M
     depends_on:
       - elasticsearch
       - rabbit
@@ -7,6 +10,7 @@ services:
   nginx:
     environment:
       APP_PATH_PREFIX: ${APP_PATH_PREFIX}
+      NGINX_MAX_BODY_SIZE: 50M
 
   rabbit:
     image: rabbitmq:3.13-management-alpine
