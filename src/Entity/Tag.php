@@ -15,6 +15,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[ORM\UniqueConstraint(name: 'tag_name_unique', columns: ['name'])]
+#[ORM\UniqueConstraint(name: 'tag_slug_unique', columns: ['slug'])]
+#[Groups([IndexNames::Tags->value, IndexNames::Vocabularies->value, IndexNames::Events->value])]
 class Tag implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;

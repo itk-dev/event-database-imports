@@ -1,0 +1,13 @@
+{% extends 'app/base.html.twig' %}
+
+{% block title %}Error{% endblock %}
+
+{% block text_pane %}
+    <p>
+        The server encountered an error:</a>.
+    </p>
+    <p class="w-100 alert alert-danger rounded mb-3">{{ exception.message }}</p>
+    <p>
+        Please <a href="/">return to the homepage</a>.
+    </p>
+{% endblock %}

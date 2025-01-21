@@ -11,10 +11,20 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: VocabularyRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[UniqueEntity(
+    fields: ['name'],
+    message: 'entity.vocabulary.name.not_unique')
+]
+#[UniqueEntity(
+    fields: ['slug'],
+    message: 'entity.vocabulary.slug.not_unique')
+]
+#[Groups([IndexNames::Vocabularies->value, IndexNames::Tags->value])]
 class Vocabulary implements IndexItemInterface
 {
     use TimestampableEntity;

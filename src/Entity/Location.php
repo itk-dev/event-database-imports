@@ -10,11 +10,16 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 #[ORM\UniqueConstraint(name: 'location_unique', columns: ['name', 'url', 'mail'])]
+#[UniqueEntity(
+    fields: ['name', 'url', 'mail'],
+    message: 'entity.location.unique'
+)]
 class Location implements IndexItemInterface, EditableEntityInterface
 {
     use TimestampableEntity;
