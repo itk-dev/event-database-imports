@@ -15,7 +15,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['mail'], message: 'user.mail.not_unique')]
+#[UniqueEntity(
+    fields: ['mail'],
+    message: 'entity.user.mail.not_unique'
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
@@ -30,9 +33,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, unique: true)]
+    #[Assert\NotBlank(
+        message: 'entity.user.mail.not_blank',
+    )]
     #[Assert\Email(
-        message: 'user.mail.not_valid',
+        message: 'entity.user.mail.not_valid',
     )]
     private ?string $mail = null;
 

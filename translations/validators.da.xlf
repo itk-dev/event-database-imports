@@ -9,29 +9,49 @@
         <source>Error</source>
         <target>Fejl</target>
       </trans-unit>
-      <trans-unit id="3ZTV5Le" resname="user.mail.not_unique">
-        <source>user.mail.not_unique</source>
-        <target state="needs-l10n">Email adresse allerede registreret</target>
-      </trans-unit>
-      <trans-unit id="f8NF5B0" resname="user.mail.not_valid">
-        <source>user.mail.not_valid</source>
-        <target state="needs-l10n">Email adresse ikke gyldig</target>
-      </trans-unit>
       <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
         <source>admin.feed.configuration.json_invalid</source>
-        <target state="needs-l10n">Fejl i JSON</target>
-      </trans-unit>
-      <trans-unit id="YXZ26gK" resname="Please enter a password">
-        <source>Please enter a password</source>
-        <target state="needs-l10n">Vælg venligst et kodeord</target>
+        <target state="translated">Fejl i JSON</target>
       </trans-unit>
       <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
         <source>Your password should be at least {{ limit }} characters</source>
-        <target state="needs-l10n">Dit kodeord skal være mindst {{ limit }} karakterer langt</target>
+        <target state="translated">Dit kodeord skal være mindst {{ limit }} karakterer langt</target>
       </trans-unit>
-      <trans-unit id="Fe2zEyl" resname="Please enter your email">
-        <source>Please enter your email</source>
-        <target state="needs-l10n">Indtast venligst din email adresse</target>
+      <trans-unit id="P6oTY4x" resname="entity.address.street_postcode.not_unique">
+        <source>entity.address.street_postcode.not_unique</source>
+        <target state="translated">Der findes allerede en adresse med det gadenavn i det postnummer</target>
+      </trans-unit>
+      <trans-unit id="jHotkHp" resname="entity.user.mail.not_unique">
+        <source>entity.user.mail.not_unique</source>
+        <target state="translated">Der findes allerede en bruger med den email</target>
+      </trans-unit>
+      <trans-unit id="t.cGJCT" resname="entity.user.mail.not_blank">
+        <source>entity.user.mail.not_blank</source>
+        <target state="translated">Email adresse skal udfyldes</target>
+      </trans-unit>
+      <trans-unit id="WoCyims" resname="entity.user.mail.not_valid">
+        <source>entity.user.mail.not_valid</source>
+        <target state="translated">Den indtastede email er ikke gyldig</target>
+      </trans-unit>
+      <trans-unit id="HU3R7Wy" resname="entity.vocabulary.name.not_unique">
+        <source>entity.vocabulary.name.not_unique</source>
+        <target state="translated">Der findes allerede et vokabular me det navn</target>
+      </trans-unit>
+      <trans-unit id="eDUEqre" resname="entity.vocabulary.slug.not_unique">
+        <source>entity.vocabulary.slug.not_unique</source>
+        <target state="translated">Der findes allerede et vokabular med det slug</target>
+      </trans-unit>
+      <trans-unit id="XP7.v3p" resname="entity.location.unique">
+        <source>entity.location.unique</source>
+        <target state="translated">Der findes allerede et sted med det navn, url og mail</target>
+      </trans-unit>
+      <trans-unit id="WjiRiLy" resname="entity.feed_item.feed_feedItemId_unique">
+        <source>entity.feed_item.feed_feedItemId_unique</source>
+        <target state="translated">Der findes allerede en feed kilde med det ID</target>
+      </trans-unit>
+      <trans-unit id="9ulyX0q" resname="entity.organization.name_mail.not_unique">
+        <source>entity.organization.name_mail.not_unique</source>
+        <target state="translated">Der findes allerede en arrangør med det navn og email</target>
       </trans-unit>
     </body>
   </file>

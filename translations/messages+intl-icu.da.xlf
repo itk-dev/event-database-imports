@@ -145,25 +145,9 @@
         <source>admin.feed.edited.update</source>
         <target state="translated">Opdateret</target>
       </trans-unit>
-      <trans-unit id="LGC.FCo" resname="admin.image.id">
-        <source>admin.image.id</source>
-        <target state="translated">Id</target>
-      </trans-unit>
       <trans-unit id="_MBm65c" resname="admin.image.title">
         <source>admin.image.title</source>
         <target state="translated">Titel</target>
-      </trans-unit>
-      <trans-unit id="18.tD8H" resname="admin.image.source">
-        <source>admin.image.source</source>
-        <target state="translated">Kilde</target>
-      </trans-unit>
-      <trans-unit id="YdvtBew" resname="admin.image.edited.headline">
-        <source>admin.image.edited.headline</source>
-        <target state="translated">Redigeret</target>
-      </trans-unit>
-      <trans-unit id="sKu.hB1" resname="admin.image.edited.update">
-        <source>admin.image.edited.update</source>
-        <target state="translated">Opdateret</target>
       </trans-unit>
       <trans-unit id="qkLipkd" resname="admin.location.id">
         <source>admin.location.id</source>
@@ -401,10 +385,6 @@
         <source>admin.link.organizations</source>
         <target state="translated">Arrangører</target>
       </trans-unit>
-      <trans-unit id="MlEyI2c" resname="admin.image.event">
-        <source>admin.image.event</source>
-        <target state="translated">Begivenhed</target>
-      </trans-unit>
       <trans-unit id="0SuBxKI" resname="admin.image.local">
         <source>admin.image.local</source>
         <target state="translated">Billede</target>
@@ -496,10 +476,6 @@
       <trans-unit id="5zzxoNU" resname="admin.address.locations">
         <source>admin.address.locations</source>
         <target state="translated">Steder</target>
-      </trans-unit>
-      <trans-unit id="DvP6Sse" resname="registration.page.email_not_verified">
-        <source>registration.page.email_not_verified</source>
-        <target state="translated">Din email er ikke bekræftet</target>
       </trans-unit>
       <trans-unit id="5.td1tT" resname="admin.label.my_content">
         <source>admin.label.my_content</source>

@@ -12,11 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
 #[ORM\UniqueConstraint(name: 'name_mail_unique', columns: ['name', 'mail'])]
+#[UniqueEntity(
+    fields: ['name', 'mail'],
+    message: 'entity.organization.name_mail.not_unique')]
 class Organization implements IndexItemInterface
 {
     use TimestampableEntity;
