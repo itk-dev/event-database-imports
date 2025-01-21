@@ -13,7 +13,8 @@ See [keep a changelog] for information about writing changes to this log.
 - Switch from Psalm to PHPStan
 - Upgrade to PHP 8.4
 - Upgrade to RabbitMQ 4
--
+- Add UniqueEntity constraints to enable proper error messages in EasyAdmin
+- Add custom error pages
 
 ## [1.0.1] - 2025-01-20
 
