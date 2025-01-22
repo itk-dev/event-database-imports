@@ -15,6 +15,9 @@ See [keep a changelog] for information about writing changes to this log.
 - Upgrade to RabbitMQ 4
 - Add UniqueEntity constraints to enable proper error messages in EasyAdmin
 - Add custom error pages
+- Update actions for new docker images
+- Add commands to list/cleanup indexes
+- Fix circular reference in serializer for event/tag
 
 ## [1.0.1] - 2025-01-20
 

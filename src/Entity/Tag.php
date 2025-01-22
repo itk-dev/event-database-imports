@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Attribute as Serializer;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -42,6 +43,7 @@ class Tag implements IndexItemInterface, EditableEntityInterface
     private ?string $slug = null;
 
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'tags')]
+    #[Serializer\Ignore]
     private Collection $events;
 
     public function __construct()

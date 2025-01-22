@@ -23,6 +23,7 @@ services:
 
   phpfpm:
     image: itkdev/php8.4-fpm:latest
+    user: ${COMPOSE_USER:-deploy}
     networks:
       - app
     extra_hosts:
@@ -36,6 +37,7 @@ services:
       - DOCKER_HOST_DOMAIN=${COMPOSE_DOMAIN}
       - COMPOSER_VERSION=2
       - PHP_IDE_CONFIG=serverName=localhost
+      - PHP_CS_FIXER_IGNORE_ENV=1
     depends_on:
       - mariadb
     volumes:
