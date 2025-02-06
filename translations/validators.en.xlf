@@ -49,9 +49,9 @@
         <source>entity.feed_item.feed_feedItemId_unique</source>
         <target>A feed item with the same ID from the same feed all ready exists</target>
       </trans-unit>
-      <trans-unit id="9ulyX0q" resname="entity.organization.name_mail.not_unique">
-        <source>entity.organization.name_mail.not_unique</source>
-        <target>An organization with the same name and email all ready exists</target>
+      <trans-unit id="CAKvzvL" resname="entity.organization.name.not_unique">
+        <source>entity.organization.name.not_unique</source>
+        <target>An organization with the same name all ready exists</target>
       </trans-unit>
     </body>
   </file>

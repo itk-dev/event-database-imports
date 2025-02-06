@@ -17,10 +17,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: OrganizationRepository::class)]
-#[ORM\UniqueConstraint(name: 'name_mail_unique', columns: ['name', 'mail'])]
+#[ORM\UniqueConstraint(name: 'name_unique', columns: ['name'])]
 #[UniqueEntity(
-    fields: ['name', 'mail'],
-    message: 'entity.organization.name_mail.not_unique')]
+    fields: ['name'],
+    message: 'entity.organization.name.not_unique')]
 class Organization implements IndexItemInterface
 {
     use TimestampableEntity;

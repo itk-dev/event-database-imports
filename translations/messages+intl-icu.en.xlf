@@ -633,6 +633,14 @@
         <source>registration.form.mail</source>
         <target>Mail</target>
       </trans-unit>
+      <trans-unit id="HF3KojK" resname="admin.location.enriched.events">
+        <source>admin.location.enriched.events</source>
+        <target>admin.location.enriched.events</target>
+      </trans-unit>
+      <trans-unit id="71ufXeQ" resname="admin.location.basic.address">
+        <source>admin.location.basic.address</source>
+        <target>Address</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

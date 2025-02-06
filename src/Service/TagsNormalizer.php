@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\Tag;
+use App\Model\Feed\FeedItemTag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -50,7 +51,7 @@ final class TagsNormalizer implements TagsNormalizerInterface
 
         // Ensure we don't exceed field length in db
         return array_map(
-            static fn (string $name) => mb_substr(trim($name), 0, $maxNameLength),
+            static fn (FeedItemTag $tag) => mb_substr(trim($tag->name), 0, $maxNameLength),
             $names
         );
     }

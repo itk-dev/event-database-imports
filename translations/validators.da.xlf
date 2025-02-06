@@ -49,9 +49,9 @@
         <source>entity.feed_item.feed_feedItemId_unique</source>
         <target state="translated">Der findes allerede en feed kilde med det ID</target>
       </trans-unit>
-      <trans-unit id="9ulyX0q" resname="entity.organization.name_mail.not_unique">
-        <source>entity.organization.name_mail.not_unique</source>
-        <target state="translated">Der findes allerede en arrangør med det navn og email</target>
+      <trans-unit id="CAKvzvL" resname="entity.organization.name.not_unique">
+        <source>entity.organization.name.not_unique</source>
+        <target state="translated">Der findes allerede en arrangør med det navn</target>
       </trans-unit>
     </body>
   </file>

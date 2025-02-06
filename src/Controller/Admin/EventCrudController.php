@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -97,7 +98,10 @@ class EventCrudController extends AbstractBaseCrudController
                 ->renderAsEmbeddedForm(EmbedImageController::class);
         yield AssociationField::new('tags')
                 ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->hideOnIndex();
+                ->hideOnDetail();
+        yield ArrayField::new('tags')
+                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+                ->onlyOnDetail();
 
         yield FormField::addFieldset('Occurrences')
                 ->setLabel(new TranslatableMessage('admin.event.occurrences'));
@@ -136,7 +140,11 @@ class EventCrudController extends AbstractBaseCrudController
                 );
         }
         yield AssociationField::new('partners')
-                ->setLabel(new TranslatableMessage('admin.event.edited.partners'));
+                ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+                ->hideOnDetail();
+        yield ArrayField::new('partners')
+            ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+            ->onlyOnDetail();
 
         yield FormField::addFieldset('Edited')
                 ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
