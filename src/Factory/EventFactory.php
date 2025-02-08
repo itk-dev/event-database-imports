@@ -90,8 +90,6 @@ final readonly class EventFactory
             ->setFeed($feed)
             ->setFeedItem($feedItemEntity);
 
-        $description = $entity->getDescription();
-
         if (null !== $item->ticketUrl && '' !== $item->ticketUrl) {
             try {
                 $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));

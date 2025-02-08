@@ -51,7 +51,7 @@ final class TagsNormalizer implements TagsNormalizerInterface
 
         // Ensure we don't exceed field length in db
         return array_map(
-            static fn (FeedItemTag $tag) => mb_substr(trim($tag->name), 0, $maxNameLength),
+            static fn (string $tag) => mb_substr(trim($tag), 0, $maxNameLength),
             $names
         );
     }

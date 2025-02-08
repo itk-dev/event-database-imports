@@ -20,7 +20,7 @@ final class FeedItemData
         /** @var array<FeedItemOrganization> */
         public array $partners = [],
         public int $feedId = 0,
-        /** @var array<FeedItemTag> */
+        /** @var array<string> */
         public array $tags = [],
     ) {
     }
