@@ -4,7 +4,6 @@ namespace App\Factory;
 
 use App\Entity\Tag;
 use App\Entity\Vocabulary;
-use App\Model\Feed\FeedItemTag;
 use App\Repository\TagRepository;
 use App\Service\Slugger;
 

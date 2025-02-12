@@ -8,5 +8,4 @@ class FeedItemTag
         public readonly string $name,
     ) {
     }
-
 }

@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Entity\Tag;
-use App\Model\Feed\FeedItemTag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
