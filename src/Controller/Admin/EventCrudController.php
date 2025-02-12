@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\AssetDto;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\AssetsDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -203,16 +204,19 @@ class EventCrudController extends AbstractBaseCrudController
     {
         $fieldAssetsDto = parent::getFieldAssets($fieldDtos);
 
-        $imageAssetDto = Asset::new('field-image.js')->getAsDto();
-        $imageAssetDto->setPackageName('easyadmin.assets.package');
-        $imageAssetDto->setLoadedOn(KeyValueStore::new(['new' => 'new', 'edit' => 'edit']));
-        $fieldAssetsDto->addJsAsset($imageAssetDto);
+        $imageAssetDto = $this->createAssetDto('field-image.js');
+        $uploadAssetDto = $this->createAssetDto('field-upload.js');
 
-        $uploadAssetDto = Asset::new('field-file-upload.js')->getAsDto();
-        $uploadAssetDto->setPackageName('easyadmin.assets.package');
-        $uploadAssetDto->setLoadedOn(KeyValueStore::new(['new' => 'new', 'edit' => 'edit']));
+        $fieldAssetsDto->addJsAsset($imageAssetDto);
         $fieldAssetsDto->addJsAsset($uploadAssetDto);
 
         return $fieldAssetsDto;
+    }
+
+    private function createAssetDto(string $value): AssetDto
+    {
+        $assetDto = Asset::new($value)->getAsDto();
+        $assetDto->setPackageName('easyadmin.assets.package');
+        $assetDto->setLoadedOn(KeyValueStore::new([Crud::PAGE_NEW => Crud::PAGE_NEW, Crud::PAGE_EDIT => Crud::PAGE_EDIT]));
     }
 }
