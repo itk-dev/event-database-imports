@@ -8,10 +8,15 @@ use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\AssetsDto;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
@@ -81,6 +86,7 @@ class EventCrudController extends AbstractBaseCrudController
                 ->renderAsHtml()
                 ->hideOnIndex()
                 ->hideOnForm();
+
         // Image / Detail view
         yield ImageField::new('image')
             ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
@@ -91,7 +97,9 @@ class EventCrudController extends AbstractBaseCrudController
                 return $transformed['large'] ?? null;
             })
         ->hideOnIndex()->hideOnForm();
+
         // Image / Form view
+        // @see self::getFieldAssets()
         yield AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex()
@@ -182,5 +190,29 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('url')
             ->add('ticketUrl')
         ;
+    }
+
+    /**
+     * Override parent to add image and upload fields from "EmbedImageController".
+     *
+     * EasyAdmin dynamically adds the relevant js assets to the html head section
+     * for the fields on the page. However, when using "renderAsEmbeddedForm", js
+     * for the fields in that controller is not added, so we have to that manually.
+     */
+    protected function getFieldAssets(FieldCollection $fieldDtos): AssetsDto
+    {
+        $fieldAssetsDto = parent::getFieldAssets($fieldDtos);
+
+        $imageAssetDto = Asset::new('field-image.js')->getAsDto();
+        $imageAssetDto->setPackageName('easyadmin.assets.package');
+        $imageAssetDto->setLoadedOn(KeyValueStore::new(['new' => 'new', 'edit' => 'edit']));
+        $fieldAssetsDto->addJsAsset($imageAssetDto);
+
+        $uploadAssetDto = Asset::new('field-file-upload.js')->getAsDto();
+        $uploadAssetDto->setPackageName('easyadmin.assets.package');
+        $uploadAssetDto->setLoadedOn(KeyValueStore::new(['new' => 'new', 'edit' => 'edit']));
+        $fieldAssetsDto->addJsAsset($uploadAssetDto);
+
+        return $fieldAssetsDto;
     }
 }
