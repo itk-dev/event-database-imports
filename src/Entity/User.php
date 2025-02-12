@@ -6,6 +6,7 @@ use App\Repository\UserRepository;
 use App\Security\UserInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
@@ -62,6 +63,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $termsAcceptedAt = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $registrationNotes = null;
 
     public function __construct()
     {
@@ -237,6 +241,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTermsAcceptedAt(?\DateTimeImmutable $termsAcceptedAt): static
     {
         $this->termsAcceptedAt = $termsAcceptedAt;
+
+        return $this;
+    }
+
+    public function getRegistrationNotes(): ?string
+    {
+        return $this->registrationNotes;
+    }
+
+    public function setRegistrationNotes(?string $registrationNotes): static
+    {
+        $this->registrationNotes = $registrationNotes;
 
         return $this;
     }

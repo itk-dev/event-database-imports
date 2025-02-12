@@ -204,10 +204,9 @@ class EventCrudController extends AbstractBaseCrudController
     {
         $fieldAssetsDto = parent::getFieldAssets($fieldDtos);
 
-        $currentPageName = $this->getContext()?->getCrud()?->getCurrentPage();
-
         // EmbedImageController is only used on "edit" and "new"
-        if ($currentPageName === Crud::PAGE_EDIT || $currentPageName === Crud::PAGE_NEW) {
+        $currentPageName = $this->getContext()?->getCrud()?->getCurrentPage();
+        if (Crud::PAGE_EDIT === $currentPageName || Crud::PAGE_NEW === $currentPageName) {
             $imageAssetDto = $this->createAssetDto('field-image.js');
             $uploadAssetDto = $this->createAssetDto('field-upload.js');
 

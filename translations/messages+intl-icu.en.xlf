@@ -641,6 +641,10 @@
         <source>admin.location.basic.address</source>
         <target>Address</target>
       </trans-unit>
+      <trans-unit id="qr0bAPM" resname="registration.form.organizations">
+        <source>registration.form.organizations</source>
+        <target>Which organizers do you work for?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

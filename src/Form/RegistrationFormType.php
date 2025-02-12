@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -30,6 +31,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['label' => new TranslatableMessage('registration.form.name')])
+            ->add('registrationNotes', TextareaType::class, ['label' => new TranslatableMessage('registration.form.organizations')])
             ->add('mail', EmailType::class, ['label' => new TranslatableMessage('registration.form.mail')])
             ->add('plainPassword', PasswordType::class, [
                 'label' => new TranslatableMessage('registration.form.enter_password'),
