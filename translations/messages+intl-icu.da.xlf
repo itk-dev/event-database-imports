@@ -641,6 +641,10 @@
         <source>admin.location.basic.address</source>
         <target state="translated">Adresse</target>
       </trans-unit>
+      <trans-unit id="qr0bAPM" resname="registration.form.organizations">
+        <source>registration.form.organizations</source>
+        <target state="needs-l10n">Hvilke arrangører arbejder du for?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
