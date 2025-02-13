@@ -8,7 +8,11 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-## [1.1.0] - 2025-01-23
+## [1.1.1] - 2025-02-13
+
+- Only super admin can edit/create/delete feeds
+
+## [1.1.0] - 2025-02-13
 
 - Update dependencies
 - Enable EasyAdmin pretty URLs

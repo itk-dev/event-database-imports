@@ -64,6 +64,20 @@ class UserCrudController extends AbstractBaseCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $userRolesChoices = [
+            'ROLE_ADMIN' => new TranslatableMessage('admin.user.role.role_admin'),
+            'ROLE_EDITOR' => new TranslatableMessage('admin.user.role.role_editor'),
+            'ROLE_ORGANIZATION_ADMIN' => new TranslatableMessage('admin.user.role.role_organization_admin'),
+            'ROLE_ORGANIZATION_EDITOR' => new TranslatableMessage('admin.user.role.role_organization_editor'),
+            'ROLE_API_USER' => new TranslatableMessage('admin.user.role.role_api_user'),
+            'ROLE_USER' => new TranslatableMessage('admin.user.role.role_user'),
+        ];
+
+        if ($this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)) {
+            $superAdminRole = ['ROLE_SUPER_ADMIN' => new TranslatableMessage('admin.user.role.role_super_admin')];
+            $userRolesChoices = array_merge($superAdminRole, $userRolesChoices);
+        }
+
         return [
             IdField::new('id')
                 ->setLabel(new TranslatableMessage('admin.user.id'))
@@ -79,14 +93,7 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setFormTypeOption('by_reference', false)
                 ->setPermission(UserRoles::ROLE_ADMIN->value),
             ChoiceField::new('roles')
-                ->setTranslatableChoices([
-                    'ROLE_ADMIN' => new TranslatableMessage('admin.user.role.role_admin'),
-                    'ROLE_EDITOR' => new TranslatableMessage('admin.user.role.role_editor'),
-                    'ROLE_ORGANIZATION_ADMIN' => new TranslatableMessage('admin.user.role.role_organization_admin'),
-                    'ROLE_ORGANIZATION_EDITOR' => new TranslatableMessage('admin.user.role.role_organization_editor'),
-                    'ROLE_API_USER' => new TranslatableMessage('admin.user.role.role_api_user'),
-                    'ROLE_USER' => new TranslatableMessage('admin.user.role.role_user'),
-                ])
+                ->setTranslatableChoices($userRolesChoices)
                 ->allowMultipleChoices()
                 ->renderExpanded()
                 ->setLabel(new TranslatableMessage('admin.user.roles'))

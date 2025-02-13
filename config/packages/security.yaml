@@ -41,6 +41,7 @@ security:
         strategy: unanimous
 
     role_hierarchy:
+        !php/enum App\Types\UserRoles::ROLE_SUPER_ADMIN->value:       !php/enum App\Types\UserRoles::ROLE_ADMIN->value
         !php/enum App\Types\UserRoles::ROLE_ADMIN->value:       !php/enum App\Types\UserRoles::ROLE_EDITOR->value
         !php/enum App\Types\UserRoles::ROLE_EDITOR->value:       !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_ADMIN->value
         !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_ADMIN->value:    !php/enum App\Types\UserRoles::ROLE_ORGANIZATION_EDITOR->value

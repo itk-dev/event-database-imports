@@ -15,17 +15,12 @@ use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /** @extends AbstractType<mixed> */
 class RegistrationFormType extends AbstractType
 {
     private const int MIN_LENGTH = 8;
     private const int MAX_LENGTH = 4096;
-
-    public function __construct(private readonly TranslatorInterface $translator)
-    {
-    }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
