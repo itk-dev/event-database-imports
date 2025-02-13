@@ -6,9 +6,14 @@ use App\Repository\FeedItemRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Timestampable;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: FeedItemRepository::class)]
 #[ORM\UniqueConstraint(name: 'feed_feedItemId_unique', columns: ['feed_id', 'feed_item_id'])]
+#[UniqueEntity(
+    fields: ['feed', 'feedItemId'],
+    message: 'entity.feed_item.feed_feedItemId_unique'
+)]
 class FeedItem
 {
     #[ORM\Id]

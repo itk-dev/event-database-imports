@@ -8,10 +8,17 @@ use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\AssetDto;
+use EasyCorp\Bundle\EasyAdminBundle\Dto\AssetsDto;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -80,6 +87,7 @@ class EventCrudController extends AbstractBaseCrudController
                 ->renderAsHtml()
                 ->hideOnIndex()
                 ->hideOnForm();
+
         // Image / Detail view
         yield ImageField::new('image')
             ->setLabel(new TranslatableMessage('admin.event.admin.image.local'))
@@ -90,14 +98,19 @@ class EventCrudController extends AbstractBaseCrudController
                 return $transformed['large'] ?? null;
             })
         ->hideOnIndex()->hideOnForm();
+
         // Image / Form view
+        // @see self::getFieldAssets()
         yield AssociationField::new('image')
                 ->setLabel(new TranslatableMessage('admin.event.basic.image'))
                 ->hideOnIndex()
                 ->renderAsEmbeddedForm(EmbedImageController::class);
         yield AssociationField::new('tags')
                 ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->hideOnIndex();
+                ->hideOnDetail();
+        yield ArrayField::new('tags')
+                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+                ->onlyOnDetail();
 
         yield FormField::addFieldset('Occurrences')
                 ->setLabel(new TranslatableMessage('admin.event.occurrences'));
@@ -136,7 +149,11 @@ class EventCrudController extends AbstractBaseCrudController
                 );
         }
         yield AssociationField::new('partners')
-                ->setLabel(new TranslatableMessage('admin.event.edited.partners'));
+                ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+                ->hideOnDetail();
+        yield ArrayField::new('partners')
+            ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+            ->onlyOnDetail();
 
         yield FormField::addFieldset('Edited')
                 ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
@@ -174,5 +191,38 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('url')
             ->add('ticketUrl')
         ;
+    }
+
+    /**
+     * Override parent to add image and upload fields from "EmbedImageController".
+     *
+     * EasyAdmin dynamically adds the relevant js assets to the html head section
+     * for the fields on the page. However, when using "renderAsEmbeddedForm", js
+     * for the fields in that controller is not added, so we have to that manually.
+     */
+    protected function getFieldAssets(FieldCollection $fieldDtos): AssetsDto
+    {
+        $fieldAssetsDto = parent::getFieldAssets($fieldDtos);
+
+        // EmbedImageController is only used on "edit" and "new"
+        $currentPageName = $this->getContext()?->getCrud()?->getCurrentPage();
+        if (Crud::PAGE_EDIT === $currentPageName || Crud::PAGE_NEW === $currentPageName) {
+            $imageAssetDto = $this->createAssetDto('field-image.js');
+            $uploadAssetDto = $this->createAssetDto('field-upload.js');
+
+            $fieldAssetsDto->addJsAsset($imageAssetDto);
+            $fieldAssetsDto->addJsAsset($uploadAssetDto);
+        }
+
+        return $fieldAssetsDto;
+    }
+
+    private function createAssetDto(string $value): AssetDto
+    {
+        $assetDto = Asset::new($value)->getAsDto();
+        $assetDto->setPackageName('easyadmin.assets.package');
+        $assetDto->setLoadedOn(KeyValueStore::new([Crud::PAGE_NEW => Crud::PAGE_NEW, Crud::PAGE_EDIT => Crud::PAGE_EDIT]));
+
+        return $assetDto;
     }
 }

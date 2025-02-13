@@ -1,0 +1,14 @@
+services:
+  phpfpm:
+    volumes:
+      - ../../shared/.env.local:/app/.env.local
+      - ../../shared/images:/app/public/images/
+
+  nginx:
+    volumes:
+      - ../../shared/images:/app/public/images/
+
+  supervisor:
+    volumes:
+      - ../../shared/.env.local:/app/.env.local
+      - ../../shared/images:/app/public/images/

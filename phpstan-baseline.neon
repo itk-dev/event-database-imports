@@ -1,0 +1,349 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexCreateCommand.php
+
+		-
+			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexDumpCommand.php
+
+		-
+			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexPopulateCommand.php
+
+		-
+			message: '#^Call to method App\\Repository\\VocabularyRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$name\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Command/Migrate/MigrateTagsCommand.php
+
+		-
+			message: '#^Using nullsafe property access "\?\-\>\(Expression\)" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: src/Command/Migrate/MigrateTagsCommand.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 2
+			path: src/DataFixtures/DailyOccurrenceFixture.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 2
+			path: src/DataFixtures/DailyOccurrenceFixture.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 13
+			path: src/DataFixtures/EventFixture.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 13
+			path: src/DataFixtures/EventFixture.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 9
+			path: src/DataFixtures/FeedFixtures.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 9
+			path: src/DataFixtures/FeedFixtures.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/DataFixtures/LocationFixture.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/DataFixtures/LocationFixture.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/DataFixtures/OccurrenceFixture.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/DataFixtures/OccurrenceFixture.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/DataFixtures/OrganizationFixtures.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/DataFixtures/OrganizationFixtures.php
+
+		-
+			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: src/DataFixtures/TagsFixtures.php
+
+		-
+			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
+			identifier: argument.templateType
+			count: 1
+			path: src/DataFixtures/TagsFixtures.php
+
+		-
+			message: '#^Static property App\\Doctrine\\Extensions\\DBAL\\Types\\UTCDateTimeImmutableType\:\:\$utc \(DateTimeZone\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Doctrine/Extensions/DBAL/Types/UTCDateTimeImmutableType.php
+
+		-
+			message: '#^Static property App\\Doctrine\\Extensions\\DBAL\\Types\\UTCDateTimeType\:\:\$utc \(DateTimeZone\|null\) is never assigned null so it can be removed from the property type\.$#'
+			identifier: property.unusedType
+			count: 1
+			path: src/Doctrine/Extensions/DBAL/Types/UTCDateTimeType.php
+
+		-
+			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
+			identifier: method.resultUnused
+			count: 2
+			path: src/Entity/DailyOccurrence.php
+
+		-
+			message: '#^Property App\\Entity\\Event\:\:\$createdAt has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Entity/Event.php
+
+		-
+			message: '#^Property App\\Entity\\Event\:\:\$updatedAt has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Entity/Event.php
+
+		-
+			message: '#^Method App\\Entity\\Feed\:\:setConfigurationField\(\) has InvalidArgumentException in PHPDoc @throws tag but it''s not thrown\.$#'
+			identifier: throws.unusedType
+			count: 1
+			path: src/Entity/Feed.php
+
+		-
+			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
+			identifier: method.resultUnused
+			count: 2
+			path: src/Entity/Occurrence.php
+
+		-
+			message: '#^Property App\\Entity\\Organization\:\:\$createdAt has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Entity/Organization.php
+
+		-
+			message: '#^Property App\\Entity\\Organization\:\:\$updatedAt has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Entity/Organization.php
+
+		-
+			message: '#^Call to function is_null\(\) with array\<string\> will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/Factory/EventFactory.php
+
+		-
+			message: '#^Call to method App\\Repository\\LocationRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$mail\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Call to method App\\Repository\\LocationRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$name\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Call to method App\\Repository\\LocationRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$telephone\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Variable \$values in empty\(\) always exists and is always falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Call to method App\\Repository\\OrganizationRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$name\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Factory/OrganizationFactory.php
+
+		-
+			message: '#^Call to method App\\Repository\\TagRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$slug\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Factory/TagsFactory.php
+
+		-
+			message: '#^Property App\\Form\\RegistrationFormType\:\:\$translator is never read, only written\.$#'
+			identifier: property.onlyWritten
+			count: 1
+			path: src/Form/RegistrationFormType.php
+
+		-
+			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: src/MessageHandler/ImageHandler.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\DailyOccurrence\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/DailyOccurrenceRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Event\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/EventRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Location\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/LocationRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Occurrence\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/OccurrenceRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Organization\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/OrganizationRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Tag\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/TagRepository.php
+
+		-
+			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Vocabulary\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
+			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/VocabularyRepository.php
+
+		-
+			message: '#^Call to an undefined method App\\Service\\Indexing\\IndexItemInterface\:\:getEvent\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingEvents.php
+
+		-
+			message: '#^Offset ''dailyOccurrences'' does not exist on array\{tags\: list, occurrences\: list\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingEvents.php
+
+		-
+			message: '#^Offset ''imageUrls'' does not exist on array\{tags\: list, occurrences\: list, dailyOccurrences\: list\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingEvents.php
+
+		-
+			message: '#^Offset ''occurrences'' does not exist on array\{tags\: list\}\.$#'
+			identifier: offsetAccess.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingEvents.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingLocations.php
+
+		-
+			message: '#^Call to an undefined method App\\Service\\Indexing\\IndexItemInterface\:\:getEvent\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingOrganizations.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingTags.php
+
+		-
+			message: '#^Cannot unset offset ''vocabularies'' on array\{vocabulary\: list\}\.$#'
+			identifier: unset.offset
+			count: 1
+			path: src/Service/Indexing/IndexingTags.php
+
+		-
+			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingVocabularies.php
+
+		-
+			message: '#^Call to method App\\Repository\\TagRepository\:\:findOneBy\(\) \- entity App\\Entity\\Event does not have a field named \$name\.$#'
+			identifier: doctrine.findOneByArgument
+			count: 1
+			path: src/Service/TagsNormalizer.php

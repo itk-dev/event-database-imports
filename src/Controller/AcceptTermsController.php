@@ -5,14 +5,14 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\AcceptTermsFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
 #[Route('/admin/accept-terms')]
-class AcceptTermsController extends AbstractDashboardController
+class AcceptTermsController extends AbstractController
 {
     #[Route('/admin')]
     public function index(): Response

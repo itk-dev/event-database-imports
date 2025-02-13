@@ -153,25 +153,9 @@
         <source>admin.feed.edited.update</source>
         <target>Last updated</target>
       </trans-unit>
-      <trans-unit id="LGC.FCo" resname="admin.image.id">
-        <source>admin.image.id</source>
-        <target>ID</target>
-      </trans-unit>
       <trans-unit id="_MBm65c" resname="admin.image.title">
         <source>admin.image.title</source>
         <target>Title</target>
-      </trans-unit>
-      <trans-unit id="18.tD8H" resname="admin.image.source">
-        <source>admin.image.source</source>
-        <target>Source (URL)</target>
-      </trans-unit>
-      <trans-unit id="YdvtBew" resname="admin.image.edited.headline">
-        <source>admin.image.edited.headline</source>
-        <target>Authoring information</target>
-      </trans-unit>
-      <trans-unit id="sKu.hB1" resname="admin.image.edited.update">
-        <source>admin.image.edited.update</source>
-        <target>Last updated</target>
       </trans-unit>
       <trans-unit id="qkLipkd" resname="admin.location.id">
         <source>admin.location.id</source>
@@ -401,10 +385,6 @@
         <source>admin.link.vocabularies</source>
         <target>Vocabularies</target>
       </trans-unit>
-      <trans-unit id="MlEyI2c" resname="admin.image.event">
-        <source>admin.image.event</source>
-        <target>Event</target>
-      </trans-unit>
       <trans-unit id="0SuBxKI" resname="admin.image.local">
         <source>admin.image.local</source>
         <target>Image</target>
@@ -496,10 +476,6 @@
       <trans-unit id="5zzxoNU" resname="admin.address.locations">
         <source>admin.address.locations</source>
         <target>Locations</target>
-      </trans-unit>
-      <trans-unit id="DvP6Sse" resname="registration.page.email_not_verified">
-        <source>registration.page.email_not_verified</source>
-        <target>Your email is not verified</target>
       </trans-unit>
       <trans-unit id="5.td1tT" resname="admin.label.my_content">
         <source>admin.label.my_content</source>
@@ -656,6 +632,18 @@
       <trans-unit id="tWTqBeb" resname="registration.form.mail">
         <source>registration.form.mail</source>
         <target>Mail</target>
+      </trans-unit>
+      <trans-unit id="HF3KojK" resname="admin.location.enriched.events">
+        <source>admin.location.enriched.events</source>
+        <target>admin.location.enriched.events</target>
+      </trans-unit>
+      <trans-unit id="71ufXeQ" resname="admin.location.basic.address">
+        <source>admin.location.basic.address</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="qr0bAPM" resname="registration.form.organizations">
+        <source>registration.form.organizations</source>
+        <target>Which organizers do you work for?</target>
       </trans-unit>
     </body>
   </file>

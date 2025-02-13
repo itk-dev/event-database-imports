@@ -46,6 +46,11 @@ final class FeedItemSource
                 $values = empty($separator) ? [$value] : explode($separator, $value);
                 $this->setValue($output, $matches['dest'], $values);
             }
+            // Match src with ".*" array without key
+            elseif (str_ends_with($src, self::SRC_SEPARATOR.self::SRC_WILDCARD)) {
+                $values = $this->getArrayValues([...$source], $src);
+                $this->setValues($output, $dest, $values);
+            }
             // Match src with ".*." multi value array mapping.
             elseif (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $values = $this->getValues([...$source], $src);
@@ -123,6 +128,20 @@ final class FeedItemSource
         $key = $this->transformKey($dest);
 
         $propertyAccessor->setValue($output, $key, $value);
+    }
+
+    private function getArrayValues(array $data, string $src): array
+    {
+        $propertyAccessor = PropertyAccess::createPropertyAccessorBuilder()
+            ->disableExceptionOnInvalidPropertyPath()
+            ->getPropertyAccessor();
+
+        // Find nested array items by split on wildcard separator.
+        $keys = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD, $src);
+        $key = $this->transformKey(reset($keys));
+        $items = $propertyAccessor->getValue($data, $key);
+
+        return $items ?? [];
     }
 
     /**

@@ -6,20 +6,15 @@ services:
       - PHP_POST_MAX_SIZE=50M
     depends_on:
       - rabbit
-    volumes:
-      - ../../shared/.env.local:/app/.env.local
-      - ../../shared/images:/app/public/images/
 
   nginx:
     environment:
       APP_PATH_PREFIX: ${APP_PATH_PREFIX}
       NGINX_MAX_BODY_SIZE: 50M
-    volumes:
-      - ../../shared/images:/app/public/images/
 
   supervisor:
     # @TODO: Create supervisor with ansible, when merged with Ture's PR
-    image: itkdev/supervisor-php8.3:alpine
+    image: itkdev/supervisor-php8.4:alpine
     restart: unless-stopped
     stop_grace_period: 20s
     environment:
@@ -35,13 +30,11 @@ services:
       - "host.docker.internal:host-gateway"
     volumes:
       - .:/app
-      - ../../shared/.env.local:/app/.env.local
-      - ../../shared/images:/app/public/images/
     depends_on:
       - rabbit
 
   rabbit:
-    image: rabbitmq:3.13-management-alpine
+    image: rabbitmq:4-management-alpine
     restart: unless-stopped
     networks:
       - app

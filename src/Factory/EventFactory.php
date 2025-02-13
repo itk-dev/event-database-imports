@@ -90,8 +90,6 @@ final readonly class EventFactory
             ->setFeed($feed)
             ->setFeedItem($feedItemEntity);
 
-        $description = $entity->getDescription();
-
         if (null !== $item->ticketUrl && '' !== $item->ticketUrl) {
             try {
                 $entity->setTicketUrl(UriHelper::getAbsoluteUrl($item->ticketUrl, $base));
@@ -132,8 +130,10 @@ final readonly class EventFactory
         }
 
         foreach ($item->partners as $partner) {
-            $partner = $this->organizationFactory->createOrUpdate($partner);
-            $partner->addPartnerEvent($entity);
+            if (null !== $partner->name) {
+                $partner = $this->organizationFactory->createOrUpdate($partner);
+                $partner->addPartnerEvent($entity);
+            }
         }
 
         // The feed items may come with occurrences The daly occurrences will be handled later on.

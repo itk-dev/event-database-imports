@@ -9,29 +9,49 @@
         <source>Error</source>
         <target>Error</target>
       </trans-unit>
-      <trans-unit id="3ZTV5Le" resname="user.mail.not_unique">
-        <source>user.mail.not_unique</source>
-        <target>There is already an account with this mail</target>
-      </trans-unit>
-      <trans-unit id="f8NF5B0" resname="user.mail.not_valid">
-        <source>user.mail.not_valid</source>
-        <target>The email {{ value }} is not a valid email</target>
-      </trans-unit>
       <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
         <source>admin.feed.configuration.json_invalid</source>
         <target>Configuration JSON is not valid</target>
-      </trans-unit>
-      <trans-unit id="YXZ26gK" resname="Please enter a password">
-        <source>Please enter a password</source>
-        <target>Please enter a password</target>
       </trans-unit>
       <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
         <source>Your password should be at least {{ limit }} characters</source>
         <target>Your password should be at least {{ limit }} characters</target>
       </trans-unit>
-      <trans-unit id="Fe2zEyl" resname="Please enter your email">
-        <source>Please enter your email</source>
-        <target>Please enter your email</target>
+      <trans-unit id="P6oTY4x" resname="entity.address.street_postcode.not_unique">
+        <source>entity.address.street_postcode.not_unique</source>
+        <target>An address all ready exists with the sam street and postcode</target>
+      </trans-unit>
+      <trans-unit id="jHotkHp" resname="entity.user.mail.not_unique">
+        <source>entity.user.mail.not_unique</source>
+        <target>A user all ready exists with the same email</target>
+      </trans-unit>
+      <trans-unit id="t.cGJCT" resname="entity.user.mail.not_blank">
+        <source>entity.user.mail.not_blank</source>
+        <target>Email cannot be empty</target>
+      </trans-unit>
+      <trans-unit id="WoCyims" resname="entity.user.mail.not_valid">
+        <source>entity.user.mail.not_valid</source>
+        <target>Email is not valid</target>
+      </trans-unit>
+      <trans-unit id="HU3R7Wy" resname="entity.vocabulary.name.not_unique">
+        <source>entity.vocabulary.name.not_unique</source>
+        <target>A vocabulary with that name all ready exits</target>
+      </trans-unit>
+      <trans-unit id="eDUEqre" resname="entity.vocabulary.slug.not_unique">
+        <source>entity.vocabulary.slug.not_unique</source>
+        <target>A vocabulary with that slug all ready exits</target>
+      </trans-unit>
+      <trans-unit id="XP7.v3p" resname="entity.location.unique">
+        <source>entity.location.unique</source>
+        <target>A location with the samme name, url and email all ready exits</target>
+      </trans-unit>
+      <trans-unit id="WjiRiLy" resname="entity.feed_item.feed_feedItemId_unique">
+        <source>entity.feed_item.feed_feedItemId_unique</source>
+        <target>A feed item with the same ID from the same feed all ready exists</target>
+      </trans-unit>
+      <trans-unit id="CAKvzvL" resname="entity.organization.name.not_unique">
+        <source>entity.organization.name.not_unique</source>
+        <target>An organization with the same name all ready exists</target>
       </trans-unit>
     </body>
   </file>

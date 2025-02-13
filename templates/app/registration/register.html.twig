@@ -38,6 +38,13 @@
     </div>
 
     <div class="form-group">
+        {{ form_label(registrationForm.registrationNotes, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        <div class="form-widget">
+            {{ form_widget(registrationForm.registrationNotes, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="form-group">
         {{ form_label(registrationForm.mail, null, {'label_attr': {'class': 'form-control-label'}}) }}
         <div class="form-widget">
             {{ form_widget(registrationForm.mail, {'attr': {'class': 'form-control'}}) }}

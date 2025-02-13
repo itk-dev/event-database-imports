@@ -62,7 +62,8 @@ class LocationCrudController extends AbstractBaseCrudController
             TextField::new('name')
                 ->setLabel(new TranslatableMessage('admin.location.basic.name')),
             AssociationField::new('address')
-                ->setLabel(new TranslatableMessage('admin.location.basic.headline'))
+                ->setLabel(new TranslatableMessage('admin.location.basic.address'))
+                ->autocomplete()
                 ->hideOnIndex(),
 
             FormField::addFieldset('Enriched information')
@@ -81,7 +82,8 @@ class LocationCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.location.enriched.disability-access'))
                 ->renderAsSwitch(false),
             AssociationField::new('events')
-                ->setLabel('admin.location.enriched.events')
+                ->setLabel(new TranslatableMessage('admin.location.enriched.events'))
+                ->hideOnForm()
                 ->setDisabled(),
 
             FormField::addFieldset(new TranslatableMessage('admin.location.edited.headline'))
