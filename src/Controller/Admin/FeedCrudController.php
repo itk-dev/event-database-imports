@@ -37,11 +37,11 @@ class FeedCrudController extends AbstractBaseCrudController
         $actions = parent::configureActions($actions);
 
         $actions->setPermission(Action::INDEX, UserRoles::ROLE_ADMIN->value);
-        $actions->setPermission(Action::NEW, UserRoles::ROLE_ADMIN->value);
-        $actions->setPermission(Action::EDIT, UserRoles::ROLE_ADMIN->value);
-        $actions->setPermission(Action::DELETE, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::NEW, UserRoles::ROLE_SUPER_ADMIN->value);
+        $actions->setPermission(Action::EDIT, UserRoles::ROLE_SUPER_ADMIN->value);
+        $actions->setPermission(Action::DELETE, UserRoles::ROLE_SUPER_ADMIN->value);
         $actions->setPermission(Action::DETAIL, UserRoles::ROLE_ADMIN->value);
-        $actions->setPermission(Action::BATCH_DELETE, UserRoles::ROLE_ADMIN->value);
+        $actions->setPermission(Action::BATCH_DELETE, UserRoles::ROLE_SUPER_ADMIN->value);
 
         return $actions;
     }
@@ -68,8 +68,9 @@ class FeedCrudController extends AbstractBaseCrudController
                     ['constraints' => [new Json(['message' => 'admin.feed.configuration.json_invalid'])]]
                 ),
 
-            BooleanField::new('enabled'),
-            BooleanField::new('syncToFeed'),
+            // EasyAdmin does not disable the toggles even though the user can't edit
+            BooleanField::new('enabled')->setDisabled(!$this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)),
+            BooleanField::new('syncToFeed')->setDisabled(!$this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)),
 
             FormField::addFieldset(new TranslatableMessage('admin.feed.last_read.headline'))
                 ->hideWhenCreating(),

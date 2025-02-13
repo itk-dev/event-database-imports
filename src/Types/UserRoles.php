@@ -4,6 +4,7 @@ namespace App\Types;
 
 enum UserRoles: string
 {
+    case ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
     case ROLE_ADMIN = 'ROLE_ADMIN';
     case ROLE_EDITOR = 'ROLE_EDITOR';
     case ROLE_ORGANIZATION_ADMIN = 'ROLE_ORGANIZATION_ADMIN';
