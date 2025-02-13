@@ -24,7 +24,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
     fields: ['slug'],
     message: 'entity.vocabulary.slug.not_unique')
 ]
-#[Groups([IndexNames::Vocabularies->value, IndexNames::Tags->value])]
 class Vocabulary implements IndexItemInterface
 {
     use TimestampableEntity;

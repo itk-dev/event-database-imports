@@ -633,6 +633,18 @@
         <source>registration.form.mail</source>
         <target state="translated">Email</target>
       </trans-unit>
+      <trans-unit id="HF3KojK" resname="admin.location.enriched.events">
+        <source>admin.location.enriched.events</source>
+        <target state="translated">Begivenheder</target>
+      </trans-unit>
+      <trans-unit id="71ufXeQ" resname="admin.location.basic.address">
+        <source>admin.location.basic.address</source>
+        <target state="translated">Adresse</target>
+      </trans-unit>
+      <trans-unit id="qr0bAPM" resname="registration.form.organizations">
+        <source>registration.form.organizations</source>
+        <target state="needs-l10n">Hvilke arrangører arbejder du for?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

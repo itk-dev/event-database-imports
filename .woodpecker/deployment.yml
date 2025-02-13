@@ -21,4 +21,5 @@ steps:
       playbook: 'release'
       pre_up:
         - itkdev-docker-compose-server run --rm phpfpm bin/console doctrine:migrations:migrate --no-interaction
+        - itkdev-docker-compose-server run --rm phpfpm bin/console messenger:setup-transports
         - itkdev-docker-compose-server run --rm phpfpm bin/console cache:clear

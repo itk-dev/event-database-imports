@@ -18,7 +18,7 @@ final readonly class TagsFactory
      * Create tag or find matching in the database.
      *
      * @param array<string> $tagNames
-     *   The tag names to create/lockup in the database as strings
+     *   The tags to create/lockup in the database as strings
      *
      * @return iterable<Tag>
      *   Yield tag entities from the database
