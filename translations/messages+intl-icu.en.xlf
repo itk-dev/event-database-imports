@@ -645,6 +645,14 @@
         <source>registration.form.organizations</source>
         <target>Which organizers do you work for?</target>
       </trans-unit>
+      <trans-unit id="mfCgFZn" resname="admin.user.role.role_super_admin">
+        <source>admin.user.role.role_super_admin</source>
+        <target>admin.user.role.role_super_admin</target>
+      </trans-unit>
+      <trans-unit id="tJVGuNl" resname="admin.user.registrationNotes">
+        <source>admin.user.registrationNotes</source>
+        <target>Requested organizers</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

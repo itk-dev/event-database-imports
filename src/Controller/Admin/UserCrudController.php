@@ -21,6 +21,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -92,6 +93,12 @@ class UserCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.user.organizers'))
                 ->setFormTypeOption('by_reference', false)
                 ->setPermission(UserRoles::ROLE_ADMIN->value),
+            TextareaField::new('registrationNotes')
+                ->setLabel(new TranslatableMessage('admin.user.registrationNotes'))
+                ->setPermission(UserRoles::ROLE_ADMIN->value)
+                ->setDisabled()
+                ->hideOnIndex()
+                ->hideWhenCreating(),
             ChoiceField::new('roles')
                 ->setTranslatableChoices($userRolesChoices)
                 ->allowMultipleChoices()
