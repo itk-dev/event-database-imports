@@ -643,15 +643,15 @@
       </trans-unit>
       <trans-unit id="qr0bAPM" resname="registration.form.organizations">
         <source>registration.form.organizations</source>
-        <target state="needs-l10n">Hvilke arrangører arbejder du for?</target>
+        <target state="translated">Hvilke arrangører arbejder du for?</target>
       </trans-unit>
       <trans-unit id="mfCgFZn" resname="admin.user.role.role_super_admin">
         <source>admin.user.role.role_super_admin</source>
-        <target state="needs-l10n">__admin.user.role.role_super_admin</target>
+        <target state="translated">__admin.user.role.role_super_admin</target>
       </trans-unit>
       <trans-unit id="tJVGuNl" resname="admin.user.registrationNotes">
         <source>admin.user.registrationNotes</source>
-        <target state="needs-l10n">Ønskede arrangører</target>
+        <target state="translated">Ønskede arrangører</target>
       </trans-unit>
     </body>
   </file>
