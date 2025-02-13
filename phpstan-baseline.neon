@@ -211,12 +211,6 @@ parameters:
 			path: src/Factory/TagsFactory.php
 
 		-
-			message: '#^Property App\\Form\\RegistrationFormType\:\:\$translator is never read, only written\.$#'
-			identifier: property.onlyWritten
-			count: 1
-			path: src/Form/RegistrationFormType.php
-
-		-
 			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
