@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.1.2] - 2025-02-13
+
+- Add users requested organizations to user view for admins
+
 ## [1.1.1] - 2025-02-13
 
 - Only super admin can edit/create/delete feeds
