@@ -8,14 +8,21 @@ use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Carbon\CarbonPeriodImmutable;
 
-final class Time implements TimeInterface
+final readonly class TimeInterval implements TimeIntervalInterface
 {
+    private \DateTimeZone $separatorTimeZone;
+
     public function __construct(
+        string $separatorTimeZone,
     ) {
+        $this->separatorTimeZone = new \DateTimeZone($separatorTimeZone);
     }
 
     public function getIntervals(\DateTimeImmutable $start, \DateTimeImmutable $end): array
     {
+        $start = $this->getDateTimeWithTimeZone($start);
+        $end = $this->getDateTimeWithTimeZone($end);
+
         $periods = (new CarbonPeriodImmutable($start, '1 day', $end))->toArray();
 
         // Invalid start/end. Best we can do is return empty array.
@@ -50,7 +57,7 @@ final class Time implements TimeInterface
 
         // First element has a defined start date.
         $first = array_shift($periods);
-        $output[] = new DateTimeInterval(start: $first->toDateTimeImmutable(), end: $first->endOfDay()->toDateTimeImmutable());
+        $output[] = new DateTimeInterval(start: $first->toDateTimeImmutable(), end: $first->endOfDay()->roundSecond()->toDateTimeImmutable());
 
         $lastKey = array_key_last($periods);
         foreach ($periods as $key => $period) {
@@ -59,7 +66,7 @@ final class Time implements TimeInterface
                 $output[] = new DateTimeInterval(start: $period->startOfDay()->toDateTimeImmutable(), end: $period->toDateTimeImmutable());
             } else {
                 // All the days between the first and last element.
-                $output[] = new DateTimeInterval(start: $period->startOfDay()->toDateTimeImmutable(), end: $period->endOfDay()->toDateTimeImmutable());
+                $output[] = new DateTimeInterval(start: $period->startOfDay()->toDateTimeImmutable(), end: $period->endOfDay()->roundSecond()->toDateTimeImmutable());
             }
         }
 
@@ -80,5 +87,10 @@ final class Time implements TimeInterface
     private function getDiffInSeconds(\DateTimeImmutable $start, \DateTimeImmutable $end): int
     {
         return intval((new CarbonImmutable($start))->diffAsCarbonInterval(new CarbonImmutable($end))->totalSeconds);
+    }
+
+    private function getDateTimeWithTimeZone(\DateTimeInterface $dateTime): \DateTimeImmutable
+    {
+        return CarbonImmutable::createFromInterface($dateTime)->setTimezone($this->separatorTimeZone);
     }
 }
