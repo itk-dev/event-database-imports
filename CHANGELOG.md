@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.1.3] - 2025-03-03
+
+- Change DailyOccurrences to split midnight local time
+
 ## [1.1.2] - 2025-02-13
 
 - Add users requested organizations to user view for admins

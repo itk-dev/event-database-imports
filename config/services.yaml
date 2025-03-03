@@ -72,6 +72,10 @@ services:
             $publicPath: '%kernel.project_dir%/public/images/'
             $allowedMineTypes: '%env(json:ALLOWED_IMAGE_MIME_TYPES)%'
 
+    App\Service\TimeInterval:
+        arguments:
+            $separatorTimeZone: '%env(string:APP_DAILY_OCCURRENCE_SEPARATOR_TIMEZONE)%'
+
     App\Utils\UriHelper:
         arguments:
             $defaultUri: '%env(string:APP_DEFAULT_URI)%'
