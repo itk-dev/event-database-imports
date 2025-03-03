@@ -115,18 +115,6 @@ parameters:
 			path: src/DataFixtures/TagsFixtures.php
 
 		-
-			message: '#^Static property App\\Doctrine\\Extensions\\DBAL\\Types\\UTCDateTimeImmutableType\:\:\$utc \(DateTimeZone\|null\) is never assigned null so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Doctrine/Extensions/DBAL/Types/UTCDateTimeImmutableType.php
-
-		-
-			message: '#^Static property App\\Doctrine\\Extensions\\DBAL\\Types\\UTCDateTimeType\:\:\$utc \(DateTimeZone\|null\) is never assigned null so it can be removed from the property type\.$#'
-			identifier: property.unusedType
-			count: 1
-			path: src/Doctrine/Extensions/DBAL/Types/UTCDateTimeType.php
-
-		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 2
