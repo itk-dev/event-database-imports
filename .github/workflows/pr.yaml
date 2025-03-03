@@ -142,7 +142,7 @@ jobs:
           restore-keys: ${{ runner.os }}-${{ matrix.php }}-composer-${{ matrix.prefer }}-
 
       - name: Install dependencies
-        run: composer update --prefer-stable --prefer-dist --no-interaction
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
 
       - name: Run PHPStan
         run: ./vendor/bin/phpstan

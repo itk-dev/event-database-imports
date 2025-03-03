@@ -7,13 +7,13 @@ use App\Entity\Event;
 use App\Entity\Occurrence;
 use App\Model\DateTimeInterval;
 use App\Repository\DailyOccurrenceRepository;
-use App\Service\TimeInterface;
+use App\Service\TimeIntervalInterface;
 use Psr\Log\LoggerInterface;
 
 final readonly class DailyOccurrencesFactory
 {
     public function __construct(
-        private TimeInterface $time,
+        private TimeIntervalInterface $time,
         private DailyOccurrenceRepository $dailyOccurrenceRepository,
         private LoggerInterface $logger,
     ) {

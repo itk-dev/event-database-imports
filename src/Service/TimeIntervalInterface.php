@@ -4,7 +4,7 @@ namespace App\Service;
 
 use App\Model\DateTimeInterval;
 
-interface TimeInterface
+interface TimeIntervalInterface
 {
     /**
      * Split the time span into 1-day DateTimeInterval value objects.

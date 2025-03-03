@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Command;
+namespace App\Command\Event;
 
 use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:event:delete',
+    name: 'app:events:delete',
     description: 'Delete event(s). Can be used to clean-up feed events as these cannot be deleted through EasyAdmin',
 )]
 class EventDeleteCommand extends Command
