@@ -24,6 +24,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final readonly class ImageService implements ImageServiceInterface
 {
+    private const LOCAL_IMAGE_PREFIX = '/images';
+
     public function __construct(
         private HttpClientInterface $client,
         private string $publicPath,
@@ -51,12 +53,12 @@ final readonly class ImageService implements ImageServiceInterface
 
     private function isLocalResource(string $url): bool
     {
-        return str_starts_with($url, $this->defaultUri);
+        return str_starts_with($url, $this->defaultUri.self::LOCAL_IMAGE_PREFIX);
     }
 
     private function getLocalResourcePath(string $url): string
     {
-        $file = str_replace($this->defaultUri.'/images', '', $url);
+        $file = str_replace($this->defaultUri.self::LOCAL_IMAGE_PREFIX, '', $url);
 
         return $this->getRelativePath($file);
     }
