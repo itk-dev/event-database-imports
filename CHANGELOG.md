@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.1.4] - 2025-03-05
+
+- Include path in check for local image resource to avoid falsely identifying images from "v1" as local
+
 ## [1.1.3] - 2025-03-03
 
 - Change DailyOccurrences to split midnight local time
