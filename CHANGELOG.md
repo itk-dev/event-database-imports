@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.1.5] - 2025-03-12
+
+- Add labels to Woodpecker workflow
+- Add stg Woodpecker workflow
+- Add missing license
+
 ## [1.1.4] - 2025-03-05
 
 - Include path in check for local image resource to avoid falsely identifying images from "v1" as local
@@ -89,5 +95,12 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[unreleased]: https://github.com/itk-dev/event-database-imports/compare/main...develop
+[unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.1.5...HEAD
+[1.1.5]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.5
+[1.1.4]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.4
+[1.1.3]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.3
+[1.1.2]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.2
+[1.1.1]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.1
+[1.1.0]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.0
+[1.0.1]: https://github.com/itk-dev/event-database-imports/releases/tag/1.0.1
 [1.0.0]: https://github.com/itk-dev/event-database-imports/releases/tag/1.0.0
