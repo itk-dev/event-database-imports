@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- Set "updated at" to newest of either entity or entity relations when indexing 
+- Set "updated at" to newest of either entity or entity relations when indexing
 
 ## [1.1.5] - 2025-03-12
 
