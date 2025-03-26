@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- Fix start/end not required for occurrences in EasyAdmin
+
 ## [1.1.5] - 2025-03-12
 
 - Add labels to Woodpecker workflow

@@ -13,6 +13,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OccurrenceRepository::class)]
 class Occurrence implements IndexItemInterface, EditableEntityInterface
@@ -28,12 +29,17 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
     #[SerializedPath('[entityId]')]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: false)]
     #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
     private ?\DateTimeImmutable $start = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: false)]
     #[Groups([IndexNames::Events->value, IndexNames::Occurrences->value])]
+    #[Assert\DateTime]
+    #[Assert\Expression(
+        'this.getStart() < this.getEnd()',
+        message: 'The start date must be before the end date'
+    )]
     private ?\DateTimeImmutable $end = null;
 
     #[ORM\Column(length: 255, nullable: true)]
