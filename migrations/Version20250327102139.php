@@ -30,7 +30,7 @@ final class Version20250326151430 extends AbstractMigration
 
         // Process each record
         foreach ($records as $record) {
-            if ($record['excerpt'] === null) {
+            if (null === $record['excerpt']) {
                 continue;  // Skip if excerpt is null
             }
 
