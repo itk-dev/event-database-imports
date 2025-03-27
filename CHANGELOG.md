@@ -10,7 +10,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [1.1.6] - 2025-03-27
 
-- Fix special char handling in event excerpt field
+- Fix special char handling in event excerpt field, fix wrong chars in existing excerpt fields
 - Fix start/end not required for occurrences in EasyAdmin
 - Set "updated at" to newest of either entity or entity relations when indexing
 
