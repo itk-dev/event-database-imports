@@ -8,6 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- Fix special char handling in event excerpt field
 - Fix start/end not required for occurrences in EasyAdmin
 - Set "updated at" to newest of either entity or entity relations when indexing
 
