@@ -2,6 +2,7 @@
 
 namespace App\Service\Indexing;
 
+use App\Entity\DailyOccurrence;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
 use Elastic\Elasticsearch\Client;
@@ -25,6 +26,13 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
 
     public function serialize(IndexItemInterface $item): array
     {
+        if (!$item instanceof DailyOccurrence) {
+            throw new \InvalidArgumentException('Item must be an instance of DailyOccurrence.');
+        }
+
+        $updatedAt = $this->getUpdatedAt($item);
+        $item->setUpdatedAt($updatedAt);
+
         $contextBuilder = (new ObjectNormalizerContextBuilder())
             ->withGroups([IndexNames::Occurrences->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
@@ -38,5 +46,25 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
         $data['event'] = $this->indexingEvents->serialize($item->getEvent());
 
         return $data;
+    }
+
+    private function getUpdatedAt(DailyOccurrence $occurrence): \DateTime
+    {
+        $updatedAt = $occurrence->getUpdatedAt();
+        $event = $occurrence->getEvent();
+
+        $updatedAt = max($updatedAt, $event->getOrganization()?->getUpdatedAt());
+        $updatedAt = max($updatedAt, $event->getLocation()?->getUpdatedAt());
+        $updatedAt = max($updatedAt, $event->getImage()?->getUpdatedAt());
+
+        foreach ($event->getPartners() as $partner) {
+            $updatedAt = max($updatedAt, $partner->getUpdatedAt());
+        }
+
+        foreach ($event->getOccurrences() as $occurrence) {
+            $updatedAt = max($updatedAt, $occurrence->getUpdatedAt());
+        }
+
+        return $updatedAt;
     }
 }
