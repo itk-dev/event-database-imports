@@ -84,7 +84,6 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
             $excerpt = $entity->getExcerpt();
             if (!empty($excerpt)) {
-                $excerpt = $this->contentNormalizer->sanitize($excerpt);
                 $excerpt = $this->contentNormalizer->trimLength($excerpt, Event::EXCERPT_MAX_LENGTH);
                 $entity->setExcerpt($excerpt);
             } elseif (!is_null($description)) {

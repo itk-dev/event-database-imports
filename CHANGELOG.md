@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
+- Fix special char handling in event excerpt field
 
 ## [1.1.5] - 2025-03-12
 
