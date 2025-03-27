@@ -32,6 +32,9 @@ final class IndexingEvents extends AbstractIndexingElastic
             throw new \InvalidArgumentException('Item must be an instance of Event.');
         }
 
+        $updatedAt = $this->getUpdatedAt($item);
+        $item->setUpdatedAt($updatedAt);
+
         $contextBuilder = (new ObjectNormalizerContextBuilder())
             ->withGroups([IndexNames::Events->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
@@ -60,5 +63,24 @@ final class IndexingEvents extends AbstractIndexingElastic
         $data['location'] = null === $location ? null : $this->indexingLocations->serialize($location);
 
         return $data;
+    }
+
+    private function getUpdatedAt(Event $event): \DateTime
+    {
+        $updatedAt = $event->getUpdatedAt();
+
+        $updatedAt = max($updatedAt, $event->getOrganization()?->getUpdatedAt());
+        $updatedAt = max($updatedAt, $event->getLocation()?->getUpdatedAt());
+        $updatedAt = max($updatedAt, $event->getImage()?->getUpdatedAt());
+
+        foreach ($event->getPartners() as $partner) {
+            $updatedAt = max($updatedAt, $partner->getUpdatedAt());
+        }
+
+        foreach ($event->getOccurrences() as $occurrence) {
+            $updatedAt = max($updatedAt, $occurrence->getUpdatedAt());
+        }
+
+        return $updatedAt;
     }
 }

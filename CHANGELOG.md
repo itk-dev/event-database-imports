@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.1.6] - 2025-03-27
+
+- Fix special char handling in event excerpt field, fix wrong chars in existing excerpt fields
+- Fix start/end not required for occurrences in EasyAdmin
+- Set "updated at" to newest of either entity or entity relations when indexing
+
 ## [1.1.5] - 2025-03-12
 
 - Add labels to Woodpecker workflow
@@ -95,7 +101,8 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.1.5...HEAD
+[unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...HEAD
+[1.1.6]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.6
 [1.1.5]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.5
 [1.1.4]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.4
 [1.1.3]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.3

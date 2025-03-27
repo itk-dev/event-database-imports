@@ -29,9 +29,11 @@ class EmbedOccurrenceCrudController extends AbstractBaseCrudController
             FormField::addFieldset('Dates')
                 ->setLabel(new TranslatableMessage('admin.occurrence.dates.headline')),
             DateTimeField::new('start')
+                ->setHtmlAttribute('required', 'required')
                 ->setLabel(new TranslatableMessage('admin.occurrence.dates.start'))
                 ->setColumns(6),
             DateTimeField::new('end')
+                ->setHtmlAttribute('required', 'required')
                 ->setLabel(new TranslatableMessage('admin.occurrence.dates.end'))
                 ->setColumns(6),
 
