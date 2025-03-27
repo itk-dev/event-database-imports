@@ -247,12 +247,6 @@ parameters:
 			path: src/Repository/VocabularyRepository.php
 
 		-
-			message: '#^Call to an undefined method App\\Service\\Indexing\\IndexItemInterface\:\:getEvent\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingDailyOccurrences.php
-
-		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -287,12 +281,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: src/Service/Indexing/IndexingLocations.php
-
-		-
-			message: '#^Call to an undefined method App\\Service\\Indexing\\IndexItemInterface\:\:getEvent\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingOccurrences.php
 
 		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
