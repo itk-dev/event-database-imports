@@ -1,5 +1,6 @@
 services:
   phpfpm:
+    image: itkdev/php8.4-fpm:latest
     environment:
       - PHP_UPLOAD_MAX_FILESIZE=40M
       - PHP_POST_MAX_SIZE=50M

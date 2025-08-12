@@ -40,7 +40,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         $params = [
             'index' => $this::INDEX_ALIAS,
-            'id' => $item->getId(),
+            'id' => (string) $item->getId(),
             'body' => $this->serialize($item),
         ];
 
@@ -61,7 +61,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         $params = [
             'index' => $this::INDEX_ALIAS,
-            'id' => $id,
+            'id' => (string) $id,
         ];
 
         try {

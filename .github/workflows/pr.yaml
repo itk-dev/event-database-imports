@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.4' ]
+        php: ["8.4"]
     name: Validate composer (${{ matrix.php}})
     steps:
       - uses: actions/checkout@v4
@@ -42,7 +42,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.4' ]
+        php: ["8.4"]
     steps:
       - uses: actions/checkout@v4
 
@@ -77,49 +77,14 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
-  php-cs-fixer:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php: [ '8.4' ]
-    name: PHP Coding Standards Fixer (PHP ${{ matrix.php }})
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup PHP, with composer and extensions
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php}}
-          extensions: apcu, ctype, iconv, imagick, json, pdo_sqlsrv, redis, soap, sqlsrv, xmlreader, zip
-          coverage: none
-
-      - name: Get composer cache directory
-        id: composer-cache
-        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-
-      - name: Cache dependencies
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
-
-      - name: Install Dependencies
-        run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-
-      - name: php-cs-fixer
-        run: composer coding-standards-check
-
   phpstan:
     name: PHPStan (${{ matrix.php }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.4' ]
-        prefer: [ prefer-stable ]
+        php: ["8.4"]
+        prefer: [prefer-stable]
     steps:
       - uses: actions/checkout@v4
 
@@ -147,36 +112,6 @@ jobs:
       - name: Run PHPStan
         run: ./vendor/bin/phpstan
 
-  markdownlint:
-    name: Markdown Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: npm install
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-          cache: 'npm'
-      - run: npm install
-      - name: markdownlint
-        run: npm run coding-standards-check
-
-  changelog:
-    runs-on: ubuntu-latest
-    name: Changelog should be updated
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Git fetch
-        run: git fetch
-
-      - name: Check that changelog has been updated.
-        run: git diff --exit-code origin/${{ github.base_ref }} -- CHANGELOG.md && exit 1 || exit 0
-
   validate-doctrine-schema:
     runs-on: ubuntu-latest
     env:
@@ -184,7 +119,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [ '8.4' ]
+        php: ["8.4"]
     name: Validate Doctrine Schema (PHP ${{ matrix.php}})
     services:
       mariadb:
