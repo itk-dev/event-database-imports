@@ -7,12 +7,10 @@ use App\Entity\Organization;
 use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
-use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
@@ -134,20 +132,22 @@ class EventCrudController extends AbstractBaseCrudController
         yield FormField::addFieldset('Organizer information')
                 ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
 
-        if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            yield AssociationField::new('organization')
-                ->setLabel(new TranslatableMessage('admin.event.edited.organization'));
-        } else {
-            yield AssociationField::new('organization')
-                ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
-                ->setQueryBuilder(
-                    fn (QueryBuilder $queryBuilder) => $queryBuilder
-                        ->select('o')
-                        ->from(Organization::class, 'o')
-                        ->where(':user MEMBER OF o.users')
-                        ->setParameter('user', $this->getUser())
-                );
+        $organization = AssociationField::new('organization')
+            ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
+            // We assume at least one organization exist for non-editor users
+            // (cf. editor stuff below).
+            ->setRequired(true)
+            ->setFormTypeOption('placeholder', new TranslatableMessage('admin.event.organizer.placeholder'));
+        // Limit organization choices for non-editors to the organizations the user is a member of.
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $userOrganizations = $this->getUser()->getOrganizations();
+            $organization
+                ->setFormTypeOption('choices', $userOrganizations)
+                // Make sure that the user is not forced to make a choice if none exists.
+                ->setRequired($userOrganizations->count() > 0);
         }
+        yield $organization;
+
         yield AssociationField::new('partners')
                 ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
                 ->hideOnDetail();

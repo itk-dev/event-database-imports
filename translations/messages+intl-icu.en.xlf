@@ -653,6 +653,10 @@
         <source>admin.user.registrationNotes</source>
         <target>Requested organizers</target>
       </trans-unit>
+      <trans-unit id="MaqqeAe" resname="admin.event.organizer.placeholder">
+        <source>admin.event.organizer.placeholder</source>
+        <target>admin.event.organizer.placeholder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
