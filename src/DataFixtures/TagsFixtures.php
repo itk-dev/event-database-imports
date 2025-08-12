@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Tag;
+use App\Entity\Vocabulary;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -49,7 +50,7 @@ final class TagsFixtures extends Fixture implements DependentFixtureInterface
     {
         $tag = new Tag();
         $tag->setName($name)
-            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED))
+            ->addVocabulary($this->getReference(VocabularyFixtures::MANAGED, Vocabulary::class))
             ->setEditable($editable);
 
         $manager->persist($tag);

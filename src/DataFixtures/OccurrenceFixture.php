@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Event;
 use App\Entity\Occurrence;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -86,7 +87,7 @@ final class OccurrenceFixture extends Fixture implements DependentFixtureInterfa
             ->setTicketPriceRange($price)
             ->setRoom($room)
             ->setEditable($editable)
-            ->setEvent($this->getReference($event));
+            ->setEvent($this->getReference($event, Event::class));
 
         $manager->persist($occurrence);
         $this->addReference($reference, $occurrence);

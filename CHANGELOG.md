@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- Updated fixtures
+
 ## [1.1.6] - 2025-03-27
 
 - Fix special char handling in event excerpt field, fix wrong chars in existing excerpt fields
