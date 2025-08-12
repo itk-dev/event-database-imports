@@ -1,4 +1,4 @@
-{% extends "app/base.html.twig" %}
+{% extends 'app/base.html.twig' %}
 
 {% set _username_label = username_label is defined ? username_label|trans : 'login_page.username'|trans({}, 'EasyAdminBundle') %}
 {% set _password_label = password_label is defined ? password_label|trans : 'login_page.password'|trans({}, 'EasyAdminBundle') %}
@@ -10,7 +10,7 @@
     <p>Få dine arrangementer og events bredt ud ved at lægge dem ind i Aarhus Kommunes eventdatabase. Er du arrangør og ønsker at få dine events med, så læs mere på: <a href="https://arrangoer.aarhus.dk/markedsfoering/det-sker-i-aarhus-eventdatabasen/">arrangoer.aarhus.dk</a></p>
     <h2>Brugeraftale</h2>
 
-    {% include('app/accept_terms/terms.html.twig') %}
+    {{ include(('app/accept_terms/terms.html.twig')) }}
 
     <h2>Kontakt</h2>
     <p><a href="mailto:kommunikation@mkb.aarhus.dk">kommunikation@mkb.aarhus.dk</a></p>
@@ -31,38 +31,38 @@
     {% endif %}
 
     <div class="form-group">
-        {{ form_label(registrationForm.name, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        {{ form_label(registrationForm.name, null, {label_attr: {class: 'form-control-label'}}) }}
         <div class="form-widget">
-            {{ form_widget(registrationForm.name, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(registrationForm.name, {attr: {class: 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ form_label(registrationForm.registrationNotes, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        {{ form_label(registrationForm.registrationNotes, null, {label_attr: {class: 'form-control-label'}}) }}
         <div class="form-widget">
-            {{ form_widget(registrationForm.registrationNotes, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(registrationForm.registrationNotes, {attr: {class: 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ form_label(registrationForm.mail, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        {{ form_label(registrationForm.mail, null, {label_attr: {class: 'form-control-label'}}) }}
         <div class="form-widget">
-            {{ form_widget(registrationForm.mail, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(registrationForm.mail, {attr: {class: 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
-        {{ form_label(registrationForm.plainPassword, null, {'label_attr': {'class': 'form-control-label'}}) }}
+        {{ form_label(registrationForm.plainPassword, null, {label_attr: {class: 'form-control-label'}}) }}
         <div class="form-widget">
-            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+            {{ form_widget(registrationForm.plainPassword, {attr: {class: 'form-control'}}) }}
         </div>
     </div>
 
     <div class="form-group">
         <label class="form-check-label" for="remember_me">
-            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_widget(registrationForm.agreeTerms, {attr: {class: 'form-check-input'}}) }}
         </label>
-        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+        {{ form_label(registrationForm.agreeTerms, null, {label_attr: {class: 'form-check-label'}}) }}
     </div>
 
     <div class="form-group">

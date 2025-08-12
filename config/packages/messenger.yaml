@@ -7,7 +7,7 @@ framework:
             sync: 'sync://'
 
             async:
-                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:
                     exchange:
                         name: async
