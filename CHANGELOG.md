@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- Updated fixtures
+- Updated fixtures. Made event organizer required.
 
 ## [1.1.6] - 2025-03-27
 

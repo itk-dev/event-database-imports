@@ -653,6 +653,10 @@
         <source>admin.user.registrationNotes</source>
         <target state="translated">Ønskede arrangører</target>
       </trans-unit>
+      <trans-unit id="MaqqeAe" resname="admin.event.organizer.placeholder">
+        <source>admin.event.organizer.placeholder</source>
+        <target state="translated">Vælg arrangør</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
