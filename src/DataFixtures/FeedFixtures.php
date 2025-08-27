@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Feed;
+use App\Entity\Organization;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -60,8 +62,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aros')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER))
-            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
+            ->setUser($this->getReference(UserFixtures::USER, User::class))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK, Organization::class));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -103,8 +105,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Aakb')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER))
-            ->setOrganization($this->getReference(OrganizationFixtures::AAKB));
+            ->setUser($this->getReference(UserFixtures::USER, User::class))
+            ->setOrganization($this->getReference(OrganizationFixtures::AAKB, Organization::class));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -149,8 +151,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Bora-bora')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER))
-            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
+            ->setUser($this->getReference(UserFixtures::USER, User::class))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK, Organization::class));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -189,7 +191,7 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - Train')
             ->setEnabled(true)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER));
+            ->setUser($this->getReference(UserFixtures::USER, User::class));
         $manager->persist($feed);
 
         $feed = new Feed();
@@ -216,8 +218,8 @@ final class FeedFixtures extends Fixture implements DependentFixtureInterface
         $feed->setName('Test feed - HeadQuarters')
             ->setEnabled(false)
             ->setConfiguration($config)
-            ->setUser($this->getReference(UserFixtures::USER))
-            ->setOrganization($this->getReference(OrganizationFixtures::ITK));
+            ->setUser($this->getReference(UserFixtures::USER, User::class))
+            ->setOrganization($this->getReference(OrganizationFixtures::ITK, Organization::class));
         $manager->persist($feed);
 
         // Make it stick.

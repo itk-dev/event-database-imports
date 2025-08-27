@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Event;
 use App\Factory\DailyOccurrencesFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -16,10 +17,10 @@ final class DailyOccurrenceFixture extends Fixture implements DependentFixtureIn
 
     public function load(ObjectManager $manager): void
     {
-        $event = $this->getReference(EventFixture::EVENT1);
+        $event = $this->getReference(EventFixture::EVENT1, Event::class);
         $this->dailyOccurrencesFactory->createOrUpdate($event);
 
-        $event = $this->getReference(EventFixture::EVENT2);
+        $event = $this->getReference(EventFixture::EVENT2, Event::class);
         $this->dailyOccurrencesFactory->createOrUpdate($event);
     }
 

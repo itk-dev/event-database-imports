@@ -31,9 +31,10 @@ The application is built around Symfony and event messages for more information 
 [docs](docs/README.md) folder in this repository.
 
 ```shell
-docker compose up -d
+docker compose pull
+docker compose up --detach --remove-orphans
 docker compose exec phpfpm composer install
-docker compose exec phpfpm bin/console doctrine:migrations:migrate
+docker compose exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
 docker compose exec phpfpm bin/console app:index:create
 docker compose exec phpfpm bin/console messenger:setup-transports
 ```
@@ -81,6 +82,13 @@ doctrine fixture load command:
 ```shell
 docker compose exec phpfpm bin/console doctrine:fixtures:load
 ```
+
+After loading fixtures, you can sign (on `/admin/login`) in as one of these users:
+
+| Username           | Password     | Roles        |
+|--------------------|--------------|--------------|
+| `admin@itkdev.dk`  | `admin`      | `ROLE_ADMIN` |
+| `tester@itkdev.dk` | `1233456789` | `ROLE_ADMIN` |
 
 ### Production
 
