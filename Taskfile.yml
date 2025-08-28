@@ -159,6 +159,13 @@ tasks:
           COMPOSE_ARGS: exec phpfpm vendor/bin/phpstan
     silent: true
 
+  test:
+    desc: Run tests
+    cmds:
+      - task: compose
+        vars:
+          COMPOSE_ARGS: exec --env XDEBUG_MODE=coverage phpfpm vendor/bin/phpunit --coverage-clover=coverage/unit.xml
+
   default:
     cmds:
       - task --list
