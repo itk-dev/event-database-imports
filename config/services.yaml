@@ -37,7 +37,7 @@ services:
     App\Command\Index\IndexCreateCommand:
         arguments:
             $indexingServices:
-                !tagged { tag: 'indexing_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
 
     App\Command\Schedule\ImportCommand:
         arguments:
@@ -56,21 +56,21 @@ services:
     App\Service\Populate:
         arguments:
             $indexingServices:
-                !tagged { tag: 'indexing_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
             $repositories:
-                !tagged { tag: 'populate_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'populate_interface', index_by: 'key' }
 
     App\Service\Dump:
         arguments:
             $indexingServices:
-                !tagged { tag: 'indexing_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
 
     App\MessageHandler\IndexHandler:
         arguments:
             $indexingServices:
-                !tagged { tag: 'indexing_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
             $repositories:
-                !tagged { tag: 'populate_interface', index_by: 'key' }
+                !tagged_iterator { tag: 'populate_interface', index_by: 'key' }
 
     App\Service\ImageService:
         arguments:
