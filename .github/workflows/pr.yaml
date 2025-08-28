@@ -34,7 +34,7 @@ jobs:
           docker compose --env-file .env exec --env APP_ENV=prod phpfpm composer install --no-dev --optimize-autoloader
 
   test-suite:
-    name: Test suite (${{ matrix.php }})
+    name: Test suite
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -62,18 +62,13 @@ jobs:
         uses: codecov/codecov-action@v4
         with:
           files: ./coverage/unit.xml
-          flags: unittests, ${{ matrix.php }}
+          flags: unittests
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   phpstan:
-    name: PHPStan (${{ matrix.php }})
+    name: PHPStan
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php: ["8.4"]
-        prefer: [prefer-stable]
     steps:
       - uses: actions/checkout@v4
 
@@ -117,10 +112,18 @@ jobs:
           limit-access-to-actor: false
         if: 1 == runner.debug
 
+      # @TODO Fix this for real
+      - name: Allow Elastic search service to read and write in its data directory
+        run: |
+          mkdir -p .docker/data/elasticsearch/
+          chmod a+w .docker/data/elasticsearch/
+
       - name: Install site
         run: |
           docker network create frontend
-          task site:update
+          task compose -- up --detach
+          task composer -- install
+          task console -- doctrine:migrations:migrate --no-interaction
 
       - name: Validate Doctrine schema
         run: |
