@@ -1,7 +1,7 @@
-<h1>{{ 'email.confirm.please_confirm' | trans }}</h1>
+<h1>{{ 'email.confirm.please_confirm'|trans }}</h1>
 
 <p>
-    {{ 'email.confirm.click_link' | trans }}: <br><br>
-    <a href="{{ signedUrl|raw }}">{{ 'email.confirm.confirm_my_email' | trans }}</a>.
-    {{ 'email.confirm.link_will_expire_in' | trans }} {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    {{ 'email.confirm.click_link'|trans }}: <br><br>
+    <a href="{{ signedUrl|raw }}">{{ 'email.confirm.confirm_my_email'|trans }}</a>.
+    {{ 'email.confirm.link_will_expire_in'|trans }} {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
 </p>

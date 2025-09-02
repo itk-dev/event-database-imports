@@ -9,7 +9,7 @@ parameters:
 services:
     # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
+        autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     # makes classes in src/ available to be used as services
@@ -28,7 +28,7 @@ services:
             tags: ['indexing_interface']
 
         App\Repository\PopulateInterface:
-            tags: [ 'populate_interface' ]
+            tags: ['populate_interface']
 
     App\Asset\EasyAdminAssetPackage:
         arguments:
@@ -36,7 +36,8 @@ services:
 
     App\Command\Index\IndexCreateCommand:
         arguments:
-            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $indexingServices:
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
 
     App\Command\Schedule\ImportCommand:
         arguments:
@@ -54,17 +55,22 @@ services:
 
     App\Service\Populate:
         arguments:
-            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
-            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+            $indexingServices:
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
+            $repositories:
+                !tagged_iterator { tag: 'populate_interface', index_by: 'key' }
 
     App\Service\Dump:
         arguments:
-            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
+            $indexingServices:
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
 
     App\MessageHandler\IndexHandler:
         arguments:
-            $indexingServices: !tagged { tag: 'indexing_interface', index_by: 'key' }
-            $repositories: !tagged { tag: 'populate_interface', index_by: 'key' }
+            $indexingServices:
+                !tagged_iterator { tag: 'indexing_interface', index_by: 'key' }
+            $repositories:
+                !tagged_iterator { tag: 'populate_interface', index_by: 'key' }
 
     App\Service\ImageService:
         arguments:

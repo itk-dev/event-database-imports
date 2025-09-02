@@ -1,10 +1,8 @@
 {
     "name": "itk-dev/event-database-api-2.0",
     "description": "Aarhus event database 2.0",
-    "type": "project",
     "license": "proprietary",
-    "minimum-stability": "stable",
-    "prefer-stable": true,
+    "type": "project",
     "require": {
         "php": ">=8.3",
         "ext-ctype": "*",
@@ -21,76 +19,59 @@
         "guzzlehttp/guzzle": "^7.7",
         "league/uri": "^7.4",
         "liip/imagine-bundle": "^2.11",
-        "nesbot/carbon": "^2.71",
+        "nesbot/carbon": "^3.10",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpstan/phpdoc-parser": "^1.22",
         "psr/http-message": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.7",
-        "symfony/amqp-messenger": "6.4.*",
-        "symfony/asset": "6.4.*",
-        "symfony/cache": "6.4.*",
-        "symfony/console": "6.4.*",
-        "symfony/doctrine-messenger": "6.4.*",
+        "symfony/amqp-messenger": "~7.3.0",
+        "symfony/asset": "~7.3.0",
+        "symfony/cache": "~7.3.0",
+        "symfony/console": "~7.3.0",
+        "symfony/doctrine-messenger": "~7.3.0",
         "symfony/dom-crawler": "^7.0",
-        "symfony/dotenv": "6.4.*",
-        "symfony/expression-language": "6.4.*",
-        "symfony/filesystem": "6.4.*",
+        "symfony/dotenv": "~7.3.0",
+        "symfony/expression-language": "~7.3.0",
+        "symfony/filesystem": "~7.3.0",
         "symfony/flex": "^2",
-        "symfony/framework-bundle": "6.4.*",
-        "symfony/html-sanitizer": "6.4.*",
-        "symfony/http-client": "6.4.*",
-        "symfony/lock": "6.4.*",
-        "symfony/mailer": "6.4.*",
-        "symfony/messenger": "6.4.*",
+        "symfony/framework-bundle": "~7.3.0",
+        "symfony/html-sanitizer": "~7.3.0",
+        "symfony/http-client": "~7.3.0",
+        "symfony/lock": "~7.3.0",
+        "symfony/mailer": "~7.3.0",
+        "symfony/messenger": "~7.3.0",
         "symfony/monolog-bundle": "^3.8",
-        "symfony/property-access": "6.4.*",
-        "symfony/property-info": "6.4.*",
-        "symfony/runtime": "6.4.*",
-        "symfony/scheduler": "6.4.*",
-        "symfony/security-bundle": "6.4.*",
-        "symfony/serializer": "6.4.*",
-        "symfony/string": "6.4.*",
-        "symfony/translation": "6.4.*",
-        "symfony/twig-bundle": "6.4.*",
-        "symfony/validator": "6.4.*",
-        "symfony/yaml": "6.4.*",
+        "symfony/property-access": "~7.3.0",
+        "symfony/property-info": "~7.3.0",
+        "symfony/runtime": "~7.3.0",
+        "symfony/scheduler": "~7.3.0",
+        "symfony/security-bundle": "~7.3.0",
+        "symfony/serializer": "~7.3.0",
+        "symfony/string": "~7.3.0",
+        "symfony/translation": "~7.3.0",
+        "symfony/twig-bundle": "~7.3.0",
+        "symfony/validator": "~7.3.0",
+        "symfony/yaml": "~7.3.0",
         "symfonycasts/reset-password-bundle": "^1.23",
         "symfonycasts/verify-email-bundle": "^1.16"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",
-        "friendsofphp/php-cs-fixer": "^3.20",
+        "ergebnis/composer-normalize": "^2.47",
+        "friendsofphp/php-cs-fixer": "^3.85",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^10.3",
-        "symfony/browser-kit": "6.4.*",
-        "symfony/css-selector": "6.4.*",
+        "symfony/browser-kit": "~7.3.0",
+        "symfony/css-selector": "~7.3.0",
         "symfony/maker-bundle": "^1.49",
         "symfony/phpunit-bridge": "^6.3",
-        "symfony/stopwatch": "^6.4",
-        "symfony/web-profiler-bundle": "^6.4"
-    },
-    "config": {
-        "allow-plugins": {
-            "php-http/discovery": true,
-            "phpstan/extension-installer": true,
-            "symfony/flex": true,
-            "symfony/runtime": true
-        },
-        "sort-packages": true
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        }
+        "symfony/stopwatch": "^7.3",
+        "symfony/web-profiler-bundle": "^7.3",
+        "vincentlanglet/twig-cs-fixer": "^3.9"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
@@ -101,35 +82,54 @@
         "symfony/polyfill-php80": "*",
         "symfony/polyfill-php81": "*"
     },
-    "scripts": {
-        "auto-scripts": {
-            "cache:clear": "symfony-cmd",
-            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "symfony/flex": true,
+            "symfony/runtime": true
         },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": true,
+            "docker": false,
+            "require": "7.3.*"
+        }
+    },
+    "scripts": {
         "post-install-cmd": [
             "@auto-scripts"
         ],
         "post-update-cmd": [
             "@auto-scripts"
         ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
         "coding-standards-apply": [
             "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix"
         ],
         "coding-standards-check": [
             "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run"
-        ],
-        "translations-update": [
-            "# We need a translation from en to en (!) (without prefix) to be able to process placeholders in en.",
-            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force en --prefix=''",
-            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force da",
-            "# Mark default translations (prefixed with `__`) as “Needs work” in Danish translations",
-            "sed --in-place='' 's/<target>__/<target state=\"needs-l10n\">__/' translations/*.da.*xlf"
-        ],
-        "psalm": [
-            "./vendor/bin/psalm --no-cache"
-        ],
-        "queues": [
-            "bin/console messenger:consume async scheduler_default --failure-limit=1 -vvv"
         ],
         "elastic-fix-flood": [
             "curl -X PUT \"elasticsearch:9200/_cluster/settings?pretty\" -H 'Content-Type: application/json' -d'\n{\n    \"persistent\": {\n        \"cluster.routing.allocation.disk.watermark.low\": \"90%\",\n        \"cluster.routing.allocation.disk.watermark.low.max_headroom\": \"100MB\",\n        \"cluster.routing.allocation.disk.watermark.high\": \"98%\",\n        \"cluster.routing.allocation.disk.watermark.high.max_headroom\": \"20MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.max_headroom\": \"5MB\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen\": \"99%\",\n        \"cluster.routing.allocation.disk.watermark.flood_stage.frozen.max_headroom\": \"5MB\"\n    }\n}\n'",
@@ -137,16 +137,19 @@
         ],
         "elastic-health": [
             "curl -X GET \"elasticsearch:9200/_cluster/health?wait_for_status=yellow&timeout=50s&pretty\"\n"
+        ],
+        "psalm": [
+            "./vendor/bin/psalm --no-cache"
+        ],
+        "queues": [
+            "bin/console messenger:consume async scheduler_default --failure-limit=1 -vvv"
+        ],
+        "translations-update": [
+            "# We need a translation from en to en (!) (without prefix) to be able to process placeholders in en.",
+            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force en --prefix=''",
+            "DEFAULT_LOCALE=en bin/console translation:extract --clean --force da",
+            "# Mark default translations (prefixed with `__`) as “Needs work” in Danish translations",
+            "sed --in-place='' 's/<target>__/<target state=\"needs-l10n\">__/' translations/*.da.*xlf"
         ]
-    },
-    "conflict": {
-        "symfony/symfony": "*"
-    },
-    "extra": {
-        "symfony": {
-            "allow-contrib": false,
-            "require": "6.4.*",
-            "docker": false
-        }
     }
 }

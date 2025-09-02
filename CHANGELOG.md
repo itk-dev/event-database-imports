@@ -8,6 +8,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-69](https://github.com/itk-dev/event-database-imports/pull/69)
+  Updated project template and cleaned up
+
 ## [1.1.6] - 2025-03-27
 
 - Fix special char handling in event excerpt field, fix wrong chars in existing excerpt fields
