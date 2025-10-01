@@ -53,7 +53,7 @@ class ImportCommand extends Command
             $progressBar->setFormat('[%bar%] %elapsed% (%memory%): Imported %current% events');
             $progressBar->start();
 
-            foreach ($this->feedReader->readFeeds() as $item) {
+            foreach ($this->feedReader->readFeedsASync() as $item) {
                 $progressBar->advance();
             }
 
