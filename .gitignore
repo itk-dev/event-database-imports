@@ -29,6 +29,7 @@ node_modules/
 ###> phpunit/phpunit ###
 /phpunit.xml
 /.phpunit.cache/
+/coverage
 ###< phpunit/phpunit ###
 
 ###> liip/imagine-bundle ###
