@@ -21,14 +21,13 @@ class FeedReader implements FeedReaderInterface
     public const string ASYNC_QUEUE = 'async';
 
     public function __construct(
-        private readonly MessageBusInterface     $messageBus,
-        private readonly FeedParserInterface     $feedParser,
+        private readonly MessageBusInterface $messageBus,
+        private readonly FeedParserInterface $feedParser,
         private readonly FeedConfigurationMapper $configurationMapper,
-        private readonly FeedRepository          $feedRepository,
-        private readonly FeedItemRepository      $feedItemRepository,
-        private readonly LoggerInterface         $logger,
-    )
-    {
+        private readonly FeedRepository $feedRepository,
+        private readonly FeedItemRepository $feedItemRepository,
+        private readonly LoggerInterface $logger,
+    ) {
     }
 
     /**
