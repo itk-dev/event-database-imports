@@ -21,13 +21,14 @@ class FeedReader implements FeedReaderInterface
     public const string ASYNC_QUEUE = 'async';
 
     public function __construct(
-        private readonly MessageBusInterface $messageBus,
-        private readonly FeedParserInterface $feedParser,
+        private readonly MessageBusInterface     $messageBus,
+        private readonly FeedParserInterface     $feedParser,
         private readonly FeedConfigurationMapper $configurationMapper,
-        private readonly FeedRepository $feedRepository,
-        private readonly FeedItemRepository $feedItemRepository,
-        private readonly LoggerInterface $logger,
-    ) {
+        private readonly FeedRepository          $feedRepository,
+        private readonly FeedItemRepository      $feedItemRepository,
+        private readonly LoggerInterface         $logger,
+    )
+    {
     }
 
     /**
@@ -67,13 +68,11 @@ class FeedReader implements FeedReaderInterface
         $feeds = $this->getEnabledFeeds($limit, $force, $feedIds);
 
         foreach ($feeds as $feed) {
-            foreach ($this->readFeed($feed, $limit, $force) as $item) {
-                $message = new ReadFeedMessage($feed->getId(), $limit, $force);
+            $message = new ReadFeedMessage($feed->getId(), $limit, $force);
 
-                $this->messageBus->dispatch($message, [new TransportNamesStamp(self::ASYNC_QUEUE)]);
+            $this->messageBus->dispatch($message, [new TransportNamesStamp(self::ASYNC_QUEUE)]);
 
-                yield $item;
-            }
+            yield $feed;
         }
     }
 

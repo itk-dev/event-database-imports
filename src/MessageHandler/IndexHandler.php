@@ -6,6 +6,7 @@ use App\Exception\IndexingException;
 use App\Message\IndexMessage;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 final readonly class IndexHandler
@@ -28,11 +29,13 @@ final readonly class IndexHandler
             try {
                 $service = $indexingServices[$index];
                 $service->index($entity);
-            } catch (IndexingException $exception) {
-                $this->logger->error(sprintf('Indexing exception: %s (%d) with entity id %d', $exception->getMessage(), $exception->getCode(), $message->getEntityId()));
+            } catch (IndexingException $e) {
+                $this->logger->error(sprintf('Indexing exception: %s (%d) with entity id %d', $e->getMessage(), $e->getCode(), $message->getEntityId()));
             }
         } else {
             $this->logger->error(sprintf('Unable to index entity into index %s with id %d', $message->getIndexName()->value, $message->getEntityId()));
+
+            throw new UnrecoverableMessageHandlingException('Unable to index entity into index %s with id %d', $message->getIndexName()->value, $message->getEntityId());
         }
     }
 }

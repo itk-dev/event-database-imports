@@ -50,7 +50,7 @@ class ImportCommand extends Command
 
         try {
             $progressBar = new ProgressBar($output);
-            $progressBar->setFormat('[%bar%] %elapsed% (%memory%): Imported %current% events');
+            $progressBar->setFormat('[%bar%] %elapsed% (%memory%): scheduled %current% feed jobs');
             $progressBar->start();
 
             foreach ($this->feedReader->readFeedsASync() as $item) {
@@ -59,7 +59,7 @@ class ImportCommand extends Command
 
             $progressBar->finish();
 
-            $this->logger->info('Schedule feeds import: Successfully imported feeds');
+            $this->logger->info('Schedule feeds import: Successfully dispatched feed import jobs');
 
             $this->ping('app:schedule:import', $this->monitoringUrl, $this->client, $this->logger);
 
@@ -67,7 +67,7 @@ class ImportCommand extends Command
         } catch (\Throwable $e) {
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
-            $this->logger->error('Schedule feeds import: Error importing feeds: '.$e->getMessage());
+            $this->logger->error('Schedule feeds import: Error scheduling import jobs: '.$e->getMessage());
 
             return Command::FAILURE;
         }

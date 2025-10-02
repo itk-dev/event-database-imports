@@ -7,6 +7,7 @@ use App\Repository\FeedRepository;
 use App\Service\Feeds\Reader\FeedReader;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Exception\UnrecoverableMessageHandlingException;
 
 #[AsMessageHandler]
 readonly class ReadFeedHandler
@@ -32,6 +33,8 @@ readonly class ReadFeedHandler
             }
         } catch (\Throwable $e) {
             $this->logger->error($e->getMessage(), ['exception' => $e]);
+
+            throw new UnrecoverableMessageHandlingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }
