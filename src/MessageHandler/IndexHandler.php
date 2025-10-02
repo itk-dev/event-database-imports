@@ -33,9 +33,11 @@ final readonly class IndexHandler
                 $this->logger->error(sprintf('Indexing exception: %s (%d) with entity id %d', $e->getMessage(), $e->getCode(), $message->getEntityId()));
             }
         } else {
-            $this->logger->error(sprintf('Unable to index entity into index %s with id %d', $message->getIndexName()->value, $message->getEntityId()));
+            $message = sprintf('Unable to index entity into index %s with id %d', $message->getIndexName()->value, $message->getEntityId());
 
-            throw new UnrecoverableMessageHandlingException('Unable to index entity into index %s with id %d', $message->getIndexName()->value, $message->getEntityId());
+            $this->logger->error($message);
+
+            throw new UnrecoverableMessageHandlingException($message);
         }
     }
 }
