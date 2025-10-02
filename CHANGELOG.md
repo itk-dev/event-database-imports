@@ -11,7 +11,8 @@ See [keep a changelog] for information about writing changes to this log.
 ## [1.2.0] - 2025-09-02
 
 - [PR-71](https://github.com/itk-dev/event-database-imports/pull/70)
-  Run schedule feed imports as separate async jobs to avoid failures in one feed blocking others
+  - Run schedule feed imports as separate async jobs to avoid failures in one feed blocking others  
+  - Update github actions to latest versions
 - [PR-70](https://github.com/itk-dev/event-database-imports/pull/70)
   Symfony 7.3 and PHP 8.4
 - [PR-69](https://github.com/itk-dev/event-database-imports/pull/69)
