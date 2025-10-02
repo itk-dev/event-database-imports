@@ -25,7 +25,9 @@ readonly class ReadFeedHandler
             $feed = $this->feedRepository->findOneBy(['id' => $message->feedId]);
 
             if (null !== $feed) {
-                $this->feedReader->readFeed($feed, $message->limit, $message->force);
+                foreach ($this->feedReader->readFeed($feed, $message->limit, $message->force) as $item) {
+                    // Do nothing.
+                }
 
                 $this->logger->info('Feed read successfully', ['feed_id' => $message->feedId]);
             } else {
