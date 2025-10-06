@@ -1,5 +1,6 @@
 services:
   phpfpm:
+    image: itkdev/php8.4-fpm:latest
     environment:
       - PHP_UPLOAD_MAX_FILESIZE=40M
       - PHP_POST_MAX_SIZE=50M
@@ -11,6 +12,10 @@ services:
     environment:
       APP_PATH_PREFIX: ${APP_PATH_PREFIX}
       NGINX_MAX_BODY_SIZE: 50M
+    labels:
+      # HTTPS config - uncomment to enable redirect from :80 to :443
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   rabbit:
     image: rabbitmq:4-management-alpine
@@ -45,6 +50,8 @@ services:
 
   node:
     image: node:22
+    profiles:
+      - dev
     networks:
       - app
     working_dir: /app

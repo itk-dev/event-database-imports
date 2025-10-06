@@ -31,90 +31,6 @@ parameters:
 			path: src/Command/Migrate/MigrateTagsCommand.php
 
 		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 2
-			path: src/DataFixtures/DailyOccurrenceFixture.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 2
-			path: src/DataFixtures/DailyOccurrenceFixture.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 13
-			path: src/DataFixtures/EventFixture.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 13
-			path: src/DataFixtures/EventFixture.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 9
-			path: src/DataFixtures/FeedFixtures.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 9
-			path: src/DataFixtures/FeedFixtures.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: src/DataFixtures/LocationFixture.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/DataFixtures/LocationFixture.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: src/DataFixtures/OccurrenceFixture.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/DataFixtures/OccurrenceFixture.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: src/DataFixtures/OrganizationFixtures.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/DataFixtures/OrganizationFixtures.php
-
-		-
-			message: '#^Method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\) invoked with 1 parameter, 2 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: src/DataFixtures/TagsFixtures.php
-
-		-
-			message: '#^Unable to resolve the template type T in call to method Doctrine\\Common\\DataFixtures\\AbstractFixture\:\:getReference\(\)$#'
-			identifier: argument.templateType
-			count: 1
-			path: src/DataFixtures/TagsFixtures.php
-
-		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 2
@@ -259,24 +175,6 @@ parameters:
 			path: src/Service/Indexing/IndexingEvents.php
 
 		-
-			message: '#^Offset ''dailyOccurrences'' does not exist on array\{tags\: list, occurrences\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
-			message: '#^Offset ''imageUrls'' does not exist on array\{tags\: list, occurrences\: list, dailyOccurrences\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
-			message: '#^Offset ''occurrences'' does not exist on array\{tags\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -297,12 +195,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingTags.php
-
-		-
-			message: '#^Cannot unset offset ''vocabularies'' on array\{vocabulary\: list\}\.$#'
-			identifier: unset.offset
 			count: 1
 			path: src/Service/Indexing/IndexingTags.php
 

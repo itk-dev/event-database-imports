@@ -7,7 +7,7 @@ framework:
             sync: 'sync://'
 
             async:
-                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 options:
                     exchange:
                         name: async
@@ -26,6 +26,7 @@ framework:
             'App\Message\GeocoderMessage': async
             'App\Message\ImageMessage': async
             'App\Message\IndexMessage': async
+            'App\Message\ReadFeedMessage': async
             'Liip\ImagineBundle\Message\WarmupCache': async
             'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
 

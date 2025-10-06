@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Address;
 use App\Entity\Location;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -17,7 +18,7 @@ final class LocationFixture extends Fixture implements DependentFixtureInterface
         $location->setName('ITK Development')
             ->setMail('itkdev@mkb.aarhus.dk')
             ->setUrl('https://itk.aarhus.dk/om-itk/afdelinger/development/')
-            ->setAddress($this->getReference(AddressFixture::ITKDEV))
+            ->setAddress($this->getReference(AddressFixture::ITKDEV, Address::class))
             ->setDisabilityAccess(true)
             ->setEditable(true);
         $manager->persist($location);

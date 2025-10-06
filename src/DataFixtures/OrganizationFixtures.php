@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Organization;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -68,7 +69,7 @@ final class OrganizationFixtures extends Fixture implements DependentFixtureInte
         $org->setName($name)
             ->setMail($mail)
             ->setUrl($url)
-            ->addUser($this->getReference(UserFixtures::USER));
+            ->addUser($this->getReference(UserFixtures::USER, User::class));
         $manager->persist($org);
         $this->addReference($reference, $org);
     }
