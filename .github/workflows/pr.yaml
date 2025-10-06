@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Composer install
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       # https://taskfile.dev/installation/#github-actions
       - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: go-task/setup-task@v1
         with:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -37,10 +37,10 @@ jobs:
     name: Test suite
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: go-task/setup-task@v1
         with:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -59,7 +59,7 @@ jobs:
           task test
 
       - name: Upload coverage to Codecov test
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           files: ./coverage/unit.xml
           flags: unittests
@@ -70,10 +70,10 @@ jobs:
     name: PHPStan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: go-task/setup-task@v1
         with:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}
@@ -95,10 +95,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Validate Doctrine Schema
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install Task
-        uses: arduino/setup-task@v2
+        uses: go-task/setup-task@v1
         with:
           version: 3.x
           repo-token: ${{ secrets.GITHUB_TOKEN }}

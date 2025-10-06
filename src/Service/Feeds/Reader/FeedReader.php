@@ -4,6 +4,7 @@ namespace App\Service\Feeds\Reader;
 
 use App\Entity\Feed;
 use App\Message\FeedItemDataMessage;
+use App\Message\ReadFeedMessage;
 use App\Repository\FeedItemRepository;
 use App\Repository\FeedRepository;
 use App\Service\Feeds\Mapper\FeedConfigurationMapper;
@@ -58,6 +59,19 @@ class FeedReader implements FeedReaderInterface
             foreach ($this->readFeed($feed, $limit, $force) as $item) {
                 yield $item;
             }
+        }
+    }
+
+    public function readFeedsASync(int $limit = FeedReaderInterface::DEFAULT_OPTION, bool $force = false, array $feedIds = []): iterable
+    {
+        $feeds = $this->getEnabledFeeds($limit, $force, $feedIds);
+
+        foreach ($feeds as $feed) {
+            $message = new ReadFeedMessage($feed->getId(), $limit, $force);
+
+            $this->messageBus->dispatch($message, [new TransportNamesStamp(self::ASYNC_QUEUE)]);
+
+            yield $feed;
         }
     }
 
@@ -134,8 +148,8 @@ class FeedReader implements FeedReaderInterface
 
     /**
      * Clean up FeedItems/Events. Remove all FeedItems where
-     *  - item was not seen on last run and event is null.
-     *  - item was not seen on last run and "sync to feed is active for feed.
+     *  - item was not seen on the last run and event is null.
+     *  - item was not seen on the last run and "sync to feed" is active for feed.
      */
     private function cleanUp(Feed $feed, \DateTimeInterface $date): void
     {
