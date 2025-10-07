@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.2.2] - 2025-10-07
+
+- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73) Set deploy user for rabbitmq container
+
 ## [1.2.1] - 2025-10-07
 
 - [PR-72](https://github.com/itk-dev/event-database-imports/pull/72) Fix missing asset for file upload
