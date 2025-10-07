@@ -208,7 +208,7 @@ class EventCrudController extends AbstractBaseCrudController
         $currentPageName = $this->getContext()?->getCrud()?->getCurrentPage();
         if (Crud::PAGE_EDIT === $currentPageName || Crud::PAGE_NEW === $currentPageName) {
             $imageAssetDto = $this->createAssetDto('field-image.js');
-            $uploadAssetDto = $this->createAssetDto('field-upload.js');
+            $uploadAssetDto = $this->createAssetDto('field-file-upload.js');
 
             $fieldAssetsDto->addJsAsset($imageAssetDto);
             $fieldAssetsDto->addJsAsset($uploadAssetDto);
