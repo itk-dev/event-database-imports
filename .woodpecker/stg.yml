@@ -32,3 +32,4 @@ steps:
         - itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
         - itkdev-docker-compose-server exec phpfpm bin/console messenger:setup-transports
         - itkdev-docker-compose-server exec phpfpm bin/console cache:clear
+        - itkdev-docker-compose-server run --rm phpfpm bin/console assets:install
