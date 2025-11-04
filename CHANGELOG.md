@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file.
 
 See [keep a changelog] for information about writing changes to this log.
 
+- Update composer depenerncies
+
 ## [Unreleased]
 
 ## [1.2.2] - 2025-10-07
