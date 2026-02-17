@@ -1,10 +1,10 @@
-{% extends "app/registration/register.html.twig" %}
+{% extends 'app/registration/register.html.twig' %}
 
 {% block form_pane %}
     <h2 class="pb-2 pt-md-5">{{ page_title|raw|trans }}</h2>
 
-    <p>{{ 'page.confirm.confirmation_link_sent' | trans({'%email%': email}) }}.</p>
-    <p>{{ 'page.confirm.click_to_activate' | trans }}.</p>
-    <p>{{ 'page.confirm.already_confirmed' | trans }}</p>
-    <p><a class="btn btn-primary" href="{{ path('app_admin_login') }}">{{ 'page.confirm.log_in' | trans }}</a></p>
+    <p>{{ 'page.confirm.confirmation_link_sent'|trans({'%email%': email}) }}.</p>
+    <p>{{ 'page.confirm.click_to_activate'|trans }}.</p>
+    <p>{{ 'page.confirm.already_confirmed'|trans }}</p>
+    <p><a class="btn btn-primary" href="{{ path('app_admin_login') }}">{{ 'page.confirm.log_in'|trans }}</a></p>
 {% endblock %}

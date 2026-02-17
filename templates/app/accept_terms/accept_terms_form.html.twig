@@ -1,4 +1,4 @@
-{% extends "app/registration/register.html.twig" %}
+{% extends 'app/registration/register.html.twig' %}
 
 {% block form_pane %}
     <h2 class="pb-2 pt-md-5">{{ page_title|raw|trans }}</h2>
@@ -14,7 +14,6 @@
             <i class="fas fa-external-link-square-alt"></i> brugeraftalen</a> før du kan logge på.
     </div>
 
-
     {{ form_start(registrationForm) }}
     {% if csrf_token_intention|default(false) %}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_intention) }}">
@@ -22,9 +21,9 @@
 
     <div class="form-group">
         <label class="form-check-label" for="remember_me">
-            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_widget(registrationForm.agreeTerms, {attr: {class: 'form-check-input'}}) }}
         </label>
-        {{ form_label(registrationForm.agreeTerms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+        {{ form_label(registrationForm.agreeTerms, null, {label_attr: {class: 'form-check-label'}}) }}
     </div>
 
     <div class="form-group">

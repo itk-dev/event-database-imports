@@ -175,24 +175,6 @@ parameters:
 			path: src/Service/Indexing/IndexingEvents.php
 
 		-
-			message: '#^Offset ''dailyOccurrences'' does not exist on array\{tags\: list, occurrences\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
-			message: '#^Offset ''imageUrls'' does not exist on array\{tags\: list, occurrences\: list, dailyOccurrences\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
-			message: '#^Offset ''occurrences'' does not exist on array\{tags\: list\}\.$#'
-			identifier: offsetAccess.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingEvents.php
-
-		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -213,12 +195,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: src/Service/Indexing/IndexingTags.php
-
-		-
-			message: '#^Cannot unset offset ''vocabularies'' on array\{vocabulary\: list\}\.$#'
-			identifier: unset.offset
 			count: 1
 			path: src/Service/Indexing/IndexingTags.php
 

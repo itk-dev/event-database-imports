@@ -28,8 +28,8 @@ node_modules/
 
 ###> phpunit/phpunit ###
 /phpunit.xml
-.phpunit.result.cache
-coverage
+/.phpunit.cache/
+/coverage
 ###< phpunit/phpunit ###
 
 ###> liip/imagine-bundle ###
@@ -40,3 +40,7 @@ coverage
 ###> phpstan/phpstan ###
 phpstan.neon
 ###< phpstan/phpstan ###
+
+###> vincentlanglet/twig-cs-fixer ###
+/.twig-cs-fixer.cache
+###< vincentlanglet/twig-cs-fixer ###

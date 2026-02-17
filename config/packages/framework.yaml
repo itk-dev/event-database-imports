@@ -17,6 +17,9 @@ framework:
     php_errors:
         log: true
 
+    # https://symfony.com/doc/current/deployment/proxies.html#but-what-if-the-ip-of-my-reverse-proxy-changes-constantly
+    trusted_proxies: '127.0.0.1,REMOTE_ADDR'
+
     assets:
         base_path: '%env(APP_PATH_PREFIX)%'
 

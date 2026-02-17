@@ -10,6 +10,24 @@ See [keep a changelog] for information about writing changes to this log.
 
 - Updated fixtures. Made event organizer required.
 
+## [1.2.2] - 2025-10-07
+
+- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73) Set deploy user for rabbitmq container
+
+## [1.2.1] - 2025-10-07
+
+- [PR-72](https://github.com/itk-dev/event-database-imports/pull/72) Fix missing asset for file upload
+
+## [1.2.0] - 2025-10-06
+
+- [PR-71](https://github.com/itk-dev/event-database-imports/pull/71)
+  - Run schedule feed imports as separate async jobs to avoid failures in one feed blocking others  
+  - Update github actions to latest versions
+- [PR-70](https://github.com/itk-dev/event-database-imports/pull/70)
+  Symfony 7.3 and PHP 8.4
+- [PR-69](https://github.com/itk-dev/event-database-imports/pull/69)
+  Updated project template and cleaned up
+
 ## [1.1.6] - 2025-03-27
 
 - Fix special char handling in event excerpt field, fix wrong chars in existing excerpt fields
@@ -103,7 +121,10 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...HEAD
+[1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2
+[1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.0...1.2.1
+[1.2.0]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...1.2.0
 [1.1.6]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.6
 [1.1.5]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.5
 [1.1.4]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.4

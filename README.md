@@ -39,6 +39,9 @@ docker compose exec phpfpm bin/console app:index:create
 docker compose exec phpfpm bin/console messenger:setup-transports
 ```
 
+> [!TIP]
+> Pro tip: Run `task site:update` to run the above incantations in one go.
+
 ### Consume messages
 
 In development, you need to consume messages by stating the consumer using the command below. Production setup uses the
@@ -81,6 +84,12 @@ doctrine fixture load command:
 
 ```shell
 docker compose exec phpfpm bin/console doctrine:fixtures:load
+```
+
+Or, using [Task](https://taskfile.dev) by running
+
+```shell
+task fixtures:load
 ```
 
 After loading fixtures, you can sign (on `/admin/login`) in as one of these users:

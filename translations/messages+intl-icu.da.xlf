@@ -583,7 +583,7 @@
       </trans-unit>
       <trans-unit id="3CeSFyF" resname="admin.link.feedItems">
         <source>admin.link.feedItems</source>
-        <target state="translated">Feed kilder</target>
+        <target state="translated">Feedkilder</target>
       </trans-unit>
       <trans-unit id="mPZQjfY" resname="admin.feeditem.id">
         <source>admin.feeditem.id</source>

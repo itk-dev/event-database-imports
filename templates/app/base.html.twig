@@ -1,11 +1,11 @@
-{% include '@EasyAdmin/flash_messages.html.twig' %}
+{{ include('@EasyAdmin/flash_messages.html.twig') }}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>'Det sker i Aarhus' Eventdatabasen</title>
-{#    <link href="/css/bootstrap.min.css" rel="stylesheet">#}
+{# <link href="/css/bootstrap.min.css" rel="stylesheet"> #}
     <link rel="stylesheet" href="{{ asset('app.css', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}">
     <link href="/admin/styles/admin.css" rel="stylesheet">
     <link rel="shortcut icon" type="image/svg" href="{{ asset('/admin/styles/logo.svg', constant('EasyCorp\\Bundle\\EasyAdminBundle\\Asset\\AssetPackage::PACKAGE_NAME')) }}" />
