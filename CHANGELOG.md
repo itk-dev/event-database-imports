@@ -122,7 +122,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...HEAD
-[1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2
+[1.2.2]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2
 [1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...1.2.0
 [1.1.6]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.6
