@@ -41,6 +41,20 @@ class EventCrudController extends AbstractBaseCrudController
         return Event::class;
     }
 
+    public function createEntity(string $entityFqcn): Event
+    {
+        $event = new Event();
+
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $userOrganizations = $this->getUser()->getOrganizations();
+            if (1 === $userOrganizations->count()) {
+                $event->setOrganization($userOrganizations->first());
+            }
+        }
+
+        return $event;
+    }
+
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -132,7 +146,7 @@ class EventCrudController extends AbstractBaseCrudController
         yield FormField::addFieldset('Organizer information')
                 ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
 
-        $organization = AssociationField::new('organization')
+        $organizationField = AssociationField::new('organization')
             ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
             // We assume at least one organization exist for non-editor users
             // (cf. editor stuff below).
@@ -141,12 +155,12 @@ class EventCrudController extends AbstractBaseCrudController
         // Limit organization choices for non-editors to the organizations the user is a member of.
         if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
             $userOrganizations = $this->getUser()->getOrganizations();
-            $organization
+            $organizationField
                 ->setFormTypeOption('choices', $userOrganizations)
                 // Make sure that the user is not forced to make a choice if none exists.
                 ->setRequired($userOrganizations->count() > 0);
         }
-        yield $organization;
+        yield $organizationField;
 
         yield AssociationField::new('partners')
                 ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
