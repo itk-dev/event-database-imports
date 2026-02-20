@@ -657,6 +657,10 @@
         <source>admin.event.organizer.placeholder</source>
         <target>admin.event.organizer.placeholder</target>
       </trans-unit>
+      <trans-unit id="fHasOrg" resname="admin.user.filter.has_organization">
+        <source>admin.user.filter.has_organization</source>
+        <target>Has organization</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
