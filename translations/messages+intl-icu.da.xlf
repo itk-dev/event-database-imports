@@ -657,6 +657,10 @@
         <source>admin.event.organizer.placeholder</source>
         <target state="translated">Vælg arrangør</target>
       </trans-unit>
+      <trans-unit id="fEvtHasOrg" resname="admin.event.filter.has_organization">
+        <source>admin.event.filter.has_organization</source>
+        <target state="translated">Har arrangør</target>
+      </trans-unit>
       <trans-unit id="fHasOrg" resname="admin.user.filter.has_organization">
         <source>admin.user.filter.has_organization</source>
         <target state="translated">Har arrangør</target>

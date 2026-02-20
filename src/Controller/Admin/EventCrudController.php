@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\EasyAdmin\Filter\HasOrganizationFilter;
 use App\Entity\Event;
 use App\Entity\Organization;
 use App\Service\ImageServiceInterface;
@@ -185,7 +186,9 @@ class EventCrudController extends AbstractBaseCrudController
     public function configureFilters(Filters $filters): Filters
     {
         if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            $filters->add('feed');
+            $filters
+                ->add('feed')
+                ->add(HasOrganizationFilter::new('organization', new TranslatableMessage('admin.event.filter.has_organization')));
         }
 
         // 'organization' filter has additional config when added in MyEventCrudController
