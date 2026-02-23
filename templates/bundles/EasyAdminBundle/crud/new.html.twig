@@ -32,14 +32,14 @@
 
 {% block configured_stylesheets %}
     {{ parent() }}
-    {{ include('@EasyAdmin/includes/_css_assets.html.twig', { assets: ea_field_assets.cssAssets }, with_context = false) }}
-    {{ include('@EasyAdmin/includes/_encore_link_tags.html.twig', { assets: ea_field_assets.webpackEncoreAssets }, with_context = false) }}
+    {{ include('@EasyAdmin/includes/_css_assets.html.twig', {assets: ea_field_assets.cssAssets}, with_context: false) }}
+    {{ include('@EasyAdmin/includes/_encore_link_tags.html.twig', {assets: ea_field_assets.webpackEncoreAssets}, with_context: false) }}
 {% endblock %}
 
 {% block configured_javascripts %}
     {{ parent() }}
-    {{ include('@EasyAdmin/includes/_js_assets.html.twig', { assets: ea_field_assets.jsAssets }, with_context = false) }}
-    {{ include('@EasyAdmin/includes/_encore_script_tags.html.twig', { assets: ea_field_assets.webpackEncoreAssets }, with_context = false) }}
+    {{ include('@EasyAdmin/includes/_js_assets.html.twig', {assets: ea_field_assets.jsAssets}, with_context: false) }}
+    {{ include('@EasyAdmin/includes/_encore_script_tags.html.twig', {assets: ea_field_assets.webpackEncoreAssets}, with_context: false) }}
 {% endblock %}
 
 {% block content_title %}
@@ -51,7 +51,7 @@
 
 {% block page_actions %}
     {% for action in entity.actions %}
-        {{ include(action.templatePath, { action: action }, with_context = false) }}
+        {{ include(action.templatePath, {action: action}, with_context: false) }}
     {% endfor %}
 {% endblock %}
 
