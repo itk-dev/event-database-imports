@@ -88,18 +88,18 @@ class EventCrudController extends AbstractBaseCrudController
         yield TextField::new('title')
             ->setLabel(new TranslatableMessage('admin.event.title'));
         yield TextareaField::new('excerpt')
-                ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
-                ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
+            ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
+            ->hideOnIndex();
         yield TextEditorField::new('description')
-                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
-                ->hideOnDetail()
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+            ->hideOnDetail()
+            ->hideOnIndex();
         yield TextareaField::new('description')
-                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
-                ->renderAsHtml()
-                ->hideOnIndex()
-                ->hideOnForm();
+            ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+            ->renderAsHtml()
+            ->hideOnIndex()
+            ->hideOnForm();
 
         // Image / Detail view
         yield ImageField::new('image')
@@ -110,42 +110,42 @@ class EventCrudController extends AbstractBaseCrudController
 
                 return $transformed['large'] ?? null;
             })
-        ->hideOnIndex()->hideOnForm();
+            ->hideOnIndex()->hideOnForm();
 
         // Image / Form view
         // @see self::getFieldAssets()
         yield AssociationField::new('image')
-                ->setLabel(new TranslatableMessage('admin.event.basic.image'))
-                ->hideOnIndex()
-                ->renderAsEmbeddedForm(EmbedImageController::class);
+            ->setLabel(new TranslatableMessage('admin.event.basic.image'))
+            ->hideOnIndex()
+            ->renderAsEmbeddedForm(EmbedImageController::class);
         yield AssociationField::new('tags')
-                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->hideOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+            ->hideOnDetail();
         yield ArrayField::new('tags')
-                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->onlyOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+            ->onlyOnDetail();
 
         yield FormField::addFieldset('Occurrences')
-                ->setLabel(new TranslatableMessage('admin.event.occurrences'));
+            ->setLabel(new TranslatableMessage('admin.event.occurrences'));
         yield CollectionField::new('occurrences')
-                ->setLabel(new TranslatableMessage('admin.event.occurrences'))
-                ->hideOnIndex()
-                ->renderExpanded(false)
-                ->useEntryCrudForm();
+            ->setLabel(new TranslatableMessage('admin.event.occurrences'))
+            ->hideOnIndex()
+            ->renderExpanded(false)
+            ->useEntryCrudForm();
 
         yield FormField::addFieldset('Location information')
-                ->setLabel(new TranslatableMessage('admin.event.location.headline'));
+            ->setLabel(new TranslatableMessage('admin.event.location.headline'));
         yield UrlField::new('url')
-                ->setLabel(new TranslatableMessage('admin.event.location.url'))
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.location.url'))
+            ->hideOnIndex();
         yield UrlField::new('ticketUrl')
-                ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl'))
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl'))
+            ->hideOnIndex();
         yield AssociationField::new('location')
-                ->setLabel(new TranslatableMessage('admin.event.location.location'));
+            ->setLabel(new TranslatableMessage('admin.event.location.location'));
 
         yield FormField::addFieldset('Organizer information')
-                ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
+            ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
 
         $organizationField = AssociationField::new('organization')
             ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
@@ -164,23 +164,41 @@ class EventCrudController extends AbstractBaseCrudController
         yield $organizationField;
 
         yield AssociationField::new('partners')
-                ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
-                ->hideOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+            ->hideOnDetail();
         yield ArrayField::new('partners')
             ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
             ->onlyOnDetail();
 
         yield FormField::addFieldset('Edited')
-                ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
-                ->hideWhenCreating();
-        yield AssociationField::new('feed')
+            ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
+            ->hideWhenCreating();
+
+        $event = $this->getContext()?->getEntity()?->getInstance();
+        if (!$event instanceof Event || null !== $event->getFeed()) {
+            yield AssociationField::new('feed')
                 ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
                 ->hideOnForm()
                 ->hideOnIndex();
+        }
+
+        yield TextField::new('created_by')
+            ->setLabel(new TranslatableMessage('admin.event.edited.created_by'))
+            ->setDisabled()
+            ->hideWhenCreating();
+        yield TextField::new('updated_by')
+            ->setLabel(new TranslatableMessage('admin.event.edited.updated_by'))
+            ->setDisabled()
+            ->hideWhenCreating();
+
+        yield DateTimeField::new('created_at')
+            ->setLabel(new TranslatableMessage('admin.event.edited.created'))
+            ->setDisabled()
+            ->hideWhenCreating();
         yield DateTimeField::new('updated_at')
-                ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
-                ->setDisabled()
-                ->hideWhenCreating();
+            ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
+            ->setDisabled()
+            ->hideWhenCreating();
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -206,8 +224,7 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('tags')
             ->add('title')
             ->add('url')
-            ->add('ticketUrl')
-        ;
+            ->add('ticketUrl');
     }
 
     /**

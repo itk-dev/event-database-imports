@@ -5,53 +5,57 @@
       <tool tool-id="symfony" tool-name="Symfony"/>
     </header>
     <body>
-      <trans-unit id="VKDowX6" resname="Error">
+      <trans-unit id="B9r0Hn5" resname="Error">
         <source>Error</source>
         <target>Error</target>
       </trans-unit>
-      <trans-unit id="mvF2KXx" resname="admin.feed.configuration.json_invalid">
+      <trans-unit id="5zw.F74" resname="admin.feed.configuration.json_invalid">
         <source>admin.feed.configuration.json_invalid</source>
         <target>Configuration JSON is not valid</target>
       </trans-unit>
-      <trans-unit id=".esazsm" resname="Your password should be at least {{ limit }} characters">
+      <trans-unit id="_OmnKuR" resname="Your password should be at least {{ limit }} characters">
         <source>Your password should be at least {{ limit }} characters</source>
         <target>Your password should be at least {{ limit }} characters</target>
       </trans-unit>
-      <trans-unit id="P6oTY4x" resname="entity.address.street_postcode.not_unique">
+      <trans-unit id="rHEtCQG" resname="entity.address.street_postcode.not_unique">
         <source>entity.address.street_postcode.not_unique</source>
         <target>An address all ready exists with the sam street and postcode</target>
       </trans-unit>
-      <trans-unit id="jHotkHp" resname="entity.user.mail.not_unique">
+      <trans-unit id="ROSmmpj" resname="entity.user.mail.not_unique">
         <source>entity.user.mail.not_unique</source>
         <target>A user all ready exists with the same email</target>
       </trans-unit>
-      <trans-unit id="t.cGJCT" resname="entity.user.mail.not_blank">
+      <trans-unit id="0.V.vBk" resname="entity.user.mail.not_blank">
         <source>entity.user.mail.not_blank</source>
         <target>Email cannot be empty</target>
       </trans-unit>
-      <trans-unit id="WoCyims" resname="entity.user.mail.not_valid">
+      <trans-unit id="p.P5h0A" resname="entity.user.mail.not_valid">
         <source>entity.user.mail.not_valid</source>
         <target>Email is not valid</target>
       </trans-unit>
-      <trans-unit id="HU3R7Wy" resname="entity.vocabulary.name.not_unique">
+      <trans-unit id="ZShCLoU" resname="entity.vocabulary.name.not_unique">
         <source>entity.vocabulary.name.not_unique</source>
         <target>A vocabulary with that name all ready exits</target>
       </trans-unit>
-      <trans-unit id="eDUEqre" resname="entity.vocabulary.slug.not_unique">
+      <trans-unit id="v7th5Nh" resname="entity.vocabulary.slug.not_unique">
         <source>entity.vocabulary.slug.not_unique</source>
         <target>A vocabulary with that slug all ready exits</target>
       </trans-unit>
-      <trans-unit id="XP7.v3p" resname="entity.location.unique">
+      <trans-unit id="NXhXUJb" resname="entity.location.unique">
         <source>entity.location.unique</source>
         <target>A location with the samme name, url and email all ready exits</target>
       </trans-unit>
-      <trans-unit id="WjiRiLy" resname="entity.feed_item.feed_feedItemId_unique">
+      <trans-unit id="Uqb7Ib4" resname="entity.feed_item.feed_feedItemId_unique">
         <source>entity.feed_item.feed_feedItemId_unique</source>
         <target>A feed item with the same ID from the same feed all ready exists</target>
       </trans-unit>
-      <trans-unit id="CAKvzvL" resname="entity.organization.name.not_unique">
+      <trans-unit id="kEAHJNR" resname="entity.organization.name.not_unique">
         <source>entity.organization.name.not_unique</source>
         <target>An organization with the same name all ready exists</target>
+      </trans-unit>
+      <trans-unit id="HnF8JJX" resname="The start date must be before the end date">
+        <source>The start date must be before the end date</source>
+        <target>The start date must be before the end date</target>
       </trans-unit>
     </body>
   </file>
