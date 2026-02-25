@@ -182,20 +182,20 @@ class EventCrudController extends AbstractBaseCrudController
                 ->hideOnIndex();
         }
 
-        yield TextField::new('created_by')
+        yield TextField::new('createdBy')
             ->setLabel(new TranslatableMessage('admin.event.edited.created_by'))
             ->setDisabled()
             ->hideWhenCreating();
-        yield TextField::new('updated_by')
+        yield TextField::new('updatedBy')
             ->setLabel(new TranslatableMessage('admin.event.edited.updated_by'))
             ->setDisabled()
             ->hideWhenCreating();
 
-        yield DateTimeField::new('created_at')
+        yield DateTimeField::new('createdAt')
             ->setLabel(new TranslatableMessage('admin.event.edited.created'))
             ->setDisabled()
             ->hideWhenCreating();
-        yield DateTimeField::new('updated_at')
+        yield DateTimeField::new('updatedAt')
             ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
             ->setDisabled()
             ->hideWhenCreating();
