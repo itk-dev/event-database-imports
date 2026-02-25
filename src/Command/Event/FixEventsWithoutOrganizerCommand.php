@@ -57,7 +57,7 @@ final class FixEventsWithoutOrganizerCommand extends Command
             $createdBy = $event->getCreatedBy();
 
             if ('' === $createdBy) {
-                $skipped[] = [$event->getId(), $event->getTitle(), 'No created by user'];
+                $skipped[] = [$event->getId(), $event->getTitle(), 'Not created by a user'];
                 continue;
             }
 
