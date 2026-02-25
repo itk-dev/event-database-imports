@@ -36,6 +36,7 @@ final class ListUsersWithoutOrganizationCommand extends Command
             ->leftJoin('u.organizations', 'o')
             ->where('o.id IS NULL');
 
+        // Roles are stored as a JSON array in the database, so we use `LIKE` to checks if a role is in the array.
         foreach ($editorOrAbove as $i => $role) {
             $qb->andWhere("u.roles NOT LIKE :role{$i}")
                 ->setParameter("role{$i}", "%\"{$role}\"%");
