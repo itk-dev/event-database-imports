@@ -158,8 +158,8 @@ class EventCrudController extends AbstractBaseCrudController
             $userOrganizations = $this->getUser()->getOrganizations();
             $organizationField
                 ->setFormTypeOption('choices', $userOrganizations)
-                // Make sure that the user is not forced to make a choice if none exists.
-                ->setRequired($userOrganizations->count() > 0);
+                // Disable the field if the user only has one organization as we set default value in createEntity()
+                ->setDisabled(1 === $userOrganizations->count());
         }
         yield $organizationField;
 
