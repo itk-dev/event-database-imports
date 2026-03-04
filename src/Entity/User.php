@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Security\UserInterface;
+use App\Types\UserRoles;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -14,6 +15,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(
@@ -209,6 +211,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
 
         return $this;
+    }
+
+    #[Assert\Callback]
+    public function validateOrganizationRequired(ExecutionContextInterface $context, mixed $payload): void
+    {
+        $organizationRoles = [
+            UserRoles::ROLE_ORGANIZATION_ADMIN->value,
+            UserRoles::ROLE_ORGANIZATION_EDITOR->value,
+        ];
+
+        if (!empty(array_intersect($this->roles, $organizationRoles)) && $this->organizations->isEmpty()) {
+            $context
+                ->buildViolation('entity.user.organizations.organization_required')
+                ->atPath('organizations')
+                ->addViolation();
+        }
     }
 
     public function eraseCredentials(): void

@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- Updated fixtures. Made event organizer required.
+
 ## [1.2.2] - 2025-10-07
 
 - [PR-73](https://github.com/itk-dev/event-database-imports/pull/73) Set deploy user for rabbitmq container
@@ -119,7 +121,9 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...HEAD
+[1.2.2]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2
+[1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...1.2.0
 [1.1.6]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.6
 [1.1.5]: https://github.com/itk-dev/event-database-imports/releases/tag/1.1.5

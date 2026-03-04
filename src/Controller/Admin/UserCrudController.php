@@ -2,6 +2,8 @@
 
 namespace App\Controller\Admin;
 
+use App\EasyAdmin\Filter\HasOrganizationFilter;
+use App\EasyAdmin\Filter\JsonContainsFilter;
 use App\Entity\User;
 use App\Types\UserRoles;
 use Doctrine\ORM\QueryBuilder;
@@ -10,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
@@ -23,6 +26,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -61,6 +66,22 @@ class UserCrudController extends AbstractBaseCrudController
         }
 
         return $actions;
+    }
+
+    public function configureFilters(Filters $filters): Filters
+    {
+        $userRolesChoices = [];
+        foreach (UserRoles::cases() as $role) {
+            $userRolesChoices[$role->value] = $role->value;
+        }
+
+        return $filters
+            ->add(EntityFilter::new('organizations', new TranslatableMessage('admin.user.organizers')))
+            ->add(HasOrganizationFilter::new('organizations', new TranslatableMessage('admin.user.filter.has_organization')))
+            ->add(JsonContainsFilter::new('roles', new TranslatableMessage('admin.user.roles'))
+                ->setChoices($userRolesChoices))
+            ->add(TextFilter::new('mail', new TranslatableMessage('admin.user.mail')))
+        ;
     }
 
     public function configureFields(string $pageName): iterable

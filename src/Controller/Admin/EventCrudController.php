@@ -2,17 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\EasyAdmin\Filter\HasOrganizationFilter;
 use App\Entity\Event;
 use App\Entity\Organization;
 use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
 use Doctrine\Common\Collections\Order;
-use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Asset;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
@@ -41,6 +40,20 @@ class EventCrudController extends AbstractBaseCrudController
     public static function getEntityFqcn(): string
     {
         return Event::class;
+    }
+
+    public function createEntity(string $entityFqcn): Event
+    {
+        $event = new Event();
+
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $userOrganizations = $this->getUser()->getOrganizations();
+            if (1 === $userOrganizations->count()) {
+                $event->setOrganization($userOrganizations->first());
+            }
+        }
+
+        return $event;
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -75,18 +88,18 @@ class EventCrudController extends AbstractBaseCrudController
         yield TextField::new('title')
             ->setLabel(new TranslatableMessage('admin.event.title'));
         yield TextareaField::new('excerpt')
-                ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
-                ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.basic.excerpt'))
+            ->setMaxLength(Event::EXCERPT_MAX_LENGTH)
+            ->hideOnIndex();
         yield TextEditorField::new('description')
-                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
-                ->hideOnDetail()
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+            ->hideOnDetail()
+            ->hideOnIndex();
         yield TextareaField::new('description')
-                ->setLabel(new TranslatableMessage('admin.event.basic.description'))
-                ->renderAsHtml()
-                ->hideOnIndex()
-                ->hideOnForm();
+            ->setLabel(new TranslatableMessage('admin.event.basic.description'))
+            ->renderAsHtml()
+            ->hideOnIndex()
+            ->hideOnForm();
 
         // Image / Detail view
         yield ImageField::new('image')
@@ -97,81 +110,103 @@ class EventCrudController extends AbstractBaseCrudController
 
                 return $transformed['large'] ?? null;
             })
-        ->hideOnIndex()->hideOnForm();
+            ->hideOnIndex()->hideOnForm();
 
         // Image / Form view
         // @see self::getFieldAssets()
         yield AssociationField::new('image')
-                ->setLabel(new TranslatableMessage('admin.event.basic.image'))
-                ->hideOnIndex()
-                ->renderAsEmbeddedForm(EmbedImageController::class);
+            ->setLabel(new TranslatableMessage('admin.event.basic.image'))
+            ->hideOnIndex()
+            ->renderAsEmbeddedForm(EmbedImageController::class);
         yield AssociationField::new('tags')
-                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->hideOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+            ->hideOnDetail();
         yield ArrayField::new('tags')
-                ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
-                ->onlyOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.basic.tags'))
+            ->onlyOnDetail();
 
         yield FormField::addFieldset('Occurrences')
-                ->setLabel(new TranslatableMessage('admin.event.occurrences'));
+            ->setLabel(new TranslatableMessage('admin.event.occurrences'));
         yield CollectionField::new('occurrences')
-                ->setLabel(new TranslatableMessage('admin.event.occurrences'))
-                ->hideOnIndex()
-                ->renderExpanded(false)
-                ->useEntryCrudForm();
+            ->setLabel(new TranslatableMessage('admin.event.occurrences'))
+            ->hideOnIndex()
+            ->renderExpanded(false)
+            ->useEntryCrudForm();
 
         yield FormField::addFieldset('Location information')
-                ->setLabel(new TranslatableMessage('admin.event.location.headline'));
+            ->setLabel(new TranslatableMessage('admin.event.location.headline'));
         yield UrlField::new('url')
-                ->setLabel(new TranslatableMessage('admin.event.location.url'))
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.location.url'))
+            ->hideOnIndex();
         yield UrlField::new('ticketUrl')
-                ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl'))
-                ->hideOnIndex();
+            ->setLabel(new TranslatableMessage('admin.event.location.ticketUrl'))
+            ->hideOnIndex();
         yield AssociationField::new('location')
-                ->setLabel(new TranslatableMessage('admin.event.location.location'));
+            ->setLabel(new TranslatableMessage('admin.event.location.location'));
 
         yield FormField::addFieldset('Organizer information')
-                ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
+            ->setLabel(new TranslatableMessage('admin.event.organizer.headline'));
 
-        if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            yield AssociationField::new('organization')
-                ->setLabel(new TranslatableMessage('admin.event.edited.organization'));
-        } else {
-            yield AssociationField::new('organization')
-                ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
-                ->setQueryBuilder(
-                    fn (QueryBuilder $queryBuilder) => $queryBuilder
-                        ->select('o')
-                        ->from(Organization::class, 'o')
-                        ->where(':user MEMBER OF o.users')
-                        ->setParameter('user', $this->getUser())
-                );
+        $organizationField = AssociationField::new('organization')
+            ->setLabel(new TranslatableMessage('admin.event.edited.organization'))
+            // We assume at least one organization exist for non-editor users
+            // (cf. editor stuff below).
+            ->setRequired(true)
+            ->setFormTypeOption('placeholder', new TranslatableMessage('admin.event.organizer.placeholder'));
+        // Limit organization choices for non-editors to the organizations the user is a member of.
+        if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
+            $userOrganizations = $this->getUser()->getOrganizations();
+            $organizationField
+                ->setFormTypeOption('choices', $userOrganizations)
+                // Disable the field if the user only has one organization as we set default value in createEntity()
+                ->setDisabled(1 === $userOrganizations->count());
         }
+        yield $organizationField;
+
         yield AssociationField::new('partners')
-                ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
-                ->hideOnDetail();
+            ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
+            ->hideOnDetail();
         yield ArrayField::new('partners')
             ->setLabel(new TranslatableMessage('admin.event.edited.partners'))
             ->onlyOnDetail();
 
         yield FormField::addFieldset('Edited')
-                ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
-                ->hideWhenCreating();
-        yield AssociationField::new('feed')
+            ->setLabel(new TranslatableMessage('admin.event.edited.headline'))
+            ->hideWhenCreating();
+
+        $event = $this->getContext()?->getEntity()?->getInstance();
+        if (!$event instanceof Event || null !== $event->getFeed()) {
+            yield AssociationField::new('feed')
                 ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
                 ->hideOnForm()
                 ->hideOnIndex();
-        yield DateTimeField::new('updated_at')
-                ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
-                ->setDisabled()
-                ->hideWhenCreating();
+        }
+
+        yield TextField::new('createdBy')
+            ->setLabel(new TranslatableMessage('admin.event.edited.created_by'))
+            ->setDisabled()
+            ->hideWhenCreating();
+        yield TextField::new('updatedBy')
+            ->setLabel(new TranslatableMessage('admin.event.edited.updated_by'))
+            ->setDisabled()
+            ->hideWhenCreating();
+
+        yield DateTimeField::new('createdAt')
+            ->setLabel(new TranslatableMessage('admin.event.edited.created'))
+            ->setDisabled()
+            ->hideWhenCreating();
+        yield DateTimeField::new('updatedAt')
+            ->setLabel(new TranslatableMessage('admin.event.edited.updated'))
+            ->setDisabled()
+            ->hideWhenCreating();
     }
 
     public function configureFilters(Filters $filters): Filters
     {
         if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            $filters->add('feed');
+            $filters
+                ->add('feed')
+                ->add(HasOrganizationFilter::new('organization', new TranslatableMessage('admin.event.filter.has_organization')));
         }
 
         // 'organization' filter has additional config when added in MyEventCrudController
@@ -189,8 +224,7 @@ class EventCrudController extends AbstractBaseCrudController
             ->add('tags')
             ->add('title')
             ->add('url')
-            ->add('ticketUrl')
-        ;
+            ->add('ticketUrl');
     }
 
     /**
