@@ -647,7 +647,7 @@
       </trans-unit>
       <trans-unit id="LlP8lFd" resname="admin.user.role.role_super_admin">
         <source>admin.user.role.role_super_admin</source>
-        <target state="translated">__admin.user.role.role_super_admin</target>
+        <target state="translated">Super Admin</target>
       </trans-unit>
       <trans-unit id="JLoOoE_" resname="admin.user.registrationNotes">
         <source>admin.user.registrationNotes</source>

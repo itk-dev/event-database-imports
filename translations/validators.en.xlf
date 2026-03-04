@@ -33,6 +33,10 @@
         <source>entity.user.mail.not_valid</source>
         <target>Email is not valid</target>
       </trans-unit>
+      <trans-unit id="qR2mNpX" resname="entity.user.organizations.organization_required">
+        <source>entity.user.organizations.organization_required</source>
+        <target>Users with an organization role must be assigned at least one organization</target>
+      </trans-unit>
       <trans-unit id="ZShCLoU" resname="entity.vocabulary.name.not_unique">
         <source>entity.vocabulary.name.not_unique</source>
         <target>A vocabulary with that name all ready exits</target>

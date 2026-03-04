@@ -33,6 +33,10 @@
         <source>entity.user.mail.not_valid</source>
         <target state="translated">Den indtastede email er ikke gyldig</target>
       </trans-unit>
+      <trans-unit id="qR2mNpX" resname="entity.user.organizations.organization_required">
+        <source>entity.user.organizations.organization_required</source>
+        <target state="translated">Brugere med en organisationsrolle skal have mindst én organisation tilknyttet</target>
+      </trans-unit>
       <trans-unit id="ZShCLoU" resname="entity.vocabulary.name.not_unique">
         <source>entity.vocabulary.name.not_unique</source>
         <target state="translated">Der findes allerede et vokabular me det navn</target>
