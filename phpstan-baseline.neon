@@ -49,12 +49,6 @@ parameters:
 			path: src/Entity/Event.php
 
 		-
-			message: '#^Method App\\Entity\\Feed\:\:setConfigurationField\(\) has InvalidArgumentException in PHPDoc @throws tag but it''s not thrown\.$#'
-			identifier: throws.unusedType
-			count: 1
-			path: src/Entity/Feed.php
-
-		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 2
