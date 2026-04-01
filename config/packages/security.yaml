@@ -11,7 +11,7 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern: ^/(admin/)?(_(profiler|wdt))|^/(css|images|js)/
             security: false
         image_resolver:
             pattern: ^/images/cache/resolve

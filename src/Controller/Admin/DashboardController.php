@@ -149,6 +149,8 @@ class DashboardController extends AbstractDashboardController
 
     public function configureAssets(): Assets
     {
-        return Assets::new()->addCssFile('/admin/styles/admin.css');
+        return Assets::new()
+            ->addCssFile('/admin/styles/admin.css')
+            ->addJsFile('/scripts/form-scroll-to-error.js');
     }
 }

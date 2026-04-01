@@ -30,6 +30,13 @@ framework:
             'Liip\ImagineBundle\Message\WarmupCache': async
             'Symfony\Component\Mailer\Messenger\SendEmailMessage': async
 
+# Handle all messages synchronously in the dev environment for easier debugging.
+#when@dev:
+#    framework:
+#        messenger:
+#            transports:
+#                async: 'sync://'
+
 when@test:
     framework:
         messenger:
