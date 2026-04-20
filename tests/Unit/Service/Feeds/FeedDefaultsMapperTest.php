@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Service\Feeds;
+namespace App\Tests\Unit\Service\Feeds;
 
 use App\Model\Feed\FeedConfiguration;
 use App\Service\Feeds\FeedDefaultsMapper;

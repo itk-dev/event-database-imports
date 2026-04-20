@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Service;
+namespace App\Tests\Unit\Service;
 
 use App\Entity\Address;
 use App\Service\Geocoder;

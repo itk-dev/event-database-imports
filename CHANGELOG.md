@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-75](https://github.com/itk-dev/event-database-imports/pull/75) Added test infrastructure (PHPUnit 12, DAMA, Liip)
+
 ## [1.2.3] - 2026-03-29
 
 - [PR-68](https://github.com/itk-dev/event-database-imports/pull/68) Made event organizer required for organization users
