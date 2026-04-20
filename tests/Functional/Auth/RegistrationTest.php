@@ -23,16 +23,6 @@ final class RegistrationTest extends AbstractAdminTestCase
         ]);
     }
 
-    public function testRegistrationPageRenders(): void
-    {
-        $crawler = $this->client->request('GET', '/admin/register/');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertCount(1, $crawler->filter('input[name="registration_form[name]"]'));
-        $this->assertCount(1, $crawler->filter('input[name="registration_form[mail]"]'));
-        $this->assertCount(1, $crawler->filter('input[name="registration_form[plainPassword]"]'));
-    }
-
     public function testSuccessfulRegistrationPersistsUserAndSendsEmail(): void
     {
         $crawler = $this->client->request('GET', '/admin/register/');

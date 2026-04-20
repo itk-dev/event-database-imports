@@ -35,6 +35,32 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    public function testAbstainsForUnsupportedAttribute(): void
+    {
+        $voter = new AddressVoter($this->createStub(Security::class));
+        $subject = [
+            'entity' => $this->createEntityDto(Address::class, new Address()),
+            'action' => Action::EDIT,
+        ];
+        $this->assertSame(
+            VoterInterface::ACCESS_ABSTAIN,
+            $voter->vote($this->createToken(new User()), $subject, ['ROLE_USER']),
+        );
+    }
+
+    public function testOrganizationEditorCannotSaveWithoutOrgAdmin(): void
+    {
+        $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(Address::class, new Address()), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $voter->vote($this->createToken(new User()), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected %s to be denied without ROLE_ORGANIZATION_ADMIN', $action),
+            );
+        }
+    }
+
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new AddressVoter($this->createSecurity([]));

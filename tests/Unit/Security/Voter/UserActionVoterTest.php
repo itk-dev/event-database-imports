@@ -33,6 +33,49 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    public function testAbstainsForUnsupportedAttribute(): void
+    {
+        $voter = new UserActionVoter($this->createStub(Security::class));
+        $subject = [
+            'entity' => $this->createEntityDto(User::class, $this->makeUser(1)),
+            'action' => Action::EDIT,
+        ];
+        $this->assertSame(
+            VoterInterface::ACCESS_ABSTAIN,
+            $voter->vote($this->createToken($this->makeUser(1)), $subject, ['ROLE_USER']),
+        );
+    }
+
+    /**
+     * Save actions have no explicit handling in UserActionVoter — the voter falls
+     * through to the ownership check (`$loggedInUser === $user`). A non-admin can
+     * therefore only save their own record. Locking this behaviour in so any change
+     * is intentional and reviewed.
+     */
+    public function testSaveActionFallsThroughToOwnershipCheck(): void
+    {
+        $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
+
+        $self = $this->makeUser(10);
+        $other = $this->makeUser(20);
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $ownSubject = ['entity' => $this->createEntityDto(User::class, $self), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_GRANTED,
+                $voter->vote($this->createToken($self), $ownSubject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected %s on own record to pass the ownership check', $action),
+            );
+
+            $otherSubject = ['entity' => $this->createEntityDto(User::class, $other), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $voter->vote($this->createToken($self), $otherSubject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected %s on another user to fail the ownership check', $action),
+            );
+        }
+    }
+
     public function testCannotDeleteSelf(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
@@ -93,14 +136,5 @@ final class UserActionVoterTest extends TestCase
             VoterInterface::ACCESS_DENIED,
             $voter->vote($this->createToken($self), $subject, [Permission::EA_EXECUTE_ACTION]),
         );
-    }
-
-    private function makeUser(int $id): User
-    {
-        $user = new User();
-        $reflection = new \ReflectionProperty(User::class, 'id');
-        $reflection->setValue($user, $id);
-
-        return $user;
     }
 }

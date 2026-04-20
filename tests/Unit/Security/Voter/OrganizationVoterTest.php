@@ -34,6 +34,19 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    public function testAbstainsForUnsupportedAttribute(): void
+    {
+        $voter = new OrganizationVoter($this->createStub(Security::class));
+        $subject = [
+            'entity' => $this->createEntityDto(Organization::class, new Organization()),
+            'action' => Action::EDIT,
+        ];
+        $this->assertSame(
+            VoterInterface::ACCESS_ABSTAIN,
+            $voter->vote($this->createToken(new User()), $subject, ['ROLE_USER']),
+        );
+    }
+
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([]));

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
@@ -36,16 +37,20 @@ abstract class AbstractAdminTestCase extends WebTestCase
 
     protected function loginAs(string $email): KernelBrowser
     {
-        $repository = static::getContainer()->get(UserRepository::class);
-        $user = $repository->findOneBy(['mail' => $email]);
+        $this->client->loginUser($this->findUser($email));
+
+        return $this->client;
+    }
+
+    protected function findUser(string $email): User
+    {
+        $user = static::getContainer()->get(UserRepository::class)->findOneBy(['mail' => $email]);
 
         if (null === $user) {
             throw new \RuntimeException(sprintf('User "%s" not found. Did you load TestUserFixtures?', $email));
         }
 
-        $this->client->loginUser($user);
-
-        return $this->client;
+        return $user;
     }
 
     /**

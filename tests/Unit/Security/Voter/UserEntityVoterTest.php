@@ -8,8 +8,6 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Security\Voter\UserEntityVoter;
 use App\Types\UserRoles;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto;
 use EasyCorp\Bundle\EasyAdminBundle\Security\Permission;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
@@ -20,6 +18,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 #[CoversClass(UserEntityVoter::class)]
 final class UserEntityVoterTest extends TestCase
 {
+    use VoterTestHelperTrait;
+
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new UserEntityVoter($this->createStub(Security::class));
@@ -89,46 +89,5 @@ final class UserEntityVoterTest extends TestCase
             VoterInterface::ACCESS_DENIED,
             $voter->vote($this->createToken($self), $dto, [Permission::EA_ACCESS_ENTITY]),
         );
-    }
-
-    /**
-     * @param list<string> $grantedRoles
-     */
-    private function createSecurity(array $grantedRoles): Security
-    {
-        $security = $this->createStub(Security::class);
-        $security->method('isGranted')->willReturnCallback(
-            fn (mixed $attribute): bool => \in_array($attribute, $grantedRoles, true),
-        );
-
-        return $security;
-    }
-
-    private function createToken(User $user): TokenInterface
-    {
-        $token = $this->createStub(TokenInterface::class);
-        $token->method('getUser')->willReturn($user);
-
-        return $token;
-    }
-
-    /**
-     * @param class-string $fqcn
-     */
-    private function createEntityDto(string $fqcn, ?object $instance): EntityDto
-    {
-        $metadata = new ClassMetadata($fqcn);
-        $metadata->identifier = ['id'];
-
-        return new EntityDto($fqcn, $metadata, null, $instance);
-    }
-
-    private function makeUser(int $id): User
-    {
-        $user = new User();
-        $reflection = new \ReflectionProperty(User::class, 'id');
-        $reflection->setValue($user, $id);
-
-        return $user;
     }
 }

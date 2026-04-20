@@ -34,6 +34,19 @@ final class TagVoterTest extends TestCase
         );
     }
 
+    public function testAbstainsForUnsupportedAttribute(): void
+    {
+        $voter = new TagVoter($this->createStub(Security::class));
+        $subject = [
+            'entity' => $this->createEntityDto(Tag::class, new Tag()),
+            'action' => Action::EDIT,
+        ];
+        $this->assertSame(
+            VoterInterface::ACCESS_ABSTAIN,
+            $voter->vote($this->createToken(new User()), $subject, ['ROLE_USER']),
+        );
+    }
+
     public function testAdminCanEditAndDeleteTag(): void
     {
         $voter = new TagVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));

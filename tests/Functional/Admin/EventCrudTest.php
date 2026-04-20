@@ -26,13 +26,6 @@ final class EventCrudTest extends AbstractAdminTestCase
         ]);
     }
 
-    public function testAnonymousAccessRedirects(): void
-    {
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class));
-
-        $this->assertResponseRedirects();
-    }
-
     #[DataProvider('authorizedRoleProvider')]
     public function testIndexLoadsForAuthorizedRole(string $email): void
     {

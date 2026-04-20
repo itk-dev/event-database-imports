@@ -43,4 +43,13 @@ trait VoterTestHelperTrait
 
         return new EntityDto($fqcn, $metadata, null, $instance);
     }
+
+    private function makeUser(int $id): User
+    {
+        $user = new User();
+        $reflection = new \ReflectionProperty(User::class, 'id');
+        $reflection->setValue($user, $id);
+
+        return $user;
+    }
 }

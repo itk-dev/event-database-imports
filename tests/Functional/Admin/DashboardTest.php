@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Admin;
 
-use App\Controller\Admin\EventCrudController;
-use App\Controller\Admin\MyEventCrudController;
 use App\DataFixtures\OrganizationFixtures;
 use App\Tests\Fixtures\TestUserFixtures;
 use App\Tests\Functional\AbstractAdminTestCase;
@@ -46,12 +44,8 @@ final class DashboardTest extends AbstractAdminTestCase
         $this->client->request('GET', '/admin');
 
         $this->assertResponseRedirects();
-        $location = (string) $this->client->getResponse()->headers->get('Location');
-        $decoded = rawurldecode($location);
-        $this->assertTrue(
-            str_contains($decoded, EventCrudController::class) || str_contains($decoded, '/admin/event'),
-            sprintf('Expected redirect to EventCrudController, got %s', $location),
-        );
+        $path = (string) parse_url((string) $this->client->getResponse()->headers->get('Location'), PHP_URL_PATH);
+        $this->assertSame('/admin/event', $path);
     }
 
     public function testOrgEditorRedirectsToMyEventCrud(): void
@@ -60,12 +54,8 @@ final class DashboardTest extends AbstractAdminTestCase
         $this->client->request('GET', '/admin');
 
         $this->assertResponseRedirects();
-        $location = (string) $this->client->getResponse()->headers->get('Location');
-        $decoded = rawurldecode($location);
-        $this->assertTrue(
-            str_contains($decoded, MyEventCrudController::class) || str_contains($decoded, '/admin/my-event'),
-            sprintf('Expected redirect to MyEventCrudController, got %s', $location),
-        );
+        $path = (string) parse_url((string) $this->client->getResponse()->headers->get('Location'), PHP_URL_PATH);
+        $this->assertSame('/admin/my-event', $path);
     }
 
     public function testOrgEditorDoesNotSeeAdminMenuItems(): void

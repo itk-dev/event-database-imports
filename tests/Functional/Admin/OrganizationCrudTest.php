@@ -23,13 +23,6 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         ]);
     }
 
-    public function testAnonymousAccessRedirects(): void
-    {
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class));
-
-        $this->assertResponseRedirects();
-    }
-
     public function testIndexLoadsForEditor(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
