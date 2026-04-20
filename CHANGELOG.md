@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- Test coverage: split test suite into `unit`/`functional`, added `dama/doctrine-test-bundle` and `liip/test-fixtures-bundle`, introduced `TestUserFixtures` and `AbstractAdminTestCase`, removed unused `symfony/phpunit-bridge` dependency.
+- Test coverage: split test suite into `unit`/`functional`, added `dama/doctrine-test-bundle` and `liip/test-fixtures-bundle`, introduced `TestUserFixtures` and `AbstractAdminTestCase`, bumped `phpunit/phpunit` to ^12, removed unused `symfony/phpunit-bridge` dependency.
 
 ## [1.2.3] - 2026-03-29
 
