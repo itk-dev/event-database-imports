@@ -54,6 +54,10 @@ jobs:
         run: |
           task composer -- install
 
+      - name: Run database migrations
+        run: |
+          task console -- --env=test doctrine:migrations:migrate --no-interaction
+
       - name: Test suite
         run: |
           task test
