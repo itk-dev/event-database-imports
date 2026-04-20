@@ -8,7 +8,13 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- Test coverage: split test suite into `unit`/`functional`, added `dama/doctrine-test-bundle`, `liip/test-fixtures-bundle`, `zenstruck/messenger-test`, and `ergebnis/phpunit-slow-test-detector`, introduced `TestUserFixtures` and `AbstractAdminTestCase`, bumped `phpunit/phpunit` to ^12, removed unused `symfony/phpunit-bridge` dependency.
+- Test infrastructure:
+  - Split PHPUnit test suites into `unit` and `functional`.
+  - Added `dama/doctrine-test-bundle`, `liip/test-fixtures-bundle`,
+    `zenstruck/messenger-test`, and `ergebnis/phpunit-slow-test-detector`.
+  - Introduced `TestUserFixtures` and `AbstractAdminTestCase`.
+  - Bumped `phpunit/phpunit` to ^12.
+  - Removed unused `symfony/phpunit-bridge` dependency.
 
 ## [1.2.3] - 2026-03-29
 
