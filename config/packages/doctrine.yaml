@@ -33,8 +33,11 @@ doctrine:
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            # Use the dev database for tests and rely on DAMA's transaction
+            # rollback (dama/doctrine-test-bundle) to isolate each test. The
+            # db user in the local docker stack does not have CREATE DATABASE
+            # privileges, so a separate _test database is impractical.
+            dbname_suffix: ''
 
 when@prod:
     doctrine:
