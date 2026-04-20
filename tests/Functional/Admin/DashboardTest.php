@@ -33,9 +33,11 @@ final class DashboardTest extends AbstractAdminTestCase
 
         $this->assertResponseIsSuccessful();
         $content = (string) $this->client->getResponse()->getContent();
-        $this->assertStringContainsString('admin.label.all_content', $content);
-        $this->assertStringContainsString('admin.label.users', $content);
-        $this->assertStringContainsString('admin.label.feeds', $content);
+        // Menu items are rendered using the default (da) locale, so assert on
+        // the translated text rather than the translation key.
+        $this->assertStringContainsString('Alt indhold', $content);
+        $this->assertStringContainsString('Brugere', $content);
+        $this->assertStringContainsString('Feeds', $content);
     }
 
     public function testEditorRedirectsToEventCrud(): void
@@ -76,7 +78,8 @@ final class DashboardTest extends AbstractAdminTestCase
         }
 
         $content = (string) $this->client->getResponse()->getContent();
-        $this->assertStringNotContainsString('admin.label.users', $content);
-        $this->assertStringNotContainsString('admin.label.feeds', $content);
+        // Menu items use the default (da) locale - assert on translated text.
+        $this->assertStringNotContainsString('Brugere', $content);
+        $this->assertStringNotContainsString('Feeds', $content);
     }
 }

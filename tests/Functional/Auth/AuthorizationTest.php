@@ -41,7 +41,10 @@ final class AuthorizationTest extends AbstractAdminTestCase
         );
 
         if (302 === $status) {
-            $this->assertStringStartsWith('/admin', (string) $this->client->getResponse()->headers->get('Location'));
+            $location = (string) $this->client->getResponse()->headers->get('Location');
+            $path = parse_url($location, PHP_URL_PATH);
+            $this->assertIsString($path);
+            $this->assertStringStartsWith('/admin', $path);
         }
     }
 }

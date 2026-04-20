@@ -27,8 +27,7 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
         $this->client->request('GET', $this->adminUrl(EventCrudController::class, 'index', [
-            'filters[hasOrganization][comparison]' => '=',
-            'filters[hasOrganization][value]' => '0',
+            'filters[hasOrganization]' => '0',
         ]));
 
         $this->assertResponseIsSuccessful();
@@ -41,8 +40,7 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
         $this->client->request('GET', $this->adminUrl(EventCrudController::class, 'index', [
-            'filters[hasOrganization][comparison]' => '=',
-            'filters[hasOrganization][value]' => '1',
+            'filters[hasOrganization]' => '1',
         ]));
 
         $this->assertResponseIsSuccessful();

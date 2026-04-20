@@ -36,9 +36,10 @@ final class RegistrationTest extends AbstractAdminTestCase
     public function testSuccessfulRegistrationPersistsUserAndSendsEmail(): void
     {
         $crawler = $this->client->request('GET', '/admin/register/');
-        $form = $crawler->selectButton('registration.page.btn.register')->form();
+        $form = $crawler->selectButton('Registrer dig')->form();
 
-        $email = 'new-user@test';
+        $email = 'new-user@example.com';
+        $this->client->enableProfiler();
         $this->client->submit($form, [
             'registration_form[name]' => 'New User',
             'registration_form[mail]' => $email,
@@ -48,20 +49,24 @@ final class RegistrationTest extends AbstractAdminTestCase
         ]);
 
         $this->assertResponseIsSuccessful();
-        $this->assertEmailCount(1);
 
         $repository = static::getContainer()->get(UserRepository::class);
         $user = $repository->findOneBy(['mail' => $email]);
-        $this->assertNotNull($user);
+        $this->assertInstanceOf(User::class, $user, 'User should have been persisted during registration');
         $this->assertNull($user->getEmailVerifiedAt());
+
+        // Outbound mail goes through the async Messenger transport in tests,
+        // so the message is queued (routed via SendEmailMessage) rather than
+        // immediately dispatched to the mailer transport.
+        $this->assertQueuedEmailCount(1);
     }
 
     public function testEmailVerificationSetsVerifiedAt(): void
     {
         $crawler = $this->client->request('GET', '/admin/register/');
-        $form = $crawler->selectButton('registration.page.btn.register')->form();
+        $form = $crawler->selectButton('Registrer dig')->form();
 
-        $email = 'verify-me@test';
+        $email = 'verify-me@example.com';
         $this->client->submit($form, [
             'registration_form[name]' => 'Verify Me',
             'registration_form[mail]' => $email,
@@ -86,7 +91,10 @@ final class RegistrationTest extends AbstractAdminTestCase
         $this->client->request('GET', $path);
 
         $this->assertResponseRedirects();
-        static::getContainer()->get('doctrine')->getManager()->refresh($user);
-        $this->assertNotNull($user->getEmailVerifiedAt());
+        // Re-fetch rather than refresh: the test container's EM may have
+        // been reset between the registration and verification requests.
+        $verifiedUser = $repository->findOneBy(['mail' => $email]);
+        $this->assertInstanceOf(User::class, $verifiedUser);
+        $this->assertNotNull($verifiedUser->getEmailVerifiedAt());
     }
 }

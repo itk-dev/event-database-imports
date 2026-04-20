@@ -175,5 +175,4 @@ final class EventVoterTest extends TestCase
             $voter->vote($token, $subject, [Permission::EA_EXECUTE_ACTION]),
         );
     }
-
 }
