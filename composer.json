@@ -59,6 +59,7 @@
         "dama/doctrine-test-bundle": "^8",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "ergebnis/composer-normalize": "^2.47",
+        "ergebnis/phpunit-slow-test-detector": "^2.19",
         "friendsofphp/php-cs-fixer": "^3.85",
         "liip/test-fixtures-bundle": "^3",
         "phpstan/extension-installer": "^1.4",
@@ -72,7 +73,8 @@
         "symfony/maker-bundle": "^1.49",
         "symfony/stopwatch": "^7.3",
         "symfony/web-profiler-bundle": "^7.3",
-        "vincentlanglet/twig-cs-fixer": "^3.9"
+        "vincentlanglet/twig-cs-fixer": "^3.9",
+        "zenstruck/messenger-test": "^1.11"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
