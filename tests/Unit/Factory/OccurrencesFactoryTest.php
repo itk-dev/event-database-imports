@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Factory;
+namespace App\Tests\Unit\Factory;
 
 use App\Entity\Event;
 use App\Entity\Occurrence;

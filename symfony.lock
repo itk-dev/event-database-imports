@@ -1,4 +1,16 @@
 {
+    "dama/doctrine-test-bundle": {
+        "version": "8.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "8.3",
+            "ref": "dfc51177476fb39d014ed89944cde53dc3326d23"
+        },
+        "files": [
+            "config/packages/dama_doctrine_test_bundle.yaml"
+        ]
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -92,6 +104,9 @@
             "config/packages/liip_imagine.yaml",
             "config/routes/liip_imagine.yaml"
         ]
+    },
+    "liip/test-fixtures-bundle": {
+        "version": "3.9.0"
     },
     "php-http/discovery": {
         "version": "1.19",
