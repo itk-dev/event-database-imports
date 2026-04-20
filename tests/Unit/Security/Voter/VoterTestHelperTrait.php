@@ -17,7 +17,7 @@ trait VoterTestHelperTrait
      */
     private function createSecurity(array $grantedRoles): Security
     {
-        $security = $this->createMock(Security::class);
+        $security = $this->createStub(Security::class);
         $security->method('isGranted')->willReturnCallback(
             fn (mixed $attribute): bool => \in_array($attribute, $grantedRoles, true),
         );
@@ -27,7 +27,7 @@ trait VoterTestHelperTrait
 
     private function createToken(User $user): TokenInterface
     {
-        $token = $this->createMock(TokenInterface::class);
+        $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($user);
 
         return $token;

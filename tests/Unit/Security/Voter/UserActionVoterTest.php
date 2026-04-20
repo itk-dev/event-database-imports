@@ -22,7 +22,7 @@ final class UserActionVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new UserActionVoter($this->createMock(Security::class));
+        $voter = new UserActionVoter($this->createStub(Security::class));
         $subject = [
             'entity' => $this->createEntityDto(Event::class, new Event()),
             'action' => Action::EDIT,

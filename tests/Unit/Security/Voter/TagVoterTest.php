@@ -23,7 +23,7 @@ final class TagVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new TagVoter($this->createMock(Security::class));
+        $voter = new TagVoter($this->createStub(Security::class));
         $subject = [
             'entity' => $this->createEntityDto(Event::class, new Event()),
             'action' => Action::EDIT,

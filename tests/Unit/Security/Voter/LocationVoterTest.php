@@ -23,7 +23,7 @@ final class LocationVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new LocationVoter($this->createMock(Security::class));
+        $voter = new LocationVoter($this->createStub(Security::class));
         $subject = [
             'entity' => $this->createEntityDto(Event::class, new Event()),
             'action' => Action::EDIT,

@@ -24,7 +24,7 @@ final class EventVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new EventVoter($this->createMock(Security::class));
+        $voter = new EventVoter($this->createStub(Security::class));
         $token = $this->createToken(new User());
 
         $subject = [
@@ -39,7 +39,7 @@ final class EventVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedAttribute(): void
     {
-        $voter = new EventVoter($this->createMock(Security::class));
+        $voter = new EventVoter($this->createStub(Security::class));
         $token = $this->createToken(new User());
 
         $subject = [

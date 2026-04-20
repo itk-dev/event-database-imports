@@ -22,7 +22,7 @@ final class UserEntityVoterTest extends TestCase
 {
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new UserEntityVoter($this->createMock(Security::class));
+        $voter = new UserEntityVoter($this->createStub(Security::class));
         $dto = $this->createEntityDto(Event::class, null);
         $this->assertSame(
             VoterInterface::ACCESS_ABSTAIN,
@@ -32,7 +32,7 @@ final class UserEntityVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedAttribute(): void
     {
-        $voter = new UserEntityVoter($this->createMock(Security::class));
+        $voter = new UserEntityVoter($this->createStub(Security::class));
         $dto = $this->createEntityDto(User::class, $this->makeUser(1));
         $this->assertSame(
             VoterInterface::ACCESS_ABSTAIN,
@@ -42,8 +42,8 @@ final class UserEntityVoterTest extends TestCase
 
     public function testAnonymousUserIsDenied(): void
     {
-        $voter = new UserEntityVoter($this->createMock(Security::class));
-        $token = $this->createMock(TokenInterface::class);
+        $voter = new UserEntityVoter($this->createStub(Security::class));
+        $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn(null);
 
         $dto = $this->createEntityDto(User::class, $this->makeUser(1));
@@ -96,7 +96,7 @@ final class UserEntityVoterTest extends TestCase
      */
     private function createSecurity(array $grantedRoles): Security
     {
-        $security = $this->createMock(Security::class);
+        $security = $this->createStub(Security::class);
         $security->method('isGranted')->willReturnCallback(
             fn (mixed $attribute): bool => \in_array($attribute, $grantedRoles, true),
         );
@@ -106,7 +106,7 @@ final class UserEntityVoterTest extends TestCase
 
     private function createToken(User $user): TokenInterface
     {
-        $token = $this->createMock(TokenInterface::class);
+        $token = $this->createStub(TokenInterface::class);
         $token->method('getUser')->willReturn($user);
 
         return $token;

@@ -23,7 +23,7 @@ final class OrganizationVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new OrganizationVoter($this->createMock(Security::class));
+        $voter = new OrganizationVoter($this->createStub(Security::class));
         $subject = [
             'entity' => $this->createEntityDto(Event::class, new Event()),
             'action' => Action::EDIT,

@@ -24,7 +24,7 @@ final class AddressVoterTest extends TestCase
 
     public function testAbstainsForUnsupportedEntity(): void
     {
-        $voter = new AddressVoter($this->createMock(Security::class));
+        $voter = new AddressVoter($this->createStub(Security::class));
         $subject = [
             'entity' => $this->createEntityDto(Event::class, new Event()),
             'action' => Action::EDIT,
