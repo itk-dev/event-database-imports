@@ -22,10 +22,14 @@ name: YAML
 
 on:
   pull_request:
+    paths: &paths
+      - "**/*.yml"
+      - "**/*.yaml"
   push:
     branches:
       - main
       - develop
+    paths: *paths
 
 jobs:
   yaml-lint:
