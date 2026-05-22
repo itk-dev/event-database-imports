@@ -124,6 +124,7 @@ jobs:
           task compose -- up --detach
           task composer -- install
           task console -- doctrine:migrations:migrate --no-interaction
+          task console -- messenger:setup-transports
 
       - name: Validate Doctrine schema
         run: |

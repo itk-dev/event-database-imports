@@ -8,7 +8,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-75](https://github.com/itk-dev/event-database-imports/pull/75) 
+- [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
+  Update itk docker compose templates
+- [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
   Added test infrastructure (PHPUnit 12, DAMA, Liip)
 
 ## [1.2.4] - 2026-05-22
@@ -18,17 +20,17 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [1.2.3] - 2026-03-29
 
-- [PR-68](https://github.com/itk-dev/event-database-imports/pull/68) 
+- [PR-68](https://github.com/itk-dev/event-database-imports/pull/68)
   Made event organizer required for organization users
 
 ## [1.2.2] - 2025-10-07
 
-- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73) 
+- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73)
   Set deploy user for rabbitmq container
 
 ## [1.2.1] - 2025-10-07
 
-- [PR-72](https://github.com/itk-dev/event-database-imports/pull/72) 
+- [PR-72](https://github.com/itk-dev/event-database-imports/pull/72)
   Fix missing asset for file upload
 
 ## [1.2.0] - 2025-10-06
