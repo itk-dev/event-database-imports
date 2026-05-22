@@ -8,6 +8,11 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.2.4] - 2026-05-22
+
+- [PR-77](https://github.com/itk-dev/event-database-api/pull/77)
+  Symfony 7.4 and dependencies, CVE's on both Symfony and Twig
+
 ## [1.2.3] - 2026-03-29
 
 - [PR-68](https://github.com/itk-dev/event-database-imports/pull/68) Made event organizer required for organization users
@@ -123,7 +128,9 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.4...HEAD
+[1.2.4]: https://github.com/itk-dev/event-database-imports/compare/1.2.3...1.2.4
+[1.2.3]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...1.2.3
 [1.2.2]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2
 [1.2.1]: https://github.com/itk-dev/event-database-imports/compare/1.2.0...1.2.1
 [1.2.0]: https://github.com/itk-dev/event-database-imports/compare/1.1.6...1.2.0
