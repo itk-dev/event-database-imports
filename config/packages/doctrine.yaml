@@ -33,11 +33,12 @@ doctrine:
 when@test:
     doctrine:
         dbal:
-            # Use the dev database for tests and rely on DAMA's transaction
-            # rollback (dama/doctrine-test-bundle) to isolate each test. The
-            # db user in the local docker stack does not have CREATE DATABASE
-            # privileges, so a separate _test database is impractical.
-            dbname_suffix: ''
+            # Run tests against a dedicated `<db>_test` database so a local
+            # run can never touch dev data. The `db` user cannot CREATE
+            # DATABASE, so the schema is provisioned once by root via
+            # `task test:setup` (see Taskfile.yml); DAMA's transaction
+            # rollback (dama/doctrine-test-bundle) then isolates each test.
+            dbname_suffix: '_test'
 
 when@prod:
     doctrine:

@@ -54,11 +54,9 @@ jobs:
         run: |
           task composer -- install
 
-      - name: Run database migrations
-        run: |
-          task console -- --env=test doctrine:migrations:migrate --no-interaction
-
       - name: Test suite
+        # `task test` provisions and migrates the isolated `db_test` database
+        # via `test:setup` before running PHPUnit.
         run: |
           task test
 
