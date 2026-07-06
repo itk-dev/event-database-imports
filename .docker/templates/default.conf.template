@@ -21,6 +21,11 @@ server {
     }
 
     location / {
+        # We are co-hosting with the event-database-api, so this app is served under '/admin/' (.env::APP_PATH_PREFIX).
+        # This is configured for Symfony in both 'api_platform.prefix' and 'framework.assets.base_path'. However
+        # Symfony still installs assets in the root path so we need to rewrite the uri to remove '/admin/'.
+        rewrite ^${APP_PATH_PREFIX}/(.*) /$1 break;
+
         # try to serve file directly, fallback to index.php
         try_files $uri /index.php$is_args$args;
     }
