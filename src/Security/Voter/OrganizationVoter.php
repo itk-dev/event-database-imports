@@ -44,9 +44,9 @@ final class OrganizationVoter extends Voter
         if (Action::DELETE === $action || Action::NEW === $action) {
             if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
                 return true;
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         // Global Admin/Editor users can edit all organizations
