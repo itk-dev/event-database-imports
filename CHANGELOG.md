@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
+- [PR-78](https://github.com/itk-dev/event-database-imports/pull/78)
   Update itk docker compose templates
 - [PR-76](https://github.com/itk-dev/event-database-imports/pull/76)
   Added security and admin test coverage
