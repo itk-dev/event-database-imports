@@ -23,6 +23,9 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies the organization index loads successfully for an editor.
+     */
     public function testIndexLoadsForEditor(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -31,6 +34,9 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies the detail page loads for an existing organization.
+     */
     public function testDetailLoadsOnExistingRow(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -41,6 +47,9 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies an editor can access the new organization form.
+     */
     public function testEditorCanAccessNewForm(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -49,6 +58,9 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Would verify org admins cannot create organizations, but is currently skipped.
+     */
     public function testOrgAdminCannotCreateOrganization(): void
     {
         // The OrganizationCrudController hides the "New" button from the
@@ -62,6 +74,9 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->markTestSkipped('URL-level access is not enforced for NEW; see OrganizationVoter::supports().');
     }
 
+    /**
+     * Verifies an org admin is denied access to edit another organization.
+     */
     public function testOrgAdminCannotEditOtherOrganization(): void
     {
         $this->loginAs(TestUserFixtures::ORG_ADMIN_A_EMAIL);

@@ -22,6 +22,9 @@ final class JsonContainsFilterTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies filtering users by editor role excludes users with other roles.
+     */
     public function testFilterByEditorRole(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
@@ -36,6 +39,9 @@ final class JsonContainsFilterTest extends AbstractAdminTestCase
         $this->assertStringNotContainsString(TestUserFixtures::ORG_EDITOR_A_EMAIL, $content);
     }
 
+    /**
+     * Verifies filtering matches users sharing a role stored in a JSON column.
+     */
     public function testFilterByOrgEditorRole(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);

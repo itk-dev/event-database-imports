@@ -23,6 +23,9 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies the hasOrganization=0 filter shows only events without an organization.
+     */
     public function testFilterForEventsWithoutOrganization(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -36,6 +39,9 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
         $this->assertStringNotContainsString('Org A Event 1', $content);
     }
 
+    /**
+     * Verifies the hasOrganization=1 filter shows only events with an organization.
+     */
     public function testFilterForEventsWithOrganization(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);

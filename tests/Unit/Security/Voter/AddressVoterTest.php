@@ -22,6 +22,9 @@ final class AddressVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the voted-on entity is not an Address.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new AddressVoter($this->createStub(Security::class));
@@ -35,6 +38,9 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the attribute is not the EasyAdmin execute-action permission.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new AddressVoter($this->createStub(Security::class));
@@ -48,6 +54,9 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies save actions for an organization editor lacking the organization admin role.
+     */
     public function testOrganizationEditorCannotSaveWithoutOrgAdmin(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -61,6 +70,9 @@ final class AddressVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants detail and index actions regardless of the user's role.
+     */
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new AddressVoter($this->createSecurity([]));
@@ -73,6 +85,9 @@ final class AddressVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants save actions to an organization admin, allowing address creation.
+     */
     public function testOrganizationAdminCanCreateAddress(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_ADMIN->value]));
@@ -85,6 +100,9 @@ final class AddressVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants delete for an editor when the address has no associated locations.
+     */
     public function testEditorCanDeleteAddressWithoutLocations(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -95,6 +113,9 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies delete for an editor when the address still has locations attached.
+     */
     public function testEditorCannotDeleteAddressWithLocations(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -109,6 +130,9 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies new and delete actions for a role below editor.
+     */
     public function testNonEditorCannotDeleteOrCreate(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -122,6 +146,9 @@ final class AddressVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants edit action to a user with the editor role.
+     */
     public function testEditorCanEditAddress(): void
     {
         $voter = new AddressVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -132,6 +159,9 @@ final class AddressVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit action for a user with no roles.
+     */
     public function testUserWithoutRoleCannotEdit(): void
     {
         $voter = new AddressVoter($this->createSecurity([]));

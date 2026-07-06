@@ -22,6 +22,9 @@ final class EventVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the voted-on entity is not an Event.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new EventVoter($this->createStub(Security::class));
@@ -37,6 +40,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the attribute is not the EasyAdmin execute-action permission.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new EventVoter($this->createStub(Security::class));
@@ -52,6 +58,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants detail and index actions regardless of the user's role.
+     */
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new EventVoter($this->createSecurity([]));
@@ -68,6 +77,9 @@ final class EventVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants save actions to a user with the organization editor role.
+     */
     public function testSaveActionsAllowedForOrganizationEditor(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -83,6 +95,9 @@ final class EventVoterTest extends TestCase
         }
     }
 
+    /**
+     * Denies edit action for an event that belongs to a feed, even for an editor.
+     */
     public function testFeedEventsAreNeverEditable(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -125,6 +140,9 @@ final class EventVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants edit action to an editor for an event that does not belong to a feed.
+     */
     public function testEditorCanEditNonFeedEvents(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -138,6 +156,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants edit action to an organization editor for an event owned by their organization.
+     */
     public function testOrganizationEditorCanEditOwnOrgEvent(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -156,6 +177,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit action to an organization editor for an event owned by another organization.
+     */
     public function testOrganizationEditorCannotEditOtherOrgEvent(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -175,6 +199,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit action to an organization editor for an event with no organization set.
+     */
     public function testOrganizationEditorCannotEditEventWithoutOrganization(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -190,6 +217,9 @@ final class EventVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit action for a user with no roles.
+     */
     public function testUserWithoutRoleCannotEdit(): void
     {
         $voter = new EventVoter($this->createSecurity([]));

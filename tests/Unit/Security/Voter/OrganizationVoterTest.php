@@ -21,6 +21,9 @@ final class OrganizationVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the subject entity is not an Organization.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new OrganizationVoter($this->createStub(Security::class));
@@ -34,6 +37,9 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the security attribute is not the expected EasyAdmin action.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new OrganizationVoter($this->createStub(Security::class));
@@ -47,6 +53,9 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants Detail and Index actions to any user regardless of role.
+     */
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([]));
@@ -59,6 +68,9 @@ final class OrganizationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants New and Delete only to editors, denies organization admins.
+     */
     public function testNewAndDeleteRequireEditor(): void
     {
         foreach ([Action::NEW, Action::DELETE] as $action) {
@@ -77,6 +89,9 @@ final class OrganizationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants edit access to an editor for any organization.
+     */
     public function testEditorCanEditAnyOrganization(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -87,6 +102,9 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants edit access to an organization admin for their own organization.
+     */
     public function testOrganizationAdminCanEditOwnOrganization(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_ADMIN->value]));
@@ -102,6 +120,9 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit access to an organization admin for another organization.
+     */
     public function testOrganizationAdminCannotEditOtherOrganization(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_ADMIN->value]));
@@ -117,6 +138,9 @@ final class OrganizationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit access to a user without any relevant role.
+     */
     public function testUserWithoutRoleCannotEdit(): void
     {
         $voter = new OrganizationVoter($this->createSecurity([]));

@@ -23,6 +23,9 @@ final class RegistrationTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies registration persists an unverified user and queues a verification email.
+     */
     public function testSuccessfulRegistrationPersistsUserAndSendsEmail(): void
     {
         $crawler = $this->client->request('GET', '/admin/register/');
@@ -51,6 +54,9 @@ final class RegistrationTest extends AbstractAdminTestCase
         $this->assertQueuedEmailCount(1);
     }
 
+    /**
+     * Verifies visiting the signed verification link sets the user's verified-at timestamp.
+     */
     public function testEmailVerificationSetsVerifiedAt(): void
     {
         $crawler = $this->client->request('GET', '/admin/register/');

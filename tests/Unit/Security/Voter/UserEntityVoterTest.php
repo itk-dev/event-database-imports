@@ -20,6 +20,9 @@ final class UserEntityVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the subject entity is not a User.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new UserEntityVoter($this->createStub(Security::class));
@@ -30,6 +33,9 @@ final class UserEntityVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the security attribute is not the expected entity-access permission.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new UserEntityVoter($this->createStub(Security::class));
@@ -40,6 +46,9 @@ final class UserEntityVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies access when the token has no authenticated user.
+     */
     public function testAnonymousUserIsDenied(): void
     {
         $voter = new UserEntityVoter($this->createStub(Security::class));
@@ -53,6 +62,9 @@ final class UserEntityVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants an admin access to any user entity.
+     */
     public function testAdminCanAccessAnyUser(): void
     {
         $voter = new UserEntityVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
@@ -66,6 +78,9 @@ final class UserEntityVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants a non-admin user access to their own user entity.
+     */
     public function testNonAdminCanAccessOwnUser(): void
     {
         $voter = new UserEntityVoter($this->createSecurity([]));
@@ -78,6 +93,9 @@ final class UserEntityVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies a non-admin user access to another user's entity.
+     */
     public function testNonAdminCannotAccessOtherUser(): void
     {
         $voter = new UserEntityVoter($this->createSecurity([]));

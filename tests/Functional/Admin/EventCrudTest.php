@@ -26,6 +26,9 @@ final class EventCrudTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies the event index loads successfully for each authorized role.
+     */
     #[DataProvider('authorizedRoleProvider')]
     public function testIndexLoadsForAuthorizedRole(string $email): void
     {
@@ -46,6 +49,9 @@ final class EventCrudTest extends AbstractAdminTestCase
         yield 'org editor' => [TestUserFixtures::ORG_EDITOR_A_EMAIL];
     }
 
+    /**
+     * Verifies the detail page loads for an existing event.
+     */
     public function testDetailLoadsOnExistingRow(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -56,6 +62,9 @@ final class EventCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies an editor can access the new event form.
+     */
     public function testEditorCanAccessNewForm(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -64,6 +73,9 @@ final class EventCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies an org editor is denied access to edit another org's event.
+     */
     public function testOrgEditorCannotEditOtherOrgEvent(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);

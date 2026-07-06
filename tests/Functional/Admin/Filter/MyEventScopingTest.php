@@ -23,6 +23,9 @@ final class MyEventScopingTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies an organization editor's event list is scoped to their own organization.
+     */
     public function testOrgEditorOnlySeesOwnOrgEvents(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
@@ -36,6 +39,9 @@ final class MyEventScopingTest extends AbstractAdminTestCase
         $this->assertStringNotContainsString('Orphan Event', $content);
     }
 
+    /**
+     * Verifies scoping applies per organization editor, not just a fixed organization.
+     */
     public function testOtherOrgEditorSeesOtherOrgEvents(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_B_EMAIL);

@@ -20,6 +20,9 @@ final class LoginTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies a successful login redirects the user to the admin area.
+     */
     public function testValidCredentialsRedirectToAdmin(): void
     {
         $crawler = $this->client->request('GET', '/admin/login');
@@ -34,6 +37,9 @@ final class LoginTest extends AbstractAdminTestCase
         $this->assertStringStartsWith('/admin', (string) $this->client->getResponse()->headers->get('Location'));
     }
 
+    /**
+     * Verifies an invalid password shows an error message instead of logging in.
+     */
     public function testInvalidCredentialsShowError(): void
     {
         $crawler = $this->client->request('GET', '/admin/login');

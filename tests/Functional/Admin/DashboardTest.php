@@ -20,6 +20,9 @@ final class DashboardTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies the super admin dashboard renders all menu sections.
+     */
     public function testSuperAdminSeesAllMenuSections(): void
     {
         $this->loginAs(TestUserFixtures::SUPER_ADMIN_EMAIL);
@@ -38,6 +41,9 @@ final class DashboardTest extends AbstractAdminTestCase
         $this->assertStringContainsString('Feeds', $content);
     }
 
+    /**
+     * Verifies editors are redirected from the dashboard to the event CRUD.
+     */
     public function testEditorRedirectsToEventCrud(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
@@ -48,6 +54,9 @@ final class DashboardTest extends AbstractAdminTestCase
         $this->assertSame('/admin/event', $path);
     }
 
+    /**
+     * Verifies org editors are redirected from the dashboard to their "my event" CRUD.
+     */
     public function testOrgEditorRedirectsToMyEventCrud(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
@@ -58,6 +67,9 @@ final class DashboardTest extends AbstractAdminTestCase
         $this->assertSame('/admin/my-event', $path);
     }
 
+    /**
+     * Verifies org editors do not see admin-only menu items.
+     */
     public function testOrgEditorDoesNotSeeAdminMenuItems(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);

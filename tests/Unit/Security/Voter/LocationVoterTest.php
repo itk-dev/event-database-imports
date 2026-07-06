@@ -21,6 +21,9 @@ final class LocationVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the voted-on entity is not a Location.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new LocationVoter($this->createStub(Security::class));
@@ -34,6 +37,9 @@ final class LocationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the attribute is not the EasyAdmin execute-action permission.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new LocationVoter($this->createStub(Security::class));
@@ -47,6 +53,9 @@ final class LocationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies save actions for an organization editor lacking the organization admin role.
+     */
     public function testOrganizationEditorCannotSaveWithoutOrgAdmin(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -60,6 +69,9 @@ final class LocationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants detail and index actions regardless of the user's role.
+     */
     public function testDetailAndIndexAreAlwaysGranted(): void
     {
         $voter = new LocationVoter($this->createSecurity([]));
@@ -72,6 +84,9 @@ final class LocationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants save actions to an organization admin, allowing location creation.
+     */
     public function testOrganizationAdminCanCreateLocation(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_ADMIN->value]));
@@ -84,6 +99,9 @@ final class LocationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants delete for an editor when the location has no associated events.
+     */
     public function testEditorCanDeleteLocationWithoutEvents(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -94,6 +112,9 @@ final class LocationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies delete for an editor when the location still has events attached.
+     */
     public function testEditorCannotDeleteLocationWithEvents(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -109,6 +130,9 @@ final class LocationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies new and delete actions for a role below editor.
+     */
     public function testNonEditorCannotDeleteOrCreate(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
@@ -122,6 +146,9 @@ final class LocationVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants edit action to a user with the editor role.
+     */
     public function testEditorCanEditLocation(): void
     {
         $voter = new LocationVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -132,6 +159,9 @@ final class LocationVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies edit action for a user with no roles.
+     */
     public function testUserWithoutRoleCannotEdit(): void
     {
         $voter = new LocationVoter($this->createSecurity([]));

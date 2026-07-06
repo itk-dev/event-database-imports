@@ -21,6 +21,9 @@ final class TagVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the subject entity is not a Tag.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new TagVoter($this->createStub(Security::class));
@@ -34,6 +37,9 @@ final class TagVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the security attribute is not the expected EasyAdmin action.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new TagVoter($this->createStub(Security::class));
@@ -47,6 +53,9 @@ final class TagVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants edit and delete actions to admins.
+     */
     public function testAdminCanEditAndDeleteTag(): void
     {
         $voter = new TagVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
@@ -60,6 +69,9 @@ final class TagVoterTest extends TestCase
         }
     }
 
+    /**
+     * Denies edit and delete actions to non-admin users.
+     */
     public function testNonAdminCannotEditOrDeleteTag(): void
     {
         $voter = new TagVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
@@ -73,6 +85,9 @@ final class TagVoterTest extends TestCase
         }
     }
 
+    /**
+     * Grants non-edit, non-delete actions regardless of role.
+     */
     public function testOtherActionsAreAllowed(): void
     {
         $voter = new TagVoter($this->createSecurity([]));

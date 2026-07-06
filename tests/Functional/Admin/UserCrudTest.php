@@ -22,6 +22,9 @@ final class UserCrudTest extends AbstractAdminTestCase
         ]);
     }
 
+    /**
+     * Verifies an admin can access the user index.
+     */
     public function testAdminCanAccessIndex(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
@@ -30,6 +33,9 @@ final class UserCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies an admin can access the new user form.
+     */
     public function testAdminCanCreateNewUser(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
@@ -38,6 +44,9 @@ final class UserCrudTest extends AbstractAdminTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    /**
+     * Verifies an org editor is denied access to the new user form.
+     */
     public function testOrgEditorCannotAccessNewUser(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
@@ -47,6 +56,9 @@ final class UserCrudTest extends AbstractAdminTestCase
         $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403, got %d', $status));
     }
 
+    /**
+     * Verifies a user can edit their own profile.
+     */
     public function testUserCanEditOwnProfile(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);

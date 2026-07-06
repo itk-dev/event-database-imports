@@ -20,6 +20,9 @@ final class UserActionVoterTest extends TestCase
 {
     use VoterTestHelperTrait;
 
+    /**
+     * Abstains when the subject entity is not a User.
+     */
     public function testAbstainsForUnsupportedEntity(): void
     {
         $voter = new UserActionVoter($this->createStub(Security::class));
@@ -33,6 +36,9 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    /**
+     * Abstains when the security attribute is not the expected EasyAdmin action.
+     */
     public function testAbstainsForUnsupportedAttribute(): void
     {
         $voter = new UserActionVoter($this->createStub(Security::class));
@@ -76,6 +82,9 @@ final class UserActionVoterTest extends TestCase
         }
     }
 
+    /**
+     * Denies deleting one's own user account, even as an admin.
+     */
     public function testCannotDeleteSelf(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
@@ -88,6 +97,9 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants an admin permission to delete another user's account.
+     */
     public function testAdminCanDeleteOtherUser(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
@@ -101,6 +113,9 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies non-admin users permission to create a new user.
+     */
     public function testNonAdminCannotCreateNewUser(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
@@ -113,6 +128,9 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    /**
+     * Grants a non-admin user permission to edit their own account.
+     */
     public function testNonAdminCanEditSelf(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
@@ -125,6 +143,9 @@ final class UserActionVoterTest extends TestCase
         );
     }
 
+    /**
+     * Denies a non-admin user permission to edit another user's account.
+     */
     public function testNonAdminCannotEditOther(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
