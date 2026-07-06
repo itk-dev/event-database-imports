@@ -93,3 +93,13 @@ services:
                 hosts: ['%env(INDEXING_URL)%']
 
     Elastic\Elasticsearch\ClientBuilder: ~
+
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Tests\Fixtures\:
+            resource: '../tests/Fixtures/'
+            tags: ['doctrine.fixture.orm']

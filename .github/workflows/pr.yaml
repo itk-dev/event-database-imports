@@ -55,6 +55,8 @@ jobs:
           task composer -- install
 
       - name: Test suite
+        # `task test` provisions and migrates the isolated `db_test` database
+        # via `test:setup` before running PHPUnit.
         run: |
           task test
 

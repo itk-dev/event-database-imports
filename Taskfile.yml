@@ -25,6 +25,7 @@ tasks:
       - task: console
         vars:
           CONSOLE_ARGS: doctrine:migrations:migrate --no-interaction
+      - task: test:setup
       - task: console
         vars:
           CONSOLE_ARGS: app:index:create
@@ -159,9 +160,23 @@ tasks:
           COMPOSE_ARGS: exec phpfpm vendor/bin/phpstan
     silent: true
 
+  test:setup:
+    desc: "Provision and migrate the isolated test database (db_test)."
+    cmds:
+      # The `db` user cannot CREATE DATABASE, so root provisions the schema
+      # and grants the app user access (idempotent). The root credentials are
+      # the fixed local-stack values from docker-compose.yml.
+      - >-
+        {{.DOCKER_COMPOSE}} exec -T mariadb mariadb -uroot -ppassword
+        -e 'CREATE DATABASE IF NOT EXISTS db_test; GRANT ALL PRIVILEGES ON `db_test`.* TO `db`@`%`;'
+      - task: console
+        vars:
+          CONSOLE_ARGS: --env=test doctrine:migrations:migrate --no-interaction
+
   test:
     desc: Run tests
     cmds:
+      - task: test:setup
       - task: compose
         vars:
           COMPOSE_ARGS: exec --env XDEBUG_MODE=coverage phpfpm vendor/bin/phpunit --coverage-clover=coverage/unit.xml

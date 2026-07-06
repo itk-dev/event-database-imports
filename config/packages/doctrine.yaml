@@ -33,8 +33,12 @@ doctrine:
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            # Run tests against a dedicated `<db>_test` database so a local
+            # run can never touch dev data. The `db` user cannot CREATE
+            # DATABASE, so the schema is provisioned once by root via
+            # `task test:setup` (see Taskfile.yml); DAMA's transaction
+            # rollback (dama/doctrine-test-bundle) then isolates each test.
+            dbname_suffix: '_test'
 
 when@prod:
     doctrine:
