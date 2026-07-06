@@ -62,9 +62,9 @@ final class EventVoter extends Voter
             $organization = $event->getOrganization();
             if (null === $organization) {
                 return false;
-            } else {
-                return $user->getOrganizations()->contains($organization);
             }
+
+            return $user->getOrganizations()->contains($organization);
         }
 
         return false;
