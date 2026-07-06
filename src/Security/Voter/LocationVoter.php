@@ -51,9 +51,9 @@ final class LocationVoter extends Voter
         if (Action::DELETE === $action || Action::NEW === $action) {
             if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
                 return 0 === $location->getEvents()->count();
-            } else {
-                return false;
             }
+
+            return false;
         }
 
         // Global Admin/Editor users can edit all locations

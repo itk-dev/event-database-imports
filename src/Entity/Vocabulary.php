@@ -18,12 +18,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\HasLifecycleCallbacks]
 #[UniqueEntity(
     fields: ['name'],
-    message: 'entity.vocabulary.name.not_unique')
-]
+    message: 'entity.vocabulary.name.not_unique')]
 #[UniqueEntity(
     fields: ['slug'],
-    message: 'entity.vocabulary.slug.not_unique')
-]
+    message: 'entity.vocabulary.slug.not_unique')]
 class Vocabulary implements IndexItemInterface
 {
     use TimestampableEntity;
