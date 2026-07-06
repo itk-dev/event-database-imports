@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
+- [PR-80](https://github.com/itk-dev/event-database-imports/pull/80)
   Document test infrastructure in README and add ADR for test database isolation
 - [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
   Update itk docker compose templates
