@@ -115,3 +115,55 @@ Using all three repositories, you can create the setup depicted below and have c
 [shared service's repository](https://github.com/itk-dev/event-database-services.git).
 
 ![Network setup production](./docs/images/networks.png)
+
+## Testing
+
+The test suite is built on [PHPUnit](https://phpunit.de/) and split into two suites (see `phpunit.xml.dist`):
+
+* **Unit** (`tests/Unit`) — isolated tests with no database, e.g. security voters and services.
+* **Functional** (`tests/Functional`) — boot the kernel and exercise the app against a real database (authentication,
+  admin CRUD, filters).
+
+Run the whole suite with [Task](https://taskfile.dev):
+
+```shell
+task test
+```
+
+Or directly:
+
+```shell
+docker compose exec phpfpm vendor/bin/phpunit
+```
+
+`task test` runs `task test:setup` first, which provisions the isolated test database and migrates it before PHPUnit
+starts. You can run that step on its own:
+
+```shell
+task test:setup
+```
+
+### Test database
+
+Tests run against a dedicated `db_test` database, never the dev `db`, so a local run can never touch your development
+data. Each test is wrapped in a transaction that is rolled back afterwards
+([DAMA DoctrineTestBundle](https://github.com/dmaicher/doctrine-test-bundle)), and fixtures are loaded per test through
+[Liip TestFixturesBundle](https://github.com/liip/LiipTestFixturesBundle).
+
+Because the local `db` user cannot `CREATE DATABASE`, `task test:setup` creates and grants `db_test` as the database
+root user (the fixed credentials from `docker-compose.yml`) and then migrates it. `task site:update` runs this as part
+of local setup, so a fresh checkout is ready to test.
+
+> [!NOTE]
+> The test database name is fixed, so parallel execution with ParaTest is not supported. See
+> [ADR 009 — Test database isolation](docs/adr/009-test-database-isolation.md) for the full rationale and trade-offs.
+
+### Fixtures for functional tests
+
+Functional tests load lightweight fixtures from `tests/Fixtures` (`TestUserFixtures`, `TestEventFixtures`) that create
+users across roles and organisations, independent of the full development `EventFixture` chain.
+
+### Coverage
+
+`task test` writes a Clover report to `coverage/unit.xml` (uploaded to [Codecov](https://codecov.io/) in CI). Generating
+coverage requires Xdebug, which the `test` task enables via `XDEBUG_MODE=coverage`.
