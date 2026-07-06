@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-PLACEHOLDER](https://github.com/itk-dev/event-database-imports/pull/PLACEHOLDER)
+  Restore nginx APP_PATH_PREFIX rewrite so admin assets load
 - [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
   Update itk docker compose templates
 - [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
