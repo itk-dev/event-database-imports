@@ -8,14 +8,16 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
+- [PR-78](https://github.com/itk-dev/event-database-imports/pull/78)
   Update itk docker compose templates
+- [PR-76](https://github.com/itk-dev/event-database-imports/pull/76)
+  Added security and admin test coverage
 - [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
   Added test infrastructure (PHPUnit 12, DAMA, Liip)
 
 ## [1.2.4] - 2026-05-22
 
-- [PR-77](https://github.com/itk-dev/event-database-api/pull/77)
+- [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
   Symfony 7.4 and dependencies, CVE's on both Symfony and Twig
 
 ## [1.2.3] - 2026-03-29

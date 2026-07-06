@@ -1,0 +1,4 @@
+liip_test_fixtures:
+    # DAMA/doctrine-test-bundle isolates each test via a rolled-back
+    # transaction on the existing schema; Liip must not drop/recreate it.
+    keep_database_and_schema: true
