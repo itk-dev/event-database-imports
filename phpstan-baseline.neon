@@ -1,10 +1,76 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Only booleans are allowed in a negated boolean, App\\Entity\\Event\|null given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Command/Event/EventDeleteCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, App\\Entity\\Feed\|null given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Command/Event/EventDeleteCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, mixed given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Command/Event/FixEventsWithoutOrganizerCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 1
+			path: src/Command/Event/FixEventsWithoutOrganizerCommand.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: src/Command/Event/FixEventsWithoutOrganizerCommand.php
+
+		-
+			message: '#^Parameter \#1 \$organization of method App\\Entity\\Event\:\:setOrganization\(\) expects App\\Entity\\Organization\|null, App\\Entity\\Organization\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Event/FixEventsWithoutOrganizerCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, bool\|null given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Command/Feed/FeedDebugCommand.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: src/Command/Feed/FeedListCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, bool\|null given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 1
+			path: src/Command/Feed/FeedListCommand.php
+
+		-
 			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Command/Index/IndexCreateCommand.php
+
+		-
+			message: '#^Parameter \#5 \$suggestedValues of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\|\(Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput, Symfony\\Component\\Console\\Completion\\CompletionSuggestions\)\: list\<string\|Symfony\\Component\\Console\\Completion\\Suggestion\>\), Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput\)\: array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexCreateCommand.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: src/Command/Index/IndexDumpCommand.php
 
 		-
 			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
@@ -13,7 +79,31 @@ parameters:
 			path: src/Command/Index/IndexDumpCommand.php
 
 		-
+			message: '#^Parameter \#5 \$suggestedValues of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\|\(Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput, Symfony\\Component\\Console\\Completion\\CompletionSuggestions\)\: list\<string\|Symfony\\Component\\Console\\Completion\\Suggestion\>\), Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput\)\: array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexDumpCommand.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: src/Command/Index/IndexListCommand.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: src/Command/Index/IndexPopulateCommand.php
+
+		-
 			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Command/Index/IndexPopulateCommand.php
+
+		-
+			message: '#^Parameter \#5 \$suggestedValues of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\|\(Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput, Symfony\\Component\\Console\\Completion\\CompletionSuggestions\)\: list\<string\|Symfony\\Component\\Console\\Completion\\Suggestion\>\), Closure\(Symfony\\Component\\Console\\Completion\\CompletionInput\)\: array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: src/Command/Index/IndexPopulateCommand.php
@@ -23,6 +113,30 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: src/Command/Migrate/MigrateTagsCommand.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 2
+			path: src/Command/User/AddUserCommand.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Command/User/ChangePasswordCommand.php
+
+		-
+			message: '#^Parameter \#1 \$organization of method App\\Entity\\Event\:\:setOrganization\(\) expects App\\Entity\\Organization\|null, App\\Entity\\Organization\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Controller/Admin/EventCrudController.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, mixed given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: src/EasyAdmin/Filter/HasOrganizationFilter.php
 
 		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
@@ -43,6 +157,12 @@ parameters:
 			path: src/Entity/Event.php
 
 		-
+			message: '#^Method App\\Entity\\Feed\:\:getConfigurationField\(\) should return string but returns string\|false\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/Feed.php
+
+		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 2
@@ -61,10 +181,58 @@ parameters:
 			path: src/Entity/Organization.php
 
 		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getMail\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getName\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Method App\\Entity\\User\:\:getUserIdentifier\(\) should return non\-empty\-string but returns string\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Entity/User.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/EventSubscriber/EasyAdminSubscriber.php
+
+		-
 			message: '#^Call to function is_null\(\) with array\<string\> will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: src/Factory/EventFactory.php
+
+		-
+			message: '#^Call to function array_filter\(\) requires parameter \#2 to be passed to avoid loose comparison semantics\.$#'
+			identifier: arrayFilter.strict
+			count: 2
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Factory/LocationFactory.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, string\|null given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: src/Factory/LocationFactory.php
 
 		-
 			message: '#^Variable \$values in empty\(\) always exists and is always falsy\.$#'
@@ -73,10 +241,112 @@ parameters:
 			path: src/Factory/LocationFactory.php
 
 		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 3
+			path: src/MessageHandler/FeedItemNormalizationHandler.php
+
+		-
 			message: '#^Call to function is_null\(\) with int will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: src/MessageHandler/ImageHandler.php
+
+		-
+			message: '#^Parameter \#1 \$string of class Symfony\\Component\\String\\UnicodeString constructor expects string, string\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/ContentNormalizer.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Service/Feeds/FeedDefaultsMapper.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Service/Feeds/Mapper/Source/FeedItemSource.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, int\|false given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: src/Service/Feeds/Mapper/Source/FeedItemSource.php
+
+		-
+			message: '#^Only booleans are allowed in a negated boolean, bool\|null given\.$#'
+			identifier: booleanNot.exprNotBoolean
+			count: 1
+			path: src/Service/Feeds/Reader/FeedReader.php
+
+		-
+			message: '#^Parameter \#1 \$feedId of class App\\Message\\ReadFeedMessage constructor expects int, int\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/Feeds/Reader/FeedReader.php
+
+		-
+			message: '#^Call to function array_filter\(\) requires parameter \#2 to be passed to avoid loose comparison semantics\.$#'
+			identifier: arrayFilter.strict
+			count: 1
+			path: src/Service/Geocoder.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 1
+			path: src/Service/ImageService.php
+
+		-
+			message: '#^Method App\\Service\\ImageService\:\:getRelativePath\(\) should return string but returns string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Service/ImageService.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function fclose expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/ImageService.php
+
+		-
+			message: '#^Parameter \#1 \$stream of function fwrite expects resource, resource\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/ImageService.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 2
+			path: src/Service/IndexManager.php
+
+		-
+			message: '#^Call to an undefined method Elastic\\Elasticsearch\\Response\\Elasticsearch\|Http\\Promise\\Promise\:\:getStatusCode\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: src/Service/Indexing/AbstractIndexingElastic.php
+
+		-
+			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
+			identifier: function.strict
+			count: 4
+			path: src/Service/Indexing/AbstractIndexingElastic.php
+
+		-
+			message: '#^Method App\\Service\\Indexing\\AbstractIndexingElastic\:\:getCurrentActiveIndexName\(\) should return string but returns int\|string\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Service/Indexing/AbstractIndexingElastic.php
+
+		-
+			message: '#^Parameter \#1 \$params of method Elastic\\Elasticsearch\\Client\:\:bulk\(\) expects array\{index\?\: string, wait_for_active_shards\?\: string, refresh\?\: string, routing\?\: string, timeout\?\: int\|string, type\?\: string, _source\?\: array\<string\>\|string, _source_excludes\?\: array\<string\>\|string, \.\.\.\}\|null, array\{\}\|array\{body\: non\-empty\-list\<array\>\} given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/Indexing/AbstractIndexingElastic.php
 
 		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
@@ -85,8 +355,62 @@ parameters:
 			path: src/Service/Indexing/IndexingDailyOccurrences.php
 
 		-
+			message: '#^Cannot call method getImage\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Cannot call method getLocation\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Cannot call method getOccurrences\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Cannot call method getOrganization\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Cannot call method getPartners\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Foreach overwrites \$occurrence with its value variable\.$#'
+			identifier: foreach.valueOverwrite
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Method App\\Service\\Indexing\\IndexingDailyOccurrences\:\:getUpdatedAt\(\) should return DateTime but returns DateTime\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
+			message: '#^Parameter \#1 \$item of method App\\Service\\Indexing\\IndexingEvents\:\:serialize\(\) expects App\\Service\\Indexing\\IndexItemInterface, App\\Entity\\Event\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Service/Indexing/IndexingDailyOccurrences.php
+
+		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingEvents.php
+
+		-
+			message: '#^Method App\\Service\\Indexing\\IndexingEvents\:\:getUpdatedAt\(\) should return DateTime but returns DateTime\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: src/Service/Indexing/IndexingEvents.php
 
@@ -99,6 +423,54 @@ parameters:
 		-
 			message: '#^Call to an undefined method Symfony\\Component\\Serializer\\SerializerInterface\:\:normalize\(\)\.$#'
 			identifier: method.notFound
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Cannot call method getImage\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Cannot call method getLocation\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Cannot call method getOccurrences\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Cannot call method getOrganization\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Cannot call method getPartners\(\) on App\\Entity\\Event\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Foreach overwrites \$occurrence with its value variable\.$#'
+			identifier: foreach.valueOverwrite
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Method App\\Service\\Indexing\\IndexingOccurrences\:\:getUpdatedAt\(\) should return DateTime but returns DateTime\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Service/Indexing/IndexingOccurrences.php
+
+		-
+			message: '#^Parameter \#1 \$item of method App\\Service\\Indexing\\IndexingEvents\:\:serialize\(\) expects App\\Service\\Indexing\\IndexItemInterface, App\\Entity\\Event\|null given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Service/Indexing/IndexingOccurrences.php
 
@@ -119,3 +491,63 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: src/Service/Indexing/IndexingVocabularies.php
+
+		-
+			message: '#^Call to function array_filter\(\) requires parameter \#2 to be passed to avoid loose comparison semantics\.$#'
+			identifier: arrayFilter.strict
+			count: 1
+			path: src/Service/TagsNormalizer.php
+
+		-
+			message: '#^Casting to int something that''s already int\.$#'
+			identifier: cast.useless
+			count: 1
+			path: src/Service/TagsNormalizer.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 1
+			path: src/Service/TagsNormalizer.php
+
+		-
+			message: '#^Only booleans are allowed in a ternary operator condition, App\\Entity\\Tag\|null given\.$#'
+			identifier: ternary.condNotBoolean
+			count: 1
+			path: src/Service/TagsNormalizer.php
+
+		-
+			message: '#^Cannot call method endOfDay\(\) on Carbon\\CarbonInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/TimeInterval.php
+
+		-
+			message: '#^Cannot call method toDateTimeImmutable\(\) on Carbon\\CarbonInterface\|null\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Service/TimeInterval.php
+
+		-
+			message: '#^Only booleans are allowed in &&, string\|false\|null given on the left side\.$#'
+			identifier: booleanAnd.leftNotBoolean
+			count: 1
+			path: src/Utils/UriHelper.php
+
+		-
+			message: '#^Only booleans are allowed in &&, string\|false\|null given on the right side\.$#'
+			identifier: booleanAnd.rightNotBoolean
+			count: 1
+			path: src/Utils/UriHelper.php
+
+		-
+			message: '#^Only booleans are allowed in an if condition, string\|false given\.$#'
+			identifier: if.condNotBoolean
+			count: 1
+			path: src/Utils/UriHelper.php
+
+		-
+			message: '#^Construct empty\(\) is not allowed\. Use more strict comparison\.$#'
+			identifier: empty.notAllowed
+			count: 3
+			path: src/Utils/Validator.php
