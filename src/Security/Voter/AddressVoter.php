@@ -20,18 +20,21 @@ final class AddressVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_EXECUTE_ACTION == $attribute
-            && null !== $subject['entity']
-            && Address::class === $subject['entity']->getFqcn();
+        if (Permission::EA_EXECUTE_ACTION != $attribute) {
+            return false;
+        }
+
+        // EasyAdmin passes a null entity for INDEX/NEW but always sets entityFqcn,
+        // so match on that to keep NEW enforced at the URL level.
+        $fqcn = $subject['entityFqcn'] ?? $subject['entity']?->getFqcn();
+
+        return Address::class === $fqcn;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         assert($user instanceof User);
-
-        $address = $subject['entity']->getInstance();
-        assert($address instanceof Address);
 
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
@@ -40,6 +43,15 @@ final class AddressVoter extends Voter
             return true;
         }
 
+        // New action is only allowed for editors (no entity instance yet)
+        if (Action::NEW === $action) {
+            return $this->security->isGranted(UserRoles::ROLE_EDITOR->value);
+        }
+
+        // Remaining actions operate on a concrete address instance
+        $address = $subject['entity']->getInstance();
+        assert($address instanceof Address);
+
         if (Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) {
             // Allow address creation
             if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
@@ -47,8 +59,8 @@ final class AddressVoter extends Voter
             }
         }
 
-        // Delete and New actions are only allowed for editors
-        if (Action::DELETE === $action || Action::NEW === $action) {
+        // Delete is only allowed for editors, and only for unused addresses
+        if (Action::DELETE === $action) {
             if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
                 return 0 === $address->getLocations()->count();
             }

@@ -20,18 +20,21 @@ final class OrganizationVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_EXECUTE_ACTION == $attribute
-            && null !== $subject['entity']
-            && Organization::class === $subject['entity']->getFqcn();
+        if (Permission::EA_EXECUTE_ACTION != $attribute) {
+            return false;
+        }
+
+        // EasyAdmin passes a null entity for INDEX/NEW but always sets entityFqcn,
+        // so match on that to keep NEW enforced at the URL level.
+        $fqcn = $subject['entityFqcn'] ?? $subject['entity']?->getFqcn();
+
+        return Organization::class === $fqcn;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         assert($user instanceof User);
-
-        $organization = $subject['entity']->getInstance();
-        assert($organization instanceof Organization);
 
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
@@ -40,13 +43,18 @@ final class OrganizationVoter extends Voter
             return true;
         }
 
-        // Delete and New actions are only allowed for editors
-        if (Action::DELETE === $action || Action::NEW === $action) {
-            if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
-                return true;
-            }
+        // New action is only allowed for editors (EasyAdmin provides no instance yet)
+        if (Action::NEW === $action) {
+            return $this->security->isGranted(UserRoles::ROLE_EDITOR->value);
+        }
 
-            return false;
+        // Remaining actions operate on a concrete entity instance
+        $organization = $subject['entity']->getInstance();
+        assert($organization instanceof Organization);
+
+        // Delete is only allowed for editors
+        if (Action::DELETE === $action) {
+            return $this->security->isGranted(UserRoles::ROLE_EDITOR->value);
         }
 
         // Global Admin/Editor users can edit all organizations
