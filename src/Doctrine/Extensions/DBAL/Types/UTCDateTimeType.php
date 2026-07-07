@@ -13,7 +13,12 @@ class UTCDateTimeType extends DateTimeType
     public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
     {
         if ($value instanceof \DateTime) {
-            $value->setTimezone(self::getUtc());
+            if (self::getUtc()->getName() !== $value->getTimezone()->getName()) {
+                // Clone before converting: \DateTime is mutable and the caller
+                // (the entity) still owns this object — its timezone must not be
+                // silently rewritten as a side effect of persisting.
+                $value = (clone $value)->setTimezone(self::getUtc());
+            }
         }
 
         return parent::convertToDatabaseValue($value, $platform);

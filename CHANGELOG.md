@@ -8,6 +8,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-89](https://github.com/itk-dev/event-database-imports/pull/89)
+  Centralize the display timezone as a single injected source shared by the admin UI and the Elasticsearch
+  index, and stop UTCDateTimeType from mutating the caller's datetime when converting to UTC for storage
 - [PR-88](https://github.com/itk-dev/event-database-imports/pull/88)
   Raise PHPStan to level 8 and add phpstan-strict-rules, baseline the existing findings
 - [PR-87](https://github.com/itk-dev/event-database-imports/pull/87)
