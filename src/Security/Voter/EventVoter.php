@@ -40,16 +40,17 @@ final class EventVoter extends Voter
             return true;
         }
 
+        // Feed events can never be edited or deleted. Apply this before any
+        // save-action grant below so it cannot be bypassed via SAVE_AND_*.
+        if (null !== $event->getFeed()) {
+            return false;
+        }
+
         if (Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) {
             // Allow event creation
             if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
                 return true;
             }
-        }
-
-        // Feed events can never be edited or deleted
-        if (null !== $event->getFeed()) {
-            return false;
         }
 
         // Global Admin/Editor users can edit all events except feed events
