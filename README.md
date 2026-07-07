@@ -95,7 +95,7 @@ task fixtures:load
 After loading fixtures, you can sign (on `/admin/login`) in as one of these users:
 
 | Username           | Password     | Roles        |
-|--------------------|--------------|--------------|
+| ------------------ | ------------ | ------------ |
 | `admin@itkdev.dk`  | `admin`      | `ROLE_ADMIN` |
 | `tester@itkdev.dk` | `1233456789` | `ROLE_ADMIN` |
 
@@ -116,12 +116,53 @@ Using all three repositories, you can create the setup depicted below and have c
 
 ![Network setup production](./docs/images/networks.png)
 
+## Roles and permissions
+
+Sign-in is local username/password (Symfony `form_login`). Admin-UI authorization is enforced by voters in
+`src/Security/Voter/` (keyed on EasyAdmin's per-action `EA_EXECUTE_ACTION` permission). Roles are defined in
+`src/Types/UserRoles.php` and form an inheritance chain in `config/packages/security.yaml` — each role also holds
+every capability of the roles to its right:
+
+```text
+SUPER_ADMIN → ADMIN → EDITOR → ORGANIZATION_ADMIN → ORGANIZATION_EDITOR → API_USER → USER
+```
+
+`ROLE_API_USER` is used by the read [`event-database-api`](https://github.com/itk-dev/event-database-api);
+`ROLE_USER` is any authenticated user. In the matrix, "+" means "that role and everything above it".
+
+| Entity       | View (index/detail) | Create                 | Edit                                                        | Delete                                    |
+| ------------ | ------------------- | ---------------------- | ----------------------------------------------------------- | ----------------------------------------- |
+| Organization | any user            | `EDITOR`+              | `EDITOR`+ · `ORGANIZATION_ADMIN` (own org)                  | `EDITOR`+                                 |
+| Event        | any user            | `ORGANIZATION_EDITOR`+ | `EDITOR`+ · `ORGANIZATION_EDITOR` (own-org) — non-feed only | `EDITOR`+ (non-feed)                      |
+| Location     | any user            | `EDITOR`+ ¹            | `EDITOR`+                                                   | `EDITOR`+ (only when it has no events)    |
+| Address      | any user            | `EDITOR`+ ¹            | `EDITOR`+                                                   | `EDITOR`+ (only when it has no locations) |
+| Tag          | any user            | any user ²             | `ADMIN`+                                                    | `ADMIN`+                                  |
+| Vocabulary   | `ADMIN`+            | `ADMIN`+               | `ADMIN`+                                                    | `ADMIN`+                                  |
+| Feed         | `ADMIN`+            | `SUPER_ADMIN`          | `SUPER_ADMIN`                                               | `SUPER_ADMIN`                             |
+| Feed item    | `ADMIN`+            | — (import-managed) ³   | — ³                                                         | — ³                                       |
+| User         | `ADMIN`+ or self    | `ADMIN`+               | `ADMIN`+ · others: self only                                | `ADMIN`+ (never your own account)         |
+
+- **Feed-imported events are never editable or deletable** by anyone (ADR 007) — they change only via re-import.
+- **Own-org scoping**: organization admins/editors may act only on entities belonging to their own organization(s).
+- ¹ Organization admins can additionally create locations/addresses **inline** while creating an event (the save-action
+  grant), even though the standalone `New` page is editor-gated.
+- ² Anyone may create a bare tag, but assigning a tag to a vocabulary (the tag's `vocabularies` field) is `ADMIN`-only.
+- **Vocabularies** (controlled tag vocabularies) are `ADMIN`-only for every action, enforced at the controller level
+  (`VocabularyCrudController::configureActions()` via `setPermission`) rather than by a voter.
+- **Feeds** are visible to `ADMIN`+ but only `SUPER_ADMIN` may create/edit/delete them; **Feed items** are read-only in
+  the admin (create/edit/delete disabled) — they change only via feed import (ADR 007). Both are enforced via
+  controller `setPermission`.
+- **Occurrences** are edited inline within an event (an embedded CRUD), not as a standalone entity. The "My …" menu
+  entries are organization-scoped views of Event/Organization for organization editors, not separate entities.
+- Users are also gated by `UserEntityVoter` (`EA_ACCESS_ENTITY`): anonymous denied; `ADMIN`+ any user; otherwise own
+  record only.
+
 ## Testing
 
 The test suite is built on [PHPUnit](https://phpunit.de/) and split into two suites (see `phpunit.xml.dist`):
 
-* **Unit** (`tests/Unit`) — isolated tests with no database, e.g. security voters and services.
-* **Functional** (`tests/Functional`) — boot the kernel and exercise the app against a real database (authentication,
+- **Unit** (`tests/Unit`) — isolated tests with no database, e.g. security voters and services.
+- **Functional** (`tests/Functional`) — boot the kernel and exercise the app against a real database (authentication,
   admin CRUD, filters).
 
 Run the whole suite with [Task](https://taskfile.dev):

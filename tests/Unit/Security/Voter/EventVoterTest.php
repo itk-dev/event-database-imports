@@ -78,19 +78,49 @@ final class EventVoterTest extends TestCase
     }
 
     /**
-     * Grants save actions to a user with the organization editor role.
+     * Grants save actions to an organization editor for an event owned by their own organization.
      */
     public function testSaveActionsAllowedForOrganizationEditor(): void
     {
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
-        $token = $this->createToken(new User());
+
+        $org = new Organization();
+        $user = new User();
+        $user->addOrganization($org);
+
         $event = new Event();
+        $event->setOrganization($org);
 
         foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
             $subject = ['entity' => $this->createEntityDto(Event::class, $event), 'action' => $action];
             $this->assertSame(
                 VoterInterface::ACCESS_GRANTED,
-                $voter->vote($token, $subject, [Permission::EA_EXECUTE_ACTION]),
+                $voter->vote($this->createToken($user), $subject, [Permission::EA_EXECUTE_ACTION]),
+            );
+        }
+    }
+
+    /**
+     * Denies save actions to an organization editor for an event owned by another organization.
+     */
+    public function testOrganizationEditorCannotSaveOtherOrgEvent(): void
+    {
+        $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
+
+        $userOrg = new Organization();
+        $otherOrg = new Organization();
+        $user = new User();
+        $user->addOrganization($userOrg);
+
+        $event = new Event();
+        $event->setOrganization($otherOrg);
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(Event::class, $event), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $voter->vote($this->createToken($user), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected save action %s to be denied for another organization', $action),
             );
         }
     }
