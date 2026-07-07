@@ -10,6 +10,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 - [PR-82](https://github.com/itk-dev/event-database-imports/pull/82)
   Update dependencies to resolve security advisories (Symfony 7.4.14, Guzzle, guzzlehttp/psr7, EasyAdmin, polyfill-intl-idn)
+- [PR-81](https://github.com/itk-dev/event-database-imports/pull/81)
+  Add Claude Code tooling: hooks, subagents, skills, and MCP servers (context7, Symfony AI Mate)
 - [PR-80](https://github.com/itk-dev/event-database-imports/pull/80)
   Document test infrastructure in README and add ADR for test database isolation
 - [PR-79](https://github.com/itk-dev/event-database-imports/pull/79)

@@ -68,6 +68,9 @@
         "phpstan/phpstan-phpunit": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^12",
+        "symfony/ai-mate": "^0.10.0",
+        "symfony/ai-monolog-mate-extension": "^0.10.0",
+        "symfony/ai-symfony-mate-extension": "^0.10.0",
         "symfony/browser-kit": "~7.4.0",
         "symfony/css-selector": "~7.4.0",
         "symfony/maker-bundle": "^1.49",
@@ -97,7 +100,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/",
+            "Mate\\": "mate/src/"
         }
     },
     "config": {
@@ -105,12 +109,22 @@
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
+            "symfony/ai-mate-composer-plugin": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
         "sort-packages": true
     },
     "extra": {
+        "ai-mate": {
+            "extension": false,
+            "includes": [
+                "mate/config.php"
+            ],
+            "scan-dirs": [
+                "mate/src"
+            ]
+        },
         "symfony": {
             "allow-contrib": true,
             "docker": false,
@@ -151,7 +165,7 @@
             "# We need a translation from en to en (!) (without prefix) to be able to process placeholders in en.",
             "DEFAULT_LOCALE=en bin/console translation:extract --clean --force en --prefix=''",
             "DEFAULT_LOCALE=en bin/console translation:extract --clean --force da",
-            "# Mark default translations (prefixed with `__`) as “Needs work” in Danish translations",
+            "# Mark default translations (prefixed with `__`) as \u201cNeeds work\u201d in Danish translations",
             "sed --in-place='' 's/<target>__/<target state=\"needs-l10n\">__/' translations/*.da.*xlf"
         ]
     }
