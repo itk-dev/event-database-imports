@@ -19,7 +19,7 @@ final class TagVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        if (Permission::EA_EXECUTE_ACTION != $attribute) {
+        if (Permission::EA_EXECUTE_ACTION !== $attribute) {
             return false;
         }
 

@@ -18,7 +18,7 @@ final class UserEntityVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_ACCESS_ENTITY == $attribute
+        return Permission::EA_ACCESS_ENTITY === $attribute
             && $subject instanceof EntityDto
             && User::class === $subject->getFqcn();
     }
