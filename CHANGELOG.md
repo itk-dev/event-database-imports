@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-87](https://github.com/itk-dev/event-database-imports/pull/87)
+  Fix UserActionVoter so user management is admin-only at the URL level (INDEX/NEW pass a null entity in EasyAdmin), correct a wrong type assertion, and tighten registration and fixture test coverage
 - [PR-85](https://github.com/itk-dev/event-database-imports/pull/85)
   Fix EventVoter so feed events cannot be edited via SAVE actions (feed guard runs before the save grant)
 - [PR-84](https://github.com/itk-dev/event-database-imports/pull/84)

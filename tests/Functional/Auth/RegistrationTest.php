@@ -50,8 +50,11 @@ final class RegistrationTest extends AbstractAdminTestCase
 
         // Outbound mail goes through the async Messenger transport in tests,
         // so the message is queued (routed via SendEmailMessage) rather than
-        // immediately dispatched to the mailer transport.
+        // immediately dispatched to the mailer transport. The email is a
+        // TemplatedEmail rendered at send time, so its body/link is not
+        // available while queued — assert on the addressed recipient instead.
         $this->assertQueuedEmailCount(1);
+        $this->assertEmailAddressContains($this->getMailerMessage(), 'To', $email);
     }
 
     /**

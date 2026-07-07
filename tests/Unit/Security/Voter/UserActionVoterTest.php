@@ -53,12 +53,9 @@ final class UserActionVoterTest extends TestCase
     }
 
     /**
-     * Save actions have no explicit handling in UserActionVoter — the voter falls
-     * through to the ownership check (`$loggedInUser === $user`). A non-admin can
-     * therefore only save their own record. Locking this behaviour in so any change
-     * is intentional and reviewed.
+     * A non-admin may save their own record but not another user's.
      */
-    public function testSaveActionFallsThroughToOwnershipCheck(): void
+    public function testNonAdminCanSaveOnlyOwnRecord(): void
     {
         $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
 
@@ -70,14 +67,34 @@ final class UserActionVoterTest extends TestCase
             $this->assertSame(
                 VoterInterface::ACCESS_GRANTED,
                 $voter->vote($this->createToken($self), $ownSubject, [Permission::EA_EXECUTE_ACTION]),
-                sprintf('Expected %s on own record to pass the ownership check', $action),
+                sprintf('Expected %s on own record to be granted', $action),
             );
 
             $otherSubject = ['entity' => $this->createEntityDto(User::class, $other), 'action' => $action];
             $this->assertSame(
                 VoterInterface::ACCESS_DENIED,
                 $voter->vote($this->createToken($self), $otherSubject, [Permission::EA_EXECUTE_ACTION]),
-                sprintf('Expected %s on another user to fail the ownership check', $action),
+                sprintf('Expected %s on another user to be denied', $action),
+            );
+        }
+    }
+
+    /**
+     * An admin may save any user's record.
+     */
+    public function testAdminCanSaveAnotherUser(): void
+    {
+        $voter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
+
+        $admin = $this->makeUser(1);
+        $other = $this->makeUser(2);
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(User::class, $other), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_GRANTED,
+                $voter->vote($this->createToken($admin), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected admin %s on another user to be granted', $action),
             );
         }
     }
@@ -126,6 +143,33 @@ final class UserActionVoterTest extends TestCase
             VoterInterface::ACCESS_DENIED,
             $voter->vote($this->createToken($self), $subject, [Permission::EA_EXECUTE_ACTION]),
         );
+    }
+
+    /**
+     * EasyAdmin invokes the voter for INDEX/NEW with a null entity and only
+     * the FQCN set. The voter must resolve the action without dereferencing the
+     * (absent) instance and gate the user list to admins.
+     */
+    public function testNullEntityIndexAndNewAreAdminOnly(): void
+    {
+        $adminVoter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
+        $userVoter = new UserActionVoter($this->createSecurity([UserRoles::ROLE_USER->value]));
+        $token = $this->createToken($this->makeUser(10));
+
+        foreach ([Action::INDEX, Action::NEW] as $action) {
+            $subject = ['entity' => null, 'entityFqcn' => User::class, 'action' => $action];
+
+            $this->assertSame(
+                VoterInterface::ACCESS_GRANTED,
+                $adminVoter->vote($token, $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected admin to be granted %s', $action),
+            );
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $userVoter->vote($token, $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected non-admin to be denied %s', $action),
+            );
+        }
     }
 
     /**
