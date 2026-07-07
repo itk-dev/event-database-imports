@@ -53,7 +53,7 @@ final class IndexPopulateCommand extends Command
 
         try {
             foreach ($inputIndexes as $index) {
-                if (!in_array($index, IndexNames::values())) {
+                if (!in_array($index, IndexNames::values(), true)) {
                     $io->error(sprintf('Index %s does not exist', $index));
 
                     return Command::FAILURE;
