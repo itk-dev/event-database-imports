@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-84](https://github.com/itk-dev/event-database-imports/pull/84)
+  Upgrade to PHPUnit 13 and tooling majors (twig-cs-fixer 4, reflection-docblock 6, phpdoc-parser 2)
 - [PR-83](https://github.com/itk-dev/event-database-imports/pull/83)
   Update dependencies (minor/patch, in-constraint)
 - [PR-82](https://github.com/itk-dev/event-database-imports/pull/82)
