@@ -48,7 +48,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->index($params);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
@@ -68,7 +68,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->delete($params);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_ACCEPTED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_ACCEPTED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to delete item from index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
@@ -98,7 +98,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             }
 
             $response = $this->client->bulk($params);
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|ServerResponseException $e) {
@@ -361,7 +361,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                 ],
             ]);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to create new index: '.$this::INDEX_ALIAS, $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {

@@ -217,7 +217,7 @@ final readonly class ImageService implements ImageServiceInterface
      */
     private function generateLocalFilename(string $url, string $mimetype): string
     {
-        if (!in_array($mimetype, $this->allowedMineTypes)) {
+        if (!in_array($mimetype, $this->allowedMineTypes, true)) {
             throw new ImageMineTypeException(sprintf('The mine type "%s" is not supported', $mimetype));
         }
         $ext = (new MimeTypes())->getExtensions($mimetype)[0];

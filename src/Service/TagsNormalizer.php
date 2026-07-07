@@ -46,7 +46,7 @@ final class TagsNormalizer implements TagsNormalizerInterface
     private function trimLength(array $names): array
     {
         $metadata = $this->em->getClassMetadata(Tag::class);
-        $maxNameLength = (int) ($metadata->fieldMappings['name']['length'] ?? 50);
+        $maxNameLength = $metadata->fieldMappings['name']['length'] ?? 50;
 
         // Ensure we don't exceed field length in db
         return array_map(

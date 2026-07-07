@@ -78,10 +78,7 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
         $start = $this->start?->setTimezone($viewTimezone);
         $end = $this->end?->setTimezone($viewTimezone);
 
-        $viewTimezone = new \DateTimeZone(DashboardController::VIEW_TIMEZONE);
         $format = 'Y-m-d H:i';
-        $start?->setTimezone($viewTimezone);
-        $end?->setTimezone($viewTimezone);
 
         return $start?->format($format).
             ' - '.$end?->format($format).

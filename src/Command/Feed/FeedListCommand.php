@@ -42,7 +42,7 @@ final class FeedListCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $status = $input->getOption('status');
-        if (!in_array($status, self::SELECTIONS)) {
+        if (!in_array($status, self::SELECTIONS, true)) {
             $io->error(sprintf('Invalid status: %s', $status));
 
             // Show how to run this command.
