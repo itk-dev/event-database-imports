@@ -59,19 +59,15 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
     }
 
     /**
-     * Would verify org admins cannot create organizations, but is currently skipped.
+     * An organization admin (non-editor) is denied URL-level access to the NEW form.
      */
     public function testOrgAdminCannotCreateOrganization(): void
     {
-        // The OrganizationCrudController hides the "New" button from the
-        // index page for non-editors via configureActions(), but EasyAdmin
-        // calls the EA_EXECUTE_ACTION voter with a null entity for the NEW
-        // action (see AbstractCrudController::new). The OrganizationVoter
-        // requires a non-null entity in supports() and therefore abstains,
-        // so the URL remains accessible. The enforcement is done in the UI,
-        // not at the URL level, and the configureActions() behaviour is
-        // covered elsewhere.
-        $this->markTestSkipped('URL-level access is not enforced for NEW; see OrganizationVoter::supports().');
+        $this->loginAs(TestUserFixtures::ORG_ADMIN_A_EMAIL);
+        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class, Action::NEW));
+
+        $status = $this->client->getResponse()->getStatusCode();
+        $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403 for NEW, got %d', $status));
     }
 
     /**

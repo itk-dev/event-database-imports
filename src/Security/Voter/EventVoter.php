@@ -20,18 +20,21 @@ final class EventVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_EXECUTE_ACTION == $attribute
-            && null !== $subject['entity']
-            && Event::class === $subject['entity']->getFqcn();
+        if (Permission::EA_EXECUTE_ACTION != $attribute) {
+            return false;
+        }
+
+        // EasyAdmin passes a null entity for INDEX/NEW but always sets entityFqcn,
+        // so match on that to keep NEW enforced at the URL level.
+        $fqcn = $subject['entityFqcn'] ?? $subject['entity']?->getFqcn();
+
+        return Event::class === $fqcn;
     }
 
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
         assert($user instanceof User);
-
-        $event = $subject['entity']->getInstance();
-        assert($event instanceof Event);
 
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
@@ -40,6 +43,15 @@ final class EventVoter extends Voter
             return true;
         }
 
+        // New action requires the organization editor role (no entity instance yet)
+        if (Action::NEW === $action) {
+            return $this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value);
+        }
+
+        // Remaining actions operate on a concrete event instance
+        $event = $subject['entity']->getInstance();
+        assert($event instanceof Event);
+
         // Feed events can never be edited or deleted. Apply this before any
         // save-action grant below so it cannot be bypassed via SAVE_AND_*.
         if (null !== $event->getFeed()) {
@@ -47,9 +59,17 @@ final class EventVoter extends Voter
         }
 
         if (Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) {
-            // Allow event creation
-            if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
+            // Global editors may save any event.
+            if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
                 return true;
+            }
+
+            // Organization editors may only save events for their own organization(s),
+            // mirroring the edit-path scoping below.
+            if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
+                $organization = $event->getOrganization();
+
+                return null !== $organization && $user->getOrganizations()->contains($organization);
             }
         }
 

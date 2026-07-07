@@ -80,6 +80,12 @@ final class CrudSmokeTest extends AbstractAdminTestCase
         yield 'editor: tag index' => [TagCrudController::class, Action::INDEX, TestUserFixtures::EDITOR_EMAIL, self::EXPECT_SUCCESS];
         yield 'org editor: tag index' => [TagCrudController::class, Action::INDEX, TestUserFixtures::ORG_EDITOR_A_EMAIL, self::EXPECT_SUCCESS];
 
+        // NEW pages are enforced at the URL level, not just hidden: sub-editor roles are denied.
+        yield 'org admin denied: address new' => [AddressCrudController::class, Action::NEW, TestUserFixtures::ORG_ADMIN_A_EMAIL, self::EXPECT_DENIED];
+        yield 'org admin denied: location new' => [LocationCrudController::class, Action::NEW, TestUserFixtures::ORG_ADMIN_A_EMAIL, self::EXPECT_DENIED];
+        // Tags remain creatable by any authenticated user.
+        yield 'org editor: tag new' => [TagCrudController::class, Action::NEW, TestUserFixtures::ORG_EDITOR_A_EMAIL, self::EXPECT_SUCCESS];
+
         // Org editors get their own "My*" screens.
         yield 'org editor: my event index' => [MyEventCrudController::class, Action::INDEX, TestUserFixtures::ORG_EDITOR_A_EMAIL, self::EXPECT_SUCCESS];
         yield 'org editor: my event new' => [MyEventCrudController::class, Action::NEW, TestUserFixtures::ORG_EDITOR_A_EMAIL, self::EXPECT_SUCCESS];
