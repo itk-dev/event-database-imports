@@ -43,12 +43,6 @@ parameters:
 			path: src/Command/Feed/FeedDebugCommand.php
 
 		-
-			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
-			identifier: function.strict
-			count: 1
-			path: src/Command/Feed/FeedListCommand.php
-
-		-
 			message: '#^Only booleans are allowed in a ternary operator condition, bool\|null given\.$#'
 			identifier: ternary.condNotBoolean
 			count: 1
@@ -65,12 +59,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Command/Index/IndexCreateCommand.php
-
-		-
-			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
-			identifier: function.strict
-			count: 1
-			path: src/Command/Index/IndexDumpCommand.php
 
 		-
 			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
@@ -91,12 +79,6 @@ parameters:
 			path: src/Command/Index/IndexListCommand.php
 
 		-
-			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
-			identifier: function.strict
-			count: 1
-			path: src/Command/Index/IndexPopulateCommand.php
-
-		-
 			message: '#^Parameter \#4 \$default of method Symfony\\Component\\Console\\Command\\Command\:\:addArgument\(\) expects array\<int, string\>\|null, array given\.$#'
 			identifier: argument.type
 			count: 1
@@ -107,12 +89,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: src/Command/Index/IndexPopulateCommand.php
-
-		-
-			message: '#^Using nullsafe property access "\?\-\>\(Expression\)" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
-			count: 1
-			path: src/Command/Migrate/MigrateTagsCommand.php
 
 		-
 			message: '#^Only booleans are allowed in a ternary operator condition, mixed given\.$#'
@@ -139,12 +115,6 @@ parameters:
 			path: src/EasyAdmin/Filter/HasOrganizationFilter.php
 
 		-
-			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
-			identifier: method.resultUnused
-			count: 2
-			path: src/Entity/DailyOccurrence.php
-
-		-
 			message: '#^Property App\\Entity\\Event\:\:\$createdAt has no type specified\.$#'
 			identifier: missingType.property
 			count: 1
@@ -161,12 +131,6 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: src/Entity/Feed.php
-
-		-
-			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
-			identifier: method.resultUnused
-			count: 2
-			path: src/Entity/Occurrence.php
 
 		-
 			message: '#^Property App\\Entity\\Organization\:\:\$createdAt has no type specified\.$#'
@@ -295,12 +259,6 @@ parameters:
 			path: src/Service/Geocoder.php
 
 		-
-			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
-			identifier: function.strict
-			count: 1
-			path: src/Service/ImageService.php
-
-		-
 			message: '#^Method App\\Service\\ImageService\:\:getRelativePath\(\) should return string but returns string\|null\.$#'
 			identifier: return.type
 			count: 1
@@ -328,12 +286,6 @@ parameters:
 			message: '#^Call to an undefined method Elastic\\Elasticsearch\\Response\\Elasticsearch\|Http\\Promise\\Promise\:\:getStatusCode\(\)\.$#'
 			identifier: method.notFound
 			count: 2
-			path: src/Service/Indexing/AbstractIndexingElastic.php
-
-		-
-			message: '#^Call to function in_array\(\) requires parameter \#3 to be set\.$#'
-			identifier: function.strict
-			count: 4
 			path: src/Service/Indexing/AbstractIndexingElastic.php
 
 		-
@@ -495,12 +447,6 @@ parameters:
 		-
 			message: '#^Call to function array_filter\(\) requires parameter \#2 to be passed to avoid loose comparison semantics\.$#'
 			identifier: arrayFilter.strict
-			count: 1
-			path: src/Service/TagsNormalizer.php
-
-		-
-			message: '#^Casting to int something that''s already int\.$#'
-			identifier: cast.useless
 			count: 1
 			path: src/Service/TagsNormalizer.php
 

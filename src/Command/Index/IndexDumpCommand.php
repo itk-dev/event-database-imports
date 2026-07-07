@@ -48,7 +48,7 @@ final class IndexDumpCommand extends Command
         $path = (string) $input->getOption('path');
 
         foreach ($inputIndexes as $index) {
-            if (!in_array($index, IndexNames::values())) {
+            if (!in_array($index, IndexNames::values(), true)) {
                 $io->error(sprintf('Index %s does not exist', $index));
 
                 return Command::FAILURE;
