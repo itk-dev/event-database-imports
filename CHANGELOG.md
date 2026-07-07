@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-92](https://github.com/itk-dev/event-database-imports/pull/92)
+  Add EasyAdmin characterization tests ahead of the 4→5 upgrade: CRUD detail/edit render matrix, create/edit
+  form round-trips, the login accept-terms and email-verified gates, and feed/ADR-007 action authorization
+
 - [PR-91](https://github.com/itk-dev/event-database-imports/pull/91)
   Correct Danish admin translations: the delete-confirmation modal now reads "… vil slette?" instead of
   interpolating the imperative action label, and translate the leftover English login-page strings
