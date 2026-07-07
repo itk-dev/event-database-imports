@@ -30,7 +30,7 @@ class AcceptTermsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setTermsAcceptedAt(new \DateTimeImmutable('now', new \DateTimeZone('UTC')));
 
             $entityManager->flush();
 

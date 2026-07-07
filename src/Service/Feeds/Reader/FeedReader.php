@@ -121,7 +121,7 @@ class FeedReader implements FeedReaderInterface
                 $this->cleanUp($feed, $start);
             }
 
-            $feed->setLastRead(new \DateTimeImmutable());
+            $feed->setLastRead(new \DateTimeImmutable('now', new \DateTimeZone('UTC')));
             $feed->setLastReadCount($index);
             $feed->setMessage(null);
             $this->feedRepository->save($feed, true);

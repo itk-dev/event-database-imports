@@ -8,6 +8,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-90](https://github.com/itk-dev/event-database-imports/pull/90)
+  Create "now" timestamps explicitly in UTC (email verification, terms acceptance, feed last-read and
+  last-seen) and use gmdate for versioned index names, so they no longer depend on the ambient PHP timezone
 - [PR-89](https://github.com/itk-dev/event-database-imports/pull/89)
   Centralize the display timezone as a single injected source shared by the admin UI and the Elasticsearch
   index, and stop UTCDateTimeType from mutating the caller's datetime when converting to UTC for storage

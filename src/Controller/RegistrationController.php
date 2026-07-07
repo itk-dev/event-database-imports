@@ -53,7 +53,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setTermsAcceptedAt(new \DateTimeImmutable('now', new \DateTimeZone('UTC')));
             $user->setRoles([UserRoles::ROLE_USER]);
             $user->setCreatedBy($user->getName());
             $user->setUpdatedBy($user->getName());

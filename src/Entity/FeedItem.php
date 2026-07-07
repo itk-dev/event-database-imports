@@ -135,7 +135,7 @@ class FeedItem
 
     public function setLastSeenAt(): static
     {
-        $this->lastSeenAt = new \DateTimeImmutable();
+        $this->lastSeenAt = new \DateTimeImmutable('now', new \DateTimeZone('UTC'));
 
         return $this;
     }

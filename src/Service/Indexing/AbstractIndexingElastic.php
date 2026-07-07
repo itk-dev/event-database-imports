@@ -81,7 +81,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         try {
             if (null === $this->newIndexName) {
-                $this->newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
+                $this->newIndexName = $this::INDEX_ALIAS.'_'.gmdate('Y-m-d-His');
                 $this->createEsIndex($this->newIndexName);
             }
 
@@ -113,7 +113,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             throw new IndexingException('Index already exists');
         }
 
-        $newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
+        $newIndexName = $this::INDEX_ALIAS.'_'.gmdate('Y-m-d-His');
         $this->createEsIndex($newIndexName);
         $this->refreshIndex($newIndexName);
 
