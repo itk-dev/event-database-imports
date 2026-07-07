@@ -22,6 +22,7 @@ final class IndexingEvents extends AbstractIndexingElastic
         private readonly SerializerInterface $serializer,
         private readonly ImageServiceInterface $imageService,
         private readonly Client $client,
+        private readonly string $viewTimezone,
     ) {
         parent::__construct($this->client);
     }
@@ -39,7 +40,7 @@ final class IndexingEvents extends AbstractIndexingElastic
             ->withGroups([IndexNames::Events->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
-            ->withTimezone('Europe/Copenhagen')
+            ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
 

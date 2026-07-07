@@ -20,6 +20,7 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
         private readonly IndexingEvents $indexingEvents,
         private readonly SerializerInterface $serializer,
         private readonly Client $client,
+        private readonly string $viewTimezone,
     ) {
         parent::__construct($this->client);
     }
@@ -37,7 +38,7 @@ final class IndexingDailyOccurrences extends AbstractIndexingElastic
             ->withGroups([IndexNames::Occurrences->value]);
         $contextBuilder = (new DateTimeNormalizerContextBuilder())
             ->withContext($contextBuilder)
-            ->withTimezone('Europe/Copenhagen')
+            ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);
 
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
