@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
+- [PR-86](https://github.com/itk-dev/event-database-imports/pull/86)
   Enforce NEW-action authorization at the URL level on the CRUD voters, scope EventVoter save actions to the user's
   organization, and document the roles/permissions matrix in the README
 - [PR-85](https://github.com/itk-dev/event-database-imports/pull/85)
