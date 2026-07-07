@@ -20,8 +20,8 @@
         "league/uri": "^7.4",
         "liip/imagine-bundle": "^2.11",
         "nesbot/carbon": "^3.10",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpstan/phpdoc-parser": "^1.22",
+        "phpdocumentor/reflection-docblock": "^6.0",
+        "phpstan/phpdoc-parser": "^2.0",
         "psr/http-message": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/amqp-messenger": "~7.4.0",
@@ -76,7 +76,7 @@
         "symfony/maker-bundle": "^1.49",
         "symfony/stopwatch": "^7.3",
         "symfony/web-profiler-bundle": "^7.3",
-        "vincentlanglet/twig-cs-fixer": "^3.9",
+        "vincentlanglet/twig-cs-fixer": "^4.0",
         "zenstruck/messenger-test": "^1.11"
     },
     "replace": {
