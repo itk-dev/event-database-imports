@@ -114,16 +114,11 @@ final class EventVoterTest extends TestCase
     }
 
     /**
-     * Documents a known production gap: EventVoter grants SAVE_AND_* to org
-     * editors before the feed-event guard runs, so the "feed events cannot be
-     * edited" rule is bypassed for save actions. Remove the skip once the
-     * voter is reordered (tracked separately from this test-coverage PR).
+     * Feed events must never be editable, including via SAVE_AND_* actions:
+     * the feed guard runs before the save-action grant.
      */
     public function testFeedEventsCannotBeSavedByOrganizationEditor(): void
     {
-        $this->markTestSkipped('EventVoter grants SAVE_AND_* before the feed guard (src/Security/Voter/EventVoter.php:43). Follow-up issue.');
-
-        // @phpstan-ignore-next-line unreachable code retained as executable documentation of the desired behaviour.
         $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
         $token = $this->createToken(new User());
 
