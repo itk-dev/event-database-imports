@@ -45,9 +45,10 @@ final class TestEventFixtures extends Fixture implements DependentFixtureInterfa
 
     public function getDependencies(): array
     {
+        // Only OrganizationFixtures is required — events reference organizations,
+        // not users. (Tests needing users load TestUserFixtures explicitly.)
         return [
             OrganizationFixtures::class,
-            TestUserFixtures::class,
         ];
     }
 
