@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
+- [PR-83](https://github.com/itk-dev/event-database-imports/pull/83)
   Update dependencies (minor/patch, in-constraint)
 - [PR-82](https://github.com/itk-dev/event-database-imports/pull/82)
   Update dependencies to resolve security advisories (Symfony 7.4.14, Guzzle, guzzlehttp/psr7, EasyAdmin, polyfill-intl-idn)
