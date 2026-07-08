@@ -37,3 +37,6 @@ phpstan.neon
 ###> vincentlanglet/twig-cs-fixer ###
 /.twig-cs-fixer.cache
 ###< vincentlanglet/twig-cs-fixer ###
+
+# Playwright MCP session traces (local tool artifacts)
+/.playwright-mcp/

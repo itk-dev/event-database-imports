@@ -18,6 +18,7 @@ task site:update                 # full setup: pull, up, composer install, migra
 task test                        # run the whole PHPUnit suite (runs test:setup first, then phpunit with coverage)
 task test:setup                  # provision + migrate the isolated db_test database (idempotent)
 task code-analysis:phpstan       # PHPStan (config: phpstan.dist.neon)
+task code-analysis:rector        # Rector (dry-run; :rector:apply to apply)
 task coding-standards:check      # markdown + PHP (php-cs-fixer) + twig + yaml, check only
 task coding-standards:apply      # auto-fix the above
 task console -- <cmd>            # Symfony console, e.g. task console -- app:feed:list
@@ -91,7 +92,7 @@ users invited per organization; organization editors may only edit non-feed even
 
 ## Testing (ADR 009)
 
-PHPUnit 12, split into `tests/Unit` (no DB) and `tests/Functional` (boots the kernel + DB). Isolation is via
+PHPUnit 13, split into `tests/Unit` (no DB) and `tests/Functional` (boots the kernel + DB). Isolation is via
 **DAMA** (each test wrapped in a rolled-back transaction) + **Liip** fixtures, running against a dedicated
 `db_test` database provisioned by `task test:setup` — never the dev `db`. Lightweight functional fixtures live in
 `tests/Fixtures` (`TestUserFixtures`, `TestEventFixtures`), independent of the full `EventFixture` chain.
@@ -121,9 +122,12 @@ cluster** — no shared database, no HTTP call between them.
 - **The contract is hand-duplicated, with no compile-time link:**
   - Index names — `src/Model/Indexing/IndexNames.php` here ↔ `src/Model/IndexName.php` in the API
     (`events`, `organizations`, `occurrences`, `daily_occurrences`, `tags`, `vocabularies`, `locations`).
-  - Document shape — mappings live **only here** (`src/Model/Indexing/Mappings/`); the API has none and trusts the
-    fields/types this repo writes. A renamed or retyped field silently breaks the API's filters/providers.
-  - Keep both in sync when changing either. The `Stop` hook (below) warns when the enum or mappings change.
+  - Document shape — mappings are authored **only here** (`src/Model/Indexing/Mappings/`) and exported to committed
+    JSON at `resources/mappings/*.json` via `app:index:mappings:dump` (`task index:mappings:dump`). The API has no
+    mappings of its own and trusts the fields/types this repo writes; a renamed or retyped field silently breaks the
+    API's filters/providers.
+  - Keep both in sync when changing either. The `index-mappings` CI gate fails if a mapping class changed without the
+    export being regenerated, and the `Stop` hook (below) warns locally when the enum or mappings change.
 - **Co-hosted by path prefix** in production: `/admin/` → this app (`APP_PATH_PREFIX`), `/api/v2/` → the API, via
   Traefik on the shared `frontend` network.
 
