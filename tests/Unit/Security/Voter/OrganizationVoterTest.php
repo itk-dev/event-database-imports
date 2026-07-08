@@ -90,6 +90,25 @@ final class OrganizationVoterTest extends TestCase
     }
 
     /**
+     * Denies delete for an editor when the organization still has events
+     * attached — a referenced organization cannot be deleted without a
+     * database foreign-key violation.
+     */
+    public function testDeleteDeniedWhenOrganizationInUse(): void
+    {
+        $voter = new OrganizationVoter($this->createSecurity([UserRoles::ROLE_EDITOR->value]));
+
+        $org = new Organization();
+        $org->addEvent(new Event());
+
+        $subject = ['entity' => $this->createEntityDto(Organization::class, $org), 'action' => Action::DELETE];
+        $this->assertSame(
+            VoterInterface::ACCESS_DENIED,
+            $voter->vote($this->createToken(new User()), $subject, [Permission::EA_EXECUTE_ACTION]),
+        );
+    }
+
+    /**
      * Grants edit access to an editor for any organization.
      */
     public function testEditorCanEditAnyOrganization(): void

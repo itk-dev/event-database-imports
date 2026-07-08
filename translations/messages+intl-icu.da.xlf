@@ -677,6 +677,10 @@
         <source>admin.event.edited.created</source>
         <target state="needs-l10n">Oprettet</target>
       </trans-unit>
+      <trans-unit id="dLtcRm1" resname="admin.crud.delete.in_use">
+        <source>admin.crud.delete.in_use</source>
+        <target>Dette element kan ikke slettes, fordi det stadig er i brug af andre poster.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

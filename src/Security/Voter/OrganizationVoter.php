@@ -52,9 +52,18 @@ final class OrganizationVoter extends Voter
         $organization = $subject['entity']->getInstance();
         assert($organization instanceof Organization);
 
-        // Delete is only allowed for editors
+        // Delete is only allowed for editors, and only when the organization is
+        // not referenced by any events, feeds or partner events — deleting a
+        // referenced organization would otherwise fail with a database
+        // foreign-key violation.
         if (Action::DELETE === $action) {
-            return $this->security->isGranted(UserRoles::ROLE_EDITOR->value);
+            if (!$this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
+                return false;
+            }
+
+            return $organization->getEvents()->isEmpty()
+                && $organization->getFeeds()->isEmpty()
+                && $organization->getPartnerEvents()->isEmpty();
         }
 
         // Global Admin/Editor users can edit all organizations

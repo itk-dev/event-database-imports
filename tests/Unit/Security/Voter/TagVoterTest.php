@@ -70,6 +70,31 @@ final class TagVoterTest extends TestCase
     }
 
     /**
+     * Denies delete for an admin when the tag is still attached to an event —
+     * a referenced tag cannot be deleted without a join-table foreign-key
+     * violation. Edit remains granted.
+     */
+    public function testDeleteDeniedWhenTagInUse(): void
+    {
+        $voter = new TagVoter($this->createSecurity([UserRoles::ROLE_ADMIN->value]));
+
+        $tag = new Tag();
+        $tag->addEvent(new Event());
+
+        $deleteSubject = ['entity' => $this->createEntityDto(Tag::class, $tag), 'action' => Action::DELETE];
+        $this->assertSame(
+            VoterInterface::ACCESS_DENIED,
+            $voter->vote($this->createToken(new User()), $deleteSubject, [Permission::EA_EXECUTE_ACTION]),
+        );
+
+        $editSubject = ['entity' => $this->createEntityDto(Tag::class, $tag), 'action' => Action::EDIT];
+        $this->assertSame(
+            VoterInterface::ACCESS_GRANTED,
+            $voter->vote($this->createToken(new User()), $editSubject, [Permission::EA_EXECUTE_ACTION]),
+        );
+    }
+
+    /**
      * Denies edit and delete actions to non-admin users.
      */
     public function testNonAdminCannotEditOrDeleteTag(): void
