@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-96](https://github.com/itk-dev/event-database-imports/pull/96)
+  Doctrine 3 pre-work: cover the UTC immutable datetime type and the populate repository, and replace the
+  deprecated Criteria::ASC constant with the Order enum
+
 - [PR-95](https://github.com/itk-dev/event-database-imports/pull/95)
   Upgrade EasyAdmin from 4 to 5: apply the mandatory #[AdminDashboard] attribute, switch menu items from
   linkToCrud() to linkTo(), and resolve the AdminContext in the login template (EA5 removed the deprecated APIs)
