@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-100](https://github.com/itk-dev/event-database-imports/pull/100)
+  Follow-up to the Doctrine 3 upgrade: bring the remaining Doctrine bundles to their latest majors
+  (doctrine-bundle 2→3, doctrine-migrations-bundle 3→4, doctrine-fixtures-bundle 3→4), drop the ORM/DBAL
+  config options that became no-ops under ORM 3 / DBAL 4 (proxy generation, lazy ghost objects,
+  report-fields-where-declared, savepoints), and raise the PHP floor to 8.4 as required by doctrine-bundle 3
+
 - [PR-99](https://github.com/itk-dev/event-database-imports/pull/99)
   Upgrade Doctrine ORM 2→3 and DBAL 3→4: port the custom UTC datetime types and raw DBAL usage to the DBAL 4
   API, add a schema-alignment migration, exclude the messenger transport table from ORM schema management, and
