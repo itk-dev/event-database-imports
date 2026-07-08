@@ -18,8 +18,8 @@ use Doctrine\Persistence\ObjectManager;
  */
 final class EventFixture extends Fixture implements DependentFixtureInterface
 {
-    public const EVENT1 = 'event1-itkdev';
-    public const EVENT2 = 'event2-itkdev';
+    public const string EVENT1 = 'event1-itkdev';
+    public const string EVENT2 = 'event2-itkdev';
 
     public function load(ObjectManager $manager): void
     {

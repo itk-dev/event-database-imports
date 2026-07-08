@@ -15,7 +15,7 @@ final class TagsNormalizerTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testTrimLength()
+    public function testTrimLength(): void
     {
         $tagsNames = PhpUnitUtils::callPrivateMethod(
             $this->getTagsNormalizerService(),
@@ -32,7 +32,7 @@ final class TagsNormalizerTest extends KernelTestCase
         $this->assertEquals('laserskæring', $tagsNames[0]);
         $this->assertEquals('lasercut', $tagsNames[1]);
         $this->assertEquals('3D print', $tagsNames[2]);
-        $this->assertEquals(255, strlen($tagsNames[3]));
+        $this->assertSame(255, strlen((string) $tagsNames[3]));
     }
 
     /**

@@ -18,11 +18,13 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class VocabularyCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Vocabulary::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -34,6 +36,7 @@ class VocabularyCrudController extends AbstractBaseCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.vocabulary.edit.title'));
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -48,6 +51,7 @@ class VocabularyCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -55,10 +59,10 @@ class VocabularyCrudController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.vocabulary.name')),
             AssociationField::new('tags')
                 ->setQueryBuilder(
-                    fn (QueryBuilder $queryBuilder) => $queryBuilder->addCriteria(
+                    fn (QueryBuilder $queryBuilder): QueryBuilder => $queryBuilder->addCriteria(
                         // accessRawFieldValues is the collections 3.0 default; no effect here as the
                         // criteria only orders, but it avoids the 2.x deprecation.
-                        (new Criteria(accessRawFieldValues: true))->orderBy(['name' => Order::Ascending])
+                        new Criteria(accessRawFieldValues: true)->orderBy(['name' => Order::Ascending])
                     )
                 )
                 ->setLabel(new TranslatableMessage('admin.vocabulary.tags')),

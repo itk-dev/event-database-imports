@@ -26,11 +26,11 @@ final readonly class TagsFactory
     public function createOrLookup(array $tagNames, ?Vocabulary $vocabulary = null): iterable
     {
         // Normalize to lowercase
-        $tagNames = array_map(fn ($value): string => mb_strtolower($value), $tagNames);
+        $tagNames = array_map(mb_strtolower(...), $tagNames);
         // Ensure we don't have duplicates
         $tagNames = array_flip($tagNames);
 
-        foreach ($tagNames as $tagName => $value) {
+        foreach (array_keys($tagNames) as $tagName) {
             $tag = $this->tagRepository->findOneBy(['slug' => Slugger::slugify($tagName)]);
             if (is_null($tag)) {
                 $tag = new Tag();

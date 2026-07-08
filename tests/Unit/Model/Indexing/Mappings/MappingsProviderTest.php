@@ -22,7 +22,7 @@ final class MappingsProviderTest extends TestCase
     #[DataProvider('indexProvider')]
     public function testEveryIndexResolvesToNonEmptyProperties(IndexNames $index): void
     {
-        self::assertNotEmpty(MappingsProvider::propertiesFor($index), $index->value.' must map to a non-empty property set');
+        $this->assertNotEmpty(MappingsProvider::propertiesFor($index), $index->value.' must map to a non-empty property set');
     }
 
     #[DataProvider('indexProvider')]
@@ -30,8 +30,8 @@ final class MappingsProviderTest extends TestCase
     {
         $mapping = MappingsProvider::mappingFor($index);
 
-        self::assertSame('strict', $mapping['dynamic'], $index->value.' mapping must be dynamic:strict');
-        self::assertSame(MappingsProvider::propertiesFor($index), $mapping['properties']);
+        $this->assertSame('strict', $mapping['dynamic'], $index->value.' mapping must be dynamic:strict');
+        $this->assertSame(MappingsProvider::propertiesFor($index), $mapping['properties']);
     }
 
     public function testEventMappingCarriesNestedObjects(): void
@@ -39,18 +39,18 @@ final class MappingsProviderTest extends TestCase
         $properties = MappingsProvider::propertiesFor(IndexNames::Events);
 
         // Composite event mapping embeds occurrences and the organizer/location objects.
-        self::assertArrayHasKey('occurrences', $properties);
-        self::assertArrayHasKey('dailyOccurrences', $properties);
-        self::assertArrayHasKey('properties', $properties['organizer']);
-        self::assertArrayHasKey('properties', $properties['location']);
+        $this->assertArrayHasKey('occurrences', $properties);
+        $this->assertArrayHasKey('dailyOccurrences', $properties);
+        $this->assertArrayHasKey('properties', $properties['organizer']);
+        $this->assertArrayHasKey('properties', $properties['location']);
     }
 
     public function testOccurrenceMappingCarriesParentEvent(): void
     {
         $properties = MappingsProvider::propertiesFor(IndexNames::Occurrences);
 
-        self::assertArrayHasKey('event', $properties);
-        self::assertArrayHasKey('properties', $properties['event']);
+        $this->assertArrayHasKey('event', $properties);
+        $this->assertArrayHasKey('properties', $properties['event']);
     }
 
     /**

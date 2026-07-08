@@ -31,7 +31,7 @@ final class LocationVoter extends Voter
         return Location::class === $fqcn;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?\Symfony\Component\Security\Core\Authorization\Voter\Vote $vote = null): bool
     {
         $user = $token->getUser();
         assert($user instanceof User);
@@ -52,11 +52,9 @@ final class LocationVoter extends Voter
         $location = $subject['entity']->getInstance();
         assert($location instanceof Location);
 
-        if (Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) {
-            // Allow location creation
-            if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
-                return true;
-            }
+        // Allow location creation
+        if ((Action::SAVE_AND_ADD_ANOTHER === $action || Action::SAVE_AND_CONTINUE === $action || Action::SAVE_AND_RETURN === $action) && $this->security->isGranted(UserRoles::ROLE_ORGANIZATION_ADMIN->value)) {
+            return true;
         }
 
         // Delete is only allowed for editors, and only for unused locations
@@ -69,10 +67,6 @@ final class LocationVoter extends Voter
         }
 
         // Global Admin/Editor users can edit all locations
-        if ($this->security->isGranted(UserRoles::ROLE_EDITOR->value)) {
-            return true;
-        }
-
-        return false;
+        return $this->security->isGranted(UserRoles::ROLE_EDITOR->value);
     }
 }

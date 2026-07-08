@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\MessageHandler;
 
 use App\Entity\Event;
@@ -29,17 +31,17 @@ final readonly class FeedItemNormalizationHandler
         // Tags normalization.
         $feedItemData->tags = $this->tagsNormalizer->normalize($feedItemData->tags);
 
-        $feedItemData->url = $feedItemData->url ?? '';
+        $feedItemData->url ??= '';
 
         // Content normalizations check up. HTML fixer etc.
         $feedItemData->description = $this->contentNormalizer->sanitize($feedItemData->description ?? '');
 
         // Set excerpt from description if empty
-        if (empty($feedItemData->excerpt) && !empty($feedItemData->description)) {
+        if (in_array($feedItemData->excerpt, [null, '', '0'], true) && ('' !== $feedItemData->description && '0' !== $feedItemData->description)) {
             $feedItemData->excerpt = $feedItemData->description;
         }
 
-        if (!empty($feedItemData->excerpt)) {
+        if (!in_array($feedItemData->excerpt, [null, '', '0'], true)) {
             try {
                 $feedItemData->excerpt = $this->contentNormalizer->sanitize($feedItemData->excerpt);
                 $feedItemData->excerpt = $this->contentNormalizer->getTextFromHtml($feedItemData->excerpt);

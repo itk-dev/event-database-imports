@@ -29,7 +29,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
     public function testIndexLoadsForEditor(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(OrganizationCrudController::class));
 
         $this->assertResponseIsSuccessful();
     }
@@ -42,7 +42,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
         $org = $this->findOrganizationByName('Aakb');
 
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class, Action::DETAIL, ['entityId' => $org->getId()]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(OrganizationCrudController::class, Action::DETAIL, ['entityId' => $org->getId()]));
 
         $this->assertResponseIsSuccessful();
     }
@@ -53,7 +53,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
     public function testEditorCanAccessNewForm(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class, Action::NEW));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(OrganizationCrudController::class, Action::NEW));
 
         $this->assertResponseIsSuccessful();
     }
@@ -64,7 +64,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
     public function testOrgAdminCannotCreateOrganization(): void
     {
         $this->loginAs(TestUserFixtures::ORG_ADMIN_A_EMAIL);
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class, Action::NEW));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(OrganizationCrudController::class, Action::NEW));
 
         $status = $this->client->getResponse()->getStatusCode();
         $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403 for NEW, got %d', $status));
@@ -78,7 +78,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
         $this->loginAs(TestUserFixtures::ORG_ADMIN_A_EMAIL);
         $otherOrg = $this->findOrganizationByName('Dokk1');
 
-        $this->client->request('GET', $this->adminUrl(OrganizationCrudController::class, Action::EDIT, ['entityId' => $otherOrg->getId()]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(OrganizationCrudController::class, Action::EDIT, ['entityId' => $otherOrg->getId()]));
 
         $status = $this->client->getResponse()->getStatusCode();
         $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403, got %d', $status));
@@ -86,7 +86,7 @@ final class OrganizationCrudTest extends AbstractAdminTestCase
 
     private function findOrganizationByName(string $name): Organization
     {
-        $repository = static::getContainer()->get('doctrine')->getManager()->getRepository(Organization::class);
+        $repository = self::getContainer()->get('doctrine')->getManager()->getRepository(Organization::class);
         $org = $repository->findOneBy(['name' => $name]);
         $this->assertInstanceOf(Organization::class, $org, sprintf('Organization "%s" not found', $name));
 

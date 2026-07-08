@@ -134,11 +134,11 @@ final class Populate
     {
         $this->lock = $this->lockFactory->createLock('app:populate:lock', $this::LOCK_TIMEOUT, false);
 
-        if ($this->lock->acquire() || $force) {
+        if ($this->lock->acquire()) {
             return true;
         }
 
-        return false;
+        return $force;
     }
 
     /**

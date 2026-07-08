@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-105](https://github.com/itk-dev/event-database-imports/pull/105)
+  Broaden the Rector config (PHP, Symfony, Doctrine, PHPUnit, code-quality sets) and apply it across src/ and tests/
 - [PR-104](https://github.com/itk-dev/event-database-imports/pull/104)
   Refresh README and CLAUDE docs for current tooling/CI, convert the network diagram to Mermaid, condense the changelog
 - [PR-103](https://github.com/itk-dev/event-database-imports/pull/103)

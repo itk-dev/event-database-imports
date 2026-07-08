@@ -25,9 +25,9 @@ final class IndexingOrganizations extends AbstractIndexingElastic
 
     public function serialize(IndexItemInterface $item): array
     {
-        $contextBuilder = (new ObjectNormalizerContextBuilder())
+        $contextBuilder = new ObjectNormalizerContextBuilder()
             ->withGroups([IndexNames::Organizations->value]);
-        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+        $contextBuilder = new DateTimeNormalizerContextBuilder()
             ->withContext($contextBuilder)
             ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);

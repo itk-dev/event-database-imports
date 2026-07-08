@@ -37,15 +37,15 @@ final class LoginGateTest extends AbstractAdminTestCase
 
     private function entityManager(): EntityManagerInterface
     {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        self::assertInstanceOf(EntityManagerInterface::class, $em);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $this->assertInstanceOf(EntityManagerInterface::class, $em);
 
         return $em;
     }
 
     private function submitLogin(string $email, string $password = TestUserFixtures::PASSWORD): void
     {
-        $crawler = $this->client->request('GET', '/admin/login');
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/login');
         $form = $crawler->filter('form')->form();
 
         $this->client->submit($form, [
@@ -64,10 +64,7 @@ final class LoginGateTest extends AbstractAdminTestCase
         $this->submitLogin(TestUserFixtures::EDITOR_EMAIL);
 
         $this->assertResponseRedirects();
-        self::assertStringContainsString(
-            '/admin/accept-terms',
-            (string) $this->client->getResponse()->headers->get('Location'),
-        );
+        $this->assertStringContainsString('/admin/accept-terms', (string) $this->client->getResponse()->headers->get('Location'));
     }
 
     /**
@@ -84,13 +81,13 @@ final class LoginGateTest extends AbstractAdminTestCase
         ]);
 
         $this->assertResponseRedirects();
-        self::assertStringContainsString('/admin', (string) $this->client->getResponse()->headers->get('Location'));
-        self::assertStringNotContainsString('/accept-terms', (string) $this->client->getResponse()->headers->get('Location'));
+        $this->assertStringContainsString('/admin', (string) $this->client->getResponse()->headers->get('Location'));
+        $this->assertStringNotContainsString('/accept-terms', (string) $this->client->getResponse()->headers->get('Location'));
 
         $this->entityManager()->clear();
-        $editor = static::getContainer()->get(UserRepository::class)->findOneBy(['mail' => TestUserFixtures::EDITOR_EMAIL]);
-        self::assertInstanceOf(User::class, $editor);
-        self::assertNotNull($editor->getTermsAcceptedAt(), 'Accepting the terms must persist termsAcceptedAt');
+        $editor = self::getContainer()->get(UserRepository::class)->findOneBy(['mail' => TestUserFixtures::EDITOR_EMAIL]);
+        $this->assertInstanceOf(User::class, $editor);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $editor->getTermsAcceptedAt(), 'Accepting the terms must persist termsAcceptedAt');
     }
 
     /**
@@ -99,15 +96,15 @@ final class LoginGateTest extends AbstractAdminTestCase
     public function testUserWithAcceptedTermsIsNotGated(): void
     {
         $em = $this->entityManager();
-        $editor = static::getContainer()->get(UserRepository::class)->findOneBy(['mail' => TestUserFixtures::EDITOR_EMAIL]);
-        self::assertInstanceOf(User::class, $editor);
+        $editor = self::getContainer()->get(UserRepository::class)->findOneBy(['mail' => TestUserFixtures::EDITOR_EMAIL]);
+        $this->assertInstanceOf(User::class, $editor);
         $editor->setTermsAcceptedAt(new \DateTimeImmutable('now', new \DateTimeZone('UTC')));
         $em->flush();
 
         $this->submitLogin(TestUserFixtures::EDITOR_EMAIL);
 
         $this->assertResponseRedirects();
-        self::assertStringNotContainsString('/accept-terms', (string) $this->client->getResponse()->headers->get('Location'));
+        $this->assertStringNotContainsString('/accept-terms', (string) $this->client->getResponse()->headers->get('Location'));
     }
 
     /**
@@ -117,8 +114,8 @@ final class LoginGateTest extends AbstractAdminTestCase
     public function testUnverifiedPlainUserIsBouncedToLogin(): void
     {
         $em = $this->entityManager();
-        $hasher = static::getContainer()->get(UserPasswordHasherInterface::class);
-        self::assertInstanceOf(UserPasswordHasherInterface::class, $hasher);
+        $hasher = self::getContainer()->get(UserPasswordHasherInterface::class);
+        $this->assertInstanceOf(UserPasswordHasherInterface::class, $hasher);
 
         $user = new User();
         $user->setName('Plain User')
@@ -135,6 +132,6 @@ final class LoginGateTest extends AbstractAdminTestCase
         $this->submitLogin('plain-user@test');
 
         $this->assertResponseRedirects();
-        self::assertStringContainsString('/admin/login', (string) $this->client->getResponse()->headers->get('Location'));
+        $this->assertStringContainsString('/admin/login', (string) $this->client->getResponse()->headers->get('Location'));
     }
 }

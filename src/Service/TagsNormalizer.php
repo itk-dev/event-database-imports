@@ -6,11 +6,11 @@ use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class TagsNormalizer implements TagsNormalizerInterface
+final readonly class TagsNormalizer implements TagsNormalizerInterface
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly TagRepository $tagRepository,
+        private EntityManagerInterface $em,
+        private TagRepository $tagRepository,
     ) {
     }
 
@@ -25,7 +25,7 @@ final class TagsNormalizer implements TagsNormalizerInterface
      */
     public function normalize(array $names): array
     {
-        if (!empty($names)) {
+        if ([] !== $names) {
             $names = array_filter($names);
             $names = $this->trimLength($names);
             $names = $this->normalizeToDbName($names);
@@ -50,7 +50,7 @@ final class TagsNormalizer implements TagsNormalizerInterface
 
         // Ensure we don't exceed field length in db
         return array_map(
-            static fn (string $tag) => mb_substr(trim($tag), 0, $maxNameLength),
+            static fn (string $tag): string => mb_substr(trim($tag), 0, $maxNameLength),
             $names
         );
     }

@@ -33,7 +33,7 @@ final class EventCrudTest extends AbstractAdminTestCase
     public function testIndexLoadsForAuthorizedRole(string $email): void
     {
         $this->loginAs($email);
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class));
 
         $this->assertResponseIsSuccessful();
     }
@@ -57,7 +57,7 @@ final class EventCrudTest extends AbstractAdminTestCase
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
         $event = $this->findEventByTitle('Org A Event 1');
 
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, Action::DETAIL, ['entityId' => $event->getId()]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::DETAIL, ['entityId' => $event->getId()]));
 
         $this->assertResponseIsSuccessful();
     }
@@ -68,7 +68,7 @@ final class EventCrudTest extends AbstractAdminTestCase
     public function testEditorCanAccessNewForm(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, Action::NEW));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
 
         $this->assertResponseIsSuccessful();
     }
@@ -81,7 +81,7 @@ final class EventCrudTest extends AbstractAdminTestCase
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
         $event = $this->findEventByTitle('Org B Event 1');
 
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $event->getId()]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $event->getId()]));
 
         $status = $this->client->getResponse()->getStatusCode();
         $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403, got %d', $status));
@@ -89,7 +89,7 @@ final class EventCrudTest extends AbstractAdminTestCase
 
     private function findEventByTitle(string $title): Event
     {
-        $repository = static::getContainer()->get('doctrine')->getManager()->getRepository(Event::class);
+        $repository = self::getContainer()->get('doctrine')->getManager()->getRepository(Event::class);
         $event = $repository->findOneBy(['title' => $title]);
         $this->assertInstanceOf(Event::class, $event, sprintf('Event "%s" not found', $title));
 

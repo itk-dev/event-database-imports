@@ -61,13 +61,13 @@ final class CrudRenderMatrixTest extends AbstractAdminTestCase
 
     private function firstId(string $entityClass): int|string
     {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        self::assertInstanceOf(EntityManagerInterface::class, $em);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $this->assertInstanceOf(EntityManagerInterface::class, $em);
         $entity = $em->getRepository($entityClass)->findOneBy([]);
-        self::assertNotNull($entity, sprintf('Expected at least one %s from fixtures', $entityClass));
+        $this->assertNotNull($entity, sprintf('Expected at least one %s from fixtures', $entityClass));
 
         $id = $em->getUnitOfWork()->getSingleIdentifierValue($entity);
-        self::assertNotNull($id);
+        $this->assertNotNull($id);
 
         return $id;
     }
@@ -102,7 +102,7 @@ final class CrudRenderMatrixTest extends AbstractAdminTestCase
         $id = $this->firstId($entityClass);
 
         foreach ($actions as $action) {
-            $this->client->request('GET', $this->adminUrl($crudControllerFqcn, $action, ['entityId' => $id]));
+            $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl($crudControllerFqcn, $action, ['entityId' => $id]));
             $this->assertResponseIsSuccessful(sprintf('%s %s should render', $crudControllerFqcn, $action));
         }
     }

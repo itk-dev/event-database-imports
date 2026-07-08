@@ -28,7 +28,7 @@ final class JsonContainsFilterTest extends AbstractAdminTestCase
     public function testFilterByEditorRole(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class, 'index', [
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class, 'index', [
             'filters[roles][comparison]' => '=',
             'filters[roles][value]' => UserRoles::ROLE_EDITOR->value,
         ]));
@@ -45,7 +45,7 @@ final class JsonContainsFilterTest extends AbstractAdminTestCase
     public function testFilterByOrgEditorRole(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class, 'index', [
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class, 'index', [
             'filters[roles][comparison]' => '=',
             'filters[roles][value]' => UserRoles::ROLE_ORGANIZATION_EDITOR->value,
         ]));

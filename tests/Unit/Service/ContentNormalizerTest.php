@@ -15,18 +15,18 @@ final class ContentNormalizerTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testNormalization()
+    public function testNormalization(): void
     {
         $service = $this->getContentNormalizerService();
         $normalized = $service->sanitize('<p>test<b>test<p><a href="http://aakb.dk/test.php"></a></p>');
 
-        $this->assertEquals('<p>test<b>test</b></p><p><b><a href="https://aakb.dk/test.php"></a></b></p>', $normalized);
+        $this->assertSame('<p>test<b>test</b></p><p><b><a href="https://aakb.dk/test.php"></a></b></p>', $normalized);
     }
 
     /**
      * @throws \Exception
      */
-    public function testTrimLength()
+    public function testTrimLength(): void
     {
         $service = $this->getContentNormalizerService();
 
@@ -38,7 +38,7 @@ final class ContentNormalizerTest extends KernelTestCase
 
         // Test split without limiting to word boundaries.
         $trimmed = $service->trimLength(TestData::LONG_STRING, 255, false);
-        $this->assertEquals(255, mb_strlen($trimmed));
+        $this->assertSame(255, mb_strlen($trimmed));
         $this->assertStringEndsWith('surv', $trimmed);
         $this->assertStringEndsNotWith(' ', $trimmed);
     }

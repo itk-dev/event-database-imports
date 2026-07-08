@@ -16,7 +16,7 @@ final class ImageHandlerTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testCreatePath()
+    public function testCreatePath(): void
     {
         $depth = 2;
         $size = 10;
@@ -26,14 +26,14 @@ final class ImageHandlerTest extends KernelTestCase
             ['https://bora-bora.dk/wp-content/uploads/2023/06/DansBabyDans-Web-Main-2600x1500px-scaled.jpg', false, $depth, $size]
         );
 
-        $this->assertEquals($depth * $size + 2, strlen($path));
+        $this->assertSame($depth * $size + 2, strlen((string) $path));
         $this->assertStringEndsWith('/', $path);
     }
 
     /**
      * @throws \Exception
      */
-    public function testGenerateLocalFilename()
+    public function testGenerateLocalFilename(): void
     {
         $filename = PhpUnitUtils::callPrivateMethod(
             $this->getImageService(),
@@ -62,7 +62,7 @@ final class ImageHandlerTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testMineTypesException()
+    public function testMineTypesException(): void
     {
         $this->expectException(ImageMineTypeException::class);
         PhpUnitUtils::callPrivateMethod(

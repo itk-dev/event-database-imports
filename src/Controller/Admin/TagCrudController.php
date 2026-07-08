@@ -14,11 +14,13 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class TagCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Tag::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -27,6 +29,7 @@ class TagCrudController extends AbstractBaseCrudController
             ->showEntityActionsInlined();
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -50,6 +53,7 @@ class TagCrudController extends AbstractBaseCrudController
         ];
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         $filters

@@ -25,7 +25,7 @@ final class LoginTest extends AbstractAdminTestCase
      */
     public function testValidCredentialsRedirectToAdmin(): void
     {
-        $crawler = $this->client->request('GET', '/admin/login');
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/login');
         $form = $crawler->filter('form')->form();
 
         $this->client->submit($form, [
@@ -42,7 +42,7 @@ final class LoginTest extends AbstractAdminTestCase
      */
     public function testInvalidCredentialsShowError(): void
     {
-        $crawler = $this->client->request('GET', '/admin/login');
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/login');
         $form = $crawler->filter('form')->form();
 
         $this->client->submit($form, [

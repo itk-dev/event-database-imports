@@ -42,11 +42,13 @@ class UserCrudController extends AbstractBaseCrudController
     ) {
     }
 
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return User::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
@@ -56,6 +58,7 @@ class UserCrudController extends AbstractBaseCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.user.edit.title'));
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -68,6 +71,7 @@ class UserCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         $userRolesChoices = [];
@@ -84,6 +88,7 @@ class UserCrudController extends AbstractBaseCrudController
         ;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         $userRolesChoices = [
@@ -159,6 +164,7 @@ class UserCrudController extends AbstractBaseCrudController
         ];
     }
 
+    #[\Override]
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
@@ -170,6 +176,7 @@ class UserCrudController extends AbstractBaseCrudController
         return $qb;
     }
 
+    #[\Override]
     public function createNewFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createNewFormBuilder($entityDto, $formOptions, $context);
@@ -177,6 +184,7 @@ class UserCrudController extends AbstractBaseCrudController
         return $this->addPasswordEventListener($formBuilder);
     }
 
+    #[\Override]
     public function createEditFormBuilder(EntityDto $entityDto, KeyValueStore $formOptions, AdminContext $context): FormBuilderInterface
     {
         $formBuilder = parent::createEditFormBuilder($entityDto, $formOptions, $context);
@@ -194,7 +202,7 @@ class UserCrudController extends AbstractBaseCrudController
      */
     private function hashPassword(): \Closure
     {
-        return function ($event) {
+        return function ($event): void {
             $form = $event->getForm();
             if (!$form->isValid()) {
                 return;

@@ -28,7 +28,7 @@ final class UserCrudTest extends AbstractAdminTestCase
     public function testAdminCanAccessIndex(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class));
 
         $this->assertResponseIsSuccessful();
     }
@@ -39,7 +39,7 @@ final class UserCrudTest extends AbstractAdminTestCase
     public function testAdminCanCreateNewUser(): void
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class, Action::NEW));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class, Action::NEW));
 
         $this->assertResponseIsSuccessful();
     }
@@ -50,7 +50,7 @@ final class UserCrudTest extends AbstractAdminTestCase
     public function testOrgEditorCannotAccessNewUser(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class, Action::NEW));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class, Action::NEW));
 
         $status = $this->client->getResponse()->getStatusCode();
         $this->assertContains($status, [302, 403], sprintf('Expected 302 or 403, got %d', $status));
@@ -64,7 +64,7 @@ final class UserCrudTest extends AbstractAdminTestCase
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
         $self = $this->findUser(TestUserFixtures::ORG_EDITOR_A_EMAIL);
 
-        $this->client->request('GET', $this->adminUrl(UserCrudController::class, Action::EDIT, ['entityId' => $self->getId()]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(UserCrudController::class, Action::EDIT, ['entityId' => $self->getId()]));
 
         $this->assertResponseIsSuccessful();
     }

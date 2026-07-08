@@ -13,10 +13,10 @@ use Doctrine\Persistence\ObjectManager;
 
 final class TestEventFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const EVENT_ORG_A_1 = 'test-event-org-a-1';
-    public const EVENT_ORG_A_2 = 'test-event-org-a-2';
-    public const EVENT_ORG_B_1 = 'test-event-org-b-1';
-    public const EVENT_ORPHAN = 'test-event-orphan';
+    public const string EVENT_ORG_A_1 = 'test-event-org-a-1';
+    public const string EVENT_ORG_A_2 = 'test-event-org-a-2';
+    public const string EVENT_ORG_B_1 = 'test-event-org-b-1';
+    public const string EVENT_ORPHAN = 'test-event-orphan';
 
     public function load(ObjectManager $manager): void
     {

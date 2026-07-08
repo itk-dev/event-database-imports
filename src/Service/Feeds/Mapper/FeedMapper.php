@@ -31,7 +31,7 @@ final readonly class FeedMapper implements FeedMapperInterface
         date_default_timezone_set($configuration->timezone);
 
         try {
-            return (new MapperBuilder())
+            return new MapperBuilder()
                 ->allowSuperfluousKeys()
                 ->allowScalarValueCasting()
                 ->allowNonSequentialList()
@@ -40,7 +40,7 @@ final readonly class FeedMapper implements FeedMapperInterface
                 ->mapper()
                 ->map(
                     FeedItemData::class,
-                    Source::iterable((new FeedItemSource($configuration, $this->defaultsMapperService))->normalize($data))
+                    Source::iterable(new FeedItemSource($configuration, $this->defaultsMapperService)->normalize($data))
                 );
         } catch (MappingError $error) {
             // Get flatten list of all messages through the whole nodes tree

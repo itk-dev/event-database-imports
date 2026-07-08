@@ -38,7 +38,7 @@ final class UTCDateTimeTypeTest extends TestCase
 
         $db = $this->type->convertToDatabaseValue($value, $this->platform());
 
-        self::assertSame('2026-07-01 12:00:00', $db);
+        $this->assertSame('2026-07-01 12:00:00', $db);
     }
 
     /**
@@ -51,8 +51,8 @@ final class UTCDateTimeTypeTest extends TestCase
 
         $this->type->convertToDatabaseValue($value, $this->platform());
 
-        self::assertSame('Europe/Copenhagen', $value->getTimezone()->getName());
-        self::assertSame('2026-07-01 14:00:00', $value->format('Y-m-d H:i:s'));
+        $this->assertSame('Europe/Copenhagen', $value->getTimezone()->getName());
+        $this->assertSame('2026-07-01 14:00:00', $value->format('Y-m-d H:i:s'));
     }
 
     /**
@@ -64,8 +64,8 @@ final class UTCDateTimeTypeTest extends TestCase
 
         $db = $this->type->convertToDatabaseValue($value, $this->platform());
 
-        self::assertSame('2026-07-01 12:00:00', $db);
-        self::assertSame('UTC', $value->getTimezone()->getName());
+        $this->assertSame('2026-07-01 12:00:00', $db);
+        $this->assertSame('UTC', $value->getTimezone()->getName());
     }
 
     /**
@@ -73,6 +73,6 @@ final class UTCDateTimeTypeTest extends TestCase
      */
     public function testNullIsPreserved(): void
     {
-        self::assertNull($this->type->convertToDatabaseValue(null, $this->platform()));
+        $this->assertNull($this->type->convertToDatabaseValue(null, $this->platform()));
     }
 }
