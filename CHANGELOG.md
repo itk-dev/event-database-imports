@@ -11,6 +11,9 @@ See [keep a changelog] for information about writing changes to this log.
 - [PR-94](https://github.com/itk-dev/event-database-imports/pull/94)
   Align the async worker (supervisor) on the default Europe/Copenhagen timezone by removing the PHP_TIMEZONE=UTC
   override, so all runtime tiers share one timezone
+- [PR-93](https://github.com/itk-dev/event-database-imports/pull/93)
+  Fix feed datetime parsing: interpret offset-less feed datetimes in the feed's declared timezone instead of the
+  worker's ambient PHP timezone, so naive-format feeds are no longer imported 1–2 hours off
 
 - [PR-92](https://github.com/itk-dev/event-database-imports/pull/92)
   Add EasyAdmin characterization tests ahead of the 4→5 upgrade: CRUD detail/edit render matrix, create/edit

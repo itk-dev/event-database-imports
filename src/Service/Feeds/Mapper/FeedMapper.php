@@ -22,6 +22,15 @@ final readonly class FeedMapper implements FeedMapperInterface
 
     public function getFeedItemFromArray(array $data, FeedConfiguration $configuration): FeedItemData
     {
+        // Feed datetimes without an explicit offset are parsed by Valinor with
+        // DateTimeImmutable::createFromFormat(), which falls back to the ambient
+        // PHP timezone. That differs between environments (UTC on the prod
+        // worker, Europe/Copenhagen in dev), so naive feed times were stored
+        // 1-2h off in production. Interpret the mapping in the feed's declared
+        // timezone instead; values that carry their own offset are unaffected.
+        $previousTimezone = date_default_timezone_get();
+        date_default_timezone_set($configuration->timezone);
+
         try {
             return (new MapperBuilder())
                 ->allowSuperfluousKeys()
@@ -39,6 +48,8 @@ final readonly class FeedMapper implements FeedMapperInterface
                 $this->logger->error($message);
             }
             throw $error;
+        } finally {
+            date_default_timezone_set($previousTimezone);
         }
     }
 }
