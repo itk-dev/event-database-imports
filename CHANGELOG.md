@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-103](https://github.com/itk-dev/event-database-imports/pull/103)
+  Export each index's Elasticsearch mapping (schema only) to committed `resources/mappings/*.json` via a new
+  `app:index:mappings:dump` command, backed by a CI gate that fails if a mapping class changed without the
+  export being regenerated. Gives the read-only `event-database-api` project an authoritative mapping artifact
+  to diff against instead of hand-copying mappings
+
 - [PR-102](https://github.com/itk-dev/event-database-imports/pull/102)
   Remove the redundant npm lint tooling (`package.json`, `package-lock.json`): markdown and YAML linting now
   run entirely through the `markdownlint` and `prettier` docker compose services (Taskfile, CI, and the Claude
