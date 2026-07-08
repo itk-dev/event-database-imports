@@ -11,57 +11,57 @@ jobs:
     runs-on: ubuntu-latest
     name: Composer install
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      # https://taskfile.dev/installation/#github-actions
-      - name: Install Task
-        uses: go-task/setup-task@v1
-        with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create docker network
+        run: docker network create frontend
 
-      - name: Start docker compose setup
-        run: |
-          docker network create frontend
-          task compose -- up --detach
+      - name: Pull container images
+        run: docker compose pull --quiet phpfpm
 
       - name: Validate composer files
-        run: |
-          task composer -- validate composer.json --strict
+        run: docker compose run --rm phpfpm composer validate composer.json --strict
 
       - name: Composer install with exported .env variables
-        run: |
-          docker compose --env-file .env exec --env APP_ENV=prod phpfpm composer install --no-dev --optimize-autoloader
+        run: docker compose run --rm --env APP_ENV=prod phpfpm composer install --no-dev --optimize-autoloader
 
   test-suite:
     name: Test suite
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - name: Install Task
-        uses: go-task/setup-task@v1
+      - name: Cache vendor
+        uses: actions/cache@v6
         with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          path: vendor
+          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.4-
+
+      - name: Create docker network
+        run: docker network create frontend
+
+      - name: Pull container images
+        run: docker compose pull --quiet
 
       - name: Start docker compose setup
-        run: |
-          docker network create frontend
-          task compose -- up --detach
+        run: docker compose up --detach
 
       - name: Install Dependencies
+        run: docker compose exec -T phpfpm composer install
+
+      - name: Provision and migrate the isolated test database
+        # Mirrors `task test:setup`: the `db` user cannot CREATE DATABASE, so
+        # root provisions `db_test`, then migrations run against it.
         run: |
-          task composer -- install
+          docker compose exec -T mariadb mariadb -uroot -ppassword -e 'CREATE DATABASE IF NOT EXISTS db_test; GRANT ALL PRIVILEGES ON `db_test`.* TO `db`@`%`;'
+          docker compose exec -T phpfpm bin/console --env=test doctrine:migrations:migrate --no-interaction
 
       - name: Test suite
-        # `task test` provisions and migrates the isolated `db_test` database
-        # via `test:setup` before running PHPUnit.
-        run: |
-          task test
+        run: docker compose exec -T --env XDEBUG_MODE=coverage phpfpm vendor/bin/phpunit --coverage-clover=coverage/unit.xml
 
       - name: Upload coverage to Codecov test
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           files: ./coverage/unit.xml
           flags: unittests
@@ -72,38 +72,39 @@ jobs:
     name: PHPStan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - name: Install Task
-        uses: go-task/setup-task@v1
+      - name: Cache vendor
+        uses: actions/cache@v6
         with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          path: vendor
+          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.4-
 
-      - name: Start docker compose setup
-        run: |
-          docker network create frontend
-          task compose -- up --detach
+      - name: Create docker network
+        run: docker network create frontend
+
+      - name: Pull container images
+        run: docker compose pull --quiet phpfpm
 
       - name: Install Dependencies
-        run: |
-          task composer -- install
+        run: docker compose run --rm phpfpm composer install
 
       - name: Run PHPStan
-        run: |
-          task code-analysis:phpstan
+        run: docker compose run --rm phpfpm vendor/bin/phpstan analyse
 
   validate-doctrine-schema:
     runs-on: ubuntu-latest
     name: Validate Doctrine Schema
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - name: Install Task
-        uses: go-task/setup-task@v1
+      - name: Cache vendor
+        uses: actions/cache@v6
         with:
-          version: 3.x
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          path: vendor
+          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.4-
 
       # https://github.com/mxschmitt/action-tmate?tab=readme-ov-file#manually-triggered-debug
       # Enable tmate debugging if debug logging is enabled (cf.
@@ -123,11 +124,11 @@ jobs:
       - name: Install site
         run: |
           docker network create frontend
-          task compose -- up --detach
-          task composer -- install
-          task console -- doctrine:migrations:migrate --no-interaction
-          task console -- messenger:setup-transports
+          docker compose pull --quiet
+          docker compose up --detach
+          docker compose exec -T phpfpm composer install
+          docker compose exec -T phpfpm bin/console doctrine:migrations:migrate --no-interaction
+          docker compose exec -T phpfpm bin/console messenger:setup-transports
 
       - name: Validate Doctrine schema
-        run: |
-          task console -- doctrine:schema:validate
+        run: docker compose exec -T phpfpm bin/console doctrine:schema:validate
