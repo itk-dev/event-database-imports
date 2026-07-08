@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Model\Indexing\IndexNames;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
 use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
 
 /**
@@ -18,7 +18,7 @@ abstract class AbstractPopulateRepository extends ServiceEntityRepository implem
     #[\Override]
     public function findToPopulate(array $criteria, int $limit, int $offset): array
     {
-        return $this->findBy($criteria, ['id' => Criteria::ASC], $limit, $offset);
+        return $this->findBy($criteria, ['id' => Order::Ascending->value], $limit, $offset);
     }
 
     #[\Override]
