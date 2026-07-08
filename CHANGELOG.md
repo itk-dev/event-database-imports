@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-102](https://github.com/itk-dev/event-database-imports/pull/102)
+  Remove the redundant npm lint tooling (`package.json`, `package-lock.json`): markdown and YAML linting now
+  run entirely through the `markdownlint` and `prettier` docker compose services (Taskfile, CI, and the Claude
+  PostToolUse hook), so the host npm toolchain was unused and only contributed transitive dev-dependency
+  advisories
+
 - [PR-101](https://github.com/itk-dev/event-database-imports/pull/101)
   Upgrade cuyz/valinor 1→2: replace the removed `enableFlexibleCasting()` with its granular successors
   (`allowScalarValueCasting`, `allowNonSequentialList`, `allowUndefinedValues`) and swap the removed
