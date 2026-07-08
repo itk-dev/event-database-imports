@@ -20,10 +20,10 @@ jobs:
         run: docker compose pull --quiet phpfpm
 
       - name: Validate composer files
-        run: docker compose run --rm phpfpm composer validate composer.json --strict
+        run: docker compose run --rm --no-deps phpfpm composer validate composer.json --strict
 
       - name: Composer install with exported .env variables
-        run: docker compose run --rm --env APP_ENV=prod phpfpm composer install --no-dev --optimize-autoloader
+        run: docker compose run --rm --no-deps --env APP_ENV=prod phpfpm composer install --no-dev --optimize-autoloader
 
   test-suite:
     name: Test suite
@@ -88,10 +88,10 @@ jobs:
         run: docker compose pull --quiet phpfpm
 
       - name: Install Dependencies
-        run: docker compose run --rm phpfpm composer install
+        run: docker compose run --rm --no-deps phpfpm composer install
 
       - name: Run PHPStan
-        run: docker compose run --rm phpfpm vendor/bin/phpstan analyse
+        run: docker compose run --rm --no-deps phpfpm vendor/bin/phpstan analyse
 
   rector:
     name: Rector
@@ -113,10 +113,10 @@ jobs:
         run: docker compose pull --quiet phpfpm
 
       - name: Install Dependencies
-        run: docker compose run --rm phpfpm composer install
+        run: docker compose run --rm --no-deps phpfpm composer install
 
       - name: Check for Rector suggestions
-        run: docker compose run --rm phpfpm vendor/bin/rector process --dry-run --no-progress-bar
+        run: docker compose run --rm --no-deps phpfpm vendor/bin/rector process --dry-run --no-progress-bar
 
   validate-doctrine-schema:
     runs-on: ubuntu-latest
@@ -140,20 +140,20 @@ jobs:
           limit-access-to-actor: false
         if: 1 == runner.debug
 
-      # @TODO Fix this for real
-      - name: Allow Elastic search service to read and write in its data directory
-        run: |
-          mkdir -p .docker/data/elasticsearch/
-          chmod a+w .docker/data/elasticsearch/
-
-      - name: Install site
+      # Schema validation only needs the database; messenger:setup-transports
+      # needs the broker. Start just those (not the full stack: no Elasticsearch,
+      # nginx or mail) and run the console commands as one-off phpfpm containers.
+      - name: Start database and message broker
         run: |
           docker network create frontend
-          docker compose pull --quiet
-          docker compose up --detach
-          docker compose exec -T phpfpm composer install
-          docker compose exec -T phpfpm bin/console doctrine:migrations:migrate --no-interaction
-          docker compose exec -T phpfpm bin/console messenger:setup-transports
+          docker compose pull --quiet phpfpm mariadb rabbit
+          docker compose up --detach --wait mariadb rabbit
+
+      - name: Install dependencies and set up the schema
+        run: |
+          docker compose run --rm --no-deps phpfpm composer install
+          docker compose run --rm --no-deps phpfpm bin/console doctrine:migrations:migrate --no-interaction
+          docker compose run --rm --no-deps phpfpm bin/console messenger:setup-transports
 
       - name: Validate Doctrine schema
-        run: docker compose exec -T phpfpm bin/console doctrine:schema:validate
+        run: docker compose run --rm --no-deps phpfpm bin/console doctrine:schema:validate
