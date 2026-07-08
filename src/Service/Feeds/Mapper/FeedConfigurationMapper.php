@@ -4,7 +4,6 @@ namespace App\Service\Feeds\Mapper;
 
 use App\Model\Feed\FeedConfiguration;
 use CuyZ\Valinor\Mapper\MappingError;
-use CuyZ\Valinor\Mapper\Tree\Message\Messages;
 use CuyZ\Valinor\MapperBuilder;
 
 final class FeedConfigurationMapper
@@ -26,7 +25,9 @@ final class FeedConfigurationMapper
             return (new MapperBuilder())
                 ->allowPermissiveTypes()
                 ->allowSuperfluousKeys()
-                ->enableFlexibleCasting()
+                ->allowScalarValueCasting()
+                ->allowNonSequentialList()
+                ->allowUndefinedValues()
                 ->mapper()
                 ->map(
                     FeedConfiguration::class,
@@ -35,10 +36,7 @@ final class FeedConfigurationMapper
         } catch (MappingError $error) {
             // @todo: Log mapping error for later debugging.
             // Get flatten list of all messages through the whole nodes tree
-            $messages = Messages::flattenFromNode(
-                $error->node()
-            );
-            foreach ($messages as $message) {
+            foreach ($error->messages() as $message) {
                 echo $message,"\n";
             }
             throw $error;
