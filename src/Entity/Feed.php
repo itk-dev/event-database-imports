@@ -30,7 +30,7 @@ class Feed
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: Types::JSON)]
     private array $configuration = [];
 
     #[ORM\Column(nullable: true)]

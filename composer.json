@@ -69,6 +69,7 @@
         "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
         "phpunit/phpunit": "^13",
+        "rector/rector": "^2.5",
         "symfony/ai-mate": "^0.10.0",
         "symfony/ai-monolog-mate-extension": "^0.10.0",
         "symfony/ai-symfony-mate-extension": "^0.10.0",
