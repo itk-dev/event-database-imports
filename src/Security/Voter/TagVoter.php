@@ -33,9 +33,23 @@ final class TagVoter extends Voter
     {
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
-        // Delete and edit are only allowed for admins.
-        if (Action::DELETE === $action || Action::EDIT === $action) {
+        // Edit is only allowed for admins.
+        if (Action::EDIT === $action) {
             return $this->security->isGranted(UserRoles::ROLE_ADMIN->value);
+        }
+
+        // Delete is only allowed for admins, and only when the tag is not
+        // attached to any events or vocabularies — a referenced tag would
+        // otherwise fail with a join-table foreign-key violation.
+        if (Action::DELETE === $action) {
+            if (!$this->security->isGranted(UserRoles::ROLE_ADMIN->value)) {
+                return false;
+            }
+
+            $tag = $subject['entity']->getInstance();
+            assert($tag instanceof Tag);
+
+            return $tag->getEvents()->isEmpty() && $tag->getVocabularies()->isEmpty();
         }
 
         // Index, detail, new and save are open to any authenticated user

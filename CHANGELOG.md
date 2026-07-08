@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-106](https://github.com/itk-dev/event-database-imports/pull/106)
+  Guard Organization/Tag deletes against in-use records, and flash on a delete FK violation instead of a 409 page
 - [PR-105](https://github.com/itk-dev/event-database-imports/pull/105)
   Broaden the Rector config (PHP, Symfony, Doctrine, PHPUnit, code-quality sets) and apply it across src/ and tests/
 - [PR-104](https://github.com/itk-dev/event-database-imports/pull/104)
