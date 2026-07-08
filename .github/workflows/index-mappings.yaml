@@ -1,0 +1,64 @@
+on:
+  pull_request:
+    paths:
+      - "src/Model/Indexing/**"
+      - "src/Service/Indexing/**"
+      - "src/Command/Index/IndexMappingsDumpCommand.php"
+      - "resources/mappings/**"
+      - "composer.lock"
+      - "docker-compose.yml"
+
+name: Index mappings
+
+env:
+  COMPOSE_USER: root
+
+jobs:
+  index-mappings:
+    runs-on: ubuntu-latest
+    name: Ensure committed index mappings are up to date
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Cache vendor
+        uses: actions/cache@v6
+        with:
+          path: vendor
+          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.4-
+
+      - name: Create docker network
+        run: docker network create frontend
+
+      - name: Pull container images
+        run: docker compose pull --quiet phpfpm
+
+      - name: Install dependencies
+        run: docker compose run --rm phpfpm composer install --no-interaction
+
+      - name: Export index mappings
+        run: docker compose run --rm phpfpm bin/console app:index:mappings:dump --no-interaction
+
+      - name: Check for changes in committed mappings
+        id: git-diff
+        continue-on-error: true
+        run: git diff --diff-filter=ACMRT --exit-code resources/mappings
+
+      - name: Comment PR
+        if: steps.git-diff.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          echo '## 🛑 Committed index mappings are out of date' > mappings-comment.md
+          echo '' >> mappings-comment.md
+          echo 'A mapping class under `src/Model/Indexing/Mappings/` changed but `resources/mappings/*.json` was not re-exported.' >> mappings-comment.md
+          echo '' >> mappings-comment.md
+          echo 'Run `task index:mappings:dump` and commit the result.' >> mappings-comment.md
+          gh pr comment ${{ github.event.pull_request.number }} --body-file mappings-comment.md --create-if-none --edit-last
+
+      - name: Fail if committed mappings are not up to date
+        if: steps.git-diff.outcome == 'failure'
+        run: exit 1

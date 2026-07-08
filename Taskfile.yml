@@ -41,6 +41,14 @@ tasks:
         vars:
           CONSOLE_ARGS: doctrine:fixtures:load --no-interaction
 
+  index:mappings:dump:
+    desc: "Export Elasticsearch index mappings (schema only) to resources/mappings"
+    cmds:
+      - task: console
+        vars:
+          CONSOLE_ARGS: app:index:mappings:dump --no-interaction
+    silent: true
+
   composer:
     desc: "Run `composer` command. Example: task composer -- normalize"
     cmds:
