@@ -9,7 +9,7 @@
         "ext-iconv": "*",
         "ext-pdo": "*",
         "cerbero/json-parser": "^1.0",
-        "cuyz/valinor": "^1.4",
+        "cuyz/valinor": "^2.0",
         "doctrine/doctrine-bundle": "^3.0",
         "doctrine/doctrine-migrations-bundle": "^4.0",
         "doctrine/orm": "^3.4",
