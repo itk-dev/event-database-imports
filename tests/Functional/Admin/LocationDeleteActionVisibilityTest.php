@@ -96,6 +96,6 @@ final class LocationDeleteActionVisibilityTest extends AbstractAdminTestCase
 
         $usedCrawler = $this->client->request(Request::METHOD_GET, $this->adminUrl(LocationCrudController::class, Action::DETAIL, ['entityId' => $usedId]));
         $this->assertResponseIsSuccessful();
-        $this->assertSame(0, $usedCrawler->filter('.action-delete')->count(), 'Used location must not offer the Delete action.');
+        $this->assertCount(0, $usedCrawler->filter('.action-delete'), 'Used location must not offer the Delete action.');
     }
 }
