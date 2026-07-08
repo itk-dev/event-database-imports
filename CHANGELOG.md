@@ -8,6 +8,12 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-103](https://github.com/itk-dev/event-database-imports/pull/103)
+  Export each index's Elasticsearch mapping (schema only) to committed `resources/mappings/*.json` via a new
+  `app:index:mappings:dump` command, backed by a CI gate that fails if a mapping class changed without the
+  export being regenerated. Gives the read-only `event-database-api` project an authoritative mapping artifact
+  to diff against instead of hand-copying mappings
+
 - [PR-101](https://github.com/itk-dev/event-database-imports/pull/101)
   Upgrade cuyz/valinor 1→2: replace the removed `enableFlexibleCasting()` with its granular successors
   (`allowScalarValueCasting`, `allowNonSequentialList`, `allowUndefinedValues`) and swap the removed
