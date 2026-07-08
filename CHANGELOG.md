@@ -8,6 +8,13 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-101](https://github.com/itk-dev/event-database-imports/pull/101)
+  Upgrade cuyz/valinor 1→2: replace the removed `enableFlexibleCasting()` with its granular successors
+  (`allowScalarValueCasting`, `allowNonSequentialList`, `allowUndefinedValues`) and swap the removed
+  `Messages::flattenFromNode($error->node())` error handling for `MappingError::messages()` in the feed
+  item and configuration mappers. Add regression tests covering both mappers' scalar-casting and
+  MappingError branches ahead of the bump (FeedConfigurationMapper was previously untested)
+
 - [PR-100](https://github.com/itk-dev/event-database-imports/pull/100)
   Follow-up to the Doctrine 3 upgrade: bring the remaining Doctrine bundles to their latest majors
   (doctrine-bundle 2→3, doctrine-migrations-bundle 3→4, doctrine-fixtures-bundle 3→4), drop the ORM/DBAL
