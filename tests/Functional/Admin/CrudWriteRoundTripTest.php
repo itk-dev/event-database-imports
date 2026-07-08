@@ -42,8 +42,8 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
     private function entityManager(): EntityManagerInterface
     {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        self::assertInstanceOf(EntityManagerInterface::class, $em);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $this->assertInstanceOf(EntityManagerInterface::class, $em);
 
         return $em;
     }
@@ -55,7 +55,7 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
     {
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
 
-        $crawler = $this->client->request('GET', $this->adminUrl(TagCrudController::class, Action::NEW));
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(TagCrudController::class, Action::NEW));
         $this->assertResponseIsSuccessful();
 
         // The slug field is disabled and auto-generated from the name via a
@@ -69,8 +69,8 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
         $this->entityManager()->clear();
         $tag = $this->entityManager()->getRepository(Tag::class)->findOneBy(['name' => 'Characterization Tag']);
-        self::assertInstanceOf(Tag::class, $tag);
-        self::assertNotEmpty($tag->getSlug(), 'The slug must be auto-generated on persist');
+        $this->assertInstanceOf(Tag::class, $tag);
+        $this->assertNotEmpty($tag->getSlug(), 'The slug must be auto-generated on persist');
     }
 
     /**
@@ -89,7 +89,7 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
 
-        $crawler = $this->client->request('GET', $this->adminUrl(TagCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(TagCrudController::class, Action::EDIT, ['entityId' => $id]));
         $this->assertResponseIsSuccessful();
 
         $form = $crawler->filter('form[name="Tag"]')->form();
@@ -99,8 +99,8 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
         $this->entityManager()->clear();
         $updated = $this->entityManager()->getRepository(Tag::class)->find($id);
-        self::assertInstanceOf(Tag::class, $updated);
-        self::assertSame('After', $updated->getName());
+        $this->assertInstanceOf(Tag::class, $updated);
+        $this->assertSame('After', $updated->getName());
     }
 
     /**
@@ -110,12 +110,12 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
     public function testEditEventTitleViaEditFormStampsUpdatedBy(): void
     {
         $event = $this->entityManager()->getRepository(Event::class)->findOneBy(['title' => 'Org A Event 1']);
-        self::assertInstanceOf(Event::class, $event);
+        $this->assertInstanceOf(Event::class, $event);
         $id = $event->getId();
 
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
 
-        $crawler = $this->client->request('GET', $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
         $this->assertResponseIsSuccessful();
 
         $form = $crawler->filter('form[name="Event"]')->form();
@@ -125,9 +125,9 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
         $this->entityManager()->clear();
         $updated = $this->entityManager()->getRepository(Event::class)->find($id);
-        self::assertInstanceOf(Event::class, $updated);
-        self::assertSame('Org A Event 1 (edited)', $updated->getTitle());
-        self::assertSame(TestUserFixtures::ADMIN_EMAIL, $updated->getUpdatedBy());
+        $this->assertInstanceOf(Event::class, $updated);
+        $this->assertSame('Org A Event 1 (edited)', $updated->getTitle());
+        $this->assertSame(TestUserFixtures::ADMIN_EMAIL, $updated->getUpdatedBy());
     }
 
     /**
@@ -138,7 +138,7 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
     {
         $em = $this->entityManager();
         $org = $this->entityManager()->getRepository(\App\Entity\Organization::class)->findOneBy([]);
-        self::assertNotNull($org);
+        $this->assertInstanceOf(\App\Entity\Organization::class, $org);
 
         $event = new Event();
         $event->setTitle('Cascade Event')
@@ -159,16 +159,13 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
         $eventId = $event->getId();
         $occurrenceId = $occurrence->getId();
-        self::assertNotNull($occurrenceId);
+        $this->assertNotNull($occurrenceId);
 
         $em->remove($event);
         $em->flush();
         $em->clear();
 
-        self::assertNull($em->getRepository(Event::class)->find($eventId));
-        self::assertNull(
-            $em->getRepository(Occurrence::class)->find($occurrenceId),
-            'Deleting an event must remove its occurrences',
-        );
+        $this->assertNotInstanceOf(Event::class, $em->getRepository(Event::class)->find($eventId));
+        $this->assertNotInstanceOf(Occurrence::class, $em->getRepository(Occurrence::class)->find($occurrenceId), 'Deleting an event must remove its occurrences');
     }
 }

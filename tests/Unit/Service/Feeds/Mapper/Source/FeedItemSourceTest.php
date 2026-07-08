@@ -168,7 +168,7 @@ final class FeedItemSourceTest extends KernelTestCase
      *
      * @throws \Exception
      */
-    public function testNormalize()
+    public function testNormalize(): void
     {
         $feedConfig = new FeedConfiguration(
             type: 'json',

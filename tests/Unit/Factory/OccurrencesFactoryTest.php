@@ -17,17 +17,17 @@ final class OccurrencesFactoryTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testOccurrenceUpdate()
+    public function testOccurrenceUpdate(): void
     {
         $itemOccurrence = new FeedItemOccurrence();
-        $itemOccurrence->start = new \DateTimeImmutable('2023-01-19T14:00:00+00:00');
-        $itemOccurrence->end = new \DateTimeImmutable('2023-01-19T15:30:00+00:00');
+        $itemOccurrence->start = \Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00');
+        $itemOccurrence->end = \Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00');
         $itemOccurrence->price = '200';
         $input = [$itemOccurrence];
 
         $eventOccurrence = new Occurrence();
-        $eventOccurrence->setStart(new \DateTimeImmutable('2023-01-19T14:00:00+00:00'))
-            ->setEnd(new \DateTimeImmutable('2023-01-19T15:30:00+00:00'))
+        $eventOccurrence->setStart(\Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00'))
+            ->setEnd(\Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00'))
             ->setTicketPriceRange('400');
 
         $event = new Event();
@@ -46,22 +46,22 @@ final class OccurrencesFactoryTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testOccurrenceAdd()
+    public function testOccurrenceAdd(): void
     {
         $itemOccurrence = new FeedItemOccurrence();
-        $itemOccurrence->start = new \DateTimeImmutable('2023-01-19T14:00:00+00:00');
-        $itemOccurrence->end = new \DateTimeImmutable('2023-01-19T15:30:00+00:00');
+        $itemOccurrence->start = \Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00');
+        $itemOccurrence->end = \Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00');
         $itemOccurrence->price = '200';
 
         $itemOccurrence2 = new FeedItemOccurrence();
-        $itemOccurrence2->start = new \DateTimeImmutable('2023-02-18T10:00:00+00:00');
-        $itemOccurrence2->end = new \DateTimeImmutable('2023-02-18T16:30:00+00:00');
+        $itemOccurrence2->start = \Carbon\CarbonImmutable::parse('2023-02-18T10:00:00+00:00');
+        $itemOccurrence2->end = \Carbon\CarbonImmutable::parse('2023-02-18T16:30:00+00:00');
         $itemOccurrence2->price = '100';
         $input = [$itemOccurrence, $itemOccurrence2];
 
         $eventOccurrence = new Occurrence();
-        $eventOccurrence->setStart(new \DateTimeImmutable('2023-01-19T14:00:00+00:00'))
-            ->setEnd(new \DateTimeImmutable('2023-01-19T15:30:00+00:00'))
+        $eventOccurrence->setStart(\Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00'))
+            ->setEnd(\Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00'))
             ->setTicketPriceRange('200');
 
         $event = new Event();
@@ -81,22 +81,22 @@ final class OccurrencesFactoryTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testOccurrenceRemove()
+    public function testOccurrenceRemove(): void
     {
         $itemOccurrence = new FeedItemOccurrence();
-        $itemOccurrence->start = new \DateTimeImmutable('2023-01-19T14:00:00+00:00');
-        $itemOccurrence->end = new \DateTimeImmutable('2023-01-19T15:30:00+00:00');
+        $itemOccurrence->start = \Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00');
+        $itemOccurrence->end = \Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00');
         $itemOccurrence->price = '200';
 
         $input = [$itemOccurrence];
 
         $eventOccurrence = new Occurrence();
-        $eventOccurrence->setStart(new \DateTimeImmutable('2023-01-19T14:00:00+00:00'))
-            ->setEnd(new \DateTimeImmutable('2023-01-19T15:30:00+00:00'))
+        $eventOccurrence->setStart(\Carbon\CarbonImmutable::parse('2023-01-19T14:00:00+00:00'))
+            ->setEnd(\Carbon\CarbonImmutable::parse('2023-01-19T15:30:00+00:00'))
             ->setTicketPriceRange('200');
         $eventOccurrence2 = new Occurrence();
-        $eventOccurrence2->setStart(new \DateTimeImmutable('2023-05-20T10:00:00+00:00'))
-            ->setEnd(new \DateTimeImmutable('2023-05-20T11:30:00+00:00'))
+        $eventOccurrence2->setStart(\Carbon\CarbonImmutable::parse('2023-05-20T10:00:00+00:00'))
+            ->setEnd(\Carbon\CarbonImmutable::parse('2023-05-20T11:30:00+00:00'))
             ->setTicketPriceRange('300-400');
 
         $event = new Event();

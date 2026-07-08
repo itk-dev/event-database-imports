@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Asset;
 
 use EasyCorp\Bundle\EasyAdminBundle\Asset\AssetPackage;

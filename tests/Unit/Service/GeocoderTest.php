@@ -16,7 +16,7 @@ final class GeocoderTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testBuildQuery()
+    public function testBuildQuery(): void
     {
         $address = new Address();
         $address->setStreet('Hack Kampmanns Plads 2')

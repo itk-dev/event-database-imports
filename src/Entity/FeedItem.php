@@ -21,15 +21,8 @@ class FeedItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'feedItems')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Feed $feed = null;
-
     #[ORM\OneToOne(inversedBy: 'feedItem', cascade: ['persist', 'remove'])]
     private ?Event $event = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $feedItemId = null;
 
     #[ORM\Column]
     private array $data = [];
@@ -51,10 +44,11 @@ class FeedItem
     #[ORM\Column]
     private ?\DateTimeImmutable $lastSeenAt = null;
 
-    public function __construct(Feed $feed, string $feedItemId, array $data)
+    public function __construct(#[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'feedItems')]
+        #[ORM\JoinColumn(nullable: false)]
+        private ?Feed $feed, #[ORM\Column(length: 255, nullable: true)]
+        private ?string $feedItemId, array $data)
     {
-        $this->feed = $feed;
-        $this->feedItemId = $feedItemId;
         $this->setData($data);
     }
 
@@ -135,7 +129,7 @@ class FeedItem
 
     public function setLastSeenAt(): static
     {
-        $this->lastSeenAt = new \DateTimeImmutable();
+        $this->lastSeenAt = \Carbon\CarbonImmutable::now();
 
         return $this;
     }

@@ -19,7 +19,7 @@ final class FeedMapperTest extends KernelTestCase
     private function mapper(): FeedMapperInterface
     {
         $mapper = self::getContainer()->get(FeedMapperInterface::class);
-        self::assertInstanceOf(FeedMapperInterface::class, $mapper);
+        $this->assertInstanceOf(FeedMapperInterface::class, $mapper);
 
         return $mapper;
     }
@@ -60,8 +60,8 @@ final class FeedMapperTest extends KernelTestCase
 
         $item = $this->mapper()->getFeedItemFromArray($data, $this->config());
 
-        self::assertSame('evt-1', $item->id);
-        self::assertSame('100', $item->occurrences[0]->price);
+        $this->assertSame('evt-1', $item->id);
+        $this->assertSame('100', $item->occurrences[0]->price);
     }
 
     /**

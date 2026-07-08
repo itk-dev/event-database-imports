@@ -36,8 +36,8 @@ final class AdminActionAuthorizationTest extends AbstractAdminTestCase
 
     private function entityManager(): EntityManagerInterface
     {
-        $em = static::getContainer()->get(EntityManagerInterface::class);
-        self::assertInstanceOf(EntityManagerInterface::class, $em);
+        $em = self::getContainer()->get(EntityManagerInterface::class);
+        $this->assertInstanceOf(EntityManagerInterface::class, $em);
 
         return $em;
     }
@@ -64,7 +64,7 @@ final class AdminActionAuthorizationTest extends AbstractAdminTestCase
         $this->entityManager()->clear();
 
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(FeedCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(FeedCrudController::class, Action::EDIT, ['entityId' => $id]));
 
         $this->assertResponseStatusCodeSame(403);
     }
@@ -80,7 +80,7 @@ final class AdminActionAuthorizationTest extends AbstractAdminTestCase
         $this->entityManager()->clear();
 
         $this->loginAs(TestUserFixtures::SUPER_ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(FeedCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(FeedCrudController::class, Action::EDIT, ['entityId' => $id]));
 
         $this->assertResponseIsSuccessful();
     }
@@ -92,7 +92,7 @@ final class AdminActionAuthorizationTest extends AbstractAdminTestCase
     public function testFeedImportedEventEditIsDenied(): void
     {
         $org = $this->entityManager()->getRepository(Organization::class)->findOneBy([]);
-        self::assertInstanceOf(Organization::class, $org);
+        $this->assertInstanceOf(Organization::class, $org);
 
         $feed = $this->createFeed();
 
@@ -109,7 +109,7 @@ final class AdminActionAuthorizationTest extends AbstractAdminTestCase
         $this->entityManager()->clear();
 
         $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
 
         $this->assertResponseStatusCodeSame(403);
     }

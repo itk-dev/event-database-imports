@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class FeedListCommand extends Command
 {
-    private const SELECTIONS = ['enabled', 'disabled', 'all'];
+    private const array SELECTIONS = ['enabled', 'disabled', 'all'];
 
     public function __construct(
         private readonly FeedConfigurationMapper $configurationMapper,

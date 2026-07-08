@@ -35,7 +35,7 @@ final class IndexingTimeZoneTest extends KernelTestCase
     private function serializer(): SerializerInterface
     {
         $serializer = self::getContainer()->get(SerializerInterface::class);
-        self::assertInstanceOf(SerializerInterface::class, $serializer);
+        $this->assertInstanceOf(SerializerInterface::class, $serializer);
 
         return $serializer;
     }
@@ -44,7 +44,7 @@ final class IndexingTimeZoneTest extends KernelTestCase
     {
         // serialize() never touches the client; a real (unconnected) instance is fine.
         $client = self::getContainer()->get(Client::class);
-        self::assertInstanceOf(Client::class, $client);
+        $this->assertInstanceOf(Client::class, $client);
 
         return $client;
     }
@@ -65,10 +65,10 @@ final class IndexingTimeZoneTest extends KernelTestCase
         $nyUpdated = $newYork->serialize($this->makeOrganization())['updated'];
 
         // 12:00 UTC stays 12:00+00:00; in New York (EDT in July) it is 08:00-04:00.
-        self::assertStringContainsString('2026-07-01T12:00:00', $utcUpdated);
-        self::assertStringEndsWith('+00:00', $utcUpdated);
-        self::assertStringContainsString('2026-07-01T08:00:00', $nyUpdated);
-        self::assertStringEndsWith('-04:00', $nyUpdated);
+        $this->assertStringContainsString('2026-07-01T12:00:00', (string) $utcUpdated);
+        $this->assertStringEndsWith('+00:00', $utcUpdated);
+        $this->assertStringContainsString('2026-07-01T08:00:00', (string) $nyUpdated);
+        $this->assertStringEndsWith('-04:00', $nyUpdated);
     }
 
     /**
@@ -78,13 +78,13 @@ final class IndexingTimeZoneTest extends KernelTestCase
     public function testContainerServiceUsesApplicationViewTimezone(): void
     {
         $indexing = self::getContainer()->get(IndexingOrganizations::class);
-        self::assertInstanceOf(IndexingOrganizations::class, $indexing);
+        $this->assertInstanceOf(IndexingOrganizations::class, $indexing);
 
         $updated = $indexing->serialize($this->makeOrganization())['updated'];
 
         // Europe/Copenhagen in July is CEST (+02:00): 12:00 UTC -> 14:00+02:00.
-        self::assertSame('Europe/Copenhagen', DashboardController::VIEW_TIMEZONE);
-        self::assertStringContainsString('2026-07-01T14:00:00', $updated);
-        self::assertStringEndsWith('+02:00', $updated);
+        $this->assertSame('Europe/Copenhagen', DashboardController::VIEW_TIMEZONE);
+        $this->assertStringContainsString('2026-07-01T14:00:00', (string) $updated);
+        $this->assertStringEndsWith('+02:00', $updated);
     }
 }

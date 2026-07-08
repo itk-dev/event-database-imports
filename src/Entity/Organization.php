@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Annotation\SerializedPath;
 #[UniqueEntity(
     fields: ['name'],
     message: 'entity.organization.name.not_unique')]
-class Organization implements IndexItemInterface
+class Organization implements IndexItemInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -49,10 +49,10 @@ class Organization implements IndexItemInterface
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'organizations')]
     private Collection $users;
 
-    #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Event::class)]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'organization')]
     private Collection $events;
 
-    #[ORM\OneToMany(mappedBy: 'organization', targetEntity: Feed::class)]
+    #[ORM\OneToMany(targetEntity: Feed::class, mappedBy: 'organization')]
     private Collection $feeds;
 
     #[Timestampable(on: 'create')]
@@ -168,11 +168,9 @@ class Organization implements IndexItemInterface
 
     public function removeEvent(Event $event): static
     {
-        if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getOrganization() === $this) {
-                $event->setOrganization(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->events->removeElement($event) && $event->getOrganization() === $this) {
+            $event->setOrganization(null);
         }
 
         return $this;
@@ -198,11 +196,9 @@ class Organization implements IndexItemInterface
 
     public function removeFeed(Feed $feed): static
     {
-        if ($this->feeds->removeElement($feed)) {
-            // set the owning side to null (unless already changed)
-            if ($feed->getOrganization() === $this) {
-                $feed->setOrganization(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->feeds->removeElement($feed) && $feed->getOrganization() === $this) {
+            $feed->setOrganization(null);
         }
 
         return $this;

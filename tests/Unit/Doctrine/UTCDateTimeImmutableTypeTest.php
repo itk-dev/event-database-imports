@@ -39,7 +39,7 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
 
         $db = $this->type->convertToDatabaseValue($value, $this->platform());
 
-        self::assertSame('2026-07-01 12:00:00', $db);
+        $this->assertSame('2026-07-01 12:00:00', $db);
     }
 
     /**
@@ -52,8 +52,8 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
 
         $this->type->convertToDatabaseValue($value, $this->platform());
 
-        self::assertSame('Europe/Copenhagen', $value->getTimezone()->getName());
-        self::assertSame('2026-07-01 14:00:00', $value->format('Y-m-d H:i:s'));
+        $this->assertSame('Europe/Copenhagen', $value->getTimezone()->getName());
+        $this->assertSame('2026-07-01 14:00:00', $value->format('Y-m-d H:i:s'));
     }
 
     /**
@@ -63,7 +63,7 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
     {
         $value = new \DateTimeImmutable('2026-07-01 12:00:00', new \DateTimeZone('UTC'));
 
-        self::assertSame('2026-07-01 12:00:00', $this->type->convertToDatabaseValue($value, $this->platform()));
+        $this->assertSame('2026-07-01 12:00:00', $this->type->convertToDatabaseValue($value, $this->platform()));
     }
 
     /**
@@ -71,8 +71,8 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
      */
     public function testNullIsPreserved(): void
     {
-        self::assertNull($this->type->convertToDatabaseValue(null, $this->platform()));
-        self::assertNull($this->type->convertToPHPValue(null, $this->platform()));
+        $this->assertNull($this->type->convertToDatabaseValue(null, $this->platform()));
+        $this->assertNull($this->type->convertToPHPValue(null, $this->platform()));
     }
 
     /**
@@ -82,9 +82,9 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
     {
         $value = $this->type->convertToPHPValue('2026-07-01 12:00:00', $this->platform());
 
-        self::assertInstanceOf(\DateTimeImmutable::class, $value);
-        self::assertSame('UTC', $value->getTimezone()->getName());
-        self::assertSame('2026-07-01 12:00:00', $value->format('Y-m-d H:i:s'));
+        $this->assertInstanceOf(\DateTimeImmutable::class, $value);
+        $this->assertSame('UTC', $value->getTimezone()->getName());
+        $this->assertSame('2026-07-01 12:00:00', $value->format('Y-m-d H:i:s'));
     }
 
     /**
@@ -94,6 +94,6 @@ final class UTCDateTimeImmutableTypeTest extends TestCase
     {
         $existing = new \DateTimeImmutable('2026-07-01 12:00:00', new \DateTimeZone('UTC'));
 
-        self::assertSame($existing, $this->type->convertToPHPValue($existing, $this->platform()));
+        $this->assertSame($existing, $this->type->convertToPHPValue($existing, $this->platform()));
     }
 }

@@ -31,8 +31,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
  */
 final class CrudSmokeTest extends AbstractAdminTestCase
 {
-    private const EXPECT_SUCCESS = 'success';
-    private const EXPECT_DENIED = 'denied';
+    private const string EXPECT_SUCCESS = 'success';
+    private const string EXPECT_DENIED = 'denied';
 
     protected function setUp(): void
     {
@@ -51,7 +51,7 @@ final class CrudSmokeTest extends AbstractAdminTestCase
     public function testRoleMatrix(string $controller, string $action, string $email, string $expected): void
     {
         $this->loginAs($email);
-        $this->client->request('GET', $this->adminUrl($controller, $action));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl($controller, $action));
 
         if (self::EXPECT_SUCCESS === $expected) {
             $this->assertResponseIsSuccessful();

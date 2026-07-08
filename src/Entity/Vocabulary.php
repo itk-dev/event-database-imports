@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[UniqueEntity(
     fields: ['slug'],
     message: 'entity.vocabulary.slug.not_unique')]
-class Vocabulary implements IndexItemInterface
+class Vocabulary implements IndexItemInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

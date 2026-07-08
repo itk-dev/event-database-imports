@@ -20,11 +20,13 @@ use Symfony\Component\Validator\Constraints\Json;
 
 class FeedCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Feed::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -32,6 +34,7 @@ class FeedCrudController extends AbstractBaseCrudController
         ;
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -46,6 +49,7 @@ class FeedCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [

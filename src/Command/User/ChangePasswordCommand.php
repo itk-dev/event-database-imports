@@ -48,7 +48,7 @@ class ChangePasswordCommand extends Command
         }
 
         $password = $io->askHidden('New Password?', function (string $password): string {
-            if (empty($password)) {
+            if ('' === $password || '0' === $password) {
                 throw new \RuntimeException('Password cannot be empty.');
             }
 

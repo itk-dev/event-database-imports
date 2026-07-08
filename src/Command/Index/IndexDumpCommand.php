@@ -34,9 +34,7 @@ final class IndexDumpCommand extends Command
                 InputArgument::IS_ARRAY,
                 'Indexes to dump (separate multiple indexes with a space)',
                 IndexNames::values(),
-                function (CompletionInput $input): array {
-                    return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
-                }
+                fn (CompletionInput $input): array => array_filter(IndexNames::values(), fn ($item): bool => str_starts_with((string) $item, $input->getCompletionValue()))
             )
             ->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Path to write data to', './src/DataFixtures/indexes');
     }

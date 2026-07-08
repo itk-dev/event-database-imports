@@ -23,7 +23,7 @@ final class PopulateRepositoryTest extends KernelTestCase
     private function repository(): EventRepository
     {
         $repository = self::getContainer()->get(EventRepository::class);
-        self::assertInstanceOf(EventRepository::class, $repository);
+        $this->assertInstanceOf(EventRepository::class, $repository);
 
         return $repository;
     }
@@ -43,7 +43,7 @@ final class PopulateRepositoryTest extends KernelTestCase
         $this->loadEvents();
 
         // TestEventFixtures creates four events.
-        self::assertSame(4, $this->repository()->countToPopulate([]));
+        $this->assertSame(4, $this->repository()->countToPopulate([]));
     }
 
     public function testFindToPopulateReturnsIdAscending(): void
@@ -55,7 +55,7 @@ final class PopulateRepositoryTest extends KernelTestCase
         $ids = array_map(static fn (Event $e): int => (int) $e->getId(), $events);
         $sorted = $ids;
         sort($sorted);
-        self::assertSame($sorted, $ids, 'findToPopulate must return events ordered by id ascending');
+        $this->assertSame($sorted, $ids, 'findToPopulate must return events ordered by id ascending');
     }
 
     public function testFindToPopulateRespectsLimitAndOffset(): void
@@ -63,15 +63,15 @@ final class PopulateRepositoryTest extends KernelTestCase
         $this->loadEvents();
 
         $all = $this->repository()->findToPopulate([], 100, 0);
-        self::assertGreaterThanOrEqual(4, count($all));
+        $this->assertGreaterThanOrEqual(4, count($all));
 
         $firstTwo = $this->repository()->findToPopulate([], 2, 0);
         $nextTwo = $this->repository()->findToPopulate([], 2, 2);
 
-        self::assertCount(2, $firstTwo);
-        self::assertCount(2, $nextTwo);
+        $this->assertCount(2, $firstTwo);
+        $this->assertCount(2, $nextTwo);
         // Paging is stable and non-overlapping.
-        self::assertSame($all[0]->getId(), $firstTwo[0]->getId());
-        self::assertSame($all[2]->getId(), $nextTwo[0]->getId());
+        $this->assertSame($all[0]->getId(), $firstTwo[0]->getId());
+        $this->assertSame($all[2]->getId(), $nextTwo[0]->getId());
     }
 }

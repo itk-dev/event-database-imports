@@ -10,20 +10,20 @@ class UTCDateTimeType extends DateTimeType
 {
     private static ?\DateTimeZone $utc = null;
 
+    #[\Override]
     public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
-        if ($value instanceof \DateTime) {
-            if (self::getUtc()->getName() !== $value->getTimezone()->getName()) {
-                // Clone before converting: \DateTime is mutable and the caller
-                // (the entity) still owns this object — its timezone must not be
-                // silently rewritten as a side effect of persisting.
-                $value = (clone $value)->setTimezone(self::getUtc());
-            }
+        if ($value instanceof \DateTime && $this->getUtc()->getName() !== $value->getTimezone()->getName()) {
+            // Clone before converting: \DateTime is mutable and the caller
+            // (the entity) still owns this object — its timezone must not be
+            // silently rewritten as a side effect of persisting.
+            $value = (clone $value)->setTimezone($this->getUtc());
         }
 
         return parent::convertToDatabaseValue($value, $platform);
     }
 
+    #[\Override]
     public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTime
     {
         if (null === $value || $value instanceof \DateTime) {
@@ -33,7 +33,7 @@ class UTCDateTimeType extends DateTimeType
         $converted = \DateTime::createFromFormat(
             $platform->getDateTimeFormatString(),
             $value,
-            self::getUtc()
+            $this->getUtc()
         );
 
         if (false === $converted) {
@@ -43,7 +43,7 @@ class UTCDateTimeType extends DateTimeType
         return $converted;
     }
 
-    private static function getUtc(): \DateTimeZone
+    private function getUtc(): \DateTimeZone
     {
         return self::$utc ??= new \DateTimeZone('UTC');
     }

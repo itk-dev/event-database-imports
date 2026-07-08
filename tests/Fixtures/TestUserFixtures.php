@@ -15,14 +15,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class TestUserFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const PASSWORD = 'test-password';
+    public const string PASSWORD = 'test-password';
 
-    public const SUPER_ADMIN_EMAIL = 'super-admin@test';
-    public const ADMIN_EMAIL = 'admin@test';
-    public const EDITOR_EMAIL = 'editor@test';
-    public const ORG_ADMIN_A_EMAIL = 'org-admin-a@test';
-    public const ORG_EDITOR_A_EMAIL = 'org-editor-a@test';
-    public const ORG_EDITOR_B_EMAIL = 'org-editor-b@test';
+    public const string SUPER_ADMIN_EMAIL = 'super-admin@test';
+    public const string ADMIN_EMAIL = 'admin@test';
+    public const string EDITOR_EMAIL = 'editor@test';
+    public const string ORG_ADMIN_A_EMAIL = 'org-admin-a@test';
+    public const string ORG_EDITOR_A_EMAIL = 'org-editor-a@test';
+    public const string ORG_EDITOR_B_EMAIL = 'org-editor-b@test';
 
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\User;
@@ -15,12 +17,14 @@ abstract class AbstractBaseCrudController extends AbstractCrudController
         return self::class;
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         return parent::configureActions($actions)
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
     }
 
+    #[\Override]
     protected function getUser(): User
     {
         $user = parent::getUser();

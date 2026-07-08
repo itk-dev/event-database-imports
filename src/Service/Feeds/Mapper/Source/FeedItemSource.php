@@ -14,14 +14,14 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @see https://valinor.cuyz.io/1.5/how-to/transform-input/#custom-source
  */
-final class FeedItemSource
+final readonly class FeedItemSource
 {
     private const string SRC_WILDCARD = '*';
     private const string SRC_SEPARATOR = '.';
 
     public function __construct(
-        private readonly FeedConfiguration $configuration,
-        private readonly FeedDefaultsMapper $defaultsMapperService,
+        private FeedConfiguration $configuration,
+        private FeedDefaultsMapper $defaultsMapperService,
     ) {
     }
 
@@ -40,26 +40,26 @@ final class FeedItemSource
 
         foreach ($this->configuration->mapping as $src => $dest) {
             // Match dest that ends with ".[OPERATOR]". to map to array
-            if (preg_match('/(?P<dest>.*)\.\[(?P<separator>.*)]/', $dest, $matches)) {
+            if (preg_match('/(?P<dest>.*)\.\[(?P<separator>.*)]/', (string) $dest, $matches)) {
                 $separator = $matches['separator'];
                 $value = $this->getValue([...$source], $src);
-                $values = empty($separator) ? [$value] : explode($separator, $value);
+                $values = '' === $separator || '0' === $separator ? [$value] : explode($separator, (string) $value);
                 $this->setValue($output, $matches['dest'], $values);
             }
             // Match src with ".*" array without key
-            elseif (str_ends_with($src, self::SRC_SEPARATOR.self::SRC_WILDCARD)) {
+            elseif (str_ends_with((string) $src, self::SRC_SEPARATOR.self::SRC_WILDCARD)) {
                 $values = $this->getArrayValues([...$source], $src);
                 $this->setValues($output, $dest, $values);
             }
             // Match src with ".*." multi value array mapping.
-            elseif (str_contains($src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
+            elseif (str_contains((string) $src, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $values = $this->getValues([...$source], $src);
                 $this->setValues($output, $dest, $values);
             }
             // Match dest with ".*." single value into array mapping.
-            elseif (str_contains($dest, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
+            elseif (str_contains((string) $dest, self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR)) {
                 $value = $this->getValue([...$source], $src);
-                $exploded = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR, $dest);
+                $exploded = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR, (string) $dest);
                 $key = array_shift($exploded);
                 $key = $this->transformKey($key);
 
@@ -162,7 +162,7 @@ final class FeedItemSource
         $keys = explode(self::SRC_SEPARATOR.self::SRC_WILDCARD.self::SRC_SEPARATOR, $src);
         $key = $this->transformKey(reset($keys));
         $items = $propertyAccessor->getValue($data, $key);
-        $items = $items ?? [];
+        $items ??= [];
 
         // Find nested array key and extra values.
         $key = $this->transformKey(array_pop($keys));

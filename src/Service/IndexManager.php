@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use Elastic\Elasticsearch\Client;
@@ -35,7 +37,7 @@ readonly class IndexManager
         $indicesData = [];
         foreach ($indices as $index) {
             $indexName = $index['index'] ?? 'unknown';
-            $index['aliases'] = !empty($aliasesMap[$indexName]) ? $aliasesMap[$indexName] : [];
+            $index['aliases'] = empty($aliasesMap[$indexName]) ? [] : $aliasesMap[$indexName];
             $indicesData[] = $index;
         }
 

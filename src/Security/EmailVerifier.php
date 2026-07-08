@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
@@ -44,7 +46,7 @@ readonly class EmailVerifier
     {
         $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), $user->getMail());
 
-        $user->setEmailVerifiedAt(new \DateTimeImmutable());
+        $user->setEmailVerifiedAt(\Carbon\CarbonImmutable::now());
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();

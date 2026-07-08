@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: DailyOccurrenceRepository::class)]
-class DailyOccurrence implements IndexItemInterface
+class DailyOccurrence implements IndexItemInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

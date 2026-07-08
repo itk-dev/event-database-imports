@@ -15,11 +15,13 @@ class EmbedImageController extends AbstractBaseCrudController
     {
     }
 
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Image::class;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [

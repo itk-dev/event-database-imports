@@ -34,9 +34,9 @@ final class IndexingOccurrences extends AbstractIndexingElastic
         $updatedAt = $this->getUpdatedAt($item);
         $item->setUpdatedAt($updatedAt);
 
-        $contextBuilder = (new ObjectNormalizerContextBuilder())
+        $contextBuilder = new ObjectNormalizerContextBuilder()
             ->withGroups([IndexNames::Occurrences->value]);
-        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+        $contextBuilder = new DateTimeNormalizerContextBuilder()
             ->withContext($contextBuilder)
             ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);

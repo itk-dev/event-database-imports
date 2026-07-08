@@ -29,7 +29,7 @@ final class MyEventScopingTest extends AbstractAdminTestCase
     public function testOrgEditorOnlySeesOwnOrgEvents(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
-        $this->client->request('GET', $this->adminUrl(MyEventCrudController::class));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(MyEventCrudController::class));
 
         $this->assertResponseIsSuccessful();
         $content = (string) $this->client->getResponse()->getContent();
@@ -45,7 +45,7 @@ final class MyEventScopingTest extends AbstractAdminTestCase
     public function testOtherOrgEditorSeesOtherOrgEvents(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_B_EMAIL);
-        $this->client->request('GET', $this->adminUrl(MyEventCrudController::class));
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(MyEventCrudController::class));
 
         $this->assertResponseIsSuccessful();
         $content = (string) $this->client->getResponse()->getContent();

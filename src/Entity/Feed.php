@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 #[ORM\Entity(repositoryClass: FeedRepository::class)]
 #[ORM\HasLifecycleCallbacks]
-class Feed
+class Feed implements \Stringable
 {
     use TimestampableEntity;
     use BlameableEntity;
@@ -42,7 +42,7 @@ class Feed
     #[ORM\ManyToOne(inversedBy: 'feeds')]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: Event::class)]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'feed')]
     private Collection $events;
 
     #[ORM\ManyToOne(inversedBy: 'feeds')]
@@ -53,7 +53,7 @@ class Feed
     /**
      * @var Collection<int, FeedItem>
      */
-    #[ORM\OneToMany(mappedBy: 'feed', targetEntity: FeedItem::class, orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: FeedItem::class, mappedBy: 'feed', orphanRemoval: true)]
     private Collection $feedItems;
 
     #[ORM\Column(nullable: true)]
@@ -129,10 +129,8 @@ class Feed
     #[Assert\Callback]
     public function validate(ExecutionContextInterface $context, mixed $payload): void
     {
-        if (null !== $this->tmpConfig) {
-            if (false === \json_validate($this->tmpConfig)) {
-                $context->buildViolation('Json error: '.\json_last_error_msg())->atPath('configuration')->addViolation();
-            }
+        if (null !== $this->tmpConfig && false === \json_validate($this->tmpConfig)) {
+            $context->buildViolation('Json error: '.\json_last_error_msg())->atPath('configuration')->addViolation();
         }
     }
 
@@ -205,11 +203,9 @@ class Feed
 
     public function removeEvent(Event $event): static
     {
-        if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getFeed() === $this) {
-                $event->setFeed(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->events->removeElement($event) && $event->getFeed() === $this) {
+            $event->setFeed(null);
         }
 
         return $this;
@@ -247,11 +243,9 @@ class Feed
 
     public function removeFeedItem(FeedItem $feedItem): static
     {
-        if ($this->feedItems->removeElement($feedItem)) {
-            // set the owning side to null (unless already changed)
-            if ($feedItem->getFeed() === $this) {
-                $feedItem->setFeed(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->feedItems->removeElement($feedItem) && $feedItem->getFeed() === $this) {
+            $feedItem->setFeed(null);
         }
 
         return $this;

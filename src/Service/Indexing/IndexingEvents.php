@@ -36,9 +36,9 @@ final class IndexingEvents extends AbstractIndexingElastic
         $updatedAt = $this->getUpdatedAt($item);
         $item->setUpdatedAt($updatedAt);
 
-        $contextBuilder = (new ObjectNormalizerContextBuilder())
+        $contextBuilder = new ObjectNormalizerContextBuilder()
             ->withGroups([IndexNames::Events->value]);
-        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+        $contextBuilder = new DateTimeNormalizerContextBuilder()
             ->withContext($contextBuilder)
             ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);

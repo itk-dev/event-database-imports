@@ -22,7 +22,7 @@ final class FeedConfigurationMapper
     public function getConfigurationFromArray(array $configuration): FeedConfiguration
     {
         try {
-            return (new MapperBuilder())
+            return new MapperBuilder()
                 ->allowPermissiveTypes()
                 ->allowSuperfluousKeys()
                 ->allowScalarValueCasting()

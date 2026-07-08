@@ -34,12 +34,12 @@ final class FeedConfigurationMapperTest extends TestCase
     {
         $config = $this->mapper->getConfigurationFromArray(FeedConfiguration::getConfigurationTemplate());
 
-        self::assertInstanceOf(FeedConfiguration::class, $config);
-        self::assertSame('json', $config->type);
-        self::assertSame('Europe/Copenhagen', $config->timezone);
-        self::assertSame("Y-m-d\TH:i:sP", $config->dateFormat);
-        self::assertArrayHasKey('id', $config->mapping);
-        self::assertNotNull($config->pagination);
+        $this->assertInstanceOf(FeedConfiguration::class, $config);
+        $this->assertSame('json', $config->type);
+        $this->assertSame('Europe/Copenhagen', $config->timezone);
+        $this->assertSame("Y-m-d\TH:i:sP", $config->dateFormat);
+        $this->assertArrayHasKey('id', $config->mapping);
+        $this->assertInstanceOf(\App\Model\Feed\FeedPagination::class, $config->pagination);
     }
 
     /**
@@ -53,7 +53,7 @@ final class FeedConfigurationMapperTest extends TestCase
 
         $config = $this->mapper->getConfigurationFromArray($data);
 
-        self::assertSame('https://example.test/feed', $config->url);
+        $this->assertSame('https://example.test/feed', $config->url);
     }
 
     /**
@@ -73,9 +73,9 @@ final class FeedConfigurationMapperTest extends TestCase
 
         $config = $this->mapper->getConfigurationFromArray($data);
 
-        self::assertNotNull($config->pagination);
-        self::assertSame(3, $config->pagination->page);
-        self::assertSame(25, $config->pagination->limit);
+        $this->assertInstanceOf(\App\Model\Feed\FeedPagination::class, $config->pagination);
+        $this->assertSame(3, $config->pagination->page);
+        $this->assertSame(25, $config->pagination->limit);
     }
 
     /**

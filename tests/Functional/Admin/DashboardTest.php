@@ -26,7 +26,7 @@ final class DashboardTest extends AbstractAdminTestCase
     public function testSuperAdminSeesAllMenuSections(): void
     {
         $this->loginAs(TestUserFixtures::SUPER_ADMIN_EMAIL);
-        $this->client->request('GET', '/admin');
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin');
 
         if ($this->client->getResponse()->isRedirection()) {
             $this->client->followRedirect();
@@ -47,7 +47,7 @@ final class DashboardTest extends AbstractAdminTestCase
     public function testEditorRedirectsToEventCrud(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', '/admin');
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin');
 
         $this->assertResponseRedirects();
         $path = (string) parse_url((string) $this->client->getResponse()->headers->get('Location'), PHP_URL_PATH);
@@ -60,7 +60,7 @@ final class DashboardTest extends AbstractAdminTestCase
     public function testOrgEditorRedirectsToMyEventCrud(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
-        $this->client->request('GET', '/admin');
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin');
 
         $this->assertResponseRedirects();
         $path = (string) parse_url((string) $this->client->getResponse()->headers->get('Location'), PHP_URL_PATH);
@@ -73,7 +73,7 @@ final class DashboardTest extends AbstractAdminTestCase
     public function testOrgEditorDoesNotSeeAdminMenuItems(): void
     {
         $this->loginAs(TestUserFixtures::ORG_EDITOR_A_EMAIL);
-        $this->client->request('GET', '/admin');
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin');
 
         if ($this->client->getResponse()->isRedirection()) {
             $this->client->followRedirect();

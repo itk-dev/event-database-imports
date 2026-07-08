@@ -28,7 +28,7 @@ final class RegistrationTest extends AbstractAdminTestCase
      */
     public function testSuccessfulRegistrationPersistsUserAndSendsEmail(): void
     {
-        $crawler = $this->client->request('GET', '/admin/register/');
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/register/');
         $form = $crawler->selectButton('Registrer dig')->form();
 
         $email = 'new-user@example.com';
@@ -43,10 +43,10 @@ final class RegistrationTest extends AbstractAdminTestCase
 
         $this->assertResponseIsSuccessful();
 
-        $repository = static::getContainer()->get(UserRepository::class);
+        $repository = self::getContainer()->get(UserRepository::class);
         $user = $repository->findOneBy(['mail' => $email]);
         $this->assertInstanceOf(User::class, $user, 'User should have been persisted during registration');
-        $this->assertNull($user->getEmailVerifiedAt());
+        $this->assertNotInstanceOf(\DateTimeImmutable::class, $user->getEmailVerifiedAt());
 
         // Outbound mail goes through the async Messenger transport in tests,
         // so the message is queued (routed via SendEmailMessage) rather than
@@ -62,7 +62,7 @@ final class RegistrationTest extends AbstractAdminTestCase
      */
     public function testEmailVerificationSetsVerifiedAt(): void
     {
-        $crawler = $this->client->request('GET', '/admin/register/');
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/register/');
         $form = $crawler->selectButton('Registrer dig')->form();
 
         $email = 'verify-me@example.com';
@@ -74,11 +74,11 @@ final class RegistrationTest extends AbstractAdminTestCase
             'registration_form[agreeTerms]' => '1',
         ]);
 
-        $repository = static::getContainer()->get(UserRepository::class);
+        $repository = self::getContainer()->get(UserRepository::class);
         $user = $repository->findOneBy(['mail' => $email]);
         $this->assertInstanceOf(User::class, $user);
 
-        $helper = static::getContainer()->get(VerifyEmailHelperInterface::class);
+        $helper = self::getContainer()->get(VerifyEmailHelperInterface::class);
         $signature = $helper->generateSignature(
             'app_verify_email',
             (string) $user->getId(),
@@ -86,14 +86,14 @@ final class RegistrationTest extends AbstractAdminTestCase
             ['id' => $user->getId()],
         );
 
-        $path = parse_url($signature->getSignedUrl(), PHP_URL_PATH).'?'.parse_url($signature->getSignedUrl(), PHP_URL_QUERY);
-        $this->client->request('GET', $path);
+        $path = parse_url((string) $signature->getSignedUrl(), PHP_URL_PATH).'?'.parse_url((string) $signature->getSignedUrl(), PHP_URL_QUERY);
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $path);
 
         $this->assertResponseRedirects();
         // Re-fetch rather than refresh: the test container's EM may have
         // been reset between the registration and verification requests.
         $verifiedUser = $repository->findOneBy(['mail' => $email]);
         $this->assertInstanceOf(User::class, $verifiedUser);
-        $this->assertNotNull($verifiedUser->getEmailVerifiedAt());
+        $this->assertInstanceOf(\DateTimeImmutable::class, $verifiedUser->getEmailVerifiedAt());
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use Doctrine\ORM\QueryBuilder;
@@ -14,6 +16,7 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class MyEventCrudController extends EventCrudController
 {
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         $crud = parent::configureCrud($crud);
@@ -25,6 +28,7 @@ class MyEventCrudController extends EventCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.my.event.edit.title'));
     }
 
+    #[\Override]
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);
@@ -35,6 +39,7 @@ class MyEventCrudController extends EventCrudController
         return $qb;
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         $choices = $this->getOrganizationChoices();

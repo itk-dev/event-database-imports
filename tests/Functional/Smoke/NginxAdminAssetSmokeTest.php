@@ -39,16 +39,12 @@ final class NginxAdminAssetSmokeTest extends TestCase
             self::markTestSkipped(sprintf('nginx not reachable at %s (requires the docker stack): %s', $baseUrl, $e->getMessage()));
         }
 
-        self::assertSame(
-            200,
+        $this->assertSame(200, $status, sprintf(
+            'Expected admin-prefixed asset "%s" to be served via the nginx APP_PATH_PREFIX rewrite, got %d. '
+            .'The "rewrite ^${APP_PATH_PREFIX}/(.*) /$1 break;" rule in .docker/templates/default.conf.template is likely missing.',
+            $url,
             $status,
-            sprintf(
-                'Expected admin-prefixed asset "%s" to be served via the nginx APP_PATH_PREFIX rewrite, got %d. '
-                .'The "rewrite ^${APP_PATH_PREFIX}/(.*) /$1 break;" rule in .docker/templates/default.conf.template is likely missing.',
-                $url,
-                $status,
-            ),
-        );
+        ));
     }
 
     /**

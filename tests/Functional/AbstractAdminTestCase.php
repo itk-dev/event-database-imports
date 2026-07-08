@@ -82,7 +82,7 @@ abstract class AbstractAdminTestCase extends WebTestCase
         // Append any remaining query parameters (filters, referrer, etc.).
         $filtered = array_filter(
             $extra,
-            static fn ($value) => null !== $value,
+            static fn (bool|float|int|string|null $value): bool => null !== $value,
         );
         if ([] !== $filtered) {
             $separator = str_contains($url, '?') ? '&' : '?';

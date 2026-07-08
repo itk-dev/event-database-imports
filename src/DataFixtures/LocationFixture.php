@@ -10,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 
 final class LocationFixture extends Fixture implements DependentFixtureInterface
 {
-    public const ITKDEV = 'location-itkdev';
+    public const string ITKDEV = 'location-itkdev';
 
     public function load(ObjectManager $manager): void
     {

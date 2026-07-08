@@ -39,7 +39,7 @@ final class FeedMapperTimezoneTest extends KernelTestCase
     private function mapper(): FeedMapperInterface
     {
         $mapper = self::getContainer()->get(FeedMapperInterface::class);
-        self::assertInstanceOf(FeedMapperInterface::class, $mapper);
+        $this->assertInstanceOf(FeedMapperInterface::class, $mapper);
 
         return $mapper;
     }
@@ -68,7 +68,7 @@ final class FeedMapperTimezoneTest extends KernelTestCase
     {
         $item = $this->mapper()->getFeedItemFromArray($data, $this->config($dateFormat));
         $start = $item->occurrences[0]->start;
-        self::assertInstanceOf(\DateTimeImmutable::class, $start);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $start);
 
         return $start->setTimezone(new \DateTimeZone('UTC'))->format('Y-m-d H:i');
     }
@@ -81,7 +81,7 @@ final class FeedMapperTimezoneTest extends KernelTestCase
     {
         $data = ['id' => 'evt-1', 'occurrences' => [['start' => '2026-08-15T20:45', 'end' => '2026-08-15T21:45']]];
 
-        self::assertSame('2026-08-15 18:45', $this->firstStartAsUtc($data, 'Y-m-d\TH:i'));
+        $this->assertSame('2026-08-15 18:45', $this->firstStartAsUtc($data, 'Y-m-d\TH:i'));
     }
 
     /**
@@ -92,7 +92,7 @@ final class FeedMapperTimezoneTest extends KernelTestCase
     {
         $data = ['id' => 'evt-2', 'occurrences' => [['start' => '2026-03-03T11:00:00', 'end' => '2026-03-03T12:00:00']]];
 
-        self::assertSame('2026-03-03 10:00', $this->firstStartAsUtc($data, 'Y-m-d\TH:i:s'));
+        $this->assertSame('2026-03-03 10:00', $this->firstStartAsUtc($data, 'Y-m-d\TH:i:s'));
     }
 
     /**
@@ -104,6 +104,6 @@ final class FeedMapperTimezoneTest extends KernelTestCase
     {
         $data = ['id' => 'evt-3', 'occurrences' => [['start' => '2026-09-04T19:30:00+02:00', 'end' => '2026-09-04T21:00:00+02:00']]];
 
-        self::assertSame('2026-09-04 17:30', $this->firstStartAsUtc($data, 'Y-m-d\TH:i:sP'));
+        $this->assertSame('2026-09-04 17:30', $this->firstStartAsUtc($data, 'Y-m-d\TH:i:sP'));
     }
 }

@@ -14,12 +14,12 @@ final class TimeIntervalTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testTimeIntervalSingleDay()
+    public function testTimeIntervalSingleDay(): void
     {
         $time = $this->getTimeService();
 
-        $start = new \DateTimeImmutable('2023-09-23T10:00:00+02:00');
-        $end = new \DateTimeImmutable('2023-09-23T12:30:00+02:00');
+        $start = \Carbon\CarbonImmutable::parse('2023-09-23T10:00:00+02:00');
+        $end = \Carbon\CarbonImmutable::parse('2023-09-23T12:30:00+02:00');
 
         $times = $time->getIntervals($start, $end);
 
@@ -28,12 +28,12 @@ final class TimeIntervalTest extends KernelTestCase
         $this->assertEquals($end, $times[0]->end);
     }
 
-    public function testTimeIntervalSpanMidnight()
+    public function testTimeIntervalSpanMidnight(): void
     {
         $time = $this->getTimeService();
 
-        $start = new \DateTimeImmutable('2023-09-23T10:00:00+02:00');
-        $end = new \DateTimeImmutable('2023-09-23T12:30:00+02:00');
+        $start = \Carbon\CarbonImmutable::parse('2023-09-23T10:00:00+02:00');
+        $end = \Carbon\CarbonImmutable::parse('2023-09-23T12:30:00+02:00');
 
         $times = $time->getIntervals($start, $end);
 
@@ -45,12 +45,12 @@ final class TimeIntervalTest extends KernelTestCase
     /**
      * @throws \Exception
      */
-    public function testTimeIntervalTwoDays()
+    public function testTimeIntervalTwoDays(): void
     {
         $time = $this->getTimeService();
 
-        $start = new \DateTimeImmutable('2023-09-29T10:00:00+02:00');
-        $end = new \DateTimeImmutable('2023-09-30T12:30:00+02:00');
+        $start = \Carbon\CarbonImmutable::parse('2023-09-29T10:00:00+02:00');
+        $end = \Carbon\CarbonImmutable::parse('2023-09-30T12:30:00+02:00');
 
         $times = $time->getIntervals($start, $end);
 
@@ -59,21 +59,21 @@ final class TimeIntervalTest extends KernelTestCase
         $second = $times[1];
 
         $this->assertEquals($start, $first->start);
-        $this->assertEquals(new \DateTimeImmutable('2023-09-30T00:00:00+02:00'), $first->end);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-30T00:00:00+02:00'), $first->end);
 
-        $this->assertEquals(new \DateTimeImmutable('2023-09-30T00:00:00+02:00'), $second->start);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-30T00:00:00+02:00'), $second->start);
         $this->assertEquals($end, $second->end);
     }
 
     /**
      * @throws \Exception
      */
-    public function testTimeIntervalTwoDaysUTC()
+    public function testTimeIntervalTwoDaysUTC(): void
     {
         $time = $this->getTimeService();
 
-        $start = new \DateTimeImmutable('2023-09-29T10:00:00+00:00');
-        $end = new \DateTimeImmutable('2023-09-30T12:30:00+00:00');
+        $start = \Carbon\CarbonImmutable::parse('2023-09-29T10:00:00+00:00');
+        $end = \Carbon\CarbonImmutable::parse('2023-09-30T12:30:00+00:00');
 
         $times = $time->getIntervals($start, $end);
 
@@ -82,21 +82,21 @@ final class TimeIntervalTest extends KernelTestCase
         $second = $times[1];
 
         $this->assertEquals($start, $first->start);
-        $this->assertEquals(new \DateTimeImmutable('2023-09-30T00:00:00+02:00'), $first->end);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-30T00:00:00+02:00'), $first->end);
 
-        $this->assertEquals(new \DateTimeImmutable('2023-09-30T00:00:00+02:00'), $second->start);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-30T00:00:00+02:00'), $second->start);
         $this->assertEquals($end, $second->end);
     }
 
     /**
      * @throws \Exception
      */
-    public function testTimeIntervalMultiDays()
+    public function testTimeIntervalMultiDays(): void
     {
         $time = $this->getTimeService();
 
-        $start = new \DateTimeImmutable('2023-09-23T10:00:00+02:00');
-        $end = new \DateTimeImmutable('2023-09-30T12:30:00+02:00');
+        $start = \Carbon\CarbonImmutable::parse('2023-09-23T10:00:00+02:00');
+        $end = \Carbon\CarbonImmutable::parse('2023-09-30T12:30:00+02:00');
 
         $times = $time->getIntervals($start, $end);
 
@@ -105,8 +105,8 @@ final class TimeIntervalTest extends KernelTestCase
         $this->assertEquals($end, end($times)->end);
 
         // Test date in the middle of the range span the full day.
-        $this->assertEquals(new \DateTimeImmutable('2023-09-27T00:00:00+02:00'), $times[4]->start);
-        $this->assertEquals(new \DateTimeImmutable('2023-09-28T00:00:00+02:00'), $times[4]->end);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-27T00:00:00+02:00'), $times[4]->start);
+        $this->assertEquals(\Carbon\CarbonImmutable::parse('2023-09-28T00:00:00+02:00'), $times[4]->end);
     }
 
     /**

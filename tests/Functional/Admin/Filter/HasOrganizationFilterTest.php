@@ -29,7 +29,7 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
     public function testFilterForEventsWithoutOrganization(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, 'index', [
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, 'index', [
             'filters[hasOrganization]' => '0',
         ]));
 
@@ -45,7 +45,7 @@ final class HasOrganizationFilterTest extends AbstractAdminTestCase
     public function testFilterForEventsWithOrganization(): void
     {
         $this->loginAs(TestUserFixtures::EDITOR_EMAIL);
-        $this->client->request('GET', $this->adminUrl(EventCrudController::class, 'index', [
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, 'index', [
             'filters[hasOrganization]' => '1',
         ]));
 

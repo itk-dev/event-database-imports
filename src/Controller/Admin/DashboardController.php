@@ -35,6 +35,7 @@ class DashboardController extends AbstractDashboardController
     ) {
     }
 
+    #[\Override]
     public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -50,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($adminUrlGenerator->setController(EventCrudController::class)->generateUrl());
     }
 
+    #[\Override]
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -58,6 +60,7 @@ class DashboardController extends AbstractDashboardController
             ->renderContentMaximized();
     }
 
+    #[\Override]
     public function configureMenuItems(): iterable
     {
         // My Content
@@ -96,6 +99,7 @@ class DashboardController extends AbstractDashboardController
             ->setPermission(UserRoles::ROLE_ADMIN->value);
     }
 
+    #[\Override]
     public function configureCrud(): Crud
     {
         // Default config for all cruds in this controller.
@@ -109,6 +113,7 @@ class DashboardController extends AbstractDashboardController
             ->setTimeFormat(self::TIME_FORMAT);
     }
 
+    #[\Override]
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         assert($user instanceof User);
@@ -128,6 +133,7 @@ class DashboardController extends AbstractDashboardController
             ]);
     }
 
+    #[\Override]
     public function configureAssets(): Assets
     {
         return Assets::new()

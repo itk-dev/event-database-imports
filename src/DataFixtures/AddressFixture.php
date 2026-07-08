@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Address;
@@ -8,7 +10,7 @@ use Doctrine\Persistence\ObjectManager;
 
 final class AddressFixture extends Fixture
 {
-    public const ITKDEV = 'address-itkdev';
+    public const string ITKDEV = 'address-itkdev';
 
     public function load(ObjectManager $manager): void
     {
