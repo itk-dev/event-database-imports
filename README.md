@@ -114,7 +114,35 @@ Using all three repositories, you can create the setup depicted below and have c
 (imports) and the API (frontend) by using the
 [shared service's repository](https://github.com/itk-dev/event-database-services.git).
 
-![Network setup production](./docs/images/networks.png)
+```mermaid
+flowchart TB
+    internet(("Internet"))
+    traefik["Traefik"]
+
+    subgraph backend ["Backend (this repo)"]
+        be_nginx["Nginx"]
+        be_php["PHP FPM"]
+        rabbit["RabbitMQ"]
+    end
+
+    subgraph services ["Services (shared)"]
+        es[("ElasticSearch")]
+    end
+
+    subgraph api ["API (event-database-api)"]
+        api_nginx["Nginx"]
+        api_php["PHP FPM"]
+    end
+
+    db[("Database")]
+
+    internet <--> traefik
+    traefik -->|"http (frontend)"| be_nginx
+    traefik -->|"http (frontend)"| api_nginx
+    be_php -->|"writes"| es
+    es -->|"reads"| api_php
+    be_php <-->|"host connection"| db
+```
 
 ## Roles and permissions
 
@@ -208,3 +236,34 @@ users across roles and organisations, independent of the full development `Event
 
 `task test` writes a Clover report to `coverage/unit.xml` (uploaded to [Codecov](https://codecov.io/) in CI). Generating
 coverage requires Xdebug, which the `test` task enables via `XDEBUG_MODE=coverage`.
+
+## Development
+
+Everything runs in Docker (`docker compose`); PHP, Composer and the Symfony console are only available inside the
+`phpfpm` container. The application targets **PHP 8.4** and **Symfony 7.4**, with Doctrine ORM 3 / DBAL 4, EasyAdmin 5,
+Elasticsearch 8 and Valinor 2. `composer.json` holds the authoritative version constraints.
+
+### Coding standards & static analysis
+
+[Task](https://taskfile.dev) wraps the tooling (each runs in the container or a dedicated lint service):
+
+- `task coding-standards:check` / `:apply` — PHP (php-cs-fixer), Twig (twig-cs-fixer), Markdown (markdownlint) and
+  YAML (prettier).
+- `task code-analysis:phpstan` — PHPStan (level 8 + strict rules).
+- `task code-analysis:rector` / `:rector:apply` — Rector (dry-run / apply).
+- `task index:mappings:dump` — regenerate the committed Elasticsearch mapping exports in `resources/mappings/`.
+
+### Continuous integration
+
+Every pull request must pass these GitHub Actions gates (`.github/workflows/`):
+
+- **`pr.yaml`** (Review) — composer validate + prod install, the full PHPUnit suite with coverage (→ Codecov),
+  PHPStan, and `doctrine:schema:validate`.
+- **`composer.yaml`** — `composer validate --strict`, `composer normalize --dry-run`, and `composer audit`.
+- **`php.yaml`** — php-cs-fixer; **`twig.yaml`** — twig-cs-fixer; **`markdown.yaml`** — markdownlint;
+  **`yaml.yaml`** — prettier `--check`.
+- **`changelog.yaml`** — `CHANGELOG.md` must be updated in the PR.
+- **`index-mappings.yaml`** — `resources/mappings/` must stay in sync with the mapping classes (fails if
+  `task index:mappings:dump` was not re-run).
+
+Tagged releases (`*.*.*`) are built by `build_release.yml`.

@@ -8,83 +8,42 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-104](https://github.com/itk-dev/event-database-imports/pull/104)
+  Refresh README and CLAUDE docs for current tooling/CI, convert the network diagram to Mermaid, condense the changelog
 - [PR-103](https://github.com/itk-dev/event-database-imports/pull/103)
-  Export each index's Elasticsearch mapping (schema only) to committed `resources/mappings/*.json` via a new
-  `app:index:mappings:dump` command, backed by a CI gate that fails if a mapping class changed without the
-  export being regenerated. Gives the read-only `event-database-api` project an authoritative mapping artifact
-  to diff against instead of hand-copying mappings
-
+  Export each index's Elasticsearch mapping to `resources/mappings/*.json` via `app:index:mappings:dump`, gated in CI
 - [PR-102](https://github.com/itk-dev/event-database-imports/pull/102)
-  Remove the redundant npm lint tooling (`package.json`, `package-lock.json`): markdown and YAML linting now
-  run entirely through the `markdownlint` and `prettier` docker compose services (Taskfile, CI, and the Claude
-  PostToolUse hook), so the host npm toolchain was unused and only contributed transitive dev-dependency
-  advisories
-
+  Remove redundant npm lint tooling (`package.json`/lock); markdown and YAML linting run via docker compose services
 - [PR-101](https://github.com/itk-dev/event-database-imports/pull/101)
-  Upgrade cuyz/valinor 1→2: replace the removed `enableFlexibleCasting()` with its granular successors
-  (`allowScalarValueCasting`, `allowNonSequentialList`, `allowUndefinedValues`) and swap the removed
-  `Messages::flattenFromNode($error->node())` error handling for `MappingError::messages()` in the feed
-  item and configuration mappers. Add regression tests covering both mappers' scalar-casting and
-  MappingError branches ahead of the bump (FeedConfigurationMapper was previously untested)
-
+  Upgrade cuyz/valinor 1→2 (granular casting methods, `MappingError::messages()`) with feed-mapper regression tests
 - [PR-100](https://github.com/itk-dev/event-database-imports/pull/100)
-  Follow-up to the Doctrine 3 upgrade: bring the remaining Doctrine bundles to their latest majors
-  (doctrine-bundle 2→3, doctrine-migrations-bundle 3→4, doctrine-fixtures-bundle 3→4), drop the ORM/DBAL
-  config options that became no-ops under ORM 3 / DBAL 4 (proxy generation, lazy ghost objects,
-  report-fields-where-declared, savepoints), and raise the PHP floor to 8.4 as required by doctrine-bundle 3.
-  Update the Doctrine Flex recipes (doctrine-bundle 2.13→3.0), adopting the plain `underscore` naming
-  strategy and dropping the deprecated `orm.controller_resolver.auto_mapping`. Resolve the Doctrine
-  forward-deprecations in app code (FieldMapping array access in TagsNormalizer, Criteria raw field access
-  in VocabularyCrudController)
-
+  Upgrade the remaining Doctrine bundles to latest majors, drop ORM/DBAL no-op config, and update the Doctrine Flex recipes
 - [PR-99](https://github.com/itk-dev/event-database-imports/pull/99)
-  Upgrade Doctrine ORM 2→3 and DBAL 3→4: port the custom UTC datetime types and raw DBAL usage to the DBAL 4
-  API, add a schema-alignment migration, exclude the messenger transport table from ORM schema management, and
-  switch Rector to composer-version-based Doctrine rules
-
+  Upgrade Doctrine ORM 2→3 and DBAL 3→4: port UTC datetime types and raw DBAL usage, add a schema-alignment migration
 - [PR-98](https://github.com/itk-dev/event-database-imports/pull/98)
-  Cache the vendor directory and pre-pull container images across the Composer, PHP, Twig and Review CI
-  workflows so composer install stops hitting GitHub's dist-download rate limit, drive the Review workflow
-  with docker compose directly instead of Task, and bump all GitHub Actions to their latest major
-  (checkout v7, cache v6, codecov-action v7)
-
+  Cache the vendor directory and pre-pull images across CI workflows, and bump all GitHub Actions to their latest major
 - [PR-97](https://github.com/itk-dev/event-database-imports/pull/97)
-  Add Rector as dev tooling (task code-analysis:rector) with the Doctrine code-quality set, ahead of the
-  Doctrine 3 upgrade; apply its attribute-key-to-constant suggestions on the Feed and User entities
+  Add Rector (task code-analysis:rector) with the Doctrine code-quality set ahead of the Doctrine 3 upgrade
 - [PR-96](https://github.com/itk-dev/event-database-imports/pull/96)
-  Doctrine 3 pre-work: cover the UTC immutable datetime type and the populate repository, and replace the
-  deprecated Criteria::ASC constant with the Order enum
-
+  Doctrine 3 pre-work: cover the UTC datetime type and populate repository, and replace Criteria::ASC with the Order enum
 - [PR-95](https://github.com/itk-dev/event-database-imports/pull/95)
-  Upgrade EasyAdmin from 4 to 5: apply the mandatory #[AdminDashboard] attribute, switch menu items from
-  linkToCrud() to linkTo(), and resolve the AdminContext in the login template (EA5 removed the deprecated APIs)
-
+  Upgrade EasyAdmin 4→5: add #[AdminDashboard], switch linkToCrud() to linkTo(), and resolve AdminContext in login
 - [PR-94](https://github.com/itk-dev/event-database-imports/pull/94)
-  Align the async worker (supervisor) on the default Europe/Copenhagen timezone by removing the PHP_TIMEZONE=UTC
-  override, so all runtime tiers share one timezone
+  Align the async worker on Europe/Copenhagen by removing the PHP_TIMEZONE=UTC override
 - [PR-93](https://github.com/itk-dev/event-database-imports/pull/93)
-  Fix feed datetime parsing: interpret offset-less feed datetimes in the feed's declared timezone instead of the
-  worker's ambient PHP timezone, so naive-format feeds are no longer imported 1–2 hours off
-
+  Interpret offset-less feed datetimes in the feed's declared timezone, not the worker's ambient PHP timezone
 - [PR-92](https://github.com/itk-dev/event-database-imports/pull/92)
-  Add EasyAdmin characterization tests ahead of the 4→5 upgrade: CRUD detail/edit render matrix, create/edit
-  form round-trips, the login accept-terms and email-verified gates, and feed/ADR-007 action authorization
-
+  Add EasyAdmin characterization tests ahead of the 4→5 upgrade (CRUD render, form round-trips, login gates, authz)
 - [PR-91](https://github.com/itk-dev/event-database-imports/pull/91)
-  Correct Danish admin translations: the delete-confirmation modal now reads "… vil slette?" instead of
-  interpolating the imperative action label, and translate the leftover English login-page strings
-
+  Correct Danish admin translations (delete-confirmation modal and leftover English login-page strings)
 - [PR-89](https://github.com/itk-dev/event-database-imports/pull/89)
-  Centralize the display timezone as a single injected source shared by the admin UI and the Elasticsearch
-  index, and stop UTCDateTimeType from mutating the caller's datetime when converting to UTC for storage
+  Centralize the display timezone as one injected source, and stop UTCDateTimeType mutating the caller's datetime
 - [PR-88](https://github.com/itk-dev/event-database-imports/pull/88)
   Raise PHPStan to level 8 and add phpstan-strict-rules, baseline the existing findings
 - [PR-87](https://github.com/itk-dev/event-database-imports/pull/87)
-  Fix UserActionVoter so user management is admin-only at the URL level (INDEX/NEW pass a null entity in
-  EasyAdmin), correct a wrong type assertion, and tighten registration and fixture test coverage
+  Fix UserActionVoter so user management is admin-only at the URL level, and correct a wrong type assertion
 - [PR-86](https://github.com/itk-dev/event-database-imports/pull/86)
-  Enforce NEW-action authorization at the URL level on the CRUD voters, scope EventVoter save actions to the user's
-  organization, and document the roles/permissions matrix in the README
+  Enforce NEW-action authorization at the URL level on the CRUD voters, and scope EventVoter saves to the user's org
 - [PR-85](https://github.com/itk-dev/event-database-imports/pull/85)
   Fix EventVoter so feed events cannot be edited via SAVE actions (feed guard runs before the save grant)
 - [PR-84](https://github.com/itk-dev/event-database-imports/pull/84)
@@ -102,9 +61,9 @@ See [keep a changelog] for information about writing changes to this log.
 - [PR-78](https://github.com/itk-dev/event-database-imports/pull/78)
   Update itk docker compose templates
 - [PR-76](https://github.com/itk-dev/event-database-imports/pull/76)
-  Added security and admin test coverage
+  Add security and admin test coverage
 - [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
-  Added test infrastructure (PHPUnit 12, DAMA, Liip)
+  Add test infrastructure (PHPUnit 12, DAMA, Liip)
 
 ## [1.2.4] - 2026-05-22
 
