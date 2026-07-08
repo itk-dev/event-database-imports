@@ -45,10 +45,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $mail = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $enabled = true;
 
     #[ORM\Column(length: 255)]
