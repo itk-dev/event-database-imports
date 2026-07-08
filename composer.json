@@ -12,7 +12,7 @@
         "cuyz/valinor": "^1.4",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.15",
+        "doctrine/orm": "^3.4",
         "dragonmantank/cron-expression": "^3.3",
         "easycorp/easyadmin-bundle": "^5.0",
         "elasticsearch/elasticsearch": "^8.13",

@@ -1,6 +1,10 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        # The messenger transport table is created and maintained by
+        # `messenger:setup-transports`, not by migrations, so exclude it from
+        # ORM schema management (diff / schema:validate).
+        schema_filter: '~^(?!messenger_messages)~'
         types:
             datetime: App\Doctrine\Extensions\DBAL\Types\UTCDateTimeType
             datetime_immutable: App\Doctrine\Extensions\DBAL\Types\UTCDateTimeImmutableType

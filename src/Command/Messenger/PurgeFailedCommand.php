@@ -3,6 +3,7 @@
 namespace App\Command\Messenger;
 
 use Doctrine\DBAL\Exception;
+use Doctrine\DBAL\ParameterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -65,8 +66,8 @@ class PurgeFailedCommand extends Command
         $connection = $this->entityManager->getConnection();
         $sql = 'DELETE FROM messenger_messages WHERE created_at < DATE_SUB(NOW(), INTERVAL ? DAY)';
         $stmt = $connection->prepare($sql);
-        $stmt->bindValue(1, $since, \PDO::PARAM_INT);
+        $stmt->bindValue(1, $since, ParameterType::INTEGER);
 
-        return $stmt->executeQuery()->rowCount();
+        return (int) $stmt->executeQuery()->rowCount();
     }
 }

@@ -8,6 +8,11 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-99](https://github.com/itk-dev/event-database-imports/pull/99)
+  Upgrade Doctrine ORM 2→3 and DBAL 3→4: port the custom UTC datetime types and raw DBAL usage to the DBAL 4
+  API, add a schema-alignment migration, exclude the messenger transport table from ORM schema management, and
+  switch Rector to composer-version-based Doctrine rules
+
 - [PR-98](https://github.com/itk-dev/event-database-imports/pull/98)
   Cache the vendor directory and pre-pull container images across the Composer, PHP, Twig and Review CI
   workflows so composer install stops hitting GitHub's dist-download rate limit, drive the Review workflow

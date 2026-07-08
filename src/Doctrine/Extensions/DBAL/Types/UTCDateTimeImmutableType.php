@@ -3,14 +3,14 @@
 namespace App\Doctrine\Extensions\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
 
 class UTCDateTimeImmutableType extends DateTimeImmutableType
 {
     private static ?\DateTimeZone $utc = null;
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
         if ($value instanceof \DateTimeImmutable) {
             if (self::getUtc()->getName() !== $value->getTimezone()->getName()) {
@@ -21,7 +21,7 @@ class UTCDateTimeImmutableType extends DateTimeImmutableType
         return parent::convertToDatabaseValue($value, $platform);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTimeImmutable
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTimeImmutable
     {
         if (null === $value || $value instanceof \DateTimeImmutable) {
             return $value;
@@ -34,7 +34,7 @@ class UTCDateTimeImmutableType extends DateTimeImmutableType
         );
 
         if (false === $converted) {
-            throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeFormatString());
+            throw InvalidFormat::new((string) $value, static::class, $platform->getDateTimeFormatString());
         }
 
         return $converted;
