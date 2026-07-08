@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Composer install
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Create docker network
         run: docker network create frontend
@@ -29,10 +29,10 @@ jobs:
     name: Test suite
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Cache vendor
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: vendor
           key: vendor-php8.4-${{ hashFiles('composer.lock') }}
@@ -61,7 +61,7 @@ jobs:
         run: docker compose exec -T --env XDEBUG_MODE=coverage phpfpm vendor/bin/phpunit --coverage-clover=coverage/unit.xml
 
       - name: Upload coverage to Codecov test
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v7
         with:
           files: ./coverage/unit.xml
           flags: unittests
@@ -72,10 +72,10 @@ jobs:
     name: PHPStan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Cache vendor
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: vendor
           key: vendor-php8.4-${{ hashFiles('composer.lock') }}
@@ -97,10 +97,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Validate Doctrine Schema
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Cache vendor
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         with:
           path: vendor
           key: vendor-php8.4-${{ hashFiles('composer.lock') }}

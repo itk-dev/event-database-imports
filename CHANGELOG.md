@@ -10,8 +10,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 - [PR-98](https://github.com/itk-dev/event-database-imports/pull/98)
   Cache the vendor directory and pre-pull container images across the Composer, PHP, Twig and Review CI
-  workflows so composer install stops hitting GitHub's dist-download rate limit, and drive the Review workflow
-  with docker compose directly instead of Task
+  workflows so composer install stops hitting GitHub's dist-download rate limit, drive the Review workflow
+  with docker compose directly instead of Task, and bump all GitHub Actions to their latest major
+  (checkout v7, cache v6, codecov-action v7)
 
 - [PR-97](https://github.com/itk-dev/event-database-imports/pull/97)
   Add Rector as dev tooling (task code-analysis:rector) with the Doctrine code-quality set, ahead of the
