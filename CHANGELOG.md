@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-107](https://github.com/itk-dev/event-database-imports/pull/107)
+  Add a Rector CI gate (pr.yaml) and PostToolUse auto-fix hook, and list it in the pr-readiness checks
 - [PR-106](https://github.com/itk-dev/event-database-imports/pull/106)
   Guard Organization/Tag deletes against in-use records, and flash on a delete FK violation instead of a 409 page
 - [PR-105](https://github.com/itk-dev/event-database-imports/pull/105)
