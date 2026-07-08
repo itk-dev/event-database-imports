@@ -8,6 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-95](https://github.com/itk-dev/event-database-imports/pull/95)
+  Upgrade EasyAdmin from 4 to 5: apply the mandatory #[AdminDashboard] attribute, switch menu items from
+  linkToCrud() to linkTo(), and resolve the AdminContext in the login template (EA5 removed the deprecated APIs)
+
 - [PR-94](https://github.com/itk-dev/event-database-imports/pull/94)
   Align the async worker (supervisor) on the default Europe/Copenhagen timezone by removing the PHP_TIMEZONE=UTC
   override, so all runtime tiers share one timezone
