@@ -16,6 +16,8 @@ See [keep a changelog] for information about writing changes to this log.
   - Import WebP feed images by allowing `image/webp` in `ALLOWED_IMAGE_MIME_TYPES`
   - Add a "Re-import" batch action to the feed admin that force re-imports the selected feeds (async),
     mirroring `app:feed:import --force`
+  - Update dependencies to resolve security advisories (Symfony 7.4.14, Guzzle, guzzlehttp/psr7, Twig,
+    EasyAdmin), and audit the locked dependencies in CI (`composer audit --locked --abandoned=report`)
 
 ## [1.2.4] - 2026-05-22
 
