@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-109](https://github.com/itk-dev/event-database-imports/pull/109)
+  Update dev dependencies (minor/patch, in-constraint): php-cs-fixer, guzzle, phpdoc-parser, phpunit
 - [PR-108](https://github.com/itk-dev/event-database-imports/pull/108)
   Scope CI image pulls per job (`--no-deps`), DB/broker-only schema validation, drop the release `--user=root`
 - [PR-107](https://github.com/itk-dev/event-database-imports/pull/107)
