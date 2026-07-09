@@ -258,7 +258,7 @@ Elasticsearch 8 and Valinor 2. `composer.json` holds the authoritative version c
 Every pull request must pass these GitHub Actions gates (`.github/workflows/`):
 
 - **`pr.yaml`** (Review) — composer validate + prod install, the full PHPUnit suite with coverage (→ Codecov),
-  PHPStan, and `doctrine:schema:validate`.
+  PHPStan, Rector (`--dry-run`), and `doctrine:schema:validate`.
 - **`composer.yaml`** — `composer validate --strict`, `composer normalize --dry-run`, and `composer audit`.
 - **`php.yaml`** — php-cs-fixer; **`twig.yaml`** — twig-cs-fixer; **`markdown.yaml`** — markdownlint;
   **`yaml.yaml`** — prettier `--check`.

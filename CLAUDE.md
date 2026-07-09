@@ -136,9 +136,10 @@ cluster** — no shared database, no HTTP call between them.
 `.claude/settings.json`, `.claude/agents/`, `.claude/skills/`, and `.mcp.json` configure this repo's Claude Code
 setup. All hooks and MCP servers run tooling **inside the `phpfpm` container**.
 
-- **Hooks** — `SessionStart` boots the stack and checks host prerequisites; `PostToolUse` auto-runs php-cs-fixer,
-  phpstan, twig-cs-fixer, `composer normalize`, prettier, and markdownlint on the file you just edited (so
-  single-file changes don't need manual formatting); `PreToolUse` blocks edits to generated/locked/secret files
+- **Hooks** — `SessionStart` boots the stack and checks host prerequisites; `PostToolUse` auto-runs Rector (on
+  `src/` and `tests/` PHP), php-cs-fixer, phpstan, twig-cs-fixer, `composer normalize`, prettier, and markdownlint
+  on the file you just edited (so single-file changes don't need manual formatting); `PreToolUse` blocks edits to
+  generated/locked/secret files
   (`config/reference.php`, lock files, `.env.local`, `phpstan-baseline.neon`, …); `Stop` validates the DI container
   (`lint:container`) and warns on ES index-contract changes.
 - **Prerequisite:** `jq` must be installed on the **host** — the Edit/Write hooks read the edited file path from the
