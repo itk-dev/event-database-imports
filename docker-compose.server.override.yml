@@ -6,7 +6,8 @@ services:
       - PHP_UPLOAD_MAX_FILESIZE=40M
       - PHP_POST_MAX_SIZE=50M
     depends_on:
-      - rabbit
+      rabbit:
+        condition: service_healthy
 
   nginx:
     environment:
@@ -32,7 +33,8 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - rabbit
+      rabbit:
+        condition: service_healthy
 
   rabbit:
     image: rabbitmq:4-management-alpine
@@ -43,5 +45,13 @@ services:
       - "RABBITMQ_DEFAULT_USER=${RABBITMQ_USER}"
       - "RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}"
       - "RABBITMQ_ERLANG_COOKIE=${RABBITMQ_ERLANG_COOKIE}"
+    healthcheck:
+      # Wait until the AMQP listener actually accepts connections; container
+      # "running" is not enough for messenger:setup-transports / consumers.
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "check_port_connectivity"]
+      start_period: 30s
+      interval: 10s
+      timeout: 10s
+      retries: 5
     volumes:
       - "./.docker/data/rabbit:/var/lib/rabbitmq/mnesia"

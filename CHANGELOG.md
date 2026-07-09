@@ -8,6 +8,15 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.2.6] - 2026-07-09
+
+- [PR-112](https://github.com/itk-dev/event-database-imports/pull/112)
+  - Fix the feed "Re-import" flash message crash by using a single, well-formed ICU plural (the `{count}`
+    argument was declared with inconsistent types)
+  - Add a RabbitMQ healthcheck and make the server `phpfpm`/`supervisor` services wait for it
+    (`condition: service_healthy`), so `messenger:setup-transports` no longer fails on deploy before the
+    AMQP listener is ready
+
 ## [1.2.5] - 2026-07-09
 
 - [PR-111](https://github.com/itk-dev/event-database-imports/pull/111)
