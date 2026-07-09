@@ -6,6 +6,7 @@ use App\Entity\Feed;
 use App\Service\Feeds\Reader\FeedReader;
 use App\Service\Feeds\Reader\FeedReaderInterface;
 use App\Types\UserRoles;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -72,6 +73,7 @@ class FeedCrudController extends AbstractBaseCrudController
      * Dispatches an async ReadFeedMessage per (enabled) feed via the same path the
      * scheduler uses; disabled feeds are skipped.
      */
+    #[AdminRoute('/reimport', name: 'reimport')]
     public function reimportBatch(BatchActionDto $batchActionDto): Response
     {
         $feedIds = array_map(intval(...), $batchActionDto->getEntityIds());
