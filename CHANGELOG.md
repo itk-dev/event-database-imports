@@ -8,6 +8,9 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
+  Add per-feed "convert newlines to br" option so plain-text feed descriptions keep their line breaks when rendered as HTML
+
 ## [1.2.4] - 2026-05-22
 
 - [PR-77](https://github.com/itk-dev/event-database-api/pull/77)

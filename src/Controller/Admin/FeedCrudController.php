@@ -71,6 +71,7 @@ class FeedCrudController extends AbstractBaseCrudController
             // EasyAdmin does not disable the toggles even though the user can't edit
             BooleanField::new('enabled')->setDisabled(!$this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)),
             BooleanField::new('syncToFeed')->setDisabled(!$this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)),
+            BooleanField::new('convertNewlinesToBr')->setDisabled(!$this->isGranted(UserRoles::ROLE_SUPER_ADMIN->value)),
 
             FormField::addFieldset(new TranslatableMessage('admin.feed.last_read.headline'))
                 ->hideWhenCreating(),
