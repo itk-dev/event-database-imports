@@ -10,7 +10,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [1.2.6] - 2026-07-09
 
-- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
+- [PR-112](https://github.com/itk-dev/event-database-imports/pull/112)
   - Fix the feed "Re-import" flash message crash by using a single, well-formed ICU plural (the `{count}`
     argument was declared with inconsistent types)
   - Add a RabbitMQ healthcheck and make the server `phpfpm`/`supervisor` services wait for it
