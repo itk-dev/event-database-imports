@@ -6,6 +6,7 @@ use Rector\CodeQuality\Rector\Identical\FlipTypeControlToUseExclusiveTypeRector;
 use Rector\CodeQuality\Rector\Isset_\IssetOnPropertyObjectToPropertyExistsRector;
 use Rector\Config\RectorConfig;
 use Rector\DeadCode\Rector\ClassMethod\RemoveUnusedPrivateMethodRector;
+use Rector\Symfony\CodeQuality\Rector\Class_\ControllerMethodInjectionToConstructorRector;
 use Rector\Symfony\Symfony73\Rector\Class_\ConstraintOptionsToNamedArgumentsRector;
 use Rector\TypeDeclaration\Rector\ClassMethod\ParamTypeByMethodCallTypeRector;
 
@@ -53,4 +54,8 @@ return RectorConfig::configure()
         // The team suppresses `method.unused` (see phpstan.dist.neon) rather than
         // deleting; don't let Rector remove those private methods out from under it.
         RemoveUnusedPrivateMethodRector::class,
+        // EasyAdmin CRUD action methods receive framework-provided arguments (e.g.
+        // BatchActionDto) and per-action services that are not constructor-autowireable;
+        // don't hoist them into the constructor.
+        ControllerMethodInjectionToConstructorRector::class,
     ]);

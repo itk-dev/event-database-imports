@@ -7,6 +7,7 @@ namespace App\MessageHandler;
 use App\Entity\Event;
 use App\Message\EventMessage;
 use App\Message\FeedItemNormalizationMessage;
+use App\Repository\FeedRepository;
 use App\Service\ContentNormalizer;
 use App\Service\TagsNormalizerInterface;
 use Psr\Log\LoggerInterface;
@@ -20,6 +21,7 @@ final readonly class FeedItemNormalizationHandler
         private ContentNormalizer $contentNormalizer,
         private MessageBusInterface $messageBus,
         private TagsNormalizerInterface $tagsNormalizer,
+        private FeedRepository $feedRepository,
         private LoggerInterface $logger,
     ) {
     }
@@ -49,6 +51,14 @@ final readonly class FeedItemNormalizationHandler
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
             }
+        }
+
+        // For feeds delivering plain-text descriptions, convert newlines to <br> so
+        // line breaks survive HTML rendering. Done after the excerpt handling above so
+        // the excerpt fallback keeps working on the tag-free description.
+        $feed = $this->feedRepository->find($feedItemData->feedId);
+        if (null !== $feed && $feed->isConvertNewlinesToBr()) {
+            $feedItemData->description = $this->contentNormalizer->newlinesToHtml($feedItemData->description ?? '');
         }
 
         $this->messageBus->dispatch(new EventMessage($feedItemData));

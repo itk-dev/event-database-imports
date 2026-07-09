@@ -77,6 +77,17 @@ See [keep a changelog] for information about writing changes to this log.
 - [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
   Add test infrastructure (PHPUnit 12, DAMA, Liip)
 
+## [1.2.5] - 2026-07-09
+
+- [PR-111](https://github.com/itk-dev/event-database-imports/pull/111)
+  - Add per-feed "convert newlines to br" option so plain-text feed descriptions keep their line breaks when
+    rendered as HTML
+  - Import WebP feed images by allowing `image/webp` in `ALLOWED_IMAGE_MIME_TYPES`
+  - Add a "Re-import" batch action to the feed admin that force re-imports the selected feeds (async),
+    mirroring `app:feed:import --force`
+  - Update dependencies to resolve security advisories (Symfony 7.4.14, Guzzle, guzzlehttp/psr7, Twig,
+    EasyAdmin), and audit the locked dependencies in CI (`composer audit --locked --abandoned=report`)
+
 ## [1.2.4] - 2026-05-22
 
 - [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)

@@ -18,6 +18,11 @@ final readonly class ContentNormalizer implements ContentNormalizerInterface
         return $this->feedHtmlSanitizer->sanitize($content);
     }
 
+    public function newlinesToHtml(string $content): string
+    {
+        return nl2br($content, false);
+    }
+
     public function trimLength(string $content, int $maxLength, bool $onWords = true): string
     {
         $str = new UnicodeString($content);

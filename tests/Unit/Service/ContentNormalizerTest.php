@@ -26,6 +26,20 @@ final class ContentNormalizerTest extends KernelTestCase
     /**
      * @throws \Exception
      */
+    public function testNewlinesToHtml(): void
+    {
+        $service = $this->getContentNormalizerService();
+
+        // Newlines are converted to <br> and preserved.
+        $this->assertSame("line one<br>\nline two", $service->newlinesToHtml("line one\nline two"));
+
+        // Content without newlines is left untouched.
+        $this->assertSame('no breaks here', $service->newlinesToHtml('no breaks here'));
+    }
+
+    /**
+     * @throws \Exception
+     */
     public function testTrimLength(): void
     {
         $service = $this->getContentNormalizerService();
