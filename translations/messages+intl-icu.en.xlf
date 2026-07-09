@@ -417,6 +417,14 @@
         <source>admin.feed.last_read.error</source>
         <target>Error</target>
       </trans-unit>
+      <trans-unit id="reImpAc0" resname="admin.feed.reimport.action">
+        <source>admin.feed.reimport.action</source>
+        <target>Re-import</target>
+      </trans-unit>
+      <trans-unit id="reImpQu0" resname="admin.feed.reimport.queued">
+        <source>admin.feed.reimport.queued</source>
+        <target>Queued {count} {count, plural, one {feed} other {feeds}} for re-import.</target>
+      </trans-unit>
       <trans-unit id="DEmQ2O1" resname="admin.event.organizer.headline">
         <source>admin.event.organizer.headline</source>
         <target><![CDATA[Organizer & Partners]]></target>

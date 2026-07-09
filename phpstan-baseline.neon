@@ -49,12 +49,6 @@ parameters:
 			path: src/Entity/Event.php
 
 		-
-			message: '#^Method App\\Entity\\Feed\:\:setConfigurationField\(\) has InvalidArgumentException in PHPDoc @throws tag but it''s not thrown\.$#'
-			identifier: throws.unusedType
-			count: 1
-			path: src/Entity/Feed.php
-
-		-
 			message: '#^Call to method DateTimeImmutable\:\:setTimezone\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 2
@@ -127,6 +121,12 @@ parameters:
 			path: src/Repository/DailyOccurrenceRepository.php
 
 		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/DailyOccurrenceRepository.php
+
+		-
 			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Event\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
 			identifier: generics.notGeneric
 			count: 1
@@ -139,8 +139,20 @@ parameters:
 			path: src/Repository/LocationRepository.php
 
 		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/LocationRepository.php
+
+		-
 			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Occurrence\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
 			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/OccurrenceRepository.php
+
+		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Repository/OccurrenceRepository.php
 
@@ -151,14 +163,32 @@ parameters:
 			path: src/Repository/OrganizationRepository.php
 
 		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/OrganizationRepository.php
+
+		-
 			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Tag\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
 			identifier: generics.notGeneric
 			count: 1
 			path: src/Repository/TagRepository.php
 
 		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Repository/TagRepository.php
+
+		-
 			message: '#^PHPDoc tag @extends contains generic type App\\Repository\\AbstractPopulateRepository\<App\\Entity\\Vocabulary\> but class App\\Repository\\AbstractPopulateRepository is not generic\.$#'
 			identifier: generics.notGeneric
+			count: 1
+			path: src/Repository/VocabularyRepository.php
+
+		-
+			message: '#^Parameter \#2 \$entityClass of method Doctrine\\Bundle\\DoctrineBundle\\Repository\\LazyServiceEntityRepository\<App\\Entity\\Event\>\:\:__construct\(\) expects class\-string\<App\\Entity\\Event\>, string given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Repository/VocabularyRepository.php
 

@@ -65,6 +65,14 @@ class Feed
     #[ORM\Column]
     private bool $syncToFeed = false;
 
+    /**
+     * When enabled, plain-text newlines in imported event descriptions are converted to
+     * <br> tags so the line breaks survive HTML rendering. Leave disabled for feeds that
+     * already deliver HTML descriptions to avoid doubled-up line breaks.
+     */
+    #[ORM\Column]
+    private bool $convertNewlinesToBr = false;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -289,6 +297,18 @@ class Feed
     public function setSyncToFeed(bool $syncToFeed): static
     {
         $this->syncToFeed = $syncToFeed;
+
+        return $this;
+    }
+
+    public function isConvertNewlinesToBr(): bool
+    {
+        return $this->convertNewlinesToBr;
+    }
+
+    public function setConvertNewlinesToBr(bool $convertNewlinesToBr): static
+    {
+        $this->convertNewlinesToBr = $convertNewlinesToBr;
 
         return $this;
     }
