@@ -15,7 +15,7 @@
         "doctrine/orm": "^3.4",
         "dragonmantank/cron-expression": "^3.3",
         "easycorp/easyadmin-bundle": "^5.0",
-        "elasticsearch/elasticsearch": "^8.13",
+        "elasticsearch/elasticsearch": "^8.19",
         "guzzlehttp/guzzle": "^7.7",
         "league/uri": "^7.4",
         "liip/imagine-bundle": "^2.11",

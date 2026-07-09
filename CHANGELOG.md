@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-110](https://github.com/itk-dev/event-database-imports/pull/110)
+  Upgrade Elasticsearch to 8.19.18 (dev image) and the `elasticsearch/elasticsearch` client constraint to `^8.19`
 - [PR-109](https://github.com/itk-dev/event-database-imports/pull/109)
   Update dev dependencies (minor/patch, in-constraint): php-cs-fixer, guzzle, phpdoc-parser, phpunit
 - [PR-108](https://github.com/itk-dev/event-database-imports/pull/108)
