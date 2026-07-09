@@ -8,8 +8,10 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-XX](https://github.com/itk-dev/event-database-imports/pull/XX)
-  Add per-feed "convert newlines to br" option so plain-text feed descriptions keep their line breaks when rendered as HTML
+## [1.2.5] - 2026-07-09
+
+- Add per-feed "convert newlines to br" option so plain-text feed descriptions keep their line breaks when rendered as HTML
+- Import WebP feed images by allowing `image/webp` in `ALLOWED_IMAGE_MIME_TYPES`
 
 ## [1.2.4] - 2026-05-22
 
