@@ -12,6 +12,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 - Add per-feed "convert newlines to br" option so plain-text feed descriptions keep their line breaks when rendered as HTML
 - Import WebP feed images by allowing `image/webp` in `ALLOWED_IMAGE_MIME_TYPES`
+- Add a "Re-import" batch action to the feed admin that force re-imports the selected feeds (async), mirroring `app:feed:import --force`
 
 ## [1.2.4] - 2026-05-22
 
