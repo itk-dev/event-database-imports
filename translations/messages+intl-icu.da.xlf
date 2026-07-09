@@ -423,7 +423,7 @@
       </trans-unit>
       <trans-unit id="reImpQu0" resname="admin.feed.reimport.queued">
         <source>admin.feed.reimport.queued</source>
-        <target state="translated">Sat {count} {count, plural, one {feed} other {feeds}} i kø til genimport.</target>
+        <target state="translated">{count, plural, one {Satte # feed i kø til genimport.} other {Satte # feeds i kø til genimport.}}</target>
       </trans-unit>
       <trans-unit id="DEmQ2O1" resname="admin.event.organizer.headline">
         <source>admin.event.organizer.headline</source>
