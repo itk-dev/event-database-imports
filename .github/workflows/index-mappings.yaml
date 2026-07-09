@@ -37,10 +37,10 @@ jobs:
         run: docker compose pull --quiet phpfpm
 
       - name: Install dependencies
-        run: docker compose run --rm phpfpm composer install --no-interaction
+        run: docker compose run --rm --no-deps phpfpm composer install --no-interaction
 
       - name: Export index mappings
-        run: docker compose run --rm phpfpm bin/console app:index:mappings:dump --no-interaction
+        run: docker compose run --rm --no-deps phpfpm bin/console app:index:mappings:dump --no-interaction
 
       - name: Check for changes in committed mappings
         id: git-diff

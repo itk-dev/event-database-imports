@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-108](https://github.com/itk-dev/event-database-imports/pull/108)
+  Scope CI image pulls per job (`--no-deps`), DB/broker-only schema validation, drop the release `--user=root`
 - [PR-107](https://github.com/itk-dev/event-database-imports/pull/107)
   Add a Rector CI gate (pr.yaml) and PostToolUse auto-fix hook, and list it in the pr-readiness checks
 - [PR-106](https://github.com/itk-dev/event-database-imports/pull/106)
