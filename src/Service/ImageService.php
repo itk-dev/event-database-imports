@@ -24,7 +24,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final readonly class ImageService implements ImageServiceInterface
 {
-    private const LOCAL_IMAGE_PREFIX = '/images';
+    private const string LOCAL_IMAGE_PREFIX = '/images';
 
     public function __construct(
         private HttpClientInterface $client,
@@ -217,10 +217,10 @@ final readonly class ImageService implements ImageServiceInterface
      */
     private function generateLocalFilename(string $url, string $mimetype): string
     {
-        if (!in_array($mimetype, $this->allowedMineTypes)) {
+        if (!in_array($mimetype, $this->allowedMineTypes, true)) {
             throw new ImageMineTypeException(sprintf('The mine type "%s" is not supported', $mimetype));
         }
-        $ext = (new MimeTypes())->getExtensions($mimetype)[0];
+        $ext = new MimeTypes()->getExtensions($mimetype)[0];
 
         return hash('sha256', $url).'.'.$ext;
     }

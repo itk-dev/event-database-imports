@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Attribute as Serializer;
 #[ORM\HasLifecycleCallbacks]
 #[ORM\UniqueConstraint(name: 'tag_name_unique', columns: ['name'])]
 #[ORM\UniqueConstraint(name: 'tag_slug_unique', columns: ['slug'])]
-class Tag implements IndexItemInterface, EditableEntityInterface
+class Tag implements IndexItemInterface, EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

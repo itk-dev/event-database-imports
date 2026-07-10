@@ -41,7 +41,7 @@ final readonly class ImageHandler
                     $this->imageRepository->save($image, true);
 
                     $this->imageService->transform($image);
-                } catch (\Exception $e) {
+                } catch (\Exception) {
                     // Indexing should continue even if we cannot fetch the image
                     $this->logger->info(sprintf('Unable to fetch remote image: %d', $source));
                 }

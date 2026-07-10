@@ -1,6 +1,10 @@
 doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
+        # The messenger transport table is created and maintained by
+        # `messenger:setup-transports`, not by migrations, so exclude it from
+        # ORM schema management (diff / schema:validate).
+        schema_filter: '~^(?!messenger_messages)~'
         types:
             datetime: App\Doctrine\Extensions\DBAL\Types\UTCDateTimeType
             datetime_immutable: App\Doctrine\Extensions\DBAL\Types\UTCDateTimeImmutableType
@@ -10,13 +14,9 @@ doctrine:
         #server_version: '16'
 
         profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
     orm:
-        auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
-        report_fields_where_declared: true
         validate_xml_mapping: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        naming_strategy: doctrine.orm.naming_strategy.underscore
         identity_generation_preferences:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
@@ -27,20 +27,20 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
-        controller_resolver:
-            auto_mapping: false
 
 when@test:
     doctrine:
         dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            # Run tests against a dedicated `<db>_test` database so a local
+            # run can never touch dev data. The `db` user cannot CREATE
+            # DATABASE, so the schema is provisioned once by root via
+            # `task test:setup` (see Taskfile.yml); DAMA's transaction
+            # rollback (dama/doctrine-test-bundle) then isolates each test.
+            dbname_suffix: '_test'
 
 when@prod:
     doctrine:
         orm:
-            auto_generate_proxy_classes: false
-            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
             query_cache_driver:
                 type: pool
                 pool: doctrine.system_cache_pool

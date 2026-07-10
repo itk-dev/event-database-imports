@@ -34,9 +34,7 @@ final class IndexPopulateCommand extends Command
                 InputArgument::IS_ARRAY,
                 'Indexes to create (separate multiple indexes with a space)',
                 IndexNames::values(),
-                function (CompletionInput $input): array {
-                    return array_filter(IndexNames::values(), fn ($item) => str_starts_with($item, $input->getCompletionValue()));
-                }
+                fn (CompletionInput $input): array => array_filter(IndexNames::values(), fn ($item): bool => str_starts_with((string) $item, $input->getCompletionValue()))
             )
             ->addOption('force', null, InputOption::VALUE_NONE, 'Force execution ignoring locks')
             ->addOption('id', null, InputOption::VALUE_OPTIONAL, 'Single table record id (try to populate single record)', -1)
@@ -53,7 +51,7 @@ final class IndexPopulateCommand extends Command
 
         try {
             foreach ($inputIndexes as $index) {
-                if (!in_array($index, IndexNames::values())) {
+                if (!in_array($index, IndexNames::values(), true)) {
                     $io->error(sprintf('Index %s does not exist', $index));
 
                     return Command::FAILURE;

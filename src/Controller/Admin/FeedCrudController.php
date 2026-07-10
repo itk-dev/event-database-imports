@@ -6,6 +6,7 @@ use App\Entity\Feed;
 use App\Service\Feeds\Reader\FeedReader;
 use App\Service\Feeds\Reader\FeedReaderInterface;
 use App\Types\UserRoles;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -18,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Component\Validator\Constraints\Json;
@@ -29,11 +31,13 @@ class FeedCrudController extends AbstractBaseCrudController
     ) {
     }
 
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Feed::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -41,6 +45,7 @@ class FeedCrudController extends AbstractBaseCrudController
         ;
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -68,9 +73,10 @@ class FeedCrudController extends AbstractBaseCrudController
      * Dispatches an async ReadFeedMessage per (enabled) feed via the same path the
      * scheduler uses; disabled feeds are skipped.
      */
+    #[AdminRoute('/reimport', name: 'reimport')]
     public function reimportBatch(BatchActionDto $batchActionDto): Response
     {
-        $feedIds = array_map('intval', $batchActionDto->getEntityIds());
+        $feedIds = array_map(intval(...), $batchActionDto->getEntityIds());
 
         $queued = iterator_to_array(
             $this->feedReader->readFeedsASync(FeedReaderInterface::DEFAULT_OPTION, true, $feedIds)
@@ -78,9 +84,15 @@ class FeedCrudController extends AbstractBaseCrudController
 
         $this->addFlash('success', new TranslatableMessage('admin.feed.reimport.queued', ['count' => count($queued)]));
 
-        return $this->redirect($batchActionDto->getReferrerUrl());
+        $url = $this->container->get(AdminUrlGenerator::class)
+            ->setController(self::class)
+            ->setAction(Action::INDEX)
+            ->generateUrl();
+
+        return $this->redirect($url);
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [

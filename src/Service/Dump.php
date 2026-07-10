@@ -12,10 +12,10 @@ use Symfony\Component\Filesystem\Filesystem;
 /**
  * Class Dump.
  */
-final class Dump
+final readonly class Dump
 {
     public function __construct(
-        private readonly iterable $indexingServices,
+        private iterable $indexingServices,
     ) {
     }
 

@@ -18,12 +18,12 @@ final class UserEntityVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_ACCESS_ENTITY == $attribute
+        return Permission::EA_ACCESS_ENTITY === $attribute
             && $subject instanceof EntityDto
             && User::class === $subject->getFqcn();
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?\Symfony\Component\Security\Core\Authorization\Voter\Vote $vote = null): bool
     {
         $user = $token->getUser();
         // if the user is anonymous, do not grant access

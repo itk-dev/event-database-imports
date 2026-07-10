@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
     fields: ['mail'],
     message: 'entity.user.mail.not_unique'
 )]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -45,10 +45,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $mail = null;
 
-    #[ORM\Column(type: 'json')]
+    #[ORM\Column(type: Types::JSON)]
     private array $roles = [];
 
-    #[ORM\Column(type: 'boolean')]
+    #[ORM\Column(type: Types::BOOLEAN)]
     private bool $enabled = true;
 
     #[ORM\Column(length: 255)]
@@ -57,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Organization::class, mappedBy: 'users')]
     private Collection $organizations;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Feed::class)]
+    #[ORM\OneToMany(targetEntity: Feed::class, mappedBy: 'user')]
     private Collection $feeds;
 
     #[ORM\Column(nullable: true)]
@@ -182,11 +182,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeFeed(Feed $feed): static
     {
-        if ($this->feeds->removeElement($feed)) {
-            // set the owning side to null (unless already changed)
-            if ($feed->getUser() === $this) {
-                $feed->setUser(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->feeds->removeElement($feed) && $feed->getUser() === $this) {
+            $feed->setUser(null);
         }
 
         return $this;
@@ -221,7 +219,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             UserRoles::ROLE_ORGANIZATION_EDITOR->value,
         ];
 
-        if (!empty(array_intersect($this->roles, $organizationRoles)) && $this->organizations->isEmpty()) {
+        if ([] !== array_intersect($this->roles, $organizationRoles) && $this->organizations->isEmpty()) {
             $context
                 ->buildViolation('entity.user.organizations.organization_required')
                 ->atPath('organizations')

@@ -5,12 +5,18 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     locale: 'en'
+    # Single source of truth for the display timezone. Datetimes are stored in
+    # UTC (model timezone); the admin UI and the Elasticsearch index both render
+    # in this zone. Keep it aligned with DashboardController::VIEW_TIMEZONE.
+    app.view_timezone: !php/const App\Controller\Admin\DashboardController::VIEW_TIMEZONE
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            string $viewTimezone: '%app.view_timezone%'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -93,3 +99,13 @@ services:
                 hosts: ['%env(INDEXING_URL)%']
 
     Elastic\Elasticsearch\ClientBuilder: ~
+
+when@test:
+    services:
+        _defaults:
+            autowire: true
+            autoconfigure: true
+
+        App\Tests\Fixtures\:
+            resource: '../tests/Fixtures/'
+            tags: ['doctrine.fixture.orm']

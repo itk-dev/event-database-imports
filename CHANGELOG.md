@@ -8,6 +8,80 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-10
+
+- [PR-113](https://github.com/itk-dev/event-database-imports/pull/113)
+  Add the `#[AdminRoute]` attribute to the feed "Re-import" batch action so it works as a custom CRUD action
+  under EasyAdmin 5 (the action 500'd on `/admin/feed` without it)
+- [PR-110](https://github.com/itk-dev/event-database-imports/pull/110)
+  Upgrade Elasticsearch to 8.19.18 (dev image) and the `elasticsearch/elasticsearch` client constraint to `^8.19`
+- [PR-109](https://github.com/itk-dev/event-database-imports/pull/109)
+  Update dev dependencies (minor/patch, in-constraint): php-cs-fixer, guzzle, phpdoc-parser, phpunit
+- [PR-108](https://github.com/itk-dev/event-database-imports/pull/108)
+  Scope CI image pulls per job (`--no-deps`), DB/broker-only schema validation, drop the release `--user=root`
+- [PR-107](https://github.com/itk-dev/event-database-imports/pull/107)
+  Add a Rector CI gate (pr.yaml) and PostToolUse auto-fix hook, and list it in the pr-readiness checks
+- [PR-106](https://github.com/itk-dev/event-database-imports/pull/106)
+  Guard Organization/Tag deletes against in-use records, and flash on a delete FK violation instead of a 409 page
+- [PR-105](https://github.com/itk-dev/event-database-imports/pull/105)
+  Broaden the Rector config (PHP, Symfony, Doctrine, PHPUnit, code-quality sets) and apply it across src/ and tests/
+- [PR-104](https://github.com/itk-dev/event-database-imports/pull/104)
+  Refresh README and CLAUDE docs for current tooling/CI, convert the network diagram to Mermaid, condense the changelog
+- [PR-103](https://github.com/itk-dev/event-database-imports/pull/103)
+  Export each index's Elasticsearch mapping to `resources/mappings/*.json` via `app:index:mappings:dump`, gated in CI
+- [PR-102](https://github.com/itk-dev/event-database-imports/pull/102)
+  Remove redundant npm lint tooling (`package.json`/lock); markdown and YAML linting run via docker compose services
+- [PR-101](https://github.com/itk-dev/event-database-imports/pull/101)
+  Upgrade cuyz/valinor 1→2 (granular casting methods, `MappingError::messages()`) with feed-mapper regression tests
+- [PR-100](https://github.com/itk-dev/event-database-imports/pull/100)
+  Upgrade the remaining Doctrine bundles to latest majors, drop ORM/DBAL no-op config, and update the Doctrine Flex recipes
+- [PR-99](https://github.com/itk-dev/event-database-imports/pull/99)
+  Upgrade Doctrine ORM 2→3 and DBAL 3→4: port UTC datetime types and raw DBAL usage, add a schema-alignment migration
+- [PR-98](https://github.com/itk-dev/event-database-imports/pull/98)
+  Cache the vendor directory and pre-pull images across CI workflows, and bump all GitHub Actions to their latest major
+- [PR-97](https://github.com/itk-dev/event-database-imports/pull/97)
+  Add Rector (task code-analysis:rector) with the Doctrine code-quality set ahead of the Doctrine 3 upgrade
+- [PR-96](https://github.com/itk-dev/event-database-imports/pull/96)
+  Doctrine 3 pre-work: cover the UTC datetime type and populate repository, and replace Criteria::ASC with the Order enum
+- [PR-95](https://github.com/itk-dev/event-database-imports/pull/95)
+  Upgrade EasyAdmin 4→5: add #[AdminDashboard], switch linkToCrud() to linkTo(), and resolve AdminContext in login
+- [PR-94](https://github.com/itk-dev/event-database-imports/pull/94)
+  Align the async worker on Europe/Copenhagen by removing the PHP_TIMEZONE=UTC override
+- [PR-93](https://github.com/itk-dev/event-database-imports/pull/93)
+  Interpret offset-less feed datetimes in the feed's declared timezone, not the worker's ambient PHP timezone
+- [PR-92](https://github.com/itk-dev/event-database-imports/pull/92)
+  Add EasyAdmin characterization tests ahead of the 4→5 upgrade (CRUD render, form round-trips, login gates, authz)
+- [PR-91](https://github.com/itk-dev/event-database-imports/pull/91)
+  Correct Danish admin translations (delete-confirmation modal and leftover English login-page strings)
+- [PR-89](https://github.com/itk-dev/event-database-imports/pull/89)
+  Centralize the display timezone as one injected source, and stop UTCDateTimeType mutating the caller's datetime
+- [PR-88](https://github.com/itk-dev/event-database-imports/pull/88)
+  Raise PHPStan to level 8 and add phpstan-strict-rules, baseline the existing findings
+- [PR-87](https://github.com/itk-dev/event-database-imports/pull/87)
+  Fix UserActionVoter so user management is admin-only at the URL level, and correct a wrong type assertion
+- [PR-86](https://github.com/itk-dev/event-database-imports/pull/86)
+  Enforce NEW-action authorization at the URL level on the CRUD voters, and scope EventVoter saves to the user's org
+- [PR-85](https://github.com/itk-dev/event-database-imports/pull/85)
+  Fix EventVoter so feed events cannot be edited via SAVE actions (feed guard runs before the save grant)
+- [PR-84](https://github.com/itk-dev/event-database-imports/pull/84)
+  Upgrade to PHPUnit 13 and tooling majors (twig-cs-fixer 4, reflection-docblock 6, phpdoc-parser 2)
+- [PR-83](https://github.com/itk-dev/event-database-imports/pull/83)
+  Update dependencies (minor/patch, in-constraint)
+- [PR-82](https://github.com/itk-dev/event-database-imports/pull/82)
+  Update dependencies to resolve security advisories (Symfony 7.4.14, Guzzle, guzzlehttp/psr7, EasyAdmin, polyfill-intl-idn)
+- [PR-81](https://github.com/itk-dev/event-database-imports/pull/81)
+  Add Claude Code tooling: hooks, subagents, skills, and MCP servers (context7, Symfony AI Mate)
+- [PR-80](https://github.com/itk-dev/event-database-imports/pull/80)
+  Document test infrastructure in README and add ADR for test database isolation
+- [PR-79](https://github.com/itk-dev/event-database-imports/pull/79)
+  Restore nginx APP_PATH_PREFIX rewrite so admin assets load
+- [PR-78](https://github.com/itk-dev/event-database-imports/pull/78)
+  Update itk docker compose templates
+- [PR-76](https://github.com/itk-dev/event-database-imports/pull/76)
+  Add security and admin test coverage
+- [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
+  Add test infrastructure (PHPUnit 12, DAMA, Liip)
+
 ## [1.2.6] - 2026-07-09
 
 - [PR-112](https://github.com/itk-dev/event-database-imports/pull/112)
@@ -30,20 +104,23 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [1.2.4] - 2026-05-22
 
-- [PR-77](https://github.com/itk-dev/event-database-api/pull/77)
+- [PR-77](https://github.com/itk-dev/event-database-imports/pull/77)
   Symfony 7.4 and dependencies, CVE's on both Symfony and Twig
 
 ## [1.2.3] - 2026-03-29
 
-- [PR-68](https://github.com/itk-dev/event-database-imports/pull/68) Made event organizer required for organization users
+- [PR-68](https://github.com/itk-dev/event-database-imports/pull/68)
+  Made event organizer required for organization users
 
 ## [1.2.2] - 2025-10-07
 
-- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73) Set deploy user for rabbitmq container
+- [PR-73](https://github.com/itk-dev/event-database-imports/pull/73)
+  Set deploy user for rabbitmq container
 
 ## [1.2.1] - 2025-10-07
 
-- [PR-72](https://github.com/itk-dev/event-database-imports/pull/72) Fix missing asset for file upload
+- [PR-72](https://github.com/itk-dev/event-database-imports/pull/72)
+  Fix missing asset for file upload
 
 ## [1.2.0] - 2025-10-06
 
@@ -148,7 +225,10 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.2.4...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...HEAD
+[1.3.0]: https://github.com/itk-dev/event-database-imports/compare/1.2.6...1.3.0
+[1.2.6]: https://github.com/itk-dev/event-database-imports/compare/1.2.5...1.2.6
+[1.2.5]: https://github.com/itk-dev/event-database-imports/compare/1.2.4...1.2.5
 [1.2.4]: https://github.com/itk-dev/event-database-imports/compare/1.2.3...1.2.4
 [1.2.3]: https://github.com/itk-dev/event-database-imports/compare/1.2.2...1.2.3
 [1.2.2]: https://github.com/itk-dev/event-database-imports/compare/1.2.1...1.2.2

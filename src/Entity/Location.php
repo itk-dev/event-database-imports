@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Annotation\SerializedPath;
     fields: ['name', 'url', 'mail'],
     message: 'entity.location.unique'
 )]
-class Location implements IndexItemInterface, EditableEntityInterface
+class Location implements IndexItemInterface, EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -63,7 +63,7 @@ class Location implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Locations->value])]
     private ?Address $address = null;
 
-    #[ORM\OneToMany(mappedBy: 'location', targetEntity: Event::class)]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'location')]
     private Collection $events;
 
     public function __construct()
@@ -185,11 +185,9 @@ class Location implements IndexItemInterface, EditableEntityInterface
 
     public function removeEvent(Event $event): static
     {
-        if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getLocation() === $this) {
-                $event->setLocation(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->events->removeElement($event) && $event->getLocation() === $this) {
+            $event->setLocation(null);
         }
 
         return $this;

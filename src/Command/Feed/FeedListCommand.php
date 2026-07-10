@@ -19,7 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 final class FeedListCommand extends Command
 {
-    private const SELECTIONS = ['enabled', 'disabled', 'all'];
+    private const array SELECTIONS = ['enabled', 'disabled', 'all'];
 
     public function __construct(
         private readonly FeedConfigurationMapper $configurationMapper,
@@ -42,7 +42,7 @@ final class FeedListCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $status = $input->getOption('status');
-        if (!in_array($status, self::SELECTIONS)) {
+        if (!in_array($status, self::SELECTIONS, true)) {
             $io->error(sprintf('Invalid status: %s', $status));
 
             // Show how to run this command.

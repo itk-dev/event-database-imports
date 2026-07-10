@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\EventListener;
 
 use App\Entity\User;
@@ -11,11 +13,11 @@ use Symfony\Component\HttpFoundation\Session\FlashBagAwareSessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
-final class LoginSuccessListener
+final readonly class LoginSuccessListener
 {
     public function __construct(
-        private readonly UrlGeneratorInterface $router,
-        private readonly Security $security,
+        private UrlGeneratorInterface $router,
+        private Security $security,
     ) {
     }
 

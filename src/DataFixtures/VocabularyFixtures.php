@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Vocabulary;
@@ -8,8 +10,8 @@ use Doctrine\Persistence\ObjectManager;
 
 final class VocabularyFixtures extends Fixture
 {
-    public const MANAGED = 'managed';
-    public const FREE = 'free';
+    public const string MANAGED = 'managed';
+    public const string FREE = 'free';
 
     public function load(ObjectManager $manager): void
     {

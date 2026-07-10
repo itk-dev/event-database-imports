@@ -16,7 +16,7 @@ use Symfony\Component\Serializer\Annotation\SerializedPath;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OccurrenceRepository::class)]
-class Occurrence implements IndexItemInterface, EditableEntityInterface
+class Occurrence implements IndexItemInterface, EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -55,7 +55,7 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
     #[Groups([IndexNames::Occurrences->value])]
     private ?Event $event = null;
 
-    #[ORM\OneToMany(mappedBy: 'occurrence', targetEntity: DailyOccurrence::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: DailyOccurrence::class, mappedBy: 'occurrence', cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $dailyOccurrences;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -78,10 +78,7 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
         $start = $this->start?->setTimezone($viewTimezone);
         $end = $this->end?->setTimezone($viewTimezone);
 
-        $viewTimezone = new \DateTimeZone(DashboardController::VIEW_TIMEZONE);
         $format = 'Y-m-d H:i';
-        $start?->setTimezone($viewTimezone);
-        $end?->setTimezone($viewTimezone);
 
         return $start?->format($format).
             ' - '.$end?->format($format).
@@ -174,11 +171,9 @@ class Occurrence implements IndexItemInterface, EditableEntityInterface
 
     public function removeDailyOccurrence(DailyOccurrence $dailyOccurrence): static
     {
-        if ($this->dailyOccurrences->removeElement($dailyOccurrence)) {
-            // set the owning side to null (unless already changed)
-            if ($dailyOccurrence->getOccurrence() === $this) {
-                $dailyOccurrence->setOccurrence(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->dailyOccurrences->removeElement($dailyOccurrence) && $dailyOccurrence->getOccurrence() === $this) {
+            $dailyOccurrence->setOccurrence(null);
         }
 
         return $this;

@@ -2,7 +2,6 @@
 
 namespace App\Security\Voter;
 
-use App\Entity\Tag;
 use App\Entity\User;
 use App\Types\UserRoles;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -20,39 +19,46 @@ final class UserActionVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        return Permission::EA_EXECUTE_ACTION == $attribute
-            && null !== $subject['entity']
-            && User::class === $subject['entity']->getFqcn();
+        if (Permission::EA_EXECUTE_ACTION !== $attribute) {
+            return false;
+        }
+
+        // EasyAdmin passes a null entity for INDEX/NEW but always sets entityFqcn,
+        // so match on that to keep NEW enforced at the URL level.
+        $fqcn = $subject['entityFqcn'] ?? $subject['entity']?->getFqcn();
+
+        return User::class === $fqcn;
     }
 
-    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+    protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?\Symfony\Component\Security\Core\Authorization\Voter\Vote $vote = null): bool
     {
         $loggedInUser = $token->getUser();
         assert($loggedInUser instanceof User);
 
-        $user = $subject['entity']->getInstance();
-        assert($user instanceof Tag);
-
         $action = is_string($subject['action']) ? $subject['action'] : $subject['action']->getName();
 
-        // You cannot delete your own account
+        // Creating users and listing all users are admin-only. EasyAdmin passes
+        // a null entity for both NEW and INDEX, so handle them before touching
+        // the (absent) instance.
+        if (Action::NEW === $action || Action::INDEX === $action) {
+            return $this->security->isGranted(UserRoles::ROLE_ADMIN->value);
+        }
+
+        // Remaining actions operate on a concrete user instance.
+        $user = $subject['entity']->getInstance();
+        assert($user instanceof User);
+
+        // You cannot delete your own account.
         if (Action::DELETE === $action && $loggedInUser->getId() === $user->getId()) {
             return false;
         }
 
-        // Admin can CRUD users
+        // Admins may manage any user (create/edit/save/delete/detail).
         if ($this->security->isGranted(UserRoles::ROLE_ADMIN->value)) {
             return true;
         }
 
-        // Non-admin users cannot create new users
-        if ($this->security->isGranted(UserRoles::ROLE_USER->value)) {
-            if (Action::NEW === $action) {
-                return false;
-            }
-        }
-
-        // Non-admin users can edit their own account
+        // Non-admins (edit, save, detail) may only act on their own account.
         return $loggedInUser->getId() === $user->getId();
     }
 }
