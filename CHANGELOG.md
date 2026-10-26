@@ -82,6 +82,11 @@ See [keep a changelog] for information about writing changes to this log.
 - [PR-75](https://github.com/itk-dev/event-database-imports/pull/75)
   Add test infrastructure (PHPUnit 12, DAMA, Liip)
 
+## [1.2.7] - 2026-10-26
+
+- [PR-115](https://github.com/itk-dev/event-database-imports/pull/115)
+  Use maintained `nginx/nginx-unprivileged` docker image instead of archived `nginxinc/nginx-unprivileged`
+
 ## [1.2.6] - 2026-07-09
 
 - [PR-112](https://github.com/itk-dev/event-database-imports/pull/112)
