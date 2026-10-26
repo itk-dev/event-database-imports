@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Service;
 
 use Symfony\Component\String\Slugger\AsciiSlugger;
@@ -8,6 +10,6 @@ class Slugger
 {
     public static function slugify(?string $name): ?string
     {
-        return null === $name ? null : (new AsciiSlugger())->slug($name)->lower()->toString();
+        return null === $name ? null : new AsciiSlugger()->slug($name)->lower()->toString();
     }
 }

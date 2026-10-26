@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
-class Image implements EditableEntityInterface
+class Image implements EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;

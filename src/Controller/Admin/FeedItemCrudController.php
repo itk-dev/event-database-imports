@@ -18,11 +18,13 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class FeedItemCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return FeedItem::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -31,6 +33,7 @@ class FeedItemCrudController extends AbstractBaseCrudController
         ;
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -43,6 +46,7 @@ class FeedItemCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -65,14 +69,13 @@ class FeedItemCrudController extends AbstractBaseCrudController
                 ->setFormat(DashboardController::DATETIME_FORMAT),
             CodeEditorField::new('data')
                 ->setLabel(new TranslatableMessage('admin.feeditem.data'))
-                ->formatValue(function ($value) {
-                    return json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
-                })
+                ->formatValue(fn ($value): string|false => json_encode($value, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE))
                 ->setLanguage('js')
                 ->hideOnIndex(),
         ];
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {

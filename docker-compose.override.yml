@@ -1,6 +1,5 @@
 services:
   phpfpm:
-    image: itkdev/php8.4-fpm:latest
     environment:
       - PHP_UPLOAD_MAX_FILESIZE=40M
       - PHP_POST_MAX_SIZE=50M
@@ -31,7 +30,7 @@ services:
       - RABBITMQ_ERLANG_COOKIE='d53f319cd7376f8f840aaf9889f315ab'
 
   elasticsearch:
-    image: elasticsearch:8.13.0
+    image: elasticsearch:8.19.18
     networks:
       - app
       - frontend

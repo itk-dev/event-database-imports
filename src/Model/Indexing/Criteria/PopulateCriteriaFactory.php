@@ -1,15 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\Indexing\Criteria;
 
 use App\Model\Indexing\IndexNames;
 
 class PopulateCriteriaFactory
 {
-    public function __construct(
-    ) {
-    }
-
     public function getPopulateCriteria(string $name): array
     {
         $index = IndexNames::from($name);

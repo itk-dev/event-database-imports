@@ -4,24 +4,24 @@
     "license": "proprietary",
     "type": "project",
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo": "*",
         "cerbero/json-parser": "^1.0",
-        "cuyz/valinor": "^1.4",
-        "doctrine/doctrine-bundle": "^2.10",
-        "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.15",
+        "cuyz/valinor": "^2.0",
+        "doctrine/doctrine-bundle": "^3.0",
+        "doctrine/doctrine-migrations-bundle": "^4.0",
+        "doctrine/orm": "^3.4",
         "dragonmantank/cron-expression": "^3.3",
-        "easycorp/easyadmin-bundle": "^4.8",
-        "elasticsearch/elasticsearch": "^8.13",
+        "easycorp/easyadmin-bundle": "^5.0",
+        "elasticsearch/elasticsearch": "^8.19",
         "guzzlehttp/guzzle": "^7.7",
         "league/uri": "^7.4",
         "liip/imagine-bundle": "^2.11",
         "nesbot/carbon": "^3.10",
-        "phpdocumentor/reflection-docblock": "^5.3",
-        "phpstan/phpdoc-parser": "^1.22",
+        "phpdocumentor/reflection-docblock": "^6.0",
+        "phpstan/phpdoc-parser": "^2.0",
         "psr/http-message": "^2.0",
         "stof/doctrine-extensions-bundle": "^1.7",
         "symfony/amqp-messenger": "~7.4.0",
@@ -56,22 +56,30 @@
         "symfonycasts/verify-email-bundle": "^1.16"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "dama/doctrine-test-bundle": "^8",
+        "doctrine/doctrine-fixtures-bundle": "^4.0",
         "ergebnis/composer-normalize": "^2.47",
+        "ergebnis/phpunit-slow-test-detector": "^2.19",
         "friendsofphp/php-cs-fixer": "^3.85",
+        "liip/test-fixtures-bundle": "^3",
         "phpstan/extension-installer": "^1.4",
         "phpstan/phpstan": "^2.1",
         "phpstan/phpstan-doctrine": "^2.0",
         "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
         "phpstan/phpstan-symfony": "^2.0",
-        "phpunit/phpunit": "^10.3",
+        "phpunit/phpunit": "^13",
+        "rector/rector": "^2.5",
+        "symfony/ai-mate": "^0.10.0",
+        "symfony/ai-monolog-mate-extension": "^0.10.0",
+        "symfony/ai-symfony-mate-extension": "^0.10.0",
         "symfony/browser-kit": "~7.4.0",
         "symfony/css-selector": "~7.4.0",
         "symfony/maker-bundle": "^1.49",
-        "symfony/phpunit-bridge": "^6.3",
         "symfony/stopwatch": "^7.3",
         "symfony/web-profiler-bundle": "^7.3",
-        "vincentlanglet/twig-cs-fixer": "^3.9"
+        "vincentlanglet/twig-cs-fixer": "^4.0",
+        "zenstruck/messenger-test": "^1.11"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
@@ -94,7 +102,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/"
+            "App\\Tests\\": "tests/",
+            "Mate\\": "mate/src/"
         }
     },
     "config": {
@@ -102,12 +111,22 @@
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
             "phpstan/extension-installer": true,
+            "symfony/ai-mate-composer-plugin": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
         "sort-packages": true
     },
     "extra": {
+        "ai-mate": {
+            "extension": false,
+            "includes": [
+                "mate/config.php"
+            ],
+            "scan-dirs": [
+                "mate/src"
+            ]
+        },
         "symfony": {
             "allow-contrib": true,
             "docker": false,
@@ -148,7 +167,7 @@
             "# We need a translation from en to en (!) (without prefix) to be able to process placeholders in en.",
             "DEFAULT_LOCALE=en bin/console translation:extract --clean --force en --prefix=''",
             "DEFAULT_LOCALE=en bin/console translation:extract --clean --force da",
-            "# Mark default translations (prefixed with `__`) as “Needs work” in Danish translations",
+            "# Mark default translations (prefixed with `__`) as \u201cNeeds work\u201d in Danish translations",
             "sed --in-place='' 's/<target>__/<target state=\"needs-l10n\">__/' translations/*.da.*xlf"
         ]
     }

@@ -37,11 +37,13 @@ class EventCrudController extends AbstractBaseCrudController
     ) {
     }
 
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Event::class;
     }
 
+    #[\Override]
     public function createEntity(string $entityFqcn): Event
     {
         $event = new Event();
@@ -56,6 +58,7 @@ class EventCrudController extends AbstractBaseCrudController
         return $event;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -66,6 +69,7 @@ class EventCrudController extends AbstractBaseCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.event.edit.title'));
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -77,6 +81,7 @@ class EventCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         yield FormField::addFieldset('Basic information')
@@ -201,6 +206,7 @@ class EventCrudController extends AbstractBaseCrudController
             ->hideWhenCreating();
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         if ($this->isGranted(UserRoles::ROLE_EDITOR->value)) {
@@ -234,6 +240,7 @@ class EventCrudController extends AbstractBaseCrudController
      * for the fields on the page. However, when using "renderAsEmbeddedForm", js
      * for the fields in that controller is not added, so we have to that manually.
      */
+    #[\Override]
     protected function getFieldAssets(FieldCollection $fieldDtos): AssetsDto
     {
         $fieldAssetsDto = parent::getFieldAssets($fieldDtos);

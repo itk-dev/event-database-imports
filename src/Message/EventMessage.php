@@ -1,13 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Message;
 
 use App\Model\Feed\FeedItemData;
 
-final class EventMessage
+final readonly class EventMessage
 {
     public function __construct(
-        private readonly FeedItemData $item,
+        private FeedItemData $item,
     ) {
     }
 

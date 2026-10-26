@@ -105,6 +105,10 @@
         <source>delete_modal.content</source>
         <target>Denne operation kan ikke fortrydes.</target>
       </trans-unit>
+      <trans-unit id="aCnfMdlT" resname="action_confirmation_modal.title">
+        <source>action_confirmation_modal.title</source>
+        <target>Er du sikker på, at du vil slette?</target>
+      </trans-unit>
       <trans-unit id="VH1tHkH" resname="filter.title">
         <source>filter.title</source>
         <target>Filtre</target>
@@ -151,15 +155,15 @@
       </trans-unit>
       <trans-unit id="iFP0IOu" resname="login_page.username">
         <source>login_page.username</source>
-        <target>Username</target>
+        <target>Brugernavn</target>
       </trans-unit>
       <trans-unit id="uxJWiMn" resname="login_page.password">
         <source>login_page.password</source>
-        <target>Password</target>
+        <target>Adgangskode</target>
       </trans-unit>
       <trans-unit id="eiGmhDt" resname="login_page.sign_in">
         <source>login_page.sign_in</source>
-        <target>Sign in</target>
+        <target>Log ind</target>
       </trans-unit>
       <trans-unit id="IsDUuMi" resname="login_page.forgot_password">
         <source>login_page.forgot_password</source>

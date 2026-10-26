@@ -10,9 +10,9 @@ use Doctrine\Persistence\ObjectManager;
 
 final class OrganizationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const ITK = 'itk';
-    public const AAKB = 'aakb';
-    public const DOKK1 = 'dokk1';
+    public const string ITK = 'itk';
+    public const string AAKB = 'aakb';
+    public const string DOKK1 = 'dokk1';
 
     public function load(ObjectManager $manager): void
     {

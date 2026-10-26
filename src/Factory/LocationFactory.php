@@ -94,8 +94,6 @@ final readonly class LocationFactory
      */
     private function getAddress(FeedItemLocation $location): ?Address
     {
-        $values = [];
-
         // @TODO Figure out if we can lookup by coordinates. Problem 1: precision, Problem 2: We also goecode the street address with DAWA coordinates, overriding the given coordinates.
         // Lookup base on coordinates
         // $latitude = $location->coordinates?->latitude;
@@ -106,14 +104,11 @@ final readonly class LocationFactory
         //        'longitude' => floatval($longitude),
         //    ];
         // }
-
         // Lookup base on city, street (as it may not have been geolocation encoded yet).
-        if (empty($values)) {
-            $values = array_filter([
-                'postalCode' => $location->postalCode,
-                'street' => $location->street,
-            ]);
-        }
+        $values = array_filter([
+            'postalCode' => $location->postalCode,
+            'street' => $location->street,
+        ]);
 
         return $this->addressRepository->findOneBy($values);
     }

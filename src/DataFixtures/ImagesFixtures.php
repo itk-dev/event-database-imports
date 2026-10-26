@@ -9,8 +9,8 @@ use Doctrine\Persistence\ObjectManager;
 
 final class ImagesFixtures extends Fixture
 {
-    public const AAK = 'image_aak';
-    public const ITK = 'image_itk';
+    public const string AAK = 'image_aak';
+    public const string ITK = 'image_itk';
 
     public function __construct(
         private readonly ImageServiceInterface $imageHandler,

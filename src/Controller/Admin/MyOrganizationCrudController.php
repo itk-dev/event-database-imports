@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use Doctrine\ORM\QueryBuilder;
@@ -12,6 +14,7 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class MyOrganizationCrudController extends OrganizationCrudController
 {
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         $crud = parent::configureCrud($crud);
@@ -22,6 +25,7 @@ class MyOrganizationCrudController extends OrganizationCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.my.organizer.edit.title'));
     }
 
+    #[\Override]
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, FilterCollection $filters): QueryBuilder
     {
         $qb = parent::createIndexQueryBuilder($searchDto, $entityDto, $fields, $filters);

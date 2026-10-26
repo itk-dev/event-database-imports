@@ -83,7 +83,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
             }
 
             $excerpt = $entity->getExcerpt();
-            if (!empty($excerpt)) {
+            if (!in_array($excerpt, [null, '', '0'], true)) {
                 $excerpt = $this->contentNormalizer->trimLength($excerpt, Event::EXCERPT_MAX_LENGTH);
                 $entity->setExcerpt($excerpt);
             } elseif (!is_null($description)) {
@@ -132,7 +132,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
      */
     private function handleEntity(object $entity): void
     {
-        switch (get_class($entity)) {
+        switch ($entity::class) {
             case Image::class:
             case Tag::class:
             case Address::class:

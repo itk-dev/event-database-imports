@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Message;
 
 use App\Model\Feed\FeedConfiguration;
 
-final class FeedItemDataMessage
+final readonly class FeedItemDataMessage
 {
     public function __construct(
-        private readonly int $feedId,
-        private readonly FeedConfiguration $configuration,
-        private readonly array $data,
-        private readonly bool $forceUpdate = false,
+        private int $feedId,
+        private FeedConfiguration $configuration,
+        private array $data,
+        private bool $forceUpdate = false,
     ) {
     }
 

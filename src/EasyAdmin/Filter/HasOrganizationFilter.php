@@ -22,8 +22,8 @@ final class HasOrganizationFilter implements FilterInterface
      */
     public static function new(string $associationProperty, $label = null): self
     {
-        $filter = (new self())
-            ->setFilterFqcn(__CLASS__)
+        $filter = new self()
+            ->setFilterFqcn(self::class)
             ->setProperty('hasOrganization')
             ->setLabel($label)
             ->setFormType(BooleanFilterType::class)

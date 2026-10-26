@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EasyAdmin;
 
 use App\Controller\Admin\DashboardController;
@@ -15,10 +17,14 @@ class DateTimeFieldConfigurator implements FieldConfiguratorInterface
 {
     public function supports(FieldDto $field, EntityDto $entityDto): bool
     {
-        return
-            DateTimeField::class === $field->getFieldFqcn()
-            || DateField::class === $field->getFieldFqcn()
-            || TimeField::class === $field->getFieldFqcn();
+        if (DateTimeField::class === $field->getFieldFqcn()) {
+            return true;
+        }
+        if (DateField::class === $field->getFieldFqcn()) {
+            return true;
+        }
+
+        return TimeField::class === $field->getFieldFqcn();
     }
 
     public function configure(FieldDto $field, EntityDto $entityDto, AdminContext $context): void

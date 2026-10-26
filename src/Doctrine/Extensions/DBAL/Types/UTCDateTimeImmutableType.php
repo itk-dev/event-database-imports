@@ -3,25 +3,25 @@
 namespace App\Doctrine\Extensions\DBAL\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
 
 class UTCDateTimeImmutableType extends DateTimeImmutableType
 {
     private static ?\DateTimeZone $utc = null;
 
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
+    #[\Override]
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
     {
-        if ($value instanceof \DateTimeImmutable) {
-            if (self::getUtc()->getName() !== $value->getTimezone()->getName()) {
-                $value = $value->setTimezone(self::getUtc());
-            }
+        if ($value instanceof \DateTimeImmutable && $this->getUtc()->getName() !== $value->getTimezone()->getName()) {
+            $value = $value->setTimezone($this->getUtc());
         }
 
         return parent::convertToDatabaseValue($value, $platform);
     }
 
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?\DateTimeImmutable
+    #[\Override]
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?\DateTimeImmutable
     {
         if (null === $value || $value instanceof \DateTimeImmutable) {
             return $value;
@@ -30,17 +30,17 @@ class UTCDateTimeImmutableType extends DateTimeImmutableType
         $converted = \DateTimeImmutable::createFromFormat(
             $platform->getDateTimeFormatString(),
             $value,
-            self::getUtc()
+            $this->getUtc()
         );
 
         if (false === $converted) {
-            throw ConversionException::conversionFailedFormat($value, $this->getName(), $platform->getDateTimeFormatString());
+            throw InvalidFormat::new((string) $value, static::class, $platform->getDateTimeFormatString());
         }
 
         return $converted;
     }
 
-    private static function getUtc(): \DateTimeZone
+    private function getUtc(): \DateTimeZone
     {
         return self::$utc ??= new \DateTimeZone('UTC');
     }

@@ -18,17 +18,18 @@ final class IndexingLocations extends AbstractIndexingElastic
     public function __construct(
         private readonly SerializerInterface $serializer,
         private readonly Client $client,
+        private readonly string $viewTimezone,
     ) {
         parent::__construct($this->client);
     }
 
     public function serialize(IndexItemInterface $item): array
     {
-        $contextBuilder = (new ObjectNormalizerContextBuilder())
+        $contextBuilder = new ObjectNormalizerContextBuilder()
             ->withGroups([IndexNames::Locations->value]);
-        $contextBuilder = (new DateTimeNormalizerContextBuilder())
+        $contextBuilder = new DateTimeNormalizerContextBuilder()
             ->withContext($contextBuilder)
-            ->withTimezone('Europe/Copenhagen')
+            ->withTimezone($this->viewTimezone)
             ->withFormat(IndexFieldTypes::DATEFORMAT);
         $data = $this->serializer->normalize($item, null, $contextBuilder->toArray());
 

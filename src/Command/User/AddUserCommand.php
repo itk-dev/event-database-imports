@@ -103,7 +103,7 @@ final class AddUserCommand extends Command
      */
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
-        if (null !== $input->getArgument('password') && null !== $input->getArgument('email') && null !== $input->getArgument('full-name')) {
+        if (!in_array(null, [$input->getArgument('password'), $input->getArgument('email'), $input->getArgument('full-name')], true)) {
             return;
         }
 

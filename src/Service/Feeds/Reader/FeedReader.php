@@ -38,12 +38,10 @@ class FeedReader implements FeedReaderInterface
     public function getEnabledFeeds(int $limit, bool $force = false, array $feedIds = []): array
     {
         if (0 === count($feedIds)) {
-            $feeds = $this->feedRepository->findBy(['enabled' => true]);
-        } else {
-            $feeds = $this->feedRepository->findBy(['id' => $feedIds, 'enabled' => true]);
+            return $this->feedRepository->findBy(['enabled' => true]);
         }
 
-        return $feeds;
+        return $this->feedRepository->findBy(['id' => $feedIds, 'enabled' => true]);
     }
 
     /**
@@ -121,7 +119,7 @@ class FeedReader implements FeedReaderInterface
                 $this->cleanUp($feed, $start);
             }
 
-            $feed->setLastRead(new \DateTimeImmutable());
+            $feed->setLastRead(\Carbon\CarbonImmutable::now());
             $feed->setLastReadCount($index);
             $feed->setMessage(null);
             $this->feedRepository->save($feed, true);

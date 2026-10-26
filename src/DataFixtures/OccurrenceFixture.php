@@ -10,9 +10,9 @@ use Doctrine\Persistence\ObjectManager;
 
 final class OccurrenceFixture extends Fixture implements DependentFixtureInterface
 {
-    public const OCCURRENCE_241207 = 'OCCURRENCE_241207';
-    public const OCCURRENCE_241108 = 'OCCURRENCE_241108';
-    public const OCCURRENCE_241208 = 'OCCURRENCE_241208';
+    public const string OCCURRENCE_241207 = 'OCCURRENCE_241207';
+    public const string OCCURRENCE_241108 = 'OCCURRENCE_241108';
+    public const string OCCURRENCE_241208 = 'OCCURRENCE_241208';
 
     public function load(ObjectManager $manager): void
     {

@@ -9,7 +9,7 @@ namespace App\Tests\Utils;
  */
 final class TestData
 {
-    public const FEED_ITEM_DATA = [
+    public const array FEED_ITEM_DATA = [
         'nid' => '30506',
         'url' => 'https://www.aakb.dk/arrangementer/teknologi/aabent-lab-60',
         'title' => 'Åbent Lab',
@@ -58,5 +58,5 @@ final class TestData
         ],
     ];
 
-    public const LONG_STRING = 'Lorem Ipsum is simply dummy teãxt of the printing and typesettiŝng industry. Lorem Ipsum has been the industry\'s staænard dummy text ever since the 15ø0s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
+    public const string LONG_STRING = 'Lorem Ipsum is simply dummy teãxt of the printing and typesettiŝng industry. Lorem Ipsum has been the industry\'s staænard dummy text ever since the 15ø0s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
 }

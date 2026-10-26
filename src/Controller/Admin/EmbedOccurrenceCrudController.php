@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Occurrence;
@@ -12,17 +14,20 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class EmbedOccurrenceCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Occurrence::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->setDefaultSort(['start' => Order::Ascending->value]);
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [

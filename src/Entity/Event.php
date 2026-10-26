@@ -17,7 +17,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedPath;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-class Event implements IndexItemInterface, EditableEntityInterface
+class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -74,11 +74,11 @@ class Event implements IndexItemInterface, EditableEntityInterface
     #[ORM\OneToOne(mappedBy: 'event', cascade: ['persist', 'remove'])]
     private ?FeedItem $feedItem = null;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: Occurrence::class, cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Occurrence::class, mappedBy: 'event', cascade: ['persist'], orphanRemoval: true)]
     #[Groups([IndexNames::Events->value])]
     private Collection $occurrences;
 
-    #[ORM\OneToMany(mappedBy: 'event', targetEntity: DailyOccurrence::class, cascade: ['persist'], orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: DailyOccurrence::class, mappedBy: 'event', cascade: ['persist'], orphanRemoval: true)]
     #[Groups([IndexNames::Events->value])]
     private Collection $dailyOccurrences;
 
@@ -244,11 +244,9 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     public function removeOccurrence(Occurrence $occurrence): static
     {
-        if ($this->occurrences->removeElement($occurrence)) {
-            // set the owning side to null (unless already changed)
-            if ($occurrence->getEvent() === $this) {
-                $occurrence->setEvent(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->occurrences->removeElement($occurrence) && $occurrence->getEvent() === $this) {
+            $occurrence->setEvent(null);
         }
 
         return $this;
@@ -274,11 +272,9 @@ class Event implements IndexItemInterface, EditableEntityInterface
 
     public function removeDailyOccurrence(DailyOccurrence $dailyOccurrence): static
     {
-        if ($this->dailyOccurrences->removeElement($dailyOccurrence)) {
-            // set the owning side to null (unless already changed)
-            if ($dailyOccurrence->getEvent() === $this) {
-                $dailyOccurrence->setEvent(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->dailyOccurrences->removeElement($dailyOccurrence) && $dailyOccurrence->getEvent() === $this) {
+            $dailyOccurrence->setEvent(null);
         }
 
         return $this;

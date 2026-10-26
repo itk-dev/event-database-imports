@@ -20,8 +20,8 @@ final class JsonContainsFilter implements FilterInterface
      */
     public static function new(string $propertyName, $label = null): self
     {
-        return (new self())
-            ->setFilterFqcn(__CLASS__)
+        return new self()
+            ->setFilterFqcn(self::class)
             ->setProperty($propertyName)
             ->setLabel($label)
             ->setFormType(ChoiceFilterType::class)
@@ -44,7 +44,7 @@ final class JsonContainsFilter implements FilterInterface
     public function setTranslatableChoices(array $choiceGenerator): self
     {
         $this->dto->setFormTypeOption('value_type_options.choices', array_keys($choiceGenerator));
-        $this->dto->setFormTypeOption('value_type_options.choice_label', fn ($value) => $choiceGenerator[$value]);
+        $this->dto->setFormTypeOption('value_type_options.choice_label', fn ($value): TranslatableInterface => $choiceGenerator[$value]);
 
         return $this;
     }
