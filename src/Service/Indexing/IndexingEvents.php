@@ -3,6 +3,7 @@
 namespace App\Service\Indexing;
 
 use App\Entity\Event;
+use App\Entity\Location;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
 use App\Service\ImageServiceInterface;
@@ -61,7 +62,7 @@ final class IndexingEvents extends AbstractIndexingElastic
         // @todo: Figure out how to do these changes with the serializer. This is just....
         // @todo: Handle validation. Location should never be null
         $location = $item->getLocation();
-        $data['location'] = null === $location ? null : $this->indexingLocations->serialize($location);
+        $data['location'] = $location instanceof Location ? $this->indexingLocations->serialize($location) : null;
 
         return $data;
     }
