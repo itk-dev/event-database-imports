@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-- [PR-PLACEHOLDER](https://github.com/itk-dev/event-database-imports/pull/PLACEHOLDER)
+- [PR-117](https://github.com/itk-dev/event-database-imports/pull/117)
   Require all directly used packages in `composer.json`, checked by PHPStan (`pb30/phpstan-composer-analysis`)
 
 ## [1.3.0] - 2026-11-04
