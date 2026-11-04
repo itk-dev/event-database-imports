@@ -8,7 +8,7 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
-## [1.3.0] - 2026-07-10
+## [1.3.0] - 2026-11-04
 
 - [PR-114](https://github.com/itk-dev/event-database-imports/pull/114)
   Targeted updates to clear `composer audit`: EasyAdmin 5.5.1, Guzzle 7.15, Symfony 7.4.22 (http-foundation,
@@ -236,7 +236,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
 [Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...HEAD
-[1.3.0]: https://github.com/itk-dev/event-database-imports/compare/1.2.6...1.3.0
+[1.3.0]: https://github.com/itk-dev/event-database-imports/compare/1.2.7...1.3.0
+[1.2.7]: https://github.com/itk-dev/event-database-imports/compare/1.2.6...1.2.7
 [1.2.6]: https://github.com/itk-dev/event-database-imports/compare/1.2.5...1.2.6
 [1.2.5]: https://github.com/itk-dev/event-database-imports/compare/1.2.4...1.2.5
 [1.2.4]: https://github.com/itk-dev/event-database-imports/compare/1.2.3...1.2.4
