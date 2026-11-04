@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-118](https://github.com/itk-dev/event-database-imports/pull/118)
+  Update Elasticsearch to 8.19.23
 - [PR-117](https://github.com/itk-dev/event-database-imports/pull/117)
   Require all directly used packages in `composer.json`, checked by PHPStan (`pb30/phpstan-composer-analysis`)
 - [PR-116](https://github.com/itk-dev/event-database-imports/pull/116)
