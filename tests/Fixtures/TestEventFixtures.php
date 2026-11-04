@@ -63,7 +63,7 @@ final class TestEventFixtures extends Fixture implements DependentFixtureInterfa
             ->setUpdatedBy('test')
             ->setEditable(true);
 
-        if (null !== $organization) {
+        if ($organization instanceof Organization) {
             $event->setOrganization($organization);
         }
 
