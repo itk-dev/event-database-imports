@@ -47,7 +47,7 @@ final class IndexCreateCommand extends Command
         $indexingServices = $this->indexingServices instanceof \Traversable ? iterator_to_array($this->indexingServices) : $this->indexingServices;
 
         foreach ($inputIndexes as $index) {
-            if (!array_key_exists($index, $indexingServices)) {
+            if (!array_key_exists((string) $index, $indexingServices)) {
                 $io->error('Indexing service for index '.$index.' does not exist');
                 continue;
             }

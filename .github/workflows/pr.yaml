@@ -35,8 +35,8 @@ jobs:
         uses: actions/cache@v6
         with:
           path: vendor
-          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
-          restore-keys: vendor-php8.4-
+          key: vendor-php8.5-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.5-
 
       - name: Create docker network
         run: docker network create frontend
@@ -78,8 +78,8 @@ jobs:
         uses: actions/cache@v6
         with:
           path: vendor
-          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
-          restore-keys: vendor-php8.4-
+          key: vendor-php8.5-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.5-
 
       - name: Create docker network
         run: docker network create frontend
@@ -103,8 +103,8 @@ jobs:
         uses: actions/cache@v6
         with:
           path: vendor
-          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
-          restore-keys: vendor-php8.4-
+          key: vendor-php8.5-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.5-
 
       - name: Create docker network
         run: docker network create frontend
@@ -128,8 +128,8 @@ jobs:
         uses: actions/cache@v6
         with:
           path: vendor
-          key: vendor-php8.4-${{ hashFiles('composer.lock') }}
-          restore-keys: vendor-php8.4-
+          key: vendor-php8.5-${{ hashFiles('composer.lock') }}
+          restore-keys: vendor-php8.5-
 
       # https://github.com/mxschmitt/action-tmate?tab=readme-ov-file#manually-triggered-debug
       # Enable tmate debugging if debug logging is enabled (cf.
