@@ -27,7 +27,7 @@ final readonly class LoginSuccessListener
         $user = $event->getUser();
         assert($user instanceof User);
 
-        if (null === $user->getTermsAcceptedAt()) {
+        if (!$user->getTermsAcceptedAt() instanceof \DateTimeImmutable) {
             $response = new RedirectResponse($this->router->generate('app_accept_terms'));
             $event->setResponse($response);
         }
@@ -36,7 +36,7 @@ final readonly class LoginSuccessListener
         // Self registered users must have verified email
         // If a role (ROLE_ORGANIZATION_EDITOR or above) has been granted we assume email is valid
         // @TODO Add "resend confirmation" email page to enable email verification for all users
-        if (null === $user->getEmailVerifiedAt() && !$this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
+        if (!$user->getEmailVerifiedAt() instanceof \DateTimeImmutable && !$this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
             $session = $event->getRequest()->getSession();
             assert($session instanceof FlashBagAwareSessionInterface);
 

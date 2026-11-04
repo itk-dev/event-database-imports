@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-PLACEHOLDER](https://github.com/itk-dev/event-database-imports/pull/PLACEHOLDER)
+  Update Rector (2.8) and PHPStan (2.3) and apply the new Rector rules
 - [PR-118](https://github.com/itk-dev/event-database-imports/pull/118)
   Update Elasticsearch to 8.19.23
 - [PR-117](https://github.com/itk-dev/event-database-imports/pull/117)

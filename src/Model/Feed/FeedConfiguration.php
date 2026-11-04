@@ -25,7 +25,7 @@ final readonly class FeedConfiguration
 
     public function supportsPagination(): bool
     {
-        return null !== $this->pagination && $this->pagination->supportsPagination();
+        return $this->pagination instanceof FeedPagination && $this->pagination->supportsPagination();
     }
 
     public static function getConfigurationTemplate(): array
