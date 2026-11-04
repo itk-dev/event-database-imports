@@ -1,14 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Message;
 
 use App\Model\Indexing\IndexNames;
 
-final class IndexMessage
+final readonly class IndexMessage
 {
     public function __construct(
-        private readonly int $entityId,
-        private readonly IndexNames $index,
+        private int $entityId,
+        private IndexNames $index,
     ) {
     }
 

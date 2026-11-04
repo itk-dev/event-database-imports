@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\EasyAdmin;
 
 use App\Controller\Admin\DashboardController;

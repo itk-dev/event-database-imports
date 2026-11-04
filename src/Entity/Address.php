@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
     fields: ['street', 'postalCode'],
     message: 'entity.address.street_postcode.not_unique'
 )]
-class Address implements EditableEntityInterface
+class Address implements EditableEntityInterface, \Stringable
 {
     use TimestampableEntity;
     use SoftDeleteableEntity;
@@ -57,7 +57,7 @@ class Address implements EditableEntityInterface
     #[Groups([IndexNames::Events->value, IndexNames::Locations->value])]
     private ?float $longitude = null;
 
-    #[ORM\OneToMany(mappedBy: 'address', targetEntity: Location::class)]
+    #[ORM\OneToMany(targetEntity: Location::class, mappedBy: 'address')]
     private Collection $locations;
 
     #[ORM\Column]
@@ -191,11 +191,9 @@ class Address implements EditableEntityInterface
 
     public function removeLocation(Location $location): static
     {
-        if ($this->locations->removeElement($location)) {
-            // set the owning side to null (unless already changed)
-            if ($location->getAddress() === $this) {
-                $location->setAddress(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->locations->removeElement($location) && $location->getAddress() === $this) {
+            $location->setAddress(null);
         }
 
         return $this;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -11,17 +13,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Translation\TranslatableMessage;
 
-#[Route('/admin/accept-terms')]
 class AcceptTermsController extends AbstractController
 {
-    #[Route('/admin')]
+    public function __construct(private readonly EntityManagerInterface $entityManager)
+    {
+    }
+
+    #[Route('/admin/accept-terms/admin')]
     public function index(): Response
     {
         return $this->redirectToRoute('admin');
     }
 
-    #[Route('/', name: 'app_accept_terms')]
-    public function acceptTerms(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/admin/accept-terms/', name: 'app_accept_terms')]
+    public function acceptTerms(Request $request): Response
     {
         $user = $this->getUser();
         assert($user instanceof User);
@@ -30,9 +35,9 @@ class AcceptTermsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setTermsAcceptedAt(\Carbon\CarbonImmutable::now());
 
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('admin');
         }

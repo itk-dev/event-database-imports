@@ -4,12 +4,7 @@ namespace App\Service\Indexing;
 
 use App\Exception\IndexingException;
 use App\Model\Indexing\IndexNames;
-use App\Model\Indexing\Mappings\EventWithOccurrences;
-use App\Model\Indexing\Mappings\Location;
-use App\Model\Indexing\Mappings\OccurrenceWithEvent;
-use App\Model\Indexing\Mappings\Organizer;
-use App\Model\Indexing\Mappings\Tag;
-use App\Model\Indexing\Mappings\Vocabularies;
+use App\Model\Indexing\Mappings\MappingsProvider;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Exception\MissingParameterException;
@@ -48,7 +43,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->index($params);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
@@ -68,7 +63,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             /** @var Elasticsearch $response */
             $response = $this->client->delete($params);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_ACCEPTED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_ACCEPTED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to delete item from index', $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
@@ -81,7 +76,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     {
         try {
             if (null === $this->newIndexName) {
-                $this->newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
+                $this->newIndexName = $this::INDEX_ALIAS.'_'.\Carbon\Carbon::now()->format('Y-m-d-His');
                 $this->createEsIndex($this->newIndexName);
             }
 
@@ -98,7 +93,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             }
 
             $response = $this->client->bulk($params);
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_CREATED, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to add item to index', $response->getStatusCode());
             }
         } catch (ClientResponseException|ServerResponseException $e) {
@@ -113,7 +108,7 @@ abstract class AbstractIndexingElastic implements IndexingInterface
             throw new IndexingException('Index already exists');
         }
 
-        $newIndexName = $this::INDEX_ALIAS.'_'.date('Y-m-d-His');
+        $newIndexName = $this::INDEX_ALIAS.'_'.\Carbon\Carbon::now()->format('Y-m-d-His');
         $this->createEsIndex($newIndexName);
         $this->refreshIndex($newIndexName);
 
@@ -354,14 +349,11 @@ abstract class AbstractIndexingElastic implements IndexingInterface
                             ],
                         ],
                     ],
-                    'mappings' => [
-                        'dynamic' => 'strict',
-                        'properties' => $this->getIndexProperties(),
-                    ],
+                    'mappings' => MappingsProvider::mappingFor(IndexNames::from($this::INDEX_ALIAS)),
                 ],
             ]);
 
-            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT])) {
+            if (!in_array($response->getStatusCode(), [Response::HTTP_OK, Response::HTTP_NO_CONTENT], true)) {
                 throw new IndexingException('Unable to create new index: '.$this::INDEX_ALIAS, $response->getStatusCode());
             }
         } catch (ClientResponseException|MissingParameterException|ServerResponseException $e) {
@@ -373,23 +365,5 @@ abstract class AbstractIndexingElastic implements IndexingInterface
     public function criteria(): array
     {
         return [];
-    }
-
-    /**
-     * @throws IndexingException
-     */
-    private function getIndexProperties(): array
-    {
-        $index = IndexNames::from($this::INDEX_ALIAS);
-
-        return match ($index) {
-            IndexNames::Organizations => Organizer::getProperties(),
-            IndexNames::Events => EventWithOccurrences::getProperties(),
-            IndexNames::Locations => Location::getProperties(),
-            IndexNames::Tags => Tag::getProperties(),
-            IndexNames::Vocabularies => Vocabularies::getProperties(),
-            IndexNames::Occurrences, IndexNames::DailyOccurrences => OccurrenceWithEvent::getProperties(),
-            // IndexNames::ApiKeys => throw new \Exception('To be implemented'),
-        };
     }
 }

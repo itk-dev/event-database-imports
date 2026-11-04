@@ -1,0 +1,99 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Tests\Functional\Auth;
+
+use App\DataFixtures\OrganizationFixtures;
+use App\Entity\User;
+use App\Repository\UserRepository;
+use App\Tests\Fixtures\TestUserFixtures;
+use App\Tests\Functional\AbstractAdminTestCase;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
+
+final class RegistrationTest extends AbstractAdminTestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->loadFixtures([
+            OrganizationFixtures::class,
+            TestUserFixtures::class,
+        ]);
+    }
+
+    /**
+     * Verifies registration persists an unverified user and queues a verification email.
+     */
+    public function testSuccessfulRegistrationPersistsUserAndSendsEmail(): void
+    {
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/register/');
+        $form = $crawler->selectButton('Registrer dig')->form();
+
+        $email = 'new-user@example.com';
+        $this->client->enableProfiler();
+        $this->client->submit($form, [
+            'registration_form[name]' => 'New User',
+            'registration_form[mail]' => $email,
+            'registration_form[registrationNotes]' => 'Please approve',
+            'registration_form[plainPassword]' => 'secret-password',
+            'registration_form[agreeTerms]' => '1',
+        ]);
+
+        $this->assertResponseIsSuccessful();
+
+        $repository = self::getContainer()->get(UserRepository::class);
+        $user = $repository->findOneBy(['mail' => $email]);
+        $this->assertInstanceOf(User::class, $user, 'User should have been persisted during registration');
+        $this->assertNotInstanceOf(\DateTimeImmutable::class, $user->getEmailVerifiedAt());
+
+        // Outbound mail goes through the async Messenger transport in tests,
+        // so the message is queued (routed via SendEmailMessage) rather than
+        // immediately dispatched to the mailer transport. The email is a
+        // TemplatedEmail rendered at send time, so its body/link is not
+        // available while queued — assert on the addressed recipient instead.
+        $this->assertQueuedEmailCount(1);
+        $this->assertEmailAddressContains($this->getMailerMessage(), 'To', $email);
+    }
+
+    /**
+     * Verifies visiting the signed verification link sets the user's verified-at timestamp.
+     */
+    public function testEmailVerificationSetsVerifiedAt(): void
+    {
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, '/admin/register/');
+        $form = $crawler->selectButton('Registrer dig')->form();
+
+        $email = 'verify-me@example.com';
+        $this->client->submit($form, [
+            'registration_form[name]' => 'Verify Me',
+            'registration_form[mail]' => $email,
+            'registration_form[registrationNotes]' => 'Please approve',
+            'registration_form[plainPassword]' => 'secret-password',
+            'registration_form[agreeTerms]' => '1',
+        ]);
+
+        $repository = self::getContainer()->get(UserRepository::class);
+        $user = $repository->findOneBy(['mail' => $email]);
+        $this->assertInstanceOf(User::class, $user);
+
+        $helper = self::getContainer()->get(VerifyEmailHelperInterface::class);
+        $signature = $helper->generateSignature(
+            'app_verify_email',
+            (string) $user->getId(),
+            $user->getMail(),
+            ['id' => $user->getId()],
+        );
+
+        $path = parse_url((string) $signature->getSignedUrl(), PHP_URL_PATH).'?'.parse_url((string) $signature->getSignedUrl(), PHP_URL_QUERY);
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $path);
+
+        $this->assertResponseRedirects();
+        // Re-fetch rather than refresh: the test container's EM may have
+        // been reset between the registration and verification requests.
+        $verifiedUser = $repository->findOneBy(['mail' => $email]);
+        $this->assertInstanceOf(User::class, $verifiedUser);
+        $this->assertInstanceOf(\DateTimeImmutable::class, $verifiedUser->getEmailVerifiedAt());
+    }
+}

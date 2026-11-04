@@ -12,7 +12,7 @@ final class EventFinder implements EventFinderInterface
 {
     public function findEvents(object $entity): iterable
     {
-        switch (get_class($entity)) {
+        switch ($entity::class) {
             case Image::class:
                 yield $entity->getEvent();
                 break;
@@ -30,7 +30,7 @@ final class EventFinder implements EventFinderInterface
                 break;
 
             default:
-                throw new NotSupportedEntityException(sprintf('The class "%s" is not supported by the EventFinder service', get_class($entity)));
+                throw new NotSupportedEntityException(sprintf('The class "%s" is not supported by the EventFinder service', $entity::class));
         }
     }
 

@@ -1,5 +1,9 @@
 {% extends 'app/base.html.twig' %}
 
+{# Resolve the current AdminContext (null outside an admin request, e.g. login),
+   mirroring EasyAdmin's own login template. The global "ea" is the provider. #}
+{% set ea = ea() %}
+
 {% set _username_label = username_label is defined ? username_label|trans : 'login_page.username'|trans({}, 'EasyAdminBundle') %}
 {% set _password_label = password_label is defined ? password_label|trans : 'login_page.password'|trans({}, 'EasyAdminBundle') %}
 {% set _forgot_password_label = forgot_password_label is defined ? forgot_password_label|trans : 'login_page.forgot_password'|trans({}, 'EasyAdminBundle') %}
@@ -34,7 +38,7 @@
             <input type="hidden" name="_csrf_token" value="{{ csrf_token(csrf_token_intention) }}">
         {% endif %}
 
-        <input type="hidden" name="{{ target_path_parameter|default('_target_path') }}" value="{{ target_path|default(ea.hasContext ? path(ea.dashboardRouteName) : '/') }}" />
+        <input type="hidden" name="{{ target_path_parameter|default('_target_path') }}" value="{{ target_path|default(null != ea ? path(ea.dashboardRouteName) : '/') }}" />
 
         <div class="form-group">
             <label class="form-control-label required" for="username">{{ _username_label }}</label>

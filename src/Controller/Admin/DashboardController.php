@@ -2,16 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Address;
-use App\Entity\Event;
-use App\Entity\Feed;
-use App\Entity\FeedItem;
-use App\Entity\Location;
-use App\Entity\Organization;
-use App\Entity\Tag;
 use App\Entity\User;
-use App\Entity\Vocabulary;
 use App\Types\UserRoles;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -21,10 +14,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Translation\TranslatableMessage;
 
+#[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 class DashboardController extends AbstractDashboardController
 {
     public const string MODEL_TIMEZONE = 'UTC';
@@ -42,7 +35,7 @@ class DashboardController extends AbstractDashboardController
     ) {
     }
 
-    #[Route('/admin', name: 'admin')]
+    #[\Override]
     public function index(): Response
     {
         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
@@ -58,6 +51,7 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($adminUrlGenerator->setController(EventCrudController::class)->generateUrl());
     }
 
+    #[\Override]
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
@@ -66,55 +60,46 @@ class DashboardController extends AbstractDashboardController
             ->renderContentMaximized();
     }
 
+    #[\Override]
     public function configureMenuItems(): iterable
     {
         // My Content
         yield MenuItem::section(new TranslatableMessage('admin.label.my_content'))
             ->setPermission(UserRoles::ROLE_ORGANIZATION_EDITOR->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.events'), 'fa fa-calendar', Event::class)
-            ->setController(MyEventCrudController::class)
+        yield MenuItem::linkTo(MyEventCrudController::class, new TranslatableMessage('admin.link.events'), 'fa fa-calendar')
             ->setPermission(UserRoles::ROLE_ORGANIZATION_EDITOR->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.organizations'), 'fa fa-sitemap', Organization::class)
-            ->setController(MyOrganizationCrudController::class)
+        yield MenuItem::linkTo(MyOrganizationCrudController::class, new TranslatableMessage('admin.link.organizations'), 'fa fa-sitemap')
             ->setPermission(UserRoles::ROLE_ORGANIZATION_EDITOR->value);
 
         // All Content
         yield MenuItem::section(new TranslatableMessage('admin.label.all_content'));
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.events'), 'fa fa-calendar', Event::class)
-            ->setController(EventCrudController::class)
+        yield MenuItem::linkTo(EventCrudController::class, new TranslatableMessage('admin.link.events'), 'fa fa-calendar')
             ->setPermission(UserRoles::ROLE_USER->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.organizations'), 'fa fa-sitemap', Organization::class)
-            ->setController(OrganizationCrudController::class)
+        yield MenuItem::linkTo(OrganizationCrudController::class, new TranslatableMessage('admin.link.organizations'), 'fa fa-sitemap')
             ->setPermission(UserRoles::ROLE_USER->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.location'), 'fa fa-location-dot', Location::class)
-            ->setController(LocationCrudController::class)
+        yield MenuItem::linkTo(LocationCrudController::class, new TranslatableMessage('admin.link.location'), 'fa fa-location-dot')
             ->setPermission(UserRoles::ROLE_USER->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.address'), 'fa fa-address-book', Address::class)
-            ->setController(AddressCrudController::class)
+        yield MenuItem::linkTo(AddressCrudController::class, new TranslatableMessage('admin.link.address'), 'fa fa-address-book')
             ->setPermission(UserRoles::ROLE_USER->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.tags'), 'fa fa-tags', Tag::class)
-            ->setController(TagCrudController::class)
+        yield MenuItem::linkTo(TagCrudController::class, new TranslatableMessage('admin.link.tags'), 'fa fa-tags')
             ->setPermission(UserRoles::ROLE_USER->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.vocabularies'), 'fa fa-book', Vocabulary::class)
-            ->setController(VocabularyCrudController::class)
+        yield MenuItem::linkTo(VocabularyCrudController::class, new TranslatableMessage('admin.link.vocabularies'), 'fa fa-book')
             ->setPermission(UserRoles::ROLE_ADMIN->value);
 
         yield MenuItem::section(new TranslatableMessage('admin.label.feeds'))
             ->setPermission(UserRoles::ROLE_ADMIN->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feeds'), 'fa fa-rss', Feed::class)
-            ->setController(FeedCrudController::class)
+        yield MenuItem::linkTo(FeedCrudController::class, new TranslatableMessage('admin.link.feeds'), 'fa fa-rss')
             ->setPermission(UserRoles::ROLE_ADMIN->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.feedItems'), 'fa fa-list-alt', FeedItem::class)
-            ->setController(FeedItemCrudController::class)
+        yield MenuItem::linkTo(FeedItemCrudController::class, new TranslatableMessage('admin.link.feedItems'), 'fa fa-list-alt')
             ->setPermission(UserRoles::ROLE_ADMIN->value);
 
         yield MenuItem::section(new TranslatableMessage('admin.label.users'))
             ->setPermission(UserRoles::ROLE_ADMIN->value);
-        yield MenuItem::linkToCrud(new TranslatableMessage('admin.link.users'), 'fa fa-user', User::class)
-            ->setController(UserCrudController::class)
+        yield MenuItem::linkTo(UserCrudController::class, new TranslatableMessage('admin.link.users'), 'fa fa-user')
             ->setPermission(UserRoles::ROLE_ADMIN->value);
     }
 
+    #[\Override]
     public function configureCrud(): Crud
     {
         // Default config for all cruds in this controller.
@@ -128,6 +113,7 @@ class DashboardController extends AbstractDashboardController
             ->setTimeFormat(self::TIME_FORMAT);
     }
 
+    #[\Override]
     public function configureUserMenu(UserInterface $user): UserMenu
     {
         assert($user instanceof User);
@@ -147,6 +133,7 @@ class DashboardController extends AbstractDashboardController
             ]);
     }
 
+    #[\Override]
     public function configureAssets(): Assets
     {
         return Assets::new()

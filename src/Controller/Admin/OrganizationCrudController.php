@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Organization;
@@ -19,11 +21,13 @@ use Symfony\Component\Translation\TranslatableMessage;
 
 class OrganizationCrudController extends AbstractBaseCrudController
 {
+    #[\Override]
     public static function getEntityFqcn(): string
     {
         return Organization::class;
     }
 
+    #[\Override]
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
@@ -34,6 +38,7 @@ class OrganizationCrudController extends AbstractBaseCrudController
             ->setPageTitle('detail', new TranslatableMessage('admin.organizer.edit.title'));
     }
 
+    #[\Override]
     public function configureActions(Actions $actions): Actions
     {
         $actions = parent::configureActions($actions);
@@ -45,6 +50,7 @@ class OrganizationCrudController extends AbstractBaseCrudController
         return $actions;
     }
 
+    #[\Override]
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -71,6 +77,7 @@ class OrganizationCrudController extends AbstractBaseCrudController
         ];
     }
 
+    #[\Override]
     public function configureFilters(Filters $filters): Filters
     {
         return $filters

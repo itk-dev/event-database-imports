@@ -22,7 +22,7 @@ class EventDeleteCommand extends Command
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly FeedRepository $feedRepository,
-        private CacheManager $imageCacheManager,
+        private readonly CacheManager $imageCacheManager,
     ) {
         parent::__construct();
     }

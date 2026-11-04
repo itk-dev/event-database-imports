@@ -23,7 +23,7 @@ final readonly class TimeInterval implements TimeIntervalInterface
         $start = $this->getDateTimeWithTimeZone($start);
         $end = $this->getDateTimeWithTimeZone($end);
 
-        $periods = (new CarbonPeriodImmutable($start, '1 day', $end))->toArray();
+        $periods = new CarbonPeriodImmutable($start, '1 day', $end)->toArray();
 
         // Invalid start/end. Best we can do is return empty array.
         if (0 === count($periods)) {
@@ -86,7 +86,7 @@ final readonly class TimeInterval implements TimeIntervalInterface
      */
     private function getDiffInSeconds(\DateTimeImmutable $start, \DateTimeImmutable $end): int
     {
-        return intval((new CarbonImmutable($start))->diffAsCarbonInterval(new CarbonImmutable($end))->totalSeconds);
+        return intval(new CarbonImmutable($start)->diffAsCarbonInterval(new CarbonImmutable($end))->totalSeconds);
     }
 
     private function getDateTimeWithTimeZone(\DateTimeInterface $dateTime): \DateTimeImmutable

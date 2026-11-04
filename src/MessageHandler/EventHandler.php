@@ -56,7 +56,7 @@ final readonly class EventHandler
 
             $this->entityManager->flush();
 
-            throw new UnrecoverableMessageHandlingException($e->getMessage());
+            throw new UnrecoverableMessageHandlingException($e->getMessage(), $e->getCode(), $e);
         }
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Model\Feed;
 
 final readonly class FeedConfiguration
@@ -23,7 +25,7 @@ final readonly class FeedConfiguration
 
     public function supportsPagination(): bool
     {
-        return !(null === $this->pagination) && $this->pagination->supportsPagination();
+        return null !== $this->pagination && $this->pagination->supportsPagination();
     }
 
     public static function getConfigurationTemplate(): array

@@ -10,11 +10,11 @@ use Doctrine\Persistence\ObjectManager;
 
 final class TagsFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const CONCERT = 'tags_concert';
-    public const KIDS = 'tags_kids';
-    public const RACE = 'tags_race';
-    public const AROS = 'tags_aros';
-    public const ITKDEV = 'tags_itkdev';
+    public const string CONCERT = 'tags_concert';
+    public const string KIDS = 'tags_kids';
+    public const string RACE = 'tags_race';
+    public const string AROS = 'tags_aros';
+    public const string ITKDEV = 'tags_itkdev';
 
     public function load(ObjectManager $manager): void
     {

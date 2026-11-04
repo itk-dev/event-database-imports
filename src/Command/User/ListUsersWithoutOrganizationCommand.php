@@ -52,7 +52,7 @@ final class ListUsersWithoutOrganizationCommand extends Command
             return Command::SUCCESS;
         }
 
-        $rows = array_map(fn ($user) => [
+        $rows = array_map(fn ($user): array => [
             $user->getId(),
             $user->getName(),
             $user->getMail(),

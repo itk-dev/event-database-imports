@@ -29,7 +29,7 @@ class IndexListCommand extends Command
             $indicesData = $this->indexManager->getAll();
 
             // Check if indices data exists
-            if (empty($indicesData)) {
+            if ([] === $indicesData) {
                 $io->warning('No indices found in the Elasticsearch cluster.');
 
                 return Command::SUCCESS;
@@ -43,7 +43,7 @@ class IndexListCommand extends Command
                 $tableData[$indexName] = [
                     '#' => ++$count,
                     'Index' => $indexName,
-                    'Aliases' => !empty($index['aliases']) ? implode(', ', $index['aliases']) : '',
+                    'Aliases' => empty($index['aliases']) ? '' : implode(', ', $index['aliases']),
                     'Docs Count' => $index['docs.count'] ?? 'N/A',
                     'Status' => $index['status'] ?? 'unknown',
                 ];

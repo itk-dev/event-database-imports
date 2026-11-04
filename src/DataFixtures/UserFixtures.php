@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\User;
@@ -9,8 +11,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class UserFixtures extends Fixture
 {
-    public const ADMIN_USER = 'admin';
-    public const USER = 'user';
+    public const string ADMIN_USER = 'admin';
+    public const string USER = 'user';
 
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,

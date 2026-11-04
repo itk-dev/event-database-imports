@@ -19,7 +19,6 @@ use Symfony\Component\Translation\TranslatableMessage;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
-#[Route('/admin/register')]
 class RegistrationController extends AbstractController
 {
     public function __construct(
@@ -28,17 +27,20 @@ class RegistrationController extends AbstractController
         private readonly string $siteSendFromEmail,
         private readonly string $siteReplyToEmail,
         private readonly string $siteName,
+        private readonly UserPasswordHasherInterface $userPasswordHasher,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator,
     ) {
     }
 
-    #[Route('/admin')]
+    #[Route('/admin/register/admin')]
     public function index(): Response
     {
         return $this->redirectToRoute('admin');
     }
 
-    #[Route('/', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager, TranslatorInterface $translator): Response
+    #[Route('/admin/register/', name: 'app_register')]
+    public function register(Request $request): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -47,27 +49,27 @@ class RegistrationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // encode the plain password
             $user->setPassword(
-                $userPasswordHasher->hashPassword(
+                $this->userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
 
-            $user->setTermsAcceptedAt(new \DateTimeImmutable());
+            $user->setTermsAcceptedAt(\Carbon\CarbonImmutable::now());
             $user->setRoles([UserRoles::ROLE_USER]);
             $user->setCreatedBy($user->getName());
             $user->setUpdatedBy($user->getName());
 
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
+                new TemplatedEmail()
                     ->from(new Address($this->siteSendFromEmail, $this->siteName))
                     ->replyTo(new Address($this->siteReplyToEmail, $this->siteName))
                     ->to($user->getMail())
-                    ->subject($translator->trans('registration.page.confirm_email', [], 'messages'))
+                    ->subject($this->translator->trans('registration.page.confirm_email', [], 'messages'))
                     ->htmlTemplate('app/registration/confirmation_email.html.twig')
             );
 
@@ -89,8 +91,8 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/verify-email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    #[Route('/admin/register/verify-email', name: 'app_verify_email')]
+    public function verifyUserEmail(Request $request): Response
     {
         $id = $request->query->get('id');
 
@@ -110,7 +112,7 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash('verify_email_error', $this->translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
