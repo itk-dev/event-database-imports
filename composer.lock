@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a3e51f67ff248ee8570bc52536b6593",
+    "content-hash": "ff599f18a97389446c0271dfd559ceb5",
     "packages": [
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -12323,7 +12323,8 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-07-05T06:31:06+00:00"
+            "time": "2026-07-05T06:31:06+00:00",
+            "published-time": "2026-07-05T06:31:19+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -15819,11 +15820,11 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.4",
+        "php": ">=8.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-pdo": "*"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.9.0"
+    "plugin-api-version": "2.11.0"
 }

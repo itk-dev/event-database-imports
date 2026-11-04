@@ -15,7 +15,7 @@ services:
 
   supervisor:
     # @TODO: Create supervisor with ansible, when merged with Ture's PR
-    image: itkdev/supervisor-php8.4:alpine
+    image: itkdev/supervisor-php8.5:alpine
     restart: unless-stopped
     stop_grace_period: 20s
     environment:
