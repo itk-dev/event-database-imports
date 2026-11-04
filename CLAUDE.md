@@ -152,3 +152,7 @@ setup. All hooks and MCP servers run tooling **inside the `phpfpm` container**.
   `phpfpm` container and exposes service-container introspection, Symfony profiler access, and Monolog log search.
   After changing services or Mate extensions, re-run `docker compose exec phpfpm vendor/bin/mate discover`.
   PhpStorm's MCP (symbol info, inspections, Xdebug) is also available when the IDE is open — no repo config needed.
+
+<!-- BEGIN AI_MATE_AGENTS_IMPORT -->
+@AGENTS.md
+<!-- END AI_MATE_AGENTS_IMPORT -->
