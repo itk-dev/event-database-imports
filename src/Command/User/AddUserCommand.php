@@ -25,7 +25,6 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\Stopwatch\Stopwatch;
 
 use function Symfony\Component\String\u;
 
@@ -155,9 +154,6 @@ final class AddUserCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $stopwatch = new Stopwatch();
-        $stopwatch->start('add-user-command');
-
         /** @var string $plainPassword */
         $plainPassword = $input->getArgument('password');
 
@@ -188,10 +184,8 @@ final class AddUserCommand extends Command
 
         $this->io->success(sprintf('%s was successfully created: %s (%s)', $isAdmin ? 'Administrator user' : 'User', $user->getName(), $user->getMail()));
 
-        $event = $stopwatch->stop('add-user-command');
-
         if ($output->isVerbose()) {
-            $this->io->comment(sprintf('New user database id: %d / Elapsed time: %.2f ms / Consumed memory: %.2f MB', $user->getId(), $event->getDuration(), $event->getMemory() / (1024 ** 2)));
+            $this->io->comment(sprintf('New user database id: %d', $user->getId()));
         }
 
         return Command::SUCCESS;
