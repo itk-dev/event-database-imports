@@ -10,6 +10,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 - [PR-122](https://github.com/itk-dev/event-database-imports/pull/122)
   Update Symfony to 7.4.23 (security advisories)
+- [PR-120](https://github.com/itk-dev/event-database-imports/pull/120)
+  Update doctrine/collections to 3.1 (with doctrine/orm 3.7 and gedmo/doctrine-extensions 3.22.2)
 - [PR-119](https://github.com/itk-dev/event-database-imports/pull/119)
   Update Rector (2.8) and PHPStan (2.3) and apply the new Rector rules
 - [PR-118](https://github.com/itk-dev/event-database-imports/pull/118)
