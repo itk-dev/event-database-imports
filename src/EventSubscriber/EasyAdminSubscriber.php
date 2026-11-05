@@ -18,10 +18,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Event\AfterEntityUpdatedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-class EasyAdminSubscriber implements EventSubscriberInterface
+class EasyAdminSubscriber
 {
     public function __construct(
         private readonly MessageBusInterface $messageBus,
@@ -32,16 +32,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
     ) {
     }
 
-    public static function getSubscribedEvents(): array
-    {
-        return [
-            BeforeEntityUpdatedEvent::class => ['beforeEntityUpdatedEvent'],
-            BeforeEntityPersistedEvent::class => ['beforeEntityPersisted'],
-            AfterEntityUpdatedEvent::class => ['afterEntityUpdated'],
-            AfterEntityPersistedEvent::class => ['afterEntityPersisted'],
-        ];
-    }
-
+    #[AsEventListener(event: BeforeEntityUpdatedEvent::class)]
     public function beforeEntityUpdatedEvent(BeforeEntityUpdatedEvent $event): void
     {
         $entity = $event->getEntityInstance();
@@ -49,6 +40,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $this->handleNormalization($entity);
     }
 
+    #[AsEventListener(event: BeforeEntityPersistedEvent::class)]
     public function beforeEntityPersisted(BeforeEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
@@ -56,12 +48,14 @@ class EasyAdminSubscriber implements EventSubscriberInterface
         $this->handleNormalization($entity);
     }
 
+    #[AsEventListener(event: AfterEntityUpdatedEvent::class)]
     public function afterEntityUpdated(AfterEntityUpdatedEvent $event): void
     {
         $entity = $event->getEntityInstance();
         $this->handleEntity($entity);
     }
 
+    #[AsEventListener(event: AfterEntityPersistedEvent::class)]
     public function afterEntityPersisted(AfterEntityPersistedEvent $event): void
     {
         $entity = $event->getEntityInstance();
