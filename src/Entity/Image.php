@@ -81,12 +81,12 @@ class Image implements EditableEntityInterface, \Stringable
     public function setEvent(?Event $event): static
     {
         // unset the owning side of the relation if necessary
-        if (null === $event && null !== $this->event) {
+        if (!$event instanceof Event && $this->event instanceof Event) {
             $this->event->setImage(null);
         }
 
         // set the owning side of the relation if necessary
-        if (null !== $event && $event->getImage() !== $this) {
+        if ($event instanceof Event && $event->getImage() !== $this) {
             $event->setImage($this);
         }
 

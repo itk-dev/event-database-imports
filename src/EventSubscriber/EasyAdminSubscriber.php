@@ -112,7 +112,7 @@ class EasyAdminSubscriber implements EventSubscriberInterface
 
     private function setImageSource(?Image $image): void
     {
-        if (null !== $image) {
+        if ($image instanceof Image) {
             $local = $image->getLocal();
 
             if (null !== $local) {

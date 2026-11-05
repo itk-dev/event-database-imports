@@ -360,12 +360,12 @@ class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
     public function setFeedItem(?FeedItem $feedItem): static
     {
         // unset the owning side of the relation if necessary
-        if (null === $feedItem && null !== $this->feedItem) {
+        if (!$feedItem instanceof FeedItem && $this->feedItem instanceof FeedItem) {
             $this->feedItem->setEvent(null);
         }
 
         // set the owning side of the relation if necessary
-        if (null !== $feedItem && $feedItem->getEvent() !== $this) {
+        if ($feedItem instanceof FeedItem && $feedItem->getEvent() !== $this) {
             $feedItem->setEvent($this);
         }
 

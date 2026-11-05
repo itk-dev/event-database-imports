@@ -295,12 +295,6 @@ parameters:
 			path: src/Service/Indexing/IndexingDailyOccurrences.php
 
 		-
-			message: '#^Foreach overwrites \$occurrence with its value variable\.$#'
-			identifier: foreach.valueOverwrite
-			count: 1
-			path: src/Service/Indexing/IndexingDailyOccurrences.php
-
-		-
 			message: '#^Method App\\Service\\Indexing\\IndexingDailyOccurrences\:\:getUpdatedAt\(\) should return DateTime but returns DateTime\|null\.$#'
 			identifier: return.type
 			count: 1
@@ -363,12 +357,6 @@ parameters:
 		-
 			message: '#^Cannot call method getPartners\(\) on App\\Entity\\Event\|null\.$#'
 			identifier: method.nonObject
-			count: 1
-			path: src/Service/Indexing/IndexingOccurrences.php
-
-		-
-			message: '#^Foreach overwrites \$occurrence with its value variable\.$#'
-			identifier: foreach.valueOverwrite
 			count: 1
 			path: src/Service/Indexing/IndexingOccurrences.php
 

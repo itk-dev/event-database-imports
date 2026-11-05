@@ -123,10 +123,10 @@ class EventDeleteCommand extends Command
 
                 return Command::FAILURE;
             }
-        } else {
-            $io->info('Events not deleted');
-
-            return Command::INVALID;
         }
+
+        $io->info('Events not deleted');
+
+        return Command::INVALID;
     }
 }

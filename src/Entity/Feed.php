@@ -31,7 +31,7 @@ class Feed implements \Stringable
     private ?string $name = null;
 
     #[ORM\Column(type: Types::JSON)]
-    private array $configuration = [];
+    private array $configuration;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $lastRead = null;

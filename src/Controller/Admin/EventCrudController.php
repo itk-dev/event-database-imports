@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\EasyAdmin\Filter\HasOrganizationFilter;
 use App\Entity\Event;
+use App\Entity\Feed;
 use App\Entity\Organization;
 use App\Service\ImageServiceInterface;
 use App\Types\UserRoles;
@@ -180,7 +181,7 @@ class EventCrudController extends AbstractBaseCrudController
             ->hideWhenCreating();
 
         $event = $this->getContext()?->getEntity()?->getInstance();
-        if (!$event instanceof Event || null !== $event->getFeed()) {
+        if (!$event instanceof Event || $event->getFeed() instanceof Feed) {
             yield AssociationField::new('feed')
                 ->setLabel(new TranslatableMessage('admin.event.edited.feed'))
                 ->hideOnForm()
