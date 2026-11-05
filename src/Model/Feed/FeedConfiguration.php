@@ -14,9 +14,9 @@ final readonly class FeedConfiguration
         public string $rootPointer,
         /** @var non-empty-string */
         public string $dateFormat,
-        /** @var array list<string> */
+        /** @var array<string, string> */
         public array $mapping = [],
-        /** @var array list<string> */
+        /** @var array<string, mixed> */
         public array $defaults = [],
         public array $clientHeaders = [],
         public ?FeedPagination $pagination = null,
