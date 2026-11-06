@@ -9,14 +9,10 @@ when@dev:
             collect_serializer_data: true
 
 when@test:
-    web_profiler:
-        toolbar: false
-        intercept_redirects: false
-
     framework:
-        # `collect_serializer_data: true` is not needed in tests, but
         # `collect: true` is required so MailerAssertionsTrait can read the
         # message logger events via the profiler subsystem.
         profiler:
             collect: true
             only_exceptions: false
+            collect_serializer_data: true
