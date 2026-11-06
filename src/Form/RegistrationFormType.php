@@ -37,24 +37,20 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
-                    new NotBlank([
-                        'message' => new TranslatableMessage('registration.form.enter_password'),
-                    ]),
-                    new Length([
-                        'min' => self::MIN_LENGTH,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    new NotBlank(message: 'registration.form.enter_password'),
+                    new Length(
+                        min: self::MIN_LENGTH,
                         // max length allowed by Symfony for security reasons
-                        'max' => self::MAX_LENGTH,
-                    ]),
+                        max: self::MAX_LENGTH,
+                        minMessage: 'Your password should be at least {{ limit }} characters',
+                    ),
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => new TranslatableMessage('registration.form.agree_terms'),
                 'mapped' => false,
                 'constraints' => [
-                    new IsTrue([
-                        'message' => new TranslatableMessage('registration.form.agree_terms'),
-                    ]),
+                    new IsTrue(message: 'registration.form.agree_terms'),
                 ],
             ])
         ;
