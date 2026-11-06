@@ -64,7 +64,8 @@ class PurgeFailedCommand extends Command
     private function purgeFailed(int $since): int
     {
         $connection = $this->entityManager->getConnection();
-        $sql = 'DELETE FROM messenger_messages WHERE created_at < DATE_SUB(NOW(), INTERVAL ? DAY)';
+        // Messenger stores created_at in UTC; NOW() would use the server time zone (Europe/Copenhagen), see ADR 008.
+        $sql = 'DELETE FROM messenger_messages WHERE created_at < DATE_SUB(UTC_TIMESTAMP(), INTERVAL ? DAY)';
         $stmt = $connection->prepare($sql);
         $stmt->bindValue(1, $since, ParameterType::INTEGER);
 
