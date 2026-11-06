@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-124](https://github.com/itk-dev/event-database-imports/pull/124)
+  Update the dev node image to Node 24
 - [PR-123](https://github.com/itk-dev/event-database-imports/pull/123)
   Update composer dependencies (minor/patch) and fix feed mapping types for Valinor 2.6
 - [PR-122](https://github.com/itk-dev/event-database-imports/pull/122)
