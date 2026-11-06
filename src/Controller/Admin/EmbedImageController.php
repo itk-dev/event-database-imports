@@ -40,7 +40,10 @@ class EmbedImageController extends AbstractBaseCrudController
                 ->setUploadDir(UriHelper::UPLOAD_DIR)
                 ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
                 // Same types as feed images, and reject files the image library cannot decode.
-                ->setFileConstraints(new ImageConstraint(mimeTypes: $this->allowedMimeTypes, detectCorrupted: true)),
+                ->setFileConstraints(new ImageConstraint(mimeTypes: $this->allowedMimeTypes, detectCorrupted: true))
+                // Only offer the allowed types in the file picker. Not via mimeTypes(), which adds a second constraint.
+                ->setCustomOption(ImageField::OPTION_MIME_TYPES, null)
+                ->setFormTypeOption('attr.accept', implode(',', $this->allowedMimeTypes)),
         ];
     }
 
