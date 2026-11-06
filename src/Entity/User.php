@@ -227,9 +227,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, \String
         }
     }
 
+    #[\Deprecated]
     public function eraseCredentials(): void
     {
-        // TODO: Implement eraseCredentials() method.
     }
 
     public function getUserIdentifier(): string

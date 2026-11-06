@@ -10,6 +10,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 - [PR-126](https://github.com/itk-dev/event-database-imports/pull/126)
   Update Symfony Flex recipes
+- [PR-125](https://github.com/itk-dev/event-database-imports/pull/125)
+  Fix deprecations (validator constraint options, email verification, `eraseCredentials()`, LiipImagine Twig mode)
 - [PR-124](https://github.com/itk-dev/event-database-imports/pull/124)
   Update the dev node image to Node 24
 - [PR-123](https://github.com/itk-dev/event-database-imports/pull/123)
