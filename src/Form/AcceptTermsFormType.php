@@ -20,9 +20,7 @@ class AcceptTermsFormType extends AbstractType
                 'label' => new TranslatableMessage('registration.form.agree_terms'),
                 'mapped' => false,
                 'constraints' => [
-                    new IsTrue([
-                        'message' => new TranslatableMessage('registration.form.agree_terms'),
-                    ]),
+                    new IsTrue(message: 'registration.form.agree_terms'),
                 ],
             ])
         ;

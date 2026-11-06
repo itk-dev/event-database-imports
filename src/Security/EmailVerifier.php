@@ -44,7 +44,7 @@ readonly class EmailVerifier
      */
     public function handleEmailConfirmation(Request $request, UserInterface $user): void
     {
-        $this->verifyEmailHelper->validateEmailConfirmation($request->getUri(), (string) $user->getId(), $user->getMail());
+        $this->verifyEmailHelper->validateEmailConfirmationFromRequest($request, (string) $user->getId(), $user->getMail());
 
         $user->setEmailVerifiedAt(\Carbon\CarbonImmutable::now());
 

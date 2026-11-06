@@ -6,6 +6,9 @@ liip_imagine:
     # Use warmup messages
     messenger: true
 
+    twig:
+        mode: lazy
+
     resolvers:
         default:
             web_path:

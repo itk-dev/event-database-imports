@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-125](https://github.com/itk-dev/event-database-imports/pull/125)
+  Fix deprecations (validator constraint options, email verification, `eraseCredentials()`, LiipImagine Twig mode)
 - [PR-123](https://github.com/itk-dev/event-database-imports/pull/123)
   Update composer dependencies (minor/patch) and fix feed mapping types for Valinor 2.6
 - [PR-122](https://github.com/itk-dev/event-database-imports/pull/122)
