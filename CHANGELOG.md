@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-127](https://github.com/itk-dev/event-database-imports/pull/127)
+  Validate admin image uploads (allowed image types only, reject images that cannot be decoded)
 - [PR-126](https://github.com/itk-dev/event-database-imports/pull/126)
   Update Symfony Flex recipes
 - [PR-125](https://github.com/itk-dev/event-database-imports/pull/125)

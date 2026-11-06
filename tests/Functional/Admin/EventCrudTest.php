@@ -71,6 +71,8 @@ final class EventCrudTest extends AbstractAdminTestCase
         $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
 
         $this->assertResponseIsSuccessful();
+        // The image picker only offers the allowed image types.
+        $this->assertSelectorExists('input[type="file"][accept="image/jpeg,image/png,image/webp"]');
     }
 
     /**
