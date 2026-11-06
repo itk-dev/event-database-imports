@@ -49,7 +49,7 @@ services:
       - xpack.security.enabled=false
 
   node:
-    image: node:22
+    image: node:24
     profiles:
       - dev
     networks:
