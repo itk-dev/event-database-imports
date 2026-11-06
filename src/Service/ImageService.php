@@ -130,8 +130,14 @@ final readonly class ImageService implements ImageServiceInterface
     public function transform(Image $image): void
     {
         $path = $image->getLocal();
-        if (!is_null($path)) {
-            $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
+        if (null === $path) {
+            return;
+        }
+
+        $relativePath = $this->getRelativePath($path);
+        // Only warm up actual files. A folder or a missing file makes the WarmupCache handler fail.
+        if (is_file($this->publicPath.ltrim($relativePath, '/'))) {
+            $this->messageBus->dispatch(new WarmupCache($relativePath));
         }
     }
 
