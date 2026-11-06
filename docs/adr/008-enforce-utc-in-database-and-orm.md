@@ -51,3 +51,11 @@ All "view layers" need to be configured to factor in the model timezone. For the
 must be serialized with timezone (already the default). For EasyAdmin all datetime fields must be configured with
 correct "model" and "view" timezones. This is done with [field configurators](https://symfony.com/bundles/EasyAdminBundle/current/fields.html#field-configurators)
 and filter configurators. See `App\EasyAdmin\DateTimeFieldConfigurator` and `App\EasyAdmin\DateTimeFilterConfigurator`
+
+MariaDB does not necessarily run in UTC. On the servers it uses the host time zone (`SYSTEM`, `Europe/Copenhagen`). In
+development it is UTC today, but itk-dev/devops_itkdev-docker#164 changes it to `Europe/Copenhagen`. This does not
+affect the stored values, because `DATETIME` columns have no time zone and the conversion to UTC happens in PHP. But SQL
+that uses the database clock gets the server's local time, so a bug only shows on the servers:
+`NOW()`, `CURRENT_TIMESTAMP` and `CURDATE()` must not be compared with the stored UTC values. Use `UTC_TIMESTAMP()` (or
+pass the time from PHP as a parameter). Symfony Messenger's Doctrine transport also stores `created_at` and
+`available_at` in UTC.
