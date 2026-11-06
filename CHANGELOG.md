@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-131](https://github.com/itk-dev/event-database-imports/pull/131)
+  Follow redirects in JSON feeds, and report HTTP errors as HTTP errors
 - [PR-128](https://github.com/itk-dev/event-database-imports/pull/128)
   Purge failed messages by UTC time, run the dev `mariadb` service in `Europe/Copenhagen` like the servers, and
   document the database time zone in ADR 008

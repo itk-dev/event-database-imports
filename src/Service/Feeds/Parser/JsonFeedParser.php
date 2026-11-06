@@ -4,6 +4,8 @@ namespace App\Service\Feeds\Parser;
 
 use App\Entity\Feed;
 use Cerbero\JsonParser\JsonParser;
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
 use League\Uri\Uri;
 use Psr\Http\Message\RequestInterface;
@@ -13,6 +15,7 @@ final readonly class JsonFeedParser implements FeedParserInterface
 {
     public function __construct(
         private LoggerInterface $logger,
+        private ClientInterface $client = new Client(),
     ) {
     }
 
@@ -51,10 +54,14 @@ final readonly class JsonFeedParser implements FeedParserInterface
 
     public function parseUrl(Feed $feed, RequestInterface $request, string $pointerPath = '/-'): \Generator
     {
-        $parser = new JsonParser($request);
-        $parser->pointer($pointerPath);
-
         try {
+            // send() follows redirects and throws on HTTP errors. Passing the request to JsonParser would use
+            // Guzzle's PSR-18 sendRequest(), which does neither, so a redirect or error page was parsed as JSON.
+            $response = $this->client->send($request, ['stream' => true]);
+
+            $parser = new JsonParser($response);
+            $parser->pointer($pointerPath);
+
             foreach ($parser as $item) {
                 yield $item;
             }
