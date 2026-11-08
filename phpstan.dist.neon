@@ -15,7 +15,6 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.associationType
         - identifier: doctrine.columnType
-        - identifier: method.unused
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
     # pb30/phpstan-composer-analysis: report packages used directly but only installed transitively ("shadow
