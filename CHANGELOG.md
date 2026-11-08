@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-08
+
 - [PR-133](https://github.com/itk-dev/event-database-imports/pull/133)
   Use the Symfony serializer `Attribute` namespace instead of the deprecated `Annotation` namespace
 - [PR-132](https://github.com/itk-dev/event-database-imports/pull/132)
@@ -274,7 +276,8 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.4.0...HEAD
+[1.4.0]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/itk-dev/event-database-imports/compare/1.2.7...1.3.0
 [1.2.7]: https://github.com/itk-dev/event-database-imports/compare/1.2.6...1.2.7
 [1.2.6]: https://github.com/itk-dev/event-database-imports/compare/1.2.5...1.2.6
