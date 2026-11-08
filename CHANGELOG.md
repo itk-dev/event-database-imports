@@ -9,7 +9,8 @@ See [keep a changelog] for information about writing changes to this log.
 ## [Unreleased]
 
 - [PR-132](https://github.com/itk-dev/event-database-imports/pull/132)
-  Fix event images being cleared when an event is edited in the admin; store admin images as `uploads/<file>`
+  Fix event images being cleared when an event is edited in the admin, and deleted images coming back; store admin
+  images as `uploads/<file>`; index events without an image with empty `imageUrls`
 - [PR-131](https://github.com/itk-dev/event-database-imports/pull/131)
   Follow redirects in JSON feeds, and report HTTP errors as HTTP errors
 - [PR-130](https://github.com/itk-dev/event-database-imports/pull/130)
