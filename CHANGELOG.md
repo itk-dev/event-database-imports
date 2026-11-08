@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-131](https://github.com/itk-dev/event-database-imports/pull/131)
+  Follow redirects in JSON feeds, and report HTTP errors as HTTP errors
 - [PR-130](https://github.com/itk-dev/event-database-imports/pull/130)
   Only request image thumbnail warm-up for files that exist
 - [PR-129](https://github.com/itk-dev/event-database-imports/pull/129)
