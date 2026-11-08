@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
 use App\Entity\Image;
-use App\Service\ImageServiceInterface;
 use App\Utils\UriHelper;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -17,7 +18,6 @@ class EmbedImageController extends AbstractBaseCrudController
      * @param list<non-empty-string> $allowedMimeTypes
      */
     public function __construct(
-        private readonly ImageServiceInterface $imageService,
         #[Autowire('%env(json:ALLOWED_IMAGE_MIME_TYPES)%')]
         private readonly array $allowedMimeTypes,
     ) {
@@ -46,14 +46,5 @@ class EmbedImageController extends AbstractBaseCrudController
                 ->setCustomOption(ImageField::OPTION_MIME_TYPES, null)
                 ->setFormTypeOption('attr.accept', implode(',', $this->allowedMimeTypes)),
         ];
-    }
-
-    private function getImageUrl(?string $imageUrl, string $size): ?string
-    {
-        if (null === $imageUrl) {
-            return null;
-        }
-
-        return $this->imageService->getTransformedImageUrls($imageUrl)[$size];
     }
 }

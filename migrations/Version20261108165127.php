@@ -28,6 +28,8 @@ final class Version20261108165127 extends AbstractMigration
 
     public function down(Schema $schema): void
     {
+        // Uploads that were stored as the plain "<file>" before up() cannot be told apart, so they also get
+        // "/uploads/<file>" (the value the old image import wrote for them anyway).
         $this->addSql("UPDATE image SET local = CONCAT('/', local) WHERE local LIKE 'uploads/_%'");
     }
 }

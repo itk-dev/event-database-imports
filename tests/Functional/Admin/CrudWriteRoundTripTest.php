@@ -226,9 +226,14 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
             $this->assertFileExists($imageDir.$replaced);
             $this->assertFileDoesNotExist($imageDir.$local);
 
-            // 5. Delete the image the way the admin's delete button does (it lists the file in "deleted_files"),
-            // then run the image import: the file is deleted and the event has no image. The import must not
-            // restore the image from its source, which points at the deleted file.
+            // 5. Delete the image the way the admin's delete button does: its JavaScript lists the stored value in
+            // the hidden "deleted_files" field (verified against EasyAdmin 5.8 in the browser). Then run the image
+            // import: the file is deleted and the event has no image. The import must not restore the image from its
+            // source, which points at the deleted file.
+            // The detached image row is kept on purpose: it is linked to no event, so it is never indexed or shown.
+            // Do not add orphanRemoval to Event::$image; Image::$event cascades "remove", so removing the orphan
+            // would delete the event.
+            $imageId = $this->findEvent($id)->getImage()?->getId();
             $form = $this->editForm($id);
             $form['Event[image][local][deleted_files]'] = (string) json_encode([$replaced]);
             $this->client->submit($form);
@@ -236,6 +241,9 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
 
             $this->assertFileDoesNotExist($imageDir.$replaced);
             $this->assertNull($this->findEvent($id)->getImage());
+            $detached = $this->entityManager()->getRepository(\App\Entity\Image::class)->find($imageId);
+            $this->assertInstanceOf(\App\Entity\Image::class, $detached);
+            $this->assertNull($detached->getEvent(), 'The detached image is linked to no event');
             $handler(new ImageMessage($id, null));
             $this->assertNull($this->findEvent($id)->getImage());
         } finally {
@@ -244,6 +252,29 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
                 @unlink($imageDir.$file);
             }
         }
+    }
+
+    /**
+     * Creating an event in the admin without uploading an image saves the event without an image.
+     */
+    public function testCreateEventWithoutImage(): void
+    {
+        $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
+        $organization = $this->entityManager()->getRepository(\App\Entity\Organization::class)->findOneBy([]);
+        $this->assertInstanceOf(\App\Entity\Organization::class, $organization);
+
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
+        $this->assertResponseIsSuccessful();
+        $this->client->submit($crawler->filter('form[name="Event"]')->form(), [
+            'Event[title]' => 'Event without image',
+            'Event[organization]' => (string) $organization->getId(),
+        ]);
+        $this->assertResponseRedirects();
+
+        $this->entityManager()->clear();
+        $event = $this->entityManager()->getRepository(Event::class)->findOneBy(['title' => 'Event without image']);
+        $this->assertInstanceOf(Event::class, $event);
+        $this->assertNull($event->getImage());
     }
 
     private function editForm(int $id): \Symfony\Component\DomCrawler\Form
@@ -261,6 +292,35 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
         $this->assertInstanceOf(Event::class, $event);
 
         return $event;
+    }
+
+    /**
+     * Removing an image must never delete its event (Image::$event had cascade "remove").
+     */
+    public function testRemovingImageKeepsEvent(): void
+    {
+        $event = $this->entityManager()->getRepository(Event::class)->findOneBy(['title' => 'Org A Event 1']);
+        $this->assertInstanceOf(Event::class, $event);
+        $image = new \App\Entity\Image()->setTitle('To remove')->setSource('https://example.com/image.png');
+        $event->setImage($image);
+        $this->entityManager()->persist($image);
+        $this->entityManager()->flush();
+        $id = $event->getId();
+        $imageId = $image->getId();
+        $this->assertNotNull($id);
+        $this->entityManager()->clear();
+
+        // Load the image from the database, so its link back to the event is set as in normal use. Detach it from
+        // the event and remove it.
+        $image = $this->entityManager()->getRepository(\App\Entity\Image::class)->find($imageId);
+        $this->assertInstanceOf(\App\Entity\Image::class, $image);
+        $this->assertInstanceOf(Event::class, $image->getEvent());
+        $image->getEvent()->setImage(null);
+        $this->entityManager()->remove($image);
+        $this->entityManager()->flush();
+
+        $this->assertNull($this->findEvent($id)->getImage());
+        $this->assertNull($this->entityManager()->getRepository(\App\Entity\Image::class)->find($imageId));
     }
 
     /**
