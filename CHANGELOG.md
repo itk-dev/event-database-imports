@@ -8,6 +8,8 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+- [PR-133](https://github.com/itk-dev/event-database-imports/pull/133)
+  Use the Symfony serializer `Attribute` namespace instead of the deprecated `Annotation` namespace
 - [PR-132](https://github.com/itk-dev/event-database-imports/pull/132)
   Fix event images being cleared when an event is edited in the admin, and deleted images coming back; store admin
   images as `uploads/<file>`; index events without an image with empty `imageUrls`
