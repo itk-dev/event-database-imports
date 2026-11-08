@@ -84,7 +84,14 @@ class EasyAdminSubscriber
                 $entity->setExcerpt($description);
             }
 
-            $this->setImageSource($entity->getImage());
+            $image = $entity->getImage();
+            if ($image instanceof Image && !$entity->getFeed() instanceof Feed && in_array($image->getLocal(), [null, ''], true)) {
+                // The image file was deleted in the admin (or none was uploaded). Detach the image, so the image
+                // import does not restore it from its source, which points at the deleted file.
+                $entity->setImage(null);
+            } else {
+                $this->setImageSource($image);
+            }
         }
 
         if ($entity instanceof Image) {

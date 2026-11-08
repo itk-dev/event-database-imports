@@ -226,14 +226,18 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
             $this->assertFileExists($imageDir.$replaced);
             $this->assertFileDoesNotExist($imageDir.$local);
 
-            // 5. Delete the image: the file is deleted and nothing is stored.
+            // 5. Delete the image the way the admin's delete button does (it lists the file in "deleted_files"),
+            // then run the image import: the file is deleted and the event has no image. The import must not
+            // restore the image from its source, which points at the deleted file.
             $form = $this->editForm($id);
-            $form['Event[image][local][delete]']->tick();
+            $form['Event[image][local][deleted_files]'] = (string) json_encode([$replaced]);
             $this->client->submit($form);
             $this->assertResponseRedirects();
 
-            $this->assertNull($this->findEvent($id)->getImage()?->getLocal());
             $this->assertFileDoesNotExist($imageDir.$replaced);
+            $this->assertNull($this->findEvent($id)->getImage());
+            $handler(new ImageMessage($id, null));
+            $this->assertNull($this->findEvent($id)->getImage());
         } finally {
             @unlink($source);
             foreach ($files as $file) {
