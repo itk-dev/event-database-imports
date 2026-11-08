@@ -109,7 +109,7 @@ class EasyAdminSubscriber
         if ($image instanceof Image) {
             $local = $image->getLocal();
 
-            if (null !== $local) {
+            if (null !== $local && '' !== $local) {
                 $url = $this->uriHelper->getAbsoluteLocalFileUrl($local);
 
                 $image->setSource($url);

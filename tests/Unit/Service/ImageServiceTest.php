@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Unit\Service;
 
 use App\Entity\Image;
+use App\Exception\ImageFetchException;
 use App\Service\ImageService;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
@@ -31,19 +32,35 @@ final class ImageServiceTest extends TestCase
         touch($this->publicPath.'uploads/existing.png');
     }
 
-    public function testWarmsUpExistingFile(): void
+    public function testWarmsUpAdminUpload(): void
     {
         $this->assertSame(['uploads/existing.png'], $this->transform('uploads/existing.png'));
     }
 
     public function testSkipsUploadFolder(): void
     {
-        $this->assertSame([], $this->transform('/uploads/'));
+        $this->assertSame([], $this->transform('/uploads'));
     }
 
     public function testSkipsMissingFile(): void
     {
         $this->assertSame([], $this->transform('uploads/missing.png'));
+    }
+
+    /**
+     * The import step must keep the value EasyAdmin's upload field stores for an admin upload ("uploads/<file>").
+     * The field rejects "/uploads/<file>", so the next edit of the event cleared the image.
+     */
+    public function testFetchKeepsAdminUploadPath(): void
+    {
+        $this->assertSame('uploads/existing.png', $this->service()->fetch('https://example.com/images/uploads/existing.png'));
+    }
+
+    public function testFetchRejectsUploadFolder(): void
+    {
+        $this->expectException(ImageFetchException::class);
+
+        $this->service()->fetch('https://example.com/images/uploads');
     }
 
     /**
@@ -61,17 +78,21 @@ final class ImageServiceTest extends TestCase
             return new Envelope($message);
         });
 
-        $service = new ImageService(
+        $this->service($bus)->transform(new Image()->setLocal($local));
+
+        return $dispatched;
+    }
+
+    private function service(?MessageBusInterface $bus = null): ImageService
+    {
+        return new ImageService(
             new MockHttpClient(),
             $this->publicPath,
             'https://example.com',
             ['image/png'],
-            $bus,
+            $bus ?? $this->createStub(MessageBusInterface::class),
             $this->createStub(CacheManager::class),
             $this->createStub(FilterManager::class),
         );
-        $service->transform(new Image()->setLocal($local));
-
-        return $dispatched;
     }
 }

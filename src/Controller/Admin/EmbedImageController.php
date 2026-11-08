@@ -37,8 +37,9 @@ class EmbedImageController extends AbstractBaseCrudController
                 ->setLabel(new TranslatableMessage('admin.image.title')),
             ImageField::new('local')
                 ->setLabel(new TranslatableMessage('admin.image.local'))
-                ->setUploadDir(UriHelper::UPLOAD_DIR)
-                ->setUploadedFileNamePattern('[slug]-[randomhash].[extension]')
+                // Store "uploads/<file>", relative to the image root like fetched feed images ("<folder>/<file>").
+                ->setUploadDir(UriHelper::IMAGE_DIR)
+                ->setUploadedFileNamePattern(UriHelper::UPLOAD_FOLDER.'/[slug]-[randomhash].[extension]')
                 // Same types as feed images, and reject files the image library cannot decode.
                 ->setFileConstraints(new ImageConstraint(mimeTypes: $this->allowedMimeTypes, detectCorrupted: true))
                 // Only offer the allowed types in the file picker. Not via mimeTypes(), which adds a second constraint.

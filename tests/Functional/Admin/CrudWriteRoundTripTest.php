@@ -10,6 +10,8 @@ use App\DataFixtures\OrganizationFixtures;
 use App\Entity\Event;
 use App\Entity\Occurrence;
 use App\Entity\Tag;
+use App\Message\ImageMessage;
+use App\MessageHandler\ImageHandler;
 use App\Tests\Fixtures\TestEventFixtures;
 use App\Tests\Fixtures\TestUserFixtures;
 use App\Tests\Functional\AbstractAdminTestCase;
@@ -156,6 +158,105 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
         $updated = $this->entityManager()->getRepository(Event::class)->find($id);
         $this->assertInstanceOf(Event::class, $updated);
         $this->assertNull($updated->getUrl());
+    }
+
+    /**
+     * The full life of an admin image: upload it, let the async import handle it, edit the event without touching
+     * the image, replace the image, and delete it.
+     *
+     * Regression: the import rewrote the stored path to "/uploads/<file>", which EasyAdmin's upload field rejects,
+     * so the next edit of the event cleared the image (prod, after 1.3.0).
+     */
+    public function testAdminImageLifecycle(): void
+    {
+        $imageDir = self::getContainer()->getParameter('kernel.project_dir').'/public/images/';
+        $source = tempnam(sys_get_temp_dir(), 'upload').'.png';
+        imagepng(imagecreatetruecolor(10, 10), $source);
+        $files = [];
+
+        try {
+            $event = $this->entityManager()->getRepository(Event::class)->findOneBy(['title' => 'Org A Event 1']);
+            $this->assertInstanceOf(Event::class, $event);
+            $id = $event->getId();
+            $this->assertNotNull($id);
+
+            $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
+
+            // 1. Upload an image through the admin.
+            $form = $this->editForm($id);
+            $form['Event[image][title]'] = 'Test image';
+            $form['Event[image][local][file]']->upload($source);
+            $this->client->submit($form);
+            $this->assertResponseRedirects();
+
+            $local = $this->findEvent($id)->getImage()?->getLocal();
+            $this->assertIsString($local);
+            $files[] = $local;
+            $this->assertMatchesRegularExpression('#^uploads/[^/]+\.png$#', $local, 'An admin upload is stored as "uploads/<file>"');
+            $this->assertFileExists($imageDir.$local);
+            $this->assertStringEndsWith('/images/'.$local, (string) $this->findEvent($id)->getImage()?->getSource());
+
+            // 2. The async import step (ImageMessage) must keep the stored value.
+            $imageId = $this->findEvent($id)->getImage()?->getId();
+            $handler = self::getContainer()->get(ImageHandler::class);
+            $this->assertInstanceOf(ImageHandler::class, $handler);
+            $handler(new ImageMessage($id, $imageId));
+            $this->assertSame($local, $this->findEvent($id)->getImage()?->getLocal());
+
+            // 3. Edit the event without touching the image: the image is kept.
+            $this->client->submit($this->editForm($id), ['Event[title]' => 'Org A Event 1 (edited)']);
+            $this->assertResponseRedirects();
+
+            $image = $this->findEvent($id)->getImage();
+            $this->assertSame($local, $image?->getLocal());
+            $this->assertStringEndsWith('/images/'.$local, (string) $image->getSource());
+            $this->assertFileExists($imageDir.$local);
+
+            // 4. Replace the image: the new file is stored and the old file is deleted.
+            $form = $this->editForm($id);
+            $form['Event[image][local][file]']->upload($source);
+            $this->client->submit($form);
+            $this->assertResponseRedirects();
+
+            $replaced = $this->findEvent($id)->getImage()?->getLocal();
+            $this->assertIsString($replaced);
+            $files[] = $replaced;
+            $this->assertNotSame($local, $replaced);
+            $this->assertMatchesRegularExpression('#^uploads/[^/]+\.png$#', $replaced);
+            $this->assertFileExists($imageDir.$replaced);
+            $this->assertFileDoesNotExist($imageDir.$local);
+
+            // 5. Delete the image: the file is deleted and nothing is stored.
+            $form = $this->editForm($id);
+            $form['Event[image][local][delete]']->tick();
+            $this->client->submit($form);
+            $this->assertResponseRedirects();
+
+            $this->assertNull($this->findEvent($id)->getImage()?->getLocal());
+            $this->assertFileDoesNotExist($imageDir.$replaced);
+        } finally {
+            @unlink($source);
+            foreach ($files as $file) {
+                @unlink($imageDir.$file);
+            }
+        }
+    }
+
+    private function editForm(int $id): \Symfony\Component\DomCrawler\Form
+    {
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $this->assertResponseIsSuccessful();
+
+        return $crawler->filter('form[name="Event"]')->form();
+    }
+
+    private function findEvent(int $id): Event
+    {
+        $this->entityManager()->clear();
+        $event = $this->entityManager()->getRepository(Event::class)->find($id);
+        $this->assertInstanceOf(Event::class, $event);
+
+        return $event;
     }
 
     /**
