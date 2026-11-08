@@ -131,6 +131,34 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
     }
 
     /**
+     * Clearing the (optional) URL of an event saves it as null instead of failing with a 500.
+     */
+    public function testClearEventUrlViaEditForm(): void
+    {
+        $event = $this->entityManager()->getRepository(Event::class)->findOneBy(['title' => 'Org A Event 1']);
+        $this->assertInstanceOf(Event::class, $event);
+        $event->setUrl('https://example.com/event');
+        $this->entityManager()->flush();
+        $id = $event->getId();
+        $this->entityManager()->clear();
+
+        $this->loginAs(TestUserFixtures::ADMIN_EMAIL);
+
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));
+        $this->assertResponseIsSuccessful();
+
+        $form = $crawler->filter('form[name="Event"]')->form();
+        $this->client->submit($form, ['Event[url]' => '']);
+
+        $this->assertResponseRedirects();
+
+        $this->entityManager()->clear();
+        $updated = $this->entityManager()->getRepository(Event::class)->find($id);
+        $this->assertInstanceOf(Event::class, $updated);
+        $this->assertNull($updated->getUrl());
+    }
+
+    /**
      * Removing an event cascades to its occurrences — the data-integrity
      * behavior the admin delete action depends on.
      */
