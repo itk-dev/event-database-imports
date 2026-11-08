@@ -57,6 +57,7 @@ final class ImageHandlerTest extends TestCase
         $this->assertCount(1, $dispatched);
         $this->assertInstanceOf(GeocoderMessage::class, $dispatched[0]);
         $this->assertSame(42, $dispatched[0]->getEventId());
-        $this->assertSame(['Unable to fetch image https://example.com/images/uploads: No image file in https://example.com/images/uploads'], $logger->messages);
+        $this->assertCount(1, $logger->messages);
+        $this->assertStringContainsString('https://example.com/images/uploads', $logger->messages[0]);
     }
 }

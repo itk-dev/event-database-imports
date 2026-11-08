@@ -8,15 +8,17 @@ use App\Entity\Image;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\EntityManagerInterface;
 use DoctrineMigrations\Version20261108165127;
-use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Psr\Log\NullLogger;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * The migration rewrites admin image paths in prod data, so check it against every stored format, not only that it
  * runs on an empty database.
+ *
+ * Migrations are outside the covered source (src/), so they cannot be a coverage target.
  */
-#[CoversClass(Version20261108165127::class)]
+#[CoversNothing]
 final class AdminImagePathMigrationTest extends KernelTestCase
 {
     public function testUpRewritesAdminUploadsOnly(): void
