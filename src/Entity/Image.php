@@ -33,7 +33,8 @@ class Image implements EditableEntityInterface, \Stringable
     #[SerializedPath('[original]')]
     private ?string $local = null;
 
-    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
+    // No "remove" cascade: removing an image must never delete its event.
+    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist'])]
     private ?Event $event = null;
 
     #[ORM\Column(length: 255, nullable: true)]
