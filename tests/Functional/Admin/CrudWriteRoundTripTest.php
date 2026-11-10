@@ -277,6 +277,54 @@ final class CrudWriteRoundTripTest extends AbstractAdminTestCase
         $this->assertNull($event->getImage());
     }
 
+    /**
+     * An organization editor with more than one organization can create an event for each of them, but not for an
+     * organization that they are not a member of.
+     */
+    public function testOrgEditorWithTwoOrganizationsCreatesEvent(): void
+    {
+        $this->loginAs(TestUserFixtures::ORG_EDITOR_AB_EMAIL);
+        $user = $this->entityManager()->getRepository(\App\Entity\User::class)->findOneBy(['mail' => TestUserFixtures::ORG_EDITOR_AB_EMAIL]);
+        $this->assertInstanceOf(\App\Entity\User::class, $user);
+        $ownOrganization = $user->getOrganizations()->last();
+        $this->assertInstanceOf(\App\Entity\Organization::class, $ownOrganization);
+        $otherOrganization = array_find($this->entityManager()->getRepository(\App\Entity\Organization::class)->findAll(), fn ($organization): bool => !$user->getOrganizations()->contains($organization));
+        $this->assertInstanceOf(\App\Entity\Organization::class, $otherOrganization);
+
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
+        $this->assertResponseIsSuccessful();
+        $this->client->submit($crawler->filter('form[name="Event"]')->form(), [
+            'Event[title]' => 'Org editor AB event',
+            'Event[organization]' => (string) $ownOrganization->getId(),
+        ]);
+        $this->assertResponseRedirects();
+
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
+        $form = $crawler->filter('form[name="Event"]')->form()->disableValidation();
+        $this->client->submit($form, [
+            'Event[title]' => 'Org editor AB other event',
+            'Event[organization]' => (string) $otherOrganization->getId(),
+        ]);
+        $this->assertResponseIsUnprocessable();
+
+        // A request without an organization is also rejected.
+        $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
+        $form = $crawler->filter('form[name="Event"]')->form()->disableValidation();
+        $this->client->submit($form, [
+            'Event[title]' => 'Org editor AB event without organization',
+            'Event[organization]' => '',
+        ]);
+        $this->assertResponseIsUnprocessable();
+
+        $this->entityManager()->clear();
+        $repository = $this->entityManager()->getRepository(Event::class);
+        $event = $repository->findOneBy(['title' => 'Org editor AB event']);
+        $this->assertInstanceOf(Event::class, $event);
+        $this->assertSame($ownOrganization->getId(), $event->getOrganization()?->getId());
+        $this->assertNotInstanceOf(Event::class, $repository->findOneBy(['title' => 'Org editor AB other event']));
+        $this->assertNotInstanceOf(Event::class, $repository->findOneBy(['title' => 'Org editor AB event without organization']));
+    }
+
     private function editForm(int $id): \Symfony\Component\DomCrawler\Form
     {
         $crawler = $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::EDIT, ['entityId' => $id]));

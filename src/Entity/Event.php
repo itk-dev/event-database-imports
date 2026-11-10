@@ -15,6 +15,7 @@ use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Serializer\Attribute\SerializedPath;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
@@ -61,6 +62,7 @@ class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
     #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'events')]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[organizer]')]
+    #[Assert\NotNull]
     private ?Organization $organization = null;
 
     #[ORM\ManyToMany(targetEntity: Organization::class, inversedBy: 'partnerEvents', cascade: ['persist'])]

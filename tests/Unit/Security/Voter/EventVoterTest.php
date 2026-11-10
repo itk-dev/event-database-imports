@@ -101,6 +101,47 @@ final class EventVoterTest extends TestCase
     }
 
     /**
+     * Grants save actions to an organization editor for a new event without an organization. A user with more than
+     * one organization selects the organization in the form, so the new event has none when the page is shown.
+     */
+    public function testSaveActionsAllowedForOrganizationEditorOnNewEventWithoutOrganization(): void
+    {
+        $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
+
+        $user = new User();
+        $user->addOrganization(new Organization());
+        $user->addOrganization(new Organization());
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(Event::class, new Event()), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_GRANTED,
+                $voter->vote($this->createToken($user), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected save action %s to be granted for a new event', $action),
+            );
+        }
+    }
+
+    /**
+     * Denies save actions to an organization editor without organizations for a new event. The user cannot select
+     * an organization, so the event can never be valid.
+     */
+    public function testSaveActionsDeniedForOrganizationEditorWithoutOrganizationsOnNewEvent(): void
+    {
+        $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
+        $user = new User();
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(Event::class, new Event()), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $voter->vote($this->createToken($user), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected save action %s to be denied for a user without organizations', $action),
+            );
+        }
+    }
+
+    /**
      * Denies save actions to an organization editor for an event owned by another organization.
      */
     public function testOrganizationEditorCannotSaveOtherOrgEvent(): void

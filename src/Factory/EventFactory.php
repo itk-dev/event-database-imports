@@ -11,6 +11,7 @@ use App\Repository\EventRepository;
 use App\Repository\FeedRepository;
 use App\Utils\UriHelper;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final readonly class EventFactory
 {
@@ -23,6 +24,7 @@ final readonly class EventFactory
         private OccurrencesFactory $occurrencesFactory,
         private ImageFactory $imageFactory,
         private LoggerInterface $logger,
+        private ValidatorInterface $validator,
     ) {
     }
 
@@ -49,6 +51,13 @@ final readonly class EventFactory
         }
 
         $this->setValues($event, $feedItemEntity, $item, $feed);
+
+        // Feed events must meet the same entity constraints as events created in the admin.
+        $violations = $this->validator->validate($event);
+        if (count($violations) > 0) {
+            throw new FactoryException('Invalid event: '.$violations);
+        }
+
         $this->eventRepository->save($event, true);
 
         return $event;
