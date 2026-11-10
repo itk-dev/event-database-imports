@@ -76,6 +76,31 @@ final class EventCrudTest extends AbstractAdminTestCase
     }
 
     /**
+     * Verifies the new event form shows the create button for each role that can create events.
+     *
+     * A new event has no organization until the form is submitted, unless the user has exactly one organization.
+     */
+    #[DataProvider('createRoleProvider')]
+    public function testNewFormShowsCreateButton(string $email): void
+    {
+        $this->loginAs($email);
+        $this->client->request(\Symfony\Component\HttpFoundation\Request::METHOD_GET, $this->adminUrl(EventCrudController::class, Action::NEW));
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorExists(sprintf('button[name="ea[newForm][btn]"][value="%s"]', Action::SAVE_AND_RETURN));
+    }
+
+    /**
+     * @return iterable<array{string}>
+     */
+    public static function createRoleProvider(): iterable
+    {
+        yield 'editor' => [TestUserFixtures::EDITOR_EMAIL];
+        yield 'org editor with one organization' => [TestUserFixtures::ORG_EDITOR_A_EMAIL];
+        yield 'org editor with two organizations' => [TestUserFixtures::ORG_EDITOR_AB_EMAIL];
+    }
+
+    /**
      * Verifies an org editor is denied access to edit another org's event.
      */
     public function testOrgEditorCannotEditOtherOrgEvent(): void

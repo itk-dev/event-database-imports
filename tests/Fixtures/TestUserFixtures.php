@@ -23,6 +23,7 @@ final class TestUserFixtures extends Fixture implements DependentFixtureInterfac
     public const string ORG_ADMIN_A_EMAIL = 'org-admin-a@test';
     public const string ORG_EDITOR_A_EMAIL = 'org-editor-a@test';
     public const string ORG_EDITOR_B_EMAIL = 'org-editor-b@test';
+    public const string ORG_EDITOR_AB_EMAIL = 'org-editor-ab@test';
 
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
@@ -40,6 +41,7 @@ final class TestUserFixtures extends Fixture implements DependentFixtureInterfac
         $this->createUser($manager, 'Org Admin A', self::ORG_ADMIN_A_EMAIL, [UserRoles::ROLE_ORGANIZATION_ADMIN->value], [$orgA]);
         $this->createUser($manager, 'Org Editor A', self::ORG_EDITOR_A_EMAIL, [UserRoles::ROLE_ORGANIZATION_EDITOR->value], [$orgA]);
         $this->createUser($manager, 'Org Editor B', self::ORG_EDITOR_B_EMAIL, [UserRoles::ROLE_ORGANIZATION_EDITOR->value], [$orgB]);
+        $this->createUser($manager, 'Org Editor AB', self::ORG_EDITOR_AB_EMAIL, [UserRoles::ROLE_ORGANIZATION_EDITOR->value], [$orgA, $orgB]);
 
         $manager->flush();
     }
