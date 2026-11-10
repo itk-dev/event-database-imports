@@ -11,8 +11,8 @@ See [keep a changelog] for information about writing changes to this log.
 ## [1.4.0] - 2026-11-08
 
 - [PR-135](https://github.com/itk-dev/event-database-imports/pull/135)
-  Show the create buttons for organization editors with more than one organization, and reject admin events
-  without an organization
+  Show the create buttons for organization editors with more than one organization, and reject events without an
+  organization in the admin and in feed imports
 - [PR-133](https://github.com/itk-dev/event-database-imports/pull/133)
   Use the Symfony serializer `Attribute` namespace instead of the deprecated `Annotation` namespace
 - [PR-132](https://github.com/itk-dev/event-database-imports/pull/132)
