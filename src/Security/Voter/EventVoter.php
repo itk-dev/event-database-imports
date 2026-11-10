@@ -73,7 +73,7 @@ final class EventVoter extends Voter
 
                 // A new event has no organization before the form is submitted if the user has more than one
                 // organization. The form only offers the user's own organizations.
-                if (null === $event->getId() && !$organization instanceof \App\Entity\Organization) {
+                if (null === $event->getId() && !$organization instanceof Organization) {
                     return true;
                 }
 
