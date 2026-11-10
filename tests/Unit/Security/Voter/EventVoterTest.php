@@ -123,6 +123,25 @@ final class EventVoterTest extends TestCase
     }
 
     /**
+     * Denies save actions to an organization editor without organizations for a new event. The user cannot select
+     * an organization, so the event can never be valid.
+     */
+    public function testSaveActionsDeniedForOrganizationEditorWithoutOrganizationsOnNewEvent(): void
+    {
+        $voter = new EventVoter($this->createSecurity([UserRoles::ROLE_ORGANIZATION_EDITOR->value]));
+        $user = new User();
+
+        foreach ([Action::SAVE_AND_ADD_ANOTHER, Action::SAVE_AND_CONTINUE, Action::SAVE_AND_RETURN] as $action) {
+            $subject = ['entity' => $this->createEntityDto(Event::class, new Event()), 'action' => $action];
+            $this->assertSame(
+                VoterInterface::ACCESS_DENIED,
+                $voter->vote($this->createToken($user), $subject, [Permission::EA_EXECUTE_ACTION]),
+                sprintf('Expected save action %s to be denied for a user without organizations', $action),
+            );
+        }
+    }
+
+    /**
      * Denies save actions to an organization editor for an event owned by another organization.
      */
     public function testOrganizationEditorCannotSaveOtherOrgEvent(): void

@@ -71,10 +71,11 @@ final class EventVoter extends Voter
             if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
                 $organization = $event->getOrganization();
 
-                // A new event has no organization before the form is submitted if the user has more than one
-                // organization. The form only offers the user's own organizations.
+                // The voter also decides if the save buttons show on the new event page, before the user selects an
+                // organization. Show them if the user can select one. Validation requires the organization when the
+                // form is submitted.
                 if (null === $event->getId() && !$organization instanceof Organization) {
-                    return true;
+                    return !$user->getOrganizations()->isEmpty();
                 }
 
                 return $organization instanceof Organization && $user->getOrganizations()->contains($organization);
