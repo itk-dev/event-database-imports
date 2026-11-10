@@ -30,7 +30,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 use Symfony\Component\Translation\TranslatableMessage;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 class EventCrudController extends AbstractBaseCrudController
 {
@@ -159,8 +158,6 @@ class EventCrudController extends AbstractBaseCrudController
             // We assume at least one organization exist for non-editor users
             // (cf. editor stuff below).
             ->setRequired(true)
-            // The HTML "required" attribute does not stop a crafted request without an organization.
-            ->setFormTypeOption('constraints', [new NotNull()])
             ->setFormTypeOption('placeholder', new TranslatableMessage('admin.event.organizer.placeholder'));
         // Limit organization choices for non-editors to the organizations the user is a member of.
         if (!$this->isGranted(UserRoles::ROLE_EDITOR->value)) {
