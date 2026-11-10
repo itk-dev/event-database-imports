@@ -71,6 +71,12 @@ final class EventVoter extends Voter
             if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
                 $organization = $event->getOrganization();
 
+                // A new event has no organization before the form is submitted if the user has more than one
+                // organization. The form only offers the user's own organizations.
+                if (null === $event->getId() && !$organization instanceof \App\Entity\Organization) {
+                    return true;
+                }
+
                 return $organization instanceof Organization && $user->getOrganizations()->contains($organization);
             }
         }
