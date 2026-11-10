@@ -6,6 +6,7 @@ use App\Entity\Image;
 use App\Exception\FilesystemException;
 use App\Exception\ImageFetchException;
 use App\Exception\ImageMineTypeException;
+use App\Utils\UriHelper;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Liip\ImagineBundle\Imagine\Filter\FilterManager;
 use Liip\ImagineBundle\Message\WarmupCache;
@@ -56,11 +57,21 @@ final readonly class ImageService implements ImageServiceInterface
         return str_starts_with($url, $this->defaultUri.self::LOCAL_IMAGE_PREFIX);
     }
 
+    /**
+     * @throws ImageFetchException
+     */
     private function getLocalResourcePath(string $url): string
     {
-        $file = str_replace($this->defaultUri.self::LOCAL_IMAGE_PREFIX, '', $url);
+        // Relative to the image root without a leading slash ("uploads/<file>"), which is the value EasyAdmin's
+        // upload field stores and reads. "/uploads/<file>" is rejected by the field, so the next edit of the event
+        // cleared the image.
+        $path = trim(substr($url, strlen($this->defaultUri.self::LOCAL_IMAGE_PREFIX)), '/');
 
-        return $this->getRelativePath($file);
+        if ('' === $path || UriHelper::UPLOAD_FOLDER === $path) {
+            throw new ImageFetchException(sprintf('No image file in %s', $url));
+        }
+
+        return $path;
     }
 
     /**
@@ -130,18 +141,20 @@ final readonly class ImageService implements ImageServiceInterface
     public function transform(Image $image): void
     {
         $path = $image->getLocal();
-        if (!is_null($path)) {
-            $this->messageBus->dispatch(new WarmupCache($this->getRelativePath($path)));
+        if (null === $path) {
+            return;
+        }
+
+        $imagePath = $this->getImagePath($path);
+        // Only warm up actual files. A folder or a missing file makes the WarmupCache handler fail.
+        if (is_file($this->publicPath.$imagePath)) {
+            $this->messageBus->dispatch(new WarmupCache($imagePath));
         }
     }
 
     public function getTransformedImageUrls(string $imageUrl, bool $absolute = true): array
     {
-        // Uploaded files only have the filename in the db, but are actually in the uploads dir to support the ImageField in EasyAdmin
-        // Fetched files have the subfolder in the db field
-        if (!str_contains($imageUrl, '/')) {
-            $imageUrl = 'uploads/'.$imageUrl;
-        }
+        $imageUrl = $this->getImagePath($imageUrl);
         $urls = [];
         $filters = $this->filterManager->getFilterConfiguration()->all();
         foreach ($filters as $name => $filter) {
@@ -149,6 +162,15 @@ final readonly class ImageService implements ImageServiceInterface
         }
 
         return $urls;
+    }
+
+    /**
+     * Get the path of an image relative to the image root (as LiipImagine expects it) from its stored local value:
+     * "uploads/<file>" for admin uploads and "<folder>/<file>" for fetched images.
+     */
+    private function getImagePath(string $local): string
+    {
+        return ltrim($this->getRelativePath($local), '/');
     }
 
     /**

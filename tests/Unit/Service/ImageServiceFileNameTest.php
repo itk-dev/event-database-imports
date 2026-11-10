@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 #[CoversClass(ImageService::class)]
-final class ImageHandlerTest extends KernelTestCase
+final class ImageServiceFileNameTest extends KernelTestCase
 {
     /**
      * @throws \Exception
@@ -83,7 +83,7 @@ final class ImageHandlerTest extends KernelTestCase
     private function getImageService(): ImageService
     {
         self::bootKernel();
-        $container = ImageHandlerTest::getContainer();
+        $container = self::getContainer();
 
         return $container->get(ImageService::class);
     }

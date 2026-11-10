@@ -15,6 +15,14 @@ parameters:
     ignoreErrors:
         - identifier: doctrine.associationType
         - identifier: doctrine.columnType
-        - identifier: method.unused
         - identifier: missingType.generics
         - identifier: missingType.iterableValue
+    # pb30/phpstan-composer-analysis: report packages used directly but only installed transitively ("shadow
+    # dependencies") and dev packages used in production code. Unused/misplaced checks are off: bundles and
+    # extensions are used through config, not class references, so they would all be false positives.
+    composerAnalysis:
+        additionalDevPaths:
+            - src/DataFixtures
+        ignoreAllUnusedDeps: true
+        ignoreAllProdDepsInDev: true
+        disableExtensionsAnalysis: true

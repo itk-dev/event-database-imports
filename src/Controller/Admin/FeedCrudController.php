@@ -112,7 +112,7 @@ class FeedCrudController extends AbstractBaseCrudController
                 ->setLanguage('js')
                 ->hideOnIndex()
                 ->setFormTypeOptions(
-                    ['constraints' => [new Json(['message' => 'admin.feed.configuration.json_invalid'])]]
+                    ['constraints' => [new Json(message: 'admin.feed.configuration.json_invalid')]]
                 ),
 
             // EasyAdmin does not disable the toggles even though the user can't edit

@@ -3,6 +3,8 @@
 namespace App\Security\Voter;
 
 use App\Entity\Event;
+use App\Entity\Feed;
+use App\Entity\Organization;
 use App\Entity\User;
 use App\Types\UserRoles;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -54,7 +56,7 @@ final class EventVoter extends Voter
 
         // Feed events can never be edited or deleted. Apply this before any
         // save-action grant below so it cannot be bypassed via SAVE_AND_*.
-        if (null !== $event->getFeed()) {
+        if ($event->getFeed() instanceof Feed) {
             return false;
         }
 
@@ -69,7 +71,14 @@ final class EventVoter extends Voter
             if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
                 $organization = $event->getOrganization();
 
-                return null !== $organization && $user->getOrganizations()->contains($organization);
+                // The voter also decides if the save buttons show on the new event page, before the user selects an
+                // organization. Show them if the user can select one. Validation requires the organization when the
+                // form is submitted.
+                if (null === $event->getId() && !$organization instanceof Organization) {
+                    return !$user->getOrganizations()->isEmpty();
+                }
+
+                return $organization instanceof Organization && $user->getOrganizations()->contains($organization);
             }
         }
 
@@ -81,7 +90,7 @@ final class EventVoter extends Voter
         // Organization users can only edit non-feed events from their organizations
         if ($this->security->isGranted(UserRoles::ROLE_ORGANIZATION_EDITOR->value)) {
             $organization = $event->getOrganization();
-            if (null === $organization) {
+            if (!$organization instanceof Organization) {
                 return false;
             }
 

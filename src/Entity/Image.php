@@ -9,8 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\SerializedPath;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedPath;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image implements EditableEntityInterface, \Stringable
@@ -33,7 +33,8 @@ class Image implements EditableEntityInterface, \Stringable
     #[SerializedPath('[original]')]
     private ?string $local = null;
 
-    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist', 'remove'])]
+    // No "remove" cascade: removing an image must never delete its event.
+    #[ORM\OneToOne(mappedBy: 'image', cascade: ['persist'])]
     private ?Event $event = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -81,12 +82,12 @@ class Image implements EditableEntityInterface, \Stringable
     public function setEvent(?Event $event): static
     {
         // unset the owning side of the relation if necessary
-        if (null === $event && null !== $this->event) {
+        if (!$event instanceof Event && $this->event instanceof Event) {
             $this->event->setImage(null);
         }
 
         // set the owning side of the relation if necessary
-        if (null !== $event && $event->getImage() !== $this) {
+        if ($event instanceof Event && $event->getImage() !== $this) {
             $event->setImage($this);
         }
 

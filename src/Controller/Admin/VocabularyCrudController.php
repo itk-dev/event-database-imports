@@ -60,9 +60,7 @@ class VocabularyCrudController extends AbstractBaseCrudController
             AssociationField::new('tags')
                 ->setQueryBuilder(
                     fn (QueryBuilder $queryBuilder): QueryBuilder => $queryBuilder->addCriteria(
-                        // accessRawFieldValues is the collections 3.0 default; no effect here as the
-                        // criteria only orders, but it avoids the 2.x deprecation.
-                        new Criteria(accessRawFieldValues: true)->orderBy(['name' => Order::Ascending])
+                        new Criteria()->orderBy(['name' => Order::Ascending])
                     )
                 )
                 ->setLabel(new TranslatableMessage('admin.vocabulary.tags')),

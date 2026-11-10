@@ -13,8 +13,9 @@ use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Mapping\Annotation\Timestampable;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Serializer\Annotation\SerializedPath;
+use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Serializer\Attribute\SerializedPath;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
@@ -61,6 +62,7 @@ class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
     #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'events')]
     #[Groups([IndexNames::Events->value])]
     #[SerializedPath('[organizer]')]
+    #[Assert\NotNull]
     private ?Organization $organization = null;
 
     #[ORM\ManyToMany(targetEntity: Organization::class, inversedBy: 'partnerEvents', cascade: ['persist'])]
@@ -169,7 +171,7 @@ class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
         return $this->url;
     }
 
-    public function setUrl(string $url): static
+    public function setUrl(?string $url): static
     {
         $this->url = $url;
 
@@ -360,12 +362,12 @@ class Event implements IndexItemInterface, EditableEntityInterface, \Stringable
     public function setFeedItem(?FeedItem $feedItem): static
     {
         // unset the owning side of the relation if necessary
-        if (null === $feedItem && null !== $this->feedItem) {
+        if (!$feedItem instanceof FeedItem && $this->feedItem instanceof FeedItem) {
             $this->feedItem->setEvent(null);
         }
 
         // set the owning side of the relation if necessary
-        if (null !== $feedItem && $feedItem->getEvent() !== $this) {
+        if ($feedItem instanceof FeedItem && $feedItem->getEvent() !== $this) {
             $feedItem->setEvent($this);
         }
 

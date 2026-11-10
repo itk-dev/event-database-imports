@@ -3,6 +3,7 @@
 namespace App\Service\Indexing;
 
 use App\Entity\Event;
+use App\Entity\Location;
 use App\Model\Indexing\IndexFieldTypes;
 use App\Model\Indexing\IndexNames;
 use App\Service\ImageServiceInterface;
@@ -52,16 +53,15 @@ final class IndexingEvents extends AbstractIndexingElastic
         $data['occurrences'] = array_values($data['occurrences']);
         $data['dailyOccurrences'] = array_values($data['dailyOccurrences']);
 
-        // Fix image urls (with a full path and derived sizes).
-        if ($data['imageUrls']) {
-            $imageUrl = $data['imageUrls']['original'];
-            $data['imageUrls'] = is_null($imageUrl) ? [] : $this->imageService->getTransformedImageUrls($imageUrl);
-        }
+        // Fix image urls (with a full path and derived sizes). An event without an image gets an empty list, never
+        // null: the aarhusguiden.dk client fails on "imageUrls": null (it reads imageUrls.large).
+        $imageUrl = $data['imageUrls']['original'] ?? null;
+        $data['imageUrls'] = null === $imageUrl ? [] : $this->imageService->getTransformedImageUrls($imageUrl);
 
         // @todo: Figure out how to do these changes with the serializer. This is just....
         // @todo: Handle validation. Location should never be null
         $location = $item->getLocation();
-        $data['location'] = null === $location ? null : $this->indexingLocations->serialize($location);
+        $data['location'] = $location instanceof Location ? $this->indexingLocations->serialize($location) : null;
 
         return $data;
     }

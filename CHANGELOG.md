@@ -8,6 +8,50 @@ See [keep a changelog] for information about writing changes to this log.
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-11-08
+
+- [PR-135](https://github.com/itk-dev/event-database-imports/pull/135)
+  Show the create buttons for organization editors with more than one organization, and reject events without an
+  organization in the admin and in feed imports
+- [PR-133](https://github.com/itk-dev/event-database-imports/pull/133)
+  Use the Symfony serializer `Attribute` namespace instead of the deprecated `Annotation` namespace
+- [PR-132](https://github.com/itk-dev/event-database-imports/pull/132)
+  Fix event images being cleared when an event is edited in the admin, and deleted images coming back; store admin
+  images as `uploads/<file>`; index events without an image with empty `imageUrls`
+- [PR-131](https://github.com/itk-dev/event-database-imports/pull/131)
+  Follow redirects in JSON feeds, and report HTTP errors as HTTP errors
+- [PR-130](https://github.com/itk-dev/event-database-imports/pull/130)
+  Only request image thumbnail warm-up for files that exist
+- [PR-129](https://github.com/itk-dev/event-database-imports/pull/129)
+  Fix 500 error when clearing an event's URL in the admin
+- [PR-128](https://github.com/itk-dev/event-database-imports/pull/128)
+  Purge failed messages by UTC time, run the dev `mariadb` service in `Europe/Copenhagen` like the servers, and
+  document the database time zone in ADR 008
+- [PR-127](https://github.com/itk-dev/event-database-imports/pull/127)
+  Validate admin image uploads (allowed image types only, reject images that cannot be decoded)
+- [PR-126](https://github.com/itk-dev/event-database-imports/pull/126)
+  Update Symfony Flex recipes
+- [PR-125](https://github.com/itk-dev/event-database-imports/pull/125)
+  Fix deprecations (validator constraint options, email verification, `eraseCredentials()`, LiipImagine Twig mode)
+- [PR-124](https://github.com/itk-dev/event-database-imports/pull/124)
+  Update the dev node image to Node 24
+- [PR-123](https://github.com/itk-dev/event-database-imports/pull/123)
+  Update composer dependencies (minor/patch) and fix feed mapping types for Valinor 2.6
+- [PR-122](https://github.com/itk-dev/event-database-imports/pull/122)
+  Update Symfony to 7.4.23 (security advisories)
+- [PR-121](https://github.com/itk-dev/event-database-imports/pull/121)
+  Update symfony/ux-twig-component to 3.6
+- [PR-120](https://github.com/itk-dev/event-database-imports/pull/120)
+  Update doctrine/collections to 3.1 (with doctrine/orm 3.7 and gedmo/doctrine-extensions 3.22.2)
+- [PR-119](https://github.com/itk-dev/event-database-imports/pull/119)
+  Update Rector (2.8) and PHPStan (2.3) and apply the new Rector rules
+- [PR-118](https://github.com/itk-dev/event-database-imports/pull/118)
+  Update Elasticsearch to 8.19.23
+- [PR-117](https://github.com/itk-dev/event-database-imports/pull/117)
+  Require all directly used packages in `composer.json`, checked by PHPStan (`pb30/phpstan-composer-analysis`)
+- [PR-116](https://github.com/itk-dev/event-database-imports/pull/116)
+  Update docker compose templates (PHP 8.5)
+
 ## [1.3.0] - 2026-11-04
 
 - [PR-114](https://github.com/itk-dev/event-database-imports/pull/114)
@@ -235,7 +279,8 @@ See [keep a changelog] for information about writing changes to this log.
 - Consolidate scheduled feed import and index populate in one command
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0/
-[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...HEAD
+[Unreleased]: https://github.com/itk-dev/event-database-imports/compare/1.4.0...HEAD
+[1.4.0]: https://github.com/itk-dev/event-database-imports/compare/1.3.0...1.4.0
 [1.3.0]: https://github.com/itk-dev/event-database-imports/compare/1.2.7...1.3.0
 [1.2.7]: https://github.com/itk-dev/event-database-imports/compare/1.2.6...1.2.7
 [1.2.6]: https://github.com/itk-dev/event-database-imports/compare/1.2.5...1.2.6

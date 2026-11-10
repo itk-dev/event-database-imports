@@ -7,17 +7,28 @@ use Symfony\Component\Asset\VersionStrategy\EmptyVersionStrategy;
 
 class UriHelper
 {
-    public const string UPLOAD_DIR = 'public/images/uploads';
+    /**
+     * The image root (relative to the project dir). Image paths are stored relative to it.
+     */
+    public const string IMAGE_DIR = 'public/images';
+
+    /**
+     * The folder in the image root for images uploaded in the admin.
+     */
+    public const string UPLOAD_FOLDER = 'uploads';
 
     public function __construct(
         private readonly string $defaultUri,
     ) {
     }
 
+    /**
+     * Get the absolute URL of a local image from its stored path (e.g. "uploads/<file>").
+     */
     public function getAbsoluteLocalFileUrl(string $file): string
     {
         $urlPackage = new UrlPackage(
-            $this->defaultUri.substr(self::UPLOAD_DIR, 6),
+            $this->defaultUri.substr(self::IMAGE_DIR, 6),
             new EmptyVersionStrategy(),
         );
 
